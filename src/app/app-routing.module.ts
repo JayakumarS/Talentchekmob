@@ -61,7 +61,10 @@ const routes: Routes = [
     loadChildren: () => import('./yettostart-frommenu/yettostart-frommenu.module').then( m => m.YettostartFrommenuPageModule)
   },
   
-  
+  {
+    path: 'profile-view',
+    loadChildren: () => import('./profile-view/profile-view.module').then( m => m.ProfileViewModule)
+  },
   
   {
     path: 'forget-password',
@@ -84,7 +87,10 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard-givven/dashboard-individual.module').then( m => m.DashboardIndividualPageModule)
   },
   
-  
+  {
+    path: 'profile-view',
+    loadChildren: () => import('./profile-view/profile-view.module').then( m => m.ProfileViewModule)
+  },
   
  
   {

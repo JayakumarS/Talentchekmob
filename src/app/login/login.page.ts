@@ -125,10 +125,12 @@ export class LoginPage {
   }
 
   ngOnInit() {
-    
+    this.slider.startAutoplay().then(()=>{})
   }
 
- 
+  signUp(){
+    this.router.navigate(['/profile-view']) 
+  }
 
   //#region Click Events
   hideShowPassword() {
