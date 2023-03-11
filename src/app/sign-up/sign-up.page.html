@@ -1,0 +1,163 @@
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+<!-- BS Stepper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
+<ion-content>
+   <div class="sign-up">
+    <div style="display: flex;align-items: center;font-size: 18px;padding-top: 25px;">Sign up</div>
+   </div> 
+   <div class="container">
+   <div id="stepper1" class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#test-l-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Email</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Password</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-3">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">Validate</span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+      <form (ngSubmit)="onSubmit()">
+        <div id="test-l-1" class="content">
+          <div class="button-content">
+            <ion-label>First name</ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">Email Address</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-label>Last name</ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">Last name</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-label>Date of birth</ion-label>
+            <ion-datetime></ion-datetime>
+
+            <ion-label>Gender</ion-label>
+            <ion-list>
+                <ion-radio-group>
+                  <ion-item> 
+                    <ion-radio value="M"></ion-radio>
+                    <ion-label>Male</ion-label>
+                  </ion-item>
+                  <ion-item> 
+                    <ion-radio value="F"></ion-radio>
+                    <ion-label>Female</ion-label>
+                  </ion-item>
+                  <ion-item> 
+                    <ion-radio value="O"></ion-radio>
+                    <ion-label>Others</ion-label>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>  
+             
+           </div>
+           <div class="display-justify">
+            <ion-button class="custom-button" (click)="next()">Next</ion-button>
+          </div>
+
+          <div class="line-with-text">
+            <hr class="hr1">
+            <span class="or-text">OR</span>
+            <hr class="hr2"> 
+          </div>
+          <div class="social-icon">
+            <ion-icon name="logo-facebook" size="large"></ion-icon>
+            <ion-icon name="logo-twitter" size="large"></ion-icon>
+            <ion-icon name="logo-linkedin" size="large"></ion-icon>
+            <ion-icon name="logo-instagram" size="large"></ion-icon>
+          </div>
+          <div class="sign-in">
+            <div style="font-size: 16px;">Already a Jobby member? </div><span style="font-size: 18px;"><b> Sign in</b></span>
+            </div>
+        </div>
+        <div id="test-l-2" class="content">
+          <div class="button-content">
+            <ion-label>First name</ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">First name</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-label>Second name</ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">Second name</ion-label>
+              <ion-input></ion-input>
+            </ion-item> 
+           </div> 
+           <div class="display-justify">
+            <ion-button class="custom-button" (click)="next()">Next</ion-button>
+          </div> 
+           
+          <div class="sign-in">
+            <div style="font-size: 16px;">Already a Jobby member? </div><span style="font-size: 18px;"><b> Sign in</b></span>
+            </div>
+        </div>
+        <div id="test-l-3" class="content text-center">
+          <div class="button-content">
+            <!-- <ion-label>Contact Phone number</ion-label> -->
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">Contact Phone number</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <!-- <ion-label>Last name</ion-label> -->
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <!-- <ion-label>Date of birth</ion-label> -->
+            <ion-item fill="outline" class="input-field">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+
+            <ion-label>Account</ion-label>
+            <ion-list class="input-field">
+                <ion-radio-group>
+                  <ion-item> 
+                    <ion-radio value="private"></ion-radio>
+                    <ion-label>Private</ion-label>
+                  </ion-item>
+                  <ion-item> 
+                    <ion-radio value="ondemand"></ion-radio>
+                    <ion-label>On Demand</ion-label>
+                  </ion-item>
+                  <ion-item> 
+                    <ion-radio value="public"></ion-radio>
+                    <ion-label>Public</ion-label>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list> 
+
+              <ion-item fill="outline" class="input-field">
+                <ion-label position="floating">Referral code</ion-label>
+                <ion-input></ion-input>
+              </ion-item> 
+              </div>
+              <div class="display-justify">
+                <ion-button class="custom-button" (click)="next()">Next</ion-button>
+              </div>
+              
+              <div class="sign-in">
+                <div style="font-size: 16px;">Already a Jobby member? </div><span style="font-size: 18px;"><b> Sign in</b></span>
+                </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 
+</ion-content>

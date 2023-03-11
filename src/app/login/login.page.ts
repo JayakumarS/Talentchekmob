@@ -478,9 +478,9 @@ export class LoginPage {
 
   }
 
-  goto_signin(){
-    this.router.navigate(['/signin'])
-}
+//   signUp(){
+//     this.router.navigate(['/hello-dear'])
+// }
   //#endregion
 
   //#region Functions
