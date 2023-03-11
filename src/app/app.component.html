@@ -1,0 +1,170 @@
+<ion-app>
+    <ion-split-pane contentId="main-content">
+        <ion-menu contentId="main-content" type="overlay">
+
+            <div class="menuHeaderStyle">
+                <ion-menu-toggle>
+                    <img src="../../assets/img/Givven logo1.png" (click)="goto_Dashboard()">
+                </ion-menu-toggle>
+            </div>
+            <ion-content>
+
+                <!-- <ion-list class="menu-list">
+					<ion-menu-toggle auto-hide="false" *ngFor="let p of AfterLogin">
+
+						<ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+							<ion-icon slot="start" name="{{p.icon}}" class="menu-icon"></ion-icon>
+							<ion-label>{{ p.title }}</ion-label>
+						</ion-item>
+
+					</ion-menu-toggle>
+					<ion-menu-toggle auto-hide="false">
+						<ion-item lines="none" (click)="logOut()">
+							<ion-icon slot="start" name="log-out-outline"></ion-icon>
+							<ion-label> Logout </ion-label>
+						</ion-item>
+					</ion-menu-toggle> -->
+
+                <!-- <ion-list *ngIf="p.open">
+						<ion-menu-toggle *ngIf="p.url">
+							<ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+								<ion-icon slot="start" name="{{p.icon}}" class="menu-icon"></ion-icon>
+								<ion-label>{{ p.title }}</ion-label>
+							</ion-item>	
+						</ion-menu-toggle>
+					</ion-list> -->
+                <!--   <div *ngIf="loginstatus == true">
+						 <ion-menu-toggle auto-hide="false" *ngFor="let p of AfterLogin">
+						
+						  <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" >
+								<ion-icon slot="start" name="{{p.icon}}"  class="menu-icon"></ion-icon>
+								<ion-label>{{ p.title }}</ion-label>
+						  </ion-item>
+						  
+						</ion-menu-toggle>
+				 </div>  -->
+                <!-- <div *ngIf="loginstatus == false">
+						 <ion-menu-toggle auto-hide="false" *ngFor="let p of BeforeLogin">
+						
+						  <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" >
+								<ion-icon slot="start" name="{{p.icon}}"  class="menu-icon"></ion-icon>
+								<ion-label>{{ p.title }}</ion-label>
+						  </ion-item>
+						  
+						</ion-menu-toggle>
+				 </div> -->
+
+                <!-- 	<div *ngIf="loginstatus == true">
+					<ion-menu-toggle auto-hide="false">
+						  <ion-item lines="none" (click)="logOut()">
+						  <ion-icon slot="start" name="log-out-outline"></ion-icon>
+								<ion-label> Logout </ion-label>
+						  </ion-item>
+					</ion-menu-toggle>
+			  </div> -->
+                <!-- </ion-list> -->
+
+                <!-- Individual menu -->
+                <div>
+                    <ion-menu-toggle>
+                        <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                            <img src=".../../assets/img/homepage.png" class="icons">
+                            <ion-label class="ion-text-wrap">Dashboard</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <div>
+                        <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                            <img src=".../../assets/img/contrack.png" class="icons" (click)="goto_Container_track()">
+                            <ion-label class="ion-text-wrap">Container-track</ion-label>
+
+
+                        </ion-item>
+
+                        <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                            <img src=".../../assets/img/callentry.png" class="icons">
+                            <ion-label class="ion-text-wrap">Call Entry</ion-label>
+
+
+                        </ion-item>
+
+                        <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                            <img src=".../../assets/img/enquiry.png" class="icons">
+                            <ion-label class="ion-text-wrap">Enquiry</ion-label>
+
+
+                        </ion-item>
+
+                    </div>
+                    <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                        <img src=".../../assets/img/lclmatrix.png" class="icons">
+                        <ion-label class="ion-text-wrap">LCL Matrix</ion-label>
+
+
+                    </ion-item>
+
+                </div>
+
+                <!-- Corporate menu -->
+                <div>
+                    <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                        <img src=".../../assets/img/LoadPlanner.png" class="icons">
+                        <ion-label class="ion-text-wrap">Load Planner</ion-label>
+
+
+                    </ion-item>
+                    <div>
+                        <ion-menu-toggle>
+                            <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                                <img src=".../../assets/img/fclmatrix.png" class="icons">
+                                <ion-label class="ion-text-wrap">FCL Matrix</ion-label>
+
+
+                            </ion-item>
+                        </ion-menu-toggle>
+
+                        <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                            <img src=".../../assets/img/airfright.png" class="icons">
+                            <ion-label class="ion-text-wrap">Air frieght</ion-label>
+
+
+                        </ion-item>
+
+                        <ion-list>
+                            <ion-menu-toggle>
+                                <div>
+                                    <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+                                        <img src=".../../assets/img/fclglobal.png" class="icons">
+                                        <ion-label class="ion-text-wrap">FCL Global</ion-label>
+
+
+                                    </ion-item>
+                                </div>
+                            </ion-menu-toggle>
+                        </ion-list>
+                    </div>
+
+
+
+                </div>
+
+                <!-- Institution menu -->
+                <div>
+
+
+                    <ion-item button (click)="p.open = !p.open" class="ParentMenu">
+
+                        <img src=".../../assets/img/logout.png" class="icons">
+                        <ion-label class="ion-text-wrap">Logout</ion-label>
+
+
+                    </ion-item>
+
+
+
+
+                </div>
+            </ion-content>
+        </ion-menu>
+        <ion-router-outlet id="main-content"></ion-router-outlet>
+    </ion-split-pane>
+</ion-app>

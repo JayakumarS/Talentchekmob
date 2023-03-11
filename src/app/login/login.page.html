@@ -1,0 +1,203 @@
+<style>
+    #back {
+        background-size: 100%;
+        background-repeat: no-repeat!important;
+        background-size: cover!important;
+        width: 110vw!important;
+        height: 104vh!important;
+        background-attachment: fixed!important;
+        margin-top: -9%!important;
+        background-position: center center!important;
+    }
+    
+    #otherslides {
+        background-size: 100%;
+        background-repeat: no-repeat!important;
+        background-size: cover!important;
+        width: 110vw!important;
+        height: 104vh!important;
+        background-attachment: fixed!important;
+        margin-top: -9%!important;
+        background-position: center center!important;
+    }
+</style>
+
+<ion-content padding color="primary">
+    <ion-slides #slider pager="false" [options]="slideOpts" (ionSlideDidChange)='ionSlideDidChange()'>
+        <ion-slide>
+            <ion-row id="back" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'">
+
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <br /> <br /> <br /> <br /> <br />
+                            <div class="title">TALENTCHEK</div>
+                            <div class="sub-title">Choose the Right One, Wise One</div><br />
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <div class="imageCss"><img src="./assets/img/Illustration.png" alt="Lights" /></div>
+
+                            <br />
+                        </ion-col>
+                    </ion-row>
+
+
+                </ion-grid>
+
+            </ion-row>
+
+        </ion-slide>
+        <ion-slide>
+            <div id="otherslides" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'" style="height:500px">
+
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <br /> <br /> <br />
+                            <div class="illustrateCss"><img src="./assets/img/Illustration-conn.png" alt="Lights" /></div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-card>
+                                <ion-card-content>
+                                    <h1>Easy Connection</h1>
+                                    <h3> Share your Resume <br>create chat with employers</h3>
+
+                                    <ion-button expand="block">Next</ion-button>
+                                    <br>
+
+                                    <span class="dot active"></span>&nbsp;
+                                    <span class="dot "></span>&nbsp;
+                                    <span class="dot"></span>&nbsp;
+                                    <span class="dot"></span>
+                                </ion-card-content>
+
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+
+
+                </ion-grid>
+
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div id="otherslides" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'" style="height:500px">
+
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <br /> <br /> <br />
+                            <div class="illustrateCss"><img src="./assets/img/Illustration-slide2.png" alt="Lights" /></div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-card>
+                                <ion-card-content>
+                                    <h1>Easy Connection</h1>
+                                    <h3> Share your Resume <br>create chat with employers</h3>
+
+                                    <ion-button expand="block">Next</ion-button>
+                                    <br>
+
+                                    <span class="dot "></span>&nbsp;
+                                    <span class="dot active"></span>&nbsp;
+                                    <span class="dot"></span>&nbsp;
+                                    <span class="dot"></span>
+                                </ion-card-content>
+
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+
+
+                </ion-grid>
+
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div id="otherslides" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'" style="height:500px">
+
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <br /> <br /> <br />
+                            <div class="illustrateCss"><img src="./assets/img/Illustration-slide3.png" alt="Lights" /></div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-card>
+                                <ion-card-content>
+                                    <h1>Easy Connection</h1>
+                                    <h3> Share your Resume <br>create chat with employers</h3>
+
+                                    <ion-button expand="block">Next</ion-button>
+                                    <br>
+
+                                    <span class="dot"></span>&nbsp;
+                                    <span class="dot "></span>&nbsp;
+                                    <span class="dot active"></span>&nbsp;
+                                    <span class="dot"></span>
+                                </ion-card-content>
+
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+
+
+                </ion-grid>
+
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div id="otherslides" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'" style="height:500px">
+
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <br /> <br /> <br />
+                            <div class="illustrateCss"><img src="./assets/img/Illustration-slide4.png" alt="Lights" /></div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-card>
+                                <ion-card-content>
+                                    <h1>Easy Connection</h1>
+                                    <h3> Share your Resume <br>create chat with employers</h3>
+
+                                    <ion-button expand="block" (click)="goto_signin()">Get Started</ion-button>
+                                    <br>
+
+                                    <span class="dot "></span>&nbsp;
+                                    <span class="dot "></span>&nbsp;
+                                    <span class="dot"></span>&nbsp;
+                                    <span class="dot active"></span>
+                                </ion-card-content>
+
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+
+
+                </ion-grid>
+
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

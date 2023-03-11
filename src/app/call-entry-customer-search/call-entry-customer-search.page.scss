@@ -1,0 +1,103 @@
+ion-button {
+    height: 30px;
+    font-size: 11px;
+    padding-left: 11px;
+}
+
+h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.horizontal {
+    border-radius: 5px;
+}
+
+h3 {
+    margin-bottom: 16px !important;
+}
+
+.fotmtext3 {
+    margin: 40px 10px;
+}
+
+.talentrow {
+    margin: 2px 0px;
+}
+
+.talentcard1 {
+    margin: 2% 2% 2% 2%;
+    border-radius: 19px;
+    --background: linear-gradient(to right top, #f5f5f5, #fbfbfb);
+}
+
+.talentcard2 {
+    margin: 2% 2% 2% 2%;
+    border-radius: 35px;
+    // --background: url('/assets/img/BG12.jpg') 0 0/100% 100% no-repeat;
+    --background: linear-gradient(to right top, #f5f5f5, #f7dc73);
+}
+
+.genderbg {
+    // background-color: #f3f4f7;
+    background-color: #f824242a;
+    border-radius: 20px;
+}
+
+.genderpadding {
+    padding: 3px 0px;
+    display: flex;
+}
+
+.emojiicons {
+    height: 20px;
+}
+
+ion-radio {
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 50%;
+    width: 13px !important;
+    height: 13px !important;
+    margin-top: 3px;
+}
+
+.emojitext {
+    font-size: 13px;
+    margin: 0px 5px;
+}
+
+.blackTheme {
+    color: black;
+}
+
+.whiteTheme {
+    color: white;
+}
+
+ion-content {
+    --background: #ddd8d8;
+}
+
+.new-background-color {
+    --background: linear-gradient(to right top, #27246f, #27246f);
+}
+
+ion-title {
+    color: #e1e5ea;
+}
+
+.container {
+    background-color: #c2d2ff;
+    border-radius: 16px;
+}
+
+.details-card {
+    border-radius: 16px;
+}
+
+.buttonedit {
+    margin-left: 44px;
+    font-size: 13px;
+    width: 117px;
+}

@@ -1,0 +1,78 @@
+<ion-card class="container">
+    <ion-card-content>
+        <ion-row class="talentrow">
+            <ion-col class="ion-no-padding">
+                <ion-col lines="none">
+                    <ion-label class="kTheme">Customer</ion-label>
+                    <ion-input class="klab" type="text" [(ngModel)]="customerDtls.customerName"></ion-input>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="ion-no-padding">
+                <ion-col lines="none">
+                    <ion-label class="kTheme">Person Met</ion-label>
+                    <ion-input class="klab" type="text" [(ngModel)]="customerDtls.personMet"></ion-input>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="ion-no-padding">
+                <ion-col lines="none">
+                    <ion-label class="kTheme">Nature</ion-label>
+                    <ion-input class="klab" type="text" [(ngModel)]="customerDtls.nature"></ion-input>
+                </ion-col>
+            </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="ion-no-padding">
+                <ion-col lines="none">
+                    <ion-label class="kTheme">FollowUp Date</ion-label>
+                    <ion-datetime class="klab" locale="en-GB-u-hc-h12" [(ngModel)]="customerDtls.followupdate"></ion-datetime>
+                </ion-col>
+            </ion-col>
+
+        </ion-row>
+
+
+        <ion-row>
+
+            <ion-col class="ion-no-padding">
+                <ion-col lines="none">
+                    <ion-label class="kTheme">Description</ion-label>
+                    <ion-textarea class="klab" type="text" [(ngModel)]="customerDtls.description"></ion-textarea>
+                </ion-col>
+            </ion-col>
+
+        </ion-row>
+
+
+        <ion-row>
+            <ion-col class="ion-no-padding">
+                <ion-col lines="none">
+                    <ion-label class="kTheme">Assigned By</ion-label>
+                    <ion-select class="klab" placeholder="Select One" [(ngModel)]="customerDtls.assigntedTo" (ionChange)="getValue(mod)">
+                        <ion-select-option *ngFor="let mod of ConsList" value="{{mod.text}}">{{mod.text}}</ion-select-option>
+                    </ion-select>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+            <ion-col text-center>
+                <ion-button shape="round" class="ioncardButtonNormal" (click)="closeModal()">
+                    <ion-icon name="save-outline"></ion-icon>save</ion-button>
+
+
+                <ion-button shape="round" class="ioncardButtonNormal" (click)="closeModal()">
+                    <ion-icon name="close-circle"></ion-icon>canecl</ion-button>
+            </ion-col>
+
+        </ion-row>
+    </ion-card-content>
+</ion-card>
