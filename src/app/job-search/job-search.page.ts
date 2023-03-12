@@ -18,4 +18,10 @@ export class JobSearchPage implements OnInit {
     speed: 400
   };
 
+  selectedTab: string = 'search';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
+
 }

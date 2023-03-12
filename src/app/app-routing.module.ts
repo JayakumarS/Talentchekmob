@@ -137,6 +137,11 @@ const routes: Routes = [
     path: 'profile-view',
     loadChildren: () => import('./profile-view/profile-view.module').then( m => m.ProfileViewModule)
   },
+  {
+    path: 'search-settings',
+    loadChildren: () => import('./search-settings/search-settings.module').then( m => m.SearchSettingsPageModule)
+  },
+
 
  
   
