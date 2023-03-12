@@ -84,9 +84,6 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard-givven/dashboard-individual.module').then( m => m.DashboardIndividualPageModule)
   },
   
-  
-  
- 
   {
     path: 'folder-password-modal',
     loadChildren: () => import('./folder-password-modal/folder-password-modal.module').then( m => m.FolderPasswordModalPageModule)
@@ -134,6 +131,11 @@ const routes: Routes = [
   {
     path: 'job-search',
     loadChildren: () => import('./job-search/job-search.module').then( m => m.JobSearchPageModule)
+  },
+
+  {
+    path: 'profile-view',
+    loadChildren: () => import('./profile-view/profile-view.module').then( m => m.ProfileViewModule)
   },
 
  

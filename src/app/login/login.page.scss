@@ -67,16 +67,16 @@ ion-col {
     margin-left: 5%;
 }
 
-ion-card {
-    display: flex;
-    flex-flow: column-reverse;
-    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+.talentcard1 {
+    margin: 4% 4% 4% 4%;
+    --background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 24px #00000033;
     border-radius: 24px;
     opacity: 1;
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
+    width: 93%;
+    margin-top: -14%;
 }
 
 .dot {
