@@ -129,7 +129,7 @@ export class LoginPage {
   }
 
   signUp(){
-    this.router.navigate(['/search-settings']) 
+    this.router.navigate(['/hello-dear']) 
   }
 
   //#region Click Events

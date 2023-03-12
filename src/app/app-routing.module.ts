@@ -110,11 +110,6 @@ const routes: Routes = [
     path: 'edit-customer-modal',
     loadChildren: () => import('./modals/edit-customer-modal/edit-customer-modal.module').then( m => m.EditCustomerModalPageModule)
   },
-
-  {
-    path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninModule)
-  },
   {
     path: 'hello-dear',
     loadChildren: () => import('./hello-dear/hello-dear.module').then( m => m.HelloDearPageModule)
@@ -122,11 +117,6 @@ const routes: Routes = [
   {
     path: 'sign-up',
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
-  },
-
-  {
-    path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninModule)
   },
   {
     path: 'job-search',
@@ -141,7 +131,10 @@ const routes: Routes = [
     path: 'search-settings',
     loadChildren: () => import('./search-settings/search-settings.module').then( m => m.SearchSettingsPageModule)
   },
-
+  {
+    path: 'sign-in',
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInModule)
+  }
 
  
   
