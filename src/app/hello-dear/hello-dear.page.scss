@@ -76,3 +76,25 @@ hr {
     flex-direction: column;
     padding-top: 40px;
 }
+.button-native{
+  background: brown!important;
+}
+
+:root.buttonColor {
+  --ion-color-secondary: #006600;
+  --ion-color-secondary-rgb: 0, 102, 0;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #005a00;
+  --ion-color-secondary-tint: #1a751a;
+}
+
+.buttonionix {
+  --background: #93e9be;
+  --background-hover: #9ce0be;
+  --background-activated: #88f4be;
+  --background-focused: #88f4be;
+  --color: #C1D8FF;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
