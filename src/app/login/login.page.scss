@@ -52,20 +52,21 @@
     letter-spacing: 0.36px;
     opacity: 1;
     font-size: 13px;
+    margin-bottom: 25px;
 }
 
-ion-col {
-    color: #fff;
-    text-align: center;
-    margin-top: 32%;
-}
+// ion-col {
+//     color: #fff;
+//     text-align: center;
+//     margin-top: 32%;
+// }
 
-.imageCss {
-    top: 132px;
-    left: 133px;
-    opacity: 1;
-    position: absolute;
-}
+// .imageCss {
+//     top: 132px;
+//     left: 133px;
+//     opacity: 1;
+//     position: absolute;
+// }
 
 .illustrateCss {
     width: 90%;
@@ -73,17 +74,14 @@ ion-col {
 }
 
 .talentcard1 {
-    margin: 4% 4% 4% 4% !important;
-    --background: #FFFFFF 0% 0% no-repeat padding-box;
+     --background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 24px #00000033;
     border-radius: 24px;
     opacity: 1;
     width: 100%;
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
-    width: 93%;
-    margin-top: -14% !important;
-}
+    position: relative;
+    bottom: -10px;
+  }
 
 .dot {
     box-shadow: inset 1px 1px 1px #AEC9F5;
@@ -107,51 +105,51 @@ ion-button {
     border-radius: 6px;
 }
 
-// image css
-@media only screen and (min-width:375px) and (max-width: 667px) {
-    .imageCss {
-        top: -100px;
-        left: 140px;
-        opacity: 1;
-        position: absolute;
-    }
-}
+// // image css
+// @media only screen and (min-width:375px) and (max-width: 667px) {
+//     .imageCss {
+//         top: -100px;
+//         left: 140px;
+//         opacity: 1;
+//         position: absolute;
+//     }
+// }
 
-@media only screen and (min-width:414px) and (max-width: 896px) {
-    .imageCss {
-        top: 51px;
-        left: 133px;
-        opacity: 1;
-        position: absolute;
-    }
-}
+// @media only screen and (min-width:414px) and (max-width: 896px) {
+//     .imageCss {
+//         top: 51px;
+//         left: 133px;
+//         opacity: 1;
+//         position: absolute;
+//     }
+// }
 
-@media only screen and (min-width:390px) and (max-width: 844px) {
-    .imageCss {
-        top: 51px;
-        left: 133px;
-        opacity: 1;
-        position: absolute;
-    }
-}
+// @media only screen and (min-width:390px) and (max-width: 844px) {
+//     .imageCss {
+//         top: 51px;
+//         left: 133px;
+//         opacity: 1;
+//         position: absolute;
+//     }
+// }
 
-@media only screen and (max-width: 740px) {
-    .imageCss {
-        top: -5px;
-        left: 122px;
-        opacity: 1;
-        position: absolute;
-    }
-}
+// @media only screen and (max-width: 740px) {
+//     .imageCss {
+//         top: -5px;
+//         left: 122px;
+//         opacity: 1;
+//         position: absolute;
+//     }
+// }
 
-@media only screen and (min-width: 412px) and (max-width: 915px) {
-    .imageCss {
-        top: 40px;
-        left: 133px;
-        opacity: 1;
-        position: absolute;
-    }
-}
+// @media only screen and (min-width: 412px) and (max-width: 915px) {
+//     .imageCss {
+//         top: 40px;
+//         left: 133px;
+//         opacity: 1;
+//         position: absolute;
+//     }
+// }
 
 // image css end
 //Title media query
@@ -192,4 +190,30 @@ ion-button {
     position: absolute;
     bottom: 100px;
     width: 94%;
+}
+.slideimag1{
+    display: flex;
+    justify-content: end;
+    padding-top: 45px;
+}
+.slideimag2{
+    display: flex;
+    justify-content: center;
+    padding-top: 45px;
+}
+.slideimag3{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+ }
+
+ .slideimag5{
+    display: flex;
+    justify-content: center; 
+ }
+.hello-dear{
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    padding-top: 40px;
 }
