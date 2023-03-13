@@ -134,7 +134,16 @@ const routes: Routes = [
   {
     path: 'sign-in',
     loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInModule)
+  },
+  {
+    path: 'sign-up-institution',
+    loadChildren: () => import('./sign-up-institution/sign-up-institution.module').then( m => m.SignUpInstitutionPageModule)
+  },
+  {
+    path: 'sign-up-organization',
+    loadChildren: () => import('./sign-up-organization/sign-up-organization.module').then( m => m.SignUpOrganizationPageModule)
   }
+
 
  
   
