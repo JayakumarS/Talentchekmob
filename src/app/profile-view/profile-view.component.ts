@@ -9,6 +9,16 @@ export class ProfileViewComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.setSelectedTab('search');
+  }
+
+
+  selectedTab: string = 'search';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
 
 }
