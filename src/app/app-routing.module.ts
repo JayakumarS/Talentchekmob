@@ -142,7 +142,35 @@ const routes: Routes = [
   {
     path: 'sign-up-organization',
     loadChildren: () => import('./sign-up-organization/sign-up-organization.module').then( m => m.SignUpOrganizationPageModule)
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'language',
+    loadChildren: () => import('./language/language.module').then( m => m.LanguagePageModule)
+  },
+  {
+    path: 'push-notification',
+    loadChildren: () => import('./push-notification/push-notification.module').then( m => m.PushNotificationPageModule)
+  },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./privacy-policy/privacy-policy.module').then( m => m.PrivacyPolicyPageModule)
+  },
+  {
+    path: 'terms-and-conditions',
+    loadChildren: () => import('./terms-and-conditions/terms-and-conditions.module').then( m => m.TermsAndConditionsPageModule)
+  },
+  {
+    path: 'about-device',
+    loadChildren: () => import('./about-device/about-device.module').then( m => m.AboutDevicePageModule)
   }
+
 
 
  

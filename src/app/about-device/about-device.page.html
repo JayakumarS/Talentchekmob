@@ -1,0 +1,75 @@
+<ion-header style="background-color: white;">
+  <ion-toolbar style="padding: 20px 10px 15px;">
+      <ion-row style="display: flex;justify-content: space-between;">
+        <div>
+          <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+        </div>  
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+        align-items: center;align-items: flex-end;">
+          About
+        </div> 
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
+        </div>
+      </ion-row> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row class="container">
+    <ion-col size="6">
+      <div class="company-card">
+      <h1 style="white-space: nowrap;font-size: 23px;font-weight: 700;">TALENT CHEK</h1>
+      <div style="font-size: 10px;">First step towards your dream job</div>
+      <div style="padding-top: 52px;">&copy; All rights reserved</div>
+      </div>
+    </ion-col>
+  <div>
+    <ion-col size="3">
+      <div class="custom-button">
+        <div style="display: flex; align-items: center;" ><ion-icon size="large" name="search-circle"></ion-icon>App version:<b>1.0.0</b></div>
+       </div>
+    </ion-col>
+    <ion-col size="3">
+      <div class="custom-button">
+        <div style="display: flex; align-items: center;" ><ion-icon size="large" name="search-circle"></ion-icon>iOS version:<b>15.6.1</b></div>
+       </div>
+    </ion-col>
+  </div>
+  </ion-row> 
+
+  <div class="line-with-text">
+    <hr class="hr1">
+ </div>
+
+ <div style="padding: 13px;">
+  <p>Jobby is the best way to find the job of dream. A large number of employers, convenient communication and a special Jobby center for finding best job search tricks, last news from employers, interviews & much more.<br>
+    <br> We will help you find a job, expand your potential, show you new ways for additional financial income.</p>
+ </div>
+
+ <div class="line-with-text">
+  <hr class="hr1">
+</div>
+
+<div style="padding: 13px;">
+  <p>If you like our application and want to share it with your friends, just choose below the share option that is convenient for you:</p>
+ </div>
+
+  <div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+  </div>
+</ion-content>
