@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-search-settings',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchSettingsPage implements OnInit {
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
   }
@@ -15,5 +16,9 @@ export class SearchSettingsPage implements OnInit {
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
+  }
+
+  searchresults(){
+    this.router.navigate(['/search-results']) 
   }
 }
