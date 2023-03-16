@@ -9,7 +9,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Injectable } from '@angular/core';
-
+import { TranslateService } from '@ngx-translate/core';
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -30,10 +31,13 @@ countryVal: string;
 countryIdVal:string;
 fileTransfer: FileTransferObject = this.transfer.create();
 splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  isSubmitted: boolean;
+  response: Object;
 
 
   constructor(public formbuilder: FormBuilder,public router: Router,private camera: Camera,
-    public storageservice:StorageService, private transfer: FileTransfer,) {
+    public storageservice:StorageService, private transfer: FileTransfer,
+     private translate: TranslateService, private loadingCtrl: LoadingController) {
 
       this.talentform = formbuilder.group({
         firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
@@ -50,7 +54,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         stateName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern(this.splCharRegex)])],
         pinCode: ['', Validators.compose([Validators.maxLength(6), Validators.pattern('[0-9]{6}')])],
         referalCode: ['', Validators.compose([Validators.maxLength(20)])],
-        accountType: ['', ''],
+        profileVisibility: ['', ''],
         cBoxIAgree: ['', ''],
         cBoxIAgreeConsent: ['', '']
   
@@ -62,9 +66,161 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     this.stepper.next();
   }
 
+  
   onSubmit() {
-    console.log(this.talentform.value);
-  }
+      this.isSubmitted = true;
+      if (!this.talentform.valid) {
+        console.log('Please provide all the required values!');
+        //this.storageservice.warningToast('Please provide all the required values!');
+        this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
+        return false;
+      }
+      else {
+        console.log(this.talentform.value);
+  
+  
+        try {
+          var firstName = this.talentform.controls['firstName'].value;
+          var lastName = this.talentform.controls['lastName'].value;
+          var pwd = this.talentform.controls['password'].value;
+          var genderVal = this.talentform.controls['gender'].value;
+          var phoneNo = this.talentform.controls['phoneNo'].value;
+          var panNo = this.talentform.controls['panNo'].value;
+          var emailId = this.talentform.controls['email'].value;
+          var dob = this.talentform.controls['dob'].value;
+          var refCode = this.talentform.controls['referalCode'].value;
+          var profileVisibility = this.talentform.controls['profileVisibility'].value; 
+          var address = this.talentform.controls['address'].value;
+          var areaName = this.talentform.controls['areaName'].value; 
+           var country = this.countryIdVal; //Google search country feature. 
+          var stateName = this.talentform.controls['stateName'].value;
+          var pinCode = this.talentform.controls['pinCode'].value; 
+          var cBoxIAgree = this.talentform.controls['cBoxIAgree'].value;
+          console.log("cBoxIAgree: " + cBoxIAgree); 
+          var cBoxIAgreeConsent = this.talentform.controls['cBoxIAgreeConsent'].value;
+          console.log("cBoxIAgreeConsent: " + cBoxIAgreeConsent); 
+          console.log("dob: " + dob); 
+          var dateOfBirth = this.transformDate(dob);
+          console.log("dateOfBirth: " + dateOfBirth);
+  
+          if (firstName != lastName) { //Validation.
+  
+            var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
+            console.log("currentDate: " + currentDate);
+            console.log("dateOfBirthAlt: " + dateOfBirth);
+            var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
+            if (frm <= currentDate) {
+  
+              //  if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
+  
+                // if (cBoxIAgree == true) {
+  
+                  // if (cBoxIAgreeConsent == true) {
+  
+                    //#region Main concept 
+                    //this.showLoadingIndicator(); // Show Loading indicator
+  
+                    var postData = {
+  
+                      'firstName': firstName,
+                      'lastName': lastName,
+                      'pwd': pwd,
+                      'gender': genderVal,
+                      'mobileNo': phoneNo,
+                      'panNo': panNo,
+                      'emailId': emailId,
+                      'dob': dateOfBirth,
+                      'referralCode': refCode,
+                      'companyCode': '',
+                      'cin': '',
+                      'tin': '',
+                      'isIndv': 'S',
+                      'profileVisibility': profileVisibility,
+                      'uploadImg': this.base64img1,
+  
+                      'address': address,
+                      'city': 0,
+                      'country': country,
+                      'state': 0,
+                      'pincode': pinCode,
+                      'typeRegister': 'Mobile',
+                      'creditPoints': 5,
+                      'latitude':0,
+                      'longitude':0
+  
+                    }
+  
+                    console.log(`Posting Data: ${JSON.stringify(postData)}`);
+  
+                    var signUpServiceUrl = "api/auth/app/registration/IndividualRegister"; 
+                    this.storageservice.postrequest(signUpServiceUrl, postData).subscribe(result => { 
+                      this.response = result;
+                      console.log(this.response);
+  
+                      if (result["success"] == true) {
+                         this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('PopupWin.userAddSucc'));
+  
+                        var empid = result["empUserId"];
+                        var points = result["creditPoints"];
+                        let navigationExtras: NavigationExtras = {
+                          queryParams: {
+                            empId: empid,
+                            points: points
+                          }
+                        };
+                        this.router.navigate(['/welcome'], navigationExtras);
+                        //this.hideLoadingIndicator(); //Hide loading indicator
+                      }
+                      else if (result["success"] == false) {
+                        var msg = result["message"];
+                        if (msg == null) {
+                          msg = "Web service does not give proper message";
+                        }
+                        this.storageservice.warningToast(msg);
+                        this.hideLoadingIndicator(); //Hide loading indicator
+                      }
+                      else {
+                       // this.storageservice.warningToast("Connection unavailable!");
+                        this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
+                        this.hideLoadingIndicator(); //Hide loading indicator
+                      }
+                    });
+                    //#endregion
+  
+                  // }
+                  // else {
+                  //   //this.storageservice.warningToast('Please accept the "Consent form.');
+                  //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsAccConForm'));
+                  // }
+                // }
+                // else {
+                //   //this.storageservice.warningToast('Please accept the "Terms and Conditions.');
+                //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsAccTmNCon'));
+                // }
+              //  }
+              //  else {
+              //    //this.storageservice.warningToast('Please upload image.');
+              //    this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsUpImg'));
+              //  }
+            }
+            else {
+              this.storageservice.warningToast('User must have minimum one year old to register. Future date is not applicable, Please change.');
+              this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.userMinOldReg'));
+            }
+          }
+          else {
+            this.storageservice.warningToast("First name & last name should not be equal");
+            this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.firNmLtNmEql'));
+          }
+  
+        }
+        catch (Exception) {
+          //this.storageservice.warningToast('Connection unavailable!');
+          this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
+          this.hideLoadingIndicator(); //Hide loading indicator
+        }
+      }
+    }
 
   async ngOnInit() {
 
@@ -77,8 +233,23 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     })
   }
 
-  
-
+  transformDate(date) {
+    return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
+  }
+  showLoadingIndicator() {
+    this.loadingCtrl.create({
+      message: 'Processing...',
+      spinner: 'bubbles',
+      cssClass: 'loadingIndicatorCustom'
+    }).then((loading) => {
+      loading.present();
+    });
+  }
+  hideLoadingIndicator() {
+    setTimeout(() => {
+      this.loadingCtrl.dismiss();
+    });
+  }
 
   goToSearchSelectedItem(CtryName, CtryId) {
     console.log("InsName: " + CtryName)

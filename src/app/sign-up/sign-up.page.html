@@ -175,26 +175,18 @@
 
                             <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select fruit">
-                                    <ion-select-option value="apples">Apples</ion-select-option>
-                                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                                    <ion-select-option value="bananas">Bananas</ion-select-option>
-                                </ion-select>
+                                <ion-input formControlName="stateName"></ion-input>
                             </ion-item>
 
 
                             <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select fruit">
-                                    <ion-select-option value="apples">Apples</ion-select-option>
-                                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                                    <ion-select-option value="bananas">Bananas</ion-select-option>
-                                </ion-select>
+                                <ion-input formControlName="areaName"></ion-input>
                             </ion-item>
 
                             <ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="pinCode"></ion-input>
                             </ion-item>
 
 
@@ -218,31 +210,31 @@
 
                             <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="phoneNo"></ion-input>
                             </ion-item>
 
 
                             <ion-label class="labels">Email <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="email"></ion-input>
                             </ion-item>
 
 
                             <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="password"></ion-input>
                             </ion-item>
 
                             <ion-label class="labels">Account <small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
-                                <ion-radio-group style="width:100%">
+                                <ion-radio-group formControlName="profileVisibility" style="width:100%">
                                     <ion-row>
                                         <ion-col size="4">
                                             <div class="genderbg">
                                                 <div class="genderpadding">
                                                     <img src="./assets/img/boys.png" class="emojiicons">
                                                     <span class="emojitext">Public</span>
-                                                    <ion-radio mode="md" class="ion-item-left" value="A"></ion-radio>
+                                                    <ion-radio mode="md" class="ion-item-left" value="public"></ion-radio>
                                                 </div>
                                             </div>
                                         </ion-col>
@@ -252,7 +244,7 @@
                                                 <div class="genderpadding">
                                                     <img src="./assets/img/girle.jpg" class="emojiicons">
                                                     <span class="emojitext">Private</span>
-                                                    <ion-radio mode="md" class="ion-item-left" value="B"></ion-radio>
+                                                    <ion-radio mode="md" class="ion-item-left" value="private"></ion-radio>
                                                 </div>
                                             </div>
                                         </ion-col>
@@ -262,7 +254,7 @@
                                                 <div class="genderpadding">
                                                     <img src="./assets/img/others.png" class="emojiicons">
                                                     <span class="emojitext">On Demand</span>
-                                                    <ion-radio mode="md" class="ion-item-left" value="c"></ion-radio>
+                                                    <ion-radio mode="md" class="ion-item-left" value="ondemand"></ion-radio>
                                                 </div>
                                             </div>
                                         </ion-col>
@@ -273,13 +265,13 @@
 
                             <ion-label class="labels">Referral code</ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="referalCode"></ion-input>
                             </ion-item>
 
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Register</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="onSubmit()">Register</ion-button>
                         </div>
 
 
