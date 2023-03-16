@@ -23,8 +23,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-
-    <div class="container">
+     <div class="container">
         <div id="stepper1" class="bs-stepper">
             <div class="bs-stepper-header">
                 <div class="step" data-target="#test-l-1">
@@ -50,30 +49,30 @@
             </div>
             <br>
             <div class="bs-stepper-content">
-                <form (ngSubmit)="onSubmit()">
+                <form  [formGroup]="talentform" (ngSubmit)="onSubmit()">
                     <div id="test-l-1" class="content">
                         <div class="button-content">
                             <ion-label class="labels">First name <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="firstName"></ion-input>
                             </ion-item>
 
 
                             <ion-label class="labels">Last name <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="lastName"></ion-input>
                             </ion-item>
 
 
                             <ion-label class="labels">Date of Birth<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="dob" presentation="date"></ion-datetime>
                             </ion-item>
 
 
                             <ion-label class="labels">Gender<small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
-                                <ion-radio-group style="width:100%">
+                                <ion-radio-group formControlName="gender" style="width:100%">
                                     <ion-row>
                                         <ion-col size="4">
                                             <div class="genderbg">
@@ -151,18 +150,28 @@
                         <div class="button-content">
                             <ion-label class="labels">Address</ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-textarea placeholder="Enter Your Address"></ion-textarea>
+                                <ion-textarea formControlName="address" placeholder="Enter Your Address"></ion-textarea>
                             </ion-item>
 
 
                             <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select fruit">
-                                    <ion-select-option value="apples">Apples</ion-select-option>
-                                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                                    <ion-select-option value="bananas">Bananas</ion-select-option>
-                                </ion-select>
+                                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="country" showcancelbutton="" 
+                                debounce="100" (ionInput)="filterList($event)" 
+                                formControlName="country" [(ngModel)]="countryVal"  (ionBlur)="unCheckFocus()"
+                                search-icon=“undefined”></ion-searchbar>
                             </ion-item>
+                            <ion-row>
+                                <ion-col>
+                                  <ion-list *ngIf="IsSearchListShow" lines="full">
+                                    <ion-item *ngFor="let cElement of countryResponse">
+                                      <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                                        {{ cElement.text }}
+                                      </ion-label>
+                                    </ion-item>
+                                  </ion-list>
+                                </ion-col>
+                              </ion-row>
 
                             <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -287,4 +296,4 @@
             </div>
         </div>
     </div>
-</ion-content>
+ </ion-content>

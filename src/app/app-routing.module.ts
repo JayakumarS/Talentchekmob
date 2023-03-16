@@ -169,6 +169,30 @@ const routes: Routes = [
   {
     path: 'about-device',
     loadChildren: () => import('./about-device/about-device.module').then( m => m.AboutDevicePageModule)
+  },
+  {
+    path: 'visibility',
+    loadChildren: () => import('./visibility/visibility.module').then( m => m.VisibilityPageModule)
+  },
+  {
+    path: 'profile-visibility',
+    loadChildren: () => import('./profile-visibility/profile-visibility.module').then( m => m.ProfileVisibilityPageModule)
+  },
+  {
+    path: 'email-visibility',
+    loadChildren: () => import('./email-visibility/email-visibility.module').then( m => m.EmailVisibilityPageModule)
+  },
+  {
+    path: 'phone-visibility',
+    loadChildren: () => import('./phone-visibility/phone-visibility.module').then( m => m.PhoneVisibilityPageModule)
+  },
+  {
+    path: 'job',
+    loadChildren: () => import('./job/job.module').then( m => m.JobPageModule)
+  },
+  {
+    path: 'job-details',
+    loadChildren: () => import('./job-details/job-details.module').then( m => m.JobDetailsPageModule)
   }
 
 

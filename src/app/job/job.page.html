@@ -1,0 +1,84 @@
+<ion-header style="background-color: white;">
+  <ion-toolbar style="padding: 20px 10px 15px;">
+      <ion-row style="display: flex;justify-content: space-between;align-items: center;">
+        <div>
+          <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_profile()"></ion-icon>
+        </div>  
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+        align-items: center;align-items: center;">
+          Job
+        </div> 
+        <div> 
+           <img src="../../assets/icon/settings-sliders.png" style="width: 70%; height: 45px; padding-bottom: 8px;">
+         </div>
+      </ion-row> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="display-justify">
+    <div class="custom-button" (click)="goto_jobdetails()">
+     <div style="display: flex; justify-content: space-between;align-items: center;" >
+    <div style="display: flex; justify-content: center;padding: 5px;">
+      <ion-avatar slot="start">
+      <img src="../../assets/icon/useremployee.png" />
+      </ion-avatar> 
+    </div> 
+    <div class="full-part-time">
+      <ion-label>Full time</ion-label>
+    </div>
+    <div class="experience">
+      <ion-label>Experience 5+</ion-label>
+    </div>
+    <div  style="display: flex; justify-content: end;">
+      <ion-avatar style="width: 35%;" slot="start">
+      <img src="../../assets/icon/add_button.png" />
+      </ion-avatar> 
+    </div> 
+  </div>
+  <div style="display: flex;flex-direction: column;">
+    <div style="font-size: 18px; font-weight: 600;">
+      Senior front-end developer
+    </div>
+    <div style="font-size: 16px;">
+      Red Bull GmbH
+    </div>
+    <div style="font-size: 10px;color: gray;">
+      USA, New-York
+    </div>
+  </div>
+
+  <div style="display: flex;justify-content: space-between;align-items: center;">
+    <div style="font-size: 18px; font-weight: 700;">
+      3950-5800$/mo
+    </div>
+    <div (click)="goto_jobdetails()" class="apply-button">
+      Apply
+    </div>
+  </div>
+    </div>
+  </div>  
+  <div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+  </div>
+  
+  
+  
+
+</ion-content>
+

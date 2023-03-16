@@ -4,9 +4,9 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SignUpPageRoutingModule } from './sign-up-routing.module';
+import { ProfileVisibilityPageRoutingModule } from './profile-visibility-routing.module';
 
-import { SignUpPage } from './sign-up.page';
+import { ProfileVisibilityPage } from './profile-visibility.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { SignUpPage } from './sign-up.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    SignUpPageRoutingModule
+    ProfileVisibilityPageRoutingModule
   ],
-  declarations: [SignUpPage]
+  declarations: [ProfileVisibilityPage]
 })
-export class SignUpPageModule {}
+export class ProfileVisibilityPageModule {}

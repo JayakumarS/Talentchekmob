@@ -14,8 +14,8 @@ export class StorageService {
 
   baseurl: any;
   serverurl: any;
-mobileserverurl:string ="http://localhost:8095/Givven";
-baseURL:string ="http://localhost:8095/";
+mobileserverurl:string ="http://localhost:8085/";
+baseURL:string ="http://localhost:8085/";
 //mobileserverurl:string ="https://givven.a-bits.com/Givven";
 //baseURL:string ="https://givven.a-bits.com/";
   mobileserverserive: any;

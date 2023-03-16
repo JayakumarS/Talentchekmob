@@ -41,4 +41,15 @@
   ion-toggle:checked {
     --background-checked: #4CAF50;
   }
-  
+ion-content {
+    --background: #EDF1FC;
+}
+.toggle-item{
+  margin-bottom: 10px;
+  --background: #EDF1FC;
+  --border-color: transparent;
+}
+.toggle{
+  height: 23px;
+  width: 41px;
+}

@@ -2,11 +2,11 @@
   <ion-toolbar style="padding: 20px 10px 15px;">
       <ion-row style="display: flex;justify-content: space-between;">
         <div>
-          <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+          <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_visibility()"></ion-icon>
         </div>  
-        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
-        align-items: center;align-items: center;">
-          Language
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 20px;display: flex;
+        align-items: center;align-items: center;">          
+        Choose who can view your phone
         </div> 
         <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
         </div>
@@ -15,26 +15,26 @@
 </ion-header>
 
 <ion-content>
-  <ion-item class="checkbox-item">
-    <ion-avatar slot="start">
-      <img src="../../assets/icon/ind-flag.png" />
-    </ion-avatar>
-    <ion-label>
-      India
-    </ion-label>
-    <ion-checkbox class="round-checkbox" slot="end"></ion-checkbox>
-  </ion-item> 
-
-  <ion-item class="checkbox-item">
-    <ion-avatar slot="start">
-      <img src="../../assets/icon/favicon.png" />
-    </ion-avatar>
-    <ion-label>
-      India
-    </ion-label>
-    <ion-checkbox class="round-checkbox" slot="end"></ion-checkbox>
-  </ion-item>
-
+  <form [formGroup]="phoneVisForm">
+  <ion-list>
+    <ion-radio-group formControlName="phoneVisibility" (ionChange)="updatePhoneVisibility()" [allowEmptySelection]="true" value="turtles">
+      <ion-item class="ion-item">
+        <ion-label><b>Public</b><h6 style="color: gray;">Anyone on Talent Chek can view your profile</h6></ion-label>
+        <ion-radio slot="end" value="public"></ion-radio>
+      </ion-item>
+  
+      <ion-item class="ion-item">
+        <ion-label><b>On Demand</b><h6 style="color: gray;">Users can request permission to view your profile</h6></ion-label>
+        <ion-radio slot="end" value="ondemand"></ion-radio>
+      </ion-item>
+  
+      <ion-item class="ion-item">
+        <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label>
+        <ion-radio slot="end" value="private"></ion-radio>
+      </ion-item> 
+    </ion-radio-group>
+  </ion-list>
+</form>
   <div class="footer-nav">
     <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
       <ion-icon size="large" name="search-circle"></ion-icon>

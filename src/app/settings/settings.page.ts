@@ -38,5 +38,8 @@ export class SettingsPage implements OnInit {
   goto_AboutApp(){
     this.router.navigate(['/about-device']) 
   }
+  goto_visibility(){
+    this.router.navigate(['/visibility'])
+  }
 
 }

@@ -10,7 +10,7 @@
   ion-content {
       --background: url('../../assets/img/06_Welcome screen.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
+      --background: #EDF1FC;
     }
     ion-card-header.ios {
         display: flex;
@@ -18,11 +18,6 @@
       } 
     .filter-button {
       margin-left: 8px;
-    }
-    ion-toolbar {
-      --background: url('../../assets/img/95246-cloudbubbles-green.gif') no-repeat center center fixed;
-      background-size: cover; 
-      filter: hue-rotate(74deg)grayscale(53%); 
     }
     
   .footer-nav {
@@ -72,13 +67,13 @@
 .custom-button{
     width: 360px;
     border-radius: 30px;
-    height: 60px;
+    height: 200px;
     font-size: 18px;
     background-color: antiquewhite;
-    display: flex;
-    padding: 0px 5px;
-    align-items: center;
-    justify-content: center; 
+    // display: flex;
+    padding: 0px 15px;
+    // align-items: center;
+    // justify-content: center; 
     background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 24px #00000026;
@@ -107,6 +102,33 @@
     height: 56px;
     font-size: 18px;
 }
-ion-avatar{
-  width: 35%;
+.full-part-time{
+    width: 25%; 
+    text-align: center;
+    background: #FA7070;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0px;
+}
+.experience{
+    width: 35%; 
+    text-align: center; 
+    background: #568FEA;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0px;
+}
+.apply-button{
+    background: #568FEA; 
+    border-radius: 30px;
+    height: 42px;
+    width: 35%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

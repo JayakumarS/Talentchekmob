@@ -45,3 +45,19 @@ ion-avatar img {
     color: aliceblue;
     border-radius: 50%;
   }
+ion-content {
+    --background: #EDF1FC;
+}
+.checkbox-item{
+  margin: 15px;
+  --min-height: 69px !important;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 8px 24px #00000026;
+  border-radius: 24px;
+}
+
+.round-checkbox {
+  --size: 30px;
+    --border-width: 0px;
+    --border-radius: 30px;
+}

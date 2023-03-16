@@ -2,52 +2,39 @@
   <ion-toolbar style="padding: 20px 10px 15px;">
       <ion-row style="display: flex;justify-content: space-between;">
         <div>
-          <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+          <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_visibility()"></ion-icon>
         </div>  
-        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 20px;display: flex;
         align-items: center;align-items: center;">
-          Push messages
+          Choose who can view your profile
         </div> 
         <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
         </div>
       </ion-row> 
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-<div>
-  <ion-item class="toggle-item">
-    <ion-label><b>Recommend vacancies</b><br>Just recommend job for you</ion-label>
-    <ion-toggle class="toggle" slot="end" ></ion-toggle>
-  </ion-item>
-
+  <form [formGroup]="profileVisForm">
+    <ion-list>
+      <ion-radio-group formControlName="profileVisibility" (ionChange)="updateProfileVisibility()" [allowEmptySelection]="false" value="turtles">
+        <ion-item class="ion-item">
+          <ion-label><b>Public</b><h6 style="color: gray;">Anyone on Talent Chek can view your profile</h6></ion-label>
+          <ion-radio slot="end" value="public"></ion-radio>
+        </ion-item>
   
-  <ion-item class="toggle-item">
-    <ion-label><b>Hot vacancies</b><br>Everyday hot job vacancies for you</ion-label>
-    <ion-toggle class="toggle" slot="end"></ion-toggle>
-  </ion-item>
-
+        <ion-item class="ion-item">
+          <ion-label><b>On Demand</b><h6 style="color: gray;">Users can request permission to view your profile</h6></ion-label>
+          <ion-radio slot="end" value="ondemand"></ion-radio>
+        </ion-item>
   
-  <ion-item class="toggle-item">
-    <ion-label><b>Your subscriptions</b><br>Job alerts for which you are subscribed</ion-label>
-    <ion-toggle class="toggle" slot="end"></ion-toggle>
-  </ion-item>
-
-  
-  <ion-item class="toggle-item">
-    <ion-label><b>Jobby center</b><br>Receive daily update notifications in Jobby center</ion-label>
-    <ion-toggle class="toggle" slot="end"></ion-toggle>
-  </ion-item>
-
-  
-  <ion-item class="toggle-item">
-    <ion-label><b>Views of your resume</b><br>Get notified when your resumes are viewed</ion-label>
-    <ion-toggle class="toggle" slot="end"></ion-toggle>
-  </ion-item>
-</div>
-
-
-
-
+        <ion-item class="ion-item">
+          <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label>
+          <ion-radio slot="end" value="private"></ion-radio>
+        </ion-item> 
+      </ion-radio-group>
+    </ion-list>
+  </form>
 
   <div class="footer-nav">
     <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
