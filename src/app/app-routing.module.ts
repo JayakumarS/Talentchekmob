@@ -193,6 +193,10 @@ const routes: Routes = [
   {
     path: 'job-details',
     loadChildren: () => import('./job-details/job-details.module').then( m => m.JobDetailsPageModule)
+  },
+  {
+    path: 'job-profile',
+    loadChildren: () => import('./job-profile/job-profile.module').then( m => m.JobProfilePageModule)
   }
 
 
