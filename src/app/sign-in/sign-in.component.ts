@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthLoginInfo } from '../auth/login-Info';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,14 +11,91 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  loginform: FormGroup;
+  private loginInfo: AuthLoginInfo;
+  error = "";
+
+
+  
+
+  constructor(public formbuilder: FormBuilder,public router: Router,public storageservice: StorageService) { 
+
+    this.loginform = formbuilder.group({
+      userName: ['', Validators.required],
+       password: ['', Validators.required],
+       otpValue: [""],
+      userNameEmailId: [""],
+      recaptchaResponse: [""],
+
+
+    });
+  }
 
   ngOnInit() {}
 
 
+  get f() {
+    return this.loginform.controls;
+  }
+
+
   goto_signup(){
 
-    this.router.navigate(['/job-search']) 
+    this.error = "";
+    if (this.loginform.invalid) {
+      this.error = "Invalid credentials";
+      return;
+    }
+    else{
+
+      this.loginInfo = new AuthLoginInfo(
+        this.f.userName.value, this.f.password.value, this.f.otpValue.value, this.f.userNameEmailId.value, this.f.recaptchaResponse.value);
+
+
+        this.storageservice.attemptAuth(this.loginInfo).subscribe(
+          data => {
+  
+            if (data) {
+              if (data.success) {
+  
+                if (data.roles[0].roleId.includes('1')) {
+                  this.router.navigate(['/job-search']);
+                } else if (data.roles[0].roleId.includes('2')) {
+                  this.router.navigate(['/job-search']);
+                } else if (data.roles[0].roleId.includes( '3')) {
+                  this.router.navigate(['/job-search']);
+                }
+                else if (data.roles[0].roleId.includes('5')) {
+                  this.router.navigate(['/job-search']);
+                }
+              }
+              else {
+
+                this.error = data.message;
+              }
+  
+            } else {
+
+              this.error = "Invalid Login";
+            }
+  
+  
+          },
+          error => {
+    
+            this.error = "Server Down!!!";
+            console.log(error);
+  
+          },
+       //  grecaptcha.reset()
+        );
+  
+      }
+
+    
+
+
+  //  this.router.navigate(['/job-search']) 
   }
 
 }

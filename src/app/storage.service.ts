@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { AuthLoginInfo } from './auth/login-Info';
+import {JwtResponse} from './auth/jwt-Response';
+import { map } from "rxjs/operators";
+import { User } from "./auth/user";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +18,8 @@ export class StorageService {
 
   baseurl: any;
   serverurl: any;
-mobileserverurl:string ="http://localhost:8085/";
-baseURL:string ="http://localhost:8085/";
+mobileserverurl:string ="http://localhost:8080/";
+baseURL:string ="http://localhost:8080/";
 //mobileserverurl:string ="https://givven.a-bits.com/Givven";
 //baseURL:string ="https://givven.a-bits.com/";
   mobileserverserive: any;
@@ -24,6 +28,8 @@ baseURL:string ="http://localhost:8085/";
 
 
   }
+
+  loginUrl = `${this.mobileserverurl}api/auth/signin`;
 
   getbaseusrl() {
   
@@ -271,6 +277,33 @@ baseURL:string ="http://localhost:8085/";
     });
 
     await alert.present();
+  }
+
+  private userObj = new User();
+
+  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
+    return  this.http
+      .post<JwtResponse>(this.loginUrl, credentials)
+      .pipe(
+        map((user) => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          console.log(user)
+          localStorage.setItem("currentUser", JSON.stringify(user));
+
+         // let response ={};
+          this.userObj['userId'] = user.empId;
+          this.userObj['token'] = user.accessToken;
+          this.userObj['roles'] = user.roles;
+          this.userObj["img"] =  user.imgurl;
+          this.userObj["defaultRoleId"] = user.defaultRoleId;
+          this.userObj["companyCode"] = user.companyCode;
+          this.userObj['firstNameLastName'] = user.firstNameLastName;
+          console.log(this.userObj);
+        // this.currentUserSubject.next(this.userObj);
+          return user;
+        })
+      );
+    //return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
 }

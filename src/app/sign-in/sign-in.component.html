@@ -15,29 +15,27 @@
 
     <div class="container">
 
-
         <div class="bs-stepper-content">
-            <div id="test-l-1" class="content">
-                <div class="button-content">
+            <form [formGroup]="loginform">
+                <div id="test-l-1" class="content">
+                    <div class="button-content">
+                        <ion-label class="labels">TalentId/User Name/Mobile Number <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input type="text" formControlName="userName"></ion-input>
+                        </ion-item>
 
-                    <ion-label class="labels">TalentId/User Name/Mobile Number <small style="color: #f70505;">*</small></ion-label>
-                    <ion-item fill="outline" class="input-field">
-                        <ion-input></ion-input>
-                    </ion-item>
+                        <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input type="password" formControlName="password"></ion-input>
+                        </ion-item>
 
-                    <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
-                    <ion-item fill="outline" class="input-field">
-                        <ion-input></ion-input>
-                    </ion-item>
-
-
+                    </div>
                 </div>
-            </div>
-
+            </form>
         </div>
 
         <div class="display-justify">
-            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="goto_signup()">Sign up</ion-button>
+            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="goto_signup()">Sign-in</ion-button>
         </div>
         <div class="line-with-text">
             <hr class="hr1">
@@ -46,14 +44,11 @@
         </div>
 
         <div class="sign-in">
-            <div style="font-size: 13px;">Are you new member in talentchek member? </div><span style="font-size: 14px;"><b> Sign up</b></span>
+            <div style="font-size: 13px;">Are you new member in talentchek? </div>
+            <span style="font-size: 14px;"><b> Sign up</b></span>
         </div>
 
+
     </div>
-
-
-
-
-
 
 </ion-content>

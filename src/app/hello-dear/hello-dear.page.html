@@ -8,76 +8,15 @@
         </ion-col>
     </ion-row>
     <div class="hello-dear">
-        <div style="font-size: 24px;font-family: sans-serif;">Hello, dear!</div>
-        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061;">Let's Create an account. it's very simple and</div>
+        <div style="font-size: 24px;font-family: Mr-eaves;">Hello, dear!</div>
+        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061; font-family: alina-sans;">Let's Create an account. it's very simple and</div>
     </div>
     <div class="display-justify">
-        <ion-button class="custom-button" (click)="goto_signup('sign')">Sign up</ion-button>
+        <ion-button class="custom-button" (click)="goto_signup()">Sign up</ion-button>
     </div>
 
-    <ion-row *ngIf="signUpButtons" style="margin-left: -17px;">
-        <ion-col size="4">
-            <ion-icon (click)="individualClick('individual')" style="width: 65px;height: 65px;margin-top: -29px;margin-left: 80px;" color="primary" size="large" name="person-circle"></ion-icon>
-        </ion-col>
-        <ion-col size="4">
-            <div ><img (click)="organizationClick('organization')" style="height: 50px;width: 58px;margin-top: -24px;margin-left: 33px;" src="./assets/img/institution.png" /></div>
-        </ion-col>
-        <ion-col size="4">
-            <div ><img (click)="institutionalClick('institutional')" style="height: 51px;width: 68px;margin-top: -22px;margin-left: -16px;" src="./assets/img/bank.png" /></div>
-          </ion-col>
-    </ion-row>
-    <div style="margin-top: -24px;margin-left: 14px;" *ngIf="individualCard">
-    <ion-card style="border-radius: 47px;height: 83px;width: 370px;background: #EDF1FC;">
-        <ion-card-content>
-            <h2 style="font-weight: 1000;margin-top: -4px;">Individual Registration</h2>
-            <ion-row>
-                <ion-col size="9">
-                    <p style="padding-bottom: 30px;font-size: 11px;color: #5E6061;margin-left: -3px;margin-top: 0px;">
-                        For anyone and everyone who would like to maintain a verified portfolio</p>
-                </ion-col>
-                <ion-col size="3">
-                    <ion-button (click)="individualRegister()" class="buttonionix" style="--border-radius: 41px;height: 26px;width: 80px;
-                    margin-top: -12px;margin-left: -3px;color: white;">Register</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    </div>
-    <div style="margin-top: -24px;margin-left: 14px;" *ngIf="organizationCard">
-        <ion-card style="border-radius: 47px;height: 83px;width: 370px;background: #EDF1FC;">
-            <ion-card-content>
-                <h2 style="font-weight: 1000;margin-top: -4px;">Organization Registration</h2>
-                <ion-row>
-                    <ion-col size="9">
-                        <p style="padding-bottom: 30px;font-size: 11px;color: #5E6061;margin-left: -3px;margin-top: 0px;">
-                            For startups, corporates, clubs and associations</p>
-                    </ion-col>
-                    <ion-col size="3">
-                        <ion-button (click)="organizationRegister()" class="buttonionix" style="--border-radius: 41px;height: 26px;width: 80px;
-                        margin-top: -12px;margin-left: -3px;color: white;">Register</ion-button>
-                    </ion-col>
-                </ion-row>
-            </ion-card-content>
-        </ion-card>
-    </div>
 
-    <div style="margin-top: -24px;margin-left: 14px;" *ngIf="institutionalCard">
-        <ion-card style="border-radius: 47px;height: 83px;width: 370px;background: #EDF1FC;">
-            <ion-card-content>
-                <h2 style="font-weight: 1000;margin-top: -4px;">Institution Registration</h2>
-                <ion-row>
-                    <ion-col size="9">
-                        <p style="padding-bottom: 30px;font-size: 11px;color: #5E6061;margin-left: -3px;margin-top: 0px;">
-                            For schools, colleges, universities, and training institutes</p>
-                    </ion-col>
-                    <ion-col size="3">
-                        <ion-button (click)="institutionRegister()" class="buttonionix" style="--border-radius: 41px;height: 26px;width: 80px;
-                        margin-top: -12px;margin-left: -3px;color: white;">Register</ion-button>
-                    </ion-col>
-                </ion-row>
-            </ion-card-content>
-        </ion-card>
-    </div>
+
     <br>
 
     <div class="line-with-text">
@@ -87,6 +26,7 @@
     </div>
 
     <div class="sign-in">
-        <div style="font-size: 16px;">Already a Jobby member? </div><span style="font-size: 18px;"><b> Sign in</b></span>
+        <div style="font-size: 16px; font-family: alina-sans;">Already a Talentchek member? </div>
+        <a href="sign-in" style="font-size: 18px; font-family: Mr-eaves;">Sign in</a>
     </div>
 </ion-content>
