@@ -29,7 +29,7 @@
 
 <ion-content>
 
-    <ion-row>
+    <!-- <ion-row>
 
         <ion-col>
             <br>
@@ -37,14 +37,19 @@
             <br>
             <br>
         </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row>
         <div class="ag-format-container">
 
             <div class="ag-courses_box">
 
-
+                <div style="width: 100%;" class="line-with-text">
+                    <br>
+                    <img style="max-width: 47%;padding: 12px;" src="../../assets/img/tc_logo_with_text.png" (click)="setSelectedTab('apps')">  
+                  <br>
+             
+                </div>
                 <div class="ag-courses_item">
                     <a class="ag-courses-item_link" (click)="individualRegister()">
                         <div class="ag-courses-item_bg"></div>
@@ -100,7 +105,7 @@
     </div>
 
     <div class="sign-in">
-        <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_login()">Sign in</a></b></span>
+        <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;">&nbsp;<b> <a (click)="goto_login()">Sign in</a></b></span>
     </div>
 
 </ion-content>
