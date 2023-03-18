@@ -197,6 +197,10 @@ const routes: Routes = [
   {
     path: 'job-profile',
     loadChildren: () => import('./job-profile/job-profile.module').then( m => m.JobProfilePageModule)
+  },
+  {
+    path: 'register-cat',
+    loadChildren: () => import('./register-cat/register-cat.module').then( m => m.RegisterCatPageModule)
   }
 
 
