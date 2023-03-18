@@ -205,6 +205,10 @@ const routes: Routes = [
   {
     path: 'awesome',
     loadChildren: () => import('./awesome/awesome.module').then( m => m.AwesomePageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   }
 
 
