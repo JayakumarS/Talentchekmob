@@ -213,15 +213,15 @@ hr {
 }
 
 .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
-    background-color: #3ecd5e;
+    background-color: #568FEA;
 }
 
 .ag-courses_item:nth-child(3n) .ag-courses-item_bg {
-    background-color: #e44002;
+    background-color: #FA7070;
 }
 
 .ag-courses_item:nth-child(4n) .ag-courses-item_bg {
-    background-color: #952aff;
+    background-color: #707070;
 }
 
 .ag-courses_item:nth-child(5n) .ag-courses-item_bg {
@@ -262,5 +262,6 @@ hr {
     }
     .ag-courses-item_date-box {
         font-size: 16px;
+        margin-top: -7%;
     }
 }
