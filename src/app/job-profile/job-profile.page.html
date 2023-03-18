@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form>
+  <form [formGroup]="jobProfileForm">
   <div class="ion-stepper">
     <div class="ion-stepper-step" id="step1">
       <div class="ion-stepper-header">
@@ -15,15 +15,15 @@
       <div class="ion-stepper-content">
         <ion-label class="labels">Industry<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                              <ion-select (ionChange)="jobtitleList($event)" placeholder="Industry">
-                                <ion-select-option *ngFor="let tittle of industryList"
+                              <ion-select (ionChange)="jobtitleList($event)" formControlName="industry" placeholder="Industry">
+                                <ion-select-option  *ngFor="let tittle of industryList"
                                 value="{{tittle.id1}}">{{tittle.text}}</ion-select-option>
                             </ion-select>
                             </ion-item>
 
         <ion-label class="labels">Job title<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                              <ion-select placeholder="Job title" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                              <ion-select placeholder="Job title" multiple="true" formControlName="jobTitle" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                                 <ion-select-option *ngFor="let jobtitle of jobTitleList"
                                 value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
                               </ion-select>
@@ -32,7 +32,7 @@
 
         <ion-label class="labels">Job type<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                              <ion-select placeholder="Job type" multiple="true" (ionChange)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                              <ion-select placeholder="Job type" formControlName="jobType" multiple="true" (ionChange)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                                 <ion-select-option *ngFor="let tittle of jobTypeList"
                                  value="{{tittle.id}}">{{tittle.text}}</ion-select-option>
                               </ion-select>
@@ -40,21 +40,31 @@
                             
          
         <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
-                            <ion-item fill="outline" class="input-field">
-                                <ion-input ></ion-input>
-                            </ion-item>
+        <ion-item fill="outline" class="input-field"> 
+          <ion-chip *ngFor="let city of selectedCities" (click)="removeCity(city)">
+            {{ city }}
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-chip>
+          <ion-input type="text" (ionInput)="onSearch($event.target.value)"></ion-input>         
+        </ion-item>
+
+        <ion-list *ngIf="showResults">
+          <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
+            {{ result.text }}
+          </ion-item>
+        </ion-list>
           
         <ion-label class="labels">Work experience<small style="color: #f70505;">*</small></ion-label>
         <div style="display: flex; align-items: center; justify-content: space-between;">
           <div>I have</div>
           <div style="width: 30%;">
             <ion-item fill="outline" class="input-field">
-              <ion-input ></ion-input>
+              <ion-input formControlName="jobExperience" ></ion-input>
           </ion-item> 
           </div>
           <div>
           <ion-item fill="outline" class="input-field">
-            <ion-select placeholder="Years">
+            <ion-select  formControlName="jobExperienceFormat" placeholder="Years">
                 <ion-select-option value="Years">Years</ion-select-option>
                 <ion-select-option value="Months">Months</ion-select-option>
                 <ion-select-option value="Weeks">Weeks</ion-select-option>
@@ -91,38 +101,38 @@
           </div>
            <div class="ind-container">
             <div>Monday</div>
-            <div><ion-item class="background"> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item class="background"> <ion-checkbox  formControlName="jobShiftDM"></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox  formControlName="jobShiftNM"></ion-checkbox></ion-item></div>
           </div>
           <div class="ind-container">
             <div>Tuesday</div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftDT" ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftNT" ></ion-checkbox></ion-item></div>
           </div>
           <div class="ind-container">
             <div style="margin: -8px;">Wednesday</div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftDW" ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftNW" ></ion-checkbox></ion-item></div>
           </div>
           <div class="ind-container">
             <div>Thursday</div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftDTH" ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftNTH" ></ion-checkbox></ion-item></div>
           </div>
           <div class="ind-container">
             <div style="margin: 12px;">Friday</div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftDF" ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftNF" ></ion-checkbox></ion-item></div>
           </div>
           <div class="ind-container">
             <div style="margin: 3px;">Saturday</div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftDS" ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftNS" ></ion-checkbox></ion-item></div>
           </div>
           <div class="ind-container">
             <div style="margin: 10px;">Sunday</div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
-            <div><ion-item> <ion-checkbox  ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftDSU" ></ion-checkbox></ion-item></div>
+            <div><ion-item> <ion-checkbox formControlName="jobShiftNSU" ></ion-checkbox></ion-item></div>
           </div>
           </div>
           <div class="line-with-text">
@@ -134,7 +144,7 @@
             </div>
             <div>
               <ion-item fill="outline" class="input-field">
-                <ion-input ></ion-input>
+                <ion-input formControlName="jobExpWorkHrs" ></ion-input>
             </ion-item>
             </div>
           </div>
@@ -148,13 +158,13 @@
             <div>
               <div style="margin: 0px 70px 0px 70px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-datetime displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                  <ion-datetime formControlName="jobStartDateFromObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                 </ion-item>
               </div>
               <h4 style="display: flex;justify-content: center;">to</h4>
                <div style="margin: 0px 70px 0px 70px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-datetime displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                  <ion-datetime formControlName="jobStartDateToObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                 </ion-item>
               </div>
             </div>
@@ -176,42 +186,20 @@
       </div>
       <div class="ion-stepper-content">
         <ion-label class="labels">Choose prefered Work Location<small style="color: #f70505;">*</small></ion-label>
-        <ion-accordion-group>
-          <ion-accordion value="first">
-            <ion-item slot="header" color="light">
-              <ion-label>First Accordion</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              First Content
-            </div>
-          </ion-accordion>
-          <ion-accordion value="second">
-            <ion-item slot="header" color="light">
-              <ion-label>Second Accordion</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              Second Content
-            </div>
-          </ion-accordion>
-          <ion-accordion value="third">
-            <ion-item slot="header" color="light">
-              <ion-label>Third Accordion</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              Third Content
-            </div>
-          </ion-accordion>
-        </ion-accordion-group>
+        <ion-item fill="outline" class="input-field">
+          <ion-select (ionChange)="jobtitleList($event)" placeholder="Industry">
+            <ion-select-option *ngFor="let tittle of industryList"
+            value="{{tittle.id1}}">{{tittle.text}}</ion-select-option>
+        </ion-select>
+        </ion-item>
 
 
         <ion-label class="labels">Known languages<small style="color: #f70505;">*</small></ion-label>
         <ion-item fill="outline" class="input-field">
-        <ion-select multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
-          <ion-select-option value="option1">Option 1</ion-select-option>
-          <ion-select-option value="option2">Option 2</ion-select-option>
-          <ion-select-option value="option3">Option 3</ion-select-option>
-          <ion-select-option value="option4">Option 4</ion-select-option>
-        </ion-select>
+          <ion-select formControlName="reqLanguages" placeholder="Known languages" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+            <ion-select-option *ngFor="let title of languageList"
+            value="{{title.id}}">{{title.text}}</ion-select-option>
+          </ion-select>
         </ion-item>
         
 
@@ -224,8 +212,8 @@
               <div>
                 <ion-label>Are you willing to relocate?</ion-label> 
               <div style="display: flex;justify-content: space-evenly;">
-               <ion-radio value="custom"></ion-radio><ion-label>Yes</ion-label>
-              <ion-radio value="custom-checked"></ion-radio><ion-label>No</ion-label>
+               <ion-radio formControlName="relocatewill" value="true"></ion-radio><ion-label>Yes</ion-label>
+              <ion-radio formControlName="relocatewill" value="false"></ion-radio><ion-label>No</ion-label>
             </div>
             </div>
             </ion-radio-group>
@@ -240,9 +228,9 @@
               <div>
                 <ion-label>Are you willing to travel?</ion-label> 
               <div style="display: flex;justify-content: space-evenly;">
-               <ion-radio value="custom1"></ion-radio><ion-label>Yes</ion-label>
-               <ion-radio value="custom"></ion-radio><ion-label>No</ion-label>
-               <ion-radio value="custom-checked"></ion-radio><ion-label>Not required</ion-label>
+               <ion-radio  formControlName="travelwill" value="Yes"></ion-radio><ion-label>Yes</ion-label>
+               <ion-radio  formControlName="travelwill" value="No"></ion-radio><ion-label>No</ion-label>
+               <ion-radio  formControlName="travelwill" value="NA"></ion-radio><ion-label>Not required</ion-label>
             </div>
             </div>
             </ion-radio-group>
@@ -259,13 +247,13 @@
             <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;" >
               <div style="margin: 0px 15px 0px 0px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-input placeholder="From"></ion-input>
+                  <ion-input formControlName="jobSalaryFrom" placeholder="From"></ion-input>
               </ion-item>
               </div>
               <h4>to</h4>
                <div style="margin: 0px 0px 0px 15px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-input placeholder="To"></ion-input>
+                  <ion-input formControlName="jobSalaryTo" placeholder="To"></ion-input>
               </ion-item>
               </div>
             </div>
@@ -273,20 +261,24 @@
             <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;" >
               <div style="margin: 0px 15px 0px 0px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-select placeholder="INR">
-                    <ion-select-option value="apples">Apples</ion-select-option>
-                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                    <ion-select-option value="bananas">Bananas</ion-select-option>
+                  <ion-select formControlName="jobSalaryCurrency" placeholder="INR">
+                    <ion-select-option value="INR">INR</ion-select-option>
+                    <ion-select-option value="USD">USD</ion-select-option>
+                    <ion-select-option value="AED">AED</ion-select-option>
+                    <ion-select-option value="EUR">EUR</ion-select-option>
+                    <ion-select-option value="SGD">SGD</ion-select-option> 
                 </ion-select>
               </ion-item>
               </div>
               <!-- <h4>to</h4> -->
                <div style="margin: 0px 0px 0px 15px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-select placeholder="Per Year">
-                    <ion-select-option value="apples">Apples</ion-select-option>
-                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                    <ion-select-option value="bananas">Bananas</ion-select-option>
+                  <ion-select formControlName="jobSalaryFrequency" placeholder="Per Year">
+                    <ion-select-option value="Per Year">Per Year</ion-select-option>
+                    <ion-select-option value="Per Month">Per Month</ion-select-option>
+                    <ion-select-option value="Per Week">Per Week</ion-select-option>
+                    <ion-select-option value="Per Day">Per Day</ion-select-option>
+                    <ion-select-option value="Per Hour">Per Hour</ion-select-option> 
                 </ion-select>
               </ion-item>
               </div>
@@ -295,7 +287,7 @@
 
         <div class="ion-stepper-buttons">
           <button class="ion-stepper-prev" (click)="prevStep('step3', 'step2')">Previous</button>
-          <button class="ion-stepper-submit" (click)="submit()">Submit</button>
+          <button class="ion-stepper-submit" (click)="onSubmit()">Submit</button>
         </div>
       </div>
     </div>

@@ -16,20 +16,24 @@ export class JobProfilePage implements OnInit {
   jobTypeList =[];
 
   searchTerm = '';
-  selectedCities = [];
-
+ 
   cities = [];
   filteredCities = [];
+  workLocation =[];
+  languageList = [];
+  JobPreferences: any;
+  cityName:any;
+  cityId:any;
+
+  // cities: string[] = ['New York', 'cos Angeles', 'Chicago', 'Houston', 'Philadelphia', 'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
+  searchResults: string[] = [];
+  selectedCities: string[] = [];
+  showResults: boolean = false; 
 
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
-    public storageservice:StorageService,) { 
-
-      this.jobProfileForm = this.fb.group({
-        phoneVisibility: [""], 
-        currentUserId: [""]
-      });
+    public storageservice:StorageService,) {  
     }
 
   selectedTab: string = 'search';
@@ -39,22 +43,52 @@ export class JobProfilePage implements OnInit {
   }
 
     ngOnInit() {
+
+      this.jobProfileForm = this.fb.group({
+        industry: [""],
+        jobTitle: [""],
+        jobType: [""],
+        jobSkills: [""],
+        jobExperience:[""],
+        jobExperienceFormat: ["Years"],
+        jobShiftDM: false,
+      jobShiftDT: false,
+      jobShiftDW: false,
+      jobShiftDTH: false,
+      jobShiftDF: false,
+      jobShiftDS: false,
+      jobShiftDSU: false,
+      jobShiftNM: false,
+      jobShiftNT: false,
+      jobShiftNW: false,
+      jobShiftNTH: false,
+      jobShiftNF: false,
+      jobShiftNS: false,
+      jobShiftNSU: false,
+      jobExpWorkHrs: [""],
+      jobStartDateFromObj:[""],
+      jobStartDateFrom: [""],
+      jobStartDateToObj:[""],
+      jobStartDateTo: [""],
+      location: [""],
+      reqLanguages: [""],
+      relocatewill: ["false"],
+      travelwill: [""],
+      jobSalaryFrom: [""],
+      jobSalaryTo: [""],
+      jobSalaryCurrency: ["INR"],
+      jobSalaryFrequency: ["Per Year"],
+      currentUserId:[""]
+      }),
+
+
       this.getIndustry();
       this.getJobType();
+      this.workLocationList();
+      this.getlanguageList();
     }
 
-    filterCities() {
-      this.filteredCities = this.cities.filter(city =>
-        city.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    }
-  
-    removeCity(city: string) {
-      const index = this.selectedCities.indexOf(city);
-      if (index > -1) {
-        this.selectedCities.splice(index, 1);
-      }
-    }
+    
 
 nextStep(currentStep: string, nextStep: string) {
     const current = document.getElementById(currentStep);
@@ -70,8 +104,8 @@ nextStep(currentStep: string, nextStep: string) {
     prev.style.display = 'block';
   }
 
-  submit() {
-    // Handle form submission here
+  onSubmit() {
+    console.log(this.jobProfileForm.value)
   }
 
   onSelectionChange(event) {
@@ -100,6 +134,31 @@ nextStep(currentStep: string, nextStep: string) {
   }
 
 
+  
+  onSearch(value: string) {
+    if (value.length > 0) {
+      this.showResults = true;
+      this.searchResults = this.cities.filter(city => city.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showResults = false;
+      this.searchResults = [];
+    }
+  }
+
+  selectCity(city: string,id:string) {
+    this.selectedCities.push(city);
+    this.cityName = city;
+    this.cityId = id;
+    this.showResults = false;
+    this.searchResults = [];
+  }
+
+  removeCity(city: string) {
+    this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+  }
+
+
+
   jobtitleList(event){
     var value = event.detail.value
     var jobtitleurl = "api/auth/app/CommonUtility/jobTitleList?industryid=" +value;
@@ -110,5 +169,24 @@ nextStep(currentStep: string, nextStep: string) {
       console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);
     });
   }
+
+ 
+    workLocationList(){
+      var getJobTypeListUrl = "api/auth/app/CommonUtility/locationList"; 
+      this.storageservice.getrequest(getJobTypeListUrl).subscribe(result => {
+       if (result["success"] == true) {
+        this.workLocation = result["jobTypeList"]; 
+        }
+     });
+    }
+
+    getlanguageList(){
+      var getlanguageListUrl = "api/auth/app/CommonUtility/languageList"; 
+      this.storageservice.getrequest(getlanguageListUrl).subscribe(result => {
+       if (result["success"] == true) {
+        this.languageList = result["languageList"]; 
+        }
+     });
+    }
   
 }
