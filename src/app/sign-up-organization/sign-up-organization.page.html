@@ -61,14 +61,18 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="organizationName"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.organizationName.hasError('required') && talentorgform.controls.organizationName.touched">
+                                <small style="color: #f70505;">Organization name is required</small>
+                              </div>
 
                             <ion-label class="labels">Registration number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="regNo"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.regNo.hasError('required') && talentorgform.controls.regNo.touched">
+                                <small style="color: #f70505;">Registration number is required</small>
+                              </div>
                             <ion-label class="labels">Organization Type<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 
@@ -79,14 +83,18 @@
                                 </ion-select>
                             </ion-item>
 
-
+                            <div *ngIf=" talentorgform.controls.orgType.hasError('required') && talentorgform.controls.orgType.touched">
+                                <small style="color: #f70505;">Organization Type is required</small>
+                              </div>
                             <ion-label class="labels">Date of Registration<small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY" formControlName="regDate" presentation="date">
                                 </ion-datetime>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.regDate.hasError('required') && talentorgform.controls.regDate.touched">
+                                <small style="color: #f70505;">Date of Registration is required</small>
+                              </div>
 
                             <ion-label class="labels">Domain <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -96,7 +104,9 @@
 
                                 </ion-select>
                             </ion-item>
-                            <br>
+                            <div *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
+                                <small style="color: #f70505;">Domain is required</small>
+                              </div>
 
                             <ion-label class="labels">Upload logo<small style="color: #f70505;">*</small></ion-label>
                             <ion-row>
@@ -121,7 +131,9 @@
                                     </div>
                                 </ion-col>
                             </ion-row>
-
+                            <div *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
+                                <small style="color: #f70505;">Upload logo is required</small>
+                              </div>
                         </div>
                         <div class="display-justify">
                             <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next
@@ -166,6 +178,9 @@
                                     </ion-list>
                                 </ion-col>
                             </ion-row>
+                            <div *ngIf=" talentorgform.controls.country.hasError('required') && talentorgform.controls.country.touched">
+                                <small style="color: #f70505;">Country is required</small>
+                              </div>
                             <ion-label class="labels">State/Province <small style="color: #f70505;">*</small>
                             </ion-label>
                              <ion-item fill="outline" class="input-field">
@@ -179,7 +194,9 @@
                                 </ion-select>
                                 </ion-item>
                           
-
+                                <div *ngIf=" talentorgform.controls.state.hasError('required') && talentorgform.controls.state.touched">
+                                    <small style="color: #f70505;">State/Province is required</small>
+                                  </div>
                             <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                     <ion-select placeholder="Select city" formControlName="city"  >
@@ -188,12 +205,16 @@
     
                                     </ion-select>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.city.hasError('required') && talentorgform.controls.city.touched">
+                                <small style="color: #f70505;">City is required</small>
+                              </div>
                             <ion-label class="labels">PIN/ZIP <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pincode"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.pincode.hasError('required') && talentorgform.controls.pincode.touched">
+                                <small style="color: #f70505;">PIN is required</small>
+                              </div>
 
                         </div>
                         <div class="display-justify">
@@ -220,20 +241,26 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="mobileNo"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.mobileNo.hasError('required') && talentorgform.controls.mobileNo.touched">
+                                <small style="color: #f70505;">Phone number is required</small>
+                              </div>
 
                             <ion-label class="labels">Organization's email <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="emailId"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.emailId.hasError('required') && talentorgform.controls.emailId.touched">
+                                <small style="color: #f70505;">Organization's email is required</small>
+                              </div>
 
                             <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pwd"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
+                                <small style="color: #f70505;">Password is required</small>
+                              </div>
 
                             <ion-label class="labels">Referral code</ion-label>
                             <ion-item fill="outline" class="input-field">

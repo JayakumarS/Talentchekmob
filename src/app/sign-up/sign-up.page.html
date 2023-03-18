@@ -55,20 +55,27 @@
                             <ion-label class="labels">First name <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="firstName"></ion-input>
+                                
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.firstName.hasError('required') && talentform.controls.firstName.touched">
+                                <small style="color: #f70505;">First name is required</small>
+                              </div>
 
                             <ion-label class="labels">Last name <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="lastName"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.lastName.hasError('required') && talentform.controls.lastName.touched">
+                                <small style="color: #f70505;">Last name is required</small>
+                              </div>
 
                             <ion-label class="labels">Date of Birth<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="dob" presentation="date"></ion-datetime>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.dob.hasError('required') && talentform.controls.dob.touched">
+                                <small style="color: #f70505;">Date of Birthe is required</small>
+                              </div>
 
                             <ion-label class="labels">Gender<small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
@@ -106,6 +113,9 @@
                                     </ion-row>
                                 </ion-radio-group>
                             </ion-row>
+                            <div *ngIf=" talentform.controls.gender.hasError('required') && talentform.controls.gender.touched">
+                                <small style="color: #f70505;">Gender is required</small>
+                              </div>
                             <br>
 
                             <ion-label class="labels">Upload Image<small style="color: #f70505;">*</small></ion-label>
@@ -130,6 +140,9 @@
                                     </div>
                                 </ion-col>
                             </ion-row>
+                            <div *ngIf=" talentform.controls.firstName.hasError('required') && talentform.controls.firstName.touched">
+                                <small style="color: #f70505;">Upload Image is required</small>
+                              </div>
 
                         </div>
                         <div class="display-justify">
@@ -172,7 +185,9 @@
                                   </ion-list>
                                 </ion-col>
                               </ion-row>
-
+                              <div *ngIf=" talentform.controls.country.hasError('required') && talentform.controls.country.touched">
+                                <small style="color: #f70505;">Country is required</small>
+                              </div>
                             <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
 
@@ -182,7 +197,9 @@
 
                             </ion-select>
 </ion-item>
-
+<div *ngIf=" talentform.controls.stateName.hasError('required') && talentform.controls.stateName.touched">
+    <small style="color: #f70505;">State/Province is required</small>
+  </div>
                             <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-select placeholder="Select city" formControlName="areaName">
@@ -191,12 +208,16 @@
 
                                 </ion-select>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.areaName.hasError('required') && talentform.controls.areaName.touched">
+                                <small style="color: #f70505;">City is required</small>
+                              </div>
                             <ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pinCode"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.pinCode.hasError('required') && talentform.controls.pinCode.touched">
+                                <small style="color: #f70505;">Pin Code  is required</small>
+                              </div>
 
                         </div>
                         <div class="display-justify">
@@ -220,19 +241,25 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="phoneNo"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.phoneNo.hasError('required') && talentform.controls.phoneNo.touched">
+                                <small style="color: #f70505;">phone No is required</small>
+                              </div>
 
                             <ion-label class="labels">Email <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="email"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.email.hasError('required') && talentform.controls.email.touched">
+                                <small style="color: #f70505;">Email is required</small>
+                              </div>
 
                             <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="password"></ion-input>
                             </ion-item>
-
+                            <div *ngIf=" talentform.controls.password.hasError('required') && talentform.controls.password.touched">
+                                <small style="color: #f70505;">password is required</small>
+                              </div>
                             <ion-label class="labels">Account <small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
                                 <ion-radio-group formControlName="profileVisibility" style="width:100%">
@@ -269,7 +296,9 @@
                                     </ion-row>
                                 </ion-radio-group>
                             </ion-row>
-
+                            <div *ngIf=" talentform.controls.profileVisibility.hasError('required') && talentform.controls.profileVisibility.touched">
+                                <small style="color: #f70505;">Account is required</small>
+                              </div>
 
                             <ion-label class="labels">Referral code</ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -279,7 +308,7 @@
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="onSubmit()">Register</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!talentform.valid"(click)="onSubmit()">Register</ion-button>
                         </div>
 
 
@@ -297,3 +326,4 @@
         </div>
     </div>
  </ion-content>
+

@@ -14,7 +14,7 @@ export class AwesomePage implements OnInit {
   }
 
   goto_signup(){
-    this.router.navigate(['register-cat'])
+    this.router.navigate(['sign-in']);
       }
     
       goto_login(){

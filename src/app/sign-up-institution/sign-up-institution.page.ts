@@ -37,21 +37,21 @@ base64img1: string = '';
     private translate: TranslateService, private loadingCtrl: LoadingController) {
 
     this.talentinstform = formbuilder.group({
-      instituteName: [''],
-      regNo: [''],
-      taxId: [''],
-      regDate: [''],
-      instType: [''],
-      emailId: ['',],
-      address: ['', ''],
-      country: [''],
-      city:[''],
-      pwd:[''],
-      mobileNo:[''],
-      state: [''],
-      pincode: [''],
+      instituteName: ['',Validators.required],
+      regNo: ['',Validators.required],
+      taxId: ['',Validators.required],
+      regDate: ['',Validators.required],
+      instType: ['',Validators.required],
+      emailId: ['',Validators.required],
+      address: [''],
+      country: ['',Validators.required],
+      city:['',Validators.required],
+      pwd:['',Validators.required],
+      mobileNo:['',Validators.required],
+      state: ['',Validators.required],
+      pincode: ['',Validators.required],
       referralCode: [''],
-      profileVisibility: ['', ''],
+      profileVisibility: ['',Validators.required],
      
 
     });

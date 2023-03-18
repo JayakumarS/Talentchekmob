@@ -45,20 +45,20 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
      private translate: TranslateService, private loadingCtrl: LoadingController) {
 
       this.talentform = formbuilder.group({
-        firstName: [''],
-        lastName: [''],
-         password: [''],
-        gender: [''],
-        phoneNo: [''],
+        firstName: ['' ,Validators.required],
+        lastName: ['', Validators.required],
+         password: ['', Validators.required],
+        gender: ['', Validators.required],
+        phoneNo: ['', Validators.required],
         email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-        dob: [''],    //Only for Android  
+        dob: ['', Validators.required],    //Only for Android  
         address: [''],
-        areaName: [''],
-        country: [''],
-        stateName: [''],
-        pinCode: [''],
+        areaName: ['' ,Validators.required],
+        country: ['', Validators.required],
+        stateName: ['', Validators.required],
+        pinCode: ['', Validators.required],
         referalCode: [''],
-        profileVisibility: ['', ''],
+        profileVisibility: ['', Validators.required],
   
       });
 
@@ -146,7 +146,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   
                     console.log(`Posting Data: ${JSON.stringify(postData)}`);
   
-                    var signUpServiceUrl = "api/auth/app/registration/IndividualRegister"; 
+                    var signUpServiceUrl = ""; //api/auth/app/registration/IndividualRegister
                     this.storageservice.postrequest(signUpServiceUrl, postData).subscribe(result => { 
                       this.response = result;
                       console.log(this.response);
