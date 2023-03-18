@@ -201,6 +201,10 @@ const routes: Routes = [
   {
     path: 'register-cat',
     loadChildren: () => import('./register-cat/register-cat.module').then( m => m.RegisterCatPageModule)
+  },
+  {
+    path: 'awesome',
+    loadChildren: () => import('./awesome/awesome.module').then( m => m.AwesomePageModule)
   }
 
 

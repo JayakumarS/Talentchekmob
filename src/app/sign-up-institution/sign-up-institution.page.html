@@ -1,5 +1,6 @@
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <!-- BS Stepper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
@@ -13,11 +14,13 @@
 
             </ion-col>
             <ion-col size="2">
-                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_welcome()"></ion-icon>
+                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_welcome()">
+                </ion-icon>
             </ion-col>
 
             <ion-col size="8">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-left: 17%; margin-top: 5%;">Sign Up</ion-title>
+                <ion-title class="ion-text-wrap"
+                    style="font-family: Mr-eaves; color: black; margin-left: 17%; margin-top: 5%;">Sign Up</ion-title>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -29,65 +32,64 @@
             <div class="bs-stepper-header">
                 <div class="step" data-target="#test-l-1">
                     <button class="step-trigger">
-          <span class="bs-stepper-circle">1</span>
-          <span class="bs-stepper-label">Profile Info</span>
-        </button>
+                        <span class="bs-stepper-circle">1</span>
+                        <span class="bs-stepper-label">Profile Info</span>
+                    </button>
                 </div>
                 <div class="line"></div>
                 <div class="step" data-target="#test-l-2">
                     <button class="step-trigger">
-          <span class="bs-stepper-circle">2</span>
-          <span class="bs-stepper-label">Address Info</span>
-        </button>
+                        <span class="bs-stepper-circle">2</span>
+                        <span class="bs-stepper-label">Address Info</span>
+                    </button>
                 </div>
                 <div class="line"></div>
                 <div class="step" data-target="#test-l-3">
                     <button class="step-trigger">
-          <span class="bs-stepper-circle">3</span>
-          <span class="bs-stepper-label">Registeration Info</span>
-        </button>
+                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-label">Registeration Info</span>
+                    </button>
                 </div>
             </div>
             <br>
             <div class="bs-stepper-content">
-                <form (ngSubmit)="onSubmit()">
+                <form [formGroup]="talentinstform" (ngSubmit)="onSubmit()">
                     <div id="test-l-1" class="content">
                         <div class="button-content">
-                            <ion-label class="labels">Institution(School / College) <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">Institution(School / College) <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="instituteName"></ion-input>
                             </ion-item>
 
 
-                            <ion-label class="labels">Registration Number <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">Registration Number <small style="color: #f70505;">*</small>
+                            </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="regNo"></ion-input>
                             </ion-item>
 
                             <ion-label class="labels">TAX ID <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="taxId"></ion-input>
                             </ion-item>
 
 
-                            <ion-label class="labels">Date of Registration<small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">Date of Registration<small style="color: #f70505;">*</small>
+                            </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                                <ion-datetime displayFormat="DD.MM.YYYY" formControlName="regDate" presentation="date">
+                                </ion-datetime>
                             </ion-item>
 
 
-                            <ion-label class="labels">Institution (School / College) <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">Institution (School / College) <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select School / College">
-                                    <ion-select-option value="affiliatedCollege">Affiliated College</ion-select-option>
-                                    <ion-select-option value="autonomousCollege">Autonomous College</ion-select-option>
-                                    <ion-select-option value="centralUniversity">Central University</ion-select-option>
-                                    <ion-select-option value="stateUniversity">State University</ion-select-option>
-                                    <ion-select-option value="instituteofNationalImportance">Institute of National Importance</ion-select-option>
-                                    <ion-select-option value="publicGovernmentSchool">Public/Government School</ion-select-option>
-                                    <ion-select-option value="privateSchool">Private School</ion-select-option>
-                                    <ion-select-option value="governmentAidedPrivateSchool">Government aided Private School</ion-select-option>
-                                    <ion-select-option value="trainingInstitute">Training Institute</ion-select-option>
+                                <ion-select placeholder="Select School / College" formControlName="instType">
+                                    <ion-select-option *ngFor="let type of instTypeList" [value]="type.id">{{type.text}}
+                                    </ion-select-option>
+
                                 </ion-select>
                             </ion-item>
                             <br>
@@ -99,7 +101,8 @@
                                         <img class="horizontal" [src]="base64img1" name="image" />
                                     </ion-thumbnail>
                                     <ion-thumbnail *ngIf="!base64img1">
-                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights"
+                                            style="width:100%" />
                                     </ion-thumbnail>
                                 </ion-col>
 
@@ -117,7 +120,8 @@
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next
+                            </ion-button>
                         </div>
 
                         <div class="line-with-text">
@@ -127,54 +131,68 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
+                            <div style="font-size: 16px;">Already a Talentchek member? </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-2" class="content">
                         <div class="button-content">
                             <ion-label class="labels">Address</ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-textarea placeholder="Enter Your Address"></ion-textarea>
+                                <ion-textarea formControlName="address" placeholder="Enter Your Address"></ion-textarea>
                             </ion-item>
 
 
                             <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select fruit">
-                                    <ion-select-option value="apples">Apples</ion-select-option>
-                                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                                    <ion-select-option value="bananas">Bananas</ion-select-option>
-                                </ion-select>
+                                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="country" showcancelbutton="" 
+                                debounce="100" (ionInput)="filterList($event)" 
+                                formControlName="country" [(ngModel)]="countryVal"  (ionBlur)="unCheckFocus()"
+                                search-icon=“undefined”></ion-searchbar>
                             </ion-item>
+                            <ion-row>
+                                <ion-col>
+                                  <ion-list *ngIf="IsSearchListShow" lines="full">
+                                    <ion-item *ngFor="let cElement of countryResponse">
+                                      <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                                        {{ cElement.text }}
+                                      </ion-label>
+                                    </ion-item>
+                                  </ion-list>
+                                </ion-col>
+                              </ion-row>
+                              
 
-                            <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">State/Province <small style="color: #f70505;">*</small>
+                            </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select fruit">
-                                    <ion-select-option value="apples">Apples</ion-select-option>
-                                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                                    <ion-select-option value="bananas">Bananas</ion-select-option>
+
+                                <ion-select placeholder="Select State" formControlName="state"(ionChange)="goTostateSelectedItem($event.target.value)">
+                                    <ion-select-option *ngFor="let sElement of stateResponse" [value]="sElement.id">
+                                        {{sElement.text}}</ion-select-option>
+
                                 </ion-select>
-                            </ion-item>
+                                </ion-item>
 
 
-                            <ion-label class="labels">ContactInfo.city <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select fruit">
-                                    <ion-select-option value="apples">Apples</ion-select-option>
-                                    <ion-select-option value="oranges">Oranges</ion-select-option>
-                                    <ion-select-option value="bananas">Bananas</ion-select-option>
+                                <ion-select placeholder="Select fruit" formControlName="city">
+                                    <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
+                                        {{ciElement.text}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
 
                             <ion-label class="labels">PIN / ZIP <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="pincode"></ion-input>
                             </ion-item>
 
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next
+                            </ion-button>
                         </div>
 
                         <div class="line-with-text">
@@ -183,87 +201,53 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
+                            <div style="font-size: 16px;">Already a Talentchek member? </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-3" class="content text-center">
                         <div class="button-content">
 
 
-                            <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small>
+                            </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="mobileNo"></ion-input>
                             </ion-item>
 
 
-                            <ion-label class="labels">Institution's email <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">Institution's email <small style="color: #f70505;">*</small>
+                            </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="emailId"></ion-input>
                             </ion-item>
 
 
                             <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="pwd"></ion-input>
                             </ion-item>
-
-                            <!-- <ion-label class="labels">Account <small style="color: #f70505;">*</small></ion-label>
-                            <ion-row class="talentrow">
-                                <ion-radio-group style="width:100%">
-                                    <ion-row>
-                                        <ion-col size="4">
-                                            <div class="genderbg">
-                                                <div class="genderpadding">
-                                                    <img src="./assets/img/boys.png" class="emojiicons">
-                                                    <span class="emojitext">Public</span>
-                                                    <ion-radio mode="md" class="ion-item-left" value="A"></ion-radio>
-                                                </div>
-                                            </div>
-                                        </ion-col>
-
-                                        <ion-col size="4">
-                                            <div class="genderbg">
-                                                <div class="genderpadding">
-                                                    <img src="./assets/img/girle.jpg" class="emojiicons">
-                                                    <span class="emojitext">Private</span>
-                                                    <ion-radio mode="md" class="ion-item-left" value="B"></ion-radio>
-                                                </div>
-                                            </div>
-                                        </ion-col>
-
-                                        <ion-col size="4">
-                                            <div class="genderbg">
-                                                <div class="genderpadding">
-                                                    <img src="./assets/img/others.png" class="emojiicons">
-                                                    <span class="emojitext">On Demand</span>
-                                                    <ion-radio mode="md" class="ion-item-left" value="c"></ion-radio>
-                                                </div>
-                                            </div>
-                                        </ion-col>
-                                    </ion-row>
-                                </ion-radio-group>
-                            </ion-row> -->
-
 
                             <ion-label class="labels">Referral code</ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input></ion-input>
+                                <ion-input formControlName="referralCode"></ion-input>
                             </ion-item>
 
                             <ion-item lines="none">
-                              <ion-checkbox slot="start"></ion-checkbox>
-                              <ion-label>I accept the <a href="#">Terms and conditions</a></ion-label>
+                                <ion-checkbox slot="start"></ion-checkbox>
+                                <ion-label>I accept the <a href="#">Terms and conditions</a></ion-label>
                             </ion-item><br>
 
                             <ion-item lines="none">
-                              <ion-checkbox slot="start"></ion-checkbox>
-                              <ion-label>I accept the <a href="#">Consent form</a></ion-label>
+                                <ion-checkbox slot="start"></ion-checkbox>
+                                <ion-label>I accept the <a href="#">Consent form</a></ion-label>
                             </ion-item>
 
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Register</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="onSubmit()">
+                                Register</ion-button>
                         </div>
 
 
@@ -273,7 +257,8 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
+                            <div style="font-size: 16px;">Already a Talentchek member? </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
                         </div>
                     </div>
                 </form>

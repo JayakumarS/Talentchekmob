@@ -25,6 +25,8 @@ step:any
 private stepper: Stepper;
 IsSearchListShow: boolean = false;
 countryResponseBackup: any;
+cityOptions:any;
+cityList:[]
 base64img1: string = '';
 countryResponse: any;
 countryVal: string;
@@ -33,6 +35,9 @@ fileTransfer: FileTransferObject = this.transfer.create();
 splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   isSubmitted: boolean;
   response: Object;
+  stateResponseBackup: any;
+  stateResponse: any;
+ 
 
 
   constructor(public formbuilder: FormBuilder,public router: Router,private camera: Camera,
@@ -40,23 +45,20 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
      private translate: TranslateService, private loadingCtrl: LoadingController) {
 
       this.talentform = formbuilder.group({
-        firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
-        lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
-         password: ['', Validators.compose([Validators.maxLength(12), Validators.minLength(8), Validators.required])],
-        gender: ['', Validators.compose([Validators.maxLength(20), Validators.required])],
-        phoneNo: ['', Validators.compose([Validators.required])],
-         panNo: ['', Validators.compose([Validators.maxLength(15), Validators.pattern('^[A-Za-z0-9 ]*$')])],
+        firstName: [''],
+        lastName: [''],
+         password: [''],
+        gender: [''],
+        phoneNo: [''],
         email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-        dob: ['', Validators.compose([Validators.maxLength(70), Validators.required])],    //Only for Android  
-        address: ['', ''],
-        areaName: ['', Validators.compose([Validators.pattern(this.splCharRegex)])],
-        country: ['', Validators.compose([Validators.required])],
-        stateName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern(this.splCharRegex)])],
-        pinCode: ['', Validators.compose([Validators.maxLength(6), Validators.pattern('[0-9]{6}')])],
-        referalCode: ['', Validators.compose([Validators.maxLength(20)])],
+        dob: [''],    //Only for Android  
+        address: [''],
+        areaName: [''],
+        country: [''],
+        stateName: [''],
+        pinCode: [''],
+        referalCode: [''],
         profileVisibility: ['', ''],
-        cBoxIAgree: ['', ''],
-        cBoxIAgreeConsent: ['', '']
   
       });
 
@@ -85,7 +87,6 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
           var pwd = this.talentform.controls['password'].value;
           var genderVal = this.talentform.controls['gender'].value;
           var phoneNo = this.talentform.controls['phoneNo'].value;
-          var panNo = this.talentform.controls['panNo'].value;
           var emailId = this.talentform.controls['email'].value;
           var dob = this.talentform.controls['dob'].value;
           var refCode = this.talentform.controls['referalCode'].value;
@@ -95,10 +96,6 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
            var country = this.countryIdVal; //Google search country feature. 
           var stateName = this.talentform.controls['stateName'].value;
           var pinCode = this.talentform.controls['pinCode'].value; 
-          var cBoxIAgree = this.talentform.controls['cBoxIAgree'].value;
-          console.log("cBoxIAgree: " + cBoxIAgree); 
-          var cBoxIAgreeConsent = this.talentform.controls['cBoxIAgreeConsent'].value;
-          console.log("cBoxIAgreeConsent: " + cBoxIAgreeConsent); 
           console.log("dob: " + dob); 
           var dateOfBirth = this.transformDate(dob);
           console.log("dateOfBirth: " + dateOfBirth);
@@ -110,7 +107,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
             console.log("dateOfBirthAlt: " + dateOfBirth);
             var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
             if (frm <= currentDate) {
-  
+              var countryID=country.slice(0,2);
               //  if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
   
                 // if (cBoxIAgree == true) {
@@ -127,21 +124,18 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                       'pwd': pwd,
                       'gender': genderVal,
                       'mobileNo': phoneNo,
-                      'panNo': panNo,
                       'emailId': emailId,
                       'dob': dateOfBirth,
                       'referralCode': refCode,
                       'companyCode': '',
-                      'cin': '',
-                      'tin': '',
                       'isIndv': 'S',
                       'profileVisibility': profileVisibility,
                       'uploadImg': this.base64img1,
   
                       'address': address,
-                      'city': 0,
-                      'country': country,
-                      'state': 0,
+                      'city': areaName,
+                      'country': countryID,
+                      'state': stateName,
                       'pincode': pinCode,
                       'typeRegister': 'Mobile',
                       'creditPoints': 5,
@@ -168,7 +162,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                             points: points
                           }
                         };
-                        this.router.navigate(['/welcome'], navigationExtras);
+                        this.router.navigate(['/awesome'], navigationExtras);
                         //this.hideLoadingIndicator(); //Hide loading indicator
                       }
                       else if (result["success"] == false) {
@@ -250,6 +244,30 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
       this.loadingCtrl.dismiss();
     });
   }
+  //state list
+  async getstatelist(CtryId): Promise<any> {
+
+    console.log(CtryId)
+    var industryURL = "api/auth/app/CommonUtility/stateList?countryId="+CtryId;
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+      this.stateResponseBackup = result["stateList"];
+      this.stateResponse = result["stateList"];
+      console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+    });
+  
+    return industryURL;
+  }
+  getcitylist(stateId,countryId){
+   
+    console.log(stateId)
+    var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+     this.cityList = result['cityList'];
+     this.cityOptions = result['cityList'];
+    console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
+     
+  });
+  }
 
   goToSearchSelectedItem(CtryName, CtryId) {
     console.log("InsName: " + CtryName)
@@ -258,9 +276,14 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     this.countryVal = CtryName;
     this.countryIdVal = CtryId;
     this.IsSearchListShow = false;
+    this.getstatelist(CtryId);
   }
 
-
+  goTostateSelectedItem( stateId) {
+    //var CtryId =this.talentorgform.value.countryId; 
+    var CtryId=this.talentform.value.country.slice(0,2);
+    this.getcitylist(stateId,CtryId);
+  }
   async initializeItems(): Promise<any> {
 
     var countryURL = "api/auth/app/CommonUtility/countryList";
@@ -278,6 +301,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   }
 
   async filterList(evt) {
+    if (evt.srcElement.value.length > 2) {
     if (evt.srcElement.value != null && evt.srcElement.value != '') {
       this.IsSearchListShow = true;
       this.countryResponse = this.countryResponseBackup;
@@ -301,6 +325,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         this.IsSearchListShow = true;
       }
     }
+  }
     else {
       this.IsSearchListShow = false;
     }

@@ -43,7 +43,7 @@
                 <div class="step" data-target="#test-l-3">
                     <button class="step-trigger">
           <span class="bs-stepper-circle">3</span>
-          <span class="bs-stepper-label">Registeration Info</span>
+          <span class="bs-stepper-label">Registration Info</span>
         </button>
                 </div>
             </div>
@@ -175,13 +175,21 @@
 
                             <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="stateName"></ion-input>
-                            </ion-item>
 
+                            <ion-select placeholder="Select State"(ionChange)="goTostateSelectedItem($event.target.value)" formControlName="stateName">
+                                <ion-select-option *ngFor="let sElement of stateResponse" [value]="sElement.id">
+                                    {{sElement.text}}</ion-select-option>
+
+                            </ion-select>
+</ion-item>
 
                             <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="areaName"></ion-input>
+                                <ion-select placeholder="Select city" formControlName="areaName">
+                                    <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
+                                        {{ciElement.text}}</ion-select-option>
+
+                                </ion-select>
                             </ion-item>
 
                             <ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
