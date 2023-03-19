@@ -57,6 +57,26 @@ export class SignInComponent implements OnInit {
   
             if (data) {
               if (data.success) {
+
+                console.log(data);
+                localStorage.setItem('userId', data["userId"]);
+                localStorage.setItem('userName', data["firstNameLastName"]);
+                localStorage.setItem('creditPoints', data["creditpoint"]);
+                localStorage.setItem('email', data["empId"]);
+                localStorage.setItem('profilePic', data["imgurl"]);
+                localStorage.setItem('access', data["accessToken"]);
+                localStorage.setItem("tokenType: ", data["tokenType"]);
+                localStorage.setItem('isloggedIn', "true");
+        
+                localStorage.setItem('isloggedIn', "true");
+        
+                localStorage.setItem('roleId', data["defaultRoleId"]);
+                localStorage.setItem('countryCode', data["countryCode"]);
+        
+                console.log("profilePic: " + data["imgurl"])
+                console.log("access: " + data["accessToken"])
+                console.log("userName: " + data["username"])
+                console.log("tokenType: " + data["tokenType"])
   
                 if (data.roles[0].roleId.includes('1')) {
                   this.router.navigate(['/job-search']);
