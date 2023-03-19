@@ -175,13 +175,13 @@
             <div>
               <div style="margin: 0px 70px 0px 70px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-datetime  (ionChange)="validateAvailability(); validateStartDate($event.target.value);" formControlName="jobStartDateFromObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                  <ion-datetime  (ionChange)="validateAvailability(); validateStartDate($event.target.value);" formControlName="jobStartDateFrom" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                 </ion-item>
               </div>
               <h4 style="display: flex;justify-content: center;">to</h4>
                <div style="margin: 0px 70px 0px 70px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-datetime (ionChange)="validateAvailability(); validateStartDate($event.target.value);" formControlName="jobStartDateToObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                  <ion-datetime (ionChange)="validateAvailability(); validateEndDate($event.target.value);" formControlName="jobStartDateTo" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                 </ion-item>
               </div>
             </div>
@@ -270,13 +270,13 @@
             <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;" >
               <div style="margin: 0px 15px 0px 0px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-input (ionChange)="validateInformation();" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
+                  <ion-input (ionChange)="validateInformation();" (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
               </ion-item>
               </div>
               <h4>to</h4>
                <div style="margin: 0px 0px 0px 15px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-input (ionChange)="validateInformation();" formControlName="jobSalaryTo" placeholder="To"></ion-input>
+                  <ion-input (ionChange)="validateInformation(); " (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
               </ion-item>
               </div>
             </div>

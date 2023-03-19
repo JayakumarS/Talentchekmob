@@ -78,11 +78,9 @@ export class JobProfilePage implements OnInit {
       jobShiftNS: false,
       jobShiftNSU: false,
       jobExpWorkHrs: ["",Validators.required],
-      jobStartDateFromObj:["",Validators.required],
-      jobStartDateFrom: [""],
-      jobStartDateToObj:["",Validators.required],
-      jobStartDateTo: [""],
-      location: [""],
+      jobStartDateFrom:["",Validators.required],
+       jobStartDateTo:["",Validators.required],
+       location: [""],
       reqLanguages: ["",Validators.required],
       relocatewill: ["false"],
       travelwill: ["No"],
@@ -114,8 +112,8 @@ export class JobProfilePage implements OnInit {
     }  
 
     validateAvailability(){
-      if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFromObj !="" 
-      && this.jobProfileForm.value.jobStartDateToObj !=""){
+      if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 
+      && this.jobProfileForm.value.jobStartDateTo !=""){
         this.disable1 = false;
        }else{
         this.disable1 = true;
@@ -131,15 +129,95 @@ export class JobProfilePage implements OnInit {
        } 
     }
 
-    validateStartDate(event){
-      // var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
-      // console.log("currentDate: " + currentDate);
-      // console.log("startDate: " + event);
-      // var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
-      // if (frm <= currentDate) {
-        
-      // }
+    async validateStartDate(event){
+      var currentDate = new Date(new Date().setFullYear(new Date().getFullYear())); //Currentdate - one year.
+      console.log("currentDate: " + currentDate);
+      console.log("startDate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      this.jobProfileForm.patchValue({
+        'jobStartDateTo':""
+      })
+      if (frm <= currentDate) {
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'Start date should be greater than current date.',
+          buttons: ['OK']
+        });
+        this.jobProfileForm.patchValue({
+          'jobStartDateFrom':""
+        })
+         await alert.present();
+      }
     }
+
+
+    async validateEndDate(event){
+      var startdate = new Date(new Date(this.jobProfileForm.value.jobStartDateFrom).setFullYear(new Date(this.jobProfileForm.value.jobStartDateFrom).getFullYear())); //Currentdate - one year.
+      console.log("startdate: " + startdate);
+      console.log("enddate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      if (frm <= startdate) {
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'End date should be greater than Start date.',
+          buttons: ['OK']
+        });
+        this.jobProfileForm.patchValue({
+          'jobStartDateTo':""
+        })
+         await alert.present();
+      }
+    }
+
+    async validateSalaryFrom(salaryFrom){
+      if(this.jobProfileForm.value.jobSalaryTo !=""){
+        let salFrom = parseInt(salaryFrom);
+        let salto = parseInt(this.jobProfileForm.value.jobSalaryTo);
+        if(salFrom>salto){
+          const alert = await this.toastController.create({
+            header: 'Validation Error',
+            message: 'Salary From should be lesser than Salary To.',
+            buttons: ['OK']
+          });
+          this.jobProfileForm.patchValue({
+            'jobSalaryFrom':""
+          })
+           await alert.present(); 
+        } 
+      }
+      
+    }
+
+    async validateSalaryTo(salaryTo){
+      let salFrom = parseInt(this.jobProfileForm.value.jobSalaryFrom);
+      let salto = parseInt(salaryTo);
+      if(salFrom>salto){
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'Salary To should be greater than Salary From.',
+          buttons: ['OK']
+        });
+        this.jobProfileForm.patchValue({
+          'jobSalaryTo':""
+        })
+         await alert.present();
+      }else if( salto<salFrom){
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'Salary From should be lesser than Salary To.',
+          buttons: ['OK']
+        });
+        this.jobProfileForm.patchValue({
+          'jobSalaryFrom':""
+        })
+         await alert.present();
+      }
+    }
+
+    onEnter(){
+      alert(12)
+    }
+ 
 
 nextStep(currentStep: string, nextStep: string) {
     const current = document.getElementById(currentStep);
@@ -292,10 +370,10 @@ nextStep(currentStep: string, nextStep: string) {
   } else {
      this.jobProfileForm.value.jobSkills = this.selectedSkills
     this.jobProfileForm.value.location = this.selectedCities;
-    var fromdate = this.transformDate(this.jobProfileForm.value.jobStartDateFromObj);
-    this.jobProfileForm.value.jobStartDateFromObj = fromdate;
-    var todate = this.transformDate(this.jobProfileForm.value.jobStartDateToObj);
-    this.jobProfileForm.value.jobStartDateToObj = todate;
+    var fromdate = this.transformDate(this.jobProfileForm.value.jobStartDateFrom);
+    this.jobProfileForm.value.jobStartDateFrom = fromdate;
+    var todate = this.transformDate(this.jobProfileForm.value.jobStartDateTo);
+    this.jobProfileForm.value.jobStartDateTo = todate;
     this.jobProfileForm.value.currentUserId = 'TFIN10555362814';
        
   this.jobpostMaster = this.jobProfileForm.value;
@@ -305,6 +383,7 @@ nextStep(currentStep: string, nextStep: string) {
    this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
+      this.router.navigate(['/job']);
       this.presentToast()
       }
    });
