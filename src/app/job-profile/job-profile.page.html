@@ -14,20 +14,27 @@
       </div>
       <div class="ion-stepper-content">
         <ion-label class="labels">Industry<small style="color: #f70505;">*</small></ion-label>
-                            <ion-item fill="outline" class="input-field">
-                              <ion-select (ionChange)="jobtitleList($event)" formControlName="industry" placeholder="Industry">
+                            <ion-item fill="outline" class="input-field" required>
+                              <ion-select (ionChange)="jobtitleList($event)"  formControlName="industry" placeholder="Industry">
                                 <ion-select-option  *ngFor="let tittle of industryList"
                                 value="{{tittle.id1}}">{{tittle.text}}</ion-select-option>
                             </ion-select>
                             </ion-item>
+                            <div *ngIf="jobProfileForm.controls.industry.hasError('required') && jobProfileForm.controls.industry.touched">
+                              <small style="color: #f70505;">Industry is required</small>
+                            </div>
+
 
         <ion-label class="labels">Job title<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                              <ion-select placeholder="Job title" multiple="true" formControlName="jobTitle" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                              <ion-select placeholder="Job title"  multiple="true" formControlName="jobTitle" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                                 <ion-select-option *ngFor="let jobtitle of jobTitleList"
                                 value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
                               </ion-select>
                             </ion-item>
+                            <div *ngIf="jobProfileForm.controls.jobTitle.hasError('required') && jobProfileForm.controls.jobTitle.touched">
+                              <small style="color: #f70505;">Job title is required</small>
+                            </div>
 
 
         <ion-label class="labels">Job type<small style="color: #f70505;">*</small></ion-label>
@@ -37,19 +44,25 @@
                                  value="{{tittle.id}}">{{tittle.text}}</ion-select-option>
                               </ion-select>
                             </ion-item>
+                            <div *ngIf="jobProfileForm.controls.jobType.hasError('required') && jobProfileForm.controls.jobType.touched">
+                              <small style="color: #f70505;">Job type is required</small>
+                            </div>
                             
          
         <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
-        <ion-item fill="outline" class="input-field"> 
-          <ion-chip *ngFor="let city of selectedCities" (click)="removeCity(city)">
-            {{ city }}
+        <ion-item  fill="outline" class="input-field"> 
+           <ion-chip *ngFor="let skill of selectedSkills" (click)="removeSkill(skill)">
+            {{ skill }}
             <ion-icon name="close-circle"></ion-icon>
           </ion-chip>
-          <ion-input type="text" (ionInput)="onSearch($event.target.value)"></ion-input>         
+           <ion-textarea   rows="1" warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-textarea>         
         </ion-item>
+        <div *ngIf="jobProfileForm.controls.jobSkills.hasError('required') && jobProfileForm.controls.jobSkills.touched">
+          <small style="color: #f70505;">Skills is required</small>
+        </div>
 
-        <ion-list *ngIf="showResults">
-          <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
+        <ion-list *ngIf="showSkillResults">
+          <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text,result.id)">
             {{ result.text }}
           </ion-item>
         </ion-list>
@@ -59,8 +72,8 @@
           <div>I have</div>
           <div style="width: 30%;">
             <ion-item fill="outline" class="input-field">
-              <ion-input formControlName="jobExperience" ></ion-input>
-          </ion-item> 
+              <ion-input (ionChange)="validatePreference();" formControlName="jobExperience" ></ion-input>
+          </ion-item>
           </div>
           <div>
           <ion-item fill="outline" class="input-field">
@@ -77,9 +90,13 @@
           <div>
             of relevant Experience
           </div> 
+           
+          <div *ngIf="jobProfileForm.controls.jobExperience.hasError('required') && jobProfileForm.controls.jobExperience.touched">
+            <small style="color: #f70505;">Work experience is required</small>
+          </div>
        
         <div class="ion-stepper-buttons">
-          <button class="ion-stepper-next" (click)="nextStep('step1', 'step2')">Next</button>
+          <button [disabled]="disable" class="ion-stepper-next" (click)="nextStep('step1', 'step2');">Next</button>
         </div>
       </div>
     </div>
@@ -140,11 +157,11 @@
           </div>
           <div style="display: flex; flex-direction: column; align-items: center;margin: 10px 0px 0px 0px;">
             <div>
-              About how many hours are you willing to work per week?
+              About how many hours are you willing to work per week?<small style="color: #f70505;">*</small>
             </div>
             <div>
               <ion-item fill="outline" class="input-field">
-                <ion-input formControlName="jobExpWorkHrs" ></ion-input>
+                <ion-input  (ionChange)="validateAvailability();" formControlName="jobExpWorkHrs" ></ion-input>
             </ion-item>
             </div>
           </div>
@@ -153,18 +170,18 @@
           </div>
           <div style="display: flex; flex-direction: column;">
             <div>
-              From when do you wish to start working?
+              From when do you wish to start working?<small style="color: #f70505;">*</small>
             </div>
             <div>
               <div style="margin: 0px 70px 0px 70px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-datetime formControlName="jobStartDateFromObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                  <ion-datetime  (ionChange)="validateAvailability(); validateStartDate($event.target.value);" formControlName="jobStartDateFromObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                 </ion-item>
               </div>
               <h4 style="display: flex;justify-content: center;">to</h4>
                <div style="margin: 0px 70px 0px 70px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-datetime formControlName="jobStartDateToObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                  <ion-datetime (ionChange)="validateAvailability(); validateStartDate($event.target.value);" formControlName="jobStartDateToObj" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                 </ion-item>
               </div>
             </div>
@@ -172,9 +189,9 @@
 
 
 
-        <div class="ion-stepper-buttons">
-          <button class="ion-stepper-prev" (click)="prevStep('step2', 'step1')">Previous</button>
-          <button class="ion-stepper-next" (click)="nextStep('step2', 'step3')">Next</button>
+        <div class="ion-stepper-buttons" style="justify-content: space-between;">
+          <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
+          <button [disabled]="disable1" class="ion-stepper-next" (click)="nextStep('step2', 'step3')">Next</button>
         </div>
       </div>
     </div>
@@ -187,16 +204,22 @@
       <div class="ion-stepper-content">
         <ion-label class="labels">Choose prefered Work Location<small style="color: #f70505;">*</small></ion-label>
         <ion-item fill="outline" class="input-field">
-          <ion-select (ionChange)="jobtitleList($event)" placeholder="Industry">
-            <ion-select-option *ngFor="let tittle of industryList"
-            value="{{tittle.id1}}">{{tittle.text}}</ion-select-option>
-        </ion-select>
+           <ion-chip *ngFor="let city of selectedCities" (click)="removeCity(city)">
+            {{ city }}
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-chip> 
+           <ion-textarea rows="1" warp="soft" placeholder="Search cities" (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-textarea>         
         </ion-item>
 
+        <ion-list *ngIf="showResults">
+          <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
+            {{ result.text }}
+          </ion-item>
+        </ion-list>
 
         <ion-label class="labels">Known languages<small style="color: #f70505;">*</small></ion-label>
         <ion-item fill="outline" class="input-field">
-          <ion-select formControlName="reqLanguages" placeholder="Known languages" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+          <ion-select (ionChange)="validateInformation();" formControlName="reqLanguages" placeholder="Known languages" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
             <ion-select-option *ngFor="let title of languageList"
             value="{{title.id}}">{{title.text}}</ion-select-option>
           </ion-select>
@@ -208,12 +231,12 @@
                             </div>
               
           <div>
-            <ion-radio-group value="custom-checked">
+            <ion-radio-group  formControlName="relocatewill" value="false">
               <div>
                 <ion-label>Are you willing to relocate?</ion-label> 
               <div style="display: flex;justify-content: space-evenly;">
-               <ion-radio formControlName="relocatewill" value="true"></ion-radio><ion-label>Yes</ion-label>
-              <ion-radio formControlName="relocatewill" value="false"></ion-radio><ion-label>No</ion-label>
+               <ion-radio value="true"></ion-radio><ion-label>Yes</ion-label>
+              <ion-radio value="false"></ion-radio><ion-label>No</ion-label>
             </div>
             </div>
             </ion-radio-group>
@@ -224,13 +247,13 @@
           </div>
 
           <div>
-            <ion-radio-group value="custom-checked">
+            <ion-radio-group formControlName="travelwill" value="No">
               <div>
                 <ion-label>Are you willing to travel?</ion-label> 
               <div style="display: flex;justify-content: space-evenly;">
-               <ion-radio  formControlName="travelwill" value="Yes"></ion-radio><ion-label>Yes</ion-label>
-               <ion-radio  formControlName="travelwill" value="No"></ion-radio><ion-label>No</ion-label>
-               <ion-radio  formControlName="travelwill" value="NA"></ion-radio><ion-label>Not required</ion-label>
+               <ion-radio   value="Yes"></ion-radio><ion-label>Yes</ion-label>
+               <ion-radio   value="No"></ion-radio><ion-label>No</ion-label>
+               <ion-radio   value="NA"></ion-radio><ion-label>Not required</ion-label>
             </div>
             </div>
             </ion-radio-group>
@@ -247,13 +270,13 @@
             <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;" >
               <div style="margin: 0px 15px 0px 0px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-input formControlName="jobSalaryFrom" placeholder="From"></ion-input>
+                  <ion-input (ionChange)="validateInformation();" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
               </ion-item>
               </div>
               <h4>to</h4>
                <div style="margin: 0px 0px 0px 15px;">
                 <ion-item fill="outline" class="input-field">
-                  <ion-input formControlName="jobSalaryTo" placeholder="To"></ion-input>
+                  <ion-input (ionChange)="validateInformation();" formControlName="jobSalaryTo" placeholder="To"></ion-input>
               </ion-item>
               </div>
             </div>
@@ -285,9 +308,9 @@
             </div>
           </div>
 
-        <div class="ion-stepper-buttons">
-          <button class="ion-stepper-prev" (click)="prevStep('step3', 'step2')">Previous</button>
-          <button class="ion-stepper-submit" (click)="onSubmit()">Submit</button>
+        <div class="ion-stepper-buttons" style="justify-content: space-between;">
+          <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">Back</button>
+          <button  class="ion-stepper-submit" (click)="savejobseek()">Save</button>
         </div>
       </div>
     </div>

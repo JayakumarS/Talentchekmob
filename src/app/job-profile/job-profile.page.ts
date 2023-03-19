@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective,FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-job-profile',
@@ -18,21 +19,32 @@ export class JobProfilePage implements OnInit {
   searchTerm = '';
  
   cities = [];
+  skillList = [];
   filteredCities = [];
   workLocation =[];
   languageList = [];
   JobPreferences: any;
   cityName:any;
   cityId:any;
-
-  // cities: string[] = ['New York', 'cos Angeles', 'Chicago', 'Houston', 'Philadelphia', 'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
+  skillSearchInput = '';
+  locationSearchInput = '';
   searchResults: string[] = [];
   selectedCities: string[] = [];
   showResults: boolean = false; 
 
+
+  searchSkillResults: string[] = [];
+  selectedSkills: string[] = [];
+  showSkillResults: boolean = false; 
+  jobpostMaster: any;
+  searchCtrl = new FormControl('');
+  disable :boolean = false;
+  disable1: boolean;
+  disable2: boolean;
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
+    private toastController: ToastController,
     public storageservice:StorageService,) {  
     }
 
@@ -45,11 +57,11 @@ export class JobProfilePage implements OnInit {
     ngOnInit() {
 
       this.jobProfileForm = this.fb.group({
-        industry: [""],
-        jobTitle: [""],
-        jobType: [""],
+        industry: ["",Validators.required],
+        jobTitle: ["",Validators.required],
+        jobType: ["",Validators.required],
         jobSkills: [""],
-        jobExperience:[""],
+        jobExperience:["",Validators.required],
         jobExperienceFormat: ["Years"],
         jobShiftDM: false,
       jobShiftDT: false,
@@ -65,17 +77,17 @@ export class JobProfilePage implements OnInit {
       jobShiftNF: false,
       jobShiftNS: false,
       jobShiftNSU: false,
-      jobExpWorkHrs: [""],
-      jobStartDateFromObj:[""],
+      jobExpWorkHrs: ["",Validators.required],
+      jobStartDateFromObj:["",Validators.required],
       jobStartDateFrom: [""],
-      jobStartDateToObj:[""],
+      jobStartDateToObj:["",Validators.required],
       jobStartDateTo: [""],
       location: [""],
-      reqLanguages: [""],
+      reqLanguages: ["",Validators.required],
       relocatewill: ["false"],
-      travelwill: [""],
-      jobSalaryFrom: [""],
-      jobSalaryTo: [""],
+      travelwill: ["No"],
+      jobSalaryFrom: ["",Validators.required],
+      jobSalaryTo: ["",Validators.required],
       jobSalaryCurrency: ["INR"],
       jobSalaryFrequency: ["Per Year"],
       currentUserId:[""]
@@ -86,9 +98,48 @@ export class JobProfilePage implements OnInit {
       this.getJobType();
       this.workLocationList();
       this.getlanguageList();
+      this.getSkillList();
+      this.validatePreference();
+      this.validateAvailability();
+      this.validateInformation();
     }
 
-    
+    validatePreference(){
+      if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.jobTitle !="" && this.jobProfileForm.value.jobType !=""
+      && this.selectedSkills.length != 0 && this.jobProfileForm.value.jobExperience !=""){
+        this.disable = false;
+       }else{
+        this.disable = true;
+       }
+    }  
+
+    validateAvailability(){
+      if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFromObj !="" 
+      && this.jobProfileForm.value.jobStartDateToObj !=""){
+        this.disable1 = false;
+       }else{
+        this.disable1 = true;
+       } 
+    }
+
+    validateInformation(){
+      if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryTo !="" 
+      && this.selectedCities.length !=0 && this.jobProfileForm.value.reqLanguages != 0){
+        this.disable2 = false;
+       }else{
+        this.disable2 = true;
+       } 
+    }
+
+    validateStartDate(event){
+      // var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
+      // console.log("currentDate: " + currentDate);
+      // console.log("startDate: " + event);
+      // var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      // if (frm <= currentDate) {
+        
+      // }
+    }
 
 nextStep(currentStep: string, nextStep: string) {
     const current = document.getElementById(currentStep);
@@ -103,6 +154,8 @@ nextStep(currentStep: string, nextStep: string) {
     current.style.display = 'none';
     prev.style.display = 'block';
   }
+
+  
 
   onSubmit() {
     console.log(this.jobProfileForm.value)
@@ -134,11 +187,11 @@ nextStep(currentStep: string, nextStep: string) {
   }
 
 
-  
+  // location auto complete 
   onSearch(value: string) {
-    if (value.length > 0) {
+    if (value.length > 2) {
       this.showResults = true;
-      this.searchResults = this.cities.filter(city => city.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      this.searchResults = this.workLocation.filter(city => city.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
     } else {
       this.showResults = false;
       this.searchResults = [];
@@ -151,14 +204,13 @@ nextStep(currentStep: string, nextStep: string) {
     this.cityId = id;
     this.showResults = false;
     this.searchResults = [];
+    this.searchCtrl.setValue('');
   }
 
   removeCity(city: string) {
     this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
   }
-
-
-
+ 
   jobtitleList(event){
     var value = event.detail.value
     var jobtitleurl = "api/auth/app/CommonUtility/jobTitleList?industryid=" +value;
@@ -172,10 +224,10 @@ nextStep(currentStep: string, nextStep: string) {
 
  
     workLocationList(){
-      var getJobTypeListUrl = "api/auth/app/CommonUtility/locationList"; 
+      var getJobTypeListUrl = "api/auth/app/CommonUtility/locationListMobile"; 
       this.storageservice.getrequest(getJobTypeListUrl).subscribe(result => {
        if (result["success"] == true) {
-        this.workLocation = result["jobTypeList"]; 
+        this.workLocation = result["locationList"]; 
         }
      });
     }
@@ -188,5 +240,108 @@ nextStep(currentStep: string, nextStep: string) {
         }
      });
     }
+
+    getSkillList(){
+      var getskillListUrl = "api/auth/app/CommonUtility/skillList"; 
+      this.storageservice.getrequest(getskillListUrl).subscribe(result => {
+       if (result["success"] == true) {
+        this.skillList = result["skillList"]; 
+        }
+     });
+    }
+// skill auto complete 
+    onSearchSkill(value: string) {
+      if (value.length > 2) {
+        this.showSkillResults = true;
+        this.searchSkillResults = this.skillList.filter(Skill => Skill.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      } else {
+        this.showSkillResults = false;
+        this.searchSkillResults = [];
+      }
+    }
+  
+    selectSkill(skill: string,id:string) {
+      this.selectedSkills.push(skill);
+      this.cityName = skill;
+      this.cityId = id;
+      this.showSkillResults = false;
+      this.searchSkillResults = [];
+      this.searchCtrl.setValue('');
+    }
+  
+    removeSkill(skill: string) {
+      this.selectedSkills.splice(this.selectedSkills.indexOf(skill), 1);
+    }   
+     
+
+    //save
+  async savejobseek(){
+    this.jobProfileForm.value.jobSkills = this.selectedSkills
+    this.jobProfileForm.value.location = this.selectedCities;
+  const errors = this.checkFormValidity(this.jobProfileForm);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+      header: 'Validation Error',
+      message: errors.join('<br>'),
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  } else {
+     this.jobProfileForm.value.jobSkills = this.selectedSkills
+    this.jobProfileForm.value.location = this.selectedCities;
+    var fromdate = this.transformDate(this.jobProfileForm.value.jobStartDateFromObj);
+    this.jobProfileForm.value.jobStartDateFromObj = fromdate;
+    var todate = this.transformDate(this.jobProfileForm.value.jobStartDateToObj);
+    this.jobProfileForm.value.jobStartDateToObj = todate;
+    this.jobProfileForm.value.currentUserId = 'TFIN10555362814';
+       
+  this.jobpostMaster = this.jobProfileForm.value;
+  console.log(` data: ${JSON.stringify(this.jobpostMaster)}`);
+  var saveJobProfile = "api/auth/app/jobportal/saveJobSeek";
+
+   this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
+      console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+      this.presentToast()
+      }
+   });
+  }
+  } 
+
+  transformDate(date) {
+    return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
+  }
+
+ 
+    async presentToast() {
+      const toast = await this.toastController.create({
+        message: 'Saved Successfully',
+        duration: 3000,
+        cssClass: 'custom-toast'
+      });
+
+    await toast.present();
+  }
+ 
+
+  checkFormValidity(form: FormGroup): string[] {
+    const errors: string[] = [];
+    
+    // Check each form control for errors
+    Object.keys(form.controls).forEach(key => {
+      const controlErrors: ValidationErrors = form.controls[key].errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          errors.push(`${key} ${keyError}`);
+        });
+      }
+    });
+  
+    return errors;
+  }
+  
   
 }
