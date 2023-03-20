@@ -1,13 +1,17 @@
  <ion-header style="background-color: white;">
   <ion-toolbar>
+    <form style="padding: inherit;" [formGroup]="jobSearchHeadForm">
       <ion-row>  
           <ion-col size="10">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;font-weight: 600;
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 3%;font-weight: 600;
               font-size: 30px;">Profile search</ion-title>
           </ion-col>
+          <ion-col size="2">
+                 <img src="./assets/icon/settings.png" style="width: 70%; height: 45px; padding-bottom: 0px;">
+            </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row style="margin: -15px 0px 0px 0px;">
           <ion-col size="10">
               <ion-title class="ion-text-wrap" style="font-size: 15px;">It's easy.</ion-title>
           </ion-col> 
@@ -15,23 +19,29 @@
 
       <ion-row style="display: flex;
       align-items: center;">
-        <ion-col size="10">
-                 <ion-searchbar mode="ios"></ion-searchbar>
-         </ion-col>
-        <ion-col size="2">
-          <ion-col size="small">
-              <img src="./assets/icon/settings.png" style="width: 70%; height: 45px; padding-bottom: 8px;">
-          </ion-col>
-         </ion-col>
+        <ion-col size="12">
+          <div class="search-container">
+            <select formControlName="searchType" class="search-dropdown">
+              <option value="talentid">Talent Id</option>
+              <option value="name">Name</option>
+              <option value="email">Email Id</option>
+              <option value="phone">Mobile No</option>
+            </select>
+            <input type="text" formControlName="searchValue" class="search-input" placeholder="Search...">
+            <ion-button (click)="search()" class="search-button">Search</ion-button>
+          </div>
+         </ion-col> 
     </ion-row>
-
+  </form>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <br>
+  
   <ion-card style="border-radius: 38px;">
+    <form [formGroup]="jobSearchHeadForm">
     <ion-card-content>
       <ion-list >
         <ion-item lines="none">
@@ -63,9 +73,13 @@
         <hr style="border: 1px solid;"> 
       </ion-list>
     </ion-card-content>
+  </form>
+    
+    
+    
   </ion-card>
 
-  <div class="footer-nav">
+   <div class="footer-nav">
     <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
       <ion-icon size="large" name="search-circle"></ion-icon>
     </button>
@@ -73,8 +87,7 @@
       <ion-icon size="large" name="earth-sharp"></ion-icon>
     </button>
     <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-      <!-- <ion-icon size="large" name="apps"></ion-icon> -->
-      <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+       <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
       
     </button>
     <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
@@ -83,9 +96,29 @@
     <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
       <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
     </button>
-  </div>
-  
-  
-  
+  </div>  
+   <!-- <div class="container">
+    <div class="tabbar tab-style1">
+      <ul class="flex-center">
+        <li class="home active" data-where="home"><span class="material-icons-outlined">
+            home
+          </span></li>
+        <li class="products" data-where="products"><span class="material-icons-outlined">
+            shopping_bag
+          </span></li>
+        <li class="services" data-where="services"><span class="material-icons-outlined">
+            plumbing
+          </span></li>
+        <li class="about" data-where="about"><span class="material-icons-outlined">
+            business
+          </span></li>
+        <li class="help" data-where="help"><span class="material-icons-outlined">
+            help_outline
+          </span></li>
+        <li class="follow">&nbsp;</li>
+      </ul>
+    </div>
+  </div> -->
+   
 
 </ion-content>
