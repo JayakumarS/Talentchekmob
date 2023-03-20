@@ -17,7 +17,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<form>
+<form [formGroup]="clubFrom">
 
 
 <ion-card-content>
@@ -35,34 +35,49 @@
             <div class="button-content">
                 <ion-label class="labels">Name of the Club/Association <small style="color: #f70505;">*</small></ion-label>
                 <ion-item fill="outline" class="input-field">
-                    <ion-input formControlName="firstName"></ion-input>
-                </ion-item>
+                    <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
+                    debounce="100" (ionInput)="filterList($event)" 
+                    formControlName="clubName" [(ngModel)]="organisationVal"  (ionBlur)="unCheckFocus()"
+                    search-icon=“undefined”></ion-searchbar>
+                    </ion-item>
+                    <ion-row>
+                        <ion-col>
+                          <ion-list *ngIf="IsorgListShow" lines="full">
+                            <ion-item *ngFor="let cElement of organisationList">
+                              <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                                {{ cElement.text }}
+                              </ion-label>
+                            </ion-item>
+                          </ion-list>
+                        </ion-col>
+                      </ion-row>
+               
                 </div>
                 <div class="button-content">
                     <ion-label class="labels">District/Branch</ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-input formControlName="firstName"></ion-input>
+                        <ion-input formControlName="clubBranch"></ion-input>
                     </ion-item>
                     </div>
                     <div class="button-content">
                         <ion-label class="labels">Time held<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input formControlName="firstName"></ion-input>
+                            <ion-input formControlName="titleHeld"></ion-input>
                         </ion-item>
                         </div>
                         <div class="button-content">
                             <ion-label class="labels">Participated From </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="dob" presentation="date"></ion-datetime>
+                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedFromObj" presentation="date"></ion-datetime>
                             </ion-item>
                             </div>
                             <div class="button-content">
                                 <ion-label class="labels">Participated Till </ion-label>
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="dob" presentation="date"></ion-datetime>
+                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedTillObj" presentation="date"></ion-datetime>
                                 </ion-item>
-                                <div style="display: inline;">
-                                    <ion-checkbox [(ngModel)]="isChecked"></ion-checkbox>&nbsp;&nbsp;Current member
+                                <div style="display:flex;">
+                                    <ion-checkbox [(ngModel)]="isChecked" formControlName="currentMember"></ion-checkbox>&nbsp;&nbsp;Current member
                                   </div>
                                
                                   
