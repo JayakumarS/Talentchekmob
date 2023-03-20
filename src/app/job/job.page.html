@@ -17,7 +17,7 @@
 
 <ion-content>
 
-  <div class="display-justify">
+  <div class="display-justify" *ngFor="let cElement of matchedJobList" >
     <div class="custom-button" (click)="goto_jobdetails()">
      <div style="display: flex; justify-content: space-between;align-items: center;" >
     <div style="display: flex; justify-content: center;padding: 5px;">
@@ -39,7 +39,7 @@
   </div>
   <div style="display: flex;flex-direction: column;">
     <div style="font-size: 18px; font-weight: 600;">
-      Senior front-end developer
+      {{cElement.jobTitleName}}
     </div>
     <div style="font-size: 16px;">
       Red Bull GmbH
@@ -81,4 +81,6 @@
   
 
 </ion-content>
+
+
 

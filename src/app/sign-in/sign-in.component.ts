@@ -59,7 +59,7 @@ export class SignInComponent implements OnInit {
               if (data.success) {
 
                 console.log(data);
-                localStorage.setItem('userId', data["userId"]);
+                localStorage.setItem('userId', data["username"]);
                 localStorage.setItem('userName', data["firstNameLastName"]);
                 localStorage.setItem('creditPoints', data["creditpoint"]);
                 localStorage.setItem('email', data["empId"]);
