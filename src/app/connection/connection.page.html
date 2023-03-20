@@ -1,0 +1,224 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-row>
+
+          <ion-col size="0.5">
+
+          </ion-col>
+          <ion-col size="2">
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="certifications()" style="margin-top:21%"></ion-icon>
+          </ion-col>
+
+          <ion-col size="7">
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Connections</ion-title>
+          </ion-col>
+      </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form  [formGroup]="ConnectionsForm">
+
+  <ion-card-content>
+      <!-- <ion-row>
+          <ion-col size="8">
+              <ion-title style="color:black; margin-left: -5%;">Connections</ion-title>
+          </ion-col>
+           <ion-col size="2">
+              <ion-icon style="color:#ACCCFF;" size="large" name="duplicate"></ion-icon>
+          </ion-col>
+      </ion-row> -->
+
+      <!-- <ion-row class="talentrow" style="display: flex;" style="column-count: 2">
+          <ion-col size="6">
+              <div class="row">
+                  <h5>2</h5>
+                  <small>Doctor(s)</small>
+              </div>
+          </ion-col>
+          <ion-col size="6">
+              <div class="row">
+                  <h5>2</h5>
+                  <small>Doctor(s)</small>
+              </div>
+          </ion-col>
+
+      </ion-row> -->
+
+      <form  [formGroup]="ConnectionsForm" (ngSubmit)="onSubmit()">
+          <div id="test-l-1" class="content">
+              <div class="button-content">
+                  <ion-label class="labels">Connection's Mobile Number <small style="color: #f70505;">*</small></ion-label>
+                  <ion-item fill="outline" class="input-field">
+                      <ion-input formControlName="receiverMobileNo"></ion-input>
+                  </ion-item>
+                  <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title>
+                 </div>
+                  <ion-spacer size="large"></ion-spacer><br>
+                   <div class="button-content">
+                      <ion-label class="labels">Connection's Name <small style="color: #f70505;">*</small></ion-label>
+                      <ion-item fill="outline" class="input-field">
+                          <ion-input formControlName="receiverName"></ion-input>
+                      </ion-item>
+                      </div>
+
+                      <div class="button-content">
+                          <ion-label class="labels">Connection's Email Id<small style="color: #f70505;">*</small></ion-label>
+                          <ion-item fill="outline" class="input-field">
+                              <ion-input formControlName="receiverEmailId"></ion-input>
+                          </ion-item>
+                          </div>
+                      <div class="button-content">
+                           <!-- <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label> -->
+                         
+                              <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label>
+                              <ion-item fill="outline" class="input-field">
+                      <ion-select style="background-color: white;" formControlName="relationshipAt">
+                        <ion-select-option  *ngFor="let tittle of relationshipList" [value]="tittle.id">
+                          {{tittle.text}}</ion-select-option>
+                        </ion-select>
+                             
+                          </ion-item> 
+
+                          
+                          </div>
+                          <div class="button-content">
+                              <ion-label class="labels">Acquainted From </ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedFromObj" presentation="date"></ion-datetime>
+                              </ion-item>
+                              </div>
+                              <div class="button-content">
+                                  <ion-label class="labels">Acquainted Till </ion-label>
+                                  <ion-item fill="outline" class="input-field">
+                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedToObj" presentation="date"></ion-datetime>
+                                  </ion-item>
+                                 
+                                    <div style="    display: flex;">
+                                      <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyAcquainted"></ion-checkbox>&nbsp;&nbsp;Currently acquainted
+                                    </div>
+                                    
+                                  </div>
+                                  <ion-spacer size="large"></ion-spacer><br>
+                                  <div class="button-content">
+                                      <ion-label class="labels">Where did you come across this connection</ion-label>
+                                      <ion-item fill="outline" class="input-field">
+                                          <ion-input  placeholder="Ex: Logwiz Institute for logistics" formControlName="relationshipAt"></ion-input>
+                                      </ion-item>
+                                      </div>
+
+                                      <div class="button-content">
+                                          <ion-label class="labels">Is this connection your favourite?</ion-label>
+                                       <ion-row >   <ion-label style=" font-size: 20px; ">Yes</ion-label>  <ion-toggle  [checked]="true"></ion-toggle><ion-label style="
+                                        font-size: 20px; ">No</ion-label>
+                                       </ion-row>   </div>
+                                       
+
+                                       <div class="button-content">
+                                          <ion-spacer size="large"></ion-spacer><br>
+                                          <ion-item fill="outline" class="input-field">
+                                              <ion-textarea formControlName="markedFavByInitiator" placeholder="Remarks about the connection"></ion-textarea>
+                                          </ion-item>
+                                          </div>
+                                          
+
+                                         <div class="button-content">
+                                         
+                                              <ion-label>Rate the Connection
+                                              </ion-label>
+                                             </div>
+                                             <div class="button-content">
+                                              <ion-row><div class="form-group">
+                                                  <div class="form-check-inline">
+                                                      <label class="form-check-label" for="1">
+                                                          <input type="radio" id="1" value="1" name="rating" class="rating" />
+                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">1</span>
+                                                        </label>
+                                                    </div>
+                                                  
+                                                    <div class="form-check-inline">
+                                                      <label class="form-check-label" for="2">
+                                                          <input type="radio" id="2" value="2" name="rating" class="rating" />
+                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">2</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                      <label class="form-check-label" for="3">
+                                                          <input type="radio" id="3" value="3" name="rating" class="rating" />
+                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">3</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                      <label class="form-check-label" for="4">
+                                                          <input type="radio" id="4" value="4" name="rating" class="rating" />
+                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">4</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                      <label class="form-check-label" for="5">
+                                                          <input type="radio" id="5" value="5" name="rating" class="rating" />
+                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">5</span>
+                                                        </label>
+                                                    </div>
+                                                    <!-- <div class="form-check-inline">
+                                                      <label class="form-check-label" for="4">
+                                                        <input type="radio" id="4" value="4" name="rating" class="rating" />
+                                                        <span class="wpcomment-input-option-label wpcomment-label-radio">4</span>
+                                                      </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                      <label class="form-check-label" for="5">
+                                                        <input type="radio" id="5" value="5" name="rating" class="rating" />
+                                                        <span class="wpcomment-input-option-label wpcomment-label-radio">5</span>
+                                                      </label>
+                                                    </div> -->
+                                              </div></ion-row>
+                                              
+                                             </div>
+
+                                          <div class="button-content">
+                                              <ion-label class="labels">Do you want to keep this connection private?</ion-label>
+                                           <ion-row>   <ion-label style="font-size: 20px;  ">Yes</ion-label>  <ion-toggle  [checked]="true"></ion-toggle><ion-label style="
+                                            font-size: 20px; ">No</ion-label>
+                                           </ion-row>   </div>
+
+                                         
+                                           <div class="button-content" style="width: 50%;
+                                        margin: auto;">
+                                        <ion-button color="primary" fill="outline" (click)="additionalInfo()">Next</ion-button>
+                                        </div>
+
+
+
+
+                                       
+
+                                      
+                  </div>
+              </form>
+
+  </ion-card-content>
+
+</form>
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+</div>
+
+</ion-content>

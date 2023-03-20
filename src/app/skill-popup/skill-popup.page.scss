@@ -1,0 +1,15 @@
+.my-popup {
+   
+      left: 30px;
+      width: 330px;
+      height: 210px;
+      transform-origin: right top;
+  }
+
+  :host ::ng-deep .my-popup {
+  
+      left: 30px;
+      width: 330px;
+      height: 210px;
+      transform-origin: right top;
+  }

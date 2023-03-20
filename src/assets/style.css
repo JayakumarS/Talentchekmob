@@ -1,4 +1,22 @@
- h3 {
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+@font-face {
+    font-family: alina-sans;
+    src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+}
+
+.my-custom-class {
+    width: 85%;
+    margin-left: 7%;
+    margin-top: 50%;
+    height: 45%;
+  }
+
+
+h3 {
      font-family: 'Asul';
  }
  /*  h5{

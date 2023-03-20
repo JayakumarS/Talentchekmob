@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePageRoutingModule } from './profile-routing.module';
+import { ClubPageRoutingModule } from './club-routing.module';
 
-import { ProfilePage } from './profile.page';
+import { ClubPage } from './club.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfilePageRoutingModule,
-    
+    ClubPageRoutingModule
   ],
-  declarations: [ProfilePage]
+  declarations: [ClubPage]
 })
-export class ProfilePageModule {}
+export class ClubPageModule {}

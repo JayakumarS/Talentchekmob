@@ -1,0 +1,126 @@
+
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-row>
+
+          <ion-col size="0.5">
+
+          </ion-col>
+          <ion-col size="2">
+              <ion-icon size="large" name="arrow-back-circle-outline"  (click)="experience()" style="margin-top:21%"></ion-icon>
+          </ion-col>
+
+          <ion-col size="7">
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Skills & Ceritications</ion-title>
+          </ion-col>
+      </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="certificationForm">
+
+  <ion-card-content>
+
+    <ion-row>
+        <ion-col size="10">
+            <ion-title style="color:black;">Add Key Skills</ion-title>
+           
+              
+        </ion-col>
+        <ion-col size="2">
+         
+          <ion-icon name="add" size="large" color="primary" (click)="presentModal($event)"></ion-icon>
+
+      </ion-col>
+        
+    </ion-row>
+
+      <ion-row>
+          <ion-col size="10">
+              <ion-title style="color:black; ">Add Certifications and Licenses</ion-title>
+          </ion-col>
+          <ion-col size="2">
+              <img src="./assets/icon/edit_icon.png" >
+          </ion-col>
+      </ion-row>
+
+      <ion-row class="talentrow">
+          <ion-col>
+              <div class="button-content">
+                  <ion-label class="labels">Certification/License/Patent/Publication Name <small style="color: #f70505;">*</small></ion-label>
+                  <ion-item fill="outline" class="input-field">
+                      <ion-input formControlName="certificationName"></ion-input>
+                  </ion-item>
+                  </div>
+                  <div class="button-content">
+                      <ion-label class="labels">Issuing Organisation<small style="color: #f70505;">*</small></ion-label>
+                      <ion-item fill="outline" class="input-field">
+                          <ion-input formControlName="issuedBy"></ion-input>
+                      </ion-item>
+                      </div>
+                      <div class="button-content">
+                          <ion-label class="labels">Certification/License/Patent/Publication Number<small style="color: #f70505;">*</small></ion-label>
+                          <ion-item fill="outline" class="input-field">
+                              <ion-input formControlName="certificationId"></ion-input>
+                          </ion-item>
+                          </div>
+                          <div class="button-content">
+                              <ion-label class="labels">Issue Date </ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="issuedDateObj" presentation="date"></ion-datetime>
+                              </ion-item>
+                              </div>
+                              <div class="button-content">
+                                  <ion-label class="labels">Expiry Date(if applicable) </ion-label>
+                                  <ion-item fill="outline" class="input-field">
+                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expiryDateObj" presentation="date"></ion-datetime>
+                                  </ion-item>
+                                 
+                                    
+                                  </div>
+                                  <div class="button-content">
+                                      <ion-button style="background: #3880ff;border-radius:20px">
+                                          <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+                                          <!-- <ion-label slot="end">Upload Image</ion-label> -->
+                                          <input type="file" formControlName="uploadCertification" (change)="loadImageFromDevice($event)" id="file-input"
+                                            accept="image/png, image/jpeg">
+                                        </ion-button>
+                                  </div>
+                                  <div class="button-content" style="width: 50%;
+                                        margin: auto;">
+                                        <ion-button color="primary" fill="outline" (click)="clubs()">Next</ion-button>
+                                        </div>
+                    
+                
+                
+          </ion-col>
+      </ion-row>
+
+      
+      
+
+  </ion-card-content>
+
+</form>
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+</div>
+
+</ion-content>

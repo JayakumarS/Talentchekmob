@@ -1,0 +1,204 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-row>
+
+          <ion-col size="0.5">
+
+          </ion-col>
+          <ion-col size="2">
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profile()" style="margin-top:21%"></ion-icon>
+          </ion-col>
+
+          <ion-col size="7">
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Education</ion-title>
+          </ion-col>
+      </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="EducationForm" >
+
+
+  <ion-card-content>
+      <!-- <ion-row>
+          <ion-col size="8">
+              <ion-title style="color:black;margin-left: -5%;">Education</ion-title>
+          </ion-col>
+          <ion-col size="2">
+              <ion-icon style="color:#ACCCFF;" size="large" name="duplicate"></ion-icon>
+          </ion-col> 
+      </ion-row> -->
+      <div id="test-l-1" class="content">
+          <div class="button-content">
+              <ion-label class="labels">Educational Institution Name<small style="color: #f70505;">*</small></ion-label>
+              <ion-item fill="outline" class="input-field">
+                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
+                debounce="100" (ionInput)="filterList($event)" 
+                formControlName="institutionName" [(ngModel)]="institutionVal"  (ionBlur)="unCheckFocus()"
+                search-icon=“undefined”></ion-searchbar>
+                </ion-item>
+                <ion-row>
+                  <ion-col>
+                    <ion-list *ngIf="IsSearchListShow" lines="full">
+                      <ion-item *ngFor="let cElement of institutionList">
+                        <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                          {{ cElement.text }}
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </ion-col>
+                </ion-row>
+              <!-- <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title> -->
+             </div>
+              <ion-spacer size="large"></ion-spacer><br>
+               <div class="button-content">
+                  <ion-label class="labels">Institution Location <small style="color: #f70505;">*</small></ion-label>
+                  <ion-item fill="outline" class="input-field">
+                      <ion-input formControlName="institutionLocation"></ion-input>
+                  </ion-item>
+                  </div>
+                 
+                      
+                          <div class="button-content">
+                              <ion-label class="labels">Course Start Month-Year<small style="color: #f70505;">*</small> </ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                <ion-datetime displayFormat="MM/YYYY" ></ion-datetime>               
+                                               </ion-item>
+                              </div>
+                              <div class="button-content">
+                                  <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
+                                  <ion-item fill="outline" class="input-field">
+                                    <ion-datetime displayFormat="MM/YYYY" ></ion-datetime>                                  </ion-item>
+                                 
+                                    <div style="display: flex;">
+                                      <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyStudy" ></ion-checkbox>&nbsp;I currently study here
+                                    </div>
+                                    
+                                  </div>
+                                  <ion-spacer size="large"></ion-spacer><br>
+                                  <div class="button-content">
+                                      <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
+                                      <ion-item fill="outline" class="input-field">
+                                        <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
+                                        debounce="100" (ionInput)="filterdegreeList($event)" 
+                                        formControlName="degree" [(ngModel)]="degreeListVal"  (ionBlur)="unDegreeList()"
+                                        search-icon=“undefined”></ion-searchbar>
+                                        </ion-item>
+                                        <ion-row>
+                                          <ion-col>
+                                            <ion-list *ngIf="IsDegreeListShow" lines="full">
+                                              <ion-item *ngFor="let cElement of degreeList">
+                                                <ion-label class="ion-text-wrap" (click)="goToDegreeListItem(cElement.text, cElement.id)">
+                                                  {{ cElement.text }}
+                                                </ion-label>
+                                              </ion-item>
+                                            </ion-list>
+                                          </ion-col>
+                                        </ion-row>
+                                      </div>
+
+                                      <div class="button-content">
+                                          <ion-label class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
+                                       
+                                          <ion-item fill="outline" class="input-field">
+                                           
+                                              <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
+                                              debounce="100" (ionInput)="filterstudyList($event)" 
+                                              formControlName="fieldofStudy" [(ngModel)]="studyListVal"  (ionBlur)="unstudyList()"
+                                              search-icon=“undefined”></ion-searchbar>
+                                            
+                                         
+                                          </ion-item>
+                                          <ion-row>
+                                            <ion-col>
+                                              <ion-list *ngIf="IsstudyListShow" lines="full">
+                                                <ion-item *ngFor="let tittle of studyList">
+                                                  <ion-label class="ion-text-wrap" (click)="goTostudyListItem(tittle.text, tittle.id)">
+                                                    {{tittle.text}}
+                                                  </ion-label>
+                                                </ion-item>
+                                              </ion-list>
+                                            </ion-col>
+                                          </ion-row>
+                                          </div>
+
+                                  <div class="button-content">
+                                      <ion-label class="labels">Student Registration Number<small style="color: #f70505;">*</small></ion-label>
+                                      <ion-item fill="outline" class="input-field">
+                                          <ion-input  type="number"formControlName="stuRegisterNumber"></ion-input>
+                                      </ion-item>
+                                      </div>
+
+                                      <div class="button-content">
+                                          <ion-label class="labels">Aggregate Marks or GPA obtained<small style="color: #f70505;">*</small></ion-label>
+                                          <ion-item fill="outline" class="input-field">
+                                              <ion-input formControlName="aggregateMarks"></ion-input>
+                                          </ion-item>
+                                          </div>
+                                          <div class="button-content" style="width: 50%;
+                                        margin: auto;">
+                                        <ion-button color="primary" fill="outline" (click)="experience()">Next</ion-button>
+                                        </div>
+                  </div>
+
+      <!-- <ion-row class="talentrow">
+          <ion-card class="talentcard2">
+              <ion-card-content> -->
+
+                  
+
+                  <!-- <ion-row>
+                      <ion-col size="2">
+                          <img src="./assets/icon/edit_icon.png">
+                      </ion-col>
+                      <ion-col size="8">
+                          <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Paragon dynamics info </ion-title>
+                      </ion-col>
+
+                      <ion-col size="2">
+                          <ion-icon name="ellipsis-vertical"></ion-icon>
+                      </ion-col>
+
+                  </ion-row> -->
+
+                  <!-- <ion-row>
+                      <ion-col size="12">
+                          <ion-label>Category : Job Seeker,Business Owner,Freelancer</ion-label>
+                      </ion-col>
+                      <ion-col size="12">
+                          <ion-label>Location : Madurai,India</ion-label>
+                      </ion-col>
+                      <ion-col size="12">
+                          <ion-label>Phone No :8838656535</ion-label>
+                      </ion-col>
+                  </ion-row> -->
+
+              <!-- </ion-card-content>
+          </ion-card>
+      </ion-row> -->
+
+  </ion-card-content>
+
+</form>
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+</div>
+
+</ion-content>

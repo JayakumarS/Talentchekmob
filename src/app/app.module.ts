@@ -20,6 +20,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 //import { FCM } from '@ionic-native/fcm/ngx';
 
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
@@ -45,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule, FormsModule,
     HttpClientModule,
     BrowserModule,
+   
     Ng2GoogleChartsModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(), AppRoutingModule,

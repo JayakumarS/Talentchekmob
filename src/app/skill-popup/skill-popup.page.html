@@ -1,0 +1,66 @@
+
+ 
+      <ion-row style="padding-top:20px">
+        <ion-col size="10">
+            <ion-title style="color:black;margin-left: -5%;">Add New Skill</ion-title>
+        </ion-col>
+        <ion-col size="2">
+         
+              <ion-icon  (click)="dismiss()" name="close"></ion-icon>
+            
+        </ion-col>
+    </ion-row>
+    
+<ion-content>
+  <form [formGroup]="skillForm">
+    <ion-card-content>
+    <ion-row class="talentrow">
+        <ion-col>
+            <div class="button-content">
+               
+                <ion-item fill="outline" class="input-field">
+                    <ion-label class="labels">Skill <small style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                      <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Select skill" showcancelbutton="" 
+                      debounce="100" (ionInput)="filterskillsList($event)" 
+                      formControlName="keySkill" [(ngModel)]="skillsListVal"  (ionBlur)="unSkillsList()"
+                      search-icon=“undefined”></ion-searchbar>
+                      </ion-item>
+                   
+                  </ion-item>
+                  <ion-row>
+                    <ion-col>
+                      <ion-list *ngIf="IsskillsListShow" lines="full">
+                        <ion-item *ngFor="let cElement of skillsList">
+                          <ion-label class="ion-text-wrap" (click)="goToSkillsListItem(cElement.text, cElement.id)">
+                            {{ cElement.text }}
+                          </ion-label>
+                        </ion-item>
+                      </ion-list>
+                    </ion-col>
+                  </ion-row>
+                <!-- <ion-item fill="outline" class="input-field">
+                    <ion-input formControlName="firstName"></ion-input>
+                </ion-item> -->
+                </div>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="talentrow">
+        <ion-col>
+            <ion-range min="0" max="100"  formControlName="expertise" [(ngModel)]="sliderValue" (ionChange)="onSliderChange()">
+                <ion-label  slot="start">Beginner</ion-label>
+                <ion-label  slot="end">Expert</ion-label>
+              </ion-range>
+              
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="button-content" style="margin: auto;">
+                                      <ion-button color="primary" fill="outline" >Add</ion-button>
+                                      </div>
+    </ion-row>
+    
+</ion-card-content>
+</form>
+</ion-content>

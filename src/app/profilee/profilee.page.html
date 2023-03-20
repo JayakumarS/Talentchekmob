@@ -1,0 +1,160 @@
+
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-row>
+
+          <ion-col size="0.5">
+
+          </ion-col>
+          <ion-col size="2">
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
+          </ion-col>
+
+          <ion-col size="7">
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit General Info</ion-title>
+          </ion-col>
+      </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="profileForm">
+
+  <ion-card-content>
+      <!-- <ion-row>
+          <ion-col >
+              <ion-title style="color:black;">Profile</ion-title>
+          </ion-col>
+          
+      </ion-row> -->
+
+      <ion-row class="talentrow">
+          <ion-col>
+              <div class="button-content">
+                  <ion-label class="labels">First Name<small style="color: #f70505;">*</small></ion-label>
+                  <ion-item fill="outline" class="input-field">
+                      <ion-input formControlName="firstname"></ion-input>
+                  </ion-item>
+                  </div>
+                  <div class="button-content">
+                      <ion-label class="labels">Last Name<small style="color: #f70505;">*</small></ion-label>
+                      <ion-item fill="outline" class="input-field">
+                          <ion-input formControlName="lastname"></ion-input>
+                      </ion-item>
+                      </div>
+                      <div class="button-content">
+                          <ion-label class="labels">Gender<small style="color: #f70505;">*</small></ion-label>
+                          <ion-item fill="outline" class="input-field" >
+                           
+                            <ion-select interface="popover"formControlName="gender" placeholder="Gender" style="background:white">
+                              <ion-select-option value="Male">Male</ion-select-option>
+                              <ion-select-option value="Female">Female</ion-select-option>
+                              <ion-select-option value="Others">Others</ion-select-option>
+                            </ion-select>
+                          </ion-item>
+                          
+                          </div>
+                          
+                          <div class="button-content">
+                              <ion-label class="labels">Date of Birth </ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                  <ion-datetime displayFormat="DD.MM.YYYY" placeholder="Date of Birth " formControlName="dob" presentation="date"></ion-datetime>
+                              </ion-item>
+                              </div>
+                              <div class="button-content">
+                                <ion-label class="labels">Email Id<small style="color: #f70505;">*</small></ion-label>
+                                <ion-item fill="outline" class="input-field">
+                                    <ion-input formControlName="email"  ></ion-input>
+                                </ion-item>
+                                </div>
+                                <div class="button-content">
+                                  <ion-label class="labels">Mobile Number<small style="color: #f70505;">*</small></ion-label>
+                                  <ion-item fill="outline" class="input-field">
+                                      <ion-input formControlName="mobile"></ion-input>
+                                  </ion-item>
+                                  </div>
+                                  <div class="button-content">
+                                    <ion-label class="labels">Unique National ID(Aadhar ID/SSN/Emirates ID etc)<small style="color: #f70505;">*</small></ion-label>
+                                    <ion-item fill="outline" class="input-field">
+                                        <ion-input formControlName="nationalid"></ion-input>
+                                    </ion-item>
+                                    </div>
+                                    <div class="button-content">
+                                      <ion-label class="labels">Category<small style="color: #f70505;">*</small></ion-label>
+                                      <ion-item fill="outline" class="input-field">
+                                    
+                                          <ion-select placeholder="Select Category"multiple="true"  formControlName="category"style="background-color: white;">
+                                            <ion-select-option *ngFor="let tittle of categoryList" [value]="tittle.id">
+                                              {{tittle.text}}</ion-select-option>
+                                            </ion-select>
+
+                                        <!-- <div *ngFor="let tittle of categoryList; let i = index">
+                                          <ion-option  value="{{tittle.id1}}">{{tittle.text}}</ion-option>
+                                      </div> -->
+                                      
+
+                                      </ion-item>
+
+                                      </div>
+
+                                  <div class="button-content">
+                                    <ion-label slot="end">Upload Image</ion-label>
+                                      <ion-button style="background: #3880ff;border-radius:20px">
+                                          <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+                                        
+                                          <input type="file" (change)="loadImageFromDevice($event)" id="file-input"
+                                            accept="image/png, image/jpeg">
+                                        </ion-button>
+                                  </div><br>
+                                  <div class="button-content">
+                                    <ion-label class="labels">URl link to your video profile<small style="color: #f70505;">*</small></ion-label>
+                                    <ion-item fill="outline" class="input-field">
+                                        <ion-input formControlName="linkurl"></ion-input>
+                                    </ion-item>
+                                    </div>
+                                    
+
+                                      <div class="button-content">
+                                      
+                                        <ion-item fill="outline" class="input-field" >
+                                            <ion-textarea  formControlName="details" placeholder="About You"></ion-textarea>
+                                        </ion-item>
+                                        </div>
+                                       
+                                        <div class="button-content" style="width: 50%;
+                                        margin: auto;">
+                                        <ion-button color="primary" fill="outline" (click)="education()">Next</ion-button>
+                                        </div>
+
+                
+                
+          </ion-col>
+      </ion-row>
+
+      
+      
+
+  </ion-card-content>
+
+</form>
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+</div>
+
+</ion-content>
