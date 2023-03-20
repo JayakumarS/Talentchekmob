@@ -8,7 +8,7 @@
   src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
 }
 ion-content {
-    --background: url('../../assets/img/06_Welcome screen.png') no-repeat center center fixed;
+    --background: url('../../assets/img/06_Welcome screen.png')  ;
     background-size: cover;
   }
   ion-card-header.ios {
@@ -19,7 +19,7 @@ ion-content {
     margin-left: 8px;
   }
   ion-toolbar {
-    --background: url('../../assets/img/animation.png') no-repeat center center fixed;
+    --background: url('../../assets/img/animation.png')  ;
     background-size: cover;
   }
   .footer-nav {

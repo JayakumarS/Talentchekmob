@@ -163,7 +163,7 @@
 /* Set the padding at the bottom of the ion-content to the height of the footer */
 ion-content {
   --ion-safe-area-bottom: 8vh; /* set the safe area bottom to 8% of the viewport height */
-  --background: url('../../assets/img/06_Welcome screen.png') no-repeat center center fixed;
+  --background: url('../../assets/img/06_Welcome screen.png')  ;
   background-size: cover;
  // --background: #EDF1FC;
 }

@@ -8,7 +8,7 @@
     src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
   }
   ion-content {
-      --background: url('../../assets/img/06_Welcome screen.png') no-repeat center center fixed;
+      --background: url('../../assets/img/06_Welcome screen.png')  ;
       background-size: cover;
       background-position: center;
     }
@@ -20,7 +20,7 @@
       margin-left: 8px;
     }
     ion-toolbar {
-      --background: url('../../assets/img/95246-cloudbubbles-green.gif') no-repeat center center fixed;
+      --background: url('../../assets/img/95246-cloudbubbles-green.gif')  ;
       background-size: cover; 
       filter: hue-rotate(74deg)grayscale(53%); 
     }
