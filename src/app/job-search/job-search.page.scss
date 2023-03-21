@@ -161,6 +161,9 @@ body {
 
 .container {
     padding: 1rem 0.5rem 0.5rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%; 
 }
 
 // start here
@@ -244,7 +247,6 @@ body {
     display: flex;
     flex-direction: column;
     box-sizing: content-box;
-    bottom: -280px;
     position: relative;
     overflow: hidden;
     transition: background-color 0.4s;

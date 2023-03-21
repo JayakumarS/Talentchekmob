@@ -1,19 +1,190 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profile-view-popup</ion-title>
+
+<ion-header style="background-color: white;">
+  <ion-toolbar style="padding: 20px 10px 15px;">
+      <ion-row style="display: flex;justify-content: space-between;">
+        <div>
+          <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="dismiss()"></ion-icon>
+        </div>  
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 20px;display: flex;
+        align-items: center;align-items: center;">
+          Profile view
+        </div> 
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
+        </div>
+      </ion-row> 
   </ion-toolbar>
-  <ion-row>
-  <ion-col size="8">
-    </ion-col>
-  <ion-col size="2">
-         
-    <ion-icon  (click)="dismiss()" name="close"></ion-icon>
-  
-</ion-col>
-
-</ion-row>
 </ion-header>
+ 
 
-<ion-content>
 
+<ion-content> 
+  <div class="display-justify">
+    <div class="custom-button" *ngFor ="let title of basicProfileDetails">
+     <div style="display: flex; justify-content: space-between;align-items: center;" >
+      <div  style="display: flex; justify-content: start;">
+        <!-- <ion-avatar style="width: 35%;" slot="start">
+       <img src="" /> 
+        </ion-avatar>  -->
+      </div>
+    <div style="display: flex; justify-content: center;padding: 5px;">
+      <ion-avatar slot="start">
+      <img src="{{title.profilepic}}" />
+      </ion-avatar> 
+    </div>
+    <div  style="display: flex; justify-content: end;">
+      <!-- <ion-avatar style="width: 35%;" slot="start">
+      <img src="../../assets/icon/add_button.png" />
+      </ion-avatar>  -->
+    </div> 
+  </div>
+  <div style="display: flex;flex-direction: column;align-items: center;">
+    <div style="font-size: 18px; font-weight: 600;">
+      {{title.username}}
+    </div>
+    <div style="font-size: 16px;">
+      {{title.category}}
+    </div> 
+  </div>
+
+  <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+    <div style="font-size: 18px; font-weight: 500;">
+     {{title.userlocation}}
+    </div>
+    <div style="font-size: 16px;">
+      {{title.phone}}
+    </div>
+    <div style="font-size: 16px;">
+      {{title.email}}
+    </div>
+  </div>
+ 
+   
+    </div>
+  </div>  
+
+<div class="display-justify">
+  <div  class="custom-button-details" *ngFor ="let title of basicProfileDetails"> 
+    <div *ngIf="title.languages != '' ">
+      <div style="font-size: 16px; font-weight: 800;color: rgba(88, 88, 236, 0.836);">
+        Languages 
+      </div>
+      <div style="font-size: 13px;">
+        {{title.languages}}
+      </div>
+    </div>
+    <div *ngIf="title.hobbies != ''">
+      <div style="font-size: 16px;font-weight: 800; color: rgba(88, 88, 236, 0.836);">
+        Hobbies & Interests
+      </div>
+      <div style="font-size: 13px;">
+        {{title.hobbies}}
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+<!-- WORK EXPERIENCE -->
+<div class="display-justify" *ngIf="experienceList.length != 0">
+  <div class="custom-button-details">
+   <div style="display: flex; justify-content: flex-start;align-items: center;">   
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">WORK EXPERIENCE</p> 
+</div>
+<div>
+  <div class="contact-details" *ngFor ="let exp of experienceList">
+    <div style="color: black;font-weight: bold;">
+      {{exp.designation}}
+     </div>
+     <div style="color:gray;font-size: 12px;">{{exp.organisationName}}</div>
+     <div style="color:gray;font-size: 12px;">{{exp.expStart}} - {{exp.expEnd}}</div>
+
+     <div style="text-align: end;" *ngIf="exp.status=='Verified Experience' || exp.status=='In Notice Period'">
+      <div style="font-size: 12px;" class="badge badge-solid-green">{{exp.status}}</div> 
+  </div>
+  <div style="text-align: end;" *ngIf="exp.status=='Fake Experience' || exp.status=='Absconded from Work' || exp.status=='Fired' || exp.status=='Information Mismatch' || exp.status=='Unverified'">
+      <div style="font-size: 12px;" class="badge badge-solid-red">{{exp.status}}</div> 
+      </div>
+  <div style="text-align: end;" *ngIf="exp.status=='Verification Pending'">
+      <div style="font-size: 12px;" class="badge badge-solid-blue">{{exp.status}}</div> 
+      </div>
+
+      <div style="color:gray;font-size: 12px; display: flex; justify-content: flex-end;">
+        {{exp.orgLocation}} 
+    </div>
+</div>    
+</div> 
+
+</div>
+</div>
+
+<!-- EDUCATION -->
+<div class="display-justify" *ngIf="educationList.length != 0">
+  <div class="custom-button-details">
+  <div style="display: flex; justify-content: flex-start;align-items: center;">  
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">EDUCATION</p> 
+</div>
+<div class="contact-details" *ngFor ="let edu of educationList"> 
+  <div style="color: black;font-weight: bold;">
+   {{edu.institutionName}}
+  </div>
+  <div style="color:gray;font-size: 12px;">{{edu.fieldofStudy}}</div>
+  <p style="color:gray;font-size: 12px;">
+    {{edu.courseStart}}</p>
+
+  <div style="text-align: end;" *ngIf="edu.status=='Verified Experience' || edu.status=='In Notice Period'">
+      <div style="font-size: 12px;" class="badge badge-solid-green">{{edu.status}}</div> 
+  </div>
+  <div style="text-align: end;" *ngIf="edu.status=='Fake Experience' || edu.status=='Absconded from Work' || edu.status=='Fired' || edu.status=='Information Mismatch' || edu.status=='Unverified'">
+      <div style="font-size: 12px;" class="badge badge-solid-red">{{edu.status}}</div> 
+  </div>
+  <div  style="text-align: end;" *ngIf="edu.status=='Verification Pending'">
+      <div style="font-size: 12px;" class="badge badge-solid-blue">{{edu.status}}</div> 
+  </div>
+  <div style="color:gray;font-size: 12px; display: flex; justify-content: flex-end;">
+      {{edu.institutionLocation}} 
+  </div>
+    <div style="font-size: 14px;" innerHtml="{{edu.eduDescription}}"> 
+    </div>
+    <div class="line-with-text" style="margin-bottom: 15px;">
+      <hr class="hr1">
+    </div>
+  </div>
+</div>
+</div>
+<!-- PATENTS, PUBLICATIONS & CERTIFICATIONS -->
+
+<div class="display-justify" *ngIf="certificationsList.length != 0">
+  <div class="custom-button-details">
+  <div style="display: flex; justify-content: flex-start;align-items: center;">   
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">PATENTS, PUBLICATIONS & CERTIFICATIONS</p> 
+</div>
+<div style="margin-bottom: 15px;" *ngFor ="let ppc of certificationsList">  
+  <div style="color:rgb(0, 0, 0);font-size: 15px;font-weight: bold;"> {{ppc.certificationName}}</div> 
+  <div style="color:gray;font-size: 12px;"> {{ppc.issuedBy}}</div> 
+  </div>    
+ </div>
+ </div>
+
+<!-- CLUBS & VOLUNTEER WORK -->
+<div class="display-justify" *ngIf="clubsList.length != 0">
+  <div class="custom-button-details">
+  <div style="display: flex; justify-content: flex-start;align-items: center;">   
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">CLUBS & VOLUNTEER WORK</p> 
+</div>
+<div style="margin-bottom: 15px;" *ngFor ="let club of clubsList">  
+  <p style="color:rgb(0, 0, 0);font-size: 15px;font-weight: bold; margin-bottom: 5px; "> {{club.clubName}}</p> 
+
+  <div style="color:gray;font-size: 12px;">{{club.titleHeld}}</div>
+  <div style="margin: 10px 0px;color:gray;font-size: 12px;">{{club.participatedFrom}}</div>
+  <div style="text-align: end;" *ngIf="club.status">
+    <div style="font-size: 12px;" class="badge badge-solid-cyan">{{club.status}}</div>
+</div>
+<div style="font-size: 14px;"  innerHtml="{{club.rolePlayed}}"></div>
+
+ 
+</div>
+  </div>
+</div>  
 </ion-content>
+
+

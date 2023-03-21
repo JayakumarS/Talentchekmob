@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+import { ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-profile-view-popup',
@@ -10,8 +12,12 @@ import { StorageService } from '../storage.service';
 export class ProfileViewPopupPage implements OnInit {
 
   talentId : string;
-
-  constructor( private navParams: NavParams,public storageservice: StorageService,public modalController: ModalController) { }
+  basicProfileDetails = [];
+  educationList = [];
+  certificationsList =[];
+  clubsList = [];
+  experienceList =[];
+  constructor( public modalController: ModalController,private navParams: NavParams,public storageservice: StorageService) { }
 
   ngOnInit() {
 
@@ -21,14 +27,17 @@ export class ProfileViewPopupPage implements OnInit {
     var profileViewUrl = "api/auth/app/IndividualProfileDetails/viewmatchesprofile"+"?talentId=" +this.talentId;
 
     this.storageservice.getrequest(profileViewUrl).subscribe(result => {
-    //  this.basicprofilesearchList = result['basicprofilesearchList'];
-      console.log(result);
-
+    this.basicProfileDetails = result['profileViewList'];
+    this.experienceList = result['profileViewList'][0]["experienceList"];
+    this.educationList = result['profileViewList'][0]["educationList"];
+    this.certificationsList = result['profileViewList'][0]["certificationsList"];
+    this.clubsList = result['profileViewList'][0]["clubsList"];
+      console.log(result["profileViewList"]);  
    });
   }
+
   dismiss() {
     this.modalController.dismiss();
   }
-  
 
 }
