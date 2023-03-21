@@ -211,42 +211,15 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  // {
-  //   path: 'profile-views',
-  //   loadChildren: () => import('./profile-views/profile-views.module').then( m => m.ProfileViewsPageModule)
-  // },
   {
-    path: 'additional-infoo',
-    loadChildren: () => import('./additional-infoo/additional-infoo.module').then( m => m.AdditionalInfooPageModule)
+    path: 'support',
+    loadChildren: () => import('./support/support.module').then( m => m.SupportPageModule)
   },
   {
-    path: 'certification',
-    loadChildren: () => import('./certification/certification.module').then( m => m.CertificationPageModule)
-  },
-  {
-    path: 'club',
-    loadChildren: () => import('./club/club.module').then( m => m.ClubPageModule)
-  },
-  {
-    path: 'skill-popup',
-    loadChildren: () => import('./skill-popup/skill-popup.module').then( m => m.SkillPopupPageModule)
-  },
-  {
-    path: 'connection',
-    loadChildren: () => import('./connection/connection.module').then( m => m.ConnectionPageModule)
-  },
-  {
-    path: 'educations',
-    loadChildren: () => import('./educations/educations.module').then( m => m.EducationsPageModule)
-  },
-  {
-    path: 'profilee',
-    loadChildren: () => import('./profilee/profilee.module').then( m => m.ProfileePageModule)
-  },
-  {
-    path: 'work-experiences',
-    loadChildren: () => import('./work-experiences/work-experiences.module').then( m => m.WorkExperiencesPageModule)
+    path: 'profile-view-popup',
+    loadChildren: () => import('./profile-view-popup/profile-view-popup.module').then( m => m.ProfileViewPopupPageModule)
   }
+
 
 
 

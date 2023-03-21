@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { StorageService } from '../storage.service';
+import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-search',
@@ -11,7 +15,8 @@ export class JobSearchPage implements OnInit {
   jobSearchHeadForm : FormGroup;
   jobSearchForm : FormGroup;
   uls :any = [];
-  constructor(private fb: FormBuilder) { }
+  basicprofilesearchList =[];
+  constructor(private fb: FormBuilder,public storageservice: StorageService, public modalController: ModalController,public router:Router) { }
 
   ngOnInit() {
     this.jobSearchHeadForm = this.fb.group({
@@ -58,7 +63,27 @@ export class JobSearchPage implements OnInit {
 
   search(){
    console.log(this.jobSearchHeadForm.value); 
-  }
+
+       var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
+
+
+    var postData = {
+      "searchby":this.jobSearchHeadForm.value.searchType,
+      "searchvalue":this.jobSearchHeadForm.value.searchValue,
+      "btn":"basicbtn"
+    }
+     this.storageservice.postrequest(BasicSearcUrl, postData).subscribe(result => {
+       this.basicprofilesearchList = result['basicprofilesearchList'];
+       console.log(result);
+
+    });
+   }
+
+   goto_advanceSearch(){
+
+    this.router.navigate(['/search-settings']);
+   }
+  
   selectedTab: string = 'search';
 
   setSelectedTab(tabName: string) {
@@ -70,6 +95,29 @@ export class JobSearchPage implements OnInit {
   
   setClass(node, className) {
     node.classList.add(className);
+  }
+
+  async profileView(talentId) {
+
+    const modal = await this.modalController.create({
+      component: ProfileViewPopupPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        "talentId": talentId,
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        //#endregion
+
+      }
+    });
+
+    return await modal.present();
   }
  
 }
