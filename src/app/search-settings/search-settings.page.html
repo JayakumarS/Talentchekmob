@@ -16,93 +16,134 @@
 </ion-header>
 
 <ion-content>
-    <div class="button-content">
+    <form [formGroup]="advsearchForm">
+
+        <div class="button-content">
 
 
-        <ion-row class="talentrow">
-            <ion-col>
-                <ion-label class="labels">Skill <small style="color: #f70505;">*</small></ion-label>
-                <ion-item fill="outline" class="input-field">
+            <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+                <ion-chip *ngFor="let skill of selectedSkills" (click)="removeSkill(skill)">
+                    {{ skill }}
+                    <ion-icon name="close-circle"></ion-icon>
+                </ion-chip>
+                <ion-textarea rows="1" warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
+            </ion-item>
 
-                    <ion-searchbar style="color:black;" placeholder="" showcancelbutton="" (ionInput)="filterSkillList($event)" [(ngModel)]="skill" search-icon=“undefined” (click)='onClickSkill($event)' (ionBlur)="unCheckFocus_Skill()" [ngModelOptions]="{standalone: true}"></ion-searchbar>
+            <ion-list *ngIf="showSkillResults">
+                <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text,result.id)">
+                    {{ result.text }}
                 </ion-item>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <ion-list *ngIf="IsCountry_SLShow" lines="full">
-                    <ion-item *ngFor="let cItem of CountryList">
-                        <ion-label class="ion-text-wrap" (click)="goToCountrySearch_SelectedItem(cItem.text, cItem.text)">
-                            {{ cItem.text }}
-                        </ion-label>
-                    </ion-item>
-                </ion-list>
-            </ion-col>
-        </ion-row>
+            </ion-list>
 
-        <ion-label class="labels">Job title</ion-label>
-        <ion-item fill="outline" class="input-field">
-            <ion-input placeholder="Enter your job title"></ion-input>
-        </ion-item>
-        <ion-label class="labels">Country</ion-label>
-        <ion-item fill="outline" class="input-field">
-            <ion-input placeholder="Enter your country"></ion-input>
-        </ion-item>
-        <ion-label class="labels">City</ion-label>
-        <ion-item fill="outline" class="input-field">
-            <ion-input placeholder="Enter your city"></ion-input>
-        </ion-item>
 
-        <ion-label>Sort by</ion-label>
-        <ion-list>
-            <ion-radio-group>
-                <ion-item>
-                    <ion-label>Publication time</ion-label>
-                    <ion-radio value="M"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Salary</ion-label>
-                    <ion-radio value="F"></ion-radio>
-                </ion-item>
-            </ion-radio-group>
-        </ion-list>
+            <ion-label class="labels">City</ion-label>
+            <ion-item fill="outline" class="input-field">
+                <ion-chip *ngFor="let city of selectedCities" (click)="removeCity(city)">
+                    {{ city }}
+                    <ion-icon name="close-circle"></ion-icon>
+                </ion-chip>
+                <ion-textarea rows="1" warp="soft" placeholder="Search cities" (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
+            </ion-item>
 
-        <ion-label>Work experience</ion-label>
-        <ion-list>
-            <ion-radio-group>
-                <ion-item>
-                    <ion-label>Not required</ion-label>
-                    <ion-radio value="M"></ion-radio>
+            <ion-list *ngIf="showResults">
+                <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
+                    {{ result.text }}
                 </ion-item>
-                <ion-item>
-                    <ion-label>No experience</ion-label>
-                    <ion-radio value="F"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>1+ year</ion-label>
-                    <ion-radio value="F"></ion-radio>
-                </ion-item>
-                <ion-item>
-                    <ion-label>3+ year</ion-label>
-                    <ion-radio value="F"></ion-radio>
-                </ion-item>
-            </ion-radio-group>
-        </ion-list>
+            </ion-list>
 
-        <ion-label class="labels">Desired salary level</ion-label>
-        <ion-item fill="outline" class="input-field">
-            <ion-input placeholder="From"></ion-input>
-        </ion-item>
 
-        <ion-list>
-            <ion-radio-group>
-                <ion-item>
-                    <ion-label>Not required</ion-label>
-                    <ion-radio value="M"></ion-radio>
-                </ion-item>
-            </ion-radio-group>
-        </ion-list>
-    </div>
+
+            <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+                <ion-searchbar class="blackTheme" placeholder="country" showcancelbutton="" debounce="100" (ionInput)="filterList($event)" formControlName="country" [(ngModel)]="countryVal" (ionBlur)="unCheckFocus()" search-icon=“undefined”></ion-searchbar>
+            </ion-item>
+            <ion-row>
+                <ion-col>
+                    <ion-list *ngIf="IsSearchListShow" lines="full">
+                        <ion-item *ngFor="let cElement of countryResponse">
+                            <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                                {{ cElement.text }}
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+
+
+            <ion-label class="labels">Designation/Role </ion-label>
+            <ion-item fill="outline" class="input-field">
+                <ion-input formControlName="designation"></ion-input>
+            </ion-item>
+
+            <ion-label class="labels">Year of Experience </ion-label>
+            <ion-item fill="outline" class="input-field">
+                <ion-input formControlName="designation"></ion-input>
+            </ion-item>
+
+
+            <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterdegreeList($event)" formControlName="degree" [(ngModel)]="degreeListVal" (ionBlur)="unDegreeList()" search-icon=“undefined”></ion-searchbar>
+            </ion-item>
+            <ion-row>
+                <ion-col>
+                    <ion-list *ngIf="IsDegreeListShow" lines="full">
+                        <ion-item *ngFor="let cElement of degreeList">
+                            <ion-label class="ion-text-wrap" (click)="goToDegreeListItem(cElement.text, cElement.id)">
+                                {{ cElement.text }}
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+
+            <ion-label class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
+
+            <ion-item fill="outline" class="input-field">
+
+                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterstudyList($event)" formControlName="fieldofStudy" [(ngModel)]="studyListVal" (ionBlur)="unstudyList()" search-icon=“undefined”></ion-searchbar>
+
+
+            </ion-item>
+            <ion-row>
+                <ion-col>
+                    <ion-list *ngIf="IsstudyListShow" lines="full">
+                        <ion-item *ngFor="let tittle of studyList">
+                            <ion-label class="ion-text-wrap" (click)="goTostudyListItem(tittle.text, tittle.id)">
+                                {{tittle.text}}
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+            <ion-label class="labels">Organisation Name / Institution Name </ion-label>
+
+            <ion-item fill="outline" class="input-field">
+                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterOrgList($event)" formControlName="organisationName" [(ngModel)]="organisationVal" (ionBlur)="unCheckFocus()"
+                    search-icon=“undefined”></ion-searchbar>
+            </ion-item>
+            <ion-row>
+                <ion-col>
+                    <ion-list *ngIf="IsorgListShow" lines="full">
+                        <ion-item *ngFor="let cElement of organisationList">
+                            <ion-label class="ion-text-wrap" (click)="goToOniSearchSelectedItem(cElement.text, cElement.id)">
+                                {{ cElement.text }}
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+
+
+        </div>
+
+    </form>
+
     <div class="footer-nav">
         <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
         <ion-icon size="large" name="search-circle"></ion-icon>
