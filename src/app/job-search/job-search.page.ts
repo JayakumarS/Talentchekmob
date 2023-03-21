@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -12,6 +12,14 @@ import { Router } from '@angular/router';
 })
 
 export class JobSearchPage implements OnInit {
+  @ViewChild('popover') popover;
+  
+  isOpen:boolean = false;
+
+  presentPopover(e: Event) {
+    this.popover.event = e;
+    this.isOpen = true;
+  }
   jobSearchHeadForm : FormGroup;
   jobSearchForm : FormGroup;
   uls :any = [];

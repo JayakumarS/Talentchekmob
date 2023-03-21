@@ -21,19 +21,12 @@
       align-items: center;">
                 <ion-col size="12">
                     <div class="search-container">
-
-                        <ion-select interface="popover"formControlName="searchType" placeholder="Gender" style="background:white">
-                            <ion-select-option value="talentid">Talent Id</ion-select-option>
-                            <ion-select-option value="name">Name</ion-select-option>
-                            <ion-select-option value="email">Email Id</ion-select-option>
-                            <ion-select-option value="phone">Mobile No</ion-select-option>
-                          </ion-select>
-                        <!-- <select formControlName="searchType" class="search-dropdown">
+                        <select formControlName="searchType" class="search-dropdown">
               <option value="talentid">Talent Id</option>
               <option value="name">Name</option>
               <option value="email">Email Id</option>
               <option value="phone">Mobile No</option>
-            </select> -->
+            </select>
                         <input type="text" formControlName="searchValue" class="search-input" placeholder="Search...">
                         <ion-button (click)="search()" class="search-button">Go</ion-button>
                     </div>
@@ -81,9 +74,10 @@
                     margin-top: 2%;">{{profile.currentwork}}</ion-title>
 
                 </ion-col>
-
-       
-
+                <ion-col size="1" style="    margin-top: -11%;">
+              
+                    <ion-icon size="large" name="arrow-round-up"></ion-icon>
+            </ion-col>
 
             </ion-row>
 

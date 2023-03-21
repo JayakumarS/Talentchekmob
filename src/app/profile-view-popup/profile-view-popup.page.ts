@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class ProfileViewPopupPage implements OnInit {
 
   talentId : string;
 
-  constructor( private navParams: NavParams,public storageservice: StorageService) { }
+  constructor( private navParams: NavParams,public storageservice: StorageService,public modalController: ModalController) { }
 
   ngOnInit() {
 
@@ -26,7 +26,9 @@ export class ProfileViewPopupPage implements OnInit {
 
    });
   }
-
+  dismiss() {
+    this.modalController.dismiss();
+  }
   
 
 }

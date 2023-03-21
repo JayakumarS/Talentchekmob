@@ -58,7 +58,7 @@ export class CertificationPage implements OnInit {
   async presentModal() {
    const modal = await this.modalController.create({
       component: SkillPopupPage,
-      cssClass: 'my-custom-class'
+      cssClass: 'my-custom-class1'
     });
     return await modal.present();
   }
