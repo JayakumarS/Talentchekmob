@@ -47,13 +47,10 @@
         </ion-col>
 
     </ion-row>
+     <div style="display: flex;justify-content: center;" *ngIf ="basicprofilesearchList.length == 0">No Results to Display</div> 
+    <div *ngIf ="basicprofilesearchList.length != 0">
     <ion-card class="profilesearchcard" *ngFor="let profile of basicprofilesearchList" (click)="profileView(profile.talentid)">
-
-        
-        <ion-row  *ngIf="flag == false">No Results to Display
-
-    
-        </ion-row>
+ 
         <ion-card-content style="padding-bottom: 0px;">
 
             <ion-row>
@@ -96,7 +93,7 @@
         </ion-card-content>
 
     </ion-card>
-
+</div>
     <div class="footer-nav">
         <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
       <ion-icon size="large" name="search-circle"></ion-icon>
