@@ -136,12 +136,15 @@ ion-footer-bar {
 ion-progress-bar {
     height: 18px;
     border-radius: 10px;
-}.footer-nav {
+}
+
+.footer-nav {
     position: fixed;
     bottom: 0;
     z-index: 10;
     width: 97%;
-    height: 8vh; /* set the height to 8% of the viewport height */
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
     background: #112e5b;
     display: flex;
     padding: 19px;
@@ -150,9 +153,9 @@ ion-progress-bar {
     border-radius: 30px;
     align-items: center;
     padding: 0 10px;
-  }
-  
-  .footer-nav button {
+}
+
+.footer-nav button {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -164,22 +167,26 @@ ion-progress-bar {
     border: none;
     cursor: pointer;
     outline: none;
-  }
-  
-  .footer-nav button ion-icon {
+}
+
+.footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
-  }
-  
-  .footer-nav button.selected {
+}
+
+.footer-nav button.selected {
     color: aliceblue;
     border-radius: 50%;
-  }
-  
-  /* Set the padding at the bottom of the ion-content to the height of the footer */
-  ion-content {
-    --ion-safe-area-bottom: 8vh; /* set the safe area bottom to 8% of the viewport height */
-  }
+}
+
+
+/* Set the padding at the bottom of the ion-content to the height of the footer */
+
+ion-content {
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
+}
+
 #prfoileimg1 {
     height: 24px;
     margin-left: 14px;

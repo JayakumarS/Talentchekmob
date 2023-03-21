@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-view.component.scss'],
 })
 export class ProfileViewComponent implements OnInit {
-  industryList =[];
-  constructor(public router:Router) { }
+
+  constructor( public router: Router) { }
 
   ngOnInit() {
 
