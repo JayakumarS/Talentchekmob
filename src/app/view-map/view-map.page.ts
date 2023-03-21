@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 
-@Component({
+@Component({ 
   selector: 'app-view-map',
   templateUrl: './view-map.page.html',
   styleUrls: ['./view-map.page.scss'],
