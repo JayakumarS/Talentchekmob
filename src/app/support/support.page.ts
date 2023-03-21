@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -16,10 +17,12 @@ export class SupportPage implements OnInit {
   userName: string;
   creditPoints: any;
   roleId: string;
+  ticketdetails: any;
+  getModuleList: any;
  
 
 
-  constructor(public formbuilder: FormBuilder,public storageservice: StorageService,) {
+  constructor(public formbuilder: FormBuilder,public storageservice: StorageService, private toastController: ToastController,) {
 
 
     
@@ -30,17 +33,19 @@ export class SupportPage implements OnInit {
     
     this.addPersonalInfo = formbuilder.group({
 
+    
       category: ['', Validators.compose([Validators.maxLength(20), Validators.required])],
-      module : ['', Validators.compose([Validators.maxLength(20),Validators.required])],
+      module: ['', Validators.compose([Validators.maxLength(20),Validators.required])],
       subject : ['', Validators.required],
-      issueQuery :['', Validators.required],
+      description :['', Validators.required],
+      file:[""],
     });
    }
 
   async ngOnInit() {
 
-    var listCountry = await this.initializeItems_Country();
-
+ 
+this.ModuleList();
   }
 
   selectedTab: string = 'menu';
@@ -49,58 +54,23 @@ export class SupportPage implements OnInit {
     this.selectedTab = tabName;
   }
 
+
+  ModuleList () {
+    var InURL = "api/auth/app/Support/getModuleList"+"?roleId=" + 1;
+    this.storageservice.getrequest(InURL).subscribe(result => {
+      if (result["success"] == true) {
+        this.getModuleList = result["getModuleList"];
+      }
+    });
+  }
   IsCountry_SLShow: boolean = false;
   public CountryList: any;
   public CountryListBackup: any;
 
 
-  async initializeItems_Country(): Promise<any> {
+  
 
-    var InURL = "api/auth/app/Support/getModuleList"+"?roleId=" + this.roleId;
-
-    const CountryList = this.storageservice.getrequest(InURL).subscribe(result => {
-      this.CountryListBackup = result['getModuleList'];
-      this.CountryList = result['getModuleList'];
-      console.log(`CountryList: ${JSON.stringify(this.CountryList)}`);
-    });
-
-    return CountryList;
-  }
-
-  goToCountrySearch_SelectedItem(countryName, countryId) {
-    console.log("countryName: " + countryName)
-    console.log("countryId: " + countryId)
-
-    let fullname = countryName;
-    let names = fullname.split("-");
-    let cnName = names[1];
-    console.log("cnName: " + cnName)
-
-    this.country = countryName;
-    this.IsCountry_SLShow = false;
-  }
-  async filterCountryList(evt) {
-    this.IsCountry_SLShow = true;
-    this.CountryList = this.CountryListBackup;
-    const searchTerm = evt.srcElement.value;
-    if (!searchTerm) {
-      return;
-    }
-
-    this.CountryList = this.CountryList.filter(currentFood => {
-      if (currentFood.text && searchTerm) {
-        return (currentFood.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-      }
-    });
-
-    if (this.CountryList == 0) {
-      this.IsCountry_SLShow = false;
-    }
-    else {
-      this.IsCountry_SLShow = true;
-    }
-  }
-
+ 
   unCheckFocus_Country() {
     console.log("unCheckFocus_Country: ")
     //this.IsCountry_SLShow = false;
@@ -115,6 +85,28 @@ export class SupportPage implements OnInit {
   }
 
  
+  save(){
 
+    this.ticketdetails = this.addPersonalInfo.value;
+    console.log(` data: ${JSON.stringify(this.ticketdetails)}`);
+    var saveticket = "api/auth/app/Support/saveTicketDetails";
+  
+     this.storageservice.postrequest(saveticket, this.ticketdetails).subscribe(result => {  
+        console.log("Image upload response: " + result)
+       if (result["success"] == true) {
+       // this.router.navigate(['/job']);
+        this.presentToast()
+        }
+     });
 
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
 }
