@@ -24,6 +24,8 @@ export class JobSearchPage implements OnInit {
   jobSearchForm : FormGroup;
   uls :any = [];
   basicprofilesearchList =[];
+  flagChange:boolean=false;
+  flag: boolean =false;
   constructor(private fb: FormBuilder,public storageservice: StorageService, public modalController: ModalController,public router:Router) { }
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class JobSearchPage implements OnInit {
     this.uls.forEach((ul) => {
       const resetClass = ul.parentNode.getAttribute("class");
       const lis = ul.querySelectorAll("li");
-
+      flagChange:false;
       lis.forEach((li) => {
         li.addEventListener("click", (e) => {
           e.preventDefault();
@@ -82,6 +84,12 @@ export class JobSearchPage implements OnInit {
     }
      this.storageservice.postrequest(BasicSearcUrl, postData).subscribe(result => {
        this.basicprofilesearchList = result['basicprofilesearchList'];
+       if(this.basicprofilesearchList.length>=1){
+        this.flagChange =true;
+        }
+        else{
+          this.flagChange=false;
+        }
        console.log(result);
 
     });

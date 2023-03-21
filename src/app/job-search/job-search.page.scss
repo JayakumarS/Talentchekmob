@@ -86,7 +86,7 @@ ion-content {
 .search-dropdown {
     background-color: #57555557;
     border: none;
-    border-radius: 14px;
+    border-radius: 0px 6px 6px 0px;
     color: #555;
     font-size: 14px;
     padding: 14.5px;
@@ -108,7 +108,7 @@ ion-content {
 .search-input {
     background-color: #5755552b;
     border: none;
-    border-radius: 30px;
+    border-radius: 0px 6px 6px 0px;
     box-shadow: none;
     color: #555;
     font-size: 17px;
@@ -125,6 +125,7 @@ ion-content {
     font-size: 16px;
     padding: 0px;
     transition: background-color 0.3s ease;
+    height: 43px;
 }
 
 .search-button:hover {
