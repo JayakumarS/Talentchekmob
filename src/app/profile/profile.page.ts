@@ -23,6 +23,9 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/settings']) 
   }
 
+  support(){
+    this.router.navigate(['/support']) 
+  }
   goto_signup(){
     
   }
