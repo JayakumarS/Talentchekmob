@@ -34,19 +34,24 @@ import { DatePipe } from '@angular/common';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Sim } from '@ionic-native/sim/ngx';
-
+import { CKEditorModule } from 'ckeditor4-angular';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
 @NgModule({
+
+ 
+ // providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+ // bootstrap: [AppComponent],
   declarations: [AppComponent, TranslatePipe],
   entryComponents: [],
   imports: [
     ReactiveFormsModule, FormsModule,
     HttpClientModule,
     BrowserModule,
-   
+    IonicModule.forRoot(), AppRoutingModule, CKEditorModule,
     Ng2GoogleChartsModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(), AppRoutingModule,

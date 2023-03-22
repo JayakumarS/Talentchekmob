@@ -112,16 +112,21 @@
                                                   </ion-select>
                                           </ion-item>
                                         </div>
+                                        <!-- <div class="button-content">
+                                            <ckeditor [(ngModel)]="content" formControlName="ckeditor" [config]="editorConfig"></ckeditor>
+
+                                        </div> -->
+                                      
                                         <div class="button-content">
-                                    
-                                            <!-- <ckeditor [editor]="Editor" data="<p>Hello, world!</p>" [(ngModel)]="Editor">
-
-                                            </ckeditor> -->
-
+                                         <ckeditor formControlName="ckeditor" ></ckeditor>
                                         </div>
+                                        
+                                        <!-- <div ngModel>
+                                            <ckeditor [(ngModel)]="content" formControlName="ckeditor" [config]="editorConfig"></ckeditor>
+                                          </div> -->
                                         <div class="button-content" style="width: 50%;
                                       margin: auto;">
-                                      <ion-button color="primary" fill="outline" (click)="certifications()">Next</ion-button>
+                                      <ion-button color="primary" fill="outline" (click)="Update()">Update</ion-button>
                                       </div>
                 </div>
    

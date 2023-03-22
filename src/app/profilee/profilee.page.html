@@ -97,7 +97,35 @@
                                       </ion-item>
 
                                       </div>
-
+                                      <div class="button-content">
+                                        <ion-label class="labels">Languages Known</ion-label>
+                                        <ion-item fill="outline" class="input-field">
+                                            <ion-select placeholder="Select Languages Known"multiple="true"   formControlName="languagesknown" style="background-color: white;">
+                                             
+                                              <ion-select-option *ngFor="let topping of languageList" [value]="topping.id">{{topping.text}}
+                                              </ion-select-option>
+                                            </ion-select>
+                                          </ion-item>
+                                        </div>
+                                        <div class="button-content">
+                                            <ion-label class="labels">Hobbies</ion-label>
+                                          
+                                                <ion-item fill="outline" class="input-field">
+                                                  <ion-select placeholder="Select Hobbies"multiple="true"  formControlName="hobbies" style="background-color: white;">
+                                                    <ion-select-option *ngFor="let hobby of hobbyList " [value]="hobby.id">
+                                                      {{hobby.text}}
+                                                  </ion-select-option>
+                                                  </ion-select>
+                                                </ion-item>
+                                            
+                                            </div>
+                                      <div class="button-content">
+                                        <ion-label class="labels">Address <small style="color: #f70505;">*</small></ion-label>
+                                        
+                                        <ion-item fill="outline" class="input-field">
+                                            <ion-textarea formControlName="permAddress"></ion-textarea>
+                                        </ion-item>
+                                        </div>
                                   <div class="button-content">
                                     <ion-label slot="end">Upload Image</ion-label>
                                       <ion-button style="background: #3880ff;border-radius:20px">
@@ -114,7 +142,7 @@
                                     </ion-item>
                                     </div>
                                     
-
+                             
                                       <div class="button-content">
                                       
                                         <ion-item fill="outline" class="input-field" >

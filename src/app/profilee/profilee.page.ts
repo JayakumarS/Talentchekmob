@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
@@ -12,6 +12,10 @@ export class ProfileePage implements OnInit {
   industryList =[];
   profileForm:FormGroup;
   categoryList: any;
+  hobby = new FormControl();
+  hobbyList = [];
+  hobbie= [];
+  languageList: any;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -29,7 +33,35 @@ export class ProfileePage implements OnInit {
       category: ["",[Validators.required]],
       linkurl:[""],
       details:[""],
+      permAddress:[""],
+      hobbies:[""],
+      languagesknown:[""],
       currentUserId:[""],
+    });
+
+    this.hobbeList();
+    this.List();
+  }
+
+
+  
+  hobbeList () {
+    var gethobbyListUrl = "api/auth/app/CommonUtility/hobbyList";
+    this.storageservice.getrequest(gethobbyListUrl).subscribe(result => {
+
+      if (result["success"] == true) {
+        this.hobbyList = result["hobbyList"];
+        console.log(`hobbyList: ${JSON.stringify(this.hobbyList)}`);
+      }
+    });
+  }
+
+  List () {
+    var getlanguageListUrl = "api/auth/app/CommonUtility/languageList";
+    this.storageservice.getrequest(getlanguageListUrl).subscribe(result => {
+      if (result["success"] == true) {
+        this.languageList = result["languageList"];
+      }
     });
   }
   education()

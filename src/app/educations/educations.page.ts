@@ -31,6 +31,7 @@ export class EducationsPage implements OnInit {
       courseEndObj : [""],
       courseStart: [""],
       courseEnd: [""],
+      ckeditor:[""],
       currentlyStudy: [""],
       degree: [""],
       fieldofStudy: [""],

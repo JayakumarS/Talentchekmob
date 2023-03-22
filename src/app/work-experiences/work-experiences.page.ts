@@ -1,24 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup,  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-
+//import { CKEditor4 } from 'ckeditor4-angular';
 
 @Component({
   selector: 'app-work-experiences',
+  //template: '<ckeditor [(ngModel)]="content" [config]="editorConfig"></ckeditor>',
   templateUrl: './work-experiences.page.html',
   styleUrls: ['./work-experiences.page.scss'],
+
+ 
 })
 export class WorkExperiencesPage implements OnInit {
 
+  // myForm = new FormGroup({
+
+  // });
+  // content: string;
+  // editorConfig: CKEditor4.Config = {
+  //   toolbar: [
+  //     { name: 'clipboard', items: ['Undo', 'Redo'] },
+  //     { name: 'styles', items: ['Styles', 'Format'] },
+  //     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+  //     { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+  //     { name: 'links', items: ['Link', 'Unlink'] },
+  //     { name: 'tools', items: ['Maximize'] },
+  //     { name: 'document', items: ['Source'] },
+  //   ],
+  // };
+
+
+
+
+
+
+
+
   // public Editor: any = ClassicEditor;
 
-  ExperienceForm:FormGroup;
+  ExperienceForm:  FormGroup;
   organisationList: any;
   IsorgListShow:boolean= false;
   institutionVal: any;
   organisationVal: any;
   jobTypeList: any;
+  
+ 
   constructor(public router:Router,private fb: FormBuilder,public storageservice:StorageService) { }
 
   ngOnInit() {
@@ -39,6 +67,7 @@ export class WorkExperiencesPage implements OnInit {
       expId:[""],
       checked:[""],
       unregisteredOrg:[""],
+      ckeditor:[""],
       currentUserId:[""]
    });
 this.getJobtype();
@@ -117,6 +146,9 @@ this.getJobtype();
        }
      });
     }
+    Update(){
+      this.ExperienceForm;
 
 
+    }
 }
