@@ -1,0 +1,39 @@
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 95%;
+    height: 8vh; /* set the height to 8% of the viewport height */
+    background: #112e5b;
+    display: flex;
+    padding: 19px;
+    margin: 0px 10px 10px 10px;
+    justify-content: space-around;
+    border-radius: 30px;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .footer-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .footer-nav button ion-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .footer-nav button.selected {
+    color: aliceblue;
+    border-radius: 50%;
+  }

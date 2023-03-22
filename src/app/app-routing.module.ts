@@ -251,7 +251,11 @@ const routes: Routes = [
   {
     path: 'work-experiences',
     loadChildren: () => import('./work-experiences/work-experiences.module').then( m => m.WorkExperiencesPageModule)
+  },  {
+    path: 'apply-for-job',
+    loadChildren: () => import('./apply-for-job/apply-for-job.module').then( m => m.ApplyForJobPageModule)
   },
+
 
 
 
