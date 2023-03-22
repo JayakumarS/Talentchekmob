@@ -16,7 +16,14 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-row *ngIf="!matchedJobList"  >
+    <ion-col size="12" >
+        <ion-avatar size="medium" style="width: 90%; margin-left: 5%;    margin-top: 16%; height: 90%;">
+            <img alt="Silhouette of a person's head"src="\assets\img\Messages 04.png" />
+        </ion-avatar>
+    </ion-col>
+    <!-- C:\Users\Swathy\shippage\TC_Mobile\Talentchekmob\src\assets\img\Messages 04.png -->
+</ion-row>
   <div class="display-justify" *ngFor="let cElement of matchedJobList" >
     <div class="custom-button" (click)="goto_jobdetails()">
      <div style="display: flex; justify-content: space-between;align-items: center;" >
