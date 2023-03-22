@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-job-search',
@@ -15,7 +16,7 @@ export class JobSearchPage implements OnInit {
   @ViewChild('popover') popover;
   
   isOpen:boolean = false;
-
+  formValues: any; 
   presentPopover(e: Event) {
     this.popover.event = e;
     this.isOpen = true;
@@ -26,9 +27,15 @@ export class JobSearchPage implements OnInit {
   basicprofilesearchList =[];
   flagChange:boolean=false;
   flag: boolean =false;
-  constructor(private fb: FormBuilder,public storageservice: StorageService, public modalController: ModalController,public router:Router) { }
+  constructor(private fb: FormBuilder,private route: ActivatedRoute,public storageservice: StorageService, public modalController: ModalController,public router:Router) { }
 
   ngOnInit() {
+    //Get the formvalues from another component
+    if (this.router.getCurrentNavigation().extras.state) {
+    this.formValues = this.router.getCurrentNavigation().extras.state.formValues;
+    console.log(this.formValues);
+    }
+
     this.jobSearchHeadForm = this.fb.group({
       searchType :["talentid"],
       searchValue :[""]

@@ -27,7 +27,7 @@
         </ion-avatar>  -->
       </div>
     <div style="display: flex; justify-content: center;padding: 5px;">
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" style="width: 105px; height: 105px;">
       <img src="{{title.profilepic}}" />
       </ion-avatar> 
     </div>
@@ -46,7 +46,7 @@
     </div> 
   </div>
 
-  <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+  <!-- <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
     <div style="font-size: 18px; font-weight: 500;">
      {{title.userlocation}}
     </div>
@@ -56,11 +56,33 @@
     <div style="font-size: 16px;">
       {{title.email}}
     </div>
-  </div>
+  </div> -->
  
    
     </div>
   </div>  
+
+  <div class="display-justify">
+    <div class="custom-button-details" *ngFor ="let title of basicProfileDetails">
+      <div style="display: flex;flex-direction: column;align-items: flex-start;" >
+        <div style="display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
+          <div style="font-size: 16px; font-weight: 800;color: rgba(88, 88, 236, 0.836);">Location</div>
+          <div style="color:gray;font-size: 14px;">
+           {{title.userlocation}}
+          </div>
+          <div style="font-size: 16px; font-weight: 800;color: rgba(88, 88, 236, 0.836);">Phone no.</div>
+          <div style="color:gray;font-size: 14px;">
+            {{title.phone}}
+          </div>
+          <div style="font-size: 16px; font-weight: 800;color: rgba(88, 88, 236, 0.836);">Email</div>
+          <div style="color:gray;font-size: 14px;">
+            {{title.email}}
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    
 
 <div class="display-justify">
   <div  class="custom-button-details" *ngFor ="let title of basicProfileDetails"> 
