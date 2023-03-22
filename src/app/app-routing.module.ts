@@ -252,10 +252,7 @@ const routes: Routes = [
     path: 'work-experiences',
     loadChildren: () => import('./work-experiences/work-experiences.module').then( m => m.WorkExperiencesPageModule)
   },
-  {
-    path: 'view-map',
-    loadChildren: () => import('./view-map/view-map.module').then( m => m.ViewMapPageModule)
-  }
+
 
 
  
