@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-search-settings',
@@ -38,8 +39,12 @@ organisationList: any;
 IsorgListShow:boolean= false;
 institutionVal: any;
 organisationVal: any;
+formValues: any = {};
 
-  constructor(public router:Router,public storageservice: StorageService,private fb: FormBuilder) {
+
+
+
+  constructor(public router:Router,public storageservice: StorageService,private fb: FormBuilder,private navCtrl: NavController) {
 
     this.advsearchForm = this.fb.group({
       industry: ["",Validators.required],
@@ -51,6 +56,9 @@ organisationVal: any;
     });
    }
 
+
+   
+
   async ngOnInit() {
 
     this.getSkillList();
@@ -58,6 +66,18 @@ organisationVal: any;
     var listConstant =  this.DegreeListItems(); 
     var listConstant =  this.studyListItems();
     var listConstant = this.initializeOrgItems();
+    var listConstant1 = await this.initializeItems(); 
+
+  }
+ 
+// Pass the formvalues to another component
+  searchresults() {
+    this.formValues = this.advsearchForm.value;
+    this.navCtrl.navigateForward("/job-search", { state: { formValues: this.formValues } });
+  }
+
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
   }
   selectedTab: string = 'search';
 
@@ -350,8 +370,5 @@ organisationVal: any;
         this.IsorgListShow = false;
       }
     }
-
-  searchresults(){
-    this.router.navigate(['/search-results']) 
-  }
+ 
 }
