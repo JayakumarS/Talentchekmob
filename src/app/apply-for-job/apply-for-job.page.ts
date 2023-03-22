@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apply-for-job',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplyForJobPage implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router,) { }
 
   ngOnInit() {
   }
@@ -16,5 +17,9 @@ export class ApplyForJobPage implements OnInit {
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
+  Apply(){
 
+    this.router.navigate(['/job-details']) 
+
+  }
 }
