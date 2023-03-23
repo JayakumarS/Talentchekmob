@@ -48,9 +48,9 @@
                           <ion-item fill="outline" class="input-field" >
                            
                             <ion-select interface="popover"formControlName="gender" placeholder="Gender" style="background:white">
-                              <ion-select-option value="Male">Male</ion-select-option>
-                              <ion-select-option value="Female">Female</ion-select-option>
-                              <ion-select-option value="Others">Others</ion-select-option>
+                              <ion-select-option value="M">Male</ion-select-option>
+                              <ion-select-option value="F">Female</ion-select-option>
+                              <ion-select-option value="O">Others</ion-select-option>
                             </ion-select>
                           </ion-item>
                           
@@ -131,7 +131,7 @@
                                       <ion-button style="background: #3880ff;border-radius:20px">
                                           <ion-icon lazy="true" slot="start" name="image"></ion-icon>
                                         
-                                          <input type="file" (change)="loadImageFromDevice($event)" id="file-input"
+                                          <input  formControlName="uploadImg" type="file" (change)="loadImageFromDevice($event)" id="file-input"
                                             accept="image/png, image/jpeg">
                                         </ion-button>
                                   </div><br>
@@ -152,7 +152,7 @@
                                        
                                         <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="education()">Next</ion-button>
+                                        <ion-button color="primary" fill="outline" (click)="Update()">Update</ion-button>
                                         </div>
 
                 

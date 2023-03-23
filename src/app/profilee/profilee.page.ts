@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -16,10 +17,14 @@ export class ProfileePage implements OnInit {
   hobbyList = [];
   hobbie= [];
   languageList: any;
-  constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder) { }
+  profiledetails: any;
+  userId: any;
+  constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,private toastController: ToastController) { }
 
   ngOnInit() {
 
+    this.userId = localStorage.getItem("userId");
+    
     this.getIndustry();
     this.profileForm = this.fb.group({
       firstname: ["", [Validators.required]],
@@ -36,6 +41,7 @@ export class ProfileePage implements OnInit {
       permAddress:[""],
       hobbies:[""],
       languagesknown:[""],
+      uploadImg:[""],
       currentUserId:[""],
     });
 
@@ -83,6 +89,29 @@ export class ProfileePage implements OnInit {
    });
   }
 
+  Update(){
+    this.profileForm.value.currentUserId=this.userId;
+    this.profiledetails = this.profileForm.value;
+    console.log(` data: ${JSON.stringify(this.profiledetails)}`);
+    var updateprofile = "api/auth/app/mobile/updateprofile";
   
+     this.storageservice.postrequest(updateprofile, this.profiledetails).subscribe(result => {  
+        console.log("Image upload response: " + result)
+       if (result["success"] == true) {
+       // this.router.navigate(['/job']);
+        this.presentToast()
+        }
+     });
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
 
 }
