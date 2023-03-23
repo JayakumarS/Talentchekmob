@@ -146,7 +146,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   
                     console.log(`Posting Data: ${JSON.stringify(postData)}`);
   
-                    var signUpServiceUrl = ""; //api/auth/app/registration/IndividualRegister
+                    var signUpServiceUrl = "api/auth/app/registration/IndividualRegister";
                     this.storageservice.postrequest(signUpServiceUrl, postData).subscribe(result => { 
                       this.response = result;
                       console.log(this.response);

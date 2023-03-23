@@ -84,13 +84,13 @@
                                       <ion-button style="background: #3880ff;border-radius:20px">
                                           <ion-icon lazy="true" slot="start" name="image"></ion-icon>
                                           <!-- <ion-label slot="end">Upload Image</ion-label> -->
-                                          <input type="file" formControlName="uploadCertification" (change)="loadImageFromDevice($event)" id="file-input"
+                                          <input type="file" formControlName="certificationName" (change)="loadImageFromDevice($event)" id="file-input"
                                             accept="image/png, image/jpeg">
                                         </ion-button>
                                   </div>
                                   <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="clubs()">Next</ion-button>
+                                        <ion-button color="primary" fill="outline" (click)="saveCertification()">Next</ion-button>
                                         </div>
                     
                 
