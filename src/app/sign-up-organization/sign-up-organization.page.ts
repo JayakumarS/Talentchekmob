@@ -54,7 +54,7 @@ base64img1: string = '';
       regDate: ['',Validators.required],
       domainId: ['',Validators.required],
       emailId: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-      address: ['', ''],
+      address: [''],
       country: ['',Validators.required],
       city:['',Validators.required],
       pwd:['',Validators.required],
@@ -63,7 +63,7 @@ base64img1: string = '';
       pincode: ['',Validators.required],
       referralCode: [''],
       profileVisibility: ['', ''],
-     countryId:[""]
+     countryId:['']
 
     });
 
@@ -231,6 +231,9 @@ onSelectedCity(cityId:any) {
 }
 getcitylist(stateId,countryId){
   this.stateId=this.talentorgform.value.state
+  this.talentorgform.patchValue({
+    'country': countryId
+  })
   console.log(stateId)
   var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
   this.storageservice.getrequest(industryURL).subscribe(result => {
@@ -242,7 +245,7 @@ getcitylist(stateId,countryId){
 }
 //save
 onSubmit(){
-  this.isSubmitted = true;
+   this.isSubmitted = true;
   if (!this.talentorgform.valid) {
     console.log('Please provide all the required values!');
     this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));

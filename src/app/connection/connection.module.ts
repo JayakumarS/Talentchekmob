@@ -14,7 +14,8 @@ import { ConnectionPage } from './connection.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ConnectionPageRoutingModule
+    ConnectionPageRoutingModule,
+   
   ],
   declarations: [ConnectionPage]
 })

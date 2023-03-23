@@ -298,5 +298,20 @@ ion-progress-bar {
     color: gold;
   }
     
-  
+  .rating-list li {
+  //float: right;
+  color: #ddd;
+  padding: 5px 5px;
+  }
 
+
+.rating-list li:hover,
+.rating-list li:hover ~ li,
+.rating-list li.selected  {
+  color: #ffd700;
+}
+.rating-list {
+  display: inline-block;
+  list-style: none;
+  font-size: 25px;
+}

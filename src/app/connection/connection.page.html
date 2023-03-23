@@ -75,7 +75,7 @@
                          
                               <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label>
                               <ion-item fill="outline" class="input-field">
-                      <ion-select style="background-color: white;" formControlName="relationshipAt">
+                      <ion-select style="background-color: white;" formControlName="relationship">
                         <ion-select-option  *ngFor="let tittle of relationshipList" [value]="tittle.id">
                           {{tittle.text}}</ion-select-option>
                         </ion-select>
@@ -111,83 +111,40 @@
 
                                       <div class="button-content">
                                           <ion-label class="labels">Is this connection your favourite?</ion-label>
-                                       <ion-row >   <ion-label style=" font-size: 20px; ">Yes</ion-label>  <ion-toggle  [checked]="true"></ion-toggle><ion-label style="
-                                        font-size: 20px; ">No</ion-label>
+                                       <ion-row >   <ion-label style=" font-size: 20px; ">Yes</ion-label>  <ion-toggle formControlName="markedFavByInitiator" [checked]="true">
+                                       </ion-toggle><ion-label style=" font-size: 20px; ">No</ion-label>
                                        </ion-row>   </div>
                                        
 
-                                       <div class="button-content">
+                                       <!-- <div class="button-content">
                                           <ion-spacer size="large"></ion-spacer><br>
                                           <ion-item fill="outline" class="input-field">
                                               <ion-textarea formControlName="markedFavByInitiator" placeholder="Remarks about the connection"></ion-textarea>
                                           </ion-item>
-                                          </div>
+                                          </div> -->
                                           
 
-                                         <div class="button-content">
+                                         <!-- <div class="button-content">
                                          
-                                              <ion-label>Rate the Connection
-                                              </ion-label>
-                                             </div>
-                                             <div class="button-content">
-                                              <ion-row><div class="form-group">
-                                                  <div class="form-check-inline">
-                                                      <label class="form-check-label" for="1">
-                                                          <input type="radio" id="1" value="1" name="rating" class="rating" />
-                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">1</span>
-                                                        </label>
-                                                    </div>
-                                                  
-                                                    <div class="form-check-inline">
-                                                      <label class="form-check-label" for="2">
-                                                          <input type="radio" id="2" value="2" name="rating" class="rating" />
-                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">2</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check-inline">
-                                                      <label class="form-check-label" for="3">
-                                                          <input type="radio" id="3" value="3" name="rating" class="rating" />
-                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">3</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check-inline">
-                                                      <label class="form-check-label" for="4">
-                                                          <input type="radio" id="4" value="4" name="rating" class="rating" />
-                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">4</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check-inline">
-                                                      <label class="form-check-label" for="5">
-                                                          <input type="radio" id="5" value="5" name="rating" class="rating" />
-                                                          <span class="wpcomment-input-option-label wpcomment-label-radio">5</span>
-                                                        </label>
-                                                    </div>
-                                                    <!-- <div class="form-check-inline">
-                                                      <label class="form-check-label" for="4">
-                                                        <input type="radio" id="4" value="4" name="rating" class="rating" />
-                                                        <span class="wpcomment-input-option-label wpcomment-label-radio">4</span>
-                                                      </label>
-                                                    </div>
-                                                    <div class="form-check-inline">
-                                                      <label class="form-check-label" for="5">
-                                                        <input type="radio" id="5" value="5" name="rating" class="rating" />
-                                                        <span class="wpcomment-input-option-label wpcomment-label-radio">5</span>
-                                                      </label>
-                                                    </div> -->
-                                              </div></ion-row>
-                                              
-                                             </div>
+                                             
+                                             </div> -->
+                                              <ion-label>Rate the Connection</ion-label>
+                                              <div> 
+                                                <ul class="list-inline rating-list" *ngFor="let star of stars"  style="display: inline-block;padding-inline-start: 0px;">
+                                                  <li  (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}"><ion-icon name="star"></ion-icon></li>
+                                                </ul> 
+                                              </div>
 
                                           <div class="button-content">
                                               <ion-label class="labels">Do you want to keep this connection private?</ion-label>
-                                           <ion-row>   <ion-label style="font-size: 20px;  ">Yes</ion-label>  <ion-toggle  [checked]="true"></ion-toggle><ion-label style="
-                                            font-size: 20px; ">No</ion-label>
+                                           <ion-row>   <ion-label style="font-size: 20px;">Yes</ion-label>  <ion-toggle  [checked]="true" formControlName="markedPrivateByInitiator">
+                                           </ion-toggle><ion-label style="font-size: 20px; ">No</ion-label>
                                            </ion-row>   </div>
 
                                          
                                            <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="additionalInfo()">Next</ion-button>
+                                        <ion-button color="primary" fill="outline" (click)="save()">Send Invite</ion-button>
                                         </div>
 
 

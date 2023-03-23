@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -12,10 +13,21 @@ export class ConnectionPage implements OnInit {
 
   ConnectionsForm: FormGroup;
   relationshipList: any;
+  userId: string;
+  Connection: any;
 
-  constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService) { }
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number;
+
+  constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,private toastController: ToastController) { 
+
+
+    
+  }
 
   ngOnInit() {
+
+    this.userId = localStorage.getItem("userId");
 
     this.ConnectionsForm = this.fb.group({
       receiverMobileNo: ["", Validators.required],
@@ -54,7 +66,14 @@ export class ConnectionPage implements OnInit {
   {
     this.router.navigate(['/profile/addCertifications']) 
   }
-
+  ///rating  star
+  countStar(star) {
+    this.selectedValue = star;
+    this.ConnectionsForm.patchValue({
+      'ratingInitiator': this.selectedValue,
+      }),
+    console.log('Value of star', this.selectedValue);
+  }
    //relationshipList
    getrelationshipList(){
     var getrelationshipListUrl= "api/auth/app/IndividualProfileDetails/relationshipList";
@@ -65,4 +84,32 @@ export class ConnectionPage implements OnInit {
      }
    });
   }
+
+
+  save(){
+
+    this.ConnectionsForm.value.currentUserId=this.userId;
+    this.Connection = this.ConnectionsForm.value;
+    console.log(` data: ${JSON.stringify(this.Connection)}`);
+    var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+  
+     this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
+        console.log("Image upload response: " + result)
+       if (result["success"] == true) {
+       // this.router.navigate(['/job']);
+        this.presentToast()
+        }
+     });
+  }
+
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
 }

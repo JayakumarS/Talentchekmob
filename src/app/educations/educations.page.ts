@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -20,7 +21,18 @@ export class EducationsPage implements OnInit {
   studyList: any;
   studyListVal: any;
   IsstudyListShow: boolean = false;
-  constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder) { }
+  selectedDate: string;
+  courseStart: string;
+  courseEnd: string;
+  userId: any;
+  Education: any;
+  constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,
+    private toastController: ToastController) {
+
+    const initialDate = new Date(2023, 2);
+    this.courseStart = initialDate.toISOString();
+    this.courseEnd = initialDate.toISOString();
+   }
 
   ngOnInit() {
     //this.getstudyList();
@@ -41,7 +53,7 @@ export class EducationsPage implements OnInit {
       eduId:[""],
       currentUserId:[""]
    });
-
+   this.userId = localStorage.getItem("userId");
     var listConstant =  this.initializeItems(); 
     var listConstant =  this.DegreeListItems(); 
     var listConstant =  this.studyListItems();
@@ -231,4 +243,32 @@ export class EducationsPage implements OnInit {
           this.IsstudyListShow = false;
         }
       }
+
+      save(){
+
+this.EducationForm.value;
+
+this.EducationForm.value.currentUserId=this.userId;
+this.Education = this.EducationForm.value;
+console.log(` data: ${JSON.stringify(this.Education)}`);
+var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
+
+ this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {  
+    console.log("Image upload response: " + result)
+   if (result["success"] == true) {
+   // this.router.navigate(['/job']);
+    this.presentToast()
+    }
+ });
+      }
+
+      async presentToast() {
+        const toast = await this.toastController.create({
+          message: 'Saved Successfully',
+          duration: 3000,
+          cssClass: 'custom-toast'
+        });
+    
+      await toast.present();
+    }
 }

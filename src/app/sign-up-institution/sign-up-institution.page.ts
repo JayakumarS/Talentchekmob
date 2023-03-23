@@ -196,6 +196,9 @@ goToSearchSelectedItem( CtryName,CtryId) {
   getcitylist(stateId,countryId){
     
     console.log(stateId)
+    this.talentinstform.patchValue({
+      'country': countryId
+    })
     var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
     this.storageservice.getrequest(industryURL).subscribe(result => {
      this.cityList = result['cityList'];
