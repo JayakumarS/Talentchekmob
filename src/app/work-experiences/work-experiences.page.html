@@ -60,7 +60,7 @@
                                     <ion-col>
                                       <ion-list *ngIf="IsorgListShow" lines="full">
                                         <ion-item *ngFor="let cElement of organisationList">
-                                          <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                                          <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id);getTitle(cElement.id)">
                                             {{ cElement.text }}
                                           </ion-label>
                                         </ion-item>
@@ -126,7 +126,7 @@
                                           </div> -->
                                         <div class="button-content" style="width: 50%;
                                       margin: auto;">
-                                      <ion-button color="primary" fill="outline" (click)="Update()">Update</ion-button>
+                                      <ion-button color="primary" fill="outline" (click)="saveCertification()">Update</ion-button>
                                       </div>
                 </div>
    

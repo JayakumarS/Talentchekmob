@@ -31,9 +31,10 @@ export class CertificationPage implements OnInit {
       issuedDate:[''],
       expiryDateObj:['', Validators.required],
       expiryDate:[""],
-      certificationId:["0"],
+      certificationId:[""],
        certId:[""],
-      currentUserId:[""]
+      currentUserId:[""],
+      certificationPath :[""]
     })
   }
   clubs()
@@ -46,23 +47,38 @@ export class CertificationPage implements OnInit {
     this.router.navigate(['/profile/addExperience']) 
   }
 
-  loadImageFromDevice(event){
-    var file = event.target.files[0].name; 
-    this.certificationForm.patchValue({
-      'certificationName' : file
-    })
-    console.log(event);
+  
+  
+//FOR File UPLOAD
+loadImageFromDevice(event) {
+  var file = event.target.files[0]; 
+  if (file.size > 2000000) { 
   }
-  // async presentPopover(ev: any) {
-  //   const popover = await this.popoverController.create({
-  //     component: SkillsPopupComponent,
-  //     event: ev,
-  //     translucent: true,
-  //     // styles: { height: '200px', width: '300px' },
-  //     cssClass: 'my-popup'
-  //   });
-  //   return await popover.present();
-  // }
+   var fileExtension = file.name;
+  var frmData: FormData = new FormData();
+  frmData.append("file", file);
+  frmData.append("fileName", fileExtension);
+  frmData.append("folderName", "knowledgebankfiles");
+
+  var filepathurl = "api/auth/app/commonServices/uploadFile";
+  this.storageservice.postrequest(filepathurl, frmData).subscribe(async result => {  
+    console.log("Image upload response: " + result)
+   if (result["success"] == true) {
+    if (result["filePath"] != undefined && result["filePath"] != null && result["filePath"] != '') {
+      this.certificationForm.patchValue({
+       'certificationPath': result["filePath"],
+       'certificationName': file.name,
+       'fileSize': file.size, 
+     })
+    }
+ } else { 
+ //  window.location.reload();
+ }
+  //  this.router.navigate(['/profile-view']);
+     
+ });
+   
+}
 
 
   async presentModal() {

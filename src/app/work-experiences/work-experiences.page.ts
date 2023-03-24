@@ -1,8 +1,8 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,  } from '@angular/forms';
+import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-//import { CKEditor4 } from 'ckeditor4-angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-work-experiences',
@@ -45,12 +45,19 @@ export class WorkExperiencesPage implements OnInit {
   institutionVal: any;
   organisationVal: any;
   jobTypeList: any;
-  
+  isunregOrg:boolean;
+  unregisteredOrg: string;
+  Experience: any;
+  userId: string;
  
-  constructor(public router:Router,private fb: FormBuilder,public storageservice:StorageService) { }
-
+  constructor(public router:Router,private fb: FormBuilder,
+    public storageservice:StorageService,public toastController:ToastController) { }
+  Exp = {
+    orgName: '',
+  }
   ngOnInit() {
-
+    this.userId = localStorage.getItem("userId");
+    this.isunregOrg = false;
     this.ExperienceForm= this.fb.group({
       designation: [""],
       organisationName: [""],
@@ -108,6 +115,15 @@ this.getJobtype();
       return InsList;
     }
     async filterList(evt) {
+      const filterValue = evt.srcElement.value.toLowerCase();
+      if(this.isunregOrg == false){
+        this.unregisteredOrg = filterValue ;
+        this.ExperienceForm.patchValue({
+          'orgLocation' : '',
+        });
+        this.ExperienceForm.get("orgLocation").enable();
+      }
+      this.isunregOrg = false;
       if (evt.srcElement.value != null && evt.srcElement.value != '') {
         this.IsorgListShow = true;
         this.organisationList = this.organisationList;
@@ -136,6 +152,19 @@ this.getJobtype();
       }
     }
 
+
+    getTitle(bookId) {
+      var value;
+      this.organisationList.forEach(element => {
+        if(element.id===bookId){
+          value =  element.text;
+          this.unregisteredOrg = "" ;
+          this.isunregOrg = true;
+        }
+      });
+      return value;
+    }
+
     //Jobtype
     getJobtype(){
       var getjobTypeListUrl= "api/auth/app/jobportal/jobTypeList";
@@ -151,4 +180,62 @@ this.getJobtype();
 
 
     }
+    //save
+  async saveCertification(){
+    const errors = this.checkFormValidity(this.ExperienceForm);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+      header: 'Validation Error',
+      message: errors.join('<br>'),
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  } else {
+     this.ExperienceForm.value.currentUserId = this.userId;
+     this.ExperienceForm.value.organisationName = this.Exp.orgName;
+     this.ExperienceForm.value.unregisteredOrg = this.unregisteredOrg;
+     this.Experience = this.ExperienceForm.value;
+   console.log(` data: ${JSON.stringify(this.Experience)}`);
+  var saveExperience = "api/auth/app/IndividualProfileDetails/saveExperience";
+
+   this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
+      console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+      this.router.navigate(['/profile-view']);
+      this.presentToast()
+       }else{  
+
+       }
+   });
+  }
+  } 
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
+
+  checkFormValidity(form: FormGroup): string[] {
+    const errors: string[] = [];
+    
+    // Check each form control for errors
+    Object.keys(form.controls).forEach(key => {
+      const controlErrors: ValidationErrors = form.controls[key].errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          errors.push(`${key} ${keyError}`);
+        });
+      }
+    });
+  
+    return errors;
+  }
 }
