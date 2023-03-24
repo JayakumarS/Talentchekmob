@@ -34,13 +34,13 @@
       
       <ion-row class="talentrow">
           <ion-col>
-              <div class="button-content">
+              <!-- <div class="button-content">
                   <ion-label class="labels">Address <small style="color: #f70505;">*</small></ion-label>
                   
                   <ion-item fill="outline" class="input-field">
                       <ion-textarea formControlName="permAddress"></ion-textarea>
                   </ion-item>
-                  </div>
+                  </div> -->
                   <div class="button-content">
                       <ion-label class="labels">Country</ion-label>
                       <ion-item fill="outline" class="input-field">
@@ -122,7 +122,7 @@
                     </ion-item>
             
               </div>
-              <div class="button-content">
+              <!-- <div class="button-content">
                   <ion-label class="labels">Languages Known</ion-label>
                   <ion-item fill="outline" class="input-field">
                       <ion-select placeholder="Select Languages Known"multiple="true"   formControlName="languagesknown" style="background-color: white;">
@@ -131,8 +131,8 @@
                         </ion-select-option>
                       </ion-select>
                     </ion-item>
-                  </div>
-                  <div class="button-content">
+                  </div> -->
+                  <!-- <div class="button-content">
                       <ion-label class="labels">Hobbies</ion-label>
                     
                           <ion-item fill="outline" class="input-field">
@@ -143,7 +143,7 @@
                             </ion-select>
                           </ion-item>
                       
-                      </div>
+                      </div> -->
                       <div class="button-content">
                           <ion-label class="labels">Tax No(optional)</ion-label>
                           <ion-item fill="outline" class="input-field">
@@ -153,13 +153,16 @@
                           <div class="button-content">
                               <ion-label class="labels">Nationality</ion-label>
                               <ion-item fill="outline" class="input-field">
-                              <ion-select placeholder="Select Nationality"multiple="true"  formControlName="nationality" style="background-color: white;">
+                              <ion-select placeholder="Select Nationality"  formControlName="nationality" style="background-color: white;">
                                   <ion-select-option *ngFor="let nationality of nationalityList" [value]="nationality.id">
                                     {{nationality.text}}</ion-select-option>
                                   </ion-select>
                               </ion-item>
                               </div>
-      
+                              <div class="button-content" style="width: 50%;
+                              margin: auto;">
+                              <ion-button color="primary" fill="outline" (click)="save()">Save</ion-button>
+                              </div>
       
 
   </ion-card-content>

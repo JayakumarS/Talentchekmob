@@ -1,8 +1,11 @@
+
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+
 
 @Component({
   selector: 'app-educations',
@@ -26,14 +29,28 @@ export class EducationsPage implements OnInit {
   courseEnd: string;
   userId: any;
   Education: any;
+ 
+  datePicker: any;
+  isunregIns:boolean;
+  unregisteredIns: string;
+  fromdate: any;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,
-    private toastController: ToastController) {
+    private toastController: ToastController,) {
 
     const initialDate = new Date(2023, 2);
     this.courseStart = initialDate.toISOString();
     this.courseEnd = initialDate.toISOString();
    }
-
+   Exp = {
+    orgName: '',
+  }
+  //  setDate() {
+  //   let date = new Date(2023, 2, 24); // Year, month (zero-based), day
+  //   this.datePicker.setValue(date.toISOString()).then((res) => {
+  //     this.myDate = res;
+  //   });
+  // }
+  
   ngOnInit() {
     //this.getstudyList();
     this.EducationForm = this.fb.group({
@@ -57,6 +74,9 @@ export class EducationsPage implements OnInit {
     var listConstant =  this.initializeItems(); 
     var listConstant =  this.DegreeListItems(); 
     var listConstant =  this.studyListItems();
+
+    let currentDate = new Date();
+    this.selectedDate = currentDate.toISOString();
   }
 
  
@@ -71,7 +91,7 @@ export class EducationsPage implements OnInit {
   }
    //institutionList
    unCheckFocus() {
-    // this.ionSearchListShow = false;
+    this.IsSearchListShow = false;
   }
   goToSearchSelectedItem( instName,instId) {
     console.log("InsName: " + instName)
@@ -94,6 +114,15 @@ export class EducationsPage implements OnInit {
       return InsList;
     }
     async filterList(evt) {
+      const filterValue = evt.srcElement.value.toLowerCase();
+      if(this.isunregIns == false){
+        this.unregisteredIns = filterValue ;
+        this.EducationForm.patchValue({
+          'orgLocation' : '',
+        });
+        this.EducationForm.get("orgLocation").enable();
+      }
+      this.isunregIns = false;
       if (evt.srcElement.value != null && evt.srcElement.value != '') {
         this.IsSearchListShow = true;
         this.institutionList = this.institutionList;
@@ -106,6 +135,7 @@ export class EducationsPage implements OnInit {
         this.institutionList = this.institutionList.filter(currentinstitution => {
           countVal++;
           if (currentinstitution.text && searchTerm && countVal < 100) {
+            
             return (currentinstitution.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
           }
         });
@@ -180,15 +210,17 @@ export class EducationsPage implements OnInit {
     }
 
 
-    // getstudyList(){
-    //   var getstudyListUrl = "api/auth/app/IndividualProfileDetails/studyList";
-         
-    //   this.storageservice.getrequest(getstudyListUrl).subscribe(result => {
-    //    if (result["success"] == true) {
-    //     this.studyList = result["studyList"]; 
-    //    }
-    //  });
-    // }
+    getTitle(bookId) {
+      var value;
+      this.institutionList.forEach(element => {
+        if(element.id===bookId){
+          value =  element.text;
+          this.unregisteredIns = "" ;
+          this.isunregIns = true;
+        }
+      });
+      return value;
+    }
 
     ///studyList
     unstudyList() {
@@ -246,8 +278,15 @@ export class EducationsPage implements OnInit {
 
       save(){
 
-this.EducationForm.value;
+//         let date = new Date(this.EducationForm.value.courseStart); // This is your date object
+// let formattedDate = this.datePicker.transform(date, 'MM/yyyy');
+// console.log(formattedDate); // Output: 24/03/2023
+this.EducationForm.value.courseStart =formatDate(this.EducationForm.value.courseStart, 'MM/yyyy','en-IN');
+this.EducationForm.value.courseEnd=formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy','en-IN');
 
+console.log(this.fromdate);
+this.EducationForm.value;
+this.EducationForm.value.unregisteredIns = this.unregisteredIns;
 this.EducationForm.value.currentUserId=this.userId;
 this.Education = this.EducationForm.value;
 console.log(` data: ${JSON.stringify(this.Education)}`);

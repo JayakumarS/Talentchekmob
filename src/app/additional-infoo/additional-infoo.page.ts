@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -11,9 +12,6 @@ import { StorageService } from '../storage.service';
 export class AdditionalInfooPage implements OnInit {
   additionalform: FormGroup;
 
-  hobby = new FormControl();
-  hobbyList = [];
-  hobbie= [];
   languageList: any;
   instTypeList:[];
 IsSearchListShow: boolean = false;
@@ -29,7 +27,9 @@ stateResponse: any;
 base64img1: string = '';
   cityOptions: any;
   cityList: any;
-  constructor(public router: Router, public formbuilder: FormBuilder, public storageservice: StorageService,) {
+  userId: string;
+  additional: any;
+  constructor(public router: Router, public formbuilder: FormBuilder, public storageservice: StorageService,   private toastController: ToastController) {
 
 
   }
@@ -43,16 +43,16 @@ base64img1: string = '';
       permstate: [""],
       permCity: [""],
       permPinCode: [""],
-      hobbies: [""],
+      currentUserId:[""],
       nationality: [""],
-      languagesknown: ["", Validators.required],
-      permAddress: [""]
+ 
+      
     });
 
     var listConstant =  this.initializeItems(); 
-
+    this.userId = localStorage.getItem("userId");
    this.nationalList();
-    this.hobbeList();
+    
     this.List();
     // this.httpService.get<any>(this.ProfileService.hobbyListUrl).subscribe({
     //   next: (data) => {
@@ -66,16 +66,7 @@ base64img1: string = '';
   }
 
 
-  hobbeList () {
-    var gethobbyListUrl = "api/auth/app/CommonUtility/hobbyList";
-    this.storageservice.getrequest(gethobbyListUrl).subscribe(result => {
 
-      if (result["success"] == true) {
-        this.hobbyList = result["hobbyList"];
-        console.log(`hobbyList: ${JSON.stringify(this.hobbyList)}`);
-      }
-    });
-  }
 
   List () {
     var getlanguageListUrl = "api/auth/app/CommonUtility/languageList";
@@ -160,6 +151,9 @@ goToSearchSelectedItem( CtryName,CtryId) {
   getcitylist(stateId,countryId){
     
     console.log(stateId)
+    this.additionalform.patchValue({
+      'permcountry': countryId
+    })
     var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
     this.storageservice.getrequest(industryURL).subscribe(result => {
      this.cityList = result['cityList'];
@@ -181,4 +175,27 @@ goToSearchSelectedItem( CtryName,CtryId) {
     this.router.navigate(['/profile/addConnections'])
   }
 
+  save(){
+    this.additionalform.value.currentUserId=this.userId;
+this.additional=this.additionalform.value;
+console.log(` data: ${JSON.stringify(this.additional)}`);
+var saveperonalinfo = "api/auth/app/mobile/saveadditionalinfo";
+
+ this.storageservice.postrequest(saveperonalinfo, this.additional).subscribe(result => {  
+   
+   if (result["success"] == true) {
+   // this.router.navigate(['/job']);
+    this.presentToast()
+    }
+ });
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
 }

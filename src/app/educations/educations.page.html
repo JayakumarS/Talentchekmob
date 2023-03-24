@@ -43,7 +43,7 @@
                   <ion-col>
                     <ion-list *ngIf="IsSearchListShow" lines="full">
                       <ion-item *ngFor="let cElement of institutionList">
-                        <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
+                        <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id);getTitle(cElement.id)">
                           {{ cElement.text }}
                         </ion-label>
                       </ion-item>
@@ -64,13 +64,13 @@
                           <div class="button-content">
                               <ion-label class="labels">Course Start Month-Year<small style="color: #f70505;">*</small> </ion-label>
                               <ion-item fill="outline" class="input-field">
-                                <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart"displayFormat="MM/YYYY" ></ion-datetime>               
+                                <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart"displayFormat="MM/YYYY"(monthSelected)="setMonthAndYearStr($event, picker1,'courseStart')" ></ion-datetime>               
                                                </ion-item>
                               </div>
                               <div class="button-content">
                                   <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
                                   <ion-item fill="outline" class="input-field">
-                                    <ion-datetime formControlName="courseEnd"[(ngModel)]="courseEnd" displayFormat="MM/YYYY" ></ion-datetime>                                  </ion-item>
+                                    <ion-datetime formControlName="courseEnd"displayFormat="MM/YYYY"  [(ngModel)]="selectedDate" ></ion-datetime>                                  </ion-item>
                                  
                                     <div style="display: flex;">
                                       <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyStudy" ></ion-checkbox>&nbsp;I currently study here
