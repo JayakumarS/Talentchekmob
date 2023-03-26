@@ -1,15 +1,23 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+      <ion-row>
 
+          <ion-col size="0.5">
+
+          </ion-col>
+          <ion-col size="2">
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="certifications()" style="margin-top:21%"></ion-icon>
+          </ion-col>
+
+          <ion-col size="7">
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Connections</ion-title>
+          </ion-col>
+      </ion-row>
+
+  </ion-toolbar>
+</ion-header>
  
-      <ion-row style="padding-top:20px">
-        <ion-col size="10">
-            <ion-title style="color:black;margin-left: -5%;">Add New Skill</ion-title>
-        </ion-col>
-        <ion-col size="2">
-         
-              <ion-icon  (click)="dismiss()" name="close"></ion-icon>
-            
-        </ion-col>
-    </ion-row>
+ 
     
 <ion-content>
   <form [formGroup]="skillForm">
@@ -57,4 +65,22 @@
     
 </ion-card-content>
 </form>
+
+<div class="footer-nav">
+  <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+    <ion-icon size="large" name="search-circle"></ion-icon>
+  </button>
+  <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+    <ion-icon size="large" name="earth-sharp"></ion-icon>
+  </button>
+  <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+    <ion-icon size="large" name="apps"></ion-icon>
+  </button>
+  <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+  </button>
+  <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+    <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+  </button>
+</div>
 </ion-content>

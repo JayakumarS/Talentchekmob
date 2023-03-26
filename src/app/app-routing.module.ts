@@ -125,7 +125,7 @@ const routes: Routes = [
 
   {
     path: 'profile-view',
-    loadChildren: () => import('./profile-view/profile-view.module').then( m => m.ProfileViewModule)
+    loadChildren: () => import('./profile-view/profile-view.module').then( m => m.ProfileViewPageModule)
   },
   {
     path: 'search-settings',
@@ -251,7 +251,8 @@ const routes: Routes = [
   {
     path: 'work-experiences',
     loadChildren: () => import('./work-experiences/work-experiences.module').then( m => m.WorkExperiencesPageModule)
-  },  {
+  },
+  {
     path: 'apply-for-job',
     loadChildren: () => import('./apply-for-job/apply-for-job.module').then( m => m.ApplyForJobPageModule)
   },

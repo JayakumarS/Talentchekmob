@@ -41,7 +41,11 @@ export class SkillPopupPage implements OnInit {
    this.getSkillList();
   }
 
-  
+  selectedTab: string = 'search';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
  
   getSkillList(){
     var getskillListUrl = "api/auth/app/CommonUtility/skillList"; 
