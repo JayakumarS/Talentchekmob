@@ -36,7 +36,7 @@ export class EducationsPage implements OnInit {
   fromdate: any;
 
   searchCtrl = new FormControl('');
-  searchInstitutionResults: string[] = [];
+  searchInstitutionResults: any;
   searchDegreeResults: string[] = [];
   selecteInstitution: any;
   InstitutionList: any;
@@ -112,6 +112,15 @@ this.isunregIns=false;
     });
   }
 //  institutionList auto complete 
+
+getinstitutionList(){
+  var institutionListUrl = "api/auth/app/IndividualProfileDetails/institutionList";
+  this.storageservice.getrequest(institutionListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.institutionList = result["institutionList"]; 
+    }
+ });
+}
 onSearchInstitution(value: string) {
 
    const filterValue = value.toLowerCase();
@@ -125,7 +134,15 @@ onSearchInstitution(value: string) {
       this.isunregIns = false;
   if (filterValue.length > 0) {
     this.IsSearchListShow = true;
-    this.searchInstitutionResults = this.InstitutionList.filter(Institution => Institution.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    this.searchInstitutionResults = this.institutionList.filter(Institution => Institution.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  
+    if (this.searchInstitutionResults == 0) {
+      this.IsSearchListShow = false;
+    }
+    else {
+      this.IsSearchListShow = true;
+    }
+  
   } else {
     this.IsSearchListShow = false;
     this.searchInstitutionResults = [];
@@ -145,14 +162,7 @@ selectInstitution(institutionName: string,id:string) {
   this.searchInstitutionResults = [];
   this.searchCtrl.setValue('');
 }
-getinstitutionList(){
-  var institutionListUrl = "api/auth/app/IndividualProfileDetails/institutionList";
-  this.storageservice.getrequest(institutionListUrl).subscribe(result => {
-   if (result["success"] == true) {
-    this.institutionList = result["institutionList"]; 
-    }
- });
-}
+
 //institution reg 
 getTitle(bookId) {
   var value;
