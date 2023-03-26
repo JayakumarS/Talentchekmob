@@ -6,7 +6,7 @@
 
           </ion-col>
           <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="connections()" style="margin-top:21%"></ion-icon>
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
           </ion-col>
 
           <ion-col size="7">
@@ -44,22 +44,21 @@
                   <div class="button-content">
                       <ion-label class="labels">Country</ion-label>
                       <ion-item fill="outline" class="input-field">
-                        <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="country" showcancelbutton="" 
-                        debounce="100" (ionInput)="filterList($event)" 
-                        formControlName="permcountry" [(ngModel)]="countryVal"  (ionBlur)="unCheckFocus()"
-                        search-icon=“undefined”></ion-searchbar>
+                        <div  class="selected-skill">{{ selecteCountry }} 
+                          <ion-icon *ngIf="selecteCountry != undefined && selecteCountry != ''" name="close-circle" 
+                          (click)="removeOrganisation(institutionName)"></ion-icon>
+                        </div>
+
+      
+                        <ion-input  warp="soft" (ionInput)="onSearchCountry($event.target.value)" [formControl]="searchCtrl"></ion-input>
                     </ion-item>
-                    <ion-row>
-                        <ion-col>
-                          <ion-list *ngIf="IsSearchListShow" lines="full">
-                            <ion-item *ngFor="let cElement of countryResponse">
-                              <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
-                                {{ cElement.text }}
-                              </ion-label>
-                            </ion-item>
-                          </ion-list>
-                        </ion-col>
-                      </ion-row>
+                    
+                    <ion-list *ngIf="IsSearchListShow">
+                      <ion-item *ngFor="let result of searchCountryResults" (click)="selectCountry(result.text,result.id)">
+                          {{ result.text }}
+                      </ion-item>
+                  </ion-list>
+                    
                       </div>
                       <div class="button-content">
                           <ion-label class="labels">State</ion-label>

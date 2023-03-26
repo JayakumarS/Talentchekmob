@@ -1,7 +1,7 @@
 
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -32,8 +32,20 @@ export class EducationsPage implements OnInit {
  
   datePicker: any;
   isunregIns:boolean;
-  unregisteredIns: string;
+  unregistered: string;
   fromdate: any;
+
+  searchCtrl = new FormControl('');
+  searchInstitutionResults: string[] = [];
+  searchDegreeResults: string[] = [];
+  selecteInstitution: any;
+  InstitutionList: any;
+  institutionid: string;
+  
+  searchStudyResults: string[] = [];
+  selecteStudy: any;
+  selectStudySet: string;
+  selectDegreeSet: string;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,
     private toastController: ToastController,) {
 
@@ -44,12 +56,7 @@ export class EducationsPage implements OnInit {
    Exp = {
     orgName: '',
   }
-  //  setDate() {
-  //   let date = new Date(2023, 2, 24); // Year, month (zero-based), day
-  //   this.datePicker.setValue(date.toISOString()).then((res) => {
-  //     this.myDate = res;
-  //   });
-  // }
+
   
   ngOnInit() {
     //this.getstudyList();
@@ -71,10 +78,11 @@ export class EducationsPage implements OnInit {
       currentUserId:[""]
    });
    this.userId = localStorage.getItem("userId");
-    var listConstant =  this.initializeItems(); 
-    var listConstant =  this.DegreeListItems(); 
-    var listConstant =  this.studyListItems();
+   this.getinstitutionList();
 
+     this.getDegreeList(); 
+  this.getStudyList();
+this.isunregIns=false;
     let currentDate = new Date();
     this.selectedDate = currentDate.toISOString();
   }
@@ -85,208 +93,153 @@ export class EducationsPage implements OnInit {
     this.router.navigate(['/profile/addExperience']) 
   }
 
-  profile()
+  profileView()
   {
-    this.router.navigate(['/profile/addProfile']) 
+    this.router.navigate(['/profile-view']) 
   }
-   //institutionList
-   unCheckFocus() {
-    this.IsSearchListShow = false;
-  }
-  goToSearchSelectedItem( instName,instId) {
-    console.log("InsName: " + instName)
-    console.log("InsId: " + instId)
-    
-    this.institutionVal = instName;
-    this.EducationForm.value.permcountry = instId;
-    this.IsSearchListShow = false;
-    //this.getstatelist(CtryId);
-  }
-    async initializeItems(): Promise<any> {
   
-      var institutionListUrl = "api/auth/app/IndividualProfileDetails/institutionList";
-      const InsList = this.storageservice.getrequest(institutionListUrl).subscribe(result => {
-        this.institutionList = result["institutionList"];
-        this.institutionList = result["institutionList"];
-     //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-      });
-    
-      return InsList;
-    }
-    async filterList(evt) {
-      const filterValue = evt.srcElement.value.toLowerCase();
-      if(this.isunregIns == false){
-        this.unregisteredIns = filterValue ;
+ 
+  orgLocation(orgid:any){
+
+    var getlocationUrl = "api/auth/app/IndividualProfileDetails/orgLocation";
+    this.storageservice.getrequest(getlocationUrl + "?orgid=" + orgid).subscribe(result => {
+      if (result["success"] == true) {
         this.EducationForm.patchValue({
-          'orgLocation' : '',
+          'institutionLocation' : result["experienceBean"].orgLocation,
+        })
+        this.EducationForm.get("institutionLocation").disable();
+      }
+    });
+  }
+//  institutionList auto complete 
+onSearchInstitution(value: string) {
+
+   const filterValue = value.toLowerCase();
+      if(this.isunregIns == false){
+        this.unregistered = filterValue ;
+        this.EducationForm.patchValue({
+          'institutionLocation' : '',
         });
-        this.EducationForm.get("orgLocation").enable();
+        this.EducationForm.get("institutionLocation").enable();
       }
       this.isunregIns = false;
-      if (evt.srcElement.value != null && evt.srcElement.value != '') {
-        this.IsSearchListShow = true;
-        this.institutionList = this.institutionList;
-        const searchTerm = evt.srcElement.value;
-        if (!searchTerm) {
-          return;
-        }
-    
-        var countVal = 0;
-        this.institutionList = this.institutionList.filter(currentinstitution => {
-          countVal++;
-          if (currentinstitution.text && searchTerm && countVal < 100) {
-            
-            return (currentinstitution.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-          }
-        });
-    
-        if (this.institutionList == 0) {
-          this.IsSearchListShow = false;
-        }
-        else {
-          this.IsSearchListShow = true;
-        }
-      }
-      else {
-        this.IsSearchListShow = false;
-      }
+  if (filterValue.length > 0) {
+    this.IsSearchListShow = true;
+    this.searchInstitutionResults = this.InstitutionList.filter(Institution => Institution.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.IsSearchListShow = false;
+    this.searchInstitutionResults = [];
+  }
+}
+
+
+removeOrganisation(selecteInstitution: string) {
+    this.selecteInstitution = undefined;
+  }
+
+selectInstitution(institutionName: string,id:string) {
+  this.selecteInstitution = institutionName;
+  this.IsSearchListShow = false;
+  this.institutionid = id;
+  this.Exp.orgName = id;
+  this.searchInstitutionResults = [];
+  this.searchCtrl.setValue('');
+}
+getinstitutionList(){
+  var institutionListUrl = "api/auth/app/IndividualProfileDetails/institutionList";
+  this.storageservice.getrequest(institutionListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.institutionList = result["institutionList"]; 
     }
+ });
+}
+//institution reg 
+getTitle(bookId) {
+  var value;
+  this.institutionList.forEach(element => {
+    if(element.id===bookId){
+      value =  element.text;
+      this.unregistered = "" ;
+      this.isunregIns = true;
+    }
+  });
+  return value;
+}  
 
 
+/// DegreeList auto complete 
+onSearchDegree(value: string) {
+  if (value.length > 0) {
+    this.IsDegreeListShow = true;
+    this.searchDegreeResults = this.degreeList.filter(Degree => Degree.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.IsDegreeListShow = false;
+    this.searchDegreeResults = [];
+  }
+}
+
+selectDegree(institutionName: string,id:string) {
+  this.selectDegreeSet = institutionName;
+  this.IsDegreeListShow = false;
+  this.institutionid = id;
+  this.searchDegreeResults = [];
+  this.searchCtrl.setValue('');
+}
+getDegreeList(){
+  var degreeListUrl = "api/auth/app/IndividualProfileDetails/degreeList";
+  this.storageservice.getrequest(degreeListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.degreeList = result["degreeList"]; 
+    }
+ });
+}
 
    
+   
 
-    // DegreeList
-   unDegreeList() {
-    // this.ionSearchListShow = false;
+
+    ///studyList auto complete 
+onSearchStudy(value: string) {
+  if (value.length > 0) {
+    this.IsstudyListShow = true;
+    this.searchStudyResults = this.studyList.filter(study => study.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.IsstudyListShow = false;
+    this.searchStudyResults = [];
   }
-  goToDegreeListItem( instName,instId) {
-    console.log("InsName: " + instName)
-    console.log("InsId: " + instId)
-    
-    this.degreeListVal = instName;
-    this.EducationForm.value.degree = instId;
-    this.IsDegreeListShow = false;
-    //this.getstatelist(CtryId);
-  }
-    async DegreeListItems(): Promise<any> {
-  
-      var degreeListUrl = "api/auth/app/IndividualProfileDetails/degreeList";
-      const InsList = this.storageservice.getrequest(degreeListUrl).subscribe(result => {
-        this.degreeList = result["degreeList"];
-        this.degreeList = result["degreeList"];
-     //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-      });
-    
-      return InsList;
-    }
-    async filterdegreeList(evt) {
-      if (evt.srcElement.value != null && evt.srcElement.value != '') {
-        this.IsDegreeListShow = true;
-        this.degreeList = this.degreeList;
-        const searchTerm = evt.srcElement.value;
-        if (!searchTerm) {
-          return;
-        }
-    
-        var countVal = 0;
-        this.degreeList = this.degreeList.filter(currentdegreeList => {
-          countVal++;
-          if (currentdegreeList.text && searchTerm && countVal < 100) {
-            return (currentdegreeList.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-          }
-        });
-    
-        if (this.degreeList == 0) {
-          this.IsDegreeListShow = false;
-        }
-        else {
-          this.IsDegreeListShow = true;
-        }
-      }
-      else {
-        this.IsDegreeListShow = false;
-      }
-    }
+}
 
-
-    getTitle(bookId) {
-      var value;
-      this.institutionList.forEach(element => {
-        if(element.id===bookId){
-          value =  element.text;
-          this.unregisteredIns = "" ;
-          this.isunregIns = true;
-        }
-      });
-      return value;
+selectStudy(Study: string,id:string) {
+  this.selectStudySet = Study;
+  this.IsstudyListShow = false;
+  //this.institutionid = id;
+  this.searchStudyResults = [];
+  this.searchCtrl.setValue('');
+}
+getStudyList(){
+  var StudyListUrl = "api/auth/app/IndividualProfileDetails/studyList";
+  this.storageservice.getrequest(StudyListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.studyList = result["studyList"]; 
     }
-
-    ///studyList
-    unstudyList() {
-      // this.ionSearchListShow = false;
-    }
-    goTostudyListItem( instName,instId) {
-      console.log("InsName: " + instName)
-      console.log("InsId: " + instId)
-      
-      this. studyListVal = instName;
-      this.EducationForm.value.fieldofStudy = instId;
-      this.IsstudyListShow = false;
-      //this.getstatelist(CtryId);
-    }
-      async studyListItems(): Promise<any> {
+ });
+}
     
-        var getstudyListUrl = "api/auth/app/IndividualProfileDetails/studyList";
-        const InsList = this.storageservice.getrequest(getstudyListUrl).subscribe(result => {
-       
-          if (result["success"] == true) {
-           this.studyList = result["studyList"]; 
-          }
-        });
-      
-        return InsList;
-      }
-      async filterstudyList(evt) {
-        if (evt.srcElement.value != null && evt.srcElement.value != '') {
-          this.IsstudyListShow = true;
-          this.studyList = this.studyList;
-          const searchTerm = evt.srcElement.value;
-          if (!searchTerm) {
-            return;
-          }
-      
-          var countVal = 0;
-          this.studyList = this.studyList.filter(currentstudyList => {
-            countVal++;
-            if (currentstudyList.text && searchTerm && countVal < 100) {
-              return (currentstudyList.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-            }
-          });
-      
-          if (this.studyList == 0) {
-            this.IsstudyListShow = false;
-          }
-          else {
-            this.IsstudyListShow = true;
-          }
-        }
-        else {
-          this.IsstudyListShow = false;
-        }
-      }
-
       save(){
 
-//         let date = new Date(this.EducationForm.value.courseStart); // This is your date object
-// let formattedDate = this.datePicker.transform(date, 'MM/yyyy');
-// console.log(formattedDate); // Output: 24/03/2023
+
+        if(this.unregistered == ""){
+          this.EducationForm.value.unregisteredIns = this.Exp.orgName;
+         }else{
+          this.EducationForm.value.unregisteredIns = this.unregistered;
+         }
+    
 this.EducationForm.value.courseStart =formatDate(this.EducationForm.value.courseStart, 'MM/yyyy','en-IN');
 this.EducationForm.value.courseEnd=formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy','en-IN');
 
 console.log(this.fromdate);
 this.EducationForm.value;
-this.EducationForm.value.unregisteredIns = this.unregisteredIns;
+this.EducationForm.value.unregisteredIns = this.unregistered;
 this.EducationForm.value.currentUserId=this.userId;
 this.Education = this.EducationForm.value;
 console.log(` data: ${JSON.stringify(this.Education)}`);
@@ -309,5 +262,6 @@ var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
         });
     
       await toast.present();
+       this.router.navigate(['/profile-view']);
     }
 }

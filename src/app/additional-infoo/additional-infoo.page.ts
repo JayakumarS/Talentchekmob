@@ -19,7 +19,7 @@ countryVal: string;
 countryIdVal:string;
 countryResponseBackup: any;
 countryResponse: any;
-countryList: [];
+countryList: any;
 nationalityList:[];
 isSubmitted: boolean;
 stateResponseBackup: any;
@@ -29,6 +29,12 @@ base64img1: string = '';
   cityList: any;
   userId: string;
   additional: any;
+  searchCtrl = new FormControl('');
+  searchCountryResults: string[] = [];
+  // selecteCountry: any;
+  selecteCountry: string;
+  CtryId: string;
+  countryId: any;
   constructor(public router: Router, public formbuilder: FormBuilder, public storageservice: StorageService,   private toastController: ToastController) {
 
 
@@ -48,11 +54,10 @@ base64img1: string = '';
  
       
     });
-
-    var listConstant =  this.initializeItems(); 
+// var listConstant =  this.initializeItems(); 
     this.userId = localStorage.getItem("userId");
    this.nationalList();
-    
+   this.getCountryList();
     this.List();
     // this.httpService.get<any>(this.ProfileService.hobbyListUrl).subscribe({
     //   next: (data) => {
@@ -65,7 +70,10 @@ base64img1: string = '';
     // });
   }
 
+  profileView(){
 
+    this.router.navigate(['/profile-view']) 
+  }
 
 
   List () {
@@ -76,58 +84,50 @@ base64img1: string = '';
       }
     });
   }
+  removeOrganisation(institutionName: string) {
+    this.selecteCountry = undefined;
+  }
+
+  //  CountryList auto complete 
+ onSearchCountry(value: string) {
+  if (value.length > 0) {
+    this.IsSearchListShow = true;
+    // this.searchCountryResults = this.countryList.filter( Country =>  
+    //    Country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+        this.searchCountryResults = this.countryList.filter(Option => Option.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  
+  } else {
+    this.IsSearchListShow = false;
+    this.searchCountryResults = [];
+  }
+}
+
+
+selectCountry(institutionName: string,id:string) {
+  // this.selecteCountry = institutionName;
+  this.selecteCountry=institutionName;
+  this.IsSearchListShow = false;
+   this.CtryId = id;
+  this.searchCountryResults = [];
+   this.searchCtrl.setValue('');
+   this.getstatelist(this.CtryId);
+   this.countryId = this.CtryId;
+}
+
+
+getCountryList(){
+  var countryURL = "api/auth/app/CommonUtility/countryList";
+  this.storageservice.getrequest(countryURL).subscribe(result => {
+   if (result["success"] == true) {
+    this.countryList = result["countryList"]; 
+    }
+ });
+}
     //CountryList
 unCheckFocus() {
   // this.ionSearchListShow = false;
 }
-goToSearchSelectedItem( CtryName,CtryId) {
-  console.log("InsName: " + CtryName)
-  console.log("InsId: " + CtryId)
 
-  this.countryVal = CtryName;
-  this.additionalform.value.permcountry = CtryId;
-  this.IsSearchListShow = false;
-  this.getstatelist(CtryId);
-}
-  async initializeItems(): Promise<any> {
-
-    var countryURL = "api/auth/app/CommonUtility/countryList";
-    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
-      this.countryResponseBackup = result["countryList"];
-      this.countryResponse = result["countryList"];
-   //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-    });
-  
-    return InsList;
-  }
-  async filterList(evt) {
-    if (evt.srcElement.value != null && evt.srcElement.value != '') {
-      this.IsSearchListShow = true;
-      this.countryResponse = this.countryResponseBackup;
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
-      }
-  
-      var countVal = 0;
-      this.countryResponse = this.countryResponse.filter(currentCountry => {
-        countVal++;
-        if (currentCountry.text && searchTerm && countVal < 100) {
-          return (currentCountry.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-        }
-      });
-  
-      if (this.countryResponse == 0) {
-        this.IsSearchListShow = false;
-      }
-      else {
-        this.IsSearchListShow = true;
-      }
-    }
-    else {
-      this.IsSearchListShow = false;
-    }
-  }
   //state list
   async getstatelist(CtryId): Promise<any> {
 
@@ -143,8 +143,8 @@ goToSearchSelectedItem( CtryName,CtryId) {
   }
   goTostateSelectedItem( stateId) {
     //var CtryId =this.talentorgform.value.countryId; 
-    var CtryId=this.additionalform.value.permcountry.slice(0,2);
-    this.getcitylist(stateId,CtryId);
+   // this.countryId=this.additionalform.value.permcountry;
+    this.getcitylist(stateId,this.countryId);
   }
   // City List
 

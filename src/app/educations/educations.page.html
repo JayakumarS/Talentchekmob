@@ -6,7 +6,7 @@
 
           </ion-col>
           <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profile()" style="margin-top:21%"></ion-icon>
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
           </ion-col>
 
           <ion-col size="7">
@@ -33,23 +33,22 @@
       <div id="test-l-1" class="content">
           <div class="button-content">
               <ion-label class="labels">Educational Institution Name<small style="color: #f70505;">*</small></ion-label>
-              <ion-item fill="outline" class="input-field">
-                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
-                debounce="100" (ionInput)="filterList($event)" 
-                formControlName="institutionName" [(ngModel)]="institutionVal"  (ionBlur)="unCheckFocus()"
-                search-icon=“undefined”></ion-searchbar>
+            
+                <ion-item fill="outline" class="input-field">
+                  <div >{{ selecteInstitution }} 
+                    <ion-icon *ngIf="selecteInstitution != undefined && selecteInstitution != ''" name="close-circle" (click)="removeOrganisation(selecteInstitution)"></ion-icon>
+                  </div>
+
+                  <ion-input  warp="soft" (ionInput)="onSearchInstitution($event.target.value)" [formControl]="searchCtrl"></ion-input>
+              </ion-item>
+              <ion-list *ngIf="IsSearchListShow">
+                <ion-item *ngFor="let result of institutionList" (click)="selectInstitution(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
+                    {{ result.text }}
                 </ion-item>
-                <ion-row>
-                  <ion-col>
-                    <ion-list *ngIf="IsSearchListShow" lines="full">
-                      <ion-item *ngFor="let cElement of institutionList">
-                        <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id);getTitle(cElement.id)">
-                          {{ cElement.text }}
-                        </ion-label>
-                      </ion-item>
-                    </ion-list>
-                  </ion-col>
-                </ion-row>
+            </ion-list>
+           
+               
+            
               <!-- <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title> -->
              </div>
               <ion-spacer size="large"></ion-spacer><br>
@@ -81,22 +80,16 @@
                                   <div class="button-content">
                                       <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
                                       <ion-item fill="outline" class="input-field">
-                                        <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
-                                        debounce="100" (ionInput)="filterdegreeList($event)" 
-                                        formControlName="degree" [(ngModel)]="degreeListVal"  (ionBlur)="unDegreeList()"
-                                        search-icon=“undefined”></ion-searchbar>
-                                        </ion-item>
-                                        <ion-row>
-                                          <ion-col>
-                                            <ion-list *ngIf="IsDegreeListShow" lines="full">
-                                              <ion-item *ngFor="let cElement of degreeList">
-                                                <ion-label class="ion-text-wrap" (click)="goToDegreeListItem(cElement.text, cElement.id)">
-                                                  {{ cElement.text }}
-                                                </ion-label>
-                                              </ion-item>
-                                            </ion-list>
-                                          </ion-col>
-                                        </ion-row>
+                                      <div >{{ selectDegreeSet }} 
+                                      </div>
+                                      <ion-input  warp="soft" (ionInput)="onSearchDegree($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                                  </ion-item>
+                                  <ion-list *ngIf="IsDegreeListShow">
+                                    <ion-item *ngFor="let result of degreeList" (click)="selectDegree(result.text,result.id)">
+                                        {{ result.text }}
+                                    </ion-item>
+                                </ion-list>
+                                       
                                       </div>
 
                                       <div class="button-content">
@@ -104,24 +97,16 @@
                                        
                                           <ion-item fill="outline" class="input-field">
                                            
-                                              <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
-                                              debounce="100" (ionInput)="filterstudyList($event)" 
-                                              formControlName="fieldofStudy" [(ngModel)]="studyListVal"  (ionBlur)="unstudyList()"
-                                              search-icon=“undefined”></ion-searchbar>
-                                            
-                                         
+                                            <div >{{ selectStudySet }} 
+                                            </div>
+                                            <ion-input  warp="soft" (ionInput)="onSearchStudy($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                                        </ion-item>
+                                        <ion-list *ngIf="IsstudyListShow">
+                                          <ion-item *ngFor="let result of studyList" (click)="selectStudy(result.text,result.id)">
+                                              {{ result.text }}
                                           </ion-item>
-                                          <ion-row>
-                                            <ion-col>
-                                              <ion-list *ngIf="IsstudyListShow" lines="full">
-                                                <ion-item *ngFor="let tittle of studyList">
-                                                  <ion-label class="ion-text-wrap" (click)="goTostudyListItem(tittle.text, tittle.id)">
-                                                    {{tittle.text}}
-                                                  </ion-label>
-                                                </ion-item>
-                                              </ion-list>
-                                            </ion-col>
-                                          </ion-row>
+                                      </ion-list>
+                                         
                                           </div>
 
                                   <div class="button-content">

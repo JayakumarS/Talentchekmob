@@ -6,7 +6,7 @@
 
           </ion-col>
           <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="certifications()" style="margin-top:21%"></ion-icon>
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
           </ion-col>
 
           <ion-col size="7">
@@ -35,23 +35,17 @@
             <div class="button-content">
                 <ion-label class="labels">Name of the Club/Association <small style="color: #f70505;">*</small></ion-label>
                 <ion-item fill="outline" class="input-field">
-                    <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
-                    debounce="100" (ionInput)="filterList($event)" 
-                    formControlName="clubName" [(ngModel)]="organisationVal"  (ionBlur)="unCheckFocus()"
-                    search-icon=“undefined”></ion-searchbar>
-                    </ion-item>
-                    <ion-row>
-                        <ion-col>
-                          <ion-list *ngIf="IsorgListShow" lines="full">
-                            <ion-item *ngFor="let cElement of organisationList">
-                              <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
-                                {{ cElement.text }}
-                              </ion-label>
-                            </ion-item>
-                          </ion-list>
-                        </ion-col>
-                      </ion-row>
-               
+                  <div class="selected-skill">{{ selectedOrganisation }} 
+                    <!-- <ion-icon name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon> -->
+                </div>
+                <ion-input  warp="soft" (ionInput)="onSearchOrganisation($event.target.value)" [formControl]="searchCtrl"></ion-input>
+            </ion-item>
+            <ion-list *ngIf="IsorgListShow">
+              <ion-item *ngFor="let result of organisationList" (click)="selectOrganisation(result.text,result.id)">
+                  {{ result.text }}
+              </ion-item>
+          </ion-list>
+                    
                 </div>
                 <div class="button-content">
                     <ion-label class="labels">District/Branch</ion-label>
@@ -68,19 +62,19 @@
 
                         <div class="button-content">
                           <ion-label class="labels">Role played / Achievement</ion-label>
-                          <ckeditor formControlName="rolePlayed" ></ckeditor>
+                          <ckeditor formControlName="rolePlayed"></ckeditor>
                          </div>
 
                         <div class="button-content">
                             <ion-label class="labels">Participated From </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedFromObj" presentation="date"></ion-datetime>
+                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedFrom" presentation="date"></ion-datetime>
                             </ion-item>
                             </div>
                             <div class="button-content">
                                 <ion-label class="labels">Participated Till </ion-label>
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedTillObj" presentation="date"></ion-datetime>
+                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedTill" presentation="date"></ion-datetime>
                                 </ion-item>
                                 <div style="display:flex;">
                                     <ion-checkbox [(ngModel)]="isChecked" formControlName="currentMember"></ion-checkbox>&nbsp;&nbsp;Current member
@@ -91,7 +85,7 @@
                                 
                                 <div class="button-content" style="width: 50%;
                                 margin: auto;">
-                                <ion-button color="primary" fill="outline" (click)="connections()">Next</ion-button>
+                                <ion-button color="primary" fill="outline" (click)="Save()">Save</ion-button>
                                 </div>
               
               

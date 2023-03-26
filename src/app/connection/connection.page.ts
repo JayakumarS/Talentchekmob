@@ -28,6 +28,7 @@ export class ConnectionPage implements OnInit {
   ngOnInit() {
 
     this.userId = localStorage.getItem("userId");
+    
 
     this.ConnectionsForm = this.fb.group({
       receiverMobileNo: ["", Validators.required],
