@@ -36,20 +36,16 @@ export class WorkExperiencesPage implements OnInit {
     this.userId = localStorage.getItem("userId");
     this.isunregOrg = false;
     this.ExperienceForm= this.fb.group({
-      designation: [""],
-      organisationName: [""],
-      department: [""],
-      registrationNumber: [""],
-      expStartObj:[""],
-      expStart: [""],
-      expEndObj:[""],
-      expEnd: [""],
+      designation: ["", Validators.required],
+      organisationName: ["", Validators.required],
+      department: ["", Validators.required],
+      registrationNumber: ["", Validators.required],
+       expStart: ["", Validators.required],
+       expEnd: ["", Validators.required],
       currentlyWork: [""],
-      jobType: [""],
-      orgLocation: [""],
+      jobType: ["", Validators.required],
+      orgLocation: ["", Validators.required],
       expDescription: [""],
-      expId:[""],
-      checked:[""],
       unregisteredOrg:[""],
       ckeditor:[""],
       currentUserId:[""]
@@ -172,7 +168,7 @@ this.getJobtype();
     // Display errors in a popup
     const alert = await this.toastController.create({
       header: 'Validation Error',
-      message: errors.join('<br>'),
+      message: 'Please provide all the required values!',
       buttons: ['OK']
     });
 

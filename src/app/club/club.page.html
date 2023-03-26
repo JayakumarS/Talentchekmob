@@ -20,26 +20,20 @@
 <form [formGroup]="clubFrom">
 
 
-<ion-card-content>
-    <!-- <ion-row>
-        <ion-col size="10">
-            <ion-title style="color:black; ">Extracurricular</ion-title>
-        </ion-col>
-        <ion-col size="2">
-            <img src="./assets/icon/edit_icon.png" id="prfoileimg1">
-        </ion-col>
-    </ion-row> -->
-
+<ion-card-content> 
     <ion-row class="talentrow">
         <ion-col>
             <div class="button-content">
                 <ion-label class="labels">Name of the Club/Association <small style="color: #f70505;">*</small></ion-label>
                 <ion-item fill="outline" class="input-field">
                   <div class="selected-skill">{{ selectedOrganisation }} 
-                    <!-- <ion-icon name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon> -->
-                </div>
-                <ion-input  warp="soft" (ionInput)="onSearchOrganisation($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                    <ion-icon *ngIf="selectedOrganisation != undefined && selectedOrganisation != ''" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
+                 </div>
+                <ion-input (ionInput)="onSearchOrganisation($event.target.value)" [formControl]="searchCtrl"></ion-input>
             </ion-item>
+            <div *ngIf="clubFrom.controls.clubName.hasError('required') && clubFrom.controls.clubName.touched">
+              <small style="color: #f70505;">Participated From is required</small>
+            </div>
             <ion-list *ngIf="IsorgListShow">
               <ion-item *ngFor="let result of organisationList" (click)="selectOrganisation(result.text,result.id)">
                   {{ result.text }}
@@ -58,6 +52,9 @@
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="titleHeld"></ion-input>
                         </ion-item>
+                        <div *ngIf="clubFrom.controls.titleHeld.hasError('required') && clubFrom.controls.titleHeld.touched">
+                          <small style="color: #f70505;">Time held is required</small>
+                        </div>
                         </div>
 
                         <div class="button-content">
@@ -70,12 +67,18 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedFrom" presentation="date"></ion-datetime>
                             </ion-item>
+                            <div *ngIf="clubFrom.controls.participatedFrom.hasError('required') && clubFrom.controls.participatedFrom.touched">
+                              <small style="color: #f70505;">Participated From is required</small>
+                            </div>
                             </div>
                             <div class="button-content">
                                 <ion-label class="labels">Participated Till </ion-label>
                                 <ion-item fill="outline" class="input-field">
                                     <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedTill" presentation="date"></ion-datetime>
                                 </ion-item>
+                                <div *ngIf="clubFrom.controls.participatedTill.hasError('required') && clubFrom.controls.participatedTill.touched">
+                                  <small style="color: #f70505;">Participated Till From is required</small>
+                                </div>
                                 <div style="display:flex;">
                                     <ion-checkbox [(ngModel)]="isChecked" formControlName="currentMember"></ion-checkbox>&nbsp;&nbsp;Current member
                                   </div>

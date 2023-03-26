@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -38,7 +38,7 @@ export class ProfileePage implements OnInit {
       category: ["",[Validators.required]],
       linkurl:[""],
       details:[""],
-      permAddress:[""],
+      permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:[""],
       uploadImg:[""],
@@ -89,19 +89,33 @@ export class ProfileePage implements OnInit {
    });
   }
 
-  Update(){
-    this.profileForm.value.currentUserId=this.userId;
-    this.profiledetails = this.profileForm.value;
-    console.log(` data: ${JSON.stringify(this.profiledetails)}`);
-    var updateprofile = "api/auth/app/mobile/updateprofile";
+  async Update(){
+    const errors = this.checkFormValidity(this.profileForm);
+
+    if (errors.length > 0) {
+      // Display errors in a popup
+      const alert = await this.toastController.create({
+        header: 'Validation Error',
+        message: 'Please provide all the required values!',
+        buttons: ['OK']
+      });
   
-     this.storageservice.postrequest(updateprofile, this.profiledetails).subscribe(result => {  
-        console.log("Image upload response: " + result)
-       if (result["success"] == true) {
-       // this.router.navigate(['/job']);
-        this.presentToast()
-        }
-     });
+      await alert.present();
+    } else{
+      this.profileForm.value.currentUserId=this.userId;
+      this.profiledetails = this.profileForm.value;
+      console.log(` data: ${JSON.stringify(this.profiledetails)}`);
+      var updateprofile = "api/auth/app/mobile/updateprofile";
+    
+       this.storageservice.postrequest(updateprofile, this.profiledetails).subscribe(result => {  
+          console.log("Image upload response: " + result)
+         if (result["success"] == true) {
+         this.router.navigate(['/profile-view']);
+          this.presentToast()
+          }
+       });
+  }
+    
   }
 
   async presentToast() {
@@ -112,6 +126,22 @@ export class ProfileePage implements OnInit {
     });
 
   await toast.present();
+}
+
+checkFormValidity(form: FormGroup): string[] {
+  const errors: string[] = [];
+  
+  // Check each form control for errors
+  Object.keys(form.controls).forEach(key => {
+    const controlErrors: ValidationErrors = form.controls[key].errors;
+    if (controlErrors != null) {
+      Object.keys(controlErrors).forEach(keyError => {
+        errors.push(`${key} ${keyError}`);
+      });
+    }
+  });
+
+  return errors;
 }
 
 }

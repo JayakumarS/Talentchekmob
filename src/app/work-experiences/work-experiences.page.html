@@ -27,6 +27,9 @@
             <ion-item fill="outline" class="input-field">
                 <ion-input formControlName="designation"></ion-input>
             </ion-item>
+            <div *ngIf="ExperienceForm.controls.designation.hasError('required') && ExperienceForm.controls.designation.touched">
+                <small style="color: #f70505;">Designation/Role is required</small>
+              </div>
             <!-- <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title> -->
            </div>
             <ion-spacer size="large"></ion-spacer><br>
@@ -35,6 +38,9 @@
                 <ion-item fill="outline" class="input-field">
                     <ion-input formControlName="department"></ion-input>
                 </ion-item>
+                <div *ngIf="ExperienceForm.controls.department.hasError('required') && ExperienceForm.controls.department.touched">
+                    <small style="color: #f70505;">Department/Team is required</small>
+                  </div>
                 </div>
                 <div class="button-content">
                     <ion-label class="labels">Organisation Name <small style="color: #f70505;">*</small></ion-label>
@@ -45,6 +51,9 @@
                                 formControlName="organisationName" [(ngModel)]="organisationVal"  (ionBlur)="unCheckFocus()"
                                 search-icon=“undefined”></ion-searchbar>
                                 </ion-item>
+                                <div *ngIf="ExperienceForm.controls.organisationName.hasError('required') && ExperienceForm.controls.organisationName.touched">
+                                    <small style="color: #f70505;">Organisation Name is required</small>
+                                  </div>
                                 <ion-row>
                                     <ion-col>
                                       <ion-list *ngIf="IsorgListShow" lines="full">
@@ -55,28 +64,34 @@
                                         </ion-item>
                                       </ion-list>
                                     </ion-col>
-                                  </ion-row>
-                    <!-- <ion-item fill="outline" class="input-field">
-                        <ion-input formControlName="firstName"></ion-input>
-                    </ion-item> -->
+                                  </ion-row> 
                     </div>
                     <div class="button-content">
                         <ion-label class="labels">Organisation Location <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="orgLocation"></ion-input>
                         </ion-item>
+                        <div *ngIf="ExperienceForm.controls.orgLocation.hasError('required') && ExperienceForm.controls.orgLocation.touched">
+                            <small style="color: #f70505;">Organisation Location is required</small>
+                          </div>
                         </div>
                         <div class="button-content">
                             <ion-label class="labels">Job Start Date<small style="color: #f70505;">*</small> </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
                             </ion-item>
+                            <div *ngIf="ExperienceForm.controls.expStart.hasError('required') && ExperienceForm.controls.expStart.touched">
+                                <small style="color: #f70505;">Job Start Date is required</small>
+                              </div>
                             </div>
                             <div class="button-content">
                                 <ion-label class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
                                 <ion-item fill="outline" class="input-field">
                                     <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date"></ion-datetime>
                                 </ion-item>
+                                <div *ngIf="ExperienceForm.controls.expEnd.hasError('required') && ExperienceForm.controls.expEnd.touched">
+                                    <small style="color: #f70505;">Job End Date is required</small>
+                                  </div>
                                
                                   <div style="    display: flex;">
                                     <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyWork"></ion-checkbox>&nbsp;I currently work here
@@ -90,6 +105,9 @@
                                     <ion-item fill="outline" class="input-field">
                                         <ion-input formControlName="registrationNumber"></ion-input>
                                     </ion-item>
+                                    <div *ngIf="ExperienceForm.controls.registrationNumber.hasError('required') && ExperienceForm.controls.registrationNumber.touched">
+                                        <small style="color: #f70505;">Employee Registration Number is required</small>
+                                      </div>
                                     </div>
 
                                     <div class="button-content">
@@ -100,6 +118,9 @@
                                                     {{tittle.text}}</ion-select-option>
                                                   </ion-select>
                                           </ion-item>
+                                          <div *ngIf="ExperienceForm.controls.jobType.hasError('required') && ExperienceForm.controls.jobType.touched">
+                                            <small style="color: #f70505;">Job Type is required</small>
+                                          </div>
                                         </div>
                                         <!-- <div class="button-content">
                                             <ckeditor [(ngModel)]="content" formControlName="ckeditor" [config]="editorConfig"></ckeditor>
