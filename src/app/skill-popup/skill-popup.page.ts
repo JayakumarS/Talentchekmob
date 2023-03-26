@@ -33,7 +33,7 @@ export class SkillPopupPage implements OnInit {
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
     this.skillForm = this.fb.group({
-      keySkill:[""],
+      keySkill:["", Validators.required],
       expertise:[""],
       skillId:[""],
       currentUserId:[""]
@@ -87,7 +87,7 @@ export class SkillPopupPage implements OnInit {
       // Display errors in a popup
       const alert = await this.toastController.create({
         header: 'Validation Error',
-        message: errors.join('<br>'),
+        message: 'Please add the required skills',
         buttons: ['OK']
       });
   

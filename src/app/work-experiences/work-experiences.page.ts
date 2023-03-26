@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } fro
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-work-experiences',
@@ -12,35 +13,11 @@ import { ToastController } from '@ionic/angular';
 
  
 })
-export class WorkExperiencesPage implements OnInit {
-
-  // myForm = new FormGroup({
-
-  // });
-  // content: string;
-  // editorConfig: CKEditor4.Config = {
-  //   toolbar: [
-  //     { name: 'clipboard', items: ['Undo', 'Redo'] },
-  //     { name: 'styles', items: ['Styles', 'Format'] },
-  //     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
-  //     { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
-  //     { name: 'links', items: ['Link', 'Unlink'] },
-  //     { name: 'tools', items: ['Maximize'] },
-  //     { name: 'document', items: ['Source'] },
-  //   ],
-  // };
-
-
-
-
-
-
-
-
-  // public Editor: any = ClassicEditor;
+export class WorkExperiencesPage implements OnInit {  
 
   ExperienceForm:  FormGroup;
   organisationList: any;
+  OrganisationList:any;
   IsorgListShow:boolean= false;
   institutionVal: any;
   organisationVal: any;
@@ -49,7 +26,7 @@ export class WorkExperiencesPage implements OnInit {
   unregisteredOrg: string;
   Experience: any;
   userId: string;
- 
+  
   constructor(public router:Router,private fb: FormBuilder,
     public storageservice:StorageService,public toastController:ToastController) { }
   Exp = {
@@ -99,7 +76,7 @@ this.getJobtype();
     console.log("InsId: " + instId)
     
     this.organisationVal = instName;
-    this.ExperienceForm.value.organisationName = instId;
+    this.Exp.orgName = instId;
     this.IsorgListShow = false;
     //this.getstatelist(CtryId);
   }
@@ -126,21 +103,21 @@ this.getJobtype();
       this.isunregOrg = false;
       if (evt.srcElement.value != null && evt.srcElement.value != '') {
         this.IsorgListShow = true;
-        this.organisationList = this.organisationList;
+        this.OrganisationList = this.organisationList;
         const searchTerm = evt.srcElement.value;
         if (!searchTerm) {
           return;
         }
     
         var countVal = 0;
-        this.organisationList = this.organisationList.filter(currentinstitution => {
+        this.OrganisationList = this.organisationList.filter(currentinstitution => {
           countVal++;
           if (currentinstitution.text && searchTerm && countVal < 100) {
             return (currentinstitution.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
           }
         });
     
-        if (this.organisationList == 0) {
+        if (this.OrganisationList == 0) {
           this.IsorgListShow = false;
         }
         else {
@@ -175,11 +152,18 @@ this.getJobtype();
        }
      });
     }
-    Update(){
-      this.ExperienceForm;
+    orgLocation(orgid:any){
 
-
-    }
+      var getlocationUrl = "api/auth/app/IndividualProfileDetails/orgLocation";
+      this.storageservice.getrequest(getlocationUrl + "?orgid=" + orgid).subscribe(result => {
+        if (result["success"] == true) {
+          this.ExperienceForm.patchValue({
+            'orgLocation' : result["experienceBean"].orgLocation,
+          })
+          this.ExperienceForm.get("orgLocation").disable();
+        }
+      });
+  }
     //save
   async saveCertification(){
     const errors = this.checkFormValidity(this.ExperienceForm);
@@ -194,8 +178,16 @@ this.getJobtype();
 
     await alert.present();
   } else {
-     this.ExperienceForm.value.currentUserId = this.userId;
-     this.ExperienceForm.value.organisationName = this.Exp.orgName;
+     this.ExperienceForm.value.currentUserId = this.userId; 
+
+     this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
+     this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
+
+     if(this.unregisteredOrg == ""){
+      this.ExperienceForm.value.organisationName = this.Exp.orgName;
+     }else{
+      this.ExperienceForm.value.organisationName = this.unregisteredOrg;
+     }
      this.ExperienceForm.value.unregisteredOrg = this.unregisteredOrg;
      this.Experience = this.ExperienceForm.value;
    console.log(` data: ${JSON.stringify(this.Experience)}`);
@@ -222,7 +214,7 @@ this.getJobtype();
 
   await toast.present();
 }
-
+ 
   checkFormValidity(form: FormGroup): string[] {
     const errors: string[] = [];
     

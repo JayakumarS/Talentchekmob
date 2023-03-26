@@ -53,29 +53,38 @@
                   <ion-item fill="outline" class="input-field">
                       <ion-input formControlName="certificationName"></ion-input>
                   </ion-item>
+                  <div *ngIf=" certificationForm.controls.certificationName.hasError('required') && certificationForm.controls.certificationName.touched">
+                    <small style="color: #f70505;">Certification/License/Patent/Publication Name is required</small>
+                  </div>
                   </div>
                   <div class="button-content">
                       <ion-label class="labels">Issuing Organisation<small style="color: #f70505;">*</small></ion-label>
                       <ion-item fill="outline" class="input-field">
                           <ion-input formControlName="issuedBy"></ion-input>
                       </ion-item>
+                      <div *ngIf=" certificationForm.controls.issuedBy.hasError('required') && certificationForm.controls.issuedBy.touched">
+                        <small style="color: #f70505;">Issuing Organisation is required</small>
+                      </div>
                       </div>
                       <div class="button-content">
                           <ion-label class="labels">Certification/License/Patent/Publication Number<small style="color: #f70505;">*</small></ion-label>
                           <ion-item fill="outline" class="input-field">
                               <ion-input formControlName="certificationId"></ion-input>
                           </ion-item>
+                          <div *ngIf=" certificationForm.controls.certificationId.hasError('required') && certificationForm.controls.certificationId.touched">
+                            <small style="color: #f70505;">Certification/License/Patent/Publication No is required</small>
+                          </div>
                           </div>
                           <div class="button-content">
                               <ion-label class="labels">Issue Date </ion-label>
                               <ion-item fill="outline" class="input-field">
-                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="issuedDateObj" presentation="date"></ion-datetime>
+                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="issuedDate" presentation="date"></ion-datetime>
                               </ion-item>
                               </div>
                               <div class="button-content">
                                   <ion-label class="labels">Expiry Date(if applicable) </ion-label>
                                   <ion-item fill="outline" class="input-field">
-                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expiryDateObj" presentation="date"></ion-datetime>
+                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expiryDate" presentation="date"></ion-datetime>
                                   </ion-item>
                                  
                                     

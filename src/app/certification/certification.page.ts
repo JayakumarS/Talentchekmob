@@ -5,6 +5,7 @@ import { StorageService } from '../storage.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { SkillPopupPage } from '../skill-popup/skill-popup.page';
+import { formatDate } from '@angular/common';
  
 
 @Component({
@@ -27,12 +28,10 @@ export class CertificationPage implements OnInit {
     this.certificationForm = this.fb.group({
       certificationName:['', Validators.required],
       issuedBy:['', Validators.required],
-      issuedDateObj:['', Validators.required],
       issuedDate:[''],
-      expiryDateObj:['', Validators.required],
       expiryDate:[""],
-      certificationId:[""],
-       certId:[""],
+      certificationId:["", Validators.required],
+      certId:[""],
       currentUserId:[""],
       certificationPath :[""]
     })
@@ -98,14 +97,16 @@ loadImageFromDevice(event) {
     // Display errors in a popup
     const alert = await this.toastController.create({
       header: 'Validation Error',
-      message: errors.join('<br>'),
+      message: 'Please provide all the required values!',
       buttons: ['OK']
     });
 
     await alert.present();
   } else {
      this.certificationForm.value.currentUserId = this.userId;
-       
+     this.certificationForm.value.issuedDate =formatDate(this.certificationForm.value.issuedDate, 'dd/MM/yyyy','en-IN');
+     this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDate, 'dd/MM/yyyy','en-IN');
+
   this.CertificationForm = this.certificationForm.value;
   console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
   var saveSkill = "api/auth/app/mobile/saveCretification";

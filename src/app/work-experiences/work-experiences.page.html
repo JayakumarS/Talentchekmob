@@ -21,18 +21,7 @@
 <form [formGroup]="ExperienceForm">
 
 <ion-card-content>
-    <!-- <ion-row>
-        <ion-col size="8">
-            <ion-title style="color:black;margin-left: -5%;">Work Experience</ion-title>
-        </ion-col>
-        <ion-col size="2">
-            <ion-icon style="color:#ACCCFF;" size="large" name="duplicate"></ion-icon>
-        </ion-col> -->
-        <!-- <ion-sub-title style="color:black">Total : 5 years 6 months</ion-sub-title> 
-    </ion-row> -->
-
-   
-    <div id="test-l-1" class="content">
+     <div id="test-l-1" class="content">
         <div class="button-content">
             <ion-label class="labels">Designation/Role <small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
@@ -59,8 +48,8 @@
                                 <ion-row>
                                     <ion-col>
                                       <ion-list *ngIf="IsorgListShow" lines="full">
-                                        <ion-item *ngFor="let cElement of organisationList">
-                                          <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id);getTitle(cElement.id)">
+                                        <ion-item *ngFor="let cElement of OrganisationList">
+                                          <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id);getTitle(cElement.id);orgLocation(cElement.id)">
                                             {{ cElement.text }}
                                           </ion-label>
                                         </ion-item>
@@ -80,13 +69,13 @@
                         <div class="button-content">
                             <ion-label class="labels">Job Start Date<small style="color: #f70505;">*</small> </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expStartObj" presentation="date"></ion-datetime>
+                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
                             </ion-item>
                             </div>
                             <div class="button-content">
                                 <ion-label class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expEndObj" presentation="date"></ion-datetime>
+                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date"></ion-datetime>
                                 </ion-item>
                                
                                   <div style="    display: flex;">
@@ -118,7 +107,7 @@
                                         </div> -->
                                       
                                         <div class="button-content">
-                                         <ckeditor formControlName="ckeditor" ></ckeditor>
+                                         <ckeditor formControlName="expDescription" ></ckeditor>
                                         </div>
                                         
                                         <!-- <div ngModel>
