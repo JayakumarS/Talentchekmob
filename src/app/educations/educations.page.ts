@@ -1,7 +1,7 @@
 
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -62,17 +62,17 @@ export class EducationsPage implements OnInit {
     //this.getstudyList();
     this.EducationForm = this.fb.group({
       institutionName: [""],
-      institutionLocation: [""],
+      institutionLocation: ["",Validators.required],
       courseStartObj:[""],
       courseEndObj : [""],
-      courseStart: [""],
-      courseEnd: [""],
+      courseStart: ["",Validators.required],
+      courseEnd: ["",Validators.required],
       ckeditor:[""],
       currentlyStudy: [""],
       degree: [""],
       fieldofStudy: [""],
-      stuRegisterNumber: [""],
-      aggregateMarks:[""],
+      stuRegisterNumber: ["",Validators.required],
+      aggregateMarks:["",Validators.required],
       eduDescription:[""],
       eduId:[""],
       currentUserId:[""]
@@ -235,33 +235,55 @@ getStudyList(){
  });
 }
     
-      save(){
+ 
+      async save(){
+
+       if(this.Exp.orgName != ""){
+        const errors = this.checkFormValidity(this.EducationForm);
+        
+        if (errors.length > 0) {
+          // Display errors in a popup
+          const alert = await this.toastController.create({
+            header: 'Validation Error',
+            message: errors.join('<br>'),
+            buttons: ['OK']
+          });
+      
+          await alert.present();
+        } else{
+          if(this.unregistered == ""){
+            this.EducationForm.value.unregisteredIns = this.Exp.orgName;
+           }else{
+            this.EducationForm.value.unregisteredIns = this.unregistered;
+           }
+      
+  
+            console.log(this.fromdate);
+            this.EducationForm.value.institutionName =this.Exp.orgName;
+            this.EducationForm.value.currentUserId=this.userId;
+            this.Education = this.EducationForm.value;
+          this.EducationForm.value.courseStart =formatDate(this.EducationForm.value.courseStart, 'MM/yyyy','en-IN');
+          this.EducationForm.value.courseEnd=formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy','en-IN');
+          
+  console.log(` data: ${JSON.stringify(this.Education)}`);
+  var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
+  
+   this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {  
+      console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+     // this.router.navigate(['/job']);
+      this.presentToast()
+      }
+   });
+      }
+
+       }else{
+
+        this.presentToast1()
+       }
+       
 
 
-        if(this.unregistered == ""){
-          this.EducationForm.value.unregisteredIns = this.Exp.orgName;
-         }else{
-          this.EducationForm.value.unregisteredIns = this.unregistered;
-         }
-    
-this.EducationForm.value.courseStart =formatDate(this.EducationForm.value.courseStart, 'MM/yyyy','en-IN');
-this.EducationForm.value.courseEnd=formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy','en-IN');
-
-console.log(this.fromdate);
-this.EducationForm.value;
-this.EducationForm.value.unregisteredIns = this.unregistered;
-this.EducationForm.value.currentUserId=this.userId;
-this.Education = this.EducationForm.value;
-console.log(` data: ${JSON.stringify(this.Education)}`);
-var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
-
- this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {  
-    console.log("Image upload response: " + result)
-   if (result["success"] == true) {
-   // this.router.navigate(['/job']);
-    this.presentToast()
-    }
- });
       }
 
       async presentToast() {
@@ -273,5 +295,33 @@ var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
     
       await toast.present();
        this.router.navigate(['/profile-view']);
+    
+}
+
+async presentToast1() {
+  const toast = await this.toastController.create({
+    message: 'Institution Name is required',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+
+await toast.present();
+
+}
+
+checkFormValidity(form: FormGroup): string[] {
+  const errors: string[] = [];
+  
+  // Check each form control for errors
+  Object.keys(form.controls).forEach(key => {
+    const controlErrors: ValidationErrors = form.controls[key].errors;
+    if (controlErrors != null) {
+      Object.keys(controlErrors).forEach(keyError => {
+        errors.push(`${key} ${keyError}`);
+      });
     }
+  });
+
+  return errors;
+}
 }

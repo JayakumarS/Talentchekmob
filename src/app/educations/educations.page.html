@@ -1,28 +1,30 @@
 <ion-header>
-  <ion-toolbar class="new-background-color">
-      <ion-row>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
 
-          <ion-col size="0.5">
+            <ion-col size="0.5">
 
-          </ion-col>
-          <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()"
+                    style="margin-top:21%"></ion-icon>
+            </ion-col>
 
-          <ion-col size="7">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Education</ion-title>
-          </ion-col>
-      </ion-row>
+            <ion-col size="7">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add
+                    Education</ion-title>
+            </ion-col>
+        </ion-row>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="EducationForm" >
+    <form [formGroup]="EducationForm">
 
 
-  <ion-card-content>
-      <!-- <ion-row>
+        <ion-card-content>
+            <!-- <ion-row>
           <ion-col size="8">
               <ion-title style="color:black;margin-left: -5%;">Education</ion-title>
           </ion-col>
@@ -30,118 +32,162 @@
               <ion-icon style="color:#ACCCFF;" size="large" name="duplicate"></ion-icon>
           </ion-col> 
       </ion-row> -->
-      <div id="test-l-1" class="content">
-          <div class="button-content">
-              <ion-label class="labels">Educational Institution Name<small style="color: #f70505;">*</small></ion-label>
-            
-                <ion-item fill="outline" class="input-field">
-                  <div >{{ selecteInstitution }} 
-                    <ion-icon *ngIf="selecteInstitution != undefined && selecteInstitution != ''" name="close-circle" (click)="removeOrganisation(selecteInstitution)"></ion-icon>
-                  </div>
+            <div id="test-l-1" class="content">
+                <div class="button-content">
+                    <ion-label class="labels">Educational Institution Name<small
+                            style="color: #f70505;">*</small></ion-label>
 
-                  <ion-input  warp="soft" (ionInput)="onSearchInstitution($event.target.value)" [formControl]="searchCtrl"></ion-input>
-              </ion-item>
-              <ion-list *ngIf="IsSearchListShow">
-                <ion-item *ngFor="let result of institutionList" (click)="selectInstitution(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
-                    {{ result.text }}
-                </ion-item>
-            </ion-list>
-           
-               
-            
-              <!-- <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title> -->
-             </div>
-              <ion-spacer size="large"></ion-spacer><br>
-               <div class="button-content">
-                  <ion-label class="labels">Institution Location <small style="color: #f70505;">*</small></ion-label>
-                  <ion-item fill="outline" class="input-field">
-                      <ion-input formControlName="institutionLocation"></ion-input>
-                  </ion-item>
-                  </div>
-                 
-                      
-                          <div class="button-content">
-                              <ion-label class="labels">Course Start Month-Year<small style="color: #f70505;">*</small> </ion-label>
-                              <ion-item fill="outline" class="input-field">
-                                <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart"displayFormat="MM/YYYY"(monthSelected)="setMonthAndYearStr($event, picker1,'courseStart')" ></ion-datetime>               
-                                               </ion-item>
-                              </div>
-                              <div class="button-content">
-                                  <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
-                                  <ion-item fill="outline" class="input-field">
-                                    <ion-datetime formControlName="courseEnd"displayFormat="MM/YYYY"  [(ngModel)]="selectedDate" ></ion-datetime>                                  </ion-item>
-                                 
-                                    <div style="display: flex;">
-                                      <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyStudy" ></ion-checkbox>&nbsp;I currently study here
-                                    </div>
-                                    
-                                  </div>
-                                  <ion-spacer size="large"></ion-spacer><br>
-                                  <div class="button-content">
-                                      <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
-                                      <ion-item fill="outline" class="input-field">
-                                      <div >{{ selectDegreeSet }} 
-                                      </div>
-                                      <ion-input  warp="soft" (ionInput)="onSearchDegree($event.target.value)" [formControl]="searchCtrl"></ion-input>
-                                  </ion-item>
-                                  <ion-list *ngIf="IsDegreeListShow">
-                                    <ion-item *ngFor="let result of degreeList" (click)="selectDegree(result.text,result.id)">
-                                        {{ result.text }}
-                                    </ion-item>
-                                </ion-list>
-                                       
-                                      </div>
+                    <ion-item fill="outline" class="input-field">
+                        <div>{{ selecteInstitution }}
+                            <ion-icon *ngIf="selecteInstitution != undefined && selecteInstitution != ''"
+                                name="close-circle" (click)="removeOrganisation(selecteInstitution)"></ion-icon>
+                        </div>
 
-                                      <div class="button-content">
-                                          <ion-label class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
-                                       
-                                          <ion-item fill="outline" class="input-field">
-                                           
-                                            <div >{{ selectStudySet }} 
-                                            </div>
-                                            <ion-input  warp="soft" (ionInput)="onSearchStudy($event.target.value)" [formControl]="searchCtrl"></ion-input>
-                                        </ion-item>
-                                        <ion-list *ngIf="IsstudyListShow">
-                                          <ion-item *ngFor="let result of studyList" (click)="selectStudy(result.text,result.id)">
-                                              {{ result.text }}
-                                          </ion-item>
-                                      </ion-list>
-                                         
-                                          </div>
-
-                                  <div class="button-content">
-                                      <ion-label class="labels">Student Registration Number<small style="color: #f70505;">*</small></ion-label>
-                                      <ion-item fill="outline" class="input-field">
-                                          <ion-input  type="number"formControlName="stuRegisterNumber"></ion-input>
-                                      </ion-item>
-                                      </div>
-
-                                      <div class="button-content">
-                                          <ion-label class="labels">Aggregate Marks or GPA obtained<small style="color: #f70505;">*</small></ion-label>
-                                          <ion-item fill="outline" class="input-field">
-                                              <ion-input formControlName="aggregateMarks"></ion-input>
-                                          </ion-item>
-                                          </div>
-
-                                          <div class="button-content">
-                                            <ckeditor formControlName="eduDescription" ></ckeditor>
-                                           </div>
+                        <ion-input (ionInput)="onSearchInstitution($event.target.value)" 
+                            [formControl]="searchCtrl"></ion-input>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.institutionName.hasError('required') && EducationForm.controls.institutionName.touched">
+                    <small style="color: #f70505;">Institution Name is required</small>
+                </div>
+                    <ion-list *ngIf="IsSearchListShow">
+                        <ion-item *ngFor="let result of institutionList"
+                            (click)="selectInstitution(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
+                            {{ result.text }}
+                        </ion-item>
+                    </ion-list>
 
 
 
-                                          <div class="button-content" style="width: 50%;
+                    <!-- <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title> -->
+                </div>
+                <ion-spacer size="large"></ion-spacer><br>
+                <div class="button-content">
+                    <ion-label class="labels">Institution Location <small style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-input formControlName="institutionLocation"></ion-input>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.institutionLocation.hasError('required') && EducationForm.controls.institutionLocation.touched">
+                    <small style="color: #f70505;">Institution Location is required</small>
+                </div>
+                </div>
+
+
+                <div class="button-content">
+                    <ion-label class="labels">Course Start Month-Year<small style="color: #f70505;">*</small>
+                    </ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart" displayFormat="MM/YYYY"
+                            (monthSelected)="setMonthAndYearStr($event, picker1,'courseStart')"></ion-datetime>
+                    </ion-item>
+                    <div
+                        *ngIf=" EducationForm.controls.courseStart.hasError('required') && EducationForm.controls.courseStart.touched">
+                        <small style="color: #f70505;">Course Start is required</small>
+                    </div>
+                </div>
+                <div class="button-content">
+                    <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-datetime formControlName="courseEnd" displayFormat="MM/YYYY"
+                        (monthSelected)="setMonthAndYearStr($event, picker1,'courseEnd')"   [(ngModel)]="selectedDate"></ion-datetime>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
+                    <small style="color: #f70505;">Course End is required</small>
+                </div>
+                    <div style="display: flex;">
+                        <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyStudy"></ion-checkbox>&nbsp;I
+                        currently study here
+                    </div>
+
+                </div>
+                <ion-spacer size="large"></ion-spacer><br>
+                <div class="button-content">
+                    <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <div>{{ selectDegreeSet }}
+                        </div>
+                        <ion-input warp="soft" (ionInput)="onSearchDegree($event.target.value)"
+                            [formControl]="searchCtrl"></ion-input>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
+                    <small style="color: #f70505;">Class/Degree/Course is required</small>
+                </div>
+                    <ion-list *ngIf="IsDegreeListShow">
+                        <ion-item *ngFor="let result of degreeList" (click)="selectDegree(result.text,result.id)">
+                            {{ result.text }}
+                        </ion-item>
+                    </ion-list>
+
+                </div>
+
+                <div class="button-content">
+                    <ion-label class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
+
+                    <ion-item fill="outline" class="input-field">
+
+                        <div>{{ selectStudySet }}
+                        </div>
+                        <ion-input warp="soft" (ionInput)="onSearchStudy($event.target.value)"
+                            [formControl]="searchCtrl"></ion-input>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
+                    <small style="color: #f70505;">Class/Degree/Course is required</small>
+                </div>
+                    <ion-list *ngIf="IsstudyListShow">
+                        <ion-item *ngFor="let result of studyList" (click)="selectStudy(result.text,result.id)">
+                            {{ result.text }}
+                        </ion-item>
+                    </ion-list>
+
+                </div>
+
+                <div class="button-content">
+                    <ion-label class="labels">Student Registration Number<small
+                            style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-input type="number" formControlName="stuRegisterNumber"></ion-input>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.stuRegisterNumber.hasError('required') && EducationForm.controls.stuRegisterNumber.touched">
+                    <small style="color: #f70505;">Student Registration Number is required</small>
+                </div>
+                </div>
+
+                <div class="button-content">
+                    <ion-label class="labels">Aggregate Marks or GPA obtained<small
+                            style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline"  class="input-field">
+                        <ion-input formControlName="aggregateMarks" type="number"></ion-input>
+                    </ion-item>
+                    <div
+                    *ngIf=" EducationForm.controls.stuRegisterNumber.hasError('required') && EducationForm.controls.stuRegisterNumber.touched">
+                    <small style="color: #f70505;">aggregateMarks is required</small>
+                </div>
+                </div>
+
+                <div class="button-content">
+                    <ckeditor formControlName="eduDescription"></ckeditor>
+                </div>
+
+
+
+                <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="save()">save</ion-button>
-                                        </div>
-                  </div>
+                    <ion-button color="primary" fill="outline" (click)="save()">save</ion-button>
+                </div>
+            </div>
 
-      <!-- <ion-row class="talentrow">
+            <!-- <ion-row class="talentrow">
           <ion-card class="talentcard2">
               <ion-card-content> -->
 
-                  
 
-                  <!-- <ion-row>
+
+            <!-- <ion-row>
                       <ion-col size="2">
                           <img src="./assets/icon/edit_icon.png">
                       </ion-col>
@@ -155,7 +201,7 @@
 
                   </ion-row> -->
 
-                  <!-- <ion-row>
+            <!-- <ion-row>
                       <ion-col size="12">
                           <ion-label>Category : Job Seeker,Business Owner,Freelancer</ion-label>
                       </ion-col>
@@ -167,30 +213,30 @@
                       </ion-col>
                   </ion-row> -->
 
-              <!-- </ion-card-content>
+            <!-- </ion-card-content>
           </ion-card>
       </ion-row> -->
 
-  </ion-card-content>
+        </ion-card-content>
 
-</form>
+    </form>
 
-<div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
-      <ion-icon size="large" name="search-circle"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
-      <ion-icon size="large" name="earth-sharp"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-      <ion-icon size="large" name="apps"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
-      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
-      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-    </button>
-</div>
+    <div class="footer-nav">
+        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+            <ion-icon size="large" name="search-circle"></ion-icon>
+        </button>
+        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+            <ion-icon size="large" name="earth-sharp"></ion-icon>
+        </button>
+        <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+            <ion-icon size="large" name="apps"></ion-icon>
+        </button>
+        <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+            <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+        </button>
+        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+            <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+        </button>
+    </div>
 
 </ion-content>
