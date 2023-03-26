@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
 
-import { ProfileViewRoutingModule } from './profile-view-routing.module';
+import { ProfileViewPageRoutingModule } from './profile-view-routing.module';
 
+import { ProfileViewPage } from './profile-view.page';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
-    ProfileViewRoutingModule,
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-  ]
+    ProfileViewPageRoutingModule
+  ],
+  declarations: [ProfileViewPage]
 })
-export class ProfileViewModule { }
+export class ProfileViewPageModule {}
