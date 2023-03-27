@@ -36,7 +36,7 @@
                   <ion-input  warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-input>
               </ion-item>
               <div *ngIf=" skillForm.controls.keySkill.hasError('required') && skillForm.controls.keySkill.touched">
-                <small style="color: #f70505;">phone No is required</small>
+                <small style="color: #f70505;">Skills is required</small>
               </div>
   
               <ion-list *ngIf="showSkillResults">

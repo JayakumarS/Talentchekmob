@@ -62,7 +62,7 @@ export class ProfileViewPage implements OnInit {
   }
   Extracurricular()
   {
-    this.router.navigate(['/Extracurricular']) 
+    this.router.navigate(['/club']) 
   }
   Skill()
   {

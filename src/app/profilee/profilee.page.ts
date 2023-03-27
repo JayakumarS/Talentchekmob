@@ -168,7 +168,6 @@ checkFormValidity(form: FormGroup): string[] {
 
       this.profileForm.patchValue({
        'dob': startdate.toISOString(),
-
        'firstname': this.profileList[0].firstname,
        'lastname': this.profileList[0].lastname,
        'gender':this.profileList[0].gender,
