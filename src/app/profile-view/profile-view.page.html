@@ -29,7 +29,8 @@
 
             <ion-col size="2">
                 <ion-avatar size="small">
-                    <img alt="Silhouette of a person's head" style=" height: 60%;width: 60%;" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                    <img alt="Silhouette of a person's head" style=" height: 60%;width: 60%;"
+                        src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </ion-avatar>
             </ion-col>
         </ion-row>
@@ -83,34 +84,27 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card class="talentcard1">
+    <ion-card class="talentcard1" style="    padding-bottom: 35px ;">
         <ion-card-content>
             <ion-row>
                 <ion-col size="10">
-                    <ion-title style="color:black; margin-left: -9%;">Academics</ion-title>
+                    <ion-title style="color:black;     margin-left: 13%;">Academics</ion-title>
                 </ion-col>
-                <ion-col size="2">
-                    <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="educations()">
-
-                    <img src="./assets/icon/edit_icon.png" (click)="editskillInfo()" id="prfoileimg1">
-                </ion-col>
-            </ion-row>
-
-            <ion-row class="talentrow">
-                <ion-col>
-                    <ion-label> Mobile App</ion-label>
-                    <ion-progress-bar value="0.6"></ion-progress-bar>
-                </ion-col>
-            </ion-row>
-            <ion-row class="talentrow">
-
-                <ion-col>
-                    <ion-label> Website Devlopement</ion-label>
-                    <ion-progress-bar value="0.6"></ion-progress-bar>
+                <ion-col size="5">
+                    <!-- C:\Users\Swathy\shippage\TC_Mobile\Talentchekmob\src\assets\icon\save add.png -->
+                    <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="educations()" 
+                    style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                   <!-- // <ion-icon style="width: 190%; height: 190%; padding: 20px;" name="add-circle-outline"></ion-icon> -->
+                 
                 </ion-col>
 
             </ion-row>
-
+            <ion-row>
+                <ion-col >
+                    <ion-title style="color:black;margin-top: 5%;
+                    margin-left: 0%;">Add Education</ion-title>
+                </ion-col>
+            </ion-row>
         </ion-card-content>
     </ion-card>
 
@@ -173,7 +167,8 @@
                                 <img src="./assets/icon/edit_icon.png" (click)="Extracurricular()">
                             </ion-col>
                             <ion-col size="8">
-                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Extracurricular </ion-title>
+                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Extracurricular
+                                </ion-title>
                             </ion-col>
 
                             <ion-col size="2">
@@ -205,7 +200,8 @@
                                 <img src="./assets/icon/edit_icon.png" (click)="Connections()">
                             </ion-col>
                             <ion-col size="8">
-                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Connections</ion-title>
+                                <ion-title
+                                    style="color:black; margin-left: -16%;  margin-top: -2%;">Connections</ion-title>
                             </ion-col>
 
                             <ion-col size="2">
@@ -237,7 +233,8 @@
                                 <img src="./assets/icon/edit_icon.png" (click)="Additional()">
                             </ion-col>
                             <ion-col size="8">
-                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Additional info </ion-title>
+                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Additional info
+                                </ion-title>
                             </ion-col>
 
                             <ion-col size="2">
@@ -290,7 +287,8 @@
                                 <img src="./assets/icon/edit_icon.png">
                             </ion-col>
                             <ion-col size="8">
-                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Paragon dynamics info </ion-title>
+                                <ion-title style="color:black; margin-left: -16%;  margin-top: -2%;">Paragon dynamics
+                                    info </ion-title>
                             </ion-col>
 
                             <ion-col size="2">
@@ -321,23 +319,24 @@
 
 
     <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-    <ion-icon size="large" name="search-circle"></ion-icon>
-  </button>
+        <button [ngClass]="{'selected': selectedTab === 'search'}"
+            (click)="setSelectedTab('search');goto_profileSearch();">
+            <ion-icon size="large" name="search-circle"></ion-icon>
+        </button>
         <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-    <ion-icon size="large" name="earth-sharp"></ion-icon>
-  </button>
+            <ion-icon size="large" name="earth-sharp"></ion-icon>
+        </button>
         <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-     <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-    
-  </button>
+            <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+
+        </button>
         <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-  </button>
+            <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+        </button>
         <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-    <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-    
-  </button>
+            <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+        </button>
     </div>
 
 </ion-content>
