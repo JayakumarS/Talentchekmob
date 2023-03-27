@@ -234,9 +234,9 @@ getOrganisationList(){
     })
   }
 
+//Updateclub
 
-
-  async UpdateCertification(){
+  async Updateclub(){
     const errors = this.checkFormValidity(this.clubFrom);
 
   if (errors.length > 0) {
@@ -268,15 +268,7 @@ getOrganisationList(){
    });
   }
   }
-//   async presentToast() {
-//     const toast = await this.toastController.create({
-//       message: 'Saved Successfully',
-//       duration: 3000,
-//       cssClass: 'custom-toast'
-//     });
 
-//   await toast.present();
-// }
 
 async updateToast() {
   const toast = await this.toastController.create({
