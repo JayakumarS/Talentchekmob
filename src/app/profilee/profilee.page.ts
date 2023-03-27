@@ -156,7 +156,7 @@ checkFormValidity(form: FormGroup): string[] {
   //editprofileDetails
   editprofile(){
 
-    var industryURL = "api/auth/app/IndividualProfileDetails/editprofiledetails?currentUserId="+this.currentUserId ;
+    var industryURL = "api/auth/app/mobile/editprofiledetails?currentUserId="+this.currentUserId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
       
@@ -174,12 +174,15 @@ checkFormValidity(form: FormGroup): string[] {
        'mobile':this.profileList[0].mobile,
        //'dob':this.profileList[0].dob,
        'dobObj':result,
+       'permAddress':this.profileList[0].permAddress,
        'email':this.profileList[0].email,
        'nationalid':this.profileList[0].nationalid,
        'category': this.profileList[0].category,
        'uploadImg':this.profileList[0].uploadImg,
        'linkurl': this.profileList[0].linkurl,
        'details': this.profileList[0].details,
+       'hobbies':this.profileList[0].hobbies,
+       'languagesknown':this.profileList[0].languagesknown,
       })
   
     })
