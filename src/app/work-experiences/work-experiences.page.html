@@ -134,9 +134,14 @@
                                         <!-- <div ngModel>
                                             <ckeditor [(ngModel)]="content" formControlName="ckeditor" [config]="editorConfig"></ckeditor>
                                           </div> -->
-                                        <div class="button-content" style="width: 50%;
+                                        <div *ngIf="!edit" class="button-content" style="width: 50%;
                                       margin: auto;">
-                                      <ion-button color="primary" fill="outline" (click)="saveCertification()">Update</ion-button>
+                                      <ion-button color="primary" fill="outline" (click)="saveCertification()">Save</ion-button>
+                                      </div>
+
+                                      <div *ngIf="edit" class="button-content" style="width: 50%;
+                                      margin: auto;">
+                                      <ion-button color="primary" fill="outline" (click)="updateCertification()">Update</ion-button>
                                       </div>
                 </div>
    

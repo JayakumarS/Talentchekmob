@@ -26,19 +26,19 @@ export class ProfileViewPage implements OnInit {
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
      console.log(result);   
-     if(result['profileViewList'][0].educationList.length != 0){
+     if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){
       this.educationcard = true;
       }
-      if(result['profileViewList'][0].clubsList.length != 0){
+      if(result['profileViewList'][0].clubsList.length != 0 && result['profileViewList'] != null){
         this.clubscard = true;
         }
-        if(result['profileViewList'][0].experienceList.length != 0){
+        if(result['profileViewList'][0].experienceList.length != 0 && result['profileViewList'] != null){
           this.experiencecard = true;
           }
-          if(result['profileViewList'][0].skillList.length != 0){
+          if(result['profileViewList'][0].skillList.length != 0 && result['profileViewList'] != null){
             this.skillscard = true;
             }
-            if(result['profileViewList'][0].connectionList.length != 0){
+            if(result['profileViewList'][0].connectionList.length != 0 && result['profileViewList'] != null){
               this.connectioncard = true;
               }
               // if(result['profileViewList'][0].educationList.length != 0){

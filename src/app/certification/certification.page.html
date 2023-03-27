@@ -78,28 +78,31 @@
                           <div class="button-content">
                               <ion-label class="labels">Issue Date </ion-label>
                               <ion-item fill="outline" class="input-field">
-                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="issuedDate" presentation="date"></ion-datetime>
+                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="issuedDateObj" presentation="date"></ion-datetime>
                               </ion-item>
                               </div>
                               <div class="button-content">
                                   <ion-label class="labels">Expiry Date(if applicable) </ion-label>
                                   <ion-item fill="outline" class="input-field">
-                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expiryDate" presentation="date"></ion-datetime>
+                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expiryDateObj" presentation="date"></ion-datetime>
                                   </ion-item>
                                  
                                     
                                   </div>
-                                  <div class="button-content">
+                                  <!-- <div class="button-content">
                                       <ion-button style="background: #3880ff;border-radius:20px">
                                           <ion-icon lazy="true" slot="start" name="image"></ion-icon>
-                                          <!-- <ion-label slot="end">Upload Image</ion-label> -->
-                                          <input type="file" formControlName="certificationName" (change)="loadImageFromDevice($event)" id="file-input"
+                                           <input type="file" formControlName="certificationPath" (change)="loadImageFromDevice($event)" id="file-input"
                                             accept="image/png, image/jpeg">
                                         </ion-button>
-                                  </div>
-                                  <div class="button-content" style="width: 50%;
+                                  </div> -->
+                                  <div *ngIf="!edit" class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="saveCertification()">Next</ion-button>
+                                        <ion-button color="primary" fill="outline" (click)="saveCertification()">Save</ion-button>
+                                        </div>
+                                  <div *ngIf="edit" class="button-content" style="width: 50%;
+                                        margin: auto;">
+                                        <ion-button color="primary" fill="outline" (click)="UpdateCertification()">Update</ion-button>
                                         </div>
                     
                 

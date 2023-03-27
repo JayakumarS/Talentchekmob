@@ -6,7 +6,8 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { SkillPopupPage } from '../skill-popup/skill-popup.page';
 import { formatDate } from '@angular/common';
- 
+import moment from 'moment';
+
 
 @Component({
   selector: 'app-certification',
@@ -18,6 +19,7 @@ export class CertificationPage implements OnInit {
   certificationForm: FormGroup;
   userId: string;
   CertificationForm: any;
+  edit: boolean =false;
 
   constructor(public router:Router,public modalController: ModalController,
     public fb: FormBuilder, 
@@ -28,14 +30,50 @@ export class CertificationPage implements OnInit {
     this.certificationForm = this.fb.group({
       certificationName:['', Validators.required],
       issuedBy:['', Validators.required],
+      issuedDateObj:[''],
+      expiryDateObj:[''],
       issuedDate:[''],
-      expiryDate:[""],
+      expiryDate:[''],
       certificationId:["", Validators.required],
       certId:[""],
       currentUserId:[""],
       certificationPath :[""]
     })
+
+
+    this.fetchEditDeatils();
   }
+
+
+  fetchEditDeatils(){
+    var getEditValues= "api/auth/app/IndividualProfileDetails/editCertification";
+         
+    this.storageservice.getrequest(getEditValues + "?certId=" + 55).subscribe(result => {
+     if (result["success"] == true) {
+      this.edit = true;
+ 
+      const issuedate = result["skillandCertificationsBean"].issuedDate;
+      const startdate = moment(issuedate, 'DD/MM/YYYY').toDate();
+
+      const expdate = result['skillandCertificationsBean'].expiryDate;
+      const enddate = moment(expdate, 'DD/MM/YYYY').toDate();
+ 
+      this.certificationForm.patchValue({ 
+      'certId': result["skillandCertificationsBean"].certId,
+      'certificationName': result["skillandCertificationsBean"].certificationName,
+      'issuedBy': result["skillandCertificationsBean"].issuedBy,
+      'certificationId': result["skillandCertificationsBean"].certificationId,
+      'issuedDateObj': startdate.toISOString(),
+      'expiryDateObj': enddate.toISOString(),
+      'certificationPath': result["skillandCertificationsBean"].uploadCertification
+      })
+     }
+   });
+  }
+
+
+
+
   clubs()
   {
     this.router.navigate(['/profile/addClubs']) 
@@ -99,10 +137,10 @@ loadImageFromDevice(event) {
 
     await alert.present();
   } else {
-     this.certificationForm.value.currentUserId = this.userId;
-     this.certificationForm.value.issuedDate =formatDate(this.certificationForm.value.issuedDate, 'dd/MM/yyyy','en-IN');
-     this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDate, 'dd/MM/yyyy','en-IN');
+     this.certificationForm.value.currentUserId = this.userId; 
 
+     this.certificationForm.value.issuedDateObj =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
+     this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
   this.CertificationForm = this.certificationForm.value;
   console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
   var saveSkill = "api/auth/app/mobile/saveCretification";
@@ -119,6 +157,39 @@ loadImageFromDevice(event) {
   }
   } 
 
+  async UpdateCertification(){
+    const errors = this.checkFormValidity(this.certificationForm);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+      header: 'Validation Error',
+      message: 'Please provide all the required values!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  } else {
+     this.certificationForm.value.currentUserId = this.userId; 
+
+     this.certificationForm.value.issuedDate =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
+     this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
+  this.CertificationForm = this.certificationForm.value;
+  console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
+  var saveSkill = "api/auth/app/IndividualProfileDetails/updateCertification";
+
+   this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
+      console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+      this.router.navigate(['/profile-view']);
+      this.updateToast()
+       }else{  
+
+       }
+   });
+  }
+  }
+
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Saved Successfully',
@@ -127,6 +198,16 @@ loadImageFromDevice(event) {
     });
 
   await toast.present();
+}
+
+async updateToast() {
+  const toast = await this.toastController.create({
+    message: 'Updated Successfully',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+
+await toast.present();
 }
 
   checkFormValidity(form: FormGroup): string[] {
