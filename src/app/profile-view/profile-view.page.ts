@@ -29,6 +29,8 @@ export class ProfileViewPage implements OnInit {
   expertise: any;
   skillList: any;
   education: any;
+  experience: any;
+  club: any;
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
@@ -73,6 +75,10 @@ export class ProfileViewPage implements OnInit {
      this.skillList = result['profileViewList'][0].skillList;
     //educations
     this.education=result['profileViewList'][0].educationList;
+    //experience
+    this.experience=result['profileViewList'][0].experienceList;
+    //Extracurricular
+    this.club=result['profileViewList'][0].clubsList;
         });
 this.getprofile();
      
