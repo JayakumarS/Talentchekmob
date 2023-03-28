@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormGroupDirective,FormControl, Validators, Val
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { formatDate } from '@angular/common';
+import moment from 'moment';
 
 @Component({
   selector: 'app-job-profile',
@@ -37,52 +39,22 @@ export class JobProfilePage implements OnInit {
   searchResults: string[] = [];
   selectedCities: string[] = [];
   showResults: boolean = false; 
-
-
+ 
   searchSkillResults: string[] = [];
   selectedSkills: string[] = [];
   showSkillResults: boolean = false; 
   jobpostMaster: any;
   searchCtrl = new FormControl('');
   disable :boolean = false;
-  disable1: boolean;
-  disable2: boolean;
+  disable1: boolean = false;
+  disable2: boolean = false;
+  edit: boolean  = false;
+  jobShiftArray  = [];
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
     private toastController: ToastController,
-    public storageservice:StorageService,private route: ActivatedRoute) {  
-
-
-      this.route.queryParams.subscribe(params => {
-        if (params) {
-    
-          if (params != null) {
-
-            if(params['call'] == "edit-call"){
-
-              this.userId = localStorage.getItem("userId")  ; 
-              var BasicSearcUrl = "api/auth/app/jobportal/editJobSeekDetails?currentUserId="+ this.userId ;
-
-              this.storageservice.getrequest(BasicSearcUrl).subscribe(result => {
-
-if(result["success"] == true){
-
-  this.jobProfileForm = result["jobSeekList"][0] ;
-            
-  console.log(result);
-}        
-             });
-
-
-            }
-        
-           console.log(params);
-  
-          }
-        }
-      });
-      
+    public storageservice:StorageService,private route: ActivatedRoute) {    
     }
 
   selectedTab: string = 'earth';
@@ -134,35 +106,144 @@ if(result["success"] == true){
       this.workLocationList();
       this.getlanguageList();
       this.getSkillList();
-      this.validatePreference();
-      this.validateAvailability();
-      this.validateInformation();
+      
+     
+      this.route.queryParams.subscribe(params => {
+        if (params) { 
+          if (params != null) { 
+            if(params['call'] == "edit-call"){ 
+              this.userId = localStorage.getItem("userId"); 
+              this.fetchdetails(this.userId); 
+            }
+           console.log(params);
+          }
+        }
+      });
+    }
+
+
+
+    fetchdetails(userid){
+      var BasicSearcUrl = "api/auth/app/jobportal/editJobSeekDetails?currentUserId="+ userid ;
+
+      this.storageservice.getrequest(BasicSearcUrl).subscribe(result => {
+        if(result["success"] == true){
+          this.jobProfileForm.reset(); 
+        if(result["jobSeekList"].length !=0){ 
+          this.edit=true;
+           console.log(result);
+
+          const industry = [result["jobSeekList"][0].industry.toString()]
+          const indId = result["jobSeekList"][0].industry;
+          this.jobtitleList(indId)
+
+          this.selectedCities =[];
+          this.selectedSkills = [];
+          //skill
+          let str = result["jobSeekList"][0].jobSkills; 
+          for(let i=0;i<str.length;i++){
+            var skill = str[i]
+            this.selectedSkills.push(skill);
+          }
+
+          //city
+          let loc = result["jobSeekList"][0].location;
+
+          for(let i=0;i<loc.length;i++){
+            var location = loc[i]
+            this.selectedCities.push(location);
+          }
+
+          const jobStartDateFrom = result["jobSeekList"][0].jobStartDateFrom;
+          const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
+
+          const jobStartDateTo = result["jobSeekList"][0].jobStartDateTo;
+          const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
+
+          const shits = result["jobSeekList"][0].jobShift
+          const arr: string[] = shits.split(",");
+
+          for(let i=0;i<arr.length;i++){
+           var job = false;
+            var shift = arr[i]
+            if(shift=="f"){
+              job = false;
+            }else{
+              job = true;
+            }
+            this.jobShiftArray.push(job);
+          }
+
+          console.log(this.jobShiftArray)
+
+          this.jobProfileForm.patchValue({
+            'industry': industry,
+            'jobTitle': result["jobSeekList"][0].jobTitle,
+            'jobType': result["jobSeekList"][0].jobType,
+            'jobExperience':result["jobSeekList"][0].jobExperience,
+            'jobExperienceFormat': result["jobSeekList"][0].jobExperienceFormat,
+            'jobExpWorkHrs': result["jobSeekList"][0].jobExpWorkHrs,
+            'jobStartDateFrom': startdate,
+            'jobStartDateTo': enddate,
+            'reqLanguages': result["jobSeekList"][0].reqLanguages,
+            'relocatewill': result["jobSeekList"][0].relocatewill.toString(),
+            'travelwill': result["jobSeekList"][0].travelwill,
+            'jobSalaryFrom': result["jobSeekList"][0].jobSalaryFrom,
+            'jobSalaryTo': result["jobSeekList"][0].jobSalaryTo,
+            'jobSalaryCurrency': result["jobSeekList"][0].jobSalaryCurrency,
+            'jobSalaryFrequency': result["jobSeekList"][0].jobSalaryFrequency,
+
+            'jobShiftDM':this.jobShiftArray[0],
+            'jobShiftDT':this.jobShiftArray[1],
+            'jobShiftDW':this.jobShiftArray[2],
+            'jobShiftDTH':this.jobShiftArray[3],
+            'jobShiftDF':this.jobShiftArray[4],
+            'jobShiftDS':this.jobShiftArray[5],
+            'jobShiftDSU':this.jobShiftArray[6],
+            
+            'jobShiftNM':this.jobShiftArray[7],
+            'jobShiftNT':this.jobShiftArray[8],
+            'jobShiftNW':this.jobShiftArray[9],
+            'jobShiftNTH':this.jobShiftArray[10],
+            'jobShiftNF':this.jobShiftArray[11],
+            'jobShiftNS':this.jobShiftArray[12],
+            'jobShiftNSU':this.jobShiftArray[13],
+
+          })
+          console.log(this.jobProfileForm.value) 
+        }    
+      }    
+     });
     }
 
     validatePreference(){
       if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.jobTitle !="" && this.jobProfileForm.value.jobType !=""
       && this.selectedSkills.length != 0 && this.jobProfileForm.value.jobExperience !=""){
-        this.disable = false;
+        this.nextStep('step1', 'step2'); 
        }else{
-        this.disable = true;
+        this.errorToast();
        }
     }  
 
     validateAvailability(){
       if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 
       && this.jobProfileForm.value.jobStartDateTo !=""){
-        this.disable1 = false;
+        this.nextStep('step2', 'step3')
        }else{
-        this.disable1 = true;
+        this.errorToast();
        } 
     }
 
-    validateInformation(){
+    validateInformation(value){
       if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryTo !="" 
       && this.selectedCities.length !=0 && this.jobProfileForm.value.reqLanguages != 0){
-        this.disable2 = false;
-       }else{
-        this.disable2 = true;
+        if(value =='save'){
+          this.savejobseek();   
+        }else{
+          this.updatejobseek();
+        }
+      }else{
+        this.errorToast();
        } 
     }
 
@@ -327,7 +408,7 @@ nextStep(currentStep: string, nextStep: string) {
   }
  
   jobtitleList(event){
-    var value = event.detail.value
+    var value = event
     var jobtitleurl = "api/auth/app/CommonUtility/jobTitleList?industryid=" +value;
 
     const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
@@ -407,11 +488,15 @@ nextStep(currentStep: string, nextStep: string) {
   } else {
      this.jobProfileForm.value.jobSkills = this.selectedSkills
     this.jobProfileForm.value.location = this.selectedCities;
-    var fromdate = this.transformDate(this.jobProfileForm.value.jobStartDateFrom);
-    this.jobProfileForm.value.jobStartDateFrom = fromdate;
-    var todate = this.transformDate(this.jobProfileForm.value.jobStartDateTo);
-    this.jobProfileForm.value.jobStartDateTo = todate;
-    this.jobProfileForm.value.currentUserId = 'TFIN10555362814';
+
+    this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
+    this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
+
+
+    const myNumber: number = parseInt(this.jobProfileForm.value.industry.join(""));
+    this.jobProfileForm.value.industry = myNumber;
+
+     this.jobProfileForm.value.currentUserId = this.userId;
        
   this.jobpostMaster = this.jobProfileForm.value;
   console.log(` data: ${JSON.stringify(this.jobpostMaster)}`);
@@ -420,6 +505,7 @@ nextStep(currentStep: string, nextStep: string) {
    this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
+      this.jobProfileForm.reset();
       this.router.navigate(['/job']);
       this.presentToast()
       }
@@ -427,8 +513,62 @@ nextStep(currentStep: string, nextStep: string) {
   }
   } 
 
+  //Update
+  async updatejobseek(){
+    this.jobProfileForm.value.jobSkills = this.selectedSkills
+    this.jobProfileForm.value.location = this.selectedCities;
+  const errors = this.checkFormValidity(this.jobProfileForm);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+      header: 'Validation Error',
+      message: errors.join('<br>'),
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  } else {
+
+     this.jobProfileForm.value.jobSkills = this.selectedSkills
+    this.jobProfileForm.value.location = this.selectedCities;
+
+    this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
+    this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
+
+    const myNumber: number = parseInt(this.jobProfileForm.value.industry.join(""));
+    this.jobProfileForm.value.industry = myNumber;
+
+     this.jobProfileForm.value.currentUserId = this.userId;
+       
+  this.jobpostMaster = this.jobProfileForm.value;
+  console.log(` data: ${JSON.stringify(this.jobpostMaster)}`);
+  var saveJobProfile = "api/auth/app/jobportal/updateJobSeek";
+
+   this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
+      console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+      this.jobProfileForm.reset();
+      this.router.navigate(['/job']);
+      this.updateToast()
+      }else{
+        const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
+          const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
+          this.jobProfileForm.value.jobStartDateFrom = startdate;
+
+          const jobStartDateTo = this.jobProfileForm.value.jobStartDateTo;
+          const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
+          this.jobProfileForm.value.jobStartDateTo = enddate;
+      }
+   });
+  }
+  } 
+
+
+
+
   transformDate(date) {
-    return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
+    return date.substring(0, 4) + "/" + date.substring(5, 7) + "/" + date.substring(8, 10); //YYY-MM-DD
   }
 
  
@@ -441,6 +581,27 @@ nextStep(currentStep: string, nextStep: string) {
 
     await toast.present();
   }
+
+  async updateToast() {
+    const toast = await this.toastController.create({
+      message: 'Updated Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
+
+
+async errorToast() {
+  const toast = await this.toastController.create({
+    message: 'Please provide all the required values!',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+
+await toast.present();
+}
  
 
   checkFormValidity(form: FormGroup): string[] {

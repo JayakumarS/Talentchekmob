@@ -225,4 +225,8 @@ await toast.present();
   
     return errors;
   }
+
+  goto_profileView(){
+    this.router.navigate(['/profile-view']);
+  }
 }

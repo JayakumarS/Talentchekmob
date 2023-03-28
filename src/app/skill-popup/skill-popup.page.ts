@@ -17,7 +17,7 @@ export class SkillPopupPage implements OnInit {
   degreeListVal: any;
   skillsListVal: any;
   searchSkillResults: string[] = [];
-  selectedSkills: string[] = [];
+  selectedSkills: any;
   skillList = [];
   searchCtrl = new FormControl('');
   showSkillResults: boolean = false; 
@@ -56,16 +56,16 @@ export class SkillPopupPage implements OnInit {
   fetchEditDeatils(){
     var getEditValues= "api/auth/app/IndividualProfileDetails/editKeyskill";
          
-    this.storageservice.getrequest(getEditValues + "?skillId=" + 81).subscribe(result => {
+    this.storageservice.getrequest(getEditValues + "?skillId=" + 95).subscribe(result => {
      if (result["success"] == true) {
        this.edit = true;
-      const str: string = result["skillandCertificationsBean"].keySkill;
-      const arr: string[] = str.split(",");
+      this.selectedSkills = result["skillandCertificationsBean"].keySkill;
+      // const arr: string[] = str.split(",");
 
-      for(let i=0;i<arr.length;i++){
-        var skill = arr[i]
-        this.selectedSkills.push(skill);
-      }
+      // for(let i=0;i<arr.length;i++){
+      //   var skill = arr[i]
+      //   this.selectedSkills.push(skill);
+      // }
        this.skillForm.patchValue({ 
        'expertise': result["skillandCertificationsBean"].expertise,
       'skillId': result["skillandCertificationsBean"].skillId, 
@@ -94,14 +94,17 @@ export class SkillPopupPage implements OnInit {
   }
 
   selectSkill(skill: string,id:string) {
-    this.selectedSkills.push(skill);
+    this.selectedSkills = skill;
     this.showSkillResults = false;
-    this.searchSkillResults = [];
+    this.skillForm.patchValue({
+      'keySkill':this.selectedSkills
+    })
+     this.searchSkillResults = [];
     this.searchCtrl.setValue('');
   }
 
   removeSkill(skill: string) {
-    this.selectedSkills.splice(this.selectedSkills.indexOf(skill), 1);
+    this.selectedSkills = undefined;
   } 
    
   onSliderChange(value){
@@ -110,9 +113,7 @@ export class SkillPopupPage implements OnInit {
 
      //save
      async saveSkill(){
-      this.skillForm.value.keySkill = this.selectedSkills
       if(this.skillForm.value.keySkill.length != 0){
-           this.skillForm.value.keySkill = this.selectedSkills 
           this.skillForm.value.currentUserId = this.userId;
              
         this.skillForm = this.skillForm.value;
@@ -137,13 +138,14 @@ export class SkillPopupPage implements OnInit {
 
      //update
      async updateSkill(){
-       if(this.selectedSkills.length != 0){
+      this.skillForm.value.keySkill = this.selectedSkills
+       if(this.skillForm.value.keySkill.length != 0){
            this.skillForm.value.keySkill = this.selectedSkills 
           this.skillForm.value.currentUserId = this.userId;
              
         this.skillform = this.skillForm.value;
         console.log(` data: ${JSON.stringify(this.skillform)}`);
-        var updateSkill = "api/auth/app/IndividualProfileDetails/updateKeyskill";
+        var updateSkill = "api/auth/app/mobile/updateKeyskillmobile";
       
          this.storageservice.postrequest(updateSkill, this.skillform).subscribe(async result => {  
             console.log("Image upload response: " + result)
@@ -189,4 +191,9 @@ export class SkillPopupPage implements OnInit {
 
   await toast.present();
 } 
+
+
+goto_profileView(){
+  this.router.navigate(['/profile-view']);
+}
 }
