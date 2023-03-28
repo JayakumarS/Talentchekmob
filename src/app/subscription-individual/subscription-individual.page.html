@@ -1,0 +1,116 @@
+<ion-header style="background-color: white;">
+    <ion-toolbar style="padding: 20px 10px 15px;">
+        <ion-row style="display: flex;justify-content: space-between;">
+            <div>
+                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_profile()"></ion-icon>
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 24px;display: flex;
+      align-items: center;align-items: center;">
+                Subscription
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
+            </div>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="display-justify">
+
+        <ion-card-content>
+
+
+            <ion-item fill="outline" class="input-field">
+                <ion-label>Currency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
+                <ion-select [(value)]="currencyVal" (ionChange)="CurrencyChangeEvent($event)">
+                    <ion-select-option value="INR">INR</ion-select-option>
+                    <ion-select-option value="USD">USD</ion-select-option>
+                    <ion-select-option value="AED">AED</ion-select-option>
+                    <ion-select-option value="MYR">MYR</ion-select-option>
+                    <ion-select-option value="SGD">SGD</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+
+            <!-- END Col one -->
+            <div id="generic_price_table">
+
+                <!--PRICE CONTENT START-->
+                <div class="generic_content clearfix">
+
+                    <!--HEAD PRICE DETAIL START-->
+                    <div class="generic_head_price clearfix">
+
+                        <!--HEAD CONTENT START-->
+                        <div class="generic_head_content clearfix">
+
+                            <!--HEAD START-->
+                            <div class="head_bg"></div>
+                            <div class="head">
+                                <span>Standard</span>
+                            </div>
+                            <!--//HEAD END-->
+
+                        </div>
+                        <!--//HEAD CONTENT END-->
+
+                        <!--PRICE START-->
+                        <div class="generic_price_tag clearfix">
+                            <span class="price">
+                                  <span class="sign">{{currencySymbolVal}}</span>
+                            <span class="currency">{{amountVal}}</span>
+                            </span>
+                        </div>
+                        <!--//PRICE END-->
+
+                    </div>
+                    <!--//HEAD PRICE DETAIL END-->
+
+                    <!--FEATURE LIST START-->
+                    <div class="generic_feature_list">
+                        <ul>
+                            <li><span>100</span> Talent Credits</li>
+                            <li><span>50</span> Profile Access</li>
+                            <li><span>100MB</span> Document Storage</li>
+                            <li><span>1</span> Year Subscription</li>
+                        </ul>
+                    </div>
+                    <!--//FEATURE LIST END-->
+
+                    <!--BUTTON START-->
+                    <div class="generic_price_btn clearfix">
+                        <a class="" (click)="payWithRazorStandard()">Get Started</a>
+                    </div>
+                    <!--//BUTTON END-->
+
+                </div>
+                <!--//PRICE CONTENT END-->
+            </div>
+
+        </ion-card-content>
+
+    </div>
+
+</ion-content>
+
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+ <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>
