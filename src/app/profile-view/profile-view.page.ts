@@ -17,6 +17,7 @@ export class ProfileViewPage implements OnInit {
   experiencecard:boolean = false;
   skillscard:boolean = false;
   connectioncard:boolean = false;
+  certificationcard:boolean = false;
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
@@ -41,9 +42,9 @@ export class ProfileViewPage implements OnInit {
             if(result['profileViewList'][0].connectionList.length != 0 && result['profileViewList'] != null){
               this.connectioncard = true;
               }
-              // if(result['profileViewList'][0].educationList.length != 0){
-              //   this.educationcard = true;
-              //   }
+              if(result['profileViewList'][0].certificationsList.length != 0 && result['profileViewList'] != null){
+                this.certificationcard = true;
+                }
         });
 
      

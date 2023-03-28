@@ -84,14 +84,14 @@
         </ion-card-content>
     </ion-card>
 
-      <!------- Skill & Certifications card------ -->
+      <!------- Skills card------ -->
 
 
     <ion-card class="talentcard1"*ngIf="skillscard">
         <ion-card-content>
             <ion-row>
                 <ion-col >
-                    <ion-title style="color:black; margin-left: -9%;">Skill & Certifications</ion-title>
+                    <ion-title style="color:black; margin-left: -9%;">Skill </ion-title>
                 </ion-col>
                 <ion-col size="2">
                      <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill()">
@@ -120,9 +120,7 @@
     <ion-card *ngIf="!skillscard" class="talentcard1" style="padding-bottom: 35px ;">
         <ion-card-content>
             <ion-row>
-                <ion-col size="">
-                    <ion-title style="color:black;     margin-left: 13%;">Skill & Certifications</ion-title>
-                </ion-col>
+             
                 <ion-col size="5">
                     <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="Skill()" 
                     style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
@@ -131,12 +129,68 @@
             <ion-row>
                 <ion-col >
                     <ion-title style="color:black;margin-top: 5%;
-                    margin-left: 0%;">Add Skill & Certifications</ion-title>
+                       margin-left: -8%;width: 112%;">Add Skills</ion-title>
                 </ion-col>
             </ion-row>
         </ion-card-content>
     </ion-card>
+  <!-------  Certifications card------ -->
 
+
+  <ion-card class="talentcard1"*ngIf="certificationcard">
+    <ion-card-content>
+        <ion-row >
+            <ion-col >
+                <ion-title style="color:black;    width: 105%; margin-left: -9%;"> Certifications</ion-title>
+            </ion-col>
+
+            <ion-col size="2">
+                <img src="./assets\icon\save add.png" style="width: 70%;" (click)="Skill()">
+           </ion-col>
+          
+        </ion-row >
+        <ion-row style =" justify-content: end;">
+        <ion-col size="2">
+            <img src="./assets/icon/edit_icon.png"  (click)="Skill()">
+           
+       </ion-col>
+    </ion-row>
+        <ion-row class="talentrow">
+            <ion-col>
+                <ion-label> Mobile App</ion-label>
+                <ion-progress-bar value="0.6"></ion-progress-bar>
+            </ion-col>
+        </ion-row>
+        <ion-row class="talentrow">
+
+            <ion-col>
+                <ion-label> Website Devlopement</ion-label>
+                <ion-progress-bar value="0.6"></ion-progress-bar>
+            </ion-col>
+
+        </ion-row>
+
+    </ion-card-content>
+</ion-card>
+
+  <!-- Add card empty -->
+  <ion-card *ngIf="!certificationcard" class="talentcard1" style="padding-bottom: 35px ;">
+    <ion-card-content>
+        <ion-row>
+         
+            <ion-col size="5">
+                <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="Skill()" 
+                style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col >
+                <ion-title style="color:black;margin-top: 5%;
+                   margin-left: -3%;width: 112%;">Add Certifications</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
     <!------- Academics card------ -->
 
     <ion-card class="talentcard1" *ngIf="educationcard">
@@ -146,6 +200,7 @@
                     <ion-title style="color:black; margin-left: -9%;">Academics</ion-title>
                 </ion-col>
                 <ion-col size="2">
+                    
                     <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="educations()">
                 </ion-col>
                 <!-- <ion-col size="2">
@@ -175,18 +230,16 @@
     <ion-card *ngIf="!educationcard" class="talentcard1" style="padding-bottom: 35px ;">
         <ion-card-content>
             <ion-row>
-                <ion-col size="10">
-                    <ion-title style="color:black;     margin-left: 13%;">Academics</ion-title>
-                </ion-col>
+          
                 <ion-col size="5">
-                    <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="educations()" 
-                    style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                    <img src="./assets\img\addeduicon.png" id="prfoileimg1" (click)="educations()" 
+                    style="    width: 50%; height: 73%; margin-left: 100%; margin-top: 19%;">
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col >
                     <ion-title style="color:black;margin-top: 5%;
-                    margin-left: 0%;">Add Education</ion-title>
+                    margin-left: 0%;width: 104%;">Add Education</ion-title>
                 </ion-col>
             </ion-row>
         </ion-card-content>
@@ -241,18 +294,16 @@
   <ion-card *ngIf="!experiencecard" class="talentcard1" style="padding-bottom: 35px ;">
         <ion-card-content>
             <ion-row>
-                <ion-col size="10">
-                    <ion-title style="color:black;     margin-left: 13%;">Experience</ion-title>
-                </ion-col>
+              
                 <ion-col size="5">
-                    <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="experiences()" 
+                    <img src=".\assets\img\briefcase (1).png" id="prfoileimg1" (click)="experiences()" 
                     style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col >
                     <ion-title style="color:black;margin-top: 5%;
-                    margin-left: 0%;">Add Work Experience</ion-title>
+                    margin-left: 0%;width: 104%;">Add Work Experience</ion-title>
                 </ion-col>
             </ion-row>
         </ion-card-content>
@@ -302,9 +353,7 @@
   <ion-card *ngIf="!connectioncard" class="talentcard1" style="padding-bottom: 35px ;">
     <ion-card-content>
         <ion-row>
-            <ion-col size="10">
-                <ion-title style="color:black;     margin-left: 13%;">Connections</ion-title>
-            </ion-col>
+           
             <ion-col size="5">
                 <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="Connections()" 
                 style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
@@ -312,7 +361,7 @@
         </ion-row>
         <ion-row>
             <ion-col >
-                <ion-title style="color:black;margin-top: 5%;  margin-left: 0%;">  Add Connection</ion-title>
+                <ion-title style="color:black;margin-top: 5%;  margin-left: 0%;width: 104%;">  Add Connection</ion-title>
             </ion-col>
         </ion-row>
     </ion-card-content>
@@ -366,9 +415,7 @@
     <ion-card *ngIf="!clubscard" class="talentcard1" style="padding-bottom: 35px ;">
         <ion-card-content>
             <ion-row>
-                <ion-col size="10">
-                    <ion-title style="color:black;     margin-left: 13%;">Extracurricular</ion-title>
-                </ion-col>
+                
                 <ion-col size="5">
                     <img src="./assets\icon\save add.png" id="prfoileimg1" (click)="Extracurricular()" 
                     style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
@@ -377,7 +424,7 @@
             <ion-row>
                 <ion-col >
                     <ion-title style="color:black;margin-top: 5%;
-                    margin-left: 0%;">Add Extracurricular</ion-title>
+                    margin-left: 0%;width: 104%;">Add Extracurricular</ion-title>
                 </ion-col>
             </ion-row>
         </ion-card-content>
