@@ -27,14 +27,42 @@ export class JobSearchPage implements OnInit {
   basicprofilesearchList =[];
   flagChange:boolean=false;
   flag: boolean =false;
-  constructor(private fb: FormBuilder,private route: ActivatedRoute,public storageservice: StorageService, public modalController: ModalController,public router:Router) { }
+  constructor(private fb: FormBuilder,
+    private route: ActivatedRoute,public storageservice: StorageService, public modalController: ModalController,public router:Router) {
+
+      
+  this.route.queryParams.subscribe(params => {
+    if (params) {
+
+      if (params != null) {
+    
+        this.formValues = params;
+
+        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
+
+        this.storageservice.postrequest(BasicSearcUrl, this.formValues).subscribe(result => {
+          this.basicprofilesearchList = result['basicprofilesearchList'];
+          if(this.basicprofilesearchList.length>=1){
+           this.flagChange =true;
+           }
+           else{
+             this.flagChange=false;
+           }
+          console.log(result);
+   
+       });
+      }
+    }
+  });
+
+
+
+     }
+
+
 
   ngOnInit() {
-    //Get the formvalues from another component
-    if (this.router.getCurrentNavigation().extras.state) {
-    this.formValues = this.router.getCurrentNavigation().extras.state.formValues;
-    console.log(this.formValues);
-    }
+ 
 
     this.jobSearchHeadForm = this.fb.group({
       searchType :["talentid"],
@@ -141,6 +169,25 @@ export class JobSearchPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+
+  // footer nav
+
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_profile(){
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
   }
  
 }
