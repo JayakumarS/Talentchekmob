@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import moment from 'moment';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -25,6 +26,8 @@ export class ClubPage implements OnInit {
   searchCtrl = new FormControl('');
   searchOrganisationResults: any;
   selectedOrganisation: any;
+  extracurricularBean: any;
+  edit: boolean = false;
   constructor(public router: Router, public fb: FormBuilder, public storageservice: StorageService, private toastController: ToastController) { }
 
   ngOnInit() {
@@ -48,6 +51,8 @@ export class ClubPage implements OnInit {
     //var listConstant = this.initializeItems();
 
     this.userId = localStorage.getItem("userId");
+
+    this.editextracurricular();
   }
 
  //  Organisation auto complete 
@@ -195,5 +200,84 @@ getOrganisationList(){
     this.router.navigate(['/profile-view']) 
   }
 
+
+   //editextracurricularDetails
+   editextracurricular(){
+
+    var industryURL = "api/auth/app/IndividualProfileDetails/EditExtracurricular?extId=" + 53 ;
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+    
+      
+      if (result["success"] == true) {
+        this.extracurricularBean = result["extracurricularBean"]; 
+       }
+       const participatedFrom =  this.extracurricularBean.participatedFrom;
+       const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
+
+         const participatedTill =  this.extracurricularBean.participatedTill;
+         const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
+    
+        this.edit = true;
+
+        this.clubFrom.patchValue({
+          'clubName':this.extracurricularBean.clubName,
+          'clubBranch' :this.extracurricularBean.clubBranch,
+          'titleHeld': this.extracurricularBean.titleHeld,
+          'rolePlayed':this.extracurricularBean.rolePlayed,
+         // 'participatedFromObj' : extFromdate,
+          'participatedFrom': startdate,
+          //'participatedTillObj' : extTodate,
+          'participatedTill' :Enddate,
+          'currentMember': this.extracurricularBean.currentMember,
+          'extId': this.extracurricularBean.extId,
+          })
+    })
+  }
+
+//Updateclub
+
+  async Updateclub(){
+    const errors = this.checkFormValidity(this.clubFrom);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+      header: 'Validation Error',
+      message: 'Please provide all the required values!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  } else {
+     this.clubFrom.value.currentUserId = this.userId; 
+
+     this.clubFrom.value.participatedFrom =formatDate(this.clubFrom.value.participatedFrom, 'dd/MM/yyyy','en-IN');
+     this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');
+  this.clubFrom = this.clubFrom.value;
+  console.log(` data: ${JSON.stringify(this.clubFrom)}`);
+  var updateclub = "api/auth/app/IndividualProfileDetails/UpdateExtracurricular";
+
+   this.storageservice.postrequest(updateclub, this.clubFrom).subscribe(async result => {  
+      console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+      this.router.navigate(['/profile-view']);
+      this.updateToast()
+       }else{  
+
+       }
+   });
+  }
+  }
+
+
+async updateToast() {
+  const toast = await this.toastController.create({
+    message: 'Updated Successfully',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+
+await toast.present();
+}
 
 }

@@ -86,9 +86,13 @@
                                   
                                 </div>
                                 
-                                <div class="button-content" style="width: 50%;
+                                <div *ngIf="!edit"class="button-content" style="width: 50%;
                                 margin: auto;">
                                 <ion-button color="primary" fill="outline" (click)="Save()">Save</ion-button>
+                                </div>
+                                <div *ngIf="edit" class="button-content" style="width: 50%;
+                                margin: auto;">
+                                <ion-button color="primary" fill="outline" (click)="Updateclub()">Update</ion-button>
                                 </div>
               
               

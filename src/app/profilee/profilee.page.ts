@@ -3,6 +3,10 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+import moment from 'moment';
+import { formatDate } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-profilee',
@@ -19,11 +23,13 @@ export class ProfileePage implements OnInit {
   languageList: any;
   profiledetails: any;
   userId: any;
+  currentUserId: string;
+  profileList: any;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,private toastController: ToastController) { }
 
   ngOnInit() {
 
-    this.userId = localStorage.getItem("userId");
+    this.currentUserId = localStorage.getItem("userId");
     
     this.getIndustry();
     this.profileForm = this.fb.group({
@@ -41,10 +47,10 @@ export class ProfileePage implements OnInit {
       permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:[""],
-      uploadImg:[""],
+    // uploadImg:[""],
       currentUserId:[""],
     });
-
+this.editprofile();
     this.hobbeList();
     this.List();
   }
@@ -102,7 +108,8 @@ export class ProfileePage implements OnInit {
   
       await alert.present();
     } else{
-      this.profileForm.value.currentUserId=this.userId;
+      this.profileForm.value.dob =formatDate(this.profileForm.value.dob, 'dd/MM/yyyy','en-IN');
+      this.profileForm.value.currentUserId=this.currentUserId;
       this.profiledetails = this.profileForm.value;
       console.log(` data: ${JSON.stringify(this.profiledetails)}`);
       var updateprofile = "api/auth/app/mobile/updateprofile";
@@ -144,4 +151,40 @@ checkFormValidity(form: FormGroup): string[] {
   return errors;
 }
 
+
+
+  //editprofileDetails
+  editprofile(){
+
+    var industryURL = "api/auth/app/mobile/editprofiledetails?currentUserId="+this.currentUserId ;
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+    
+      
+      if (result["success"] == true) {
+        this.profileList = result["profileList"]; 
+       }
+        const dob =  this.profileList[0].dob;
+        const startdate = moment(dob, 'DD/MM/YYYY').toDate();
+
+      this.profileForm.patchValue({
+       'dob': startdate.toISOString(),
+       'firstname': this.profileList[0].firstname,
+       'lastname': this.profileList[0].lastname,
+       'gender':this.profileList[0].gender,
+       'mobile':this.profileList[0].mobile,
+       //'dob':this.profileList[0].dob,
+       'dobObj':result,
+       'permAddress':this.profileList[0].permAddress,
+       'email':this.profileList[0].email,
+       'nationalid':this.profileList[0].nationalid,
+       'category': this.profileList[0].category,
+       'uploadImg':this.profileList[0].uploadImg,
+       'linkurl': this.profileList[0].linkurl,
+       'details': this.profileList[0].details,
+       'hobbies':this.profileList[0].hobbies,
+       'languagesknown':this.profileList[0].languagesknown,
+      })
+  
+    })
+  }
 }
