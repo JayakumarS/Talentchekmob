@@ -107,6 +107,8 @@
                     <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <div>{{ selectDegreeSet }}
+                            <ion-icon *ngIf="selectDegreeSet != undefined && selectDegreeSet != ''"
+                            name="close-circle" (click)="removeDegree(selectDegreeSet)"></ion-icon>
                         </div>
                         <ion-input warp="soft" (ionInput)="onSearchDegree($event.target.value)"
                             [formControl]="searchCtrl"></ion-input>
@@ -128,7 +130,9 @@
 
                     <ion-item fill="outline" class="input-field">
 
-                        <div>{{selectStudySet}}
+                        <div (click)="remove()">{{selectStudySet}}
+                            <ion-icon *ngIf="selectStudySet != undefined && selectStudySet != ''"
+                            name="close-circle" ></ion-icon>
                         </div>
                         <ion-input warp="soft" (ionInput)="onSearchStudy($event.target.value)"
                             [formControl]="searchCtrl"></ion-input>

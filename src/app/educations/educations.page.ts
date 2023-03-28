@@ -85,7 +85,7 @@ export class EducationsPage implements OnInit {
     this.getStudyList();
     this.isunregIns = false;
     let currentDate = new Date();
-    this.selectedDate = currentDate.toISOString();
+    // this.selectedDate = currentDate.toISOString();
 
 
     this.editEducation();
@@ -154,6 +154,12 @@ export class EducationsPage implements OnInit {
 
   removeOrganisation(selecteInstitution: string) {
     this.selecteInstitution = undefined;
+  }
+  removeDegree(selectDegreeSet: string) {
+    this.selectDegreeSet = undefined;
+  }
+  remove() {
+    this.selectStudySet = undefined;
   }
 
   selectInstitution(institutionName: string, id: string) {
@@ -340,39 +346,35 @@ export class EducationsPage implements OnInit {
       if (result["success"] == true) {
         this.Education = result["educationBean"];
 
-        // const str: string = this.Education.fieldofStudy;
-        // const arr: string[] = str.split(",");
+        this.selectStudySet = this.Education.fieldofStudy;
+        this.selectDegreeSet=this.Education.degree;
+        this.selecteInstitution = this.Education.institutionName;
+       // const arr: string[] = str.split(",");
 
         // for(let i=0;i<arr.length;i++){
         //   var selectStudySet = arr[i]
         //   this.studyListVal.push(selectStudySet);
         // }
       }
-      // const courseStart =  this.Education.courseStart;
-      // const startdate = moment(courseStart, 'MM/yyyy').toDate();
-      // const courseEnd =  this.Education.courseEnd;
-      // const enddate = moment(courseEnd, 'MM/yyyy').toDate();
+       const courseStart =  this.Education.courseStart;
+       const startdate = moment(courseStart, 'MM/yyyy').toDate();
+       this.courseStart = moment(startdate).format('DD/MM/YYYY');
+      const courseEnd =  this.Education.courseEnd;
+      const enddate = moment(courseEnd, 'MM/yyyy').toDate();
+      this.selectedDate = moment(enddate).format('DD/MM/YYYY');
       this.edit = true;
 
       this.EducationForm.patchValue({
         'institutionName': this.Education.institutionName,
         'institutionLocation': this.Education.institutionLocation,
-        //'courseStartObj' : eduFromdate,
-        'courseStart': this.Education.courseStart,
-        //'courseEndObj' : ,
-        'courseEnd': this.Education.courseEnd,
+         
         'currentlyStudy': this.Education.currentlyStudy,
         'degree': this.Education.degree,
-        // 'fieldofStudy': this.Education.fieldofStudy,
-        'stuRegisterNumber': this.Education.stuRegisterNumber,
+         'stuRegisterNumber': this.Education.stuRegisterNumber,
         'aggregateMarks': this.Education.aggregateMarks,
         'eduDescription': this.Education.eduDescription,
         'eduId': this.Education.eduId,
-        'date': this.Education.courseStart
-      })
-      this.courseStart = this.EducationForm.value.courseStart;
-      this.searchCtrl = this.EducationForm.value.fieldofStudy;
-      // this.Edu.Study = this.EducationForm.value.fieldofStudy;
+       })  
     })
   }
 

@@ -18,6 +18,13 @@ export class ProfileViewPage implements OnInit {
   skillscard:boolean = false;
   connectioncard:boolean = false;
   certificationcard:boolean = false;
+  username: any;
+  category: any;
+  hobbies: any;
+  Location: any;
+  mobile: any;
+  email: any;
+  language: any;
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
@@ -26,7 +33,16 @@ export class ProfileViewPage implements OnInit {
 
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
-     console.log(result);   
+     console.log(result); 
+     
+     this.Location = result['profileViewList'][0]['skills'];
+     this.username = result['profileViewList'][0]['username'];
+     this.category =result['profileViewList'][0]['category'];
+     this.hobbies =result['profileViewList'][0]['hobbies'];
+     this.mobile = result['profileViewList'][0]['phone'];
+     this.email = result['profileViewList'][0]['email'];
+     this.language = result['profileViewList'][0]['languages'];
+   
      if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){
       this.educationcard = true;
       }
@@ -46,7 +62,7 @@ export class ProfileViewPage implements OnInit {
                 this.certificationcard = true;
                 }
         });
-
+this.getprofile();
      
   }
   profile()
@@ -108,5 +124,11 @@ export class ProfileViewPage implements OnInit {
   goto_more(){
     this.router.navigate(['/settings']);
   }
+
+getprofile(){
+  
+
+}
+
 
 }
