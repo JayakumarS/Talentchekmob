@@ -30,8 +30,16 @@ export class JobPage implements OnInit {
     this.selectedTab = tabName;
   }
   
-  goto_jobdetails(){
-   this.router.navigate(['/job-details']) 
+  goto_jobdetails(jobId){
+    let edit = {
+
+      jobID :jobId
+    }
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/job-details'], navigationExtras);
   }
 
   
@@ -45,6 +53,16 @@ export class JobPage implements OnInit {
     const matchedJobList = this.storageservices.getrequest(MatchedJobsURL).subscribe(result => {
 
       this.matchedJobList = result['jobSeekList'];
+      this.matchedJobList.forEach(element=>{
+        let jobType = "";
+        for(let jb=0;jb<element.jobType.length;jb++){
+          jobType += element.jobType[jb]+", ";
+        }
+        element.jobTypeStr = jobType.substring(0, jobType.length-2);
+      });
+      var str = result['jobSeekList'][0]['jobType'].toString(); 
+
+      console.log("Returned string is : " + str );
       console.log(this.matchedJobList);
     })
 

@@ -54,7 +54,7 @@ this.storageservice.getrequest(indiRatingsCountURL).subscribe(result => {
 
 
   }
-  selectedTab: string = 'search';
+  selectedTab: string = 'apps';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;

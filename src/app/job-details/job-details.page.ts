@@ -8,12 +8,24 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 })
 export class JobDetailsPage implements OnInit {
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,private route: ActivatedRoute) { 
+
+    
+    this.route.queryParams.subscribe(params => {
+      if (params) {
+  
+        if (params != null) {
+
+          console.log(params);
+        }
+      }
+    });
+  }
 
   ngOnInit() {
   }
 
-  selectedTab: string = 'search';
+  selectedTab: string = 'earth';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;

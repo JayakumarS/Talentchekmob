@@ -20,26 +20,31 @@ export class SettingsPage implements OnInit {
   }
   
   goto_profile(){
-    this.router.navigate(['/profile']) 
+    this.router.navigate(['/profile']); 
   }
 
   goto_language(){
-    this.router.navigate(['/language']) 
+    this.router.navigate(['/language']);
   }
   goto_messages(){
-    this.router.navigate(['/push-notification']) 
+    this.router.navigate(['/push-notification']); 
   }
   goto_policy(){
-    this.router.navigate(['/privacy-policy']) 
+    this.router.navigate(['/privacy-policy']); 
   }
   goto_Terms(){
-    this.router.navigate(['/terms-and-conditions']) 
+    this.router.navigate(['/terms-and-conditions']); 
   }
   goto_AboutApp(){
-    this.router.navigate(['/about-device']) 
+    this.router.navigate(['/about-device']); 
   }
   goto_visibility(){
-    this.router.navigate(['/visibility'])
+    this.router.navigate(['/visibility']);
+  }
+
+  goto_subscribe(){
+    this.router.navigate(['/subscription-individual']);
+
   }
 
 
