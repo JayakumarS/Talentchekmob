@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
 
@@ -11,6 +11,12 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./job-profile.page.scss'],
 })
 export class JobProfilePage implements OnInit {
+
+
+  userId:string
+
+  
+
   jobProfileForm: FormGroup;
   industryList =[];
   jobTitleList = [];
@@ -45,10 +51,41 @@ export class JobProfilePage implements OnInit {
     public router:Router,
     private http: HttpClient,
     private toastController: ToastController,
-    public storageservice:StorageService,) {  
+    public storageservice:StorageService,private route: ActivatedRoute) {  
+
+
+      this.route.queryParams.subscribe(params => {
+        if (params) {
+    
+          if (params != null) {
+
+            if(params['call'] == "edit-call"){
+
+              this.userId = localStorage.getItem("userId")  ; 
+              var BasicSearcUrl = "api/auth/app/jobportal/editJobSeekDetails?currentUserId="+ this.userId ;
+
+              this.storageservice.getrequest(BasicSearcUrl).subscribe(result => {
+
+if(result["success"] == true){
+
+  this.jobProfileForm = result["jobSeekList"][0] ;
+            
+  console.log(result);
+}        
+             });
+
+
+            }
+        
+           console.log(params);
+  
+          }
+        }
+      });
+      
     }
 
-  selectedTab: string = 'search';
+  selectedTab: string = 'earth';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
@@ -421,6 +458,26 @@ nextStep(currentStep: string, nextStep: string) {
   
     return errors;
   }
+
+
+   // footer nav
+
+   goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_profile(){
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
+  }
+
   
   
 }
