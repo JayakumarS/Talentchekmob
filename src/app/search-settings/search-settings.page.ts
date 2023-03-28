@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { NavController } from "@ionic/angular";
+import { ModalController, NavController } from "@ionic/angular";
+import { JobSearchPage } from '../job-search/job-search.page';
 
 @Component({
   selector: 'app-search-settings',
@@ -15,16 +16,29 @@ export class SearchSettingsPage implements OnInit {
 
   skillList = [];
   workLocation =[];
+  stateList =[];
   searchSkillResults: string[] = [];
   selectedSkills: string[] = [];
   showSkillResults: boolean = false; 
   IsSearchListShow: boolean = false;
+
   searchResults: string[] = [];
+  selectedState: string[] = [];
   selectedCities: string[] = [];
+  selectedCountry: string[] = [];
   showResults: boolean = false; 
+  showcountyResults : boolean = false;
+  showStateResults : boolean = false;
+  countrysearchCtrl = new FormControl('');
+  statesearchCtrl = new FormControl('');
+  citysearchCtrl = new FormControl('');
   searchCtrl = new FormControl('');
   cityName:any;
   cityId:any;
+  stateName:any;
+  stateId : any;
+  countryName:any;
+  countryId : any;
 countryResponse: any;
 countryVal: string;
 countryIdVal:string;
@@ -44,15 +58,20 @@ formValues: any = {};
 
 
 
-  constructor(public router:Router,public storageservice: StorageService,private fb: FormBuilder,private navCtrl: NavController) {
+  constructor(public router:Router,public storageservice: StorageService,private fb: FormBuilder,
+    private navCtrl: NavController,public modalController: ModalController) {
 
     this.advsearchForm = this.fb.group({
-      industry: ["",Validators.required],
-      designation: [""],
-      country: ['', Validators.required],
-      degree :[""],
-      fieldofStudy:[""],
-      organisationName:[""]
+      skillsearch:[""],
+      designationsearch: [""],
+      experiencesearch:[""],
+      countrysearch: [""],
+      statesearch:[""],
+      citysearch: [""],
+      qualificationsearch :[""],
+      fieldofstudysearch:[""],
+      onisearch:[""],
+      btn:["advancebtn"]
     });
    }
 
@@ -63,22 +82,42 @@ formValues: any = {};
 
     this.getSkillList();
     this.workLocationList();
+    this.getstateList();
+    this.getCountryList();
     var listConstant =  this.DegreeListItems(); 
     var listConstant =  this.studyListItems();
     var listConstant = this.initializeOrgItems();
-    var listConstant1 = await this.initializeItems(); 
+  
 
   }
  
 // Pass the formvalues to another component
-  searchresults() {
-    this.formValues = this.advsearchForm.value;
-    this.navCtrl.navigateForward("/job-search", { state: { formValues: this.formValues } });
+async searchresults() {
+
+if(this.advsearchForm.value['qualificationsearch'] == undefined ){
+
+  this.advsearchForm.value['qualificationsearch']= "";
+}
+if(this.advsearchForm.value['fieldofstudysearch'] == undefined){
+
+  this.advsearchForm.value['fieldofstudysearch']= "";
+}
+if (this.advsearchForm.value['onisearch'] == undefined){
+  this.advsearchForm.value['onisearch']= "";
+}
+
+  let navigationExtras: NavigationExtras = {
+    queryParams: this.advsearchForm.value
+  };
+
+  
+  this.formValues = this.advsearchForm.value;
+
+  this.router.navigate(['/job-search'], navigationExtras);
+
   }
 
-  goto_profileSearch(){
-    this.router.navigate(['/job-search']);
-  }
+
   selectedTab: string = 'search';
 
   setSelectedTab(tabName: string) {
@@ -107,6 +146,7 @@ formValues: any = {};
 
   selectSkill(skill: string,id:string) {
     this.selectedSkills.push(skill);
+    this.advsearchForm.value['skillsearch'] = skill ;
     this.showSkillResults = false;
     this.searchSkillResults = [];
     this.searchCtrl.setValue('');
@@ -114,7 +154,84 @@ formValues: any = {};
 
   removeSkill(skill: string) {
     this.selectedSkills.splice(this.selectedSkills.indexOf(skill), 1);
-  }   
+  } 
+
+
+  //country list
+
+  getCountryList(){
+
+    var countryURL = "api/auth/app/CommonUtility/countryList";
+    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+      this.countryResponse = result["countryList"];
+      console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+    });
+  }
+
+  onCountrySearch(value: string) {
+    if (value.length > 2) {
+      this.showcountyResults = true;
+      this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showcountyResults = false;
+      this.searchResults = [];
+    }
+  }
+
+  selectcountry(contry: string,id:string) {
+    this.selectedCountry.push(contry);
+    this.countryName = contry;
+    this.countryId = id;
+    this.advsearchForm.value['countrysearch'] = id;
+    this.showcountyResults = false;
+    this.searchResults = [];
+    this.countrysearchCtrl.setValue('');
+  }
+
+  
+  removeCountry(country: string) {
+    this.selectedCountry.splice(this.selectedCountry.indexOf(country), 1);
+  }
+
+  
+  //States List
+getstateList(){
+
+  var getStateListUrl = "api/auth/app/CommonUtility/stateListMobile"; 
+  this.storageservice.getrequest(getStateListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.stateList = result["stateList"]; 
+    }
+ });
+
+}
+
+
+onstateSearch(value: string) {
+  if (value.length > 2) {
+    this.showStateResults = true;
+    this.searchResults = this.stateList.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showStateResults = false;
+    this.searchResults = [];
+  }
+}
+
+selectState(state: string,id:string) {
+  this.selectedState.push(state);
+  this.stateName = state;
+  this.stateId = id;
+  this.advsearchForm.value['statesearch'] = id ;
+  this.showStateResults = false;
+  this.searchResults = [];
+  this.statesearchCtrl.setValue('');
+}
+
+removeState(state: string) {
+  this.selectedState.splice(this.selectedState.indexOf(state), 1);
+}
+
+
 
   // city list
 
@@ -142,69 +259,19 @@ formValues: any = {};
       this.selectedCities.push(city);
       this.cityName = city;
       this.cityId = id;
+      this.advsearchForm.value['citysearch'] = id;
       this.showResults = false;
       this.searchResults = [];
-      this.searchCtrl.setValue('');
+      this.citysearchCtrl.setValue('');
     }
   
     removeCity(city: string) {
       this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
     }
-    goToSearchSelectedItem(CtryName, CtryId) {
-      console.log("InsName: " + CtryName)
-      console.log("InsId: " + CtryId)
-  
-      this.countryVal = CtryName;
-      this.countryIdVal = CtryId;
-      this.IsSearchListShow = false;
-    }
 
-    async initializeItems(): Promise<any> {
 
-      var countryURL = "api/auth/app/CommonUtility/countryList";
-      const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
-        this.countryResponseBackup = result["countryList"];
-        this.countryResponse = result["countryList"];
-        console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-      });
-  
-      return InsList;
-    }
-  
-    unCheckFocus() {
-      // this.ionSearchListShow = false;
-    }
-
-    async filterList(evt) {
-    if (evt.srcElement.value.length > 2) {
-    if (evt.srcElement.value != null && evt.srcElement.value != '') {
-      this.IsSearchListShow = true;
-      this.countryResponse = this.countryResponseBackup;
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
-      }
-
-      var countVal = 0;
-      this.countryResponse = this.countryResponse.filter(currentCountry => {
-        countVal++;
-        if (currentCountry.text && searchTerm && countVal < 100) {
-          return (currentCountry.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-        }
-      });
-
-      if (this.countryResponse == 0) {
-        this.IsSearchListShow = false;
-      }
-      else {
-        this.IsSearchListShow = true;
-      }
-    }
-  }
-    else {
-      this.IsSearchListShow = false;
-    }
-  }
+   
+   
 
   //degreelist
   async filterdegreeList(evt) {
@@ -243,6 +310,8 @@ formValues: any = {};
   goToDegreeListItem( instName,instId) {
     console.log("InsName: " + instName)
     console.log("InsId: " + instId)
+
+    this.advsearchForm.value['qualificationsearch']= instName;
     
     this.degreeListVal = instName;
     this.advsearchForm.value.degree = instId;
@@ -279,9 +348,9 @@ formValues: any = {};
     // this.ionSearchListShow = false;
   }
   goTostudyListItem( instName,instId) {
-    console.log("InsName: " + instName)
-    console.log("InsId: " + instId)
-    
+    console.log("InsName: " + instName);
+    console.log("InsId: " + instId);
+    this.advsearchForm.value['fieldofstudysearch'] = instName;
     this. studyListVal = instName;
     this.advsearchForm.value.fieldofStudy = instId;
     this.IsstudyListShow = false;
@@ -325,6 +394,8 @@ formValues: any = {};
   goToOniSearchSelectedItem( instName,instId) {
     console.log("InsName: " + instName)
     console.log("InsId: " + instId)
+
+    this.advsearchForm.value['onisearch'] = instId;
     
     this.organisationVal = instName;
     this.advsearchForm.value.organisationName = instId;
@@ -370,5 +441,24 @@ formValues: any = {};
         this.IsorgListShow = false;
       }
     }
+
+
+    // footer
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_profile(){
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
+  }
+
  
 }

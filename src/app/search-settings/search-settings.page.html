@@ -16,19 +16,19 @@
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="advsearchForm" >
+    <form [formGroup]="advsearchForm">
 
         <div class="button-content">
 
 
-            <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">Skills</ion-label>
             <ion-item fill="outline" class="input-field">
                 <div class="selected-skills-container">
                     <div *ngFor="let skill of selectedSkills" class="selected-skill">{{ skill }}
                         <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
                     </div>
-                  </div> 
-                <ion-input  warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                </div>
+                <ion-input warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showSkillResults">
@@ -37,24 +37,38 @@
                 </ion-item>
             </ion-list>
 
-            <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">Country</ion-label>
             <ion-item fill="outline" class="input-field">
-                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="country" showcancelbutton="" 
-                debounce="100" (ionInput)="filterList($event)" 
-                formControlName="country" [(ngModel)]="countryVal"  (ionBlur)="unCheckFocus()"
-                search-icon=“undefined”></ion-searchbar>
+                <div class="selected-skills-container">
+                    <div *ngFor="let country of selectedCountry" class="selected-skill">{{ country }}
+                        <ion-icon name="close-circle" (click)="removeCountry(country)"></ion-icon>
+                    </div>
+                </div>
+                <ion-input placeholder="Select Country" (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
             </ion-item>
-            <ion-row>
-                <ion-col>
-                  <ion-list *ngIf="IsSearchListShow" lines="full">
-                    <ion-item *ngFor="let cElement of countryResponse">
-                      <ion-label class="ion-text-wrap" (click)="goToSearchSelectedItem(cElement.text, cElement.id)">
-                        {{ cElement.text }}
-                      </ion-label>
-                    </ion-item>
-                  </ion-list>
-                </ion-col>
-              </ion-row>
+
+            <ion-list *ngIf="showcountyResults">
+                <ion-item *ngFor="let result of searchResults" (click)="selectcountry(result.text,result.id)">
+                    {{ result.text }}
+                </ion-item>
+            </ion-list>
+
+            <ion-label class="labels">State</ion-label>
+            <ion-item fill="outline" class="input-field">
+                <div class="selected-skills-container">
+                    <div *ngFor="let state of selectedState" class="selected-skill">{{ state }}
+                        <ion-icon name="close-circle" (click)="removeState(state)"></ion-icon>
+                    </div>
+                </div>
+                <ion-input placeholder="Select States" (ionInput)="onstateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
+            </ion-item>
+
+            <ion-list *ngIf="showStateResults">
+                <ion-item *ngFor="let result of searchResults" (click)="selectState(result.text,result.id)">
+                    {{ result.text }}
+                </ion-item>
+            </ion-list>
+
 
             <ion-label class="labels">City</ion-label>
             <ion-item fill="outline" class="input-field">
@@ -62,30 +76,30 @@
                     <div *ngFor="let city of selectedCities" class="selected-skill">{{ city }}
                         <ion-icon name="close-circle" (click)="removeCity(skill)"></ion-icon>
                     </div>
-                  </div> 
-                <ion-input placeholder="Search cities" (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                </div>
+                <ion-input placeholder="Select Cities" (ionInput)="onSearch($event.target.value)" [formControl]="citysearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showResults">
                 <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
                     {{ result.text }}
                 </ion-item>
-            </ion-list> 
- 
+            </ion-list>
+
             <ion-label class="labels">Designation/Role </ion-label>
             <ion-item fill="outline" class="input-field">
-                <ion-input formControlName="designation"></ion-input>
+                <ion-input formControlName="designationsearch"></ion-input>
             </ion-item>
 
             <ion-label class="labels">Year of Experience </ion-label>
             <ion-item fill="outline" class="input-field">
-                <ion-input formControlName="designation"></ion-input>
+                <ion-input type="number" formControlName="experiencesearch"></ion-input>
             </ion-item>
 
 
-            <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">Qualification</ion-label>
             <ion-item fill="outline" class="input-field">
-                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterdegreeList($event)" formControlName="degree" [(ngModel)]="degreeListVal" (ionBlur)="unDegreeList()" search-icon=“undefined”></ion-searchbar>
+                <ion-searchbar class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterdegreeList($event)" formControlName="qualificationsearch" [(ngModel)]="degreeListVal" (ionBlur)="unDegreeList()" search-icon=“undefined”></ion-searchbar>
             </ion-item>
             <ion-row>
                 <ion-col>
@@ -100,11 +114,11 @@
             </ion-row>
 
 
-            <ion-label class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">Field of Study</ion-label>
 
             <ion-item fill="outline" class="input-field">
 
-                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterstudyList($event)" formControlName="fieldofStudy" [(ngModel)]="studyListVal" (ionBlur)="unstudyList()" search-icon=“undefined”></ion-searchbar>
+                <ion-searchbar class="blackTheme" placeholder="Select the field you want" showcancelbutton="" debounce="100" (ionInput)="filterstudyList($event)" formControlName="fieldofstudysearch" [(ngModel)]="studyListVal" (ionBlur)="unstudyList()" search-icon=“undefined”></ion-searchbar>
 
 
             </ion-item>
@@ -123,8 +137,7 @@
             <ion-label class="labels">Organisation Name / Institution Name </ion-label>
 
             <ion-item fill="outline" class="input-field">
-                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterOrgList($event)" formControlName="organisationName" [(ngModel)]="organisationVal" (ionBlur)="unCheckFocus()"
-                    search-icon=“undefined”></ion-searchbar>
+                <ion-searchbar class="blackTheme" placeholder="Organisation Name / Institution Name" showcancelbutton="" debounce="100" (ionInput)="filterOrgList($event)" formControlName="onisearch" [(ngModel)]="organisationVal" (ionBlur)="unCheckFocus()" search-icon=“undefined”></ion-searchbar>
             </ion-item>
             <ion-row>
                 <ion-col>
@@ -136,26 +149,28 @@
                         </ion-item>
                     </ion-list>
                 </ion-col>
-            </ion-row>  
+            </ion-row>
         </div>
 
     </form>
 
     <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
-        <ion-icon size="large" name="search-circle"></ion-icon>
-      </button>
-        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
-        <ion-icon size="large" name="earth-sharp"></ion-icon>
-      </button>
-        <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-        <ion-icon size="large" name="apps"></ion-icon>
-      </button>
-        <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
-        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-      </button>
-        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
-        <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-      </button>
+        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+    <ion-icon size="large" name="search-circle"></ion-icon>
+  </button>
+        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+    <ion-icon size="large" name="earth-sharp"></ion-icon>
+  </button>
+        <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+     <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+    
+  </button>
+        <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+  </button>
+        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+    <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    
+  </button>
     </div>
 </ion-content>
