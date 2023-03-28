@@ -11,9 +11,12 @@ export class JobPage implements OnInit {
 
   public matchedJobList:any;
   userId:string; 
+  
 
   constructor(public router:Router,public storageservices: StorageService) { 
-    this.userId = localStorage.getItem("userId");
+   // this.userId = localStorage.getItem("userId") ;
+
+    this.userId = "TFIN10000000106" ;
   }
 
   ngOnInit() {
@@ -21,7 +24,7 @@ export class JobPage implements OnInit {
     this.BindMatchedJobsList();
   }
 
-  selectedTab: string = 'search';
+  selectedTab: string = 'earth';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
@@ -45,6 +48,38 @@ export class JobPage implements OnInit {
       console.log(this.matchedJobList);
     })
 
+  }
+
+  goto_addJob(){
+
+    let edit = {
+
+      call : "edit-call"
+    }
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/job-profile'], navigationExtras);
+  }
+
+
+  // footer nav
+
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_profile(){
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
   }
 
 

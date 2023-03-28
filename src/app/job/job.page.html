@@ -1,93 +1,127 @@
-<ion-header style="background-color: white;">
-  <ion-toolbar style="padding: 20px 10px 15px;">
-      <ion-row style="display: flex;justify-content: space-between;align-items: center;">
-        <div>
-          <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_profile()"></ion-icon>
-        </div>  
-        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
-        align-items: center;align-items: center;">
-          Job
-        </div> 
-        <div> 
-           <img src="../../assets/icon/settings-sliders.png" style="width: 70%; height: 45px; padding-bottom: 8px;">
-         </div>
-      </ion-row> 
-  </ion-toolbar>
+<ion-header>
+    <ion-toolbar>
+        <ion-row>
+            <ion-col size="3">
+                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_jobs()"></ion-icon>
+            </ion-col>
+            <ion-col size="9">
+                <h1 style="font-size:22px ; font-family: Mr-eaves;">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Jobs</h1>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
-  <ion-row *ngIf="!matchedJobList"  >
-    <ion-col size="12" >
-        <ion-avatar size="medium" style="width: 90%; margin-left: 5%;    margin-top: 16%; height: 90%;">
-            <img alt="Silhouette of a person's head"src="\assets\img\Messages 04.png" />
-        </ion-avatar>
-    </ion-col>
-    <!-- C:\Users\Swathy\shippage\TC_Mobile\Talentchekmob\src\assets\img\Messages 04.png -->
-</ion-row>
-  <div class="display-justify" *ngFor="let cElement of matchedJobList" >
-    <div class="custom-button" (click)="goto_jobdetails()">
-     <div style="display: flex; justify-content: space-between;align-items: center;" >
-    <div style="display: flex; justify-content: center;padding: 5px;">
-      <ion-avatar slot="start">
-      <img src="../../assets/icon/useremployee.png" />
-      </ion-avatar> 
-    </div> 
-    <div class="full-part-time">
-      <ion-label>Full time</ion-label>
-    </div>
-    <div class="experience">
-      <ion-label>Experience 5+</ion-label>
-    </div>
-    <div  style="display: flex; justify-content: end;">
-      <ion-avatar style="width: 35%;" slot="start">
-      <img src="../../assets/icon/add_button.png" />
-      </ion-avatar> 
-    </div> 
-  </div>
-  <div style="display: flex;flex-direction: column;">
-    <div style="font-size: 18px; font-weight: 600;">
-      {{cElement.jobTitleName}}
-    </div>
-    <div style="font-size: 16px;">
-      Red Bull GmbH
-    </div>
-    <div style="font-size: 10px;color: gray;">
-      USA, New-York
-    </div>
-  </div>
+    <ion-row *ngIf="!matchedJobList">
+        <ion-col size="12">
+            <ion-avatar size="medium" style="width: 90%; margin-left: 5%;    margin-top: 16%; height: 90%;">
+                <img alt="Silhouette of a person's head" src="\assets\img\jobs empty.png" />
+            </ion-avatar>
 
-  <div style="display: flex;justify-content: space-between;align-items: center;">
-    <div style="font-size: 18px; font-weight: 700;">
-      3950-5800$/mo
+
+            <div class="display-justify-button">
+                <ion-button class="custom-button-job" (click)="goto_addJob()">
+                    <ion-icon name="add-circle-outline"></ion-icon> &nbsp; Add Job Preference</ion-button>
+            </div>
+
+        </ion-col>
+        <!-- C:\Users\Swathy\shippage\TC_Mobile\Talentchekmob\src\assets\img\Messages 04.png -->
+    </ion-row>
+
+    <br>
+    <div class="display-justify" *ngIf="matchedJobList">
+        <ion-card class="adv-card">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="4">
+                        <ion-avatar size="large">
+                            <img alt="Silhouette of a person's head" src="\assets\img\briefcase.png" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="8">
+                        <ion-button class="custom-button-job-edit" (click)="goto_addJob()">
+                            <ion-icon name="add-circle-outline"></ion-icon> &nbsp; Edit Job Preference</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
     </div>
-    <div (click)="goto_jobdetails()" class="apply-button">
-      View profile
+
+
+
+
+
+
+    <div class="display-justify" *ngFor="let cElement of matchedJobList">
+        <div class="custom-button" (click)="goto_jobdetails()">
+            <div style="display: flex; justify-content: space-between;align-items: center;">
+                <div style="display: flex; justify-content: center;padding: 5px;">
+                    <ion-avatar slot="start">
+                        <img src="../../assets/icon/useremployee.png" />
+                    </ion-avatar>
+                </div>
+                <div class="full-part-time">
+                    <ion-label>Full time</ion-label>
+                </div>
+                <div class="experience">
+                    <ion-label>Experience 5+</ion-label>
+                </div>
+                <div style="display: flex; justify-content: end;">
+                    <ion-avatar style="width: 35%;" slot="start">
+                        <img src="../../assets/icon/add_button.png" />
+                    </ion-avatar>
+                </div>
+            </div>
+            <div style="display: flex;flex-direction: column;">
+                <div style="font-size: 18px; font-weight: 600;">
+                    {{cElement.jobTitleName}}
+                </div>
+                <div style="font-size: 16px;">
+                    {{cElement.postedBy}}
+                </div>
+                <div style="font-size: 10px;color: gray;">
+                    USA, New-York
+                </div>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;align-items: center;">
+                <div style="font-size: 18px; font-weight: 700;">
+                    3950-5800$/mo
+                </div>
+                <div (click)="goto_jobdetails()" class="apply-button">
+                    View profile
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-    </div>
-  </div>  
-  <div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+
+
+
+
+
+    <div class="footer-nav">
+        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
       <ion-icon size="large" name="search-circle"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
       <ion-icon size="large" name="earth-sharp"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-      <ion-icon size="large" name="apps"></ion-icon>
+        <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+       <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+      
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+        <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
       <ion-icon size="large" name="person-circle-sharp"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
       <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+      
     </button>
-  </div>
-  
-  
-  
+    </div>
+
+
+
 
 </ion-content>
-
-
-
