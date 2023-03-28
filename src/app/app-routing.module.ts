@@ -12,8 +12,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
  
-  
- 
   {
     path: 'forgotpassword',
     loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
@@ -255,7 +253,14 @@ const routes: Routes = [
   {
     path: 'apply-for-job',
     loadChildren: () => import('./apply-for-job/apply-for-job.module').then( m => m.ApplyForJobPageModule)
+  },  {
+    path: 'subscription-individual',
+    loadChildren: () => import('./subscription-individual/subscription-individual.module').then( m => m.SubscriptionIndividualPageModule)
   },
+
+
+
+
 
 
 

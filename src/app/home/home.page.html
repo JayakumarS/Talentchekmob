@@ -1,95 +1,156 @@
 <ion-header style="background-color: white;">
-  <ion-toolbar style="padding: 20px 10px 15px;">
-      <ion-row style="display: flex;justify-content: space-between;">
-        <div>
-          <ion-icon size="large" (click)="goto_settings()"  name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
-        </div>  
-        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+    <ion-toolbar style="padding: 20px 10px 15px;">
+        <ion-row style="display: flex;justify-content: space-between;">
+            <div>
+                <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
         align-items: center;align-items: center;">
-          Profile statistics
-        </div> 
-        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
-        </div>
-      </ion-row> 
-  </ion-toolbar>
+                Home
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
+            </div>
+        </ion-row>
+    </ion-toolbar>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </ion-header>
 
 <ion-content>
+    <form>
+        <div class="display-justify">
+            <ion-row class="container">
+                <ion-col size="6">
+                    <ion-card class="recharge-card" (click)="goto_subscribe()">
+                        <ion-card-content>
+                            <p style="text-align: center;font-size: 16px; color: #fff;"> Avalible</p>
+                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">Talent credits</p>
 
-  <ion-row class="container">
-    <ion-col size="6" style="padding: 18px;">
-      <div class="company-card">
-        <div style="font-size: 20px;text-align: center;">Your</div>
-      <h1 style="white-space: nowrap;font-size: 23px;font-weight: 700;">Talent Credits</h1>
-      <div style="font-size: 24px;color: rgb(255, 0, 0);font-weight: 900;"><b>100</b></div>
-      <div style="padding-top: 10px;">&copy; Recharge Now</div>
-      </div>
-    </ion-col>
-  <div>
-    <ion-col size="3">
-      <div class="custom-button">
-        <div style="display: flex; align-items: center;" ><ion-icon name="eye-outline" style="padding: 10px;font-size: 17px;"></ion-icon>Profile views:<b>555</b></div>
-       </div>
-    </ion-col>
-    <ion-col size="3">
-      <div class="custom-button">
-        <div style="display: flex; align-items: center;" ><ion-icon name="person-outline" style="padding: 10px;font-size: 17px;"></ion-icon>Followers:<b>156</b></div>
-       </div>
-    </ion-col>
-  </div>
-  </ion-row> 
+                            <div class="card-content p-0 flex">
+                                <div class="spinningasset coin is-sm">
+                                    <div>
+                                        <em></em>
+                                        <em></em>
+                                    </div>
+                                </div>
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
+                                    {{creditPoints}}
+                                </div>
+                            </div>
+                            <br>
+                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>Recharge Now</b></p>
 
-
-  <ion-row class="container">
-    <ion-col size="6" style="padding: 18px;">
-      <div class="company-card" style="background:#ffff;color:black">
-      <div style="font-size: 24px;">100</div>
-      <div style="padding-top: 10px;    display: flex;"><ion-icon name="person-add-outline"></ion-icon>Your Network</div>
-      </div>
-    </ion-col>
-
-    <ion-col size="6" style="padding: 18px;">
-      <div class="company-card" style="background:#ffff;color:black">
-       <div style="font-size: 24px;">100</div>
-      <div style="padding-top: 10px;    display: flex;"><ion-icon name="eye-outline"></ion-icon>Matched Jobs</div>
-      </div>
-    </ion-col>
-    </ion-row>
-  <div class="line-with-text" >
-   <h2 style=" font-weight: 900;text-align: center; font-size: 27px;line-height: 0px; ">STAY CALM</h2>
-
-  <p style="text-align:center;"> and get your profile permanently endorsed</p>
-
-  <p style="text-align:center;"> Go to Profile </p>
-
- </div>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <div>
+                    <ion-col size="3">
+                        <div class="custom-button">
+                            <div style="display: flex; align-items: center;">
+                                Profile Views<b>: {{profileViewCount}}</b></div>
+                        </div>
+                    </ion-col>
+                    <ion-col size="3">
+                        <div class="custom-button">
+                            <div style="display: flex; align-items: center;">
+                                Your Rating:<b>&nbsp; {{avgrating}}</b><span class="fa fa-star checked"></span></div>
+                        </div>
+                    </ion-col>
+                </div>
+            </ion-row>
+        </div>
 
 
+        <!-- <ion-row class="container">
+            <ion-col size="6">
+                <ion-card class="network-card">
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col size="3">
+                                <ion-icon name="person-add-outline"></ion-icon>
+                            </ion-col>
 
- <ion-row>
-  <ion-col>
-      <div class="imageCss" style="    padding: 50px;
-      margin-left: 6%;"><img src=".\assets\img\Illustration.png" /></div>
-  </ion-col>
-</ion-row>
+                            <ion-col size="6">
+
+                            </ion-col>
+
+                            <ion-col size="3">
+
+                            </ion-col>
+
+                        </ion-row>
+
+                        <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{networkCount}}</p>
+                        <p style="text-align: center;font-size: 14px; color: #000;"><b>Your Network</b></p>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+            <ion-col size="6">
+                <ion-card class="network-card">
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col size="3">
+                                <ion-icon name="eye-outline"></ion-icon>
+                            </ion-col>
+
+                            <ion-col size="6">
+
+                            </ion-col>
+
+                            <ion-col size="3">
+
+                            </ion-col>
+
+                        </ion-row>
+
+                        <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{matchedJobsCount}}</p>
+                        <p style="text-align: center;font-size: 14px; color: #000;"><b>Matched Jobs</b></p>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row> -->
+
+
+        <div class="line-with-text">
+            <hr class="hr1">
+        </div>
+
+
+        <ion-col>
+            <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">STAY CALM</h1>
+            <P style="text-align: center ;">and get your profile permenently endorsed</P>
+            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">Go to Profile</a></p>
+            <img class="imageCss" src=".\assets\img\Illustration.png" />
+        </ion-col>
 
 
 
-  <div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
-      <ion-icon size="large" name="search-circle"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
-      <ion-icon size="large" name="earth-sharp"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-      <ion-icon size="large" name="apps"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
-      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
-      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-    </button>
-  </div>
+    </form>
+
 </ion-content>
+
+
+
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+ <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>
