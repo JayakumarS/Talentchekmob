@@ -42,4 +42,25 @@ export class SettingsPage implements OnInit {
     this.router.navigate(['/visibility'])
   }
 
+
+
+  // footer nav
+
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
+  }
+ 
+
+
+
+
 }
