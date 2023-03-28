@@ -21,10 +21,14 @@ export class ProfileViewPage implements OnInit {
   username: any;
   category: any;
   hobbies: any;
-  Location: any;
+  location: any;
   mobile: any;
   email: any;
   language: any;
+  skillName: any;
+  expertise: any;
+  skillList: any;
+  education: any;
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
@@ -34,14 +38,7 @@ export class ProfileViewPage implements OnInit {
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
      console.log(result); 
-     
-     this.Location = result['profileViewList'][0]['skills'];
-     this.username = result['profileViewList'][0]['username'];
-     this.category =result['profileViewList'][0]['category'];
-     this.hobbies =result['profileViewList'][0]['hobbies'];
-     this.mobile = result['profileViewList'][0]['phone'];
-     this.email = result['profileViewList'][0]['email'];
-     this.language = result['profileViewList'][0]['languages'];
+ 
    
      if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){
       this.educationcard = true;
@@ -61,6 +58,21 @@ export class ProfileViewPage implements OnInit {
               if(result['profileViewList'][0].certificationsList.length != 0 && result['profileViewList'] != null){
                 this.certificationcard = true;
                 }
+
+                    //profileview 
+     this.location = result['profileViewList'][0]['userlocation'];
+     this.username = result['profileViewList'][0]['username'];
+     this.category =result['profileViewList'][0]['category'];
+     this.hobbies =result['profileViewList'][0]['hobbies'];
+     this.mobile = result['profileViewList'][0]['phone'];
+     this.email = result['profileViewList'][0]['email'];
+     this.language = result['profileViewList'][0]['languages'];
+     
+
+     //skills
+     this.skillList = result['profileViewList'][0].skillList;
+    //educations
+    this.education=result['profileViewList'][0].educationList;
         });
 this.getprofile();
      

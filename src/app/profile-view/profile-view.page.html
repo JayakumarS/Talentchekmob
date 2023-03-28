@@ -62,7 +62,7 @@
                     <ion-label>Category : {{category}}</ion-label>
                 </ion-col>
                 <ion-col size="15" style="border-bottom: 1px solid #A3A4A5;">
-                    <ion-label>Location : Madurai,India</ion-label>
+                    <ion-label>Location : {{location}}</ion-label>
                 </ion-col>
                 <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
                     <ion-label>Phone No :{{mobile}}</ion-label>
@@ -72,7 +72,7 @@
                 </ion-col>
 
                 <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                    <ion-label>language Know: {{language}}</ion-label>
+                    <ion-label>Language Know: {{language}}</ion-label>
                 </ion-col>
 
 
@@ -106,20 +106,20 @@
                </ion-col>
             </ion-row>
 
-            <ion-row class="talentrow">
+            <ion-row class="talentrow" *ngFor="let x of skillList">
                 <ion-col>
-                    <ion-label> Mobile App</ion-label>
-                    <ion-progress-bar value="0.6"></ion-progress-bar>
+                    <ion-label>{{x.skillName}}</ion-label>
+                    <ion-progress-bar value="0.{{x.expertise}}"></ion-progress-bar>
                 </ion-col>
             </ion-row>
-            <ion-row class="talentrow">
+            <!-- <ion-row class="talentrow">
 
                 <ion-col>
                     <ion-label> Website Devlopement</ion-label>
                     <ion-progress-bar value="0.6"></ion-progress-bar>
                 </ion-col>
 
-            </ion-row>
+            </ion-row> -->
 
         </ion-card-content>
     </ion-card>
@@ -190,7 +190,7 @@
                 style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row style="    text-align: center;">
             <ion-col >
                 <ion-title style="color:black;margin-top: 5%;
                 margin-left: -5%;width: 112%;">Add Certifications</ion-title>
@@ -215,22 +215,43 @@
                   </ion-col> -->
             </ion-row>
 
-            <ion-row class="talentrow" style="display: flex;" style="column-count: 2">
-                <ion-col size="6">
-                    <div class="row">
-                        <h5>2</h5>
-                        <small>Doctor(s)</small>
-                    </div>
-                </ion-col>
-                <ion-col size="6">
-                    <div class="row">
-                        <h5>2</h5>
-                        <small>Doctor(s)</small>
-                    </div>
-                </ion-col>
+            <ion-card class="talentcard2" *ngFor="let x of education">
+                <ion-card-content>
 
-            </ion-row>
+                    <ion-row style="text-align: end;">
+                        <ion-col size="12">
+                            <ion-icon name="ellipsis-vertical"></ion-icon>
+                        </ion-col>
+                    </ion-row>
 
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-label style="font-size: 12px;font-weight: bold;">{{x.institutionName}}</ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-label style="font-size: 10px; font-weight: 700;">{{x.institutionLocation}}</ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-label style="font-size: 10px; font-weight: 700;">{{x.courseStart}}</ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-label style="font-size: 10px; font-weight: 700;">{{x.fieldofStudy}}</ion-label>
+                        </ion-col>
+                        <ion-col size="12" style="text-align: end;">
+                            <ion-label>     <span class="badge badge-pill badge-primary col-blue" style="background: #E5F6DF;
+                                color: #39D688!important;
+                                border: #E5F6DF;">
+
+
+                                    {{x.status}}</span></ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <!-- <ion-label>{{x.}}</ion-label> -->
+                        </ion-col>
+                    </ion-row>
+
+                </ion-card-content>
+            </ion-card>
         </ion-card-content>
     </ion-card>
 <!-- Add card empty -->
@@ -243,7 +264,7 @@
                     style="    width: 50%; height: 73%; margin-left: 100%; ">
                 </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row style="    text-align: center;">
                 <ion-col >
                     <ion-title style="color:black;margin-top: 5%;
                     width: 104%;">Add Education</ion-title>
@@ -307,7 +328,7 @@
                     style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
                 </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row style="    text-align: center;">
                 <ion-col >
                     <ion-title style="color:black;margin-top: 5%;
                 width: 104%;">Add Work Experience</ion-title>
