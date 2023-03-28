@@ -67,7 +67,13 @@ export class ProfileViewPage implements OnInit {
   }
   Skill()
   {
+    this.router.navigate(['/skill-popup']) 
+  }
+  certification()
+  {
+
     this.router.navigate(['/certification']) 
+
   }
   Connections()
   {
