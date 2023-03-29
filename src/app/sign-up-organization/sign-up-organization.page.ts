@@ -60,7 +60,7 @@ base64img1: string = '';
 
 
     this.talentorgform = formbuilder.group({
-      organizationName: ['',[Validators.required, Validators.minLength(9), Validators.pattern('\d{1}[a-zA-Z]{2}\d{6}')]],
+      organizationName: ['',Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
       regNo: ['',Validators.required],
       orgType: ['',Validators.required],
       regDate: ['',Validators.required],

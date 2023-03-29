@@ -64,7 +64,12 @@
                             <div *ngIf=" talentinstform.controls.instituteName.hasError('required') && talentinstform.controls.instituteName.touched">
                                 <small style="color: #f70505;">Institution Name is required</small>
                               </div>
-
+                              <div *ngIf="talentinstform.controls.instituteName.hasError('pattern')">
+                                <small style="color: #f70505;">Special characters are not allowed</small>
+                            </div>
+                            <div *ngIf="talentinstform.controls.instituteName.hasError('minlength')">
+                                <small style="color: #f70505;">Institution name must be atleast 3 characters long</small>
+                            </div>
                             <ion-label class="labels">Registration Number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
