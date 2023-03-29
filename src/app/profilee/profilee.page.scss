@@ -300,4 +300,6 @@ ion-progress-bar {
   }
     
   
-
+  ion-select::part(icon) {
+    display: none;
+  }
