@@ -208,3 +208,6 @@ ion-radio {
     font-size: 13px;
     margin: 0px 5px;
 }
+ion-select::part(icon) {
+    display: none;
+  }
