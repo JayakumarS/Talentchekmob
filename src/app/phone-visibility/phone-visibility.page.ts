@@ -26,7 +26,7 @@ export class PhoneVisibilityPage implements OnInit {
     }
 
   ngOnInit() {
-    this.currentUserId = 'TFIN10000452331';
+    this.currentUserId = localStorage.getItem("userId");
       
       var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId=" + this.currentUserId;
        
@@ -52,8 +52,8 @@ export class PhoneVisibilityPage implements OnInit {
   }
 
   updatePhoneVisibility(){
-    this.currentUserId = 'TFIN10000452331';
-   var data = {
+    this.currentUserId = localStorage.getItem("userId");
+      var data = {
      "profileVisibility": "",
      "currentUserId":this.currentUserId,
      "phoneVisibility":this.phoneVisForm.value.phoneVisibility,

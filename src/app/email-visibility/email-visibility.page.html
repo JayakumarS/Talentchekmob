@@ -20,19 +20,24 @@
     <ion-list>
       <ion-radio-group formControlName="emailVisibility" (ionChange)="updateEmailVisibility()" [allowEmptySelection]="true" value="turtles">
         <ion-item class="ion-item">
-          <ion-label><b>Public</b><h6 style="color: gray;">Anyone on Talent Chek can view your profile</h6></ion-label>
-          <ion-radio slot="end" value="public"></ion-radio>
-        </ion-item>
-    
-        <ion-item class="ion-item">
-          <ion-label><b>On Demand</b><h6 style="color: gray;">Users can request permission to view your profile</h6></ion-label>
-          <ion-radio slot="end" value="ondemand"></ion-radio>
-        </ion-item>
-    
-        <ion-item class="ion-item">
           <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label>
           <ion-radio slot="end" value="private"></ion-radio>
+        </ion-item>  
+        
+        <ion-item class="ion-item">
+          <ion-label><b>Network</b><h6 style="color: gray;">Connections verified by you & your university corporate alumni network can view</h6></ion-label>
+          <ion-radio slot="end" value="network"></ion-radio>
         </ion-item> 
+        
+        <ion-item class="ion-item">
+          <ion-label><b>Employers</b><h6 style="color: gray;">Visible to organisations & recruiters</h6></ion-label>
+          <ion-radio slot="end" value="employers"></ion-radio>
+        </ion-item> 
+
+        <ion-item class="ion-item">
+          <ion-label><b>Public</b><h6 style="color: gray;">Anyone on talent chek can see your email ID</h6></ion-label>
+          <ion-radio slot="end" value="public"></ion-radio>
+        </ion-item>
       </ion-radio-group>
     </ion-list>
   </form>

@@ -102,9 +102,9 @@ export class WorkExperiencesPage implements OnInit {
   {
     this.router.navigate(['/profile/addCertifications']) 
   }
-  education()
+  goto_jobProfile()
   {
-    this.router.navigate(['/profile/addEducation']) 
+    this.router.navigate(['/profile-view']) 
   }
 
 

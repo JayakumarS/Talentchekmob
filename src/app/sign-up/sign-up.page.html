@@ -168,7 +168,24 @@
 
 
                             <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
+
                             <ion-item fill="outline" class="input-field">
+                                <div class="selected-skills-container">
+                                    <div class="selected-skill">{{ selectedCountry }} 
+                                    </div>
+                                </div>
+                                <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" 
+                                        name="close-circle" (click)="removeCountry()"></ion-icon>
+                                <ion-input  (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                            </ion-item>
+                
+                            <ion-list *ngIf="showcountyResults">
+                                <ion-item *ngFor="let result of searchResults" (click)="selectcountry(result.text,result.id)">
+                                    {{ result.text }}
+                                </ion-item>
+                            </ion-list>
+
+                            <!-- <ion-item fill="outline" class="input-field">
                                 <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="country" showcancelbutton="" 
                                 debounce="100" (ionInput)="filterList($event)" 
                                 formControlName="country" [(ngModel)]="countryVal"  (ionBlur)="unCheckFocus()"
@@ -184,7 +201,7 @@
                                     </ion-item>
                                   </ion-list>
                                 </ion-col>
-                              </ion-row>
+                              </ion-row> -->
                               <div *ngIf=" talentform.controls.country.hasError('required') && talentform.controls.country.touched">
                                 <small style="color: #f70505;">Country is required</small>
                               </div>

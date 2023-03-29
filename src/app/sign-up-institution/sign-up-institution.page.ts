@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
@@ -33,6 +33,12 @@ stateResponse: any;
 base64img1: string = '';
   cityOptions: any;
   cityList: any;
+  showcountyResults : boolean = false;
+  selectedCountry: any;
+  showResults: boolean = false; 
+  searchResults: string[] = [];
+  countrysearchCtrl = new FormControl('');
+  countryId: string;
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder, public storageservice:StorageService, private transfer: FileTransfer,
     private translate: TranslateService, private loadingCtrl: LoadingController) {
 
@@ -51,7 +57,7 @@ base64img1: string = '';
       state: ['',Validators.required],
       pincode: ['',Validators.required],
       referralCode: [''],
-      profileVisibility: ['',Validators.required],
+      profileVisibility: [''],
      
 
     });
@@ -74,7 +80,7 @@ base64img1: string = '';
       animation: true
     })
     this.BindInsType();
-    var listConstant =  this.initializeItems(); 
+    this.getCountryList(); 
 
   }
 
@@ -134,45 +140,45 @@ goToSearchSelectedItem( CtryName,CtryId) {
   this.IsSearchListShow = false;
   this.getstatelist(CtryId);
 }
-  async initializeItems(): Promise<any> {
+  //country list
 
-    var countryURL = "api/auth/app/CommonUtility/countryList";
-    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
-      this.countryResponseBackup = result["countryList"];
-      this.countryResponse = result["countryList"];
-   //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-    });
-  
-    return InsList;
+getCountryList(){
+
+  var countryURL = "api/auth/app/CommonUtility/countryList";
+  const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+    this.countryResponse = result["countryList"];
+    console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+  });
+}
+
+
+
+onCountrySearch(value: string) {
+  if (value.length > 2) {
+    this.showcountyResults = true;
+    this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showcountyResults = false;
+    this.searchResults = [];
   }
-  async filterList(evt) {
-    if (evt.srcElement.value != null && evt.srcElement.value != '') {
-      this.IsSearchListShow = true;
-      this.countryResponse = this.countryResponseBackup;
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
-      }
-  
-      var countVal = 0;
-      this.countryResponse = this.countryResponse.filter(currentCountry => {
-        countVal++;
-        if (currentCountry.text && searchTerm && countVal < 100) {
-          return (currentCountry.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-        }
-      });
-  
-      if (this.countryResponse == 0) {
-        this.IsSearchListShow = false;
-      }
-      else {
-        this.IsSearchListShow = true;
-      }
-    }
-    else {
-      this.IsSearchListShow = false;
-    }
-  }
+}
+
+selectcountry(contry: string,id:string) {
+  this.selectedCountry = contry; 
+  this.talentinstform.patchValue({
+    'country' : id
+  })
+   this.showcountyResults = false;
+  this.searchResults = []; 
+  this.getstatelist(id);
+  this.countrysearchCtrl.setValue('');
+}
+
+
+removeCountry() {
+  this.selectedCountry = undefined;
+}
+    
   //state list
   async getstatelist(CtryId): Promise<any> {
 
@@ -188,17 +194,14 @@ goToSearchSelectedItem( CtryName,CtryId) {
   }
   goTostateSelectedItem( stateId) {
     //var CtryId =this.talentorgform.value.countryId; 
-    var CtryId=this.talentinstform.value.country.slice(0,2);
+    var CtryId=this.talentinstform.value.country;
     this.getcitylist(stateId,CtryId);
   }
   // City List
 
   getcitylist(stateId,countryId){
     
-    console.log(stateId)
-    this.talentinstform.patchValue({
-      'country': countryId
-    })
+    console.log(stateId) 
     var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
     this.storageservice.getrequest(industryURL).subscribe(result => {
      this.cityList = result['cityList'];
@@ -239,7 +242,7 @@ goToSearchSelectedItem( CtryName,CtryId) {
       let myString = regDate1;
       this.Four = myString.substring(0, myString.length - 6);
       console.log(this.Four)
-      var countryID=country.slice(0,2);
+      //var countryID=country.slice(0,2);
       // if (firstName != lastName) { //Validation.
   
         // var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
@@ -257,7 +260,7 @@ goToSearchSelectedItem( CtryName,CtryId) {
         'instType': instType,
         'address': address,
         'emailId': emailId,
-        'country': countryID,
+        'country': country,
         'city': city,
         'pwd': pwd,
         'mobileNo': mobileNo,

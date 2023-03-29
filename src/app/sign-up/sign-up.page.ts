@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Stepper from 'bs-stepper';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -37,7 +37,12 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   response: Object;
   stateResponseBackup: any;
   stateResponse: any;
- 
+  showcountyResults : boolean = false;
+  selectedCountry: any;
+  showResults: boolean = false; 
+  searchResults: string[] = [];
+  countrysearchCtrl = new FormControl('');
+  countryId: string;
 
 
   constructor(public formbuilder: FormBuilder,public router: Router,private camera: Camera,
@@ -93,7 +98,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
           var profileVisibility = this.talentform.controls['profileVisibility'].value; 
           var address = this.talentform.controls['address'].value;
           var areaName = this.talentform.controls['areaName'].value; 
-           var country = this.countryIdVal; //Google search country feature. 
+           var country = this.talentform.controls['country'].value;
           var stateName = this.talentform.controls['stateName'].value;
           var pinCode = this.talentform.controls['pinCode'].value; 
           console.log("dob: " + dob); 
@@ -107,8 +112,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
             console.log("dateOfBirthAlt: " + dateOfBirth);
             var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
             if (frm <= currentDate) {
-              var countryID=country.slice(0,2);
-              //  if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
+               //  if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
   
                 // if (cBoxIAgree == true) {
   
@@ -134,7 +138,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   
                       'address': address,
                       'city': areaName,
-                      'country': countryID,
+                      'country': country,
                       'state': stateName,
                       'pincode': pinCode,
                       'typeRegister': 'Mobile',
@@ -218,7 +222,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
 
   async ngOnInit() {
 
-    var listConstant = await this.initializeItems(); 
+   this.getCountryList(); 
 
     this.step = 1;
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
@@ -244,6 +248,48 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
       this.loadingCtrl.dismiss();
     });
   }
+
+
+//country list
+
+getCountryList(){
+
+  var countryURL = "api/auth/app/CommonUtility/countryList";
+  const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+    this.countryResponse = result["countryList"];
+    console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+  });
+}
+
+
+onCountrySearch(value: string) {
+  if (value.length > 2) {
+    this.showcountyResults = true;
+    this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showcountyResults = false;
+    this.searchResults = [];
+  }
+}
+
+selectcountry(contry: string,id:string) {
+  this.selectedCountry = contry; 
+  this.talentform.patchValue({
+    'country' : id
+  })
+   this.showcountyResults = false;
+  this.searchResults = []; 
+  this.getstatelist(id);
+  this.countrysearchCtrl.setValue('');
+}
+
+
+removeCountry() {
+  this.selectedCountry = undefined;
+}
+
+
+
   //state list
   async getstatelist(CtryId): Promise<any> {
 
@@ -269,10 +315,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   });
   }
 
-  goToSearchSelectedItem(CtryName, CtryId) {
-    console.log("InsName: " + CtryName)
-    console.log("InsId: " + CtryId)
-
+  goToSearchSelectedItem(CtryName, CtryId) {  
     this.countryVal = CtryName;
     this.countryIdVal = CtryId;
     this.IsSearchListShow = false;
@@ -281,56 +324,13 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
 
   goTostateSelectedItem( stateId) {
     //var CtryId =this.talentorgform.value.countryId; 
-    var CtryId=this.talentform.value.country.slice(0,2);
+    var CtryId=this.talentform.value.country;
     this.getcitylist(stateId,CtryId);
   }
-  async initializeItems(): Promise<any> {
-
-    var countryURL = "api/auth/app/CommonUtility/countryList";
-    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
-      this.countryResponseBackup = result["countryList"];
-      this.countryResponse = result["countryList"];
-      console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-    });
-
-    return InsList;
-  }
-
+  
   unCheckFocus() {
     // this.ionSearchListShow = false;
-  }
-
-  async filterList(evt) {
-    if (evt.srcElement.value.length > 2) {
-    if (evt.srcElement.value != null && evt.srcElement.value != '') {
-      this.IsSearchListShow = true;
-      this.countryResponse = this.countryResponseBackup;
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
-      }
-
-      var countVal = 0;
-      this.countryResponse = this.countryResponse.filter(currentCountry => {
-        countVal++;
-        if (currentCountry.text && searchTerm && countVal < 100) {
-          return (currentCountry.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-        }
-      });
-
-      if (this.countryResponse == 0) {
-        this.IsSearchListShow = false;
-      }
-      else {
-        this.IsSearchListShow = true;
-      }
-    }
-  }
-    else {
-      this.IsSearchListShow = false;
-    }
-  }
-
+  } 
   goto_welcome(){
 
       this.router.navigate(['/hello-dear']) 
