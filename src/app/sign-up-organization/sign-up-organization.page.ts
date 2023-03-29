@@ -54,7 +54,7 @@ base64img1: string = '';
 
 
     this.talentorgform = formbuilder.group({
-      organizationName: ['',Validators.required],
+      organizationName: ['',[Validators.required, Validators.minLength(9), Validators.pattern('\d{1}[a-zA-Z]{2}\d{6}')]],
       regNo: ['',Validators.required],
       orgType: ['',Validators.required],
       regDate: ['',Validators.required],
@@ -327,9 +327,9 @@ onSubmit(){
                   //this.hideLoadingIndicator(); //Hide loading indicator
                 }
                 else if (result["success"] == false) {
-                  var msg = result["message"];
+                  var msg = result["msg"];
                   if (msg == null) {
-                    msg = "Web service does not give proper message";
+                    "msg" 
                   }
                   this.storageservice.warningToast(msg);
                   //this.hideLoadingIndicator(); //Hide loading indicator

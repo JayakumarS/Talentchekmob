@@ -40,15 +40,15 @@ base64img1: string = '';
   countrysearchCtrl = new FormControl('');
   countryId: string;
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder, public storageservice:StorageService, private transfer: FileTransfer,
-    private translate: TranslateService, private loadingCtrl: LoadingController) {
+    private translate: TranslateService, private loadingCtrl: LoadingController,) {
 
     this.talentinstform = formbuilder.group({
-      instituteName: ['',Validators.required],
+      instituteName: ['',[Validators.required, Validators.minLength(9), Validators.pattern('\d{1}[a-zA-Z]{2}\d{6}')]],
       regNo: ['',Validators.required],
       taxId: ['',Validators.required],
       regDate: ['',Validators.required],
       instType: ['',Validators.required],
-      emailId: ['',Validators.required],
+      emailId: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
       address: [''],
       country: ['',Validators.required],
       city:['',Validators.required],
@@ -286,15 +286,17 @@ removeCountry() {
                         empId: empid,
                         points: points
                       }
+                      
                     };
-                    this.router.navigate(['/awesome'], navigationExtras);
+                                        this.router.navigate(['/awesome'], navigationExtras);
                     //this.hideLoadingIndicator(); //Hide loading indicator
                   }
                   else if (result["success"] == false) {
-                    var msg = result["message"];
+                    var msg = result["msg"];
                     if (msg == null) {
-                      msg = "Web service does not give proper message";
+                      "msg" 
                     }
+                    // this.showNotification('snackbar-danger',result['msg'],'top','Right');
                     this.storageservice.warningToast(msg);
                     //this.hideLoadingIndicator(); //Hide loading indicator
                   }
@@ -327,4 +329,13 @@ removeCountry() {
   transformDate(date) {
     return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
   }
+
+  // showNotification(colorName, text, placementFrom, placementAlign) {
+  //   this.snackBar.open(text, "", {
+  //     duration: 2000,
+  //     verticalPosition: placementFrom,
+  //     horizontalPosition: placementAlign,
+  //     panelClass: colorName,
+  //   });
+  // }
 }

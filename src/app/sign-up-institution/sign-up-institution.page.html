@@ -68,7 +68,7 @@
                             <ion-label class="labels">Registration Number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="regNo"></ion-input>
+                                <ion-input  formControlName="regNo"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentinstform.controls.regNo.hasError('required') && talentinstform.controls.regNo.touched">
                                 <small style="color: #f70505;">Registration Number is required</small>
@@ -231,7 +231,7 @@
                             <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="mobileNo"></ion-input>
+                                <ion-input type="number" formControlName="mobileNo"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentinstform.controls.mobileNo.hasError('required') && talentinstform.controls.mobileNo.touched">
                                 <small style="color: #f70505;">Phone number is required</small>

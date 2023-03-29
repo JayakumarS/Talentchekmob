@@ -236,7 +236,7 @@
                             <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="mobileNo"></ion-input>
+                                <ion-input type="number" formControlName="mobileNo"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.mobileNo.hasError('required') && talentorgform.controls.mobileNo.touched">
                                 <small style="color: #f70505;">Phone number is required</small>
