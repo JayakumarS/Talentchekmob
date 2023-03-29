@@ -44,7 +44,7 @@
                         <ion-icon name="close-circle" (click)="removeCountry(country)"></ion-icon>
                     </div>
                 </div>
-                <ion-input placeholder="Select Country" (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                <ion-input  (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showcountyResults">
@@ -60,7 +60,7 @@
                         <ion-icon name="close-circle" (click)="removeState(state)"></ion-icon>
                     </div>
                 </div>
-                <ion-input placeholder="Select States" (ionInput)="onstateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
+                <ion-input  (ionInput)="onstateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showStateResults">
@@ -77,7 +77,7 @@
                         <ion-icon name="close-circle" (click)="removeCity(skill)"></ion-icon>
                     </div>
                 </div>
-                <ion-input placeholder="Select Cities" (ionInput)="onSearch($event.target.value)" [formControl]="citysearchCtrl"></ion-input>
+                <ion-input  (ionInput)="onSearch($event.target.value)" [formControl]="citysearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showResults">
