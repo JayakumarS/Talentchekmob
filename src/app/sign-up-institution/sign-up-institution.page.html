@@ -68,7 +68,7 @@
                             <ion-label class="labels">Registration Number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input  formControlName="regNo"></ion-input>
+                                <ion-input  formControlName="regNo" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentinstform.controls.regNo.hasError('required') && talentinstform.controls.regNo.touched">
                                 <small style="color: #f70505;">Registration Number is required</small>
@@ -258,19 +258,19 @@
                             </ion-item>
 
                             <ion-item lines="none">
-                                <ion-checkbox slot="start"></ion-checkbox>
-                                <ion-label>I accept the <a href="#">Terms and conditions</a></ion-label>
+                                <ion-checkbox formControlName="cBoxIAgree" [(ngModel)]="cBoxIAgreeVal"></ion-checkbox>
+                                <ion-label>&emsp;I accept the <a (click)="openTCForm()" style="color: rgb(119, 191, 194);">  Terms and conditions</a><span style="color:red">*</span></ion-label>
                             </ion-item><br>
 
                             <ion-item lines="none">
-                                <ion-checkbox slot="start"></ion-checkbox>
-                                <ion-label>I accept the <a href="#">Consent form</a></ion-label>
+                                <ion-checkbox formControlName="cBoxIAgreeConsent" [(ngModel)]="cBoxIAgreeConsentVal"></ion-checkbox>
+                                <ion-label>&emsp;I accept the <a (click)="openConsentForm()" style="color: rgb(119, 191, 194);">Consent form</a><span style="color:red">*</span></ion-label>
                             </ion-item>
 
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="onSubmit()">
+                            <ion-button class="custom-button" [disabled]="!talentinstform.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false " style="font-family:  Mr-eaves;" (click)="onSubmit()">
                                 Register</ion-button>
                         </div>
 

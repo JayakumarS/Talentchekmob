@@ -7,6 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import Stepper from 'bs-stepper';
 import { Alert } from 'selenium-webdriver';
 import { StorageService } from '../storage.service';
+import { ModalController } from '@ionic/angular';
+import { ConsentFormPage } from '../consent-form/consent-form.page';
+import { TcFormPage } from '../tc-form/tc-form.page';
 
 @Component({
   selector: 'app-sign-up-organization',
@@ -49,8 +52,11 @@ base64img1: string = '';
   searchResults: string[] = [];
   countrysearchCtrl = new FormControl('');
   countryId: string;
+  cBoxIAgreeVal: boolean = true;
+  cBoxIAgreeConsentVal: boolean = true;
+
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder,public storageservice:StorageService, private transfer: FileTransfer,
-    private translate: TranslateService, ) { 
+    private translate: TranslateService,public modalController: ModalController, ) { 
 
 
     this.talentorgform = formbuilder.group({
@@ -69,8 +75,9 @@ base64img1: string = '';
       pincode: ['',Validators.required],
       referralCode: [''],
       profileVisibility: ['', ''],
-     countryId:['']
-
+     countryId:[''],
+     cBoxIAgree:[''],
+     cBoxIAgreeConsent:['']
     });
 
 
@@ -363,8 +370,70 @@ onSubmit(){
 transformDate(date) {
   return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
 }
+
+openTCForm() {
+  this.goto_TCFormModal();
+}
+async goto_TCFormModal() {
+
+  const modal = await this.modalController.create({
+    component: TcFormPage,
+    cssClass: 'my-custom-class'
+  });
+
+
+  modal.onDidDismiss().then((dataReturned) => {
+    if (dataReturned !== null) {
+
+      //#region Getting values from popup
+      console.table("One: " + dataReturned);
+      var IsAgree = dataReturned.data["IsAgree"];
+      console.log("IsAgree: " + IsAgree);
+      //#endregion
+
+      if (IsAgree == "Yes") {
+        this.cBoxIAgreeVal = true;
+      }
+      else if (IsAgree == "No") {
+        this.cBoxIAgreeVal = false;
+      }
+    }
+  });
+
+  return await modal.present();
 }
 
-function startWith(arg0: string): any {
-  throw new Error('Function not implemented.');
+openConsentForm() {
+  this.goto_ConsentFormModal();
+}
+
+async goto_ConsentFormModal() {
+
+  const modal = await this.modalController.create({
+    component: ConsentFormPage,
+    cssClass: 'my-custom-class'
+  });
+
+  modal.onDidDismiss().then((dataReturned) => {
+    if (dataReturned !== null) {
+
+      //#region Getting values from popup
+      console.table("One: " + dataReturned);
+      var IsAgree = dataReturned.data["IsAgree"];
+      console.log("IsAgree: " + IsAgree);
+      //this.storageservice.warningToast('Modal Sent Data :' + dataReturned);
+      //#endregion
+
+      if (IsAgree == "Yes") {
+        this.cBoxIAgreeConsentVal = true;
+      }
+      else if (IsAgree == "No") {
+        this.cBoxIAgreeConsentVal = false;
+      }
+    }
+  });
+
+  return await modal.present();
+}
+
 }
