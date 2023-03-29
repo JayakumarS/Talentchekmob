@@ -10,7 +10,9 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
- 
+import { ModalController } from '@ionic/angular';
+import { ConsentFormPage } from '../consent-form/consent-form.page';
+import { TcFormPage } from '../tc-form/tc-form.page';
 @Injectable({
   providedIn: 'root'
 })
@@ -43,19 +45,20 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   searchResults: string[] = [];
   countrysearchCtrl = new FormControl('');
   countryId: string;
-
+  cBoxIAgreeVal: boolean = true;
+  cBoxIAgreeConsentVal: boolean = true;
 
   constructor(public formbuilder: FormBuilder,public router: Router,private camera: Camera,
-    public storageservice:StorageService, private transfer: FileTransfer,
+    public storageservice:StorageService, private transfer: FileTransfer,public modalController: ModalController,
      private translate: TranslateService, private loadingCtrl: LoadingController) {
 
       this.talentform = formbuilder.group({
-        firstName: ['' ,Validators.required],
-        lastName: ['', Validators.required],
+        firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+        lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
          password: ['', Validators.required],
         gender: ['', Validators.required],
-        phoneNo: ['', Validators.required],
-        email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+        phoneNo: ['', Validators.compose([Validators.required])],
+        email: ['', Validators.compose([Validators.maxLength(70),Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
         dob: ['', Validators.required],    //Only for Android  
         address: [''],
         areaName: ['' ,Validators.required],
@@ -64,6 +67,8 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         pinCode: ['', Validators.required],
         referalCode: [''],
         profileVisibility: ['', Validators.required],
+        cBoxIAgree:[''],
+        cBoxIAgreeConsent:['']
   
       });
 
@@ -170,10 +175,10 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                         //this.hideLoadingIndicator(); //Hide loading indicator
                       }
                       else if (result["success"] == false) {
-                        var msg = result["message"];
-                        if (msg == null) {
-                          msg = "Web service does not give proper message";
-                        }
+                           var msg = result["msg"];
+                            if (msg == null) {
+                              "msg"
+                            }
                         this.storageservice.warningToast(msg);
                         this.hideLoadingIndicator(); //Hide loading indicator
                       }
@@ -365,4 +370,68 @@ removeCountry() {
     })
   }
 
+  openTCForm() {
+    this.goto_TCFormModal();
+  }
+  async goto_TCFormModal() {
+
+    const modal = await this.modalController.create({
+      component: TcFormPage,
+      cssClass: 'my-custom-class'
+    });
+
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        var IsAgree = dataReturned.data["IsAgree"];
+        console.log("IsAgree: " + IsAgree);
+        //#endregion
+
+        if (IsAgree == "Yes") {
+          this.cBoxIAgreeVal = true;
+        }
+        else if (IsAgree == "No") {
+          this.cBoxIAgreeVal = false;
+        }
+      }
+    });
+
+    return await modal.present();
+  }
+
+  openConsentForm() {
+    this.goto_ConsentFormModal();
+  }
+
+  async goto_ConsentFormModal() {
+
+    const modal = await this.modalController.create({
+      component: ConsentFormPage,
+      cssClass: 'my-custom-class'
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        var IsAgree = dataReturned.data["IsAgree"];
+        console.log("IsAgree: " + IsAgree);
+        //this.storageservice.warningToast('Modal Sent Data :' + dataReturned);
+        //#endregion
+
+        if (IsAgree == "Yes") {
+          this.cBoxIAgreeConsentVal = true;
+        }
+        else if (IsAgree == "No") {
+          this.cBoxIAgreeConsentVal = false;
+        }
+      }
+    });
+
+    return await modal.present();
+  }
 }

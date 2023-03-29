@@ -54,20 +54,29 @@
                         <div class="button-content">
                             <ion-label class="labels">First name <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="firstName"></ion-input>
+                                <ion-input type="text" formControlName="firstName"></ion-input>
                                 
                             </ion-item>
                             <div *ngIf=" talentform.controls.firstName.hasError('required') && talentform.controls.firstName.touched">
                                 <small style="color: #f70505;">First name is required</small>
-                              </div>
+                            </div>
+                            <div *ngIf="talentform.controls.firstName.hasError('pattern')">
+                                <small style="color: #f70505;">Special characters are not allowed</small>
+                            </div>
+                            <div *ngIf="talentform.controls.firstName.hasError('minlength')">
+                                <small style="color: #f70505;">First name must be atleast 3 characters long</small>
+                            </div>
 
                             <ion-label class="labels">Last name <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="lastName"></ion-input>
+                                <ion-input type="text" formControlName="lastName"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.lastName.hasError('required') && talentform.controls.lastName.touched">
                                 <small style="color: #f70505;">Last name is required</small>
                               </div>
+                              <div *ngIf="talentform.controls.lastName.hasError('pattern')">
+                                <small style="color: #f70505;">Special characters are not allowed</small>
+                             </div>
 
                             <ion-label class="labels">Date of Birth<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -256,7 +265,7 @@
 
                             <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="phoneNo"></ion-input>
+                                <ion-input type="number" formControlName="phoneNo"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.phoneNo.hasError('required') && talentform.controls.phoneNo.touched">
                                 <small style="color: #f70505;">phone No is required</small>
@@ -264,11 +273,14 @@
 
                             <ion-label class="labels">Email <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="email"></ion-input>
+                                <ion-input type="email" formControlName="email" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.email.hasError('required') && talentform.controls.email.touched">
                                 <small style="color: #f70505;">Email is required</small>
                               </div>
+                            <div *ngIf="talentform.controls.email.hasError('pattern')">
+                                <small style="color: #f70505;">Invalid email</small>
+                            </div>
 
                             <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -322,10 +334,19 @@
                                 <ion-input formControlName="referalCode"></ion-input>
                             </ion-item>
 
+                            <ion-item lines="none">
+                                <ion-checkbox formControlName="cBoxIAgree" [(ngModel)]="cBoxIAgreeVal"></ion-checkbox>
+                                <ion-label>&emsp;I accept the <a (click)="openTCForm()" style="color: rgb(119, 191, 194);">  Terms and conditions</a><span style="color:red">*</span></ion-label>
+                            </ion-item><br>
+
+                            <ion-item lines="none">
+                                <ion-checkbox formControlName="cBoxIAgreeConsent" [(ngModel)]="cBoxIAgreeConsentVal"></ion-checkbox>
+                                <ion-label>&emsp;I accept the <a (click)="openConsentForm()" style="color: rgb(119, 191, 194);">Consent form</a><span style="color:red">*</span></ion-label>
+                            </ion-item>
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!talentform.valid"(click)="onSubmit()">Register</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!talentform.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false "(click)="onSubmit()">Register</ion-button>
                         </div>
 
 

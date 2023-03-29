@@ -257,6 +257,14 @@ const routes: Routes = [
     path: 'subscription-individual',
     loadChildren: () => import('./subscription-individual/subscription-individual.module').then( m => m.SubscriptionIndividualPageModule)
   },
+  {
+    path: 'tc-form',
+    loadChildren: () => import('./tc-form/tc-form.module').then( m => m.TcFormPageModule)
+  },
+  {
+    path: 'consent-form',
+    loadChildren: () => import('./consent-form/consent-form.module').then( m => m.ConsentFormPageModule)
+  },
 
 
 
