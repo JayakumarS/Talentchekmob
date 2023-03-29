@@ -27,10 +27,7 @@ export class SkillPopupPage implements OnInit {
   constructor(public modalController: ModalController,
     private fb: FormBuilder,private toastController: ToastController,
     public storageservice:StorageService,
-    public router :Router) { }
-  dismiss() {
-    this.modalController.dismiss();
-  }
+    public router :Router,private route: ActivatedRoute) { } 
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
@@ -41,7 +38,17 @@ export class SkillPopupPage implements OnInit {
       currentUserId:[""]
     })
    this.getSkillList();
-   this.fetchEditDeatils();
+  // this.fetchEditDeatils();
+
+
+   this.route.queryParams.subscribe(params => {
+    if (params) { 
+      if (params != null || params != undefined ) {  
+          this.fetchEditDeatils(params.id); 
+        console.log(params);
+      }
+    }
+  });
   } 
 
   getSkillList(){
@@ -53,10 +60,10 @@ export class SkillPopupPage implements OnInit {
    });
   }
 
-  fetchEditDeatils(){
+  fetchEditDeatils(skillId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/editKeyskill";
          
-    this.storageservice.getrequest(getEditValues + "?skillId=" + 95).subscribe(result => {
+    this.storageservice.getrequest(getEditValues + "?skillId=" + skillId).subscribe(result => {
      if (result["success"] == true) {
        this.edit = true;
       this.selectedSkills = result["skillandCertificationsBean"].keySkill;
@@ -125,10 +132,8 @@ export class SkillPopupPage implements OnInit {
            if (result["success"] == true) {
             this.router.navigate(['/profile-view']);
             this.presentToast()
-            this.dismiss();
-            }else{  
-              this.dismiss();
-            }
+             }else{  
+             }
          }); 
        }else{
         this.presentToast1()
@@ -152,10 +157,8 @@ export class SkillPopupPage implements OnInit {
            if (result["success"] == true) {
             this.router.navigate(['/profile-view']);
             this.updateToast()
-            this.dismiss();
-            }else{  
-              this.dismiss();
-            }
+             }else{  
+             }
          }); 
        }else{
         this.presentToast1()

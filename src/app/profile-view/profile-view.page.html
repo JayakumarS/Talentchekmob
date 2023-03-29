@@ -24,13 +24,13 @@
 
         <ion-row>
             <ion-col size="10">
-                <ion-title class="ion-text-wrap">Software Developer</ion-title>
+                <ion-title class="ion-text-wrap">{{category}}</ion-title>
             </ion-col>
 
             <ion-col size="2">
                 <ion-avatar size="small">
                     <img alt="Silhouette of a person's head" style=" height: 60%;width: 60%;"
-                        src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        src={{img}} />
                 </ion-avatar>
             </ion-col>
         </ion-row>
@@ -50,7 +50,7 @@
                         <ion-title style="color:black; margin-left: -9%;">Profile</ion-title>
                     </ion-col>
                     <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="profile()" id="prfoileimg1">
+                        <img src="./assets/icon/edit_icon.png" (click)="profile( )" id="prfoileimg1">
                     </ion-col>
                 </ion-row>
 
@@ -91,25 +91,23 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black; margin-left: -9%;">Skill </ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">Skill
+                            <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                                name="add-circle-outline" (click)="Skill()"></ion-icon>
+                        </ion-title>
                     </ion-col>
 
-                    <ion-col size="2">
-                        <img src="./assets\icon\save add.png" style="width: 70%;margin-left: 30%;" (click)="Skill()">
-                    </ion-col>
-
-                </ion-row>
-                <ion-row style=" justify-content: end;">
-                    <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill()">
-
-                    </ion-col>
                 </ion-row>
 
                 <ion-row class="talentrow" *ngFor="let x of skillList">
+
                     <ion-col>
                         <ion-label>{{x.skillName}}</ion-label>
                         <ion-progress-bar value="0.{{x.expertise}}"></ion-progress-bar>
+                    </ion-col>
+                    <ion-col size="2">
+                        <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill(x.skillId)">
+
                     </ion-col>
                 </ion-row>
                 <!-- <ion-row class="talentrow">
@@ -136,7 +134,7 @@
                 <ion-row>
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                    margin-left: -8%;width: 112%;">Add Skills</ion-title>
+                   width: 112%;    text-align: center;">Add Skills</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -148,34 +146,32 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> Certifications</ion-title>
-                    </ion-col>
-
-                    <ion-col size="2">
-                        <img src="./assets\icon\save add.png" style="width: 70%;" (click)="certification()">
-                    </ion-col>
-
-                </ion-row>
-                <ion-row style=" justify-content: end;">
-                    <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="certification()">
-
+                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> Certifications
+                            <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                                name="add-circle-outline" (click)="certification()"></ion-icon>
+                        </ion-title>
                     </ion-col>
                 </ion-row>
-                <ion-row class="talentrow">
-                    <ion-col>
-                        <ion-label> Mobile App</ion-label>
-                        <ion-progress-bar value="0.6"></ion-progress-bar>
-                    </ion-col>
-                </ion-row>
-                <ion-row class="talentrow">
+                <ion-card class="talentcard2" *ngFor="let x of certifications">
+                    <ion-card-content>
 
-                    <ion-col>
-                        <ion-label> Website Devlopement</ion-label>
-                        <ion-progress-bar value="0.6"></ion-progress-bar>
-                    </ion-col>
+                        <ion-row style="text-align: end;">
+                            <ion-col size="12">
+                                <ion-icon name="ellipsis-vertical"></ion-icon>
+                            </ion-col>
+                        </ion-row>
 
-                </ion-row>
+                        <ion-row>
+                            <ion-col size="12">
+                                <ion-label>{{x.certificationName}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label>{{x.issuedBy}}</ion-label>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
 
             </ion-card-content>
         </ion-card>
@@ -193,34 +189,39 @@
                 <ion-row style="    text-align: center;">
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                margin-left: -5%;width: 112%;">Add Certifications</ion-title>
+                    text-align: center;width: 112%;">Add Certifications</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
         </ion-card>
         <!------- Academics card------ -->
 
-        <ion-card class="talentcard1" *ngIf="educationcard">
-            <ion-card-content>
+        <ion-card  class="talentcard1" *ngIf="educationcard">
+            <ion-card-content >
                 <ion-row>
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">Academics</ion-title>
                     </ion-col>
-                    <ion-col size="2">
-
-                        <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="educations()">
-                    </ion-col>
+                
                     <!-- <ion-col size="2">
                       <ion-icon style="color:#ACCCFF;" size="large" name="duplicate"></ion-icon>
                   </ion-col> -->
                 </ion-row>
 
-                <ion-card class="talentcard2" *ngFor="let x of education">
+                <ion-card  class="talentcard2" *ngFor="let x of education">
                     <ion-card-content>
 
-                        <ion-row style="text-align: end;">
+                        <ion-row style="text-align: end;" (ionBlur)="unCheckFocus()">
                             <ion-col size="12">
-                                <ion-icon name="ellipsis-vertical"></ion-icon>
+                                <button ion-button (click)="showDropdown(x.eduId)">
+                                    <ion-icon name="ellipsis-vertical"></ion-icon>
+                                  </button>
+                                  <div  *ngIf="x.eduId == showDropdownFlag">
+                                    <ion-list>
+                                      <ion-item   (click)="educations(x.eduId)"><ion-icon name="ellipsis-vertical"></ion-icon>Edit</ion-item>
+                                      <ion-item  (click)="showDropdown(x.eduId)" style="color:red"><ion-icon name="ellipsis-vertical"></ion-icon>Delete</ion-item>
+                                    </ion-list>
+                                  </div>
                             </ion-col>
                         </ion-row>
 
@@ -289,9 +290,7 @@
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">Experience</ion-title>
                     </ion-col>
-                    <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="experiences()" id="prfoileimg1">
-                    </ion-col>
+                   
                 </ion-row>
 
 
@@ -399,7 +398,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;margin-top: 5%; margin-left: -2%;width: 104%;"> Add
+                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> Add
                             Connection</ion-title>
                     </ion-col>
                 </ion-row>
@@ -414,9 +413,7 @@
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">Extracurricular</ion-title>
                     </ion-col>
-                    <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="Extracurricular()" id="prfoileimg1">
-                    </ion-col>
+                   
                 </ion-row>
                 <ion-card class="talentcard2" *ngFor="let x of club">
                     <ion-card-content>
@@ -461,7 +458,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;margin-top: 5%;
+                        <ion-title style="color:black;margin-top: 5%;    text-align: center;
                     width: 104%;">Add Extracurricular</ion-title>
                     </ion-col>
                 </ion-row>

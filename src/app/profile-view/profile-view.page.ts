@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -31,11 +31,16 @@ export class ProfileViewPage implements OnInit {
   education: any;
   experience: any;
   club: any;
+  img: any;
+  showDropdownFlag:any;
+  certifications: any;
   constructor(public router: Router,public storageservice: StorageService) { }
-
+  @ViewChild('picker', { static: false })
+  pickerInst: any;
   ngOnInit() {
     this.setSelectedTab('profile');
     this.userId = localStorage.getItem("userId")  ; 
+    this.img = localStorage.getItem("profilePic")  ;
 
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
@@ -79,9 +84,15 @@ export class ProfileViewPage implements OnInit {
     this.experience=result['profileViewList'][0].experienceList;
     //Extracurricular
     this.club=result['profileViewList'][0].clubsList;
+    //certifications
+    this.certifications= result['profileViewList'][0].certificationsList
+
         });
-this.getprofile();
+
      
+  }
+  showDropdown(eduId) {
+    this.showDropdownFlag = eduId;
   }
   profile()
   {
@@ -99,14 +110,31 @@ this.getprofile();
   {
     this.router.navigate(['/club']) 
   }
-  Skill()
+  Skill(id)
   {
-    this.router.navigate(['/skill-popup']) 
-  }
-  certification()
-  {
+    let edit = {
 
-    this.router.navigate(['/certification']) 
+       id
+    }
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/skill-popup'], navigationExtras);
+  
+  }
+  certification(id)
+  {
+    let edit = {
+
+      id
+   }
+
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+   this.router.navigate(['/certification'], navigationExtras);
+    
 
   }
   Connections()
@@ -123,9 +151,7 @@ this.getprofile();
     this.selectedTab = tabName;
   }
 
-  presentPopover() {
-   alert(12)
-  }
+
 // footer
   goto_profileSearch(){
     this.router.navigate(['/job-search']);
@@ -143,10 +169,10 @@ this.getprofile();
     this.router.navigate(['/settings']);
   }
 
-getprofile(){
-  
-
-}
+  unCheckFocus() {
+    alert(12)
+    this.showDropdownFlag = 0;
+  }
 
 
 }

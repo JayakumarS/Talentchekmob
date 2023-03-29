@@ -188,6 +188,29 @@ ion-content {
 }
 
 #prfoileimg1 {
-    height: 24px;
-    margin-left: 14px;
+    height: 15px;
+   
 }
+
+.container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .label {
+    display: none;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .action-btn {
+    margin: 0 10px;
+  }
+  
