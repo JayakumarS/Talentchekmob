@@ -2,7 +2,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
@@ -48,7 +48,7 @@ export class EducationsPage implements OnInit {
   selectStudySet: string;
   selectDegreeSet: string;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
-    private toastController: ToastController,) {
+    private toastController: ToastController,private route: ActivatedRoute) {
 
     const initialDate = new Date(2023, 2);
     this.courseStart = initialDate.toISOString();
@@ -87,8 +87,15 @@ export class EducationsPage implements OnInit {
     let currentDate = new Date();
     // this.selectedDate = currentDate.toISOString();
 
-
-    this.editEducation();
+    this.route.queryParams.subscribe(params => {
+      if (params) { 
+        if (params != null || params != undefined ) {  
+            this.editEducation(params.id); 
+          console.log(params);
+        }
+      }
+    });
+    
   }
 
 
@@ -338,9 +345,9 @@ export class EducationsPage implements OnInit {
 
 
   //editEducationDetails
-  editEducation() {
+  editEducation(eduId) {
 
-    var industryURL = "api/auth/app/IndividualProfileDetails/EditEducation?eduId=" + 114;
+    var industryURL = "api/auth/app/IndividualProfileDetails/EditEducation?eduId=" + eduId;
     this.storageservice.getrequest(industryURL).subscribe(result => {
 
       if (result["success"] == true) {

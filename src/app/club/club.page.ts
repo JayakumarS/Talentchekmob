@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
@@ -28,7 +28,8 @@ export class ClubPage implements OnInit {
   selectedOrganisation: any;
   extracurricularBean: any;
   edit: boolean = false;
-  constructor(public router: Router, public fb: FormBuilder, public storageservice: StorageService, private toastController: ToastController) { }
+  constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,
+     public storageservice: StorageService, private toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -52,7 +53,15 @@ export class ClubPage implements OnInit {
 
     this.userId = localStorage.getItem("userId");
 
-    this.editextracurricular();
+    this.route.queryParams.subscribe(params => {
+      if (params) { 
+        if (params != null || params != undefined ) {  
+            this.editextracurricular(params.id); 
+          console.log(params);
+        }
+      }
+    });
+
   }
 
  //  Organisation auto complete 
@@ -202,9 +211,9 @@ getOrganisationList(){
 
 
    //editextracurricularDetails
-   editextracurricular(){
+   editextracurricular(extId){
 
-    var industryURL = "api/auth/app/IndividualProfileDetails/EditExtracurricular?extId=" + 53 ;
+    var industryURL = "api/auth/app/IndividualProfileDetails/EditExtracurricular?extId=" + extId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
       

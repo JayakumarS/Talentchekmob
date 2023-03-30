@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit,  ElementRef, HostListener, ViewChild  } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
@@ -9,7 +9,8 @@ import { StorageService } from '../storage.service';
 })
 export class ProfileViewPage implements OnInit {
   @ViewChild('popover') popover;
-
+  @ViewChild('dropdownContainer') dropdownContainer: ElementRef;
+  showDropdownFlag: number;
   isOpen = false;
   userId:string;
   educationcard:boolean = false;
@@ -32,11 +33,18 @@ export class ProfileViewPage implements OnInit {
   experience: any;
   club: any;
   img: any;
-  showDropdownFlag:any;
-  certifications: any;
-  constructor(public router: Router,public storageservice: StorageService) { }
+   certifications: any;
+  constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef) { }
   @ViewChild('picker', { static: false })
   pickerInst: any;
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.dropdownContainer.nativeElement.contains(event.target)) {
+      this.closeDropdown();
+    }
+  }
+
   ngOnInit() {
     this.setSelectedTab('profile');
     this.userId = localStorage.getItem("userId")  ; 
@@ -91,32 +99,46 @@ export class ProfileViewPage implements OnInit {
 
      
   }
-  showDropdown(eduId) {
+  showDropdown(eduId: number) {
     this.showDropdownFlag = eduId;
+  }
+
+  closeDropdown() {
+    this.showDropdownFlag = null;
   }
   profile()
   {
     this.router.navigate(['/profilee']) 
   }
-  educations()
+  educations(id)
   {
-    this.router.navigate(['/educations']) 
+    let edit = {
+      id
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/educations'],navigationExtras) 
   }
   experiences()
   {
     this.router.navigate(['/work-experiences']) 
   }
-  Extracurricular()
+  Extracurricular(id)
   {
-    this.router.navigate(['/club']) 
+    let edit = {
+      id
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/club'],navigationExtras) 
   }
   Skill(id)
   {
     let edit = {
-
        id
     }
-
     let navigationExtras: NavigationExtras = {
       queryParams: edit
     };
@@ -126,16 +148,12 @@ export class ProfileViewPage implements OnInit {
   certification(id)
   {
     let edit = {
-
       id
    }
-
    let navigationExtras: NavigationExtras = {
      queryParams: edit
    };
    this.router.navigate(['/certification'], navigationExtras);
-    
-
   }
   Connections()
   {
@@ -167,12 +185,5 @@ export class ProfileViewPage implements OnInit {
   }
   goto_more(){
     this.router.navigate(['/settings']);
-  }
-
-  unCheckFocus() {
-    alert(12)
-    this.showDropdownFlag = 0;
-  }
-
-
+  } 
 }

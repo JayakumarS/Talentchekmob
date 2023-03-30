@@ -144,7 +144,7 @@
 
         <ion-card class="talentcard1" *ngIf="certificationcard">
             <ion-card-content>
-                <ion-row>
+                <ion-row style="    padding-bottom: 10px;">
                     <ion-col>
                         <ion-title style="color:black;    width: 105%; margin-left: -9%;"> Certifications
                             <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
@@ -157,8 +157,21 @@
 
                         <ion-row style="text-align: end;">
                             <ion-col size="12">
-                                <ion-icon name="ellipsis-vertical"></ion-icon>
-                            </ion-col>
+                                <button ion-button (click)="showDropdown(x.certId)" style="    background: #edf1fc;">
+                                  <ion-icon name="ellipsis-vertical"></ion-icon>
+                                </button>
+                                <div *ngIf="x.certId == showDropdownFlag">
+                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                    <ion-item (click)="certification(x.certId)">
+                                        <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
+                                    </ion-item>
+                                    <ion-item (click)="showDropdown(x.certId)" style="color:red">
+                                        <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
+                                    </ion-item>
+                                  </ion-list>
+                                </div>
+                              </ion-col>
+                              
                         </ion-row>
 
                         <ion-row>
@@ -198,7 +211,7 @@
 
         <ion-card  class="talentcard1" *ngIf="educationcard">
             <ion-card-content >
-                <ion-row>
+                <ion-row  style="    padding-bottom: 10px;">
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">Academics</ion-title>
                     </ion-col>
@@ -208,21 +221,26 @@
                   </ion-col> -->
                 </ion-row>
 
-                <ion-card  class="talentcard2" *ngFor="let x of education">
-                    <ion-card-content>
+                <ion-card  class="talentcard2" *ngFor="let x of education" #dropdownContainer>
+                    <ion-card-content> 
 
-                        <ion-row style="text-align: end;" (ionBlur)="unCheckFocus()">
+                        <ion-row style="text-align: end;">
                             <ion-col size="12">
-                                <button ion-button (click)="showDropdown(x.eduId)">
-                                    <ion-icon name="ellipsis-vertical"></ion-icon>
-                                  </button>
-                                  <div  *ngIf="x.eduId == showDropdownFlag">
-                                    <ion-list>
-                                      <ion-item   (click)="educations(x.eduId)"><ion-icon name="ellipsis-vertical"></ion-icon>Edit</ion-item>
-                                      <ion-item  (click)="showDropdown(x.eduId)" style="color:red"><ion-icon name="ellipsis-vertical"></ion-icon>Delete</ion-item>
-                                    </ion-list>
-                                  </div>
-                            </ion-col>
+                                <button ion-button (click)="showDropdown(x.eduId)" style="    background: #edf1fc;">
+                                  <ion-icon name="ellipsis-vertical"></ion-icon>
+                                </button>
+                                <div *ngIf="x.eduId == showDropdownFlag">
+                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                    <ion-item (click)="educations(x.eduId)">
+                                        <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
+                                    </ion-item>
+                                    <ion-item (click)="showDropdown(x.eduId)" style="color:red">
+                                        <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
+                                    </ion-item>
+                                  </ion-list>
+                                </div>
+                              </ion-col>
+                              
                         </ion-row>
 
                         <ion-row>
@@ -286,7 +304,7 @@
 
         <ion-card class="talentcard1" *ngIf="experiencecard">
             <ion-card-content>
-                <ion-row>
+                <ion-row  style="    padding-bottom: 10px;">
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">Experience</ion-title>
                     </ion-col>
@@ -299,8 +317,21 @@
 
                         <ion-row style="text-align: end;">
                             <ion-col size="12">
-                                <ion-icon name="ellipsis-vertical"></ion-icon>
-                            </ion-col>
+                                <button ion-button (click)="showDropdown(x.expId)" style="    background: #edf1fc;">
+                                  <ion-icon name="ellipsis-vertical"></ion-icon>
+                                </button>
+                                <div *ngIf="x.expId == showDropdownFlag">
+                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                    <ion-item (click)="Extracurricular(x.expId)">
+                                        <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
+                                    </ion-item>
+                                    <ion-item (click)="showDropdown(x.expId)" style="color:red">
+                                        <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
+                                    </ion-item>
+                                  </ion-list>
+                                </div>
+                              </ion-col>
+                              
                         </ion-row>
 
                         <ion-row>
@@ -409,7 +440,7 @@
         <!-- Extracurricular card------ -->
         <ion-card class="talentcard1" *ngIf="clubscard">
             <ion-card-content>
-                <ion-row>
+                <ion-row  style="    padding-bottom: 10px;">
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">Extracurricular</ion-title>
                     </ion-col>

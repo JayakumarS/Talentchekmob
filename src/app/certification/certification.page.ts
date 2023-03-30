@@ -49,13 +49,18 @@ export class CertificationPage implements OnInit {
       }
     });
 
+
    }
 
 
-  fetchEditDeatils(cerId){
+
+
+
+  fetchEditDeatils(certId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/editCertification";
          
-    this.storageservice.getrequest(getEditValues + "?certId=" + cerId).subscribe(result => {
+    this.storageservice.getrequest(getEditValues + "?certId=" + certId).subscribe(result => {
+
      if (result["success"] == true) {
       this.edit = true;
  
