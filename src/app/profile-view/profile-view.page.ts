@@ -1,7 +1,6 @@
 import { Component, OnInit,  ElementRef, HostListener, ViewChild  } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { SkillDeletePage } from '../skill-delete/skill-delete.page';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
 
