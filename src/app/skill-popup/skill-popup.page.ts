@@ -62,7 +62,8 @@ export class SkillPopupPage implements OnInit {
 
   fetchEditDeatils(skillId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/editKeyskill";
-         
+         this.skillForm.reset();
+         this.selectedSkills= [];
     this.storageservice.getrequest(getEditValues + "?skillId=" + skillId).subscribe(result => {
      if (result["success"] == true) {
        this.edit = true;
@@ -120,17 +121,17 @@ export class SkillPopupPage implements OnInit {
 
      //save
      async saveSkill(){
-      if(this.skillForm.value.keySkill.length != 0){
+      if(this.skillForm.value.keySkill  != ""){
           this.skillForm.value.currentUserId = this.userId;
              
-        this.skillForm = this.skillForm.value;
-        console.log(` data: ${JSON.stringify(this.skillForm)}`);
+        this.skillform = this.skillForm.value;
+        console.log(` data: ${JSON.stringify(this.skillform)}`);
         var saveSkill = "api/auth/app/mobile/saveSkill";
       
-         this.storageservice.postrequest(saveSkill, this.skillForm).subscribe(async result => {  
+         this.storageservice.postrequest(saveSkill, this.skillform).subscribe(async result => {  
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
-            this.router.navigate(['/profile-view']);
+             this.router.navigate(['/profile-view']);
             this.presentToast()
              }else{  
              }
@@ -144,7 +145,7 @@ export class SkillPopupPage implements OnInit {
      //update
      async updateSkill(){
       this.skillForm.value.keySkill = this.selectedSkills
-       if(this.skillForm.value.keySkill.length != 0){
+       if(this.skillForm.value.keySkill != ""){
            this.skillForm.value.keySkill = this.selectedSkills 
           this.skillForm.value.currentUserId = this.userId;
              
@@ -155,7 +156,7 @@ export class SkillPopupPage implements OnInit {
          this.storageservice.postrequest(updateSkill, this.skillform).subscribe(async result => {  
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
-            this.router.navigate(['/profile-view']);
+             this.router.navigate(['/profile-view']);
             this.updateToast()
              }else{  
              }
