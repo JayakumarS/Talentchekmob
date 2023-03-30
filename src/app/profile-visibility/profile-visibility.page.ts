@@ -31,9 +31,8 @@ export class ProfileVisibilityPage implements OnInit {
     }
 
   ngOnInit() {  
-      this.currentUserId = 'TFIN10000452331';
-      
-      var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId=" + this.currentUserId;
+      this.currentUserId = localStorage.getItem("userId"); 
+       var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId=" + this.currentUserId;
        
        this.storageservice.getrequest(geteditVisibilityUrl).subscribe(result => {
         if (result["success"] == true) {
