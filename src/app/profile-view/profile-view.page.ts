@@ -112,9 +112,15 @@ export class ProfileViewPage implements OnInit {
    };
     this.router.navigate(['/educations'],navigationExtras) 
   }
-  experiences()
+  experiences(id)
   {
-    this.router.navigate(['/work-experiences']) 
+    let edit = {
+      id
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+     this.router.navigate(['/work-experiences'],navigationExtras) 
   }
   Extracurricular(id)
   {
