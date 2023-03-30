@@ -168,7 +168,7 @@
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
                                 <div *ngIf="x.certId == showDropdownFlag" (click)="closeDropdown(x.certId)">
-                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                  <ion-list style="  height: 106px;width: 50%; margin-left: 46%;">
                                     <ion-item (click)="certification(x.certId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
@@ -220,7 +220,10 @@
             <ion-card-content >
                 <ion-row  style="    padding-bottom: 10px;">
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Academics</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">Academics
+                            <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                            name="add-circle-outline" (click)="educations()"></ion-icon>
+                        </ion-title>
                     </ion-col>
                 
                     <!-- <ion-col size="2">
@@ -237,7 +240,7 @@
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
                                 <div *ngIf="x.eduId == showDropdownFlag" (click)="closeDropdown(x.eduId)">
-                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                  <ion-list style="height: 106px;    width: 50%; margin-left: 46%;">
                                     <ion-item (click)="educations(x.eduId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
@@ -313,7 +316,10 @@
             <ion-card-content>
                 <ion-row  style="    padding-bottom: 10px;">
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Experience</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">Experience
+                        
+                            <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                            name="add-circle-outline" (click)="experiences()"></ion-icon></ion-title>
                     </ion-col>
                    
                 </ion-row>
@@ -328,7 +334,7 @@
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
                                 <div *ngIf="x.expId == showDropdownFlag" (click)="closeDropdown(x.expId)">
-                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                  <ion-list style=" height: 106px;   width: 50%; margin-left: 46%;">
                                     <ion-item (click)="experiences(x.expId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
@@ -388,7 +394,11 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Connections</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">Connections
+                            <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                            name="add-circle-outline" (click)="Connections()"></ion-icon>
+                        
+                        </ion-title>
                     </ion-col>
                     <ion-col size="2">
                         <img src="./assets/icon/edit_icon.png" (click)="Connections()" id="prfoileimg1">
@@ -449,7 +459,10 @@
             <ion-card-content>
                 <ion-row  style="    padding-bottom: 10px;">
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Extracurricular</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">Extracurricular
+                            <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                            name="add-circle-outline" (click)="Extracurricular()"></ion-icon>
+                        </ion-title>
                     </ion-col>
                    
                 </ion-row>
@@ -462,7 +475,7 @@
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
                                 <div *ngIf="x.clubId == showDropdownFlag" (click)="closeDropdown(x.clubId)">
-                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                  <ion-list style=" height: 106px;   width: 50%; margin-left: 46%;">
                                     <ion-item (click)="Extracurricular(x.clubId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>

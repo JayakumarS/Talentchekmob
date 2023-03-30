@@ -65,7 +65,7 @@
                         <div class="button-content">
                             <ion-label class="labels">Participated From </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedFrom" presentation="date"></ion-datetime>
+                                <ion-datetime displayFormat="DD.MM.YYYY"  (ionChange)="validateStartDate($event.target.value);" formControlName="participatedFrom" presentation="date"></ion-datetime>
                             </ion-item>
                             <div *ngIf="clubFrom.controls.participatedFrom.hasError('required') && clubFrom.controls.participatedFrom.touched">
                               <small style="color: #f70505;">Participated From is required</small>
@@ -74,7 +74,7 @@
                             <div class="button-content">
                                 <ion-label class="labels">Participated Till </ion-label>
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="participatedTill" presentation="date"></ion-datetime>
+                                    <ion-datetime displayFormat="DD.MM.YYYY" (ionChange)="validateEndDate($event.target.value);" formControlName="participatedTill" presentation="date"></ion-datetime>
                                 </ion-item>
                                 <div *ngIf="clubFrom.controls.participatedTill.hasError('required') && clubFrom.controls.participatedTill.touched">
                                   <small style="color: #f70505;">Participated Till From is required</small>

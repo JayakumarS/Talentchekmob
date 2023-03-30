@@ -107,8 +107,62 @@ getOrganisationList(){
  removeOrganisation(selectedOrganisation: string) {
   this.selectedOrganisation = undefined;
 }
+
+
+
+///
+//validate dates
+  async validateEndDate(event){
+    var startdate = new Date(new Date(this.clubFrom.value.participatedFrom).setFullYear(new Date(this.clubFrom.value.participatedFrom).getFullYear())); //Currentdate - one year.
+    console.log("startdate: " + startdate);
+    console.log("enddate: " + event);
+    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    if (frm <= startdate) {
+      const alert = await this.toastController.create({
+        header: 'Validation Error',
+        message: 'Participated Till date should be greater than Participated From date.',
+        buttons: ['OK']
+      });
+      this.clubFrom.patchValue({
+        'participatedTill':""
+      })
+       await alert.present();
+    }
+  }
+
+
+  async validateStartDate(event){
+
+    if(this.clubFrom.value.participatedTill != undefined){
+      var endDate = new Date(new Date(this.clubFrom.value.participatedTill).setFullYear(new Date(this.clubFrom.value.participatedTill).getFullYear())); //Currentdate - one year.
+      console.log("endDate: " + endDate);
+      console.log("startDate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      if (endDate <= frm) {
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'participated From date should be lesser than participated Till date.',
+          buttons: ['OK']
+        });
+        this.clubFrom.patchValue({
+          'participatedFrom':""
+        })
+         await alert.present();
+      }
+    }
+    
+  }
+
+  // validationForCurWorking(event){
+  //   var value  = event;
+  //   if(value == true){
+  //     this.clubFrom.get("coursparticipatedTilleEnd").disable(); 
+  //   }else{
+  //     this.clubFrom.get("courseEnd").enable();
+  //   }
+  // }
   
-  
+
   getTitle(bookId) {
     var value;
     this.organisationList.forEach(element => {

@@ -191,7 +191,7 @@ export class EducationsPage implements OnInit {
 
   async validateStartDate(event){
 
-    if(this.EducationForm.value.courseEnd != undefined){
+    if(this.EducationForm.value.courseEnd != undefined && ""){
       var endDate = new Date(new Date(this.EducationForm.value.courseEnd).setFullYear(new Date(this.EducationForm.value.courseEnd).getFullYear())); //Currentdate - one year.
       console.log("endDate: " + endDate);
       console.log("startDate: " + event);

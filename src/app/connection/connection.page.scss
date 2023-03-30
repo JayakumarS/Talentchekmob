@@ -315,3 +315,7 @@ ion-progress-bar {
   list-style: none;
   font-size: 25px;
 }
+
+ion-select::part(icon) {
+  display: none;
+}
