@@ -108,7 +108,14 @@
                     <ion-col size="2">
                         <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill(x.skillId)">
 
+
+                        <ion-icon name="trash-outline" style="padding-left: 24%;"(click)="deleteSkills(x.skillId)"></ion-icon>
+
                     </ion-col>
+                    <!-- <ion-col size="2">
+                        <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>
+
+                    </ion-col> -->
                 </ion-row>
                 <!-- <ion-row class="talentrow">
 
@@ -160,12 +167,12 @@
                                 <button ion-button (click)="showDropdown(x.certId)" style="    background: #edf1fc;">
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
-                                <div *ngIf="x.certId == showDropdownFlag">
+                                <div *ngIf="x.certId == showDropdownFlag" (click)="closeDropdown(x.certId)">
                                   <ion-list style="    width: 50%; margin-left: 46%;">
                                     <ion-item (click)="certification(x.certId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
-                                    <ion-item (click)="showDropdown(x.certId)" style="color:red">
+                                    <ion-item (click)="deleteCertificateCard(x.certId)" style="color:red">
                                         <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
                                     </ion-item>
                                   </ion-list>
@@ -229,12 +236,12 @@
                                 <button ion-button (click)="showDropdown(x.eduId)" style="    background: #edf1fc;">
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
-                                <div *ngIf="x.eduId == showDropdownFlag">
+                                <div *ngIf="x.eduId == showDropdownFlag" (click)="closeDropdown(x.eduId)">
                                   <ion-list style="    width: 50%; margin-left: 46%;">
                                     <ion-item (click)="educations(x.eduId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
-                                    <ion-item (click)="showDropdown(x.eduId)" style="color:red">
+                                    <ion-item (click)="deleteeducation(x.eduId)" style="color:red">
                                         <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
                                     </ion-item>
                                   </ion-list>
@@ -320,12 +327,12 @@
                                 <button ion-button (click)="showDropdown(x.expId)" style="    background: #edf1fc;">
                                   <ion-icon name="ellipsis-vertical"></ion-icon>
                                 </button>
-                                <div *ngIf="x.expId == showDropdownFlag">
+                                <div *ngIf="x.expId == showDropdownFlag" (click)="closeDropdown(x.expId)">
                                   <ion-list style="    width: 50%; margin-left: 46%;">
                                     <ion-item (click)="experiences(x.expId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
-                                    <ion-item (click)="showDropdown(x.expId)" style="color:red">
+                                    <ion-item (click)="presentModal(x.expId)" style="color:red">
                                         <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
                                     </ion-item>
                                   </ion-list>

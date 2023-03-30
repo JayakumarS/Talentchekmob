@@ -1,6 +1,9 @@
 import { Component, OnInit,  ElementRef, HostListener, ViewChild  } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { SkillDeletePage } from '../skill-delete/skill-delete.page';
 import { StorageService } from '../storage.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile-view',
@@ -33,7 +36,8 @@ export class ProfileViewPage implements OnInit {
   club: any;
   img: any;
    certifications: any;
-  constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef) { }
+  constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef,
+    public modalController: ModalController,public alertController: AlertController,) { }
   @ViewChild('picker', { static: false })
   pickerInst: any;
  
@@ -167,7 +171,209 @@ export class ProfileViewPage implements OnInit {
     this.selectedTab = tabName;
   }
 
+  //delete
 
+  // async presentModal() {
+  //   const modal = await this.modalController.create({
+  //      component: SkillDeletePage,
+  //      cssClass: 'my-custom-class1'
+  //    });
+  //    return await modal.present();
+  //  }
+  // BindExistingValues() {
+  //   var editFamilyServiceUrl = "/hrms/master/employeeAdminMaster/edit?empId=" + this.empId;
+  //   var postData = {
+  //     'empid': this.empId
+  //   }
+
+   async deleteCertificateCard(certId: number) {
+    let alert = await this.alertController.create({
+      header: 'Delete request!',
+      message: 'Are you sure you want to delete?',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'YES',
+          cssClass: 'btncss',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            //Main concept.
+            console.log("Id: " + certId);
+           // this.showLoadingIndicator(); // Show Loading indicator
+            try {
+              var postData = {
+                'certId': certId
+              }
+              console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
+
+              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteCertification";
+
+              this.storageservice.postrequest(deleteExperienceServiceUrl,postData.certId).subscribe(async result => {  
+
+                if (result  == true) {
+                  this.storageservice.successToast('Deleted successfully');
+                  window.location.reload()
+                  }
+                else if (result == false) {
+                  var msg = result["message"];
+                  if (msg == null) {
+                    msg = "Web service does not give proper message";
+                  }
+                  this.storageservice.warningToast(msg);
+                //  this.hideLoadingIndicator(); //Hide loading indicator
+                }
+                else {
+                  this.storageservice.warningToast("Connection unavailable!");
+                
+                }
+              });
+            }
+            catch (Exception) {
+              this.storageservice.warningToast('Connection unavailable!');
+             // this.hideLoadingIndicator(); //Hide loading indicator
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async deleteSkills(skillId: number) {
+    let alert = await this.alertController.create({
+      header: 'Delete request!',
+      message: 'Are you sure you want to delete?',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'YES',
+          cssClass: 'btncss',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            //Main concept.
+            console.log("Id: " + skillId);
+           // this.showLoadingIndicator(); // Show Loading indicator
+            try {
+              var postData = {
+                'skillId': skillId
+              }
+              console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
+
+              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteKeyskill";
+
+              this.storageservice.postrequest(deleteExperienceServiceUrl,postData.skillId).subscribe(async result => {  
+
+                if (result  == true) {
+                  this.storageservice.successToast('Deleted successfully');
+                  window.location.reload()
+                  }
+                else if (result == false) {
+                  var msg = result["message"];
+                  if (msg == null) {
+                    msg = "Web service does not give proper message";
+                  }
+                  this.storageservice.warningToast(msg);
+                //  this.hideLoadingIndicator(); //Hide loading indicator
+                }
+                else {
+                  this.storageservice.warningToast("Connection unavailable!");
+                
+                }
+              });
+            }
+            catch (Exception) {
+              this.storageservice.warningToast('Connection unavailable!');
+             // this.hideLoadingIndicator(); //Hide loading indicator
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async deleteeducation(eduId: number) {
+    let alert = await this.alertController.create({
+      header: 'Delete request!',
+      message: 'Are you sure you want to delete?',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'YES',
+          cssClass: 'btncss',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            //Main concept.
+            console.log("Id: " + eduId);
+           // this.showLoadingIndicator(); // Show Loading indicator
+            try {
+              var postData = {
+                'eduId': eduId
+              }
+              console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
+
+              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteEducation";
+
+              this.storageservice.postrequest(deleteExperienceServiceUrl,postData.eduId).subscribe(async result => {  
+
+                if (result  == true) {
+                  this.storageservice.successToast('Deleted successfully');
+                  window.location.reload()
+                  }
+                else if (result == false) {
+                  var msg = result["message"];
+                  if (msg == null) {
+                    msg = "Web service does not give proper message";
+                  }
+                  this.storageservice.warningToast(msg);
+                //  this.hideLoadingIndicator(); //Hide loading indicator
+                }
+                else {
+                  this.storageservice.warningToast("Connection unavailable!");
+                
+                }
+              });
+            }
+            catch (Exception) {
+              this.storageservice.warningToast('Connection unavailable!');
+             // this.hideLoadingIndicator(); //Hide loading indicator
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 // footer
   goto_profileSearch(){
     this.router.navigate(['/job-search']);
