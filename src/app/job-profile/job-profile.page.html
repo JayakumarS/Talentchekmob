@@ -125,12 +125,12 @@
                             <div>Monday</div>
                             <div>
                                 <ion-item class="background">
-                                    <ion-checkbox formControlName="jobShiftDM"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDM"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNM"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNM"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -138,12 +138,12 @@
                             <div>Tuesday</div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftDT"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDT"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNT"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNT"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -151,12 +151,12 @@
                             <div style="margin: -8px;">Wednesday</div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftDW"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDW"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNW"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNW"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -164,12 +164,12 @@
                             <div>Thursday</div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftDTH"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDTH"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNTH"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNTH"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -177,12 +177,12 @@
                             <div style="margin: 12px;">Friday</div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftDF"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDF"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNF"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNF"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -190,12 +190,12 @@
                             <div style="margin: 3px;">Saturday</div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftDS"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDS"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNS"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNS"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -203,12 +203,12 @@
                             <div style="margin: 10px;">Sunday</div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftDSU"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftDSU"></ion-checkbox>
                                 </ion-item>
                             </div>
                             <div>
                                 <ion-item>
-                                    <ion-checkbox formControlName="jobShiftNSU"></ion-checkbox>
+                                    <ion-checkbox  formControlName="jobShiftNSU"></ion-checkbox>
                                 </ion-item>
                             </div>
                         </div>
@@ -264,13 +264,23 @@
                 </div>
                 <div class="ion-stepper-content">
                     <ion-label class="labels">Choose prefered Work Location<small style="color: #f70505;">*</small></ion-label>
+                    
                     <ion-item fill="outline" class="input-field">
+                        <div class="selected-skills-container">
+                            <div *ngFor="let city of selectedCities" class="selected-skill">{{ city }}
+                                <ion-icon name="close-circle" (click)="removeCity(city)"></ion-icon>
+                            </div>
+                        </div>
+                        <ion-input (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                    </ion-item>
+                    
+                    <!-- <ion-item fill="outline" class="input-field">
                         <ion-chip *ngFor="let city of selectedCities" (click)="removeCity(city)">
                             {{ city }}
                             <ion-icon name="close-circle"></ion-icon>
                         </ion-chip>
-                        <ion-textarea rows="1" warp="soft" placeholder="Search cities" (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
-                    </ion-item>
+                        <ion-textarea  (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
+                    </ion-item> -->
 
                     <ion-list *ngIf="showResults">
                         <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">

@@ -22,7 +22,7 @@ export class CertificationPage implements OnInit {
   edit: boolean =false;
 
   constructor(public router:Router,public modalController: ModalController,
-    public fb: FormBuilder, 
+    public fb: FormBuilder, private route: ActivatedRoute,
     public storageservice: StorageService,private toastController: ToastController,) { }
 
   ngOnInit() {
@@ -40,15 +40,22 @@ export class CertificationPage implements OnInit {
       certificationPath :[""]
     })
 
+    this.route.queryParams.subscribe(params => {
+      if (params) { 
+        if (params != null || params != undefined ) {  
+            this.fetchEditDeatils(params.id); 
+          console.log(params);
+        }
+      }
+    });
 
-    this.fetchEditDeatils();
-  }
+   }
 
 
-  fetchEditDeatils(){
+  fetchEditDeatils(cerId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/editCertification";
          
-    this.storageservice.getrequest(getEditValues + "?certId=" + 55).subscribe(result => {
+    this.storageservice.getrequest(getEditValues + "?certId=" + cerId).subscribe(result => {
      if (result["success"] == true) {
       this.edit = true;
  

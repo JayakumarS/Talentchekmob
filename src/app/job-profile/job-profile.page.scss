@@ -179,4 +179,24 @@
         color: #030207;
         font-size: 15px;
     }
+
+    ion-select::part(icon) {
+        display: none;
+      }
+
+
+      .selected-skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .selected-skill {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #e0e0e00e;
+        color: #333;
+    }
 }
