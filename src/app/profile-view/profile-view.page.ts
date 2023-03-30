@@ -373,6 +373,134 @@ export class ProfileViewPage implements OnInit {
     });
     await alert.present();
   }
+
+  async deleteExperiences(expId: number) {
+    let alert = await this.alertController.create({
+      header: 'Delete request!',
+      message: 'Are you sure you want to delete?',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'YES',
+          cssClass: 'btncss',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            //Main concept.
+            console.log("Id: " + expId);
+           // this.showLoadingIndicator(); // Show Loading indicator
+            try {
+              var postData = {
+                'expId': expId
+              }
+              console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
+
+              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExperience";
+
+              this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
+
+                if (result  == true) {
+                  this.storageservice.successToast('Deleted successfully');
+                  window.location.reload()
+                  }
+                else if (result == false) {
+                  var msg = result["message"];
+                  if (msg == null) {
+                    msg = "Web service does not give proper message";
+                  }
+                  this.storageservice.warningToast(msg);
+                //  this.hideLoadingIndicator(); //Hide loading indicator
+                }
+                else {
+                  this.storageservice.warningToast("Connection unavailable!");
+                
+                }
+              });
+            }
+            catch (Exception) {
+              this.storageservice.warningToast('Connection unavailable!');
+             // this.hideLoadingIndicator(); //Hide loading indicator
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  
+  async deleteExtracurricular(expId: number) {
+    let alert = await this.alertController.create({
+      header: 'Delete request!',
+      message: 'Are you sure you want to delete?',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'YES',
+          cssClass: 'btncss',
+          handler: () => {
+            console.log('Confirm Okay');
+
+            //Main concept.
+            console.log("Id: " + expId);
+           // this.showLoadingIndicator(); // Show Loading indicator
+            try {
+              var postData = {
+                'expId': expId
+              }
+              console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
+
+              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExperience";
+
+              this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
+
+                if (result  == true) {
+                  this.storageservice.successToast('Deleted successfully');
+                  window.location.reload()
+                  }
+                else if (result == false) {
+                  var msg = result["message"];
+                  if (msg == null) {
+                    msg = "Web service does not give proper message";
+                  }
+                  this.storageservice.warningToast(msg);
+                //  this.hideLoadingIndicator(); //Hide loading indicator
+                }
+                else {
+                  this.storageservice.warningToast("Connection unavailable!");
+                
+                }
+              });
+            }
+            catch (Exception) {
+              this.storageservice.warningToast('Connection unavailable!');
+             // this.hideLoadingIndicator(); //Hide loading indicator
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
 // footer
   goto_profileSearch(){
     this.router.navigate(['/job-search']);

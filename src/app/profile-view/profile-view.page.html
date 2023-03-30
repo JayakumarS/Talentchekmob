@@ -332,7 +332,7 @@
                                     <ion-item (click)="experiences(x.expId)">
                                         <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
                                     </ion-item>
-                                    <ion-item (click)="presentModal(x.expId)" style="color:red">
+                                    <ion-item (click)="deleteExperiences(x.expId)" style="color:red">
                                         <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
                                     </ion-item>
                                   </ion-list>
@@ -458,8 +458,21 @@
 
                         <ion-row style="text-align: end;">
                             <ion-col size="12">
-                                <ion-icon name="ellipsis-vertical"></ion-icon>
-                            </ion-col>
+                                <button ion-button (click)="showDropdown(x.clubId)" style="    background: #edf1fc;">
+                                  <ion-icon name="ellipsis-vertical"></ion-icon>
+                                </button>
+                                <div *ngIf="x.clubId == showDropdownFlag" (click)="closeDropdown(x.clubId)">
+                                  <ion-list style="    width: 50%; margin-left: 46%;">
+                                    <ion-item (click)="Extracurricular(x.clubId)">
+                                        <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
+                                    </ion-item>
+                                    <ion-item (click)="deleteExtracurricular(x.clubId)" style="color:red">
+                                        <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
+                                    </ion-item>
+                                  </ion-list>
+                                </div>
+                              </ion-col>
+                              
                         </ion-row>
 
                         <ion-row>
