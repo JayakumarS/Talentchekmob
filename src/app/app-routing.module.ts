@@ -265,6 +265,10 @@ const routes: Routes = [
     path: 'consent-form',
     loadChildren: () => import('./consent-form/consent-form.module').then( m => m.ConsentFormPageModule)
   },
+  {
+    path: 'org-profile-view',
+    loadChildren: () => import('./org-profile-view/org-profile-view.module').then( m => m.OrgProfileViewPageModule)
+  },
 
 
 
