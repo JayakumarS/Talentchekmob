@@ -18,6 +18,8 @@ export class ConnectionPage implements OnInit {
 
   stars: number[] = [1, 2, 3, 4, 5];
   selectedValue: number;
+  receiverRegistered: boolean;
+  Message: any;
 
   constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,private toastController: ToastController) { 
 
@@ -87,6 +89,32 @@ export class ConnectionPage implements OnInit {
   }
 
 
+  getconnectionDetails(mobileNo: string): void{
+    var getRegisterdetails= "api/auth/app/IndividualProfileDetails/Registerdetails";
+       
+    this.storageservice.getrequest(getRegisterdetails + "?mobileNo=" + mobileNo).subscribe(result => { 
+     if(result["success"] == true){
+
+      this.receiverRegistered = true;
+    this.ConnectionsForm.patchValue({
+      'receiverTalentId' : result["connectionBean"].receiverTalentId, 
+      'receiverName' : result["connectionBean"].receiverName,
+      'receiverEmailId' : result["connectionBean"].receiverEmailId,
+      
+    })
+  }else if(result["success"] == false){
+    this.ConnectionsForm.patchValue({
+      'receiverName': null,
+      'receiverEmailId' : null,
+    })
+    this.receiverRegistered = false;
+    this.Message = result["message"]
+  } 
+
+   });
+  }
+
+
   save(){
 
     this.ConnectionsForm.value.currentUserId=this.userId;
@@ -97,7 +125,8 @@ export class ConnectionPage implements OnInit {
      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
         console.log("Image upload response: " + result)
        if (result["success"] == true) {
-       // this.router.navigate(['/job']);
+       this.router.navigate(['/profile-view']);
+       window.location.reload();
         this.presentToast()
         }
      });
@@ -112,5 +141,9 @@ export class ConnectionPage implements OnInit {
     });
 
   await toast.present();
+}
+
+goto_profileView(){
+  this.router.navigate(['/profile-view']);
 }
 }

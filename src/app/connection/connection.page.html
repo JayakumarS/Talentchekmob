@@ -6,7 +6,7 @@
 
           </ion-col>
           <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="certifications()" style="margin-top:21%"></ion-icon>
+              <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
           </ion-col>
 
           <ion-col size="7">
@@ -52,10 +52,15 @@
               <div class="button-content">
                   <ion-label class="labels">Connection's Mobile Number <small style="color: #f70505;">*</small></ion-label>
                   <ion-item fill="outline" class="input-field">
-                      <ion-input formControlName="receiverMobileNo"></ion-input>
+                      <ion-input formControlName="receiverMobileNo" (ionChange)="getconnectionDetails($event.target.value)"></ion-input>
                   </ion-item>
                   <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title>
-                 </div>
+                <br>
+                  <h6>
+                  <span *ngIf="receiverRegistered" style="color: #30ae30;">Connection is a registered user :{{this.ConnectionsForm.value.receiverTalentId}} </span>
+                  <span *ngIf="!receiverRegistered" style="color: #ae3030;">{{this.Message}}</span>
+                </h6>
+                </div>
                   <ion-spacer size="large"></ion-spacer><br>
                    <div class="button-content">
                       <ion-label class="labels">Connection's Name <small style="color: #f70505;">*</small></ion-label>

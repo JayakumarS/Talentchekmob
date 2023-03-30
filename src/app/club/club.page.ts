@@ -87,6 +87,9 @@ selectOrganisation(institutionName: string,id:string) {
   this.selectedOrganisation = institutionName;
   this.IsorgListShow = false;
   this.clubid = id;
+  this.clubFrom.patchValue({
+    'clubName':this.clubid
+  })
   this.searchOrganisationResults = [];
   this.searchCtrl.setValue('');
 }
@@ -125,7 +128,7 @@ getOrganisationList(){
   }
 
   async Save() { 
-    if(this.clubid != undefined){
+    if(this.clubFrom.value.clubName != ""){
       const errors = this.checkFormValidity(this.clubFrom); 
       if (errors.length > 0) {
         // Display errors in a popup
@@ -219,27 +222,28 @@ getOrganisationList(){
       
       if (result["success"] == true) {
         this.extracurricularBean = result["extracurricularBean"]; 
+        const participatedFrom =  this.extracurricularBean.participatedFrom;
+        const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
+ 
+          const participatedTill =  this.extracurricularBean.participatedTill;
+          const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
+     
+         this.edit = true;
+ 
+         this.clubFrom.patchValue({
+           'clubName':this.extracurricularBean.clubName,
+           'clubBranch' :this.extracurricularBean.clubBranch,
+           'titleHeld': this.extracurricularBean.titleHeld,
+           'rolePlayed':this.extracurricularBean.rolePlayed,
+          // 'participatedFromObj' : extFromdate,
+           'participatedFrom': startdate.toISOString(),
+           //'participatedTillObj' : extTodate,
+           'participatedTill' :Enddate.toISOString(),
+           'currentMember': this.extracurricularBean.currentMember,
+           'extId': this.extracurricularBean.extId,
+           })
        }
-       const participatedFrom =  this.extracurricularBean.participatedFrom;
-       const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
-
-         const participatedTill =  this.extracurricularBean.participatedTill;
-         const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
-    
-        this.edit = true;
-
-        this.clubFrom.patchValue({
-          'clubName':this.extracurricularBean.clubName,
-          'clubBranch' :this.extracurricularBean.clubBranch,
-          'titleHeld': this.extracurricularBean.titleHeld,
-          'rolePlayed':this.extracurricularBean.rolePlayed,
-         // 'participatedFromObj' : extFromdate,
-          'participatedFrom': startdate,
-          //'participatedTillObj' : extTodate,
-          'participatedTill' :Enddate,
-          'currentMember': this.extracurricularBean.currentMember,
-          'extId': this.extracurricularBean.extId,
-          })
+      
     })
   }
 

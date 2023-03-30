@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-
+import { StorageService } from '../storage.service';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,public storageservice: StorageService,public nativeStorage: NativeStorage) { }
 
   ngOnInit() {
   }
@@ -47,6 +48,45 @@ export class SettingsPage implements OnInit {
 
   }
 
+  logOut() {
+
+    localStorage.setItem("userId", "");
+    localStorage.setItem("userName", "");
+    localStorage.setItem("creditPoints", "");
+    localStorage.setItem("empId", "");
+    localStorage.setItem("email", "");
+    localStorage.setItem("userRefFlag", "");
+    localStorage.setItem("isloggedIn", "");
+    localStorage.setItem("TC_Id", "");
+    localStorage.setItem("TC_Pwd", "");
+    localStorage.setItem("FCMToken", "");
+
+    localStorage.setItem("userRefFlag", "");
+    localStorage.setItem("categoryflag", "");
+    localStorage.setItem("IsFloatingScript", "");
+
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("creditPoints");
+    localStorage.removeItem("empId");
+    localStorage.removeItem("email");
+    localStorage.removeItem("userRefFlag");
+    localStorage.removeItem("isloggedIn");
+    localStorage.removeItem("TC_Id");
+    localStorage.removeItem("TC_Pwd");
+    localStorage.removeItem("FCMToken");
+    localStorage.removeItem("IsFloatingScript");
+
+    this.storageservice.publishSomeData({
+      status_get: false
+    });
+    localStorage.clear();
+
+    this.nativeStorage.clear();
+
+    //this.router.navigate(['/login']);
+    this.router.navigateByUrl('/login', { replaceUrl: true });
+  }
 
 
   // footer nav

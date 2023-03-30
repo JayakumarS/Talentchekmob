@@ -67,8 +67,16 @@ export class CertificationPage implements OnInit {
       const issuedate = result["skillandCertificationsBean"].issuedDate;
       const startdate = moment(issuedate, 'DD/MM/YYYY').toDate();
 
-      const expdate = result['skillandCertificationsBean'].expiryDate;
-      const enddate = moment(expdate, 'DD/MM/YYYY').toDate();
+
+      if(result["skillandCertificationsBean"].expiryDate != null &&  result["skillandCertificationsBean"].expiryDate != ""){
+        const expdate = result['skillandCertificationsBean'].expiryDate;
+        const enddate = moment(expdate, 'DD/MM/YYYY').toDate();
+        this.certificationForm.patchValue({
+          'expiryDateObj': enddate.toISOString(),
+        })
+        }
+
+      
  
       this.certificationForm.patchValue({ 
       'certId': result["skillandCertificationsBean"].certId,
@@ -76,8 +84,7 @@ export class CertificationPage implements OnInit {
       'issuedBy': result["skillandCertificationsBean"].issuedBy,
       'certificationId': result["skillandCertificationsBean"].certificationId,
       'issuedDateObj': startdate.toISOString(),
-      'expiryDateObj': enddate.toISOString(),
-      'certificationPath': result["skillandCertificationsBean"].uploadCertification
+       'certificationPath': result["skillandCertificationsBean"].uploadCertification
       })
      }
    });
@@ -152,7 +159,9 @@ loadImageFromDevice(event) {
      this.certificationForm.value.currentUserId = this.userId; 
 
      this.certificationForm.value.issuedDateObj =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
-     this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
+     if(this.certificationForm.value.expiryDateObj != ""){
+      this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
+     }
   this.CertificationForm = this.certificationForm.value;
   console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
   var saveSkill = "api/auth/app/mobile/saveCretification";
@@ -185,8 +194,10 @@ loadImageFromDevice(event) {
      this.certificationForm.value.currentUserId = this.userId; 
 
      this.certificationForm.value.issuedDate =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
-     this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
-  this.CertificationForm = this.certificationForm.value;
+     if(this.certificationForm.value.expiryDateObj != ""){
+      this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
+     }
+       this.CertificationForm = this.certificationForm.value;
   console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
   var saveSkill = "api/auth/app/IndividualProfileDetails/updateCertification";
 
