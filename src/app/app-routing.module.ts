@@ -269,6 +269,14 @@ const routes: Routes = [
     path: 'org-profile-view',
     loadChildren: () => import('./org-profile-view/org-profile-view.module').then( m => m.OrgProfileViewPageModule)
   },
+  {
+    path: 'org-profile',
+    loadChildren: () => import('./org-profile/org-profile.module').then( m => m.OrgProfilePageModule)
+  },
+  {
+    path: 'insti-profile-view',
+    loadChildren: () => import('./insti-profile-view/insti-profile-view.module').then( m => m.InstiProfileViewPageModule)
+  },
 
 
 

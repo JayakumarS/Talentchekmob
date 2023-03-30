@@ -1,0 +1,175 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-row>
+
+      <ion-col size="0.5">
+
+      </ion-col>
+      <ion-col size="2">
+        <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()"
+          style="margin-top:21%"></ion-icon>
+      </ion-col>
+
+      <ion-col size="7">
+        <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit General
+          Info</ion-title>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="docForm">
+
+    <ion-card-content>
+
+
+      <ion-row class="talentrow">
+        <ion-col>
+          <div class="button-content">
+            <ion-label class="labels">Organization Name<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-input formControlName="orgName"></ion-input>
+            </ion-item>
+            <div *ngIf="docForm.controls.orgName.hasError('required') && docForm.controls.orgName.touched">
+              <small style="color: #f70505;">Organization Name is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Domain<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-select placeholder="Select Domain"  formControlName="domain" style="background-color: white;">
+              <ion-select-option *ngFor="let domain of industryList " [value]="domain.id">
+                {{domain.text}}
+            </ion-select-option>
+            </ion-select>
+            </ion-item>
+            <div *ngIf="docForm.controls.domain.hasError('required') && docForm.controls.domain.touched">
+              <small style="color: #f70505;">Domain is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Email<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-input formControlName="orgEmail"></ion-input>
+            </ion-item>
+            <div *ngIf="docForm.controls.orgEmail.hasError('required') && docForm.controls.orgEmail.touched">
+              <small style="color: #f70505;">Email Id is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Mobile<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-input formControlName="orgMobile"></ion-input>
+            </ion-item>
+            <div *ngIf="docForm.controls.orgMobile.hasError('required') && docForm.controls.orgMobile.touched">
+              <small style="color: #f70505;">Mobile No is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Company Size<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-select formControlName="size" style="background:white">
+                <ion-select-option [value]="'1-50'">1-50</ion-select-option>
+                <ion-select-option [value]="'51-200'"> 51-200</ion-select-option>
+                <ion-select-option [value]="'51-200'"> 51-200</ion-select-option>
+                <ion-select-option [value]="'201-500'"> 201-500</ion-select-option>
+                <ion-select-option [value]="'501-1000'"> 501-1000</ion-select-option>
+                <ion-select-option [value]="'1001-5000'"> 1001-5000</ion-select-option>
+                <ion-select-option [value]="' 5000+'"> 5000+</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="docForm.controls.size.hasError('required') && docForm.controls.size.touched">
+              <small style="color: #f70505;">Company Size is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Organization Type<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-select placeholder="Select Organization Type" formControlName="orgType" style="background-color: white;">
+                <ion-select-option *ngFor="let hobby of orgTypeList " [value]="hobby.id">
+                  {{hobby.text}}
+              </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="docForm.controls.orgType.hasError('required') && docForm.controls.orgType.touched">
+              <small style="color: #f70505;">Organization Type is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">CIN/Registration No<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-input formControlName="cinReg"></ion-input>
+            </ion-item>
+            <div *ngIf="docForm.controls.cinReg.hasError('required') && docForm.controls.cinReg.touched">
+              <small style="color: #f70505;">CIN/Registration No is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Date Of Registration<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-datetime displayFormat="DD.MM.YYYY" formControlName="dob" presentation="date"></ion-datetime>
+            </ion-item>
+            <div *ngIf="docForm.controls.dob.hasError('required') && docForm.controls.dob.touched">
+              <small style="color: #f70505;">Date Of Registration is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label class="labels">Tax Id<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-input formControlName="taxId"></ion-input>
+            </ion-item>
+            <div *ngIf="docForm.controls.taxId.hasError('required') && docForm.controls.taxId.touched">
+              <small style="color: #f70505;">Tax Id is required</small>
+            </div>
+          </div>
+          <div class="button-content">
+            <ion-label slot="end">Upload Organization Logo *</ion-label>
+            <ion-button style="background: #3880ff;border-radius:20px">
+              <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+
+              <!-- <input formControlName="uploadImg" type="file" (change)="loadImageFromDevice($event)" id="file-input"
+                accept="image/png, image/jpeg"> -->
+            </ion-button>
+          </div><br>
+          <div class="button-content">
+            <ion-label class="labels">About the Organization<small style="color: #f70505;">*</small></ion-label>
+            <ion-item fill="outline" class="input-field">
+              <ion-textarea formControlName="details"></ion-textarea>
+            </ion-item>
+            <!-- <div *ngIf="docForm.controls.orgName.hasError('required') && docForm.controls.orgName.touched">
+                          <small style="color: #f70505;">Organization Name is required</small>
+                        </div> -->
+          </div>
+  
+          <div class="button-content" style="width: 50%;
+          margin: auto;">
+          <ion-button color="primary" fill="outline" >Update</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </form>
+
+
+  <div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+</div>
+
+</ion-content>

@@ -19,6 +19,8 @@ export class OrgProfileViewPage implements OnInit {
   logo: any;
   companysize: any;
   foundedin: any;
+  registrationno: any;
+  aboutdesc: any;
 
   constructor(public router: Router,public storageservice: StorageService) { }
 
@@ -45,6 +47,9 @@ export class OrgProfileViewPage implements OnInit {
                    this.logo = result['profileViewList'][0]['logo'];
                    this.companysize = result['profileViewList'][0]['companysize'];
                    this.foundedin = result['profileViewList'][0]['foundedin'];
+                   this.registrationno = result['profileViewList'][0]['registrationno'];
+                   this.aboutdesc = result['profileViewList'][0]['aboutdesc'];
+
     })
   }
 
