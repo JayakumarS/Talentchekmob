@@ -165,9 +165,6 @@ export class WorkExperiencesPage implements OnInit {
       console.log("endDate: " + endDate);
       console.log("startDate: " + event);
       var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
-      this.ExperienceForm.patchValue({
-        'jobStartDateTo':""
-      })
       if (endDate <= frm) {
         const alert = await this.toastController.create({
           header: 'Validation Error',

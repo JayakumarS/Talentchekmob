@@ -169,6 +169,56 @@ export class EducationsPage implements OnInit {
     this.selectStudySet = undefined;
   }
 
+//validate dates
+  async validateEndDate(event){
+    var startdate = new Date(new Date(this.EducationForm.value.courseStart).setFullYear(new Date(this.EducationForm.value.courseStart).getFullYear())); //Currentdate - one year.
+    console.log("startdate: " + startdate);
+    console.log("enddate: " + event);
+    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    if (frm <= startdate) {
+      const alert = await this.toastController.create({
+        header: 'Validation Error',
+        message: 'course End date should be greater than Course Start date.',
+        buttons: ['OK']
+      });
+      this.EducationForm.patchValue({
+        'courseEnd':""
+      })
+       await alert.present();
+    }
+  }
+
+
+  async validateStartDate(event){
+
+    if(this.EducationForm.value.courseEnd != undefined){
+      var endDate = new Date(new Date(this.EducationForm.value.courseEnd).setFullYear(new Date(this.EducationForm.value.courseEnd).getFullYear())); //Currentdate - one year.
+      console.log("endDate: " + endDate);
+      console.log("startDate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      if (endDate <= frm) {
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'course Start date should be lesser than Course End date.',
+          buttons: ['OK']
+        });
+        this.EducationForm.patchValue({
+          'courseStart':""
+        })
+         await alert.present();
+      }
+    }
+    
+  }
+
+  validationForCurWorking(event){
+    var value  = event;
+    if(value == true){
+      this.EducationForm.get("courseEnd").disable(); 
+    }else{
+      this.EducationForm.get("courseEnd").enable();
+    }
+  }
   selectInstitution(institutionName: string, id: string) {
     this.selecteInstitution = institutionName;
     this.IsSearchListShow = false;
@@ -269,6 +319,11 @@ export class EducationsPage implements OnInit {
 
         await alert.present();
       } else {
+
+        this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+        if(this.EducationForm.value.courseEnd != undefined){
+          this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
+        }
         if (this.unregistered == "") {
           this.EducationForm.value.unregisteredIns = this.Exp.orgName;
         } else {
@@ -280,8 +335,8 @@ export class EducationsPage implements OnInit {
         this.EducationForm.value.institutionName = this.Exp.orgName;
         this.EducationForm.value.currentUserId = this.userId;
         this.Education = this.EducationForm.value;
-        this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
-        this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
+        // this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+        // this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
 
         console.log(` data: ${JSON.stringify(this.Education)}`);
         var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
@@ -402,11 +457,16 @@ export class EducationsPage implements OnInit {
 
       await alert.present();
     } else {
+
+      this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+      if(this.EducationForm.value.courseEnd != undefined){
+        this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
+      }
       this.EducationForm.value.institutionName = this.Exp.orgName;
       this.EducationForm.value.currentUserId = this.userId;
       this.Education = this.EducationForm.value;
-      this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
-      this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
+      // this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+      // this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
 
 
       this.EducationForm = this.EducationForm.value;
