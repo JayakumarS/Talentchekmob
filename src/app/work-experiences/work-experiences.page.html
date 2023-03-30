@@ -48,7 +48,7 @@
                           <ion-item fill="outline" class="input-field">
                                 <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
                                 debounce="100" (ionInput)="filterList($event)" 
-                                formControlName="organisationName" [(ngModel)]="organisationVal"  (ionBlur)="unCheckFocus()"
+                                formControlName="organisationName" [(ngModel)]="organisationVal"
                                 search-icon=“undefined”></ion-searchbar>
                                 </ion-item>
                                 <div *ngIf="ExperienceForm.controls.organisationName.hasError('required') && ExperienceForm.controls.organisationName.touched">
@@ -78,7 +78,7 @@
                         <div class="button-content">
                             <ion-label class="labels">Job Start Date<small style="color: #f70505;">*</small> </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
+                                <ion-datetime (ionChange)="validateStartDate($event.target.value);"  displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
                             </ion-item>
                             <div *ngIf="ExperienceForm.controls.expStart.hasError('required') && ExperienceForm.controls.expStart.touched">
                                 <small style="color: #f70505;">Job Start Date is required</small>
@@ -87,14 +87,14 @@
                             <div class="button-content">
                                 <ion-label class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date"></ion-datetime>
+                                    <ion-datetime (ionChange)="validateEndDate($event.target.value);" displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date"></ion-datetime>
                                 </ion-item>
                                 <div *ngIf="ExperienceForm.controls.expEnd.hasError('required') && ExperienceForm.controls.expEnd.touched">
                                     <small style="color: #f70505;">Job End Date is required</small>
                                   </div>
                                
                                   <div style="    display: flex;">
-                                    <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyWork"></ion-checkbox>&nbsp;I currently work here
+                                    <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurWorking($event.detail.checked);" formControlName="currentlyWork"></ion-checkbox>&nbsp;I currently work here
                                   </div>
                                   
                                 </div>
@@ -103,7 +103,7 @@
                                 <div class="button-content">
                                     <ion-label class="labels">Employee Registration Number<small style="color: #f70505;">*</small></ion-label>
                                     <ion-item fill="outline" class="input-field">
-                                        <ion-input formControlName="registrationNumber"></ion-input>
+                                        <ion-input onkeyup="this.value = this.value.toUpperCase();" formControlName="registrationNumber"></ion-input>
                                     </ion-item>
                                     <div *ngIf="ExperienceForm.controls.registrationNumber.hasError('required') && ExperienceForm.controls.registrationNumber.touched">
                                         <small style="color: #f70505;">Employee Registration Number is required</small>

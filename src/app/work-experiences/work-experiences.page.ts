@@ -1,6 +1,6 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
@@ -29,8 +29,9 @@ export class WorkExperiencesPage implements OnInit {
   userId: string;
   empId:any;
   edit: boolean = false;
-  
-  constructor(public router:Router,private fb: FormBuilder,
+  desiredItem: any;
+
+  constructor(public router:Router,private fb: FormBuilder,private route: ActivatedRoute,
     public storageservice:StorageService,public toastController:ToastController) { }
   Exp = {
     orgName: '',
@@ -57,34 +58,51 @@ export class WorkExperiencesPage implements OnInit {
    this.getJobtype();
    var listConstant =  this.initializeItems(); 
 
-
+   this.route.queryParams.subscribe(params => {
+    if (params) { 
+      if (params != null || params != undefined ) {  
+          this.fetchEditDeatils(params.id); 
+        console.log(params);
+      }
+    }
+  });
    
 
-   this.fetchEditDeatils(this.empId);
- 
+  
  
   }
 
-  fetchEditDeatils(empId){
+  fetchEditDeatils(expId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/EditExperience";
-         
-    this.storageservice.getrequest(getEditValues + "?expId=" + 229).subscribe(result => {
+      
+    this.storageservice.getrequest(getEditValues + "?expId=" + expId).subscribe(result => {
      if (result["success"] == true) {
       this.edit = true;
+      this.initializeItems();
+      this.searchForItem(result["experienceBean"].organisationName);
+      this.ExperienceForm.get("organisationName").disable(); 
 
+      this.orgLocation(this.desiredItem.id);
+
+      this. validationForCurWorking(result["experienceBean"].currentlyWork)
       const expStart = result["experienceBean"].expStart;
       const startdate = moment(expStart, 'DD/MM/YYYY').toDate();
 
+      if(result["experienceBean"].expEnd != null &&  result["experienceBean"].expEnd != ""){
       const expEnd = result["experienceBean"].expEnd;
       const enddate = moment(expEnd, 'DD/MM/YYYY').toDate();
- 
+      this.ExperienceForm.patchValue({
+        'expEnd': enddate.toISOString(),
+      })
+      }
+
+
       this.ExperienceForm.patchValue({ 
       'designation': result["experienceBean"].designation,
-      'organisationName': result["experienceBean"].organisationName,
+      'organisationName': this.desiredItem.text,
       'department': result["experienceBean"].department,
       'registrationNumber': result["experienceBean"].registrationNumber,
-      'expStart': startdate.toISOString(),
-      'expEnd': enddate.toISOString(),
+      'expStart': startdate.toISOString(), 
       'currentlyWork': result["experienceBean"].currentlyWork,
       'jobType': result["experienceBean"].jobType,
       'orgLocation': result["experienceBean"].orgLocation,
@@ -96,7 +114,20 @@ export class WorkExperiencesPage implements OnInit {
    });
   }
 
-
+  searchForItem(id: string) {
+    this.desiredItem = null;
+    for (const item of this.organisationList) {
+      if (item.id === id) {
+        this.desiredItem = item; 
+        break;
+      }
+    }
+    if (this.desiredItem === null) {
+      console.log('Item not found');
+    } else {
+      console.log(this.desiredItem.text); 
+    }
+  }
 
   certifications()
   {
@@ -108,10 +139,59 @@ export class WorkExperiencesPage implements OnInit {
   }
 
 
-   //organisationList
-   unCheckFocus() {
-    // this.ionSearchListShow = false;
+  async validateEndDate(event){
+    var startdate = new Date(new Date(this.ExperienceForm.value.expStart).setFullYear(new Date(this.ExperienceForm.value.expStart).getFullYear())); //Currentdate - one year.
+    console.log("startdate: " + startdate);
+    console.log("enddate: " + event);
+    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    if (frm <= startdate) {
+      const alert = await this.toastController.create({
+        header: 'Validation Error',
+        message: 'Job end date should be greater than Start date.',
+        buttons: ['OK']
+      });
+      this.ExperienceForm.patchValue({
+        'expEnd':""
+      })
+       await alert.present();
+    }
   }
+
+
+  async validateStartDate(event){
+
+    if(this.ExperienceForm.value.expEnd != ""){
+      var endDate = new Date(new Date(this.ExperienceForm.value.expEnd).setFullYear(new Date(this.ExperienceForm.value.expEnd).getFullYear())); //Currentdate - one year.
+      console.log("endDate: " + endDate);
+      console.log("startDate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      this.ExperienceForm.patchValue({
+        'jobStartDateTo':""
+      })
+      if (endDate <= frm) {
+        const alert = await this.toastController.create({
+          header: 'Validation Error',
+          message: 'Job Start date should be lesser than Job end date.',
+          buttons: ['OK']
+        });
+        this.ExperienceForm.patchValue({
+          'expStart':""
+        })
+         await alert.present();
+      }
+    }
+    
+  }
+
+  validationForCurWorking(event){
+    var value  = event;
+    if(value == true){
+      this.ExperienceForm.get("expEnd").disable(); 
+    }else{
+      this.ExperienceForm.get("expEnd").enable();
+    }
+  }
+
   goToSearchSelectedItem( instName,instId) {
     console.log("InsName: " + instName)
     console.log("InsId: " + instId)
@@ -127,8 +207,7 @@ export class WorkExperiencesPage implements OnInit {
       const InsList = this.storageservice.getrequest(organisationListUrl).subscribe(result => {
         this.organisationList = result["organisationList"];
         this.organisationList = result["organisationList"];
-     //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-      });
+       });
     
       return InsList;
     }
@@ -222,7 +301,9 @@ export class WorkExperiencesPage implements OnInit {
      this.ExperienceForm.value.currentUserId = this.userId; 
 
      this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
-     this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
+     if(this.ExperienceForm.value.expEnd != undefined){
+      this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
+     }
 
      if(this.unregisteredOrg == ""){
       this.ExperienceForm.value.organisationName = this.Exp.orgName;
@@ -276,11 +357,12 @@ if (errors.length > 0) {
    this.ExperienceForm.value.currentUserId = this.userId; 
 
    this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
-   this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
-
+   if(this.ExperienceForm.value.expEnd != undefined){
+    this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
+   }
     this.Experience = this.ExperienceForm.value;
  console.log(` data: ${JSON.stringify(this.Experience)}`);
-var saveExperience = "api/auth/app/IndividualProfileDetails/UpdateExperience";
+var saveExperience = "api/auth/app/mobile/UpdateExperience";
 
  this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
     console.log("Image upload response: " + result)
