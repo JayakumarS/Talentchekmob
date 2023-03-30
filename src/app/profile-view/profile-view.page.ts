@@ -9,8 +9,7 @@ import { StorageService } from '../storage.service';
 })
 export class ProfileViewPage implements OnInit {
   @ViewChild('popover') popover;
-  @ViewChild('dropdownContainer') dropdownContainer: ElementRef;
-  showDropdownFlag: number;
+   showDropdownFlag: number;
   isOpen = false;
   userId:string;
   educationcard:boolean = false;
@@ -37,14 +36,7 @@ export class ProfileViewPage implements OnInit {
   constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef) { }
   @ViewChild('picker', { static: false })
   pickerInst: any;
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.dropdownContainer.nativeElement.contains(event.target)) {
-      this.closeDropdown();
-    }
-  }
-
+ 
   ngOnInit() {
     this.setSelectedTab('profile');
     this.userId = localStorage.getItem("userId")  ; 
