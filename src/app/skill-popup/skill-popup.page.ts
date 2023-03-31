@@ -121,7 +121,7 @@ export class SkillPopupPage implements OnInit {
 
      //save
      async saveSkill(){
-      if(this.skillForm.value.keySkill  != "" && this.skillForm.value.keySkill  != null){
+      if(this.skillForm.value.keySkill  != "" && this.skillForm.value.keySkill  != null && this.skillForm.value.expertise != "" && this.skillForm.value.expertise  != null){
           this.skillForm.value.currentUserId = this.userId;
              
         this.skillform = this.skillForm.value;
@@ -145,7 +145,7 @@ export class SkillPopupPage implements OnInit {
      //update
      async updateSkill(){
       this.skillForm.value.keySkill = this.selectedSkills
-       if(this.skillForm.value.keySkill != "" && this.skillForm.value.keySkill  != null){
+       if(this.skillForm.value.keySkill != "" && this.skillForm.value.keySkill  != null && this.skillForm.value.expertise != "" && this.skillForm.value.expertise  != null){
            this.skillForm.value.keySkill = this.selectedSkills 
           this.skillForm.value.currentUserId = this.userId;
              
@@ -188,7 +188,7 @@ export class SkillPopupPage implements OnInit {
 
   async presentToast1() {
     const toast = await this.toastController.create({
-      message: 'Please add the required skills',
+      message: 'Please fill all deatils',
       duration: 3000,
       cssClass: 'custom-toast'
     });
