@@ -253,7 +253,8 @@ const routes: Routes = [
   {
     path: 'apply-for-job',
     loadChildren: () => import('./apply-for-job/apply-for-job.module').then( m => m.ApplyForJobPageModule)
-  },  {
+  },
+  {
     path: 'subscription-individual',
     loadChildren: () => import('./subscription-individual/subscription-individual.module').then( m => m.SubscriptionIndividualPageModule)
   },
@@ -264,6 +265,18 @@ const routes: Routes = [
   {
     path: 'consent-form',
     loadChildren: () => import('./consent-form/consent-form.module').then( m => m.ConsentFormPageModule)
+
+  },
+  {
+    path: 'institution-dashboard',
+    loadChildren: () => import('./institution-dashboard/institution-dashboard.module').then( m => m.InstitutionDashboardPageModule)
+  },
+  {
+    path: 'subscription-insorg',
+    loadChildren: () => import('./subscription-insorg/subscription-insorg.module').then( m => m.SubscriptionInsorgPageModule)
+  },  {
+    path: 'organization-dashboard',
+    loadChildren: () => import('./organization-dashboard/organization-dashboard.module').then( m => m.OrganizationDashboardPageModule)
   },
   {
     path: 'org-profile-view',
@@ -277,6 +290,7 @@ const routes: Routes = [
     path: 'insti-profile-view',
     loadChildren: () => import('./insti-profile-view/insti-profile-view.module').then( m => m.InstiProfileViewPageModule)
   },
+
 
 
 

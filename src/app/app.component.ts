@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './language.service';
+import { timer } from 'rxjs/internal/observable/timer';
 //import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 @Component({
@@ -261,7 +262,7 @@ export class AppComponent {
 
   dashboardLabel: string;
   logoutLabel: string;
-
+  showSplash = true;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -432,7 +433,7 @@ export class AppComponent {
       // this.fcm.subscribeToTopic('Deals');
 
       // get FCM token
-
+      timer(3000).subscribe(()=>this.showSplash=false);
       });
 
       // ionic push notification example
