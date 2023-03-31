@@ -28,6 +28,7 @@ export class ClubPage implements OnInit {
   selectedOrganisation: any;
   extracurricularBean: any;
   edit: boolean = false;
+  disabled: boolean =false;
   desiredItem: any;
   constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,
      public storageservice: StorageService, private toastController: ToastController) { }
@@ -299,7 +300,7 @@ getOrganisationList(){
           const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
      
          this.edit = true;
- 
+         this.disabled =true
          this.clubFrom.patchValue({
           // 'clubName':this.desiredItem.text,
            'clubBranch' :this.extracurricularBean.clubBranch,

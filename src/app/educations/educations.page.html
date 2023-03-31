@@ -37,14 +37,14 @@
                     <ion-label class="labels">Educational Institution Name<small
                             style="color: #f70505;">*</small></ion-label>
 
-                    <ion-item fill="outline" class="input-field">
+                    <ion-item fill="outline" class="input-field" >
                         <div>{{ selecteInstitution }}
                             <ion-icon *ngIf="selecteInstitution != undefined && selecteInstitution != ''"
                                 name="close-circle" (click)="removeOrganisation(selecteInstitution)"></ion-icon>
                         </div>
 
                         <ion-input (ionInput)="onSearchInstitution($event.target.value)" 
-                            [formControl]="searchCtrl"></ion-input>
+                            [formControl]="searchCtrl" *ngIf="!disabled==true"></ion-input>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.institutionName.hasError('required') && EducationForm.controls.institutionName.touched">

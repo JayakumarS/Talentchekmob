@@ -48,6 +48,8 @@ export class EducationsPage implements OnInit {
   selectStudySet: string;
   selectDegreeSet: string;
   dateValidation: boolean;
+  desiredItem: any;
+  disabled: boolean =false;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
     private toastController: ToastController,private route: ActivatedRoute) {
 
@@ -148,6 +150,9 @@ export class EducationsPage implements OnInit {
 
       if (this.searchInstitutionResults == 0) {
         this.IsSearchListShow = false;
+        this.EducationForm.patchValue({
+          'institutionName':filterValue
+          })
       }
       else {
         this.IsSearchListShow = true;
@@ -347,7 +352,7 @@ export class EducationsPage implements OnInit {
   
   
           console.log(this.fromdate);
-          this.EducationForm.value.institutionName = this.Exp.orgName;
+          // this.EducationForm.value.institutionName = this.Exp.orgName;
           this.EducationForm.value.currentUserId = this.userId;
           this.Education = this.EducationForm.value;
           // this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
@@ -431,9 +436,21 @@ export class EducationsPage implements OnInit {
       if (result["success"] == true) {
         this.Education = result["educationBean"];
 
+      
+
         this.selectStudySet = this.Education.fieldofStudy;
         this.selectDegreeSet=this.Education.degree;
-        this.selecteInstitution = this.Education.institutionName;
+
+
+        const containsTF = this.checkForTF(this.Education.institutionName)
+        if(containsTF == true){
+          this.searchForId(this.Education.institutionName);  
+        }else{
+          this.searchForText(this.Education.institutionName); 
+        }
+
+        this.selecteInstitution = this.desiredItem.text;
+       // this.EducationForm.value.get("this.selecteInstitution").disable(); 
        // const arr: string[] = str.split(",");
 
         // for(let i=0;i<arr.length;i++){
@@ -450,7 +467,7 @@ export class EducationsPage implements OnInit {
        const enddate = moment(courseEnd, 'MM/yyyy').toDate();
        this.selectedDate = moment(enddate).format('DD/MM/YYYY');
        this.edit = true;
- 
+       this.disabled =true
        this.EducationForm.patchValue({
          'institutionName': this.Education.institutionName,
          'institutionLocation': this.Education.institutionLocation,
@@ -467,6 +484,44 @@ export class EducationsPage implements OnInit {
     })
   }
 
+  checkForTF(data: string): boolean {
+    if (data.indexOf('TF') !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  searchForId(id: string) {
+    this.desiredItem = null;
+    for (const item of this.institutionList) {
+      if (item.id === id) {
+        this.desiredItem = item; 
+        break;
+      }
+    }
+    if (this.desiredItem === null) {
+      console.log('Item not found');
+    } else {
+      console.log(this.desiredItem.text); 
+    }
+  }
+
+
+  searchForText(text: string) {
+    this.desiredItem = null;
+    for (const item of this.institutionList) {
+      if (item.text === text) {
+        this.desiredItem = item; 
+        break;
+      }
+    }
+    if (this.desiredItem === null) {
+      console.log('Item not found');
+    } else {
+      console.log(this.desiredItem.text); 
+    }
+  }
 
 
   //UpdateEducation
