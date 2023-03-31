@@ -28,6 +28,7 @@ export class ClubPage implements OnInit {
   selectedOrganisation: any;
   extracurricularBean: any;
   edit: boolean = false;
+  desiredItem: any;
   constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,
      public storageservice: StorageService, private toastController: ToastController) { }
 
@@ -67,11 +68,20 @@ export class ClubPage implements OnInit {
  //  Organisation auto complete 
  onSearchOrganisation(value: string) {
   if (value.length > 0) {
+
+    if(this.isunregIns == false){
+      this.unregisteredIns = value ;
+    }
+    this.isunregIns = false;
     this.IsorgListShow = true;
     this.searchOrganisationResults = this.organisationList.filter(Organisation => Organisation.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
  
     if (this.searchOrganisationResults == 0) {
       this.IsorgListShow = false;
+      this.clubFrom.patchValue({
+      'clubName':value
+
+      })
     }
     else {
       this.IsorgListShow = true;
@@ -196,15 +206,15 @@ getOrganisationList(){
       } else{
   
         if(this.unregisteredIns == ""){
-          this.clubFrom.value.unregisteredIns = this.clubid;
+          this.clubFrom.value.unregisteredClub = this.clubid;
          }else{
-          this.clubFrom.value.unregisteredIns = this.unregisteredIns;
+          this.clubFrom.value.unregisteredClub = this.unregisteredIns;
          }
   
          this.clubFrom.value.participatedFrom =formatDate(this.clubFrom.value.participatedFrom, 'dd/MM/yyyy','en-IN');
          this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');          
          this.clubFrom.value.currentUserId = this.userId;
-         this.clubFrom.value.clubName = this.clubid; 
+        // this.clubFrom.value.clubName = this.clubid; 
          this.Extracurricular = this.clubFrom.value;
          console.log(` data: ${JSON.stringify(this.Extracurricular)}`);
          var saveperonalinfo = "api/auth/app/IndividualProfileDetails/saveExtracurricular";
@@ -274,8 +284,14 @@ getOrganisationList(){
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
       
+      
       if (result["success"] == true) {
+
+        this.clubFrom.get("clubName").disable();
+       
         this.extracurricularBean = result["extracurricularBean"]; 
+        this.searchForItem(this.extracurricularBean.clubName);
+        this.selectedOrganisation = this.desiredItem.text;
         const participatedFrom =  this.extracurricularBean.participatedFrom;
         const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
  
@@ -285,7 +301,7 @@ getOrganisationList(){
          this.edit = true;
  
          this.clubFrom.patchValue({
-           'clubName':this.extracurricularBean.clubName,
+          // 'clubName':this.desiredItem.text,
            'clubBranch' :this.extracurricularBean.clubBranch,
            'titleHeld': this.extracurricularBean.titleHeld,
            'rolePlayed':this.extracurricularBean.rolePlayed,
@@ -299,6 +315,22 @@ getOrganisationList(){
        }
       
     })
+  }
+
+
+  searchForItem(id: string) {
+    this.desiredItem = null;
+    for (const item of this.organisationList) {
+      if (item.id === id) {
+        this.desiredItem = item; 
+        break;
+      }
+    }
+    if (this.desiredItem === null) {
+      console.log('Item not found');
+    } else {
+      console.log(this.desiredItem.text); 
+    }
   }
 
 //Updateclub

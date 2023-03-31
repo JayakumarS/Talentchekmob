@@ -215,20 +215,24 @@ export class EducationsPage implements OnInit {
     
   }
 
-  validationForCurWorking(event){
-    var value  = event;
-    if(value == true){
-      this.EducationForm.get("courseEnd").disable(); 
-      this.dateValidation = true;
-    }else{
-      this.EducationForm.get("courseEnd").enable();
-    }
-  }
+  // validationForCurWorking(event){
+  //   var value  = event;
+  //   if(value == true){
+  //     this.EducationForm.get("courseEnd").disable(); 
+  //     this.dateValidation = true;
+  //   }else{
+  //     this.EducationForm.get("courseEnd").enable();
+  //   }
+  // }
   selectInstitution(institutionName: string, id: string) {
     this.selecteInstitution = institutionName;
     this.IsSearchListShow = false;
     this.institutionid = id;
-    this.Exp.orgName = id;
+
+    this.EducationForm.patchValue({
+      'institutionName':id
+    })
+    
     this.searchInstitutionResults = [];
     this.searchCtrl.setValue('');
   }
@@ -261,7 +265,10 @@ export class EducationsPage implements OnInit {
   selectDegree(institutionName: string, id: string) {
     this.selectDegreeSet = institutionName;
     this.IsDegreeListShow = false;
-    this.EducationForm.value.degree=this.selectDegreeSet;
+    this.EducationForm.patchValue({
+    'degree':this.selectDegreeSet
+    })
+  
     this.institutionid = id;
     this.searchDegreeResults = [];
     this.searchCtrl.setValue('');
@@ -293,8 +300,10 @@ export class EducationsPage implements OnInit {
   selectStudy(Study: string, id: string) {
     this.selectStudySet = Study;
     this.IsstudyListShow = false;
-
-    this.EducationForm.value.fieldofStudy=this.selectStudySet;
+    this.EducationForm.patchValue({
+      'fieldofStudy':this.selectStudySet
+      })
+    
     //this.institutionid = id;
     this.searchStudyResults = [];
     this.searchCtrl.setValue('');
@@ -311,7 +320,7 @@ export class EducationsPage implements OnInit {
 
   async save() {
 
-    if (this.Exp.orgName != "") {
+    if (this.EducationForm.value.institutionName != "") {
       const errors = this.checkFormValidity(this.EducationForm);
 
       if (errors.length > 0) {
@@ -432,7 +441,7 @@ export class EducationsPage implements OnInit {
         //   this.studyListVal.push(selectStudySet);
         // }
 
-        this.validationForCurWorking(this.Education.currentlyStudy)
+       // this.validationForCurWorking(this.Education.currentlyStudy)
 
         const courseStart =  this.Education.courseStart;
         const startdate = moment(courseStart, 'MM/yyyy').toDate();
