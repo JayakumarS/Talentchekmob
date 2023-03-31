@@ -44,6 +44,7 @@ export class ProfileePage implements OnInit {
       category: ["",[Validators.required]],
       linkurl:[""],
       details:[""],
+      uploadImg:[""],
       permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:[""],
@@ -117,7 +118,7 @@ this.editprofile();
        this.storageservice.postrequest(updateprofile, this.profiledetails).subscribe(result => {  
           console.log("Image upload response: " + result)
          if (result["success"] == true) {
-         this.router.navigate(['/profile-view']);
+        
           this.presentToast()
           }
        });
@@ -131,7 +132,8 @@ this.editprofile();
       duration: 3000,
       cssClass: 'custom-toast'
     });
-
+    this.router.navigate(['/profile-view']);
+    window.location.reload();
   await toast.present();
 }
 

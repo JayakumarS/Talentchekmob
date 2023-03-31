@@ -29,9 +29,14 @@
 
             <ion-col size="2">
                 <ion-avatar size="small">
-                    <img style=" height: 60%;width: 60%;"
+                    <img style=" height: 60%;width: 60%;"(click)="profile( )"
                         src={{img}} />
                 </ion-avatar>
+
+                <!-- <ion-avatar size="small" *ngIf img = null>
+                    <img style=" height: 60%;width: 60%;"(click)="profile( )"
+                        src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar> -->
             </ion-col>
         </ion-row>
 
