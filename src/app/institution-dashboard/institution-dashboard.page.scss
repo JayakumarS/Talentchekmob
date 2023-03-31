@@ -75,42 +75,46 @@ ion-content {
 }
 
 .custom-buttryfly-left1 {
-    width: 165px;
-    height: 160px;
+    width: 140px;
+    height: 135px;
     background: rgba(217, 217, 217, 0.31) 0% 0% no-repeat padding-box;
     border-radius: 7px 7px 70px 7px;
     opacity: 1;
     margin-left: 4px;
+    padding: 8px;
     margin-right: 4px;
 }
 
 .custom-buttryfly-left2 {
-    width: 165px;
-    height: 160px;
+    width: 140px;
+    height: 135px;
     background: rgba(217, 217, 217, 0.31) 0% 0% no-repeat padding-box;
     border-radius: 7px 70px 7px 7px;
     opacity: 1;
     margin-left: 4px;
+    padding: 8px;
     margin-right: 4px;
 }
 
 .custom-buttryfly-right1 {
-    width: 165px;
-    height: 160px;
+    width: 140px;
+    height: 135px;
     background: rgba(217, 217, 217, 0.31) 0% 0% no-repeat padding-box;
     border-radius: 7px 7px 7px 70px;
     opacity: 1;
     margin-left: 4px;
+    padding: 8px;
     margin-right: 4px;
 }
 
 .custom-buttryfly-right2 {
-    width: 165px;
-    height: 160px;
+    width: 140px;
+    height: 135px;
     background: rgba(217, 217, 217, 0.31) 0% 0% no-repeat padding-box;
     border-radius: 70px 7px 7px 7px;
     opacity: 1;
     margin-left: 4px;
+    padding: 8px;
     margin-right: 4px;
 }
 
@@ -132,13 +136,15 @@ ion-content {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
 }
 
 .butterfly-container {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    margin-left: 6px;
+    margin-left: 0px;
+    justify-content: space-around;
 }
 
 .company-card {
