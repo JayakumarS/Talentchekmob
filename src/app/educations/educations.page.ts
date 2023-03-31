@@ -47,6 +47,7 @@ export class EducationsPage implements OnInit {
   selecteStudy: any;
   selectStudySet: string;
   selectDegreeSet: string;
+  dateValidation: boolean;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
     private toastController: ToastController,private route: ActivatedRoute) {
 
@@ -175,11 +176,13 @@ export class EducationsPage implements OnInit {
     console.log("startdate: " + startdate);
     console.log("enddate: " + event);
     var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    this.dateValidation =true;
     if (frm <= startdate) {
+      this.dateValidation =false;
       const alert = await this.toastController.create({
-        header: 'Validation Error',
+        header: '',
         message: 'course End date should be greater than Course Start date.',
-        buttons: ['OK']
+        duration: 3000,
       });
       this.EducationForm.patchValue({
         'courseEnd':""
@@ -191,20 +194,21 @@ export class EducationsPage implements OnInit {
 
   async validateStartDate(event){
 
-    if(this.EducationForm.value.courseEnd != undefined && ""){
+    if(this.EducationForm.value.courseEnd != undefined && this.EducationForm.value.courseEnd != ""){
       var endDate = new Date(new Date(this.EducationForm.value.courseEnd).setFullYear(new Date(this.EducationForm.value.courseEnd).getFullYear())); //Currentdate - one year.
       console.log("endDate: " + endDate);
       console.log("startDate: " + event);
       var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      this.dateValidation =true;
       if (endDate <= frm) {
         const alert = await this.toastController.create({
-          header: 'Validation Error',
-          message: 'course Start date should be lesser than Course End date.',
-          buttons: ['OK']
+          header: '',
+          message: 'course End date should be greater than Course Start date.',
+          duration: 3000,
         });
-        this.EducationForm.patchValue({
-          'courseStart':""
-        })
+        // this.EducationForm.patchValue({
+        //   'courseStart':""
+        // })
          await alert.present();
       }
     }
@@ -215,6 +219,7 @@ export class EducationsPage implements OnInit {
     var value  = event;
     if(value == true){
       this.EducationForm.get("courseEnd").disable(); 
+      this.dateValidation = true;
     }else{
       this.EducationForm.get("courseEnd").enable();
     }
@@ -312,42 +317,51 @@ export class EducationsPage implements OnInit {
       if (errors.length > 0) {
         // Display errors in a popup
         const alert = await this.toastController.create({
-          header: 'Validation Error',
+          header: '',
           message: errors.join('<br>'),
-          buttons: ['OK']
+          duration: 3000,
         });
 
         await alert.present();
       } else {
 
-        this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
-        if(this.EducationForm.value.courseEnd != undefined){
-          this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
-        }
-        if (this.unregistered == "") {
-          this.EducationForm.value.unregisteredIns = this.Exp.orgName;
-        } else {
-          this.EducationForm.value.unregisteredIns = this.unregistered;
-        }
-
-
-        console.log(this.fromdate);
-        this.EducationForm.value.institutionName = this.Exp.orgName;
-        this.EducationForm.value.currentUserId = this.userId;
-        this.Education = this.EducationForm.value;
-        // this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
-        // this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
-
-        console.log(` data: ${JSON.stringify(this.Education)}`);
-        var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
-
-        this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
-          console.log("Image upload response: " + result)
-          if (result["success"] == true) {
-            // this.router.navigate(['/job']);
-            this.presentToast()
+        if(this.dateValidation == true || this.dateValidation == undefined){
+          this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+          if(this.EducationForm.value.courseEnd != undefined){
+            this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
           }
-        });
+          if (this.unregistered == "") {
+            this.EducationForm.value.unregisteredIns = this.Exp.orgName;
+          } else {
+            this.EducationForm.value.unregisteredIns = this.unregistered;
+          }
+  
+  
+          console.log(this.fromdate);
+          this.EducationForm.value.institutionName = this.Exp.orgName;
+          this.EducationForm.value.currentUserId = this.userId;
+          this.Education = this.EducationForm.value;
+          // this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+          // this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
+  
+          console.log(` data: ${JSON.stringify(this.Education)}`);
+          var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
+  
+          this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
+            console.log("Image upload response: " + result)
+            if (result["success"] == true) {
+              // this.router.navigate(['/job']);
+              this.presentToast()
+            }
+          });
+        }else{
+          const alert = await this.toastController.create({
+            header: '',
+            message: 'course End date should be greater than Course Start date.',
+            duration: 3000,
+          }); 
+           await alert.present();
+        } 
       }
 
     } else {
@@ -418,6 +432,8 @@ export class EducationsPage implements OnInit {
         //   this.studyListVal.push(selectStudySet);
         // }
 
+        this.validationForCurWorking(this.Education.currentlyStudy)
+
         const courseStart =  this.Education.courseStart;
         const startdate = moment(courseStart, 'MM/yyyy').toDate();
         this.courseStart = moment(startdate).format('DD/MM/YYYY');
@@ -452,15 +468,17 @@ export class EducationsPage implements OnInit {
     if (errors.length > 0) {
       // Display errors in a popup
       const alert = await this.toastController.create({
-        header: 'Validation Error',
+        header: '',
         message: 'Please provide all the required values!',
-        buttons: ['OK']
+        duration: 3000,
       });
 
       await alert.present();
     } else {
 
-      this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+      if(this.dateValidation == true || this.dateValidation == undefined){
+
+        this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
       if(this.EducationForm.value.courseEnd != undefined){
         this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
       }
@@ -484,6 +502,16 @@ export class EducationsPage implements OnInit {
 
         }
       });
+      }else{
+        const alert = await this.toastController.create({
+          header: '',
+          message: 'course End date should be greater than Course Start date.',
+          duration: 3000,
+        });
+         await alert.present();
+      }
+
+      
     }
   }
 

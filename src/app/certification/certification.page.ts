@@ -20,6 +20,7 @@ export class CertificationPage implements OnInit {
   userId: string;
   CertificationForm: any;
   edit: boolean =false;
+  dateValidation: boolean;
 
   constructor(public router:Router,public modalController: ModalController,
     public fb: FormBuilder, private route: ActivatedRoute,
@@ -30,7 +31,7 @@ export class CertificationPage implements OnInit {
     this.certificationForm = this.fb.group({
       certificationName:['', Validators.required],
       issuedBy:['', Validators.required],
-      issuedDateObj:[''],
+      issuedDateObj:['', Validators.required],
       expiryDateObj:[''],
       issuedDate:[''],
       expiryDate:[''],
@@ -64,9 +65,14 @@ export class CertificationPage implements OnInit {
      if (result["success"] == true) {
       this.edit = true;
  
-      const issuedate = result["skillandCertificationsBean"].issuedDate;
-      const startdate = moment(issuedate, 'DD/MM/YYYY').toDate();
-
+      
+      if(result["skillandCertificationsBean"].issuedDate != null &&  result["skillandCertificationsBean"].issuedDate != ""){
+        const issuedate = result["skillandCertificationsBean"].issuedDate;
+        const startdate = moment(issuedate, 'DD/MM/YYYY').toDate();
+        this.certificationForm.patchValue({
+          'issuedDateObj': startdate.toISOString(),
+        })
+        }
 
       if(result["skillandCertificationsBean"].expiryDate != null &&  result["skillandCertificationsBean"].expiryDate != ""){
         const expdate = result['skillandCertificationsBean'].expiryDate;
@@ -83,8 +89,7 @@ export class CertificationPage implements OnInit {
       'certificationName': result["skillandCertificationsBean"].certificationName,
       'issuedBy': result["skillandCertificationsBean"].issuedBy,
       'certificationId': result["skillandCertificationsBean"].certificationId,
-      'issuedDateObj': startdate.toISOString(),
-       'certificationPath': result["skillandCertificationsBean"].uploadCertification
+      'certificationPath': result["skillandCertificationsBean"].uploadCertification
       })
      }
    });
@@ -144,38 +149,48 @@ loadImageFromDevice(event) {
 
   //save
   async saveCertification(){
-    const errors = this.checkFormValidity(this.certificationForm);
-
-  if (errors.length > 0) {
-    // Display errors in a popup
-    const alert = await this.toastController.create({
-      header: 'Validation Error',
-      message: 'Please provide all the required values!',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  } else {
-     this.certificationForm.value.currentUserId = this.userId; 
-
-     this.certificationForm.value.issuedDateObj =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
-     if(this.certificationForm.value.expiryDateObj != ""){
-      this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
-     }
-  this.CertificationForm = this.certificationForm.value;
-  console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
-  var saveSkill = "api/auth/app/mobile/saveCretification";
-
-   this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
-      console.log("Image upload response: " + result)
-     if (result["success"] == true) {
-      this.router.navigate(['/profile-view']);
-      this.presentToast()
-       }else{  
-
-       }
-   });
-  }
+    const errors = this.checkFormValidity(this.certificationForm);  
+      if (errors.length > 0) {
+        // Display errors in a popup
+        const alert = await this.toastController.create({
+          header: '',
+          message: 'Please provide all the required values!',
+          duration: 3000,
+        });
+    
+        await alert.present();
+      } else {
+        if(this.dateValidation == true || this.dateValidation == undefined){
+         this.certificationForm.value.currentUserId = this.userId; 
+    
+         if(this.certificationForm.value.issuedDateObj != ""){
+          this.certificationForm.value.issuedDateObj =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
+          }
+          if(this.certificationForm.value.expiryDateObj != ""){
+          this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
+         }
+      this.CertificationForm = this.certificationForm.value;
+      console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
+      var saveSkill = "api/auth/app/mobile/saveCretification";
+    
+       this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
+          console.log("Image upload response: " + result)
+         if (result["success"] == true) {
+          this.router.navigate(['/profile-view']);
+          this.presentToast()
+           }else{  
+    
+           }
+       });
+      }else{
+        const alert = await this.toastController.create({
+          header: '',
+          message: 'Expiry Date should be greater than Issue date.',
+          duration: 3000,
+        }); 
+         await alert.present();
+      }
+    } 
   } 
 
   async UpdateCertification(){
@@ -184,18 +199,20 @@ loadImageFromDevice(event) {
   if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
-      header: 'Validation Error',
+      header: '',
       message: 'Please provide all the required values!',
-      buttons: ['OK']
+      duration: 3000,
     });
 
     await alert.present();
   } else {
+     if(this.dateValidation == true || this.dateValidation == undefined){
      this.certificationForm.value.currentUserId = this.userId; 
-
+     if(this.certificationForm.value.issuedDateObj != ""){
      this.certificationForm.value.issuedDate =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
+     }
      if(this.certificationForm.value.expiryDateObj != ""){
-      this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
+      this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
      }
        this.CertificationForm = this.certificationForm.value;
   console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
@@ -204,12 +221,21 @@ loadImageFromDevice(event) {
    this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
+      window.location.reload();
       this.router.navigate(['/profile-view']);
       this.updateToast()
        }else{  
 
        }
    });
+  }else{
+    const alert = await this.toastController.create({
+      header: '',
+      message: 'Expiry Date should be greater than Issue date.',
+      duration: 3000,
+    }); 
+     await alert.present();
+  }
   }
   }
 
@@ -251,5 +277,50 @@ await toast.present();
 
   goto_profileView(){
     this.router.navigate(['/profile-view']);
+  }
+
+  async validateEndDate(event){
+    var startdate = new Date(new Date(this.certificationForm.value.issuedDateObj).setFullYear(new Date(this.certificationForm.value.issuedDateObj).getFullYear())); //Currentdate - one year.
+    console.log("startdate: " + startdate);
+    console.log("enddate: " + event);
+    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    this.dateValidation = true;
+    if (frm <= startdate) {
+      this.dateValidation = false;
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Expiry Date should be greater than Issue date.',
+        duration: 3000,
+      });
+      this.certificationForm.patchValue({
+        'expiryDateObj':""
+      })
+       await alert.present();
+    }
+  }
+
+
+  async validateStartDate(event){
+
+    if(this.certificationForm.value.expiryDateObj != ""){
+      var endDate = new Date(new Date(this.certificationForm.value.expiryDateObj).setFullYear(new Date(this.certificationForm.value.expiryDateObj).getFullYear())); //Currentdate - one year.
+      console.log("endDate: " + endDate);
+      console.log("startDate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      this.dateValidation = true;
+      if (endDate <= frm) {
+        this.dateValidation = false;
+        const alert = await this.toastController.create({
+          header: '',
+          message: 'Expiry Date should be greater than Issue date.',
+          duration: 3000,
+        });
+        // this.certificationForm.patchValue({
+        //   'issuedDateObj':""
+        // })
+         await alert.present();
+      }
+    }
+    
   }
 }

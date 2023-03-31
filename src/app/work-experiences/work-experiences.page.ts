@@ -30,7 +30,7 @@ export class WorkExperiencesPage implements OnInit {
   empId:any;
   edit: boolean = false;
   desiredItem: any;
-
+  dateValidation: boolean;
   constructor(public router:Router,private fb: FormBuilder,private route: ActivatedRoute,
     public storageservice:StorageService,public toastController:ToastController) { }
   Exp = {
@@ -74,8 +74,7 @@ export class WorkExperiencesPage implements OnInit {
 
   fetchEditDeatils(expId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/EditExperience";
-      
-    this.storageservice.getrequest(getEditValues + "?expId=" + expId).subscribe(result => {
+     this.storageservice.getrequest(getEditValues + "?expId=" + expId).subscribe(result => {
      if (result["success"] == true) {
       this.edit = true;
       this.initializeItems();
@@ -84,7 +83,7 @@ export class WorkExperiencesPage implements OnInit {
 
       this.orgLocation(this.desiredItem.id);
 
-      this. validationForCurWorking(result["experienceBean"].currentlyWork)
+      this.validationForCurWorking(result["experienceBean"].currentlyWork)
       const expStart = result["experienceBean"].expStart;
       const startdate = moment(expStart, 'DD/MM/YYYY').toDate();
 
@@ -144,11 +143,13 @@ export class WorkExperiencesPage implements OnInit {
     console.log("startdate: " + startdate);
     console.log("enddate: " + event);
     var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    this.dateValidation =true;
     if (frm <= startdate) {
+      this.dateValidation =false;
       const alert = await this.toastController.create({
-        header: 'Validation Error',
+        header: '',
         message: 'Job end date should be greater than Start date.',
-        buttons: ['OK']
+        duration: 3000,
       });
       this.ExperienceForm.patchValue({
         'expEnd':""
@@ -165,15 +166,17 @@ export class WorkExperiencesPage implements OnInit {
       console.log("endDate: " + endDate);
       console.log("startDate: " + event);
       var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      this.dateValidation =true;
       if (endDate <= frm) {
+        this.dateValidation =false;
         const alert = await this.toastController.create({
-          header: 'Validation Error',
-          message: 'Job Start date should be lesser than Job end date.',
-          buttons: ['OK']
+          header: '',
+          message: 'Job end date should be greater than Start date.',
+          duration: 3000,
         });
-        this.ExperienceForm.patchValue({
-          'expStart':""
-        })
+        // this.ExperienceForm.patchValue({
+        //   'expStart':""
+        // })
          await alert.present();
       }
     }
@@ -288,39 +291,50 @@ export class WorkExperiencesPage implements OnInit {
   if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
-      header: 'Validation Error',
+      header: '',
       message: 'Please provide all the required values!',
-      buttons: ['OK']
+      duration: 3000,
     });
 
     await alert.present();
   } else {
-     this.ExperienceForm.value.currentUserId = this.userId; 
 
-     this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
-     if(this.ExperienceForm.value.expEnd != undefined){
-      this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
-     }
+    if(this.dateValidation == true || this.dateValidation == undefined){
+      this.ExperienceForm.value.currentUserId = this.userId; 
 
-     if(this.unregisteredOrg == ""){
-      this.ExperienceForm.value.organisationName = this.Exp.orgName;
-     }else{
-      this.ExperienceForm.value.organisationName = this.unregisteredOrg;
-     }
-     this.ExperienceForm.value.unregisteredOrg = this.unregisteredOrg;
-     this.Experience = this.ExperienceForm.value;
-   console.log(` data: ${JSON.stringify(this.Experience)}`);
-  var saveExperience = "api/auth/app/IndividualProfileDetails/saveExperience";
-
-   this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
-      console.log("Image upload response: " + result)
-     if (result["success"] == true) {
-      this.router.navigate(['/profile-view']);
-      this.presentToast()
-       }else{  
-
-       }
-   });
+      this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
+      if(this.ExperienceForm.value.expEnd != undefined){
+       this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
+      }
+ 
+      if(this.unregisteredOrg == ""){
+       this.ExperienceForm.value.organisationName = this.Exp.orgName;
+      }else{
+       this.ExperienceForm.value.organisationName = this.unregisteredOrg;
+      }
+      this.ExperienceForm.value.unregisteredOrg = this.unregisteredOrg;
+      this.Experience = this.ExperienceForm.value;
+    console.log(` data: ${JSON.stringify(this.Experience)}`);
+   var saveExperience = "api/auth/app/IndividualProfileDetails/saveExperience";
+ 
+    this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
+       console.log("Image upload response: " + result)
+      if (result["success"] == true) {
+       this.router.navigate(['/profile-view']);
+       this.presentToast()
+        }else{  
+ 
+        }
+    });
+    }else{
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Job end date should be greater than Start date.',
+        duration: 3000,
+      }); 
+       await alert.present();
+    }
+    
   }
   } 
 
@@ -344,32 +358,42 @@ async updateCertification(){
 if (errors.length > 0) {
   // Display errors in a popup
   const alert = await this.toastController.create({
-    header: 'Validation Error',
+    header: '',
     message: 'Please provide all the required values!',
-    buttons: ['OK']
+    duration: 3000,
   });
 
   await alert.present();
 } else {
-   this.ExperienceForm.value.currentUserId = this.userId; 
 
-   this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
-   if(this.ExperienceForm.value.expEnd != undefined){
-    this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
-   }
-    this.Experience = this.ExperienceForm.value;
- console.log(` data: ${JSON.stringify(this.Experience)}`);
-var saveExperience = "api/auth/app/mobile/UpdateExperience";
+  if(this.dateValidation == true || this.dateValidation == undefined){
+          this.ExperienceForm.value.currentUserId = this.userId; 
 
- this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
-    console.log("Image upload response: " + result)
-   if (result["success"] == true) {
-    this.router.navigate(['/profile-view']);
-    this.updateToast()
-     }else{  
-
-     }
- });
+          this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
+          if(this.ExperienceForm.value.expEnd != undefined){
+          this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
+          }
+          this.Experience = this.ExperienceForm.value;
+        console.log(` data: ${JSON.stringify(this.Experience)}`);
+      var saveExperience = "api/auth/app/mobile/UpdateExperience";
+      
+        this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
+          console.log("Image upload response: " + result)
+          if (result["success"] == true) {
+          this.router.navigate(['/profile-view']);
+          this.updateToast()
+            }else{  
+      
+            }
+        });
+  }else{
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Job end date should be greater than Start date.',
+        duration: 3000,
+      }); 
+       await alert.present();
+    }  
 }
 } 
 
