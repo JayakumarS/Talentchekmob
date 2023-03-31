@@ -417,26 +417,28 @@ export class EducationsPage implements OnInit {
         //   var selectStudySet = arr[i]
         //   this.studyListVal.push(selectStudySet);
         // }
-      }
-       const courseStart =  this.Education.courseStart;
-       const startdate = moment(courseStart, 'MM/yyyy').toDate();
-       this.courseStart = moment(startdate).format('DD/MM/YYYY');
-      const courseEnd =  this.Education.courseEnd;
-      const enddate = moment(courseEnd, 'MM/yyyy').toDate();
-      this.selectedDate = moment(enddate).format('DD/MM/YYYY');
-      this.edit = true;
 
-      this.EducationForm.patchValue({
-        'institutionName': this.Education.institutionName,
-        'institutionLocation': this.Education.institutionLocation,
-         
-        'currentlyStudy': this.Education.currentlyStudy,
-        'degree': this.Education.degree,
-         'stuRegisterNumber': this.Education.stuRegisterNumber,
-        'aggregateMarks': this.Education.aggregateMarks,
-        'eduDescription': this.Education.eduDescription,
-        'eduId': this.Education.eduId,
-       })  
+        const courseStart =  this.Education.courseStart;
+        const startdate = moment(courseStart, 'MM/yyyy').toDate();
+        this.courseStart = moment(startdate).format('DD/MM/YYYY');
+       const courseEnd =  this.Education.courseEnd;
+       const enddate = moment(courseEnd, 'MM/yyyy').toDate();
+       this.selectedDate = moment(enddate).format('DD/MM/YYYY');
+       this.edit = true;
+ 
+       this.EducationForm.patchValue({
+         'institutionName': this.Education.institutionName,
+         'institutionLocation': this.Education.institutionLocation,
+          
+         'currentlyStudy': this.Education.currentlyStudy,
+         'degree': this.Education.degree,
+          'stuRegisterNumber': this.Education.stuRegisterNumber,
+         'aggregateMarks': this.Education.aggregateMarks,
+         'eduDescription': this.Education.eduDescription,
+         'eduId': this.Education.eduId,
+        })  
+      }
+      
     })
   }
 
