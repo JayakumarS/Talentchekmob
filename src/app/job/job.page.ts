@@ -14,9 +14,9 @@ export class JobPage implements OnInit {
   
 
   constructor(public router:Router,public storageservices: StorageService) { 
-   // this.userId = localStorage.getItem("userId") ;
+   this.userId = localStorage.getItem("userId") ;
 
-    this.userId = "TFIN10000000106" ;
+   // this.userId = "TFIN10000000106" ;
   }
 
   ngOnInit() {

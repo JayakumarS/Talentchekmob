@@ -83,7 +83,7 @@ export class SignInComponent implements OnInit {
                 } else if (data.roles[0].roleId.includes('2')) {
                   this.router.navigate(['/job-search']);
                 } else if (data.roles[0].roleId.includes( '3')) {
-                  this.router.navigate(['/job-search']);
+                  this.router.navigate(['/institution-dashboard']);
                 }
                 else if (data.roles[0].roleId.includes('5')) {
                   this.router.navigate(['/job-search']);

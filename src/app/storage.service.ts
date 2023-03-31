@@ -18,10 +18,14 @@ export class StorageService {
 
   baseurl: any;
   serverurl: any;
+
+//testing Server
+// mobileserverurl:string ="http://192.168.5.25:8080/talentchek/";
+// baseURL:string ="http://192.168.5.25:8080/talentchek/";
+
+//Local server
 mobileserverurl:string ="http://localhost:8080/";
-baseURL:string ="http://localhost:8080/";
-//mobileserverurl:string ="https://givven.a-bits.com/Givven";
-//baseURL:string ="https://givven.a-bits.com/";
+baseURL:string ="http://localhost:8080//";
   mobileserverserive: any;
   
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {

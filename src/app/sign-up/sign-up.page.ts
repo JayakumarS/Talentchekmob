@@ -354,6 +354,12 @@ removeCountry() {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: false
     }
+    this.camera.getPicture(options).then((ImageData => {
+      this.base64img1 = "data:image/jpeg;base64," + ImageData;
+    }), error => {
+      console.log(error);
+    })
+
   }
 
   opencamera() {

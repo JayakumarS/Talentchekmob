@@ -171,7 +171,7 @@
     .md body {
         --ion-background-color: #121212;
         --ion-background-color-rgb: 18, 18, 18;
-        --ion-text-color: #ffffff;
+        --ion-text-color: #121212;
         --ion-text-color-rgb: 255, 255, 255;
         --ion-border-color: #222222;
         --ion-color-step-50: #1e1e1e;
@@ -198,6 +198,25 @@
         --ion-tab-bar-background: #1f1f1f;
         --ion-card-background: #1e1e1e;
     }
+}
+
+:root {
+    /* Set the background of the entire app */
+    --ion-background-color: #fff !important;
+}
+
+
+/* Set text color of the entire app for iOS only */
+
+.ios {
+    --ion-text-color: #000;
+}
+
+
+/* Set text color of the entire app for Material Design only */
+
+.md {
+    --ion-text-color: #222;
 }
 
 

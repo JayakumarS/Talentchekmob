@@ -1,6 +1,7 @@
-@font-face {
-    font-family: Mr-eaves;
-    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+#card1 {
+    --background: linear-gradient(to right top, #f5f5f5, #f7dc73);
+    border-radius: 20px;
+    color: black;
 }
 
 ion-content {
@@ -9,10 +10,16 @@ ion-content {
     --background: #EDF1FC;
 }
 
-#cardIndividual {
-    --background: linear-gradient(#54eee1, #44d693);
-    border-radius: 20px;
-    color: white;
+#cardProfessional {
+    width: 100%;
+}
+
+#cardEnterprises {
+    width: 100%;
+}
+
+#cardUltimate {
+    width: 100%;
 }
 
 .subscriptionBtn {
@@ -21,14 +28,6 @@ ion-content {
     color: black;
     font-size: small;
     font-weight: bold;
-}
-
-.blackTheme {
-    color: black;
-}
-
-.whiteTheme {
-    color: white;
 }
 
 .generic_price_table {
@@ -265,10 +264,12 @@ ion-content {
     }
 }
 
-.display-justify {
-    display: flex;
-    justify-content: center;
-    padding: 20px 10px;
+.blackTheme {
+    color: black;
+}
+
+.whiteTheme {
+    color: white;
 }
 
 .input-field {
@@ -276,6 +277,12 @@ ion-content {
     margin-bottom: 15px;
     box-shadow: 0px 8px 24px #00000026;
     border: 1px solid #D1D1D2;
+}
+
+.swiper-pagination {
+    position: fixed;
+    bottom: 0px;
+    padding-bottom: 3px;
 }
 
 .footer-nav {

@@ -1,0 +1,235 @@
+<ion-header style="background-color: white;">
+    <ion-toolbar style="padding: 20px 10px 15px;">
+        <ion-row style="display: flex;justify-content: space-between;">
+            <div>
+                <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+      align-items: center;align-items: center;">
+                Home
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
+            </div>
+        </ion-row>
+    </ion-toolbar>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</ion-header>
+
+<ion-content>
+    <form>
+        <div class="display-justify">
+            <ion-row class="container">
+                <ion-col size="6">
+                    <ion-card class="recharge-card" (click)="goto_subscribe()">
+                        <ion-card-content>
+                            <p style="text-align: center;font-size: 16px; color: #fff;"> Avalible</p>
+                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">Talent credits</p>
+
+                            <div class="card-content p-0 flex">
+                                <div class="spinningasset coin is-sm">
+                                    <div>
+                                        <em></em>
+                                        <em></em>
+                                    </div>
+                                </div>
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
+                                    {{creditPoints}}
+                                </div>
+                            </div>
+                            <br>
+                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>Recharge Now</b></p>
+
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <div>
+                    <ion-col size="3">
+                        <div class="custom-button">
+                            <div style="display: flex; align-items: center;">
+                                Profile Views<b>: {{profileViewCount}}</b></div>
+                        </div>
+                    </ion-col>
+                    <ion-col size="3">
+                        <div class="custom-button">
+                            <div style="display: flex; align-items: center;">
+                                Your Rating:<b>&nbsp; {{oniRating }}</b><span class="fa fa-star checked"></span></div>
+                        </div>
+                    </ion-col>
+                </div>
+            </ion-row>
+        </div>
+
+
+        <!-- <ion-row class="container">
+          <ion-col size="6">
+              <ion-card class="network-card">
+                  <ion-card-content>
+                      <ion-row>
+                          <ion-col size="3">
+                              <ion-icon name="person-add-outline"></ion-icon>
+                          </ion-col>
+
+                          <ion-col size="6">
+
+                          </ion-col>
+
+                          <ion-col size="3">
+
+                          </ion-col>
+
+                      </ion-row>
+
+                      <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{networkCount}}</p>
+                      <p style="text-align: center;font-size: 14px; color: #000;"><b>Your Network</b></p>
+
+                  </ion-card-content>
+              </ion-card>
+          </ion-col>
+
+          <ion-col size="6">
+              <ion-card class="network-card">
+                  <ion-card-content>
+                      <ion-row>
+                          <ion-col size="3">
+                              <ion-icon name="eye-outline"></ion-icon>
+                          </ion-col>
+
+                          <ion-col size="6">
+
+                          </ion-col>
+
+                          <ion-col size="3">
+
+                          </ion-col>
+
+                      </ion-row>
+
+                      <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{matchedJobsCount}}</p>
+                      <p style="text-align: center;font-size: 14px; color: #000;"><b>Matched Jobs</b></p>
+                  </ion-card-content>
+              </ion-card>
+          </ion-col>
+      </ion-row> -->
+
+
+        <div class="line-with-text">
+            <hr class="hr1">
+        </div>
+
+        <div *ngFor=" let count of instCountlist">
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link" (click)="individualRegister()">
+                    <div class="ag-courses-item_bg"></div>
+                    <br>
+                    <ion-row class="ag-courses-item_date-box">
+                        <ion-col size="3">
+                            <img src="../../assets/img/connections.png">
+                        </ion-col>
+                        <ion-col size="3">
+                            <div style="font-size: 35px;
+                        text-align: center;">
+                                <b>{{count.connections}}</b></div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div style="text-align: end;font-size: 21px;">
+                                <b>Connections</b></div>
+                        </ion-col>
+                    </ion-row>
+                </a>
+            </div>
+
+
+
+
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link" (click)="individualRegister()">
+                    <div class="ag-courses-item_bg"></div>
+                    <br>
+                    <ion-row class="ag-courses-item_date-box">
+                        <ion-col size="3">
+                            <img src="../../assets/img/referrals.png">
+                        </ion-col>
+                        <ion-col size="3">
+                            <div style="font-size: 35px;
+                      text-align: center;">
+                                <b>{{count.referrals}}</b></div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div style="text-align: end;font-size: 21px;">
+                                <b>Referrals</b></div>
+                        </ion-col>
+                    </ion-row>
+                </a>
+            </div>
+
+            <div class="display-justify-butterfly">
+                <ion-row class="butterfly-container">
+                    <div>
+                        <ion-col size="3">
+                            <div class="custom-buttryfly-left1">
+                                <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;{{count.referrals}}</b></ion-row>
+                                <ion-row style="font-size: 20px;"><b>&nbsp;Verified</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#24316B">Current Students</ion-row>
+                            </div>
+                        </ion-col>
+                        <ion-col size="3">
+                            <div class="custom-buttryfly-left2">
+
+                                <ion-row style="font-size: 14px; color:#24316B">Student Alumni</ion-row>
+                                <ion-row style="font-size: 20px;"><b>&nbsp;Verified</b></ion-row>
+                                <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;50</b></ion-row>
+                            </div>
+                        </ion-col>
+                    </div>
+                    <img src="../../assets/img/students.png">
+                    <div>
+                        <ion-col size="3">
+                            <div class="custom-buttryfly-right1">
+                                <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;50</b></ion-row>
+                                <ion-row style="font-size: 20px;"><b>&nbsp;Pending Approval</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#24316B">Current Students</ion-row>
+                            </div>
+                        </ion-col>
+                        <ion-col size="3">
+                            <div class="custom-buttryfly-right2">
+
+                                <ion-row style="font-size: 14px; color:#24316B">Student Alumni</ion-row>
+                                <ion-row style="font-size: 20px;"><b>&nbsp;Pending Approval</b></ion-row>
+                                <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;50</b></ion-row>
+                            </div>
+                        </ion-col>
+                    </div>
+                </ion-row>
+            </div>
+
+        </div>
+    </form>
+
+</ion-content>
+
+
+
+
+
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>
