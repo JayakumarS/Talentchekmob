@@ -221,8 +221,7 @@ loadImageFromDevice(event) {
    this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
-      window.location.reload();
-      this.router.navigate(['/profile-view']);
+       this.router.navigate(['/profile-view']);
       this.updateToast()
        }else{  
 

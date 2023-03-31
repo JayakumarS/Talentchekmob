@@ -78,7 +78,15 @@ export class WorkExperiencesPage implements OnInit {
      if (result["success"] == true) {
       this.edit = true;
       this.initializeItems();
-      this.searchForItem(result["experienceBean"].organisationName);
+
+      const containsTF = this.checkForTF(result["experienceBean"].organisationName)
+      if(containsTF == true){
+        this.searchForId(result["experienceBean"].organisationName);  
+      }else{
+        this.searchForText(result["experienceBean"].organisationName); 
+      }
+
+
       this.ExperienceForm.get("organisationName").disable(); 
 
       this.orgLocation(this.desiredItem.id);
@@ -113,10 +121,35 @@ export class WorkExperiencesPage implements OnInit {
    });
   }
 
-  searchForItem(id: string) {
+
+  checkForTF(data: string): boolean {
+    if (data.indexOf('TF') !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  searchForId(id: string) {
     this.desiredItem = null;
     for (const item of this.organisationList) {
       if (item.id === id) {
+        this.desiredItem = item; 
+        break;
+      }
+    }
+    if (this.desiredItem === null) {
+      console.log('Item not found');
+    } else {
+      console.log(this.desiredItem.text); 
+    }
+  }
+
+
+  searchForText(text: string) {
+    this.desiredItem = null;
+    for (const item of this.organisationList) {
+      if (item.text === text) {
         this.desiredItem = item; 
         break;
       }
