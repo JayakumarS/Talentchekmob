@@ -187,9 +187,9 @@ getOrganisationList(){
       if (errors.length > 0) {
         // Display errors in a popup
         const alert = await this.toastController.create({
-          header: 'Validation Error',
+         
           message: 'Please provide all the required values!',
-          buttons: ['OK']
+          duration: 3000,
         });
     
         await alert.present();

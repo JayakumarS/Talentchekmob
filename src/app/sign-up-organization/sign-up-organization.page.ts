@@ -320,7 +320,7 @@ onSubmit(){
       this.response = result;
       console.log(this.response);
         if (result["success"] == true) {
-                   this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('PopupWin.userAddSucc'));
+                   this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('Registration Successful.  Please check your inbox to confirm your email address.'));
 
                   var empid = result["empUserId"];
                   var points = result["creditPoints"];

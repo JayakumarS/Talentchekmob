@@ -1,5 +1,8 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -14,7 +17,8 @@ export class OrgProfilePage implements OnInit {
   orgTypeList: any;
   currentUserId: string;
   profileList: any;
-  constructor(private fb: FormBuilder,public storageservice:StorageService) { }
+  Orgdetails: any;
+  constructor(private fb: FormBuilder,public storageservice:StorageService,public router:Router,private toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -64,7 +68,7 @@ OrgtypeList () {
   });
 }
 
-//editprofileDetails
+//editprofileDetails 
 editprofile(){
 
   var EditprofileDetails = "api/auth/app/OrganizationProfileDetails/orgeditprofiledetails?currentUserId="+this.currentUserId ;
@@ -89,5 +93,61 @@ editprofile(){
     })
 
   })
+}
+
+///profileDetails  Update
+async Update(){
+  const errors = this.checkFormValidity(this.docForm);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+    
+      message: 'Please provide all the required values!',
+      duration: 3000,
+    });
+
+    await alert.present();
+  } else{
+    this.docForm.value.dob =formatDate(this.docForm.value.dob, 'dd/MM/yyyy','en-IN');
+    this.docForm.value.currentUserId=this.currentUserId;
+    this.Orgdetails = this.docForm.value;
+    console.log(` data: ${JSON.stringify(this.Orgdetails)}`);
+    var updateprofile = "api/auth/app/mobile/updateprofile";
+  
+     this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {  
+        console.log("Image upload response: " + result)
+       if (result["success"] == true) {
+       this.router.navigate(['/profile-view']);
+        this.presentToast()
+        }
+     });
+}
+  
+}
+
+async presentToast() {
+  const toast = await this.toastController.create({
+    message: 'Saved Successfully',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+
+await toast.present();
+}
+checkFormValidity(form: FormGroup): string[] {
+  const errors: string[] = [];
+  
+  // Check each form control for errors
+  Object.keys(form.controls).forEach(key => {
+    const controlErrors: ValidationErrors = form.controls[key].errors;
+    if (controlErrors != null) {
+      Object.keys(controlErrors).forEach(keyError => {
+        errors.push(`${key} ${keyError}`);
+      });
+    }
+  });
+
+  return errors;
 }
 }
