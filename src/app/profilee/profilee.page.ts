@@ -28,7 +28,18 @@ export class ProfileePage implements OnInit {
   userId: any;
   currentUserId: string;
   profileList: any;
-
+  showcountyResults : boolean = false;
+  selectedCountry: any;
+  countryResponse: any;
+  stateResponse: any;
+  searchResults: string[] = [];
+  countrysearchCtrl = new FormControl('');
+  cityOptions:any;
+  countryVal: string;
+countryIdVal:string;
+  cityList:[]
+  IsSearchListShow: boolean = false;
+  stateResponseBackup: any;
   //image
   base64img1: string = '';
   cBoxIAgreeVal: boolean = true;
@@ -53,16 +64,22 @@ export class ProfileePage implements OnInit {
       category: ["",[Validators.required]],
       linkurl:[""],
       details:[""],
-      //uploadImg:[""],
+      permCity:[""], 
+      permState:[""],
+      permCountry:[""],
+     permPinCode:[""],
+     
       permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:[""],
-    // uploadImg:[""],
+    
       currentUserId:[""],
     });
+    this.getCountryList()
 this.editprofile();
     this.hobbeList();
     this.List();
+;
   }
 
 
@@ -95,6 +112,87 @@ this.editprofile();
     this.router.navigate(['/profile-view']) 
   }
 
+
+//country list
+
+getCountryList(){
+
+  var countryURL = "api/auth/app/CommonUtility/countryList";
+  const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+    this.countryResponse = result["countryList"];
+    console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+  });
+}
+
+
+onCountrySearch(value: string) {
+  if (value.length > 2) {
+    this.showcountyResults = true;
+    this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showcountyResults = false;
+    this.searchResults = [];
+  }
+}
+
+selectcountry(contry: string,id:string) {
+  this.selectedCountry = contry; 
+  this.profileForm.patchValue({
+    'permCountry' : id
+  })
+   this.showcountyResults = false;
+  this.searchResults = []; 
+  this.getstatelist(id);
+  this.countrysearchCtrl.setValue('');
+}
+
+
+removeCountry() {
+  this.selectedCountry = undefined;
+}
+
+
+//state list
+async getstatelist(CtryId): Promise<any> {
+
+  console.log(CtryId)
+  var industryURL = "api/auth/app/CommonUtility/stateList?countryId="+CtryId;
+  this.storageservice.getrequest(industryURL).subscribe(result => {
+    this.stateResponseBackup = result["stateList"];
+    this.stateResponse = result["stateList"];
+    console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+  });
+
+  return industryURL;
+}
+///citylist
+getcitylist(stateId,countryId){
+ 
+  console.log(stateId)
+  var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
+  this.storageservice.getrequest(industryURL).subscribe(result => {
+   this.cityList = result['cityList'];
+   this.cityOptions = result['cityList'];
+  console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
+   
+});
+}
+
+goToSearchSelectedItem(CtryName, CtryId) {  
+  this.countryVal = CtryName;
+  this.countryIdVal = CtryId;
+  this.IsSearchListShow = false;
+  this.getstatelist(CtryId);
+}
+
+goTostateSelectedItem( stateId) {
+  //var CtryId =this.talentorgform.value.countryId; 
+  var CtryId=this.profileForm.value.permCountry;
+  this.getcitylist(stateId,CtryId);
+}
+
+
+  //categorylist
   getIndustry(){
     var getcategoryListUrl= "api/auth/app/CommonUtility/categoryList";
        
@@ -186,7 +284,11 @@ checkFormValidity(form: FormGroup): string[] {
        'mobile':this.profileList[0].mobile,
        //'dob':this.profileList[0].dob,
        'dobObj':result,
-       'permAddress':this.profileList[0].permAddress,
+       'permAddress': this.profileList[0].permAddress,
+       'permCity': this.profileList[0].permCity,
+       'permState':this.profileList[0].permState,
+       'permCountry':this.profileList[0].permCountry,
+       'permPinCode':this.profileList[0].permPinCode,
        'email':this.profileList[0].email,
        'nationalid':this.profileList[0].nationalid,
        'category': this.profileList[0].category,

@@ -21,13 +21,30 @@ export class OrgProfileViewPage implements OnInit {
   foundedin: any;
   registrationno: any;
   aboutdesc: any;
+  prof: boolean=false;
+  accountHolderName: any;
+  accountNumber: any;
+  feeCurrency: any;
+  feeAmount: any;
+  ifscCode: any;
+  connectionList: any;
 
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
 
     this.userId = localStorage.getItem("userId")  ; 
-    this.img = localStorage.getItem("profilePic")  ;
+    this.logo = localStorage.getItem("profilePic")  ;
+
+    if(this.logo!="null" && this.logo!=""){
+      this.prof = true
+      // this.profAvatar = false
+    }else{
+
+      // this.profAvatar = true
+      this.prof = false
+      
+    }
 
 
     
@@ -50,6 +67,12 @@ export class OrgProfileViewPage implements OnInit {
                    this.registrationno = result['profileViewList'][0]['registrationno'];
                    this.aboutdesc = result['profileViewList'][0]['aboutdesc'];
 
+                   this.accountHolderName = result['profileViewList'][0]['accountHolderName'];
+                   this.accountNumber = result['profileViewList'][0]['accountNumber'];
+                   this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
+                   this.feeAmount = result['profileViewList'][0]['feeAmount'];
+                   this.ifscCode = result['profileViewList'][0]['ifscCode'];
+                   this.connectionList = result['profileViewList'][0]['connectionList'] 
     })
   }
 
@@ -57,6 +80,11 @@ export class OrgProfileViewPage implements OnInit {
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
+  }
+
+  profileorg(){
+    this.router.navigate(['/org-profile']);
+
   }
 
   // footer

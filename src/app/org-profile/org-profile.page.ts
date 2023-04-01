@@ -1,9 +1,12 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { TcFormPage } from '../tc-form/tc-form.page';
+import { ConsentFormPage } from '../consent-form/consent-form.page';
 
 @Component({
   selector: 'app-org-profile',
@@ -18,7 +21,25 @@ export class OrgProfilePage implements OnInit {
   currentUserId: string;
   profileList: any;
   Orgdetails: any;
-  constructor(private fb: FormBuilder,public storageservice:StorageService,public router:Router,private toastController: ToastController) { }
+  showcountyResults : boolean = false;
+  selectedCountry: any;
+  countryResponse: any;
+  stateResponse: any;
+  searchResults: string[] = [];
+  countrysearchCtrl = new FormControl('');
+  cityOptions:any;
+  countryVal: string;
+countryIdVal:string;
+  cityList:[]
+  IsSearchListShow: boolean = false;
+  stateResponseBackup: any;
+//image
+base64img1: string = '';
+cBoxIAgreeVal: boolean = true;
+cBoxIAgreeConsentVal: boolean = true;
+
+  constructor(private fb: FormBuilder,public storageservice:StorageService,public modalController: ModalController,
+    private camera: Camera, public router:Router,private toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -35,6 +56,11 @@ export class OrgProfilePage implements OnInit {
       size: ["",[Validators.required]],
       orgType: [""],
       taxId:[""],
+      permAddress:[""],
+      permCity:[""], 
+      permState:[""],
+      permCountry:[""],
+     permPinCode:[""],
      // orgLogo: ["",[Validators.required]],
       details: ["",[Validators.required]],
       currentUserId:[""]
@@ -42,8 +68,95 @@ export class OrgProfilePage implements OnInit {
 this.OrgtypeList();
   this.domainList();
   this.editprofile();
+
+  this.getCountryList(); 
 }
 
+profileView(){
+  this.router.navigate(['/org-profile-view']);
+
+
+}
+
+
+///
+//country list
+
+getCountryList(){
+
+  var countryURL = "api/auth/app/CommonUtility/countryList";
+  const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+    this.countryResponse = result["countryList"];
+    console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+  });
+}
+
+
+onCountrySearch(value: string) {
+  if (value.length > 2) {
+    this.showcountyResults = true;
+    this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showcountyResults = false;
+    this.searchResults = [];
+  }
+}
+
+selectcountry(contry: string,id:string) {
+  this.selectedCountry = contry; 
+  this.docForm.patchValue({
+    'permCountry' : id
+  })
+   this.showcountyResults = false;
+  this.searchResults = []; 
+  this.getstatelist(id);
+  this.countrysearchCtrl.setValue('');
+}
+
+
+removeCountry() {
+  this.selectedCountry = undefined;
+}
+
+
+//state list
+async getstatelist(CtryId): Promise<any> {
+
+  console.log(CtryId)
+  var industryURL = "api/auth/app/CommonUtility/stateList?countryId="+CtryId;
+  this.storageservice.getrequest(industryURL).subscribe(result => {
+    this.stateResponseBackup = result["stateList"];
+    this.stateResponse = result["stateList"];
+    console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+  });
+
+  return industryURL;
+}
+///citylist
+getcitylist(stateId,countryId){
+ 
+  console.log(stateId)
+  var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
+  this.storageservice.getrequest(industryURL).subscribe(result => {
+   this.cityList = result['cityList'];
+   this.cityOptions = result['cityList'];
+  console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
+   
+});
+}
+
+goToSearchSelectedItem(CtryName, CtryId) {  
+  this.countryVal = CtryName;
+  this.countryIdVal = CtryId;
+  this.IsSearchListShow = false;
+  this.getstatelist(CtryId);
+}
+
+goTostateSelectedItem( stateId) {
+  //var CtryId =this.talentorgform.value.countryId; 
+  var CtryId=this.docForm.value.permCountry;
+  this.getcitylist(stateId,CtryId);
+}
 //domainList 
 domainList () {
   var industryListUrl = "api/auth/app/CommonUtility/industryList";
@@ -89,6 +202,11 @@ editprofile(){
       'orgType':this.profileList[0].orgType,
       'taxId':this.profileList[0].taxId,
       'details':this.profileList[0].details,
+      'permAddress':this.profileList[0].permAddress,
+        'permCity':this.profileList[0].permCity,
+         'permState':this.profileList[0].permState,
+         'permCountry':this.profileList[0].permCountry,
+         'permPinCode':this.profileList[0].permPinCode,
      'languagesknown':this.profileList[0].languagesknown,
     })
 
@@ -113,12 +231,12 @@ async Update(){
     this.docForm.value.currentUserId=this.currentUserId;
     this.Orgdetails = this.docForm.value;
     console.log(` data: ${JSON.stringify(this.Orgdetails)}`);
-    var updateprofile = "api/auth/app/mobile/updateprofile";
+    var updateprofile = "api/auth/app/mobile/orgupdateProfile";
   
      this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {  
         console.log("Image upload response: " + result)
        if (result["success"] == true) {
-       this.router.navigate(['/profile-view']);
+      
         this.presentToast()
         }
      });
@@ -132,7 +250,7 @@ async presentToast() {
     duration: 3000,
     cssClass: 'custom-toast'
   });
-
+  this.router.navigate(['/org-profile-view']);
 await toast.present();
 }
 checkFormValidity(form: FormGroup): string[] {
@@ -149,5 +267,102 @@ checkFormValidity(form: FormGroup): string[] {
   });
 
   return errors;
+}
+
+////img 
+
+////image
+opengallery() {
+  const options: CameraOptions = {
+    quality: 70,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    saveToPhotoAlbum: false
+  }
+  this.camera.getPicture(options).then((ImageData => {
+    this.base64img1 = "data:image/jpeg;base64," + ImageData;
+  }), error => {
+    console.log(error);
+  })
+
+}
+
+opencamera() {
+  const options: CameraOptions = {
+    quality: 70,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+  this.camera.getPicture(options).then((ImageData => {
+    this.base64img1 = "data:image/jpeg;base64," + ImageData;
+  }), error => {
+    console.log(error);
+  })
+}
+
+openTCForm() {
+  this.goto_TCFormModal();
+}
+async goto_TCFormModal() {
+
+  const modal = await this.modalController.create({
+    component: TcFormPage,
+    cssClass: 'my-custom-class'
+  });
+
+
+  modal.onDidDismiss().then((dataReturned) => {
+    if (dataReturned !== null) {
+
+      //#region Getting values from popup
+      console.table("One: " + dataReturned);
+      var IsAgree = dataReturned.data["IsAgree"];
+      console.log("IsAgree: " + IsAgree);
+      //#endregion
+
+      if (IsAgree == "Yes") {
+        this.cBoxIAgreeVal = true;
+      }
+      else if (IsAgree == "No") {
+        this.cBoxIAgreeVal = false;
+      }
+    }
+  });
+
+  return await modal.present();
+}
+
+openConsentForm() {
+  this.goto_ConsentFormModal();
+}
+
+async goto_ConsentFormModal() {
+
+  const modal = await this.modalController.create({
+    component: ConsentFormPage,
+    cssClass: 'my-custom-class'
+  });
+
+  modal.onDidDismiss().then((dataReturned) => {
+    if (dataReturned !== null) {
+
+      //#region Getting values from popup
+      console.table("One: " + dataReturned);
+      var IsAgree = dataReturned.data["IsAgree"];
+      console.log("IsAgree: " + IsAgree);
+      //this.storageservice.warningToast('Modal Sent Data :' + dataReturned);
+      //#endregion
+
+      if (IsAgree == "Yes") {
+        this.cBoxIAgreeConsentVal = true;
+      }
+      else if (IsAgree == "No") {
+        this.cBoxIAgreeConsentVal = false;
+      }
+    }
+  });
+
+  return await modal.present();
 }
 }
