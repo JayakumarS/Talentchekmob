@@ -467,7 +467,7 @@ export class ProfileViewPage implements OnInit {
               }
               console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
 
-              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExperience";
+              var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExtracurricular";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
 
