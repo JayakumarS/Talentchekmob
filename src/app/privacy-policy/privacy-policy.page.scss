@@ -4,7 +4,8 @@
     bottom: 0;
     z-index: 10;
     width: 97%;
-    height: 8vh; /* set the height to 8% of the viewport height */
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
     background: #112e5b;
     display: flex;
     padding: 19px;
@@ -13,31 +14,31 @@
     border-radius: 30px;
     align-items: center;
     padding: 0 10px;
-  }
-  
-  .footer-nav button {
+}
+
+.footer-nav button {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #555;
+    color: aliceblue;
     font-size: 14px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     outline: none;
-  }
-  
-  .footer-nav button ion-icon {
+}
+
+.footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
-  }
-  
-  .footer-nav button.selected {
-    color: aliceblue;
+}
+
+.footer-nav button.selected {
+    color: #FF9E3F;
     border-radius: 50%;
-  }
+}
   
   /* Set the padding at the bottom of the ion-content to the height of the footer */
   ion-content {

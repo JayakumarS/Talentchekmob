@@ -4,7 +4,8 @@
   bottom: 0;
   z-index: 10;
   width: 97%;
-  height: 8vh; /* set the height to 8% of the viewport height */
+  height: 8vh;
+  /* set the height to 8% of the viewport height */
   background: #112e5b;
   display: flex;
   padding: 19px;
@@ -21,7 +22,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #555;
+  color: aliceblue;
   font-size: 14px;
   background-color: transparent;
   border: none;
@@ -35,7 +36,7 @@
 }
 
 .footer-nav button.selected {
-  color: aliceblue;
+  color: #FF9E3F;
   border-radius: 50%;
 }
 

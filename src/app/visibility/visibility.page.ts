@@ -7,16 +7,55 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
   styleUrls: ['./visibility.page.scss'],
 })
 export class VisibilityPage implements OnInit {
-
+  uls:any =[];
   constructor(public router:Router) { }
 
   ngOnInit() {
+
+    this.uls = document.querySelectorAll("ul");
+
+    this.uls.forEach((ul) => {
+      const resetClass = ul.parentNode.getAttribute("class");
+      const lis = ul.querySelectorAll("li");
+
+      lis.forEach((li) => {
+        li.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const target = e.currentTarget;
+    
+          if (
+            target.classList.contains("active") ||
+            target.classList.contains("follow")
+          ) {
+            return;
+          }
+    
+          ul.parentNode.setAttribute(
+            "class",
+            `${resetClass} ${target.getAttribute("data-where")}-style`
+          );
+    
+          lis.forEach((item) => this.clearClass(item, "active"));
+    
+          this.setClass(target, "active");
+        });
+    });
+    });
   }
 
-  selectedTab: string = 'search';
+  selectedTab: string = 'menu';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
+  }
+
+  clearClass(node, className) {
+    node.classList.remove(className);
+  }
+  
+  setClass(node, className) {
+    node.classList.add(className);
   }
 
   profile_vis(){
@@ -34,5 +73,23 @@ export class VisibilityPage implements OnInit {
   goto_settings(){
     this.router.navigate(['/settings']) 
   }
+
+
+  // footer
+goto_profileSearch(){
+  this.router.navigate(['/job-search']);
+}
+goto_jobs(){
+  this.router.navigate(['/job']);
+}
+goto_home(){
+  this.router.navigate(['/home']);
+}
+goto_profile(){
+  this.router.navigate(['/profile-view']);
+}
+goto_more(){
+  this.router.navigate(['/settings']);
+}
 
 }

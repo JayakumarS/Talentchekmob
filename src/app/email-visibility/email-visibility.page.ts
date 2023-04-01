@@ -41,7 +41,7 @@ export class EmailVisibilityPage implements OnInit {
       }); 
   }
 
-  selectedTab: string = 'search';
+  selectedTab: string = 'menu';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
@@ -71,5 +71,23 @@ export class EmailVisibilityPage implements OnInit {
       }
    });
   }
+
+
+  // footer
+goto_profileSearch(){
+  this.router.navigate(['/job-search']);
+}
+goto_jobs(){
+  this.router.navigate(['/job']);
+}
+goto_home(){
+  this.router.navigate(['/home']);
+}
+goto_profile(){
+  this.router.navigate(['/profile-view']);
+}
+goto_more(){
+  this.router.navigate(['/settings']);
+}
 
 }

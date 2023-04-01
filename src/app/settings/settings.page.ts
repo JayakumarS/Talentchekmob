@@ -20,9 +20,7 @@ export class SettingsPage implements OnInit {
     this.selectedTab = tabName;
   }
   
-  goto_profile(){
-    this.router.navigate(['/profile']); 
-  }
+ 
 
   goto_language(){
     this.router.navigate(['/language']);
@@ -89,20 +87,22 @@ export class SettingsPage implements OnInit {
   }
 
 
-  // footer nav
-
-  goto_profileSearch(){
-    this.router.navigate(['/job-search']);
-  }
-  goto_jobs(){
-    this.router.navigate(['/job']);
-  }
-  goto_home(){
-    this.router.navigate(['/home']);
-  }
-  goto_more(){
-    this.router.navigate(['/settings']);
-  }
+ // footer
+goto_profileSearch(){
+  this.router.navigate(['/job-search']);
+}
+goto_jobs(){
+  this.router.navigate(['/job']);
+}
+goto_home(){
+  this.router.navigate(['/home']);
+}
+goto_profile(){
+  this.router.navigate(['/profile-view']);
+}
+goto_more(){
+  this.router.navigate(['/settings']);
+}
  
 
 
