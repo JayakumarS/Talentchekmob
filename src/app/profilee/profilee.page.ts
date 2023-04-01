@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import moment from 'moment';
 import { formatDate } from '@angular/common';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { TcFormPage } from '../tc-form/tc-form.page';
+import { ConsentFormPage } from '../consent-form/consent-form.page';
 
 
 
@@ -25,7 +28,13 @@ export class ProfileePage implements OnInit {
   userId: any;
   currentUserId: string;
   profileList: any;
-  constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,private toastController: ToastController) { }
+
+  //image
+  base64img1: string = '';
+  cBoxIAgreeVal: boolean = true;
+  cBoxIAgreeConsentVal: boolean = true;
+  constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,public modalController: ModalController,
+    private camera: Camera,private toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -44,7 +53,7 @@ export class ProfileePage implements OnInit {
       category: ["",[Validators.required]],
       linkurl:[""],
       details:[""],
-      uploadImg:[""],
+      //uploadImg:[""],
       permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:[""],
@@ -132,9 +141,9 @@ this.editprofile();
       duration: 3000,
       cssClass: 'custom-toast'
     });
-   
-    window.location.reload();
     this.router.navigate(['/profile-view']);
+   // window.location.reload();
+   
   await toast.present();
 }
 
@@ -190,4 +199,105 @@ checkFormValidity(form: FormGroup): string[] {
   
     })
   }
+
+
+
+
+
+
+////image
+opengallery() {
+  const options: CameraOptions = {
+    quality: 70,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    saveToPhotoAlbum: false
+  }
+  this.camera.getPicture(options).then((ImageData => {
+    this.base64img1 = "data:image/jpeg;base64," + ImageData;
+  }), error => {
+    console.log(error);
+  })
+
+}
+
+opencamera() {
+  const options: CameraOptions = {
+    quality: 70,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+  this.camera.getPicture(options).then((ImageData => {
+    this.base64img1 = "data:image/jpeg;base64," + ImageData;
+  }), error => {
+    console.log(error);
+  })
+}
+
+openTCForm() {
+  this.goto_TCFormModal();
+}
+async goto_TCFormModal() {
+
+  const modal = await this.modalController.create({
+    component: TcFormPage,
+    cssClass: 'my-custom-class'
+  });
+
+
+  modal.onDidDismiss().then((dataReturned) => {
+    if (dataReturned !== null) {
+
+      //#region Getting values from popup
+      console.table("One: " + dataReturned);
+      var IsAgree = dataReturned.data["IsAgree"];
+      console.log("IsAgree: " + IsAgree);
+      //#endregion
+
+      if (IsAgree == "Yes") {
+        this.cBoxIAgreeVal = true;
+      }
+      else if (IsAgree == "No") {
+        this.cBoxIAgreeVal = false;
+      }
+    }
+  });
+
+  return await modal.present();
+}
+
+openConsentForm() {
+  this.goto_ConsentFormModal();
+}
+
+async goto_ConsentFormModal() {
+
+  const modal = await this.modalController.create({
+    component: ConsentFormPage,
+    cssClass: 'my-custom-class'
+  });
+
+  modal.onDidDismiss().then((dataReturned) => {
+    if (dataReturned !== null) {
+
+      //#region Getting values from popup
+      console.table("One: " + dataReturned);
+      var IsAgree = dataReturned.data["IsAgree"];
+      console.log("IsAgree: " + IsAgree);
+      //this.storageservice.warningToast('Modal Sent Data :' + dataReturned);
+      //#endregion
+
+      if (IsAgree == "Yes") {
+        this.cBoxIAgreeConsentVal = true;
+      }
+      else if (IsAgree == "No") {
+        this.cBoxIAgreeConsentVal = false;
+      }
+    }
+  });
+
+  return await modal.present();
+}
+
 }
