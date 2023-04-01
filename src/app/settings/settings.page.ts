@@ -14,7 +14,7 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
   }
 
-  selectedTab: string = 'search';
+  selectedTab: string = 'menu';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
