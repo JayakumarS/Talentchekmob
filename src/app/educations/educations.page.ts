@@ -448,7 +448,8 @@ export class EducationsPage implements OnInit {
         }else{
           this.searchForText(this.Education.institutionName); 
         }
-
+        this.orgLocation(this.desiredItem.id);
+        this.EducationForm.get("institutionName").disable();
         this.selecteInstitution = this.desiredItem.text;
        // this.EducationForm.value.get("this.selecteInstitution").disable(); 
        // const arr: string[] = str.split(",");
@@ -466,11 +467,12 @@ export class EducationsPage implements OnInit {
        const courseEnd =  this.Education.courseEnd;
        const enddate = moment(courseEnd, 'MM/yyyy').toDate();
        this.selectedDate = moment(enddate).format('DD/MM/YYYY');
+       
        this.edit = true;
        this.disabled =true
        this.EducationForm.patchValue({
          'institutionName': this.Education.institutionName,
-         'institutionLocation': this.Education.institutionLocation,
+        // 'institutionLocation': this.Education.institutionLocation,
           
          'currentlyStudy': this.Education.currentlyStudy,
          'degree': this.Education.degree,

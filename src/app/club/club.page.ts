@@ -291,7 +291,14 @@ getOrganisationList(){
         this.clubFrom.get("clubName").disable();
        
         this.extracurricularBean = result["extracurricularBean"]; 
-        this.searchForItem(this.extracurricularBean.clubName);
+ 
+        const containsTF = this.checkForTF(this.extracurricularBean.clubName)
+        if(containsTF == true){
+          this.searchForId(this.extracurricularBean.clubName);  
+        }else{
+          this.searchForText(this.extracurricularBean.clubName); 
+        }
+
         this.selectedOrganisation = this.desiredItem.text;
         const participatedFrom =  this.extracurricularBean.participatedFrom;
         const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
@@ -302,7 +309,7 @@ getOrganisationList(){
          this.edit = true;
          this.disabled =true
          this.clubFrom.patchValue({
-          // 'clubName':this.desiredItem.text,
+            'clubName':this.desiredItem.text,
            'clubBranch' :this.extracurricularBean.clubBranch,
            'titleHeld': this.extracurricularBean.titleHeld,
            'rolePlayed':this.extracurricularBean.rolePlayed,
@@ -319,10 +326,34 @@ getOrganisationList(){
   }
 
 
-  searchForItem(id: string) {
+  checkForTF(data: string): boolean {
+    if (data.indexOf('TF') !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  searchForId(id: string) {
     this.desiredItem = null;
     for (const item of this.organisationList) {
       if (item.id === id) {
+        this.desiredItem = item; 
+        break;
+      }
+    }
+    if (this.desiredItem === null) {
+      console.log('Item not found');
+    } else {
+      console.log(this.desiredItem.text); 
+    }
+  }
+
+
+  searchForText(text: string) {
+    this.desiredItem = null;
+    for (const item of this.organisationList) {
+      if (item.text === text) {
         this.desiredItem = item; 
         break;
       }
