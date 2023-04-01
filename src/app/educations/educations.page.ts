@@ -401,8 +401,10 @@ export class EducationsPage implements OnInit {
       cssClass: 'custom-toast'
     });
 
-    await toast.present();
     this.router.navigate(['/profile-view']);
+    window.location.reload();
+    await toast.present();
+   
 
   }
 
@@ -569,7 +571,7 @@ export class EducationsPage implements OnInit {
       this.storageservice.postrequest(updateclub, this.EducationForm).subscribe(async result => {
         console.log("Image upload response: " + result)
         if (result["success"] == true) {
-          this.router.navigate(['/profile-view']);
+         
           this.updateToast()
         } else {
 
@@ -581,6 +583,9 @@ export class EducationsPage implements OnInit {
           message: 'course End date should be greater than Course Start date.',
           duration: 3000,
         });
+       
+        this.router.navigate(['/profile-view']);
+        window.location.reload();
          await alert.present();
       }
 

@@ -132,8 +132,9 @@ this.editprofile();
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    this.router.navigate(['/profile-view']);
+   
     window.location.reload();
+    this.router.navigate(['/profile-view']);
   await toast.present();
 }
 

@@ -357,7 +357,7 @@ export class WorkExperiencesPage implements OnInit {
     this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
        console.log("Image upload response: " + result)
       if (result["success"] == true) {
-       this.router.navigate(['/profile-view']);
+     
        this.presentToast()
         }else{  
  
@@ -369,6 +369,9 @@ export class WorkExperiencesPage implements OnInit {
         message: 'Job end date should be greater than Start date.',
         duration: 3000,
       }); 
+   
+      this.router.navigate(['/profile-view']);
+      window.location.reload();
        await alert.present();
     }
     
@@ -417,7 +420,7 @@ if (errors.length > 0) {
         this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
-          this.router.navigate(['/profile-view']);
+          
           this.updateToast()
             }else{  
       
@@ -441,6 +444,9 @@ async updateToast() {
     duration: 3000,
     cssClass: 'custom-toast'
   });
+
+  this.router.navigate(['/profile-view']);
+    window.location.reload();
 
 await toast.present();
 }

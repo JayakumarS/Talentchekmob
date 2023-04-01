@@ -173,6 +173,8 @@ export class SkillPopupPage implements OnInit {
         cssClass: 'custom-toast'
       });
 
+      this.router.navigate(['/profile-view']);
+      window.location.reload();
     await toast.present();
   }
 
@@ -182,6 +184,9 @@ export class SkillPopupPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
+    
+    this.router.navigate(['/profile-view']);
+    window.location.reload();
 
   await toast.present();
 }

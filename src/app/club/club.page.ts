@@ -240,7 +240,8 @@ getOrganisationList(){
       cssClass: 'custom-toast'
      
     });
-    this.router.navigate(['/profile-view'])
+    this.router.navigate(['/profile-view']);
+    window.location.reload();
     await toast.present();
   }
 
@@ -408,6 +409,8 @@ async updateToast() {
     cssClass: 'custom-toast'
   });
 
+  this.router.navigate(['/profile-view']);
+    window.location.reload();
 await toast.present();
 }
 

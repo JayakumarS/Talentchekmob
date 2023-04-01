@@ -35,6 +35,8 @@ export class ProfileViewPage implements OnInit {
   club: any;
   img: any;
    certifications: any;
+  prof:boolean=false;
+  profAvatar: boolean=false;
   constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef,
     public modalController: ModalController,public alertController: AlertController,) { }
   @ViewChild('picker', { static: false })
@@ -45,12 +47,22 @@ export class ProfileViewPage implements OnInit {
     this.userId = localStorage.getItem("userId")  ; 
     this.img = localStorage.getItem("profilePic")  ;
 
+    if(this.img!="null" && this.img!=""){
+      this.prof = true
+      // this.profAvatar = false
+    }else{
+
+      // this.profAvatar = true
+      this.prof = false
+      
+    }
+
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
      console.log(result); 
  
    
-     if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){
+     if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){ 
       this.educationcard = true;
       }
       if(result['profileViewList'][0].clubsList.length != 0 && result['profileViewList'] != null){

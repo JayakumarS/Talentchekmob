@@ -248,7 +248,8 @@ loadImageFromDevice(event) {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-
+    this.router.navigate(['/profile-view']);
+    window.location.reload();
   await toast.present();
 }
 
@@ -258,7 +259,8 @@ async updateToast() {
     duration: 3000,
     cssClass: 'custom-toast'
   });
-
+  this.router.navigate(['/profile-view']);
+    window.location.reload();
 await toast.present();
 }
 
