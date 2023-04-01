@@ -174,7 +174,6 @@ checkFormValidity(form: FormGroup): string[] {
       
       if (result["success"] == true) {
         this.profileList = result["profileList"]; 
-       }
         const dob =  this.profileList[0].dob;
         const startdate = moment(dob, 'DD/MM/YYYY').toDate();
 
@@ -197,7 +196,10 @@ checkFormValidity(form: FormGroup): string[] {
        'languagesknown':this.profileList[0].languagesknown,
       })
   
-    })
+    }
+
+  })   
+       
   }
 
 
