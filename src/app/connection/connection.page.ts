@@ -68,6 +68,14 @@ export class ConnectionPage implements OnInit {
    this.getrelationshipList();
    this.editconnectionDetails(108,'receiver');
   }
+
+  selectedTab: string = 'profile';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
+  
+
   additionalInfo()
   {
     this.router.navigate(['/profile/addAdditionalInfo']) 
@@ -196,5 +204,23 @@ editconnectionDetails(id, index){
     })
 
   })
+}
+
+
+// footer
+goto_profileSearch(){
+  this.router.navigate(['/job-search']);
+}
+goto_jobs(){
+  this.router.navigate(['/job']);
+}
+goto_home(){
+  this.router.navigate(['/home']);
+}
+goto_profile(){
+  this.router.navigate(['/profile-view']);
+}
+goto_more(){
+  this.router.navigate(['/settings']);
 }
 }

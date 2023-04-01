@@ -66,6 +66,15 @@ export class ClubPage implements OnInit {
 
   }
 
+
+
+  selectedTab: string = 'profile';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
+  
+
  //  Organisation auto complete 
  onSearchOrganisation(value: string) {
   if (value.length > 0) {
@@ -412,6 +421,24 @@ async updateToast() {
   this.router.navigate(['/profile-view']);
     window.location.reload();
 await toast.present();
+}
+
+
+// footer
+goto_profileSearch(){
+  this.router.navigate(['/job-search']);
+}
+goto_jobs(){
+  this.router.navigate(['/job']);
+}
+goto_home(){
+  this.router.navigate(['/home']);
+}
+goto_profile(){
+  this.router.navigate(['/profile-view']);
+}
+goto_more(){
+  this.router.navigate(['/settings']);
 }
 
 }
