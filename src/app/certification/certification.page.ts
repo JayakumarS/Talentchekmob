@@ -38,7 +38,8 @@ export class CertificationPage implements OnInit {
       certificationId:["", Validators.required],
       certId:[""],
       currentUserId:[""],
-      certificationPath :[""]
+      certificationPath :[""],
+      uploadFile:['']
     })
 
     this.route.queryParams.subscribe(params => {
@@ -59,6 +60,96 @@ export class CertificationPage implements OnInit {
    setSelectedTab(tabName: string) {
      this.selectedTab = tabName;
    }
+
+   _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    console.log("binaryString: " + binaryString);
+
+    var base64textString = btoa(binaryString);
+    console.log("base64textString: " + base64textString);
+
+    var base64img1 = "data:image/jpeg;base64," + base64textString
+
+    console.log(`readerEvt Data: ${JSON.stringify(readerEvt)}`);
+    console.log(`readerEvt.target Data: ${JSON.stringify(readerEvt.target)}`);
+    //var uploadFileServiceUrl = "/hrms/master/employeeAdminMaster/uploadfile";
+    this.uploadImageToServer(base64img1);
+  }
+
+  imgFileNameWithPath: string = "";
+  uploadImageToServer(imgSixtyFourData) {
+
+    var uploadImgServiceUrl = "api/auth/app/mobile/uploadImageMob";
+    var postDataUpload = {
+      "file": imgSixtyFourData,
+      "firstName": ''
+    }
+
+    console.log(`Upload image posting data: ${JSON.stringify(postDataUpload)}`);
+
+    this.storageservice.postrequest(uploadImgServiceUrl, postDataUpload).subscribe(result => {
+      var response = result;
+      console.log(`Image upload response: ${JSON.stringify(result)}`);
+      if (result["success"] == true) {
+        this.imgFileNameWithPath = result["uploadPhoto"];
+        console.log("imgFileNameWithPath: " + this.imgFileNameWithPath)
+      }
+    });
+  }
+   base64textString: string;
+   uploadedFilenameWithoutExt: string;
+   uploadedFileSize: string;
+   uploadedFileExtension: string;
+   uploadFileIcon: string;
+   upload(event) {
+     var files = event.target.files[0];
+     var file = files;
+     var fileName = file.name;
+     this.uploadedFilenameWithoutExt = this.removeExtension(fileName);
+     this.uploadedFileExtension = fileName.split('.').pop().toLowerCase();
+     this.uploadedFileSize = Math.round((file.size / 1000)) + " KB";
+ 
+     console.log(`fileName: ${JSON.stringify(fileName)}`);
+     console.log(`uploadedFilenameWithoutExt: ${JSON.stringify(this.uploadedFilenameWithoutExt)}`);
+     console.log(`uploadedFileExtension: ${JSON.stringify(this.uploadedFileExtension)}`);
+     console.log(`uploadedFileSize: ${JSON.stringify(this.uploadedFileSize)}`);
+ 
+     switch (this.uploadedFileExtension) {
+       case ".pdf":
+       case ".jpg":
+       case ".jpeg":
+       case ".png":
+         this.uploadFileIcon = "/img/dm/books.png";
+         break;
+       case ".doc":
+       case ".docx":
+         this.uploadFileIcon = "/img/dm/doc.png";
+         break;
+       case ".ppt":
+       case ".pptx":
+         this.uploadFileIcon = "/img/dm/ppt.png";
+         break;
+       default:
+         this.uploadFileIcon = "/img/dm/file.png";
+         break;
+     }
+ 
+ 
+     if (files && file) {
+       var reader = new FileReader();
+       reader.onload = this._handleReaderLoaded.bind(this);
+ 
+       var ans = reader.readAsBinaryString(file);
+       console.log("ans: " + ans);
+     }
+ 
+   }
+
+   removeExtension(filename) {
+    var lastDotPosition = filename.lastIndexOf(".");
+    if (lastDotPosition === -1) return filename;
+    else return filename.substr(0, lastDotPosition);
+  }
 
 
   fetchEditDeatils(certId){
@@ -115,35 +206,35 @@ export class CertificationPage implements OnInit {
   
   
 //FOR File UPLOAD
-loadImageFromDevice(event) {
-  var file = event.target.files[0]; 
-  if (file.size > 2000000) { 
-  }
-   var fileExtension = file.name;
-  var frmData: FormData = new FormData();
-  frmData.append("file", file);
-  frmData.append("fileName", fileExtension);
-  frmData.append("folderName", "knowledgebankfiles");
+// loadImageFromDevice(event) {
+//   var file = event.target.files[0]; 
+//   if (file.size > 2000000) { 
+//   }
+//    var fileExtension = file.name;
+//   var frmData: FormData = new FormData();
+//   frmData.append("file", file);
+//   frmData.append("fileName", fileExtension);
+//   frmData.append("folderName", "knowledgebankfiles");
 
-  var filepathurl = "api/auth/app/commonServices/uploadFile";
-  this.storageservice.postrequest(filepathurl, frmData).subscribe(async result => {  
-    console.log("Image upload response: " + result)
-   if (result["success"] == true) {
-    if (result["filePath"] != undefined && result["filePath"] != null && result["filePath"] != '') {
-      this.certificationForm.patchValue({
-       'certificationPath': result["filePath"],
-       'certificationName': file.name,
-       'fileSize': file.size, 
-     })
-    }
- } else { 
- //  window.location.reload();
- }
-  //  this.router.navigate(['/profile-view']);
+//   var filepathurl = "api/auth/app/commonServices/uploadFile";
+//   this.storageservice.postrequest(filepathurl, frmData).subscribe(async result => {  
+//     console.log("Image upload response: " + result)
+//    if (result["success"] == true) {
+//     if (result["filePath"] != undefined && result["filePath"] != null && result["filePath"] != '') {
+//       this.certificationForm.patchValue({
+//        'certificationPath': result["filePath"],
+//        'certificationName': file.name,
+//        'fileSize': file.size, 
+//      })
+//     }
+//  } else { 
+//  //  window.location.reload();
+//  }
+//   //  this.router.navigate(['/profile-view']);
      
- });
+//  });
    
-}
+// }
 
 
    presentModal() {

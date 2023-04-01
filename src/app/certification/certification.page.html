@@ -75,6 +75,19 @@
                                             accept="image/png, image/jpeg">
                                         </ion-button>
                                   </div> -->
+
+                                  <!-- Upload file -->
+                  <ion-row class="talentrow">
+                    <ion-col>
+                      <ion-item class="formitem itemborder" lines="none">
+                        <ion-label class="blackTheme" >uploadFile<span style="color:red">*</span></ion-label>
+                        
+                        <ion-input type="file" formControlName="uploadFile" (change)="upload($event)"></ion-input> 
+                     
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+
                                   <div *ngIf="!edit" class="button-content" style="width: 50%;
                                         margin: auto;">
                                         <ion-button color="primary" fill="outline" (click)="saveCertification()">Save</ion-button>
