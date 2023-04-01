@@ -174,6 +174,7 @@ checkFormValidity(form: FormGroup): string[] {
       
       if (result["success"] == true) {
         this.profileList = result["profileList"]; 
+        
         const dob =  this.profileList[0].dob;
         const startdate = moment(dob, 'DD/MM/YYYY').toDate();
 

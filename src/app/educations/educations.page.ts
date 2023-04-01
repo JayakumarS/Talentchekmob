@@ -402,7 +402,7 @@ export class EducationsPage implements OnInit {
     });
 
     this.router.navigate(['/profile-view']);
-    window.location.reload();
+   
     await toast.present();
    
 
@@ -585,7 +585,7 @@ export class EducationsPage implements OnInit {
         });
        
         this.router.navigate(['/profile-view']);
-        window.location.reload();
+       // window.location.reload();
          await alert.present();
       }
 

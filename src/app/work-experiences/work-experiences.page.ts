@@ -371,7 +371,7 @@ export class WorkExperiencesPage implements OnInit {
       }); 
    
       this.router.navigate(['/profile-view']);
-      window.location.reload();
+     
        await alert.present();
     }
     
@@ -446,7 +446,7 @@ async updateToast() {
   });
 
   this.router.navigate(['/profile-view']);
-    window.location.reload();
+   // window.location.reload();
 
 await toast.present();
 }

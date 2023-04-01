@@ -250,7 +250,7 @@ getOrganisationList(){
      
     });
     this.router.navigate(['/profile-view']);
-    window.location.reload();
+
     await toast.present();
   }
 
@@ -401,7 +401,7 @@ getOrganisationList(){
    this.storageservice.postrequest(updateclub, this.clubFrom).subscribe(async result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
-      this.router.navigate(['/profile-view']);
+     
       this.updateToast()
        }else{  
 
@@ -419,7 +419,7 @@ async updateToast() {
   });
 
   this.router.navigate(['/profile-view']);
-    window.location.reload();
+
 await toast.present();
 }
 

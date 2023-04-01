@@ -131,7 +131,7 @@ export class SkillPopupPage implements OnInit {
          this.storageservice.postrequest(saveSkill, this.skillform).subscribe(async result => {  
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
-             this.router.navigate(['/profile-view']);
+             
             this.presentToast()
              }else{  
              }
@@ -174,7 +174,7 @@ export class SkillPopupPage implements OnInit {
       });
 
       this.router.navigate(['/profile-view']);
-      window.location.reload();
+    //  window.location.reload();
     await toast.present();
   }
 
@@ -186,7 +186,7 @@ export class SkillPopupPage implements OnInit {
     });
     
     this.router.navigate(['/profile-view']);
-    window.location.reload();
+    // window.location.reload();
 
   await toast.present();
 }
