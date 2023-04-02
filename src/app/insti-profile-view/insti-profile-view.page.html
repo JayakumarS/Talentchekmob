@@ -24,14 +24,19 @@
 
       <ion-row>
           <ion-col size="10">
-              <ion-title class="ion-text-wrap"></ion-title>
+              <ion-title class="ion-text-wrap">{{instname}}</ion-title>
           </ion-col>
 
           <ion-col size="2">
-              <ion-avatar size="small">
-                  <img  style=" height: 60%;width: 60%;"
-                      src={{logo}} />
-              </ion-avatar>
+            <ion-avatar size="small" *ngIf="prof">
+                <img style=" height: 60%;width: 60%;"(click)="profile( )"
+                    src={{logo}} />
+            </ion-avatar>
+
+            <ion-avatar size="small" *ngIf="!prof">
+                <img style=" height: 60%;width: 60%;"(click)="profile( )"
+                    src="https://ionicframework.com/docs/img/demos/avatar.svg"/>
+            </ion-avatar>
           </ion-col>
       </ion-row>
 
@@ -49,7 +54,7 @@
                         <ion-title style="color:black; margin-left: -9%;">Profile</ion-title>
                     </ion-col>
                     <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="profile( )" id="prfoileimg1">
+                        <img src="./assets/icon/edit_icon.png" (click)="profileinsti( )" id="prfoileimg1">
                     </ion-col>
                 </ion-row>
 
@@ -80,7 +85,7 @@
                       <ion-title style="color:black; margin-left: -9%;">About the Institution</ion-title>
                   </ion-col>
                   <ion-col size="2">
-                      <img src="./assets/icon/edit_icon.png" (click)="profile( )" id="prfoileimg1">
+                      <img src="./assets/icon/edit_icon.png" (click)="profileinsti( )" id="prfoileimg1">
                   </ion-col>
               </ion-row>
            
@@ -90,30 +95,122 @@
                   <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
                     <ion-label>About : <b>{{aboutdesc}}</b></ion-label>
                 </ion-col>
-                  <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
+                  <!-- <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
                       <ion-label>Domain : <b>{{industrydomain}}</b></ion-label>
-                  </ion-col>
+                  </ion-col> -->
                   <ion-col size="15" style="border-bottom: 1px solid #A3A4A5;">
                       <ion-label>Entity Type : {{entitytype}}</ion-label>
                   </ion-col>
-                  <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                  <!-- <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
                       <ion-label>Company Size :{{companysize}}</ion-label>
-                  </ion-col>
-                  <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                  </ion-col> -->
+                  <ion-col size="12" >
                       <ion-label>Founded : {{foundedin}}</ion-label>
                   </ion-col>
-                  <ion-col size="12" >
+                  <!-- <ion-col size="12" >
                     <ion-label>Registration No : {{registrationno}}</ion-label>
-                </ion-col>
+                </ion-col> -->
 
               </ion-row>
-                       
+                  
+              
 
           </ion-card-content>
       </ion-card>
+      <ion-card class="talentcard1">
+        <ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <ion-title style="color:black;    width: 105%; margin-left: -9%;">Payment Info
+                        <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                            name="add-circle-outline" (click)="certification()"></ion-icon>
+                    </ion-title>
+                </ion-col>
+            </ion-row>
+            <ion-card class="talentcard2" >
+                <ion-card-content>
+
+                    <ion-row style="text-align: end;">
+                        <ion-col >
+                            <img src="./assets/icon/edit_icon.png" (click)="payment(userId)" >
+                        </ion-col>
+                          
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-label>Amount Holder Name : <b>{{accountHolderName}}</b></ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-label> Bank A/C NO : <b>{{accountNumber}}</b></ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-label> IFSC Code : <b>{{ifscCode}}</b></ion-label>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-label> Service Fee for Verification : <b>{{feeAmount}} {{feeCurrency}}</b></ion-label>
+                        </ion-col>
+                     
+                        <!-- <ion-col size="12">
+                            <ion-label>{{accountHolderName}}</ion-label>
+                        </ion-col> -->
+                    </ion-row>
+
+                </ion-card-content>
+            </ion-card>
+
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="talentcard1">
+        <ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <ion-title style="color:black;    width: 105%; margin-left: -9%;">Verified Network
+                        <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
+                            name="add-circle-outline" (click)="certification()"></ion-icon>
+                    </ion-title>
+                </ion-col>
+            </ion-row>
+            <ion-card class="talentcard2" >
+                <ion-card-content>
+
+                    <!-- <ion-row style="text-align: end;">
+                        <ion-col size="12">
+                            <button ion-button (click)="showDropdown(x.certId)" style="    background: #edf1fc;">
+                              <ion-icon name="ellipsis-vertical"></ion-icon>
+                            </button>
+                            <div *ngIf="x.certId == showDropdownFlag" (click)="closeDropdown(x.certId)">
+                              <ion-list style="  height: 106px;width: 50%; margin-left: 46%;">
+                                <ion-item (click)="certification(x.certId)">
+                                    <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
+                                </ion-item>
+                                <ion-item (click)="deleteCertificateCard(x.certId)" style="color:red">
+                                    <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
+                                </ion-item>
+                              </ion-list>
+                            </div>
+                          </ion-col>
+                    </ion-row> -->
+
+                    <ion-row>
+                       
+                        Verified Network
+                        <ion-col size="12">
+                            <ion-label> <b>.connectionCount </b></ion-label>
+                            <ion-label> <b>relationship </b></ion-label>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-card-content>
+            </ion-card>
 
 
+              
+                     
 
+        </ion-card-content>
+    </ion-card>
 
 
         <div class="footer-nav">

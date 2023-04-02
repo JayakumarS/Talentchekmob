@@ -21,7 +21,13 @@ export class InstiProfileViewPage implements OnInit {
   aboutdesc: any;
   registrationno: any;
   companysize: any;
-
+  prof: boolean=false;
+  accountHolderName: any;
+  accountNumber: any;
+  feeCurrency: any;
+  feeAmount: any;
+  ifscCode: any;
+  connectionList: any;
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
@@ -30,7 +36,15 @@ export class InstiProfileViewPage implements OnInit {
     this.userId = localStorage.getItem("userId")  ; 
     this.img = localStorage.getItem("profilePic")  ;
 
+    if(this.logo!="null" && this.logo!=""){
+      this.prof = true
+      // this.profAvatar = false
+    }else{
 
+      // this.profAvatar = true
+      this.prof = false
+      
+    }
     
     var profileInstView = "api/auth/app/IndividualProfileDetails/instviewprofiledetails?currentUserId="+this.userId;
     this.storageservice.getrequest(profileInstView).subscribe(result => {
@@ -49,13 +63,24 @@ export class InstiProfileViewPage implements OnInit {
      this.registrationno = result['profileViewList'][0]['registrationno'];
      this.aboutdesc = result['profileViewList'][0]['aboutdesc'];
 
+     ///payment
+     this.accountHolderName = result['profileViewList'][0]['accountHolderName'];
+     this.accountNumber = result['profileViewList'][0]['accountNumber'];
+     this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
+     this.feeAmount = result['profileViewList'][0]['feeAmount'];
+     this.ifscCode = result['profileViewList'][0]['ifscCode'];
+     this.connectionList = result['profileViewList'][0]['connectionList'] 
+
   })
 }
 
 
 
 
+profileinsti(){
+  this.router.navigate(['/insti-profile']);
 
+}
 
 
 
