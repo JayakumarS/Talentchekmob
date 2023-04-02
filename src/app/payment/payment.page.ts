@@ -41,7 +41,11 @@ export class PaymentPage implements OnInit {
     this.editpayment();
 
   }
-
+  profileView(){
+    this.router.navigate(['/org-profile-view']);
+  
+  
+  }
 
   //editpaymentDetails 
   editpayment(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-org-profile-view',
@@ -28,8 +29,9 @@ export class OrgProfileViewPage implements OnInit {
   feeAmount: any;
   ifscCode: any;
   connectionList: any;
+  showDropdownFlag: any;
 
-  constructor(public router: Router,public storageservice: StorageService) { }
+  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { }
 
   ngOnInit() {
 
@@ -76,6 +78,15 @@ export class OrgProfileViewPage implements OnInit {
     })
   }
 
+
+
+  showDropdown(userId :string) {
+    this.showDropdownFlag = userId;
+  }
+
+  closeDropdown() {
+    this.showDropdownFlag = null;
+  }
   selectedTab: string = 'profile';
 
   setSelectedTab(tabName: string) {
@@ -86,6 +97,21 @@ export class OrgProfileViewPage implements OnInit {
     this.router.navigate(['/org-profile']);
 
   }
+
+
+
+  payment(userId)
+  {
+    let edit = {
+      userId
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/payment'],navigationExtras) 
+  }
+
+ 
 
   // footer
   goto_profileSearch(){
