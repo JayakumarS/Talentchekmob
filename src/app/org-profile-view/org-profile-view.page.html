@@ -174,7 +174,7 @@
                     </ion-title>
                 </ion-col>
             </ion-row>
-            <ion-card class="talentcard2" >
+            <ion-card class="talentcard2" *ngFor="let i of connectionList" >
                 <ion-card-content>
 
                     <!-- <ion-row style="text-align: end;">
@@ -199,8 +199,8 @@
                        
                         Verified Network
                         <ion-col size="12">
-                            <ion-label> <b>.connectionCount </b></ion-label>
-                            <ion-label> <b>relationship </b></ion-label>
+                            <ion-label> <b>{{i.connectionCount}} </b></ion-label>
+                            <ion-label> <b>{{i.relationship}} </b></ion-label>
                         </ion-col>
                     </ion-row>
 

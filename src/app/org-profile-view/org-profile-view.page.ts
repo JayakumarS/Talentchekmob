@@ -74,7 +74,9 @@ export class OrgProfileViewPage implements OnInit {
                    this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
                    this.feeAmount = result['profileViewList'][0]['feeAmount'];
                    this.ifscCode = result['profileViewList'][0]['ifscCode'];
-                   this.connectionList = result['profileViewList'][0]['connectionList'] 
+                   this.connectionList = result['profileViewList'][0]['connectionList'];
+
+
     })
   }
 
