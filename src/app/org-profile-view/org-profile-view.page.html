@@ -124,7 +124,7 @@
                 <ion-col>
                     <ion-title style="color:black;    width: 105%; margin-left: -9%;">Payment Info
                         <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
-                            name="add-circle-outline" (click)="certification()"></ion-icon>
+                            name="add-circle-outline" (click)="payment()"></ion-icon>
                     </ion-title>
                 </ion-col>
             </ion-row>
@@ -132,21 +132,9 @@
                 <ion-card-content>
 
                     <ion-row style="text-align: end;">
-                        <!-- <ion-col size="12">
-                            <button ion-button (click)="showDropdown(x.certId)" style="    background: #edf1fc;">
-                              <ion-icon name="ellipsis-vertical"></ion-icon>
-                            </button>
-                            <div *ngIf="x.certId == showDropdownFlag" (click)="closeDropdown(x.certId)">
-                              <ion-list style="  height: 106px;width: 50%; margin-left: 46%;">
-                                <ion-item (click)="certification(x.certId)">
-                                    <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
-                                </ion-item>
-                                <ion-item (click)="deleteCertificateCard(x.certId)" style="color:red">
-                                    <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
-                                </ion-item>
-                              </ion-list>
-                            </div>
-                          </ion-col> -->
+                        <ion-col >
+                            <img src="./assets/icon/edit_icon.png" (click)="payment(userId)" >
+                        </ion-col>
                           
                     </ion-row>
 
@@ -172,10 +160,6 @@
                 </ion-card-content>
             </ion-card>
 
-
-              
-                     
-
         </ion-card-content>
     </ion-card>
 
@@ -186,15 +170,15 @@
                 <ion-col>
                     <ion-title style="color:black;    width: 105%; margin-left: -9%;">Verified Network
                         <ion-icon style="margin-top: 1px;    color: #8b8b8b;    width: 17px;"
-                            name="add-circle-outline" (click)="certification()"></ion-icon>
+                            name="add-circle-outline" (click)="Connections()"></ion-icon>
                     </ion-title>
                 </ion-col>
             </ion-row>
-            <ion-card class="talentcard2" *ngFor="let i of connectionList">
+            <ion-card class="talentcard2" *ngFor="let i of connectionList" >
                 <ion-card-content>
 
-                    <ion-row style="text-align: end;">
-                        <!-- <ion-col size="12">
+                    <!-- <ion-row style="text-align: end;">
+                        <ion-col size="12">
                             <button ion-button (click)="showDropdown(x.certId)" style="    background: #edf1fc;">
                               <ion-icon name="ellipsis-vertical"></ion-icon>
                             </button>
@@ -208,11 +192,8 @@
                                 </ion-item>
                               </ion-list>
                             </div>
-                          </ion-col> -->
-                          
-
-
-                    </ion-row>
+                          </ion-col>
+                    </ion-row> -->
 
                     <ion-row>
                        
