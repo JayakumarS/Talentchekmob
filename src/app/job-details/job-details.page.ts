@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-job-details',
@@ -8,7 +9,13 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 })
 export class JobDetailsPage implements OnInit {
 
-  constructor(public router:Router,private route: ActivatedRoute) { 
+
+  jobDetails:any;
+  jobSkills:[];
+
+  jobId :any;
+
+  constructor(public router:Router,private route: ActivatedRoute,public storageservice: StorageService) { 
 
     
     this.route.queryParams.subscribe(params => {
@@ -17,12 +24,15 @@ export class JobDetailsPage implements OnInit {
         if (params != null) {
 
           console.log(params);
+          this.jobId = params.jobID;
         }
       }
     });
   }
 
   ngOnInit() {
+
+    this.getJobDetails(this.jobId)
   }
 
   selectedTab: string = 'earth';
@@ -39,5 +49,40 @@ export class JobDetailsPage implements OnInit {
     this.router.navigate(['/apply-for-job']) 
 
   }
+
+
+   getJobDetails(jobID){
+
+    var oniDashboardListURL = "api/auth/app/jobportal/JobAdvertisementview?jobId="+jobID;
+    this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+  
+      this.jobDetails = result['JobAdvertisementList'][0];
+      this.jobSkills = result['JobAdvertisementList'][0]['jobSkills'];
+
+      //job Type string 
+
+      result['JobAdvertisementList'].forEach(element=>{
+        let jobType = "";
+        for(let jb=0;jb<element.jobType.length;jb++){
+          jobType += element.jobType[jb]+", ";
+        }
+        element.jobTypeStr = jobType.substring(0, jobType.length-2);
+      });
+
+
+      result['JobAdvertisementList'].forEach(element=>{
+        let reqLanguages = "";
+        for(let jb=0;jb<element.reqLanguages.length;jb++){
+          reqLanguages += element.reqLanguages[jb]+", ";
+        }
+        element.reqLanguagesStr = reqLanguages.substring(0, reqLanguages.length-2);
+      });
+
+           console.log(result);
+           console.log(this.jobSkills); 
+  
+        });
+   }         
+
 
 }

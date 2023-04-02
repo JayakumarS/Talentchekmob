@@ -61,65 +61,13 @@
         </div>
 
 
-        <!-- <ion-row class="container">
-          <ion-col size="6">
-              <ion-card class="network-card">
-                  <ion-card-content>
-                      <ion-row>
-                          <ion-col size="3">
-                              <ion-icon name="person-add-outline"></ion-icon>
-                          </ion-col>
-
-                          <ion-col size="6">
-
-                          </ion-col>
-
-                          <ion-col size="3">
-
-                          </ion-col>
-
-                      </ion-row>
-
-                      <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{networkCount}}</p>
-                      <p style="text-align: center;font-size: 14px; color: #000;"><b>Your Network</b></p>
-
-                  </ion-card-content>
-              </ion-card>
-          </ion-col>
-
-          <ion-col size="6">
-              <ion-card class="network-card">
-                  <ion-card-content>
-                      <ion-row>
-                          <ion-col size="3">
-                              <ion-icon name="eye-outline"></ion-icon>
-                          </ion-col>
-
-                          <ion-col size="6">
-
-                          </ion-col>
-
-                          <ion-col size="3">
-
-                          </ion-col>
-
-                      </ion-row>
-
-                      <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{matchedJobsCount}}</p>
-                      <p style="text-align: center;font-size: 14px; color: #000;"><b>Matched Jobs</b></p>
-                  </ion-card-content>
-              </ion-card>
-          </ion-col>
-      </ion-row> -->
-
-
         <div class="line-with-text">
             <hr class="hr1">
         </div>
 
         <div *ngFor=" let count of instCountlist">
             <div class="ag-courses_item">
-                <a class="ag-courses-item_link" (click)="individualRegister()">
+                <a class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
                     <br>
                     <ion-row class="ag-courses-item_date-box">
@@ -143,7 +91,7 @@
 
 
             <div class="ag-courses_item">
-                <a class="ag-courses-item_link" (click)="individualRegister()">
+                <a class="ag-courses-item_link" (click)="viewList('referrals','Network - Referrals')">
                     <div class="ag-courses-item_bg"></div>
                     <br>
                     <ion-row class="ag-courses-item_date-box">
@@ -166,14 +114,14 @@
             <div class="display-justify-butterfly">
                 <ion-row class="butterfly-container">
                     <div>
-                        <ion-col size="2">
+                        <ion-col size="2" (click)="viewList('verifiedCurrentStu','Current Students - Verified')">
                             <div class="custom-buttryfly-left1">
-                                <ion-row style="font-size: 34px;"><b>{{count.referrals}}</b></ion-row>
+                                <ion-row style="font-size: 34px;"><b>{{count.verifiedCurrentStu}}</b></ion-row>
                                 <ion-row style="font-size: 15px;"><b>Verified</b></ion-row>
                                 <ion-row style="font-size: 14px; color:#24316B">Current Students</ion-row>
                             </div>
                         </ion-col>
-                        <ion-col size="2">
+                        <ion-col size="2" (click)="viewList('verifiedExStu','Student Alumni - Verified')">
                             <div class="custom-buttryfly-left2" style="    display: flex;
                             align-items: flex-start;
                             flex-direction: column;
@@ -181,17 +129,17 @@
 
                                 <ion-row style="font-size: 14px; color:#24316B">Student Alumni</ion-row>
                                 <ion-row style="font-size: 15px;"><b>Verified</b></ion-row>
-                                <ion-row style="font-size: 34px;"><b>50</b></ion-row>
+                                <ion-row style="font-size: 34px;"><b>{{count.verifiedExStu}}</b></ion-row>
                             </div>
                         </ion-col>
                     </div>
                     <img width="15%" src="../../assets/img/students.png">
                     <div>
-                        <ion-col size="2">
+                        <ion-col size="2" (click)="viewList('pendingCurrentStu','Current Students - Pending Approval')">
                             <div class="custom-buttryfly-right1">
                                 <ion-row style="    display: flex;
                                 font-size: 34px;
-                                justify-content: flex-end;"><b>&nbsp;&nbsp;50</b></ion-row>
+                                justify-content: flex-end;"><b>&nbsp;&nbsp;{{count.pendingCurrentStu}}</b></ion-row>
                                 <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;Pending Approval</b></ion-row>
                                 <ion-row style="    font-size: 14px;
                                 color: #24316B;
@@ -199,7 +147,7 @@
                                 justify-content: flex-end;">Current Students</ion-row>
                             </div>
                         </ion-col>
-                        <ion-col size="2">
+                        <ion-col size="2" (click)="viewList('pendingExStu','Student Alumni - Pending Approval')">
                             <div class="custom-buttryfly-right2" style="    display: flex;
                             flex-direction: column;
                             justify-content: center;
@@ -208,7 +156,7 @@
                                 <ion-row style="font-size: 14px; color:#24316B;    display: flex;
                                 justify-content: flex-end;">Student Alumni</ion-row>
                                 <ion-row style="font-size: 15px;"><b>&nbsp;Pending Approval</b></ion-row>
-                                <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;50</b></ion-row>
+                                <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;{{count.pendingExStu}}</b></ion-row>
                             </div>
                         </ion-col>
                     </div>

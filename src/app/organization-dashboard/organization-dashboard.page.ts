@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -39,5 +39,20 @@ export class OrganizationDashboardPage implements OnInit {
          this.orgCountList = result['orgCountlist'];
             });
   }
+
+
+  viewList(btnType,title){
+    let edit = {
+
+      btntype :btnType,
+      title :title
+    }
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/organization-dashboard-list'], navigationExtras);
+  }
+
 
 }

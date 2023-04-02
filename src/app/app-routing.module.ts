@@ -290,6 +290,18 @@ const routes: Routes = [
     path: 'insti-profile-view',
     loadChildren: () => import('./insti-profile-view/insti-profile-view.module').then( m => m.InstiProfileViewPageModule)
   },
+  {
+    path: 'organization-dashboard-list',
+    loadChildren: () => import('./organization-dashboard-list/organization-dashboard-list.module').then( m => m.OrganizationDashboardListPageModule)
+  },
+  {
+    path: 'institution-dashboard-list',
+    loadChildren: () => import('./institution-dashboard-list/institution-dashboard-list.module').then( m => m.InstitutionDashboardListPageModule)
+  },
+  {
+    path: 'oni-job-post',
+    loadChildren: () => import('./oni-job-post/oni-job-post.module').then( m => m.OniJobPostPageModule)
+  },
 
 
 

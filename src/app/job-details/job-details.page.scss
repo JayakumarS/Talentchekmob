@@ -1,74 +1,98 @@
 @font-face {
     font-family: Mr-eaves;
     src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: alina-sans;
     src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
-  }
-  ion-content {
-      --background: url('../../assets/img/06_Welcome screen.png')  ;
-      background-size: cover;
-      --background: #EDF1FC;
-    }
-    ion-card-header.ios {
-        display: flex;
-        flex-flow: column-reverse;
-      } 
-    .filter-button {
-      margin-left: 8px;
-    }
-    .footer-nav {
-        position: fixed;
-        bottom: 0;
-        z-index: 10;
-        width: 97%;
-        height: 8vh; /* set the height to 8% of the viewport height */
-        background: #112e5b;
-        display: flex;
-        padding: 19px;
-        margin: 0px 10px 10px 10px;
-        justify-content: space-around;
-        border-radius: 30px;
-        align-items: center;
-        padding: 0 10px;
-      }
-      
-      .footer-nav button {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #555;
-        font-size: 14px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        outline: none;
-      }
-      
-      .footer-nav button ion-icon {
-        font-size: 20px;
-        margin-bottom: 5px;
-      }
-      
-      .footer-nav button.selected {
-        color: aliceblue;
-        border-radius: 50%;
-      }
-      
-      /* Set the padding at the bottom of the ion-content to the height of the footer */
-      ion-content {
-        --ion-safe-area-bottom: 8vh; /* set the safe area bottom to 8% of the viewport height */
-      }
-  .display-justify{
+}
+
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png');
+    background-size: cover;
+    --background: #EDF1FC;
+}
+
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+.filter-button {
+    margin-left: 8px;
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 97%;
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
+    background: #112e5b;
+    display: flex;
+    padding: 19px;
+    margin: 0px 10px 10px 10px;
+    justify-content: space-around;
+    border-radius: 30px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.footer-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.footer-nav button ion-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.footer-nav button.selected {
+    color: aliceblue;
+    border-radius: 50%;
+}
+
+.talentcard1 {
+    margin: 4% 4% 4% 4%;
+    --background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+}
+
+ion-label {
+    font-family: alina-sans;
+    font-weight: medium;
+    font-size: 14px;
+    color: #191D1E;
+}
+
+
+/* Set the padding at the bottom of the ion-content to the height of the footer */
+
+ion-content {
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
+}
+
+.display-justify {
     display: flex;
     justify-content: center;
-    padding: 20px 10px; 
+    padding: 20px 10px;
 }
-.custom-button{
+
+.custom-button {
     width: 360px;
     border-radius: 30px;
     height: 200px;
@@ -85,7 +109,8 @@
     opacity: 1;
     margin-left: 4px;
     margin-right: 4px;
-    overflow: auto; /* add this line */
+    overflow: auto;
+    /* add this line */
 }
 
 .line-with-text .hr1 {
@@ -95,20 +120,23 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-.log-out{
+
+.log-out {
     display: flex;
     padding-top: 127px;
     margin: 0px 111px;
-    justify-content: center;    
+    justify-content: center;
 }
-.log-out-button{
+
+.log-out-button {
     width: 360px;
     --border-radius: 30px;
     height: 56px;
     font-size: 18px;
 }
-.full-part-time{
-    width: 25%; 
+
+.full-part-time {
+    width: 25%;
     text-align: center;
     background: #FA7070;
     border-radius: 10px;
@@ -117,9 +145,10 @@
     font-size: 15px;
     padding: 5px 0px;
 }
-.experience{
-    width: 35%; 
-    text-align: center; 
+
+.experience {
+    width: 35%;
+    text-align: center;
     background: #568FEA;
     border-radius: 10px;
     margin: 5px;
@@ -127,18 +156,8 @@
     font-size: 15px;
     padding: 5px 0px;
 }
-.apply-button{
-    background: #568FEA; 
-    border-radius: 30px;
-    height: 32px;
-    width: 50%;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.custom-button-details{
+.custom-button-details {
     width: 360px;
     border-radius: 30px;
     height: 320px;
@@ -152,12 +171,61 @@
     opacity: 1;
     margin-left: 4px;
     margin-right: 4px;
-    overflow: auto; /* add this line */
+    overflow: auto;
+    /* add this line */
 }
-.contact-details{
+
+.contact-details {
     display: flex;
     align-items: center;
     margin: -10px 0px -10px 0px;
     font-size: 14px;
     columns: #191D1E;
+}
+
+.c-pill--danger {
+    background: #112e5b;
+}
+
+.c-pill {
+    align-items: center;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 11px;
+    display: inline-block;
+    height: 100%;
+    white-space: nowrap;
+    width: auto;
+    position: relative;
+    border-radius: 100px;
+    line-height: 1;
+    overflow: hidden;
+    padding: 4px 12px 0px 20px;
+    text-overflow: ellipsis;
+    line-height: 1.25rem;
+    color: #fff;
+    word-break: break-word;
+    margin-left: 10%;
+    &:before {
+        border-radius: 50%;
+        content: '';
+        height: 10px;
+        left: 6px;
+        margin-top: -5px;
+        position: absolute;
+        top: 50%;
+        width: 10px;
+    }
+}
+
+.display-justify-button {
+    padding: 10px 10px;
+}
+
+.apply-button {
+    width: 360px;
+    --border-radius: 50px;
+    height: 56px;
+    font-size: 18px;
+    font-family: Mr-eaves;
 }

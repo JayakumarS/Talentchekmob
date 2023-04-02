@@ -1,10 +1,13 @@
-
 ion-label {
-    font-family: alina-sans;
-    font-weight: medium;
-    font-size: 14px;
+    font-family: Mr-eaves;
+    font-size: 16px;
     color: #191D1E;
-    padding-top:5px;
+    padding-top: 5px;
+}
+
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
 }
 
 .horizontal {
@@ -128,12 +131,15 @@ ion-footer-bar {
 ion-progress-bar {
     height: 18px;
     border-radius: 10px;
-}.footer-nav {
+}
+
+.footer-nav {
     position: fixed;
     bottom: 0;
     z-index: 10;
     width: 97%;
-    height: 8vh; /* set the height to 8% of the viewport height */
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
     background: #112e5b;
     display: flex;
     padding: 19px;
@@ -142,9 +148,9 @@ ion-progress-bar {
     border-radius: 30px;
     align-items: center;
     padding: 0 10px;
-  }
-  
-  .footer-nav button {
+}
+
+.footer-nav button {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -156,27 +162,30 @@ ion-progress-bar {
     border: none;
     cursor: pointer;
     outline: none;
-  }
-  
-  .footer-nav button ion-icon {
+}
+
+.footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
-  }
-  
-  .footer-nav button.selected {
+}
+
+.footer-nav button.selected {
     color: aliceblue;
     border-radius: 50%;
-  }
-  
-  /* Set the padding at the bottom of the ion-content to the height of the footer */
-  ion-content {
-    --ion-safe-area-bottom: 8vh; /* set the safe area bottom to 8% of the viewport height */
-  }
+}
+
+
+/* Set the padding at the bottom of the ion-content to the height of the footer */
+
+ion-content {
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
+}
+
 #prfoileimg1 {
     height: 24px;
     margin-left: 14px;
 }
-
 
 .button-content {
     display: flex;
@@ -196,110 +205,105 @@ ion-progress-bar {
     color: #FFD700;
     /* Use the star Unicode character */
     content: "\2605";
-  }
+}
 
-  .ion-radio.star {
+.ion-radio.star {
     /* Hide the radio button */
     opacity: 0;
     position: absolute;
-  
     /* Display the star using pseudo elements */
     &::before {
-      display: inline-block;
-      font-family: 'Ionicons';
-      font-size: 24px;
-      content: '\f3ae';
-      color: #FFD700;
-      margin-right: 5px;
+        display: inline-block;
+        font-family: 'Ionicons';
+        font-size: 24px;
+        content: '\f3ae';
+        color: #FFD700;
+        margin-right: 5px;
     }
-  
     /* Show the star when the radio button is checked */
     &[aria-checked="true"]::before {
-      color: #FFD700;
+        color: #FFD700;
     }
-  }
+}
 
- 
-
-  .form-group {
+.form-group {
     display: flex;
-  }
-  
-  .form-check-inline .rating {
+}
+
+.form-check-inline .rating {
     display: none;
-  }
-  
-  .form-check-inline span {
+}
+
+.form-check-inline span {
     padding-right: 2%;
     cursor: pointer;
     color: transparent;
-    font-size:25px
-  }
-  
-  .form-check-inline span:before {
+    font-size: 25px
+}
+
+.form-check-inline span:before {
     content: '\2606';
     color: gold;
-  }
-  
-  .form-check-inline span:hover:before,
-  .form-check-inline span:hover~span:before {
-    content: '\2605';
-    color: gold;
-  }
-  
-  .form-check-inline .rating:checked~span:before {
-    content: '\2605';
-    color: gold;
-  }
-  
-  .form-group:has(input[id="2"]:checked) input[id='1']+span:before {
-    content: '\2605';
-    color: gold;
-  }
-  
-  .form-group:has(input[id="3"]:checked) input[id='1']+span:before,
-  .form-group:has(input[id="3"]:checked) input[id='2']+span:before {
-    content: '\2605';
-    color: gold;
-  }
-  
-  .form-group:has(input[id="2"]:hover) input[id='1']+span:before {
-    content: '\2605';
-    color: gold;
-  }
-  
-  .form-group:has(input[id="3"]:hover) input[id='1']+span:before,
-  .form-group:has(input[id="3"]:hover) input[id='2']+span:before {
-    content: '\2605';
-    color: gold;
-  }
+}
 
-  .form-group:has(input[id="3"]:hover) input[id='1']+span:before {
+.form-check-inline span:hover:before,
+.form-check-inline span:hover~span:before {
     content: '\2605';
     color: gold;
-  }
-  
-  .form-group:has(input[id="4"]:hover) input[id='1']+span:before,
-  .form-group:has(input[id="4"]:hover) input[id='2']+span:before,
-  .form-group:has(input[id="4"]:hover) input[id='3']+span:before {
-    content: '\2605';
-    color: gold;
-  }
+}
 
-  .form-group:has(input[id="4"]:hover) input[id='1']+span:before {
+.form-check-inline .rating:checked~span:before {
     content: '\2605';
     color: gold;
-  }
-  
-  .form-group:has(input[id="5"]:hover) input[id='1']+span:before,
-  .form-group:has(input[id="5"]:hover) input[id='2']+span:before,
-  .form-group:has(input[id="5"]:hover) input[id='3']+span:before,
-  .form-group:has(input[id="5"]:hover) input[id='4']+span:before {
+}
+
+.form-group:has(input[id="2"]:checked) input[id='1']+span:before {
     content: '\2605';
     color: gold;
-  }
-    
-  
-  ion-select::part(icon) {
+}
+
+.form-group:has(input[id="3"]:checked) input[id='1']+span:before,
+.form-group:has(input[id="3"]:checked) input[id='2']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+.form-group:has(input[id="2"]:hover) input[id='1']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+.form-group:has(input[id="3"]:hover) input[id='1']+span:before,
+.form-group:has(input[id="3"]:hover) input[id='2']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+.form-group:has(input[id="3"]:hover) input[id='1']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+.form-group:has(input[id="4"]:hover) input[id='1']+span:before,
+.form-group:has(input[id="4"]:hover) input[id='2']+span:before,
+.form-group:has(input[id="4"]:hover) input[id='3']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+.form-group:has(input[id="4"]:hover) input[id='1']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+.form-group:has(input[id="5"]:hover) input[id='1']+span:before,
+.form-group:has(input[id="5"]:hover) input[id='2']+span:before,
+.form-group:has(input[id="5"]:hover) input[id='3']+span:before,
+.form-group:has(input[id="5"]:hover) input[id='4']+span:before {
+    content: '\2605';
+    color: gold;
+}
+
+ion-select::part(icon) {
     display: none;
-  }
+}

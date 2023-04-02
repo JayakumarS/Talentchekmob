@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -47,6 +47,19 @@ export class InstitutionDashboardPage implements OnInit {
   goto_subscribe(){
 
     this.router.navigate(['/subscription-insorg']) 
+  }
+
+  viewList(btnType,title){
+    let edit = {
+
+      btntype :btnType,
+      title :title
+    }
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/institution-dashboard-list'], navigationExtras);
   }
 
 }
