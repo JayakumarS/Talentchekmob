@@ -100,7 +100,10 @@ export class OrgProfileViewPage implements OnInit {
 
   }
 
-
+  Connections()
+  {
+    this.router.navigate(['/connection']) 
+  }
 
   payment(userId)
   {

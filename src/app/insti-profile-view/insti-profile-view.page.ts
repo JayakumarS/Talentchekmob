@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -82,6 +82,21 @@ profileinsti(){
 
 }
 
+Connections()
+{
+  this.router.navigate(['/connection']) 
+}
+
+payment(userId)
+{
+  let edit = {
+    userId
+ }
+ let navigationExtras: NavigationExtras = {
+   queryParams: edit
+ };
+  this.router.navigate(['/payment'],navigationExtras) 
+}
 
 
   selectedTab: string = 'profile';
