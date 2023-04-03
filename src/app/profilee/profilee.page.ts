@@ -44,6 +44,9 @@ countryIdVal:string;
   base64img1: string = '';
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
+  desiredItem: any;
+  desiredstateItem: any;
+  desiredcityItem: any;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,public modalController: ModalController,
     private camera: Camera,private toastController: ToastController) { }
 
@@ -76,9 +79,10 @@ countryIdVal:string;
       currentUserId:[""],
     });
     this.getCountryList()
-this.editprofile();
+
     this.hobbeList();
     this.List();
+    this.editprofile();
 ;
   }
 
@@ -269,7 +273,14 @@ checkFormValidity(form: FormGroup): string[] {
     var industryURL = "api/auth/app/mobile/editprofiledetails?currentUserId="+this.currentUserId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
-      
+      this.searchForId(result["profileList"][0].permCountry); 
+      this.selectedCountry = this.desiredItem.text;
+
+      this.getstatelist(result["profileList"][0].permCountry);
+       
+      this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
+      this.profileList = result["profileList"]; 
+
       if (result["success"] == true) {
         this.profileList = result["profileList"]; 
         
@@ -287,7 +298,7 @@ checkFormValidity(form: FormGroup): string[] {
        'permAddress': this.profileList[0].permAddress,
        'permCity': this.profileList[0].permCity,
        'permState':this.profileList[0].permState,
-       'permCountry':this.profileList[0].permCountry,
+      // 'permCountry':this.profileList[0].permCountry,
        'permPinCode':this.profileList[0].permPinCode,
        'email':this.profileList[0].email,
        'nationalid':this.profileList[0].nationalid,
@@ -308,6 +319,48 @@ checkFormValidity(form: FormGroup): string[] {
 
 
 
+searchForId(id: string) {
+  this.desiredItem = null;
+  for (const item of  this.countryResponse ) {
+    if (item.id === id) {
+      this.desiredItem = item; 
+      break;
+    }
+  }
+  if (this.desiredItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredItem.text); 
+  }
+}
+searchstateId(id: string) {
+  this.desiredstateItem = null;
+  for (const item of this.stateResponse  ) {
+    if (item.id === id) {
+      this.desiredstateItem = item; 
+      break;
+    }
+  }
+  if (this.desiredstateItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredstateItem.text); 
+  }
+}
+searchcityId(id: string) {
+  this.desiredcityItem = null;
+  for (const item of  this.cityOptions ) {
+    if (item.id === id) {
+      this.desiredcityItem = item; 
+      break;
+    }
+  }
+  if (this.desiredcityItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredcityItem.text); 
+  }
+}
 
 
 ////image

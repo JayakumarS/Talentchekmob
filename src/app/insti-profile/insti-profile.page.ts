@@ -35,6 +35,9 @@ cBoxIAgreeVal: boolean = true;
 cBoxIAgreeConsentVal: boolean = true;
   InstitypeList: any;
   profileList: any;
+  desiredItem: any;
+  desiredcityItem: any;
+  desiredstateItem: any;
  
   constructor(private fb: FormBuilder,public storageservice:StorageService,public modalController: ModalController,
     private camera: Camera, public router:Router,private toastController: ToastController) { }
@@ -176,6 +179,14 @@ editinstiprofile(){
   var EditinstiprofileDetails = "api/auth/app/InstitutionProfileDetails/insteditprofiledetails?currentUserId="+this.currentUserId ;
   this.storageservice.getrequest(EditinstiprofileDetails).subscribe(result => {
   
+
+    this.searchForId(result["profileList"][0].permCountry); 
+    this.selectedCountry = this.desiredItem.text;
+
+    this.getstatelist(result["profileList"][0].permCountry);
+     
+    this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
+    this.profileList = result["profileList"]; 
     
     if (result["success"] == true) {
       this.profileList = result["profileList"]; 
@@ -194,7 +205,7 @@ editinstiprofile(){
       'permAddress':this.profileList[0].permAddress,
         'permCity':this.profileList[0].permCity,
          'permState':this.profileList[0].permState,
-         'permCountry':this.profileList[0].permCountry,
+         //'permCountry':this.profileList[0].permCountry,
          'permPinCode':this.profileList[0].permPinCode,
      'languagesknown':this.profileList[0].languagesknown,
     })
@@ -260,6 +271,50 @@ checkFormValidity(form: FormGroup): string[] {
 
   return errors;
 }
+
+searchForId(id: string) {
+  this.desiredItem = null;
+  for (const item of  this.countryResponse ) {
+    if (item.id === id) {
+      this.desiredItem = item; 
+      break;
+    }
+  }
+  if (this.desiredItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredItem.text); 
+  }
+}
+searchstateId(id: string) {
+  this.desiredstateItem = null;
+  for (const item of this.stateResponse  ) {
+    if (item.id === id) {
+      this.desiredstateItem = item; 
+      break;
+    }
+  }
+  if (this.desiredstateItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredstateItem.text); 
+  }
+}
+searchcityId(id: string) {
+  this.desiredcityItem = null;
+  for (const item of  this.cityOptions ) {
+    if (item.id === id) {
+      this.desiredcityItem = item; 
+      break;
+    }
+  }
+  if (this.desiredcityItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredcityItem.text); 
+  }
+}
+
 
 ////img 
 
