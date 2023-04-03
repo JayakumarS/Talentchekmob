@@ -83,7 +83,7 @@ export class SettingsPage implements OnInit {
     this.nativeStorage.clear();
 
     //this.router.navigate(['/login']);
-    this.router.navigateByUrl('/login', { replaceUrl: true });
+    this.router.navigateByUrl('/sign-in', { replaceUrl: true });
   }
 
 
