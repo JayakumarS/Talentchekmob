@@ -23,6 +23,8 @@ export class ConnectionPage implements OnInit {
   Message: any;
   connectionBean: any;
   username: string;
+  roleId: any;
+  RoleID: any;
 
   constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,private toastController: ToastController) { 
 
@@ -67,7 +69,26 @@ export class ConnectionPage implements OnInit {
 
    this.getrelationshipList();
    this.editconnectionDetails(108,'receiver');
+
+   
+   this.roleId = localStorage.getItem("roleId");
+   this.RoleID =  this.roleId.split(",", 3);
   }
+
+
+
+  public newOrgprofileView(): void {
+    this.router.navigate(['/org-profile-view']);
+  
+  // newOrgprofileView(){
+  }
+  
+  // }
+
+  public newInstiprofileView(): void {
+    this.router.navigate(['/insti-profile-view']);
+  }
+
 
   selectedTab: string = 'profile';
 

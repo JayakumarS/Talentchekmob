@@ -16,7 +16,8 @@ export class PaymentPage implements OnInit {
   currentUserId: string;
   bankDetails: any;
   paymentDetails: any;
-  
+  roleId: any;
+  RoleID: any;
   constructor(private fb: FormBuilder,public storageservice:StorageService,private toastController: ToastController, public router:Router) { }
 
   ngOnInit() {
@@ -40,12 +41,27 @@ export class PaymentPage implements OnInit {
 
     this.editpayment();
 
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
+
   }
-  profileView(){
+  
+  public newOrgprofileView(): void {
     this.router.navigate(['/org-profile-view']);
   
-  
+  // newOrgprofileView(){
   }
+  
+  // }
+
+  public newInstiprofileView(): void {
+    this.router.navigate(['/insti-profile-view']);
+  }
+  // newInstiprofileView(){
+    
+  
+  
+  // }
 
   //editpaymentDetails 
   editpayment(){

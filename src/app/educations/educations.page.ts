@@ -584,7 +584,7 @@ export class EducationsPage implements OnInit {
           duration: 3000,
         });
        
-        this.router.navigate(['/profile-view']);
+       
        // window.location.reload();
          await alert.present();
       }
@@ -593,14 +593,14 @@ export class EducationsPage implements OnInit {
     }
   }
 
-
   async updateToast() {
     const toast = await this.toastController.create({
       message: 'Updated Successfully',
       duration: 3000,
       cssClass: 'custom-toast'
     });
-
+    this.router.navigate(['/profile-view']);
+      window.location.reload();
     await toast.present();
   }
 

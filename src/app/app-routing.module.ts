@@ -291,6 +291,14 @@ const routes: Routes = [
     path: 'insti-profile-view',
     loadChildren: () => import('./insti-profile-view/insti-profile-view.module').then( m => m.InstiProfileViewPageModule)
   },
+  {
+  path: 'payment',
+  loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
+},
+{
+  path: 'insti-profile',
+  loadChildren: () => import('./insti-profile/insti-profile.module').then( m => m.InstiProfilePageModule)
+},
 
 
 

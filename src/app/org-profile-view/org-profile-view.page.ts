@@ -31,12 +31,16 @@ export class OrgProfileViewPage implements OnInit {
   connectionList: any;
   showDropdownFlag: any;
 
+
   constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { }
 
   ngOnInit() {
 
     this.userId = localStorage.getItem("userId")  ; 
     this.logo = localStorage.getItem("profilePic")  ;
+
+
+  
 
     if(this.logo!="null" && this.logo!=""){
       this.prof = true
