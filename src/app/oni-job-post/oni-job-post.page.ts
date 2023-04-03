@@ -38,6 +38,12 @@ export class OniJobPostPage implements OnInit {
   locationSearchInput = '';
   searchResults: string[] = [];
   selectedCities: string[] = [];
+
+  locationOffer: string[] = [];
+  locationAdvertise: string[] = [];
+  
+  searchResultsOffLocation: string[] = [];
+  selectedCitiesOffLocation: string[] = [];
   showResults: boolean = false; 
  
   searchSkillResults: string[] = [];
@@ -50,6 +56,9 @@ export class OniJobPostPage implements OnInit {
   disable2: boolean = false;
   edit: boolean  = false;
   jobShiftArray  = [];
+  showResultsForLocation: boolean;
+  currentUserName: any;
+  cityIdLocation: string;
 
   constructor(private fb: FormBuilder,
     public router:Router,
@@ -65,18 +74,31 @@ export class OniJobPostPage implements OnInit {
 
 
   ngOnInit() {
+    this.currentUserName = localStorage.getItem("userName");
+    this.userId = localStorage.getItem("userId")  ; 
 
     this.jobProfileForm = this.fb.group({
+
       industry: ["",Validators.required],
-      jobTitle: ["",Validators.required],
+      jobTitle1: ["",Validators.required],
       jobType: ["",Validators.required],
       openings: ["",Validators.required],
+
       roles: ["",Validators.required],
       jobQualification: ["",Validators.required],
       jobSkills: [""],
-      jobExperience:["",Validators.required],
-      jobExperienceFormat: ["Years"],
-      jobShiftDM: false,
+      jobExperience: ["",Validators.required],
+      jobExperienceFormat :["Years"],
+      jobExperienceMandatory:["false"],
+
+
+      jobSalaryFrom:["",Validators.required],
+      jobSalaryTo:["",Validators.required],
+      jobSalaryCurrency: ["INR"],
+      jobSalaryFrequency:["Per Year"],
+      additionalpay: ["",Validators.required], 
+
+       jobShiftDM: false,
       jobShiftDT: false,
       jobShiftDW: false,
       jobShiftDTH: false,
@@ -90,19 +112,29 @@ export class OniJobPostPage implements OnInit {
       jobShiftNF: false,
       jobShiftNS: false,
       jobShiftNSU: false,
-    jobExpWorkHrs: ["",Validators.required],
-    jobStartDateFrom:["",Validators.required],
-     jobStartDateTo:["",Validators.required],
+      jobExpWorkHrs: ["",Validators.required],
+      jobStartDateFrom:[""],
+      
+
+      appDeadlineObj:[""],
+      appDeadline: [""],
+      locationOffer: [""],
+      locationAdvertise: [""],
+      gender:["NP"],
+      reqLanguages:[""],
+      phoneNo:[""],
+      currentUserName:[""],
+      currentUserId:[""],
+
+      
      location: [""],
-    reqLanguages: ["",Validators.required],
-    relocatewill: ["false"],
+     relocatewill: ["false"],
     travelwill: ["No"],
-    jobSalaryFrom: ["",Validators.required],
-    jobSalaryTo: ["",Validators.required],
-    jobSalaryCurrency: ["INR"],
-    jobSalaryFrequency: ["Per Year"],
-    currentUserId:[""]
-    }),
+
+    auctioned:["true"],
+      jobId:[""],
+      
+     }),
 
 
     this.getIndustry();
@@ -221,7 +253,7 @@ export class OniJobPostPage implements OnInit {
 
   validatePreference(){
     if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.industry !=null
-     && this.jobProfileForm.value.jobTitle !="" &&  this.jobProfileForm.value.jobTitle !=null &&
+     && this.jobProfileForm.value.jobTitle1 !="" &&  this.jobProfileForm.value.jobTitle1 !=null &&
      this.jobProfileForm.value.jobType !="" && this.jobProfileForm.value.jobType !=null
     &&this.jobProfileForm.value.openings !=null){
       this.nextStep('step1', 'step2'); 
@@ -230,15 +262,15 @@ export class OniJobPostPage implements OnInit {
      }
   }  
 
-  validateAvailability(){
-    if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 
-    && this.jobProfileForm.value.jobExpWorkHrs !=null && this.jobProfileForm.value.jobStartDateFrom !=null &&
-    this.jobProfileForm.value.jobStartDateTo !="" && this.jobProfileForm.value.jobStartDateTo !=null){
-      this.nextStep('step2', 'step3') 
-     }else{
-      this.errorToast();
-     } 
-  }
+  // validateAvailability(){
+  //   if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 
+  //   && this.jobProfileForm.value.jobExpWorkHrs !=null && this.jobProfileForm.value.jobStartDateFrom !=null &&
+  //   this.jobProfileForm.value.jobStartDateTo !="" && this.jobProfileForm.value.jobStartDateTo !=null){
+  //     this.nextStep('step2', 'step3') 
+  //    }else{
+  //     this.errorToast();
+  //    } 
+  // }
 
   validateJobDesc(){
 if(this.jobProfileForm.value.roles != "" && this.jobProfileForm.value.jobQualification != ""
@@ -252,9 +284,17 @@ else{
 }   
   }
 
+  validateJobshedule(){
+    this.nextStep('step4', 'step5')
+  }
+
   validateSalary(){
     
     this.nextStep('step3', 'step4')
+  }
+
+  validateAdditional(){
+    this.nextStep('step5', 'step6')
   }
 
   validateInformation(value){
@@ -262,7 +302,7 @@ else{
      && this.jobProfileForm.value.jobSalaryTo !=""  && this.jobProfileForm.value.jobSalaryTo !=null
     && this.selectedCities.length !=0 && this.jobProfileForm.value.reqLanguages != 0){
       if(value =='save'){
-        this.savejobseek();   
+        this.savejobadvertisement();   
       }else{
         this.updatejobseek();
       }
@@ -453,7 +493,7 @@ onSearch(value: string) {
 selectCity(city: string,id:string) {
   this.selectedCities.push(city);
   this.cityName = city;
-  this.cityId = id;
+  this.locationOffer.push(id);
   this.showResults = false;
   this.searchResults = [];
   this.searchCtrl.setValue('');
@@ -461,6 +501,31 @@ selectCity(city: string,id:string) {
 
 removeCity(city: string) {
   this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+}
+
+
+// location auto complete 
+onSearchOfferLocation(value: string) {
+  if (value.length > 2) {
+    this.showResultsForLocation = true;
+    this.searchResultsOffLocation = this.workLocation.filter(city => city.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showResultsForLocation = false;
+    this.searchResultsOffLocation = [];
+  }
+}
+
+selectCityForLocation(city: string,id:string) {
+  this.selectedCitiesOffLocation.push(city);
+  this.cityName = city;
+  this.locationAdvertise.push(id);
+  this.showResultsForLocation = false;
+  this.searchResultsOffLocation = [];
+  this.searchCtrl.setValue('');
+}
+
+removeCityForLocation(city: string) {
+  this.selectedCitiesOffLocation.splice(this.selectedCitiesOffLocation.indexOf(city), 1);
 }
 
 jobtitleList(event){
@@ -527,7 +592,7 @@ jobtitleList(event){
    
 
   //save
-async savejobseek(){
+async savejobadvertisement(){
   this.jobProfileForm.value.jobSkills = this.selectedSkills
   this.jobProfileForm.value.location = this.selectedCities;
 const errors = this.checkFormValidity(this.jobProfileForm);
@@ -543,35 +608,36 @@ if (errors.length > 0) {
   await alert.present();
 } else {
    this.jobProfileForm.value.jobSkills = this.selectedSkills
-  this.jobProfileForm.value.location = this.selectedCities;
-
+  this.jobProfileForm.value.locationOffer = this.locationOffer;
+  this.jobProfileForm.value.locationAdvertise = this.locationAdvertise;
   this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
-  this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
+  this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'dd/MM/yyyy','en-IN');
 
 
   const myNumber: number = parseInt(this.jobProfileForm.value.industry);
   this.jobProfileForm.value.industry = myNumber;
 
-   this.jobProfileForm.value.currentUserId = this.userId;
+  this.jobProfileForm.value.currentUserId = this.userId;
+  this.jobProfileForm.value.currentUserName = this.currentUserName;
      
 this.jobpostMaster = this.jobProfileForm.value;
 console.log(` data: ${JSON.stringify(this.jobpostMaster)}`);
-var saveJobProfile = "api/auth/app/jobportal/saveJobSeek";
+var saveJobProfile = "api/auth/app/jobportal/savejobadvertisement";
 
  this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
     console.log("Image upload response: " + result)
    if (result["success"] == true) {
-    this.jobProfileForm.reset();
-    this.router.navigate(['/job']);
+    //this.jobProfileForm.reset();
+    //this.router.navigate(['/job']);
     this.presentToast()
     }else{
       const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
         const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
         this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
 
-        const jobStartDateTo = this.jobProfileForm.value.jobStartDateTo;
-        const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
-        this.jobProfileForm.value.jobStartDateTo = enddate.toISOString();
+        const appDeadline = this.jobProfileForm.value.appDeadline;
+        const enddate = moment(appDeadline, 'DD/MM/YYYY').toDate();
+        this.jobProfileForm.value.appDeadline = enddate.toISOString();
     }
  });
 }
@@ -604,6 +670,7 @@ if (errors.length > 0) {
   this.jobProfileForm.value.industry = myNumber;
 
    this.jobProfileForm.value.currentUserId = this.userId;
+   this.jobProfileForm.value.currentUserName = this.currentUserName;
      
 this.jobpostMaster = this.jobProfileForm.value;
 console.log(` data: ${JSON.stringify(this.jobpostMaster)}`);
