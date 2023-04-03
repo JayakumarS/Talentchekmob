@@ -33,10 +33,13 @@ countryIdVal:string;
   cityList:[]
   IsSearchListShow: boolean = false;
   stateResponseBackup: any;
+  desiredItem: any;
 //image
 base64img1: string = '';
 cBoxIAgreeVal: boolean = true;
 cBoxIAgreeConsentVal: boolean = true;
+  desiredcityItem: any;
+  desiredstateItem: any;
 
   constructor(private fb: FormBuilder,public storageservice:StorageService,public modalController: ModalController,
     private camera: Camera, public router:Router,private toastController: ToastController) { }
@@ -67,9 +70,10 @@ cBoxIAgreeConsentVal: boolean = true;
   })
 this.OrgtypeList();
   this.domainList();
-  this.editprofile();
+  
 
   this.getCountryList(); 
+  this.editprofile();
 }
 
 profileView(){
@@ -189,9 +193,18 @@ editprofile(){
   
     
     if (result["success"] == true) {
+
+      
+      this.searchForId(result["profileList"][0].permCountry); 
+      this.selectedCountry = this.desiredItem.text;
+
+      this.getstatelist(result["profileList"][0].permCountry);
+       
+      this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
       this.profileList = result["profileList"]; 
      }
     this.docForm.patchValue({
+      
       'orgName':this.profileList[0].orgName,
       'domain':this.profileList[0].domain,
       'orgEmail':this.profileList[0].orgEmail,
@@ -205,7 +218,7 @@ editprofile(){
       'permAddress':this.profileList[0].permAddress,
         'permCity':this.profileList[0].permCity,
          'permState':this.profileList[0].permState,
-         'permCountry':this.profileList[0].permCountry,
+        // 'permCountry':this.profileList[0].this.desiredItem.text,
          'permPinCode':this.profileList[0].permPinCode,
      'languagesknown':this.profileList[0].languagesknown,
     })
@@ -267,6 +280,49 @@ checkFormValidity(form: FormGroup): string[] {
   });
 
   return errors;
+}
+
+searchForId(id: string) {
+  this.desiredItem = null;
+  for (const item of  this.countryResponse ) {
+    if (item.id === id) {
+      this.desiredItem = item; 
+      break;
+    }
+  }
+  if (this.desiredItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredItem.text); 
+  }
+}
+searchstateId(id: string) {
+  this.desiredstateItem = null;
+  for (const item of this.stateResponse  ) {
+    if (item.id === id) {
+      this.desiredstateItem = item; 
+      break;
+    }
+  }
+  if (this.desiredstateItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredstateItem.text); 
+  }
+}
+searchcityId(id: string) {
+  this.desiredcityItem = null;
+  for (const item of  this.cityOptions ) {
+    if (item.id === id) {
+      this.desiredcityItem = item; 
+      break;
+    }
+  }
+  if (this.desiredcityItem === null) {
+    console.log('Item not found');
+  } else {
+    console.log(this.desiredcityItem.text); 
+  }
 }
 
 ////img 
