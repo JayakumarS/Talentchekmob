@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { SkillPopupPage } from '../skill-popup/skill-popup.page';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
-
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 
 @Component({
   selector: 'app-certification',
@@ -23,7 +23,8 @@ export class CertificationPage implements OnInit {
   dateValidation: boolean;
 
   constructor(public router:Router,public modalController: ModalController,
-    public fb: FormBuilder, private route: ActivatedRoute,
+    public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
+    ,public alertController: AlertController,
     public storageservice: StorageService,private toastController: ToastController,) { }
 
   ngOnInit() {
@@ -271,8 +272,11 @@ export class CertificationPage implements OnInit {
        this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
           console.log("Image upload response: " + result)
          if (result["success"] == true) {
-          this.router.navigate(['/profile-view']);
-          this.presentToast()
+          setTimeout(() => {
+            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
+             this.presentToast()
            }else{  
     
            }
@@ -316,8 +320,11 @@ export class CertificationPage implements OnInit {
    this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
-       this.router.navigate(['/profile-view']);
-      this.updateToast()
+      setTimeout(() => {
+         const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        profilePage.updateData();
+      }, 800);
+       this.updateToast()
        }else{  
 
        }
@@ -340,8 +347,7 @@ export class CertificationPage implements OnInit {
       cssClass: 'custom-toast'
     });
     this.router.navigate(['/profile-view']);
-    //window.location.reload();
-  await toast.present();
+   await toast.present();
 }
 
 async updateToast() {
@@ -351,8 +357,7 @@ async updateToast() {
     cssClass: 'custom-toast'
   });
   this.router.navigate(['/profile-view']);
-    // window.location.reload();
-await toast.present();
+ await toast.present();
 }
 
   checkFormValidity(form: FormGroup): string[] {

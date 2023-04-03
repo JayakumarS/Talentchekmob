@@ -43,7 +43,7 @@ export class ProfileViewPage implements OnInit {
   pickerInst: any;
  
   ngOnInit() {
-    this.setSelectedTab('profile');
+     this.setSelectedTab('profile');
     this.userId = localStorage.getItem("userId")  ; 
     this.img = localStorage.getItem("profilePic")  ;
 
@@ -106,6 +106,11 @@ export class ProfileViewPage implements OnInit {
 
      
   }
+
+  updateData() {
+     window.location.reload();
+  }
+
   showDropdown(eduId: number) {
     this.showDropdownFlag = eduId;
   }
