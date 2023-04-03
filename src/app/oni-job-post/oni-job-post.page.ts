@@ -252,6 +252,11 @@ else{
 }   
   }
 
+  validateSalary(){
+    
+    this.nextStep('step3', 'step4')
+  }
+
   validateInformation(value){
     if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryFrom !=null
      && this.jobProfileForm.value.jobSalaryTo !=""  && this.jobProfileForm.value.jobSalaryTo !=null
@@ -421,10 +426,11 @@ getJobType(){
 
 getAdditionalPay(){
 
-  var getAdditionalPayUrl = "api/auth/app/jobportal/additionalpayList`";
+  var getAdditionalPayUrl = "api/auth/app/jobportal/additionalpayList";
 
   this.storageservice.getrequest(getAdditionalPayUrl).subscribe(result => {
 
+    console.log(result);
     if(result["success"] == true){
  this.additionalPaylist = result["additionalpayList"];
 

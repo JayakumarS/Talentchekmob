@@ -21,6 +21,7 @@
                     <div class="ion-stepper-title" style="font-family: Mr-eaves;">Job Details</div>
                 </div>
                 <div class="ion-stepper-content">
+
                     <ion-label class="labels">Industry<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field" required>
                         <ion-select (ionChange)="jobtitleList($event.target.value)" formControlName="industry" placeholder="Industry">
@@ -173,111 +174,9 @@
             <div class="ion-stepper-step" id="step3">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">3</div>
-                    <div class="ion-stepper-title">Job Description</div>
+                    <div class="ion-stepper-title">Salary & Benefits</div>
                 </div>
                 <div class="ion-stepper-content">
-
-                    <ion-label class="labels">Roles & Responsibilities<small style="color: #f70505;">*</small></ion-label>
-                    <div class="button-content">
-                        <ckeditor formControlName="roles"></ckeditor>
-                    </div>
-
-
-                    <ion-label class="labels">Required Skills & Qualifications<small style="color: #f70505;">*</small></ion-label>
-                    <div class="button-content">
-                        <ckeditor formControlName="jobQualification"></ckeditor>
-                    </div>
-
-
-
-                    <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
-                    <ion-item fill="outline" class="input-field">
-                        <ion-chip *ngFor="let skill of selectedSkills">
-                            {{ skill }}
-                            <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
-                        </ion-chip>
-                        <ion-textarea rows="1" warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
-                    </ion-item>
-                    <div *ngIf="jobProfileForm.controls.jobSkills.hasError('required') && jobProfileForm.controls.jobSkills.touched">
-                        <small style="color: #f70505;">Skills is required</small>
-                    </div>
-
-                    <ion-list *ngIf="showSkillResults">
-                        <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text,result.id)">
-                            {{ result.text }}
-                        </ion-item>
-                    </ion-list>
-
-                    <ion-label class="labels">Work experience<small style="color: #f70505;">*</small></ion-label>
-                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <div>Atleast</div>
-                        <div style="width: 30%;">
-                            <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="jobExperience"></ion-input>
-                            </ion-item>
-                        </div>
-                        <div>
-                            <ion-item fill="outline" class="input-field">
-                                <ion-select formControlName="jobExperienceFormat" placeholder="Years">
-                                    <ion-select-option value="Years">Years</ion-select-option>
-                                    <ion-select-option value="Months">Months</ion-select-option>
-                                    <ion-select-option value="Weeks">Weeks</ion-select-option>
-                                    <ion-select-option value="Days">Days</ion-select-option>
-                                    <ion-select-option value="Hours">Hours</ion-select-option>
-                                </ion-select>
-                            </ion-item>
-                        </div>
-                    </div>
-                    <div>
-                        of relevant Experience
-                    </div>
-
-                    <div *ngIf="jobProfileForm.controls.jobExperience.hasError('required') && jobProfileForm.controls.jobExperience.touched">
-                        <small style="color: #f70505;">Work experience is required</small>
-                    </div>
-
-
-                    <div>
-                        <ion-item class="background">
-
-                            <ion-checkbox formControlName="jobShiftDM">
-                            </ion-checkbox>
-                            <ion-lable class="labels">&nbsp;&nbsp;Must have</ion-lable>
-                        </ion-item>
-                    </div>
-                    <div>
-                        <ion-item>
-
-                            <ion-checkbox formControlName="jobShiftNM"></ion-checkbox>
-                            <ion-lable class="labels">&nbsp;&nbsp;Good to have</ion-lable>
-                        </ion-item>
-                    </div>
-
-
-                    <div class="line-with-text">
-                        <hr class="hr1">
-                    </div>
-
-                    <div class="line-with-text">
-                        <hr class="hr1">
-                    </div>
-
-
-
-                    <div class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
-                        <button class="ion-stepper-next" (click)="validateJobDesc()">Next</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ion-stepper-step" id="step4">
-                <div class="ion-stepper-header">
-                    <div class="ion-stepper-circle">4</div>
-                    <div class="ion-stepper-title"> Salary & Benefits</div>
-                </div>
-                <div class="ion-stepper-content">
-
 
                     <div>
                         <div>
@@ -337,6 +236,271 @@
                     <div *ngIf="jobProfileForm.controls.jobType.hasError('required') && jobProfileForm.controls.jobType.touched">
                         <small style="color: #f70505;"> Please select perks offered</small>
                     </div>
+
+
+
+
+                    <div class="ion-stepper-buttons" style="justify-content: space-between;">
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
+                        <button class="ion-stepper-next" (click)="validateSalary()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ion-stepper-step" id="step4">
+                <div class="ion-stepper-header">
+                    <div class="ion-stepper-circle">4</div>
+                    <div class="ion-stepper-title">Job Schedule</div>
+                </div>
+                <div class="ion-stepper-content">
+
+                    <div>
+                        <div class="ind-container">
+                            <div>Shifts</div>
+                            <div>Day shift</div>
+                            <div>Night shift</div>
+                        </div>
+                        <div class="line-with-text">
+                            <hr class="hr1">
+                        </div>
+                        <div class="ind-container">
+                            <div>Monday</div>
+                            <div>
+                                <ion-item class="background">
+                                    <ion-checkbox formControlName="jobShiftDM"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNM"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div class="ind-container">
+                            <div>Tuesday</div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftDT"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNT"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div class="ind-container">
+                            <div style="margin: -8px;">Wednesday</div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftDW"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNW"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div class="ind-container">
+                            <div>Thursday</div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftDTH"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNTH"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div class="ind-container">
+                            <div style="margin: 12px;">Friday</div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftDF"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNF"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div class="ind-container">
+                            <div style="margin: 3px;">Saturday</div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftDS"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNS"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                        <div class="ind-container">
+                            <div style="margin: 10px;">Sunday</div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftDSU"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                            <div>
+                                <ion-item>
+                                    <ion-checkbox formControlName="jobShiftNSU"></ion-checkbox>
+                                </ion-item>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-with-text">
+                        <hr class="hr1">
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;margin: 10px 0px 0px 0px;">
+                        <div>
+                            What is the expected working hours per week for this job?<small style="color: #f70505;">*</small>
+                        </div>
+                        <div>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="jobExpWorkHrs"></ion-input>
+                            </ion-item>
+                        </div>
+                    </div>
+                    <div class="line-with-text">
+                        <hr class="hr1">
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <div>
+                            From when do you wish to start working?<small style="color: #f70505;">*</small>
+                        </div>
+                        <div>
+                            <div style="margin: 0px 70px 0px 70px;">
+                                <ion-item fill="outline" class="input-field">
+                                    <ion-datetime displayFormat="MM/YYYY" (ionChange)="validateStartDate($event.target.value);" formControlName="jobStartDateFrom" presentation="date"></ion-datetime>
+                                </ion-item>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="ion-stepper-buttons" style="justify-content: space-between;">
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">Back</button>
+                        <button class="ion-stepper-next" (click)="validateJobDesc()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ion-stepper-step" id="step5">
+                <div class="ion-stepper-header">
+                    <div class="ion-stepper-circle">5</div>
+                    <div class="ion-stepper-title"> Additional Informatione</div>
+                </div>
+                <div class="ion-stepper-content">
+
+                    <ion-label class="labels">Mention the deadline for applications<small style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-datetime (ionChange)="validateStartDate($event.target.value);" formControlName="jobStartDateFrom" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                    </ion-item>
+
+
+                    <ion-label class="labels">Select offered locations(s) for the job<small style="color: #f70505;">*</small></ion-label>
+
+                    <ion-item fill="outline" class="input-field">
+                        <div class="selected-skills-container">
+                            <div *ngFor="let city of selectedCities" class="selected-skill">{{ city }}
+                                <ion-icon name="close-circle" (click)="removeCity(city)"></ion-icon>
+                            </div>
+                        </div>
+                        <ion-input (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-input>
+
+                    </ion-item>
+                    <ion-list *ngIf="showResults">
+                        <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
+                            {{ result.text }}
+                        </ion-item>
+                    </ion-list>
+
+
+                    <ion-label class="labels">Receive applications from<small style="color: #f70505;">*</small></ion-label>
+
+                    <ion-item fill="outline" class="input-field">
+                        <div class="selected-skills-container">
+                            <div *ngFor="let city of selectedCities" class="selected-skill">{{ city }}
+                                <ion-icon name="close-circle" (click)="removeCity(city)"></ion-icon>
+                            </div>
+                        </div>
+                        <ion-input (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                    </ion-item>
+
+
+                    <ion-list *ngIf="showResults">
+                        <ion-item *ngFor="let result of searchResults" (click)="selectCity(result.text,result.id)">
+                            {{ result.text }}
+                        </ion-item>
+                    </ion-list>
+
+
+                    <ion-label class="labels">Mention languages requirements for the job<small style="color: #f70505;">*</small></ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-select formControlName="reqLanguages" placeholder="Known languages" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                            <ion-select-option *ngFor="let title of languageList" value="{{title.id}}">{{title.text}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+
+
+                    <ion-label class="labels">Enter Contact number to let the applicants call you Directly</ion-label>
+                    <ion-item fill="outline" class="input-field">
+                        <ion-input formControlName="jobExpWorkHrs"></ion-input>
+                    </ion-item>
+
+
+                    <div class="line-with-text">
+                        <hr class="hr1">
+                    </div>
+
+                    <div>
+                        <ion-radio-group formControlName="travelwill" value="No">
+                            <div>
+                                <ion-label>Gender Preferences</ion-label>
+                                <div style="display: flex;justify-content: space-evenly;">
+                                    <ion-radio value="Yes"></ion-radio>
+                                    <ion-label>Male</ion-label>
+                                    <ion-radio value="No"></ion-radio>
+                                    <ion-label>Female</ion-label>
+                                    <ion-radio value="NA"></ion-radio>
+                                    <ion-label>Others</ion-label>
+                                </div>
+                            </div>
+                        </ion-radio-group>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class="ion-stepper-step" id="step6">
+                <div class="ion-stepper-header">
+                    <div class="ion-stepper-circle">5</div>
+                    <div class="ion-stepper-title"> Auction the Job</div>
+                </div>
+                <div class="ion-stepper-content">
+
+                    <img width=80 src="../../assets/img/auctioneer.png" alt="Paris" class="center">
+                    <br>
+                    <p>Would you like to Auction this Job Vacancy?</p>
+                    <p>Auction your organisation's vacant positions and invite top bidders that fit your expectations and budget for an interview.</p>
+
+                    <ion-toggle>Default Toggle</ion-toggle>
 
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">

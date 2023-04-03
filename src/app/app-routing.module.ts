@@ -299,23 +299,9 @@ const routes: Routes = [
   path: 'insti-profile',
   loadChildren: () => import('./insti-profile/insti-profile.module').then( m => m.InstiProfilePageModule)
 },
-
-
-
-
-
-
-
-
-
- 
-  
-  
-  
-  
- 
-  
- 
+{  path: 'oni-job-post',
+    loadChildren: () => import('./oni-job-post/oni-job-post.module').then( m => m.OniJobPostPageModule)
+  }
 ];
 
 @NgModule({
