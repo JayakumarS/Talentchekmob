@@ -1,10 +1,12 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, ElementRef, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
+//import { ProfileViewPage } from '../profile-view/profile-view.page';
+import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.page';
 
 @Component({
   selector: 'app-work-experiences',
@@ -31,11 +33,13 @@ export class WorkExperiencesPage implements OnInit {
   edit: boolean = false;
   desiredItem: any;
   dateValidation: boolean;
-  constructor(public router:Router,private fb: FormBuilder,private route: ActivatedRoute,
-    public storageservice:StorageService,public toastController:ToastController) { }
+   constructor(public router:Router,private fb: FormBuilder,private route: ActivatedRoute,
+    public storageservice:StorageService,public toastController:ToastController,private elementRef: ElementRef,
+    public modalController: ModalController,public alertController: AlertController,) { }
   Exp = {
     orgName: '',
   }
+  
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
     this.isunregOrg = false;
@@ -357,8 +361,11 @@ export class WorkExperiencesPage implements OnInit {
     this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
        console.log("Image upload response: " + result)
       if (result["success"] == true) {
-     
-       this.presentToast()
+        setTimeout(() => {
+           const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
+        this.presentToast()
         }else{  
  
         }
@@ -368,10 +375,7 @@ export class WorkExperiencesPage implements OnInit {
         header: '',
         message: 'Job end date should be greater than Start date.',
         duration: 3000,
-      }); 
-   
-      this.router.navigate(['/profile-view']);
-     
+      });  
        await alert.present();
     }
     
@@ -384,6 +388,7 @@ export class WorkExperiencesPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
+    this.router.navigate(['/profile-view']);
 
   await toast.present();
 }
@@ -420,8 +425,11 @@ if (errors.length > 0) {
         this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
-          
-          this.updateToast()
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              profilePage.updateData();
+             }, 800);
+             this.updateToast()
             }else{  
       
             }
@@ -446,7 +454,6 @@ async updateToast() {
   });
 
   this.router.navigate(['/profile-view']);
-   // window.location.reload();
 
 await toast.present();
 }
