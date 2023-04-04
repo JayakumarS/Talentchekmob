@@ -46,7 +46,7 @@
                     <ion-label class="labels">Organisation Name <small style="color: #f70505;">*</small></ion-label>
 
                           <ion-item fill="outline" class="input-field">
-                                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Institution Name" showcancelbutton="" 
+                                <ion-searchbar style="padding-top: 22px;" class="blackTheme" placeholder="Organisation Name" showcancelbutton="" 
                                 debounce="100" (ionInput)="filterList($event)" 
                                 formControlName="organisationName" [(ngModel)]="organisationVal"
                                 search-icon=“undefined”></ion-searchbar>
@@ -78,7 +78,7 @@
                         <div class="button-content">
                             <ion-label class="labels">Job Start Date<small style="color: #f70505;">*</small> </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime (ionChange)="validateStartDate($event.target.value);"  displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                                <ion-datetime (ionChange)="validateStartDate($event.target.value);"  displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
                             </ion-item>
                             <div *ngIf="ExperienceForm.controls.expStart.hasError('required') && ExperienceForm.controls.expStart.touched">
                                 <small style="color: #f70505;">Job Start Date is required</small>
