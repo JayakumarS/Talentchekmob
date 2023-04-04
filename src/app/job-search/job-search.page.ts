@@ -17,6 +17,8 @@ export class JobSearchPage implements OnInit {
   
   isOpen:boolean = false;
   formValues: any; 
+  roleId: any;
+  RoleID: any;
   presentPopover(e: Event) {
     this.popover.event = e;
     this.isOpen = true;
@@ -63,7 +65,10 @@ export class JobSearchPage implements OnInit {
 
   ngOnInit() {
  
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
 
+    
     this.jobSearchHeadForm = this.fb.group({
       searchType :["talentid"],
       searchValue :[""]
@@ -180,8 +185,32 @@ export class JobSearchPage implements OnInit {
   goto_jobs(){
     this.router.navigate(['/job']);
   }
+  goto_orgjobs(){
+
+    this.router.navigate(['/oni-job-post']);
+  }
+  goto_instijobs(){
+    this.router.navigate(['/oni-job-post']);
+
+  }
+  goto_orghome(){
+
+    this.router.navigate(['/organization-dashboard']);
+  }
+  goto_instihome(){
+    this.router.navigate(['/institution-dashboard']);
+  
+  }
   goto_home(){
     this.router.navigate(['/home']);
+  }
+  goto_instiprofile(){
+
+    this.router.navigate(['/insti-profile-view']);
+  }
+  goto_orgprofile(){
+  
+    this.router.navigate(['/org-profile-view']);
   }
   goto_profile(){
     this.router.navigate(['/profile-view']);
