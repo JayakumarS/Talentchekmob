@@ -252,24 +252,5 @@
 
 </form>
 
-<div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-  <ion-icon size="large" name="search-circle"></ion-icon>
-  </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-  <ion-icon size="large" name="earth-sharp"></ion-icon>
-  </button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-  <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-  
-  </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-  <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-  </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-  <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-  
-  </button>
-  </div>
 
 </ion-content>

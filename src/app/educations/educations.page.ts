@@ -605,20 +605,20 @@ export class EducationsPage implements OnInit {
   }
 
 
-  // footer
-goto_profileSearch(){
-  this.router.navigate(['/job-search']);
-}
-goto_jobs(){
-  this.router.navigate(['/job']);
-}
-goto_home(){
-  this.router.navigate(['/home']);
-}
-goto_profile(){
-  this.router.navigate(['/profile-view']);
-}
-goto_more(){
-  this.router.navigate(['/settings']);
-}
+//   // footer
+// goto_profileSearch(){
+//   this.router.navigate(['/job-search']);
+// }
+// goto_jobs(){
+//   this.router.navigate(['/job']);
+// }
+// goto_home(){
+//   this.router.navigate(['/home']);
+// }
+// goto_profile(){
+//   this.router.navigate(['/profile-view']);
+// }
+// goto_more(){
+//   this.router.navigate(['/settings']);
+// }
 }
