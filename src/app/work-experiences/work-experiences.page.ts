@@ -17,6 +17,11 @@ import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.pag
  
 })
 export class WorkExperiencesPage implements OnInit {  
+  getMaxDate() {
+    let maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 10);
+    return maxDate.toISOString().split('T')[0];
+  }
 
   ExperienceForm:  FormGroup;
   organisationList: any;

@@ -79,7 +79,7 @@
                     </ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart" displayFormat="MM/YYYY"
-                        (ionChange)="validateStartDate($event.target.value);" presentation="date" (monthSelected)="setMonthAndYearStr($event, picker1,'courseStart')"></ion-datetime>
+                        (ionChange)="validateStartDate($event.target.value);" presentation="date" (monthSelected)="setMonthAndYearStr($event, picker1,'courseStart')" [max]="getMaxDate()"></ion-datetime>
                     </ion-item>
                     <div
                         *ngIf=" EducationForm.controls.courseStart.hasError('required') && EducationForm.controls.courseStart.touched">
@@ -90,7 +90,7 @@
                     <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-datetime formControlName="courseEnd" displayFormat="MM/YYYY"presentation="date"(ionChange)="validateEndDate($event.target.value);"
-                        (monthSelected)="setMonthAndYearStr($event, picker1,'courseEnd')"   [(ngModel)]="selectedDate"></ion-datetime>
+                        (monthSelected)="setMonthAndYearStr($event, picker1,'courseEnd')"   [(ngModel)]="selectedDate" [max]="getMaxDate()"></ion-datetime>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
@@ -179,14 +179,16 @@
 
 
 
-                <div *ngIf="!edit" class="button-content" style="width: 50%;
-                                        margin: auto;">
-                    <ion-button color="primary" fill="outline" (click)="save()">save</ion-button>
-                </div>
-                <div *ngIf="edit" class="button-content" style="width: 50%;
-                margin: auto;">
-                <ion-button color="primary" fill="outline" (click)="UpdateEducation()">Update</ion-button>
-                </div>
+                <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">
+                    <div class="display-justify">
+                        <ion-button class="custom-button" (click)="save()">Save</ion-button>
+                     </div>
+                 </div>
+                <div *ngIf="edit" class="button-content" style="width: 50%; margin: auto;">
+                    <div class="display-justify">
+                        <ion-button class="custom-button" (click)="UpdateEducation()">Update</ion-button>
+                     </div>
+                 </div>
             </div>
 
            

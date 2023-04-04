@@ -12,6 +12,11 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./connection.page.scss'],
 })
 export class ConnectionPage implements OnInit {
+  getMaxDate() {
+    let maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 10);
+    return maxDate.toISOString().split('T')[0];
+  }
 
   ConnectionsForm: FormGroup;
   relationshipList: any;

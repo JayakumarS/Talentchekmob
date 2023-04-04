@@ -15,6 +15,11 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./certification.page.scss'],
 })
 export class CertificationPage implements OnInit {
+  getMaxDate() {
+    let maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 10);
+    return maxDate.toISOString().split('T')[0];
+  }
 
   certificationForm: FormGroup;
   userId: string;
