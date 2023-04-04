@@ -8,10 +8,15 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+  roleId: string;
+  RoleID: string[];
 
   constructor(public router:Router,public storageservice: StorageService,public nativeStorage: NativeStorage) { }
 
   ngOnInit() {
+
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
   }
 
   selectedTab: string = 'menu';
@@ -96,6 +101,22 @@ goto_jobs(){
 }
 goto_home(){
   this.router.navigate(['/home']);
+}
+goto_orghome(){
+
+  this.router.navigate(['/organization-dashboard']);
+}
+goto_instihome(){
+  this.router.navigate(['/institution-dashboard']);
+
+}
+goto_instiprofile(){
+
+  this.router.navigate(['/insti-profile-view']);
+}
+goto_orgprofile(){
+
+  this.router.navigate(['/org-profile-view']);
 }
 goto_profile(){
   this.router.navigate(['/profile-view']);
