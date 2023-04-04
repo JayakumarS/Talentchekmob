@@ -193,7 +193,7 @@ editprofile(){
   
     
     if (result["success"] == true) {
-
+this.getCountryList();
       
       this.searchForId(result["profileList"][0].permCountry); 
       this.selectedCountry = this.desiredItem.text;

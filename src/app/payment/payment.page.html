@@ -145,11 +145,16 @@
               <small style="color: #f70505;">Currency is required</small>
             </div>
           </div>
-          <div class="button-content" style="width: 50%; margin: auto;">
+          <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify">
-              <ion-button class="custom-button" (click)="Update()">Update</ion-button>
+               <ion-button class="custom-button" (click)="saveCertification()">Save</ion-button>
             </div>
-          </div>
+           </div>
+           <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
+            <div class="display-justify">
+               <ion-button class="custom-button" (click)="updateCertification()">Update</ion-button>
+            </div>
+           </div> 
         </ion-col>
       </ion-row>
     </ion-card-content>

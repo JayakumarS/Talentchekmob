@@ -18,6 +18,7 @@ export class PaymentPage implements OnInit {
   paymentDetails: any;
   roleId: any;
   RoleID: any;
+  edit: boolean = false;
   constructor(private fb: FormBuilder,public storageservice:StorageService,private toastController: ToastController, public router:Router) { }
 
   ngOnInit() {
@@ -71,6 +72,7 @@ export class PaymentPage implements OnInit {
   
     
     if (result["success"] == true) {
+      this.edit = true;
       this.bankDetails = result["bankDetails"]; 
      }
     this.docForm.patchValue({

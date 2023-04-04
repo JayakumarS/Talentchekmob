@@ -179,16 +179,17 @@ editinstiprofile(){
   var EditinstiprofileDetails = "api/auth/app/InstitutionProfileDetails/insteditprofiledetails?currentUserId="+this.currentUserId ;
   this.storageservice.getrequest(EditinstiprofileDetails).subscribe(result => {
   
-
-    this.searchForId(result["profileList"][0].permCountry); 
-    this.selectedCountry = this.desiredItem.text;
-
-    this.getstatelist(result["profileList"][0].permCountry);
-     
-    this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
-    this.profileList = result["profileList"]; 
-    
     if (result["success"] == true) {
+      this.profileList = result["profileList"]; 
+      this.getCountryList();
+
+
+      this.searchForId(result["profileList"][0].permCountry); 
+      this.selectedCountry = this.desiredItem.text;
+  
+      this.getstatelist(result["profileList"][0].permCountry);
+       
+      this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
       this.profileList = result["profileList"]; 
      }
     this.docForm.patchValue({
