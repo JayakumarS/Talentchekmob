@@ -40,7 +40,7 @@ export class ClubPage implements OnInit {
     this.clubFrom = this.fb.group({
        clubName: [""],
       clubBranch: [""],
-      titleHeld: ["",Validators.required],
+      titleHeld: ["",Validators.compose([Validators.required])],
       rolePlayed: [""],
       participatedFrom: ["",Validators.required],
       participatedTill: ["",Validators.required],
@@ -141,9 +141,9 @@ getOrganisationList(){
     var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
     if (frm <= startdate) {
       const alert = await this.toastController.create({
-        header: 'Validation Error',
+        header: '',
         message: 'Participated Till date should be greater than Participated From date.',
-        buttons: ['OK']
+        duration: 3000,
       });
       this.clubFrom.patchValue({
         'participatedTill':""
@@ -162,13 +162,10 @@ getOrganisationList(){
       var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
       if (endDate <= frm) {
         const alert = await this.toastController.create({
-          header: 'Validation Error',
-          message: 'participated From date should be lesser than participated Till date.',
-          buttons: ['OK']
+          header: '',
+          message: 'Participated Till date should be greater than Participated From date.',
+          duration: 3000,
         });
-        this.clubFrom.patchValue({
-          'participatedFrom':""
-        })
          await alert.present();
       }
     }
@@ -388,9 +385,9 @@ getOrganisationList(){
   if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
-      header: 'Validation Error',
+      header: '',
       message: 'Please provide all the required values!',
-      buttons: ['OK']
+      duration: 3000,
     });
 
     await alert.present();

@@ -262,9 +262,9 @@ export class JobProfilePage implements OnInit {
       })
       if (frm <= currentDate) {
         const alert = await this.toastController.create({
-          header: 'Validation Error',
+          header: '',
           message: 'Start date should be greater than current date.',
-          buttons: ['OK']
+          duration: 3000,
         });
         this.jobProfileForm.patchValue({
           'jobStartDateFrom':""
@@ -281,9 +281,9 @@ export class JobProfilePage implements OnInit {
       var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
       if (frm <= startdate) {
         const alert = await this.toastController.create({
-          header: 'Validation Error',
+          header: '',
           message: 'End date should be greater than Start date.',
-          buttons: ['OK']
+          duration: 3000,
         });
         this.jobProfileForm.patchValue({
           'jobStartDateTo':""
@@ -298,9 +298,9 @@ export class JobProfilePage implements OnInit {
         let salto = parseInt(this.jobProfileForm.value.jobSalaryTo);
         if(salFrom>salto){
           const alert = await this.toastController.create({
-            header: 'Validation Error',
+            header: '',
             message: 'Salary From should be lesser than Salary To.',
-            buttons: ['OK']
+            duration: 3000,
           });
           this.jobProfileForm.patchValue({
             'jobSalaryFrom':""
@@ -316,9 +316,9 @@ export class JobProfilePage implements OnInit {
       let salto = parseInt(salaryTo);
       if(salFrom>salto){
         const alert = await this.toastController.create({
-          header: 'Validation Error',
+          header: '',
           message: 'Salary To should be greater than Salary From.',
-          buttons: ['OK']
+          duration: 3000,
         });
         this.jobProfileForm.patchValue({
           'jobSalaryTo':""
@@ -326,9 +326,9 @@ export class JobProfilePage implements OnInit {
          await alert.present();
       }else if( salto<salFrom){
         const alert = await this.toastController.create({
-          header: 'Validation Error',
+          header: '',
           message: 'Salary From should be lesser than Salary To.',
-          buttons: ['OK']
+          duration: 3000,
         });
         this.jobProfileForm.patchValue({
           'jobSalaryFrom':""
@@ -484,9 +484,9 @@ nextStep(currentStep: string, nextStep: string) {
   if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
-      header: 'Validation Error',
+      header: '',
       message: errors.join('<br>'),
-      buttons: ['OK']
+      duration: 3000,
     });
 
     await alert.present();
@@ -535,9 +535,9 @@ nextStep(currentStep: string, nextStep: string) {
   if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
-      header: 'Validation Error',
+      header: '',
       message: errors.join('<br>'),
-      buttons: ['OK']
+      duration: 3000,
     });
 
     await alert.present();
