@@ -15,7 +15,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./educations.page.scss'],
 })
 export class EducationsPage implements OnInit {
-
+ 
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -53,11 +53,12 @@ export class EducationsPage implements OnInit {
   edit: boolean = false;
   searchStudyResults: string[] = [];
   selecteStudy: any;
-  selectStudySet: string;
+  selectStudySet: any;
   selectDegreeSet: string;
   dateValidation: boolean;
   desiredItem: any;
   disabled: boolean =false;
+  fieldOfStudyDisable: boolean = false;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
     private toastController: ToastController,private route: ActivatedRoute,
     public modalController: ModalController,private elementRef: ElementRef
@@ -84,7 +85,7 @@ export class EducationsPage implements OnInit {
       ckeditor: [""],
       currentlyStudy: [""],
       degree: [""],
-      fieldofStudy: [""],
+      fieldofStudy: ["", Validators.required],
       stuRegisterNumber: ["", Validators.required],
       aggregateMarks: ["", Validators.required],
       eduDescription: [""],
@@ -186,7 +187,10 @@ export class EducationsPage implements OnInit {
     this.selecteInstitution = undefined;
   }
   removeDegree(selectDegreeSet: string) {
+    this.fieldOfStudyDisable = false;
+    this.EducationForm.get("fieldofStudy").enable();
     this.selectDegreeSet = undefined;
+    this.selectStudySet = "";
   }
   remove() {
     this.selectStudySet = undefined;
@@ -227,25 +231,13 @@ export class EducationsPage implements OnInit {
           header: '',
           message: 'Course End date should be greater than Course Start date.',
           duration: 3000,
-        });
-        // this.EducationForm.patchValue({
-        //   'courseStart':""
-        // })
+        }); 
          await alert.present();
       }
     }
     
   }
-
-  // validationForCurWorking(event){
-  //   var value  = event;
-  //   if(value == true){
-  //     this.EducationForm.get("courseEnd").disable(); 
-  //     this.dateValidation = true;
-  //   }else{
-  //     this.EducationForm.get("courseEnd").enable();
-  //   }
-  // }
+ 
   selectInstitution(institutionName: string, id: string) {
     this.selecteInstitution = institutionName;
     this.IsSearchListShow = false;
@@ -286,7 +278,7 @@ export class EducationsPage implements OnInit {
 
   selectDegree(institutionName: string, id: string) {
     this.selectDegreeSet = institutionName;
-    this.IsDegreeListShow = false;
+     this.IsDegreeListShow = false;
     this.EducationForm.patchValue({
     'degree':this.selectDegreeSet
     })
@@ -304,8 +296,36 @@ export class EducationsPage implements OnInit {
     });
   }
 
+  disableFiledOfStudy(value){
 
-
+    if(value == "High School Diploma"){
+      this.fieldOfStudyDisable = true;
+      this.EducationForm.get("fieldofStudy").disable();
+    }else if(value == "SSLC"){
+      this.fieldOfStudyDisable = true;
+      this.EducationForm.get("fieldofStudy").disable();
+    }else if(value == "HSC"){
+      this.fieldOfStudyDisable = true;
+      this.EducationForm.get("fieldofStudy").disable();
+    }else{
+      const checkForClass = this.checkForClass(value) 
+      if(checkForClass){
+          this.fieldOfStudyDisable = true;
+          this.EducationForm.get("fieldofStudy").disable();
+      }else{
+        this.fieldOfStudyDisable = false;
+        this.EducationForm.get("fieldofStudy").enable();
+      }
+    }
+    
+  }
+  checkForClass(data: string): boolean {
+    if (data.indexOf('Class') !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
   ///studyList auto complete 
@@ -459,9 +479,19 @@ export class EducationsPage implements OnInit {
         this.Education = result["educationBean"];
 
       
-
-        this.selectStudySet = this.Education.fieldofStudy;
         this.selectDegreeSet=this.Education.degree;
+
+        const study = this.Education.fieldofStudy;
+       
+        if(study != "" && study != "null"){
+          this.fieldOfStudyDisable = false;
+          this.EducationForm.get("fieldofStudy").enable();
+          this.selectStudySet = this.Education.fieldofStudy;
+        }else{
+          this.fieldOfStudyDisable = true;
+          this.EducationForm.get("fieldofStudy").disable(); 
+        }
+       
 
 
         const containsTF = this.checkForTF(this.Education.institutionName)
@@ -557,7 +587,8 @@ export class EducationsPage implements OnInit {
       // Display errors in a popup
       const alert = await this.toastController.create({
         header: '',
-        message: 'Please provide all the required values!',
+        //message: 'Please provide all the required values!',
+        message: errors.join('<br>'),
         duration: 3000,
       });
 

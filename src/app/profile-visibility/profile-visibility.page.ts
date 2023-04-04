@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile-visibility',
@@ -23,7 +24,8 @@ export class ProfileVisibilityPage implements OnInit {
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
-    public storageservice:StorageService,) {
+    public storageservice:StorageService,
+    public toastController :ToastController) {
       this.profileVisForm = this.fb.group({
         profileVisibility: [""], 
         currentUserId: [""]
@@ -55,7 +57,7 @@ export class ProfileVisibilityPage implements OnInit {
   }
 
   updateProfileVisibility(){
-     this.currentUserId = 'TFIN10000452331';
+    this.currentUserId = localStorage.getItem("userId"); 
     var data = {
       "profileVisibility": this.profileVisForm.value.profileVisibility,
       "currentUserId":this.currentUserId,
@@ -67,14 +69,23 @@ export class ProfileVisibilityPage implements OnInit {
 
     var updateprofileVisibilityUrl = "api/auth/app/setting/updateVisibilityMoblie";
  
-    this.storageservice.postrequest(updateprofileVisibilityUrl, data).subscribe(result => {  
+    this.storageservice.postrequest(updateprofileVisibilityUrl, data).subscribe(async result => {  
       this.response = result;
       console.log("Image upload response: " + result)
       if (result["success"] == true) {
-       }
+        this.presentToast()  
+        }
     });
    }
- 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Updated Successfully',
+      duration: 3000,
+      cssClass: 'blue-toast'
+    }); 
+    this.router.navigate(['/visibility']); 
+    await toast.present(); 
+  }
 
    // footer
 goto_profileSearch(){

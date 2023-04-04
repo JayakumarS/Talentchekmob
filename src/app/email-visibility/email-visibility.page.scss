@@ -96,3 +96,7 @@ ion-avatar{
     padding-bottom: 8px;
     background: transparent;
 }
+::ng-deep .blue-toast {
+  --background: rgb(73, 173, 212);
+  color: white;
+}
