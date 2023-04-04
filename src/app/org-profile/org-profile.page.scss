@@ -309,3 +309,14 @@ ion-progress-bar {
     box-shadow: 0px 8px 24px #00000026;
     border: 1px solid #D1D1D2;
 }
+.display-justify {
+  display: flex;
+  justify-content: center;
+  padding-top: 35px;
+}
+.custom-button {
+width: 360px;
+--border-radius: 50px;
+height: 40px;
+font-size: 16px;
+}

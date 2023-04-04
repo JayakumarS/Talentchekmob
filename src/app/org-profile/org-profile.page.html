@@ -219,30 +219,15 @@
   
           <div class="button-content" style="width: 50%;
           margin: auto;">
-          <ion-button color="primary" fill="outline" (click)="Update()" >Update</ion-button>
-          </div>
+          <div class="display-justify">
+            <ion-button class="custom-button" (click)="Update()">Update</ion-button>
+         </div>
+           </div>
         </ion-col>
       </ion-row>
     </ion-card-content>
   </form>
 
 
-  <div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
-      <ion-icon size="large" name="search-circle"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
-      <ion-icon size="large" name="earth-sharp"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-      <ion-icon size="large" name="apps"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
-      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-    </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
-      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-    </button>
-</div>
 
 </ion-content>
