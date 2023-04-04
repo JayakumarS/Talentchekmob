@@ -118,10 +118,10 @@ payment(userId)
     this.router.navigate(['/job']);
   }
   goto_home(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['/institution-dashboard']);
   }
   goto_profile(){
-    this.router.navigate(['/profile-view']);
+    this.router.navigate(['/insti-profile-view']);
   }
   goto_more(){
     this.router.navigate(['/settings']);
