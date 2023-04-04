@@ -28,8 +28,9 @@ export class OrgProfileViewPage implements OnInit {
   feeCurrency: any;
   feeAmount: any;
   ifscCode: any;
-  connectionList: any;
+  connectioncard:boolean = false;
   showDropdownFlag: any;
+  connectionList: any;
 
 
   constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { }
@@ -58,7 +59,9 @@ export class OrgProfileViewPage implements OnInit {
     this.storageservice.getrequest(profileOrgView).subscribe(result => {
      console.log(result); 
 
-
+     if(result['profileViewList'][0].connectionList.length != 0 && result['profileViewList'] != null){
+      this.connectioncard = true;
+      }
                    //profileview ORG
                    this.orglocation = result['profileViewList'][0]['orglocation'];
                    this.orgname = result['profileViewList'][0]['orgname'];
@@ -78,7 +81,7 @@ export class OrgProfileViewPage implements OnInit {
                    this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
                    this.feeAmount = result['profileViewList'][0]['feeAmount'];
                    this.ifscCode = result['profileViewList'][0]['ifscCode'];
-                   this.connectionList = result['profileViewList'][0]['connectionList'];
+                  this.connectionList = result['profileViewList'][0]['connectionList'];
 
 
     })

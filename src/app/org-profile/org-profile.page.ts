@@ -240,7 +240,7 @@ async Update(){
 
     await alert.present();
   } else{
-    this.docForm.value.dob =formatDate(this.docForm.value.dob, 'dd/MM/yyyy','en-IN');
+    this.docForm.value.dob =formatDate(this.docForm.value.dob, 'yyyy/MM/dd','en-IN');
     this.docForm.value.currentUserId=this.currentUserId;
     this.Orgdetails = this.docForm.value;
     console.log(` data: ${JSON.stringify(this.Orgdetails)}`);
