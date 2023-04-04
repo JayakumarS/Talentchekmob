@@ -56,12 +56,16 @@
     </ion-row>
     <ion-row>
       <div *ngIf="!edit" class="button-content" style="margin: auto;">
-          <ion-button color="primary" (click)="saveSkill()" fill="outline" >Add</ion-button>
+        <div class="display-justify">
+          <ion-button class="custom-button" (click)="saveSkill()">Add</ion-button>
        </div>
+        </div>
  
        <div *ngIf="edit" class="button-content" style="margin: auto;">
-        <ion-button color="primary" (click)="updateSkill()" fill="outline" >Update</ion-button>
-     </div>
+        <div class="display-justify">
+          <ion-button class="custom-button" (click)="updateSkill()">Update</ion-button>
+       </div>
+      </div>
     </ion-row>
     
 </ion-card-content>

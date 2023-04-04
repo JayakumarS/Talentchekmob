@@ -98,13 +98,13 @@
                           <div class="button-content">
                               <ion-label class="labels">Acquainted From </ion-label>
                               <ion-item fill="outline" class="input-field">
-                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedFromObj" presentation="date"></ion-datetime>
+                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedFromObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
                               </ion-item>
                               </div>
                               <div class="button-content">
                                   <ion-label class="labels">Acquainted Till </ion-label>
                                   <ion-item fill="outline" class="input-field">
-                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedToObj" presentation="date"></ion-datetime>
+                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedToObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                   </ion-item>
                                  
                                     <div style="    display: flex;">
@@ -155,8 +155,10 @@
                                          
                                            <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="save()">Send Invite</ion-button>
-                                        </div>
+                                        <div class="display-justify">
+                                            <ion-button class="custom-button" (click)="save()">Send Invite</ion-button>
+                                         </div>
+                                         </div>
 
 
 

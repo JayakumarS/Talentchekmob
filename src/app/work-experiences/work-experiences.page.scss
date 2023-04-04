@@ -298,6 +298,16 @@ ion-progress-bar {
     content: '\2605';
     color: gold;
   }
-    
+.display-justify {
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+}
+.custom-button {
+  width: 360px;
+  --border-radius: 50px;
+  height: 40px;
+  font-size: 16px;
+}
   
 

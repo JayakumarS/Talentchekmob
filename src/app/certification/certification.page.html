@@ -54,7 +54,7 @@
                           <div class="button-content">
                               <ion-label class="labels">Issue Date<small style="color: #f70505;">*</small></ion-label>
                               <ion-item fill="outline" class="input-field">
-                                  <ion-datetime (ionChange)="validateStartDate($event.target.value)"  displayFormat="DD.MM.YYYY"  formControlName="issuedDateObj" presentation="date"></ion-datetime>
+                                  <ion-datetime (ionChange)="validateStartDate($event.target.value)"  displayFormat="DD.MM.YYYY"  formControlName="issuedDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
                               </ion-item>
                               <div *ngIf=" certificationForm.controls.issuedDateObj.hasError('required') && certificationForm.controls.issuedDateObj.touched">
                                 <small style="color: #f70505;">Issue Date is required</small>
@@ -63,7 +63,7 @@
                               <div class="button-content">
                                   <ion-label class="labels">Expiry Date(if applicable) </ion-label>
                                   <ion-item fill="outline" class="input-field">
-                                      <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY"  formControlName="expiryDateObj" presentation="date"></ion-datetime>
+                                      <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY"  formControlName="expiryDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                   </ion-item>
                                  
                                     
@@ -88,14 +88,16 @@
                     </ion-col>
                   </ion-row>
 
-                                  <div *ngIf="!edit" class="button-content" style="width: 50%;
-                                        margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="saveCertification()">Save</ion-button>
-                                        </div>
-                                  <div *ngIf="edit" class="button-content" style="width: 50%;
-                                        margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="UpdateCertification()">Update</ion-button>
-                                        </div>
+                                  <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">
+                                    <div class="display-justify">
+                                      <ion-button class="custom-button" (click)="saveCertification()">Save</ion-button>
+                                   </div>
+                                         </div>
+                                  <div *ngIf="edit" class="button-content" style="width: 50%; margin: auto;">
+                                    <div class="display-justify">
+                                      <ion-button class="custom-button" (click)="UpdateCertification()">Update</ion-button>
+                                   </div>
+                                         </div>
                     
                 
                 

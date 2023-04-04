@@ -78,7 +78,7 @@
                         <div class="button-content">
                             <ion-label class="labels">Job Start Date<small style="color: #f70505;">*</small> </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-datetime (ionChange)="validateStartDate($event.target.value);"  displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
+                                <ion-datetime (ionChange)="validateStartDate($event.target.value);"  displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date" [max]="getMaxDate()"></ion-datetime>
                             </ion-item>
                             <div *ngIf="ExperienceForm.controls.expStart.hasError('required') && ExperienceForm.controls.expStart.touched">
                                 <small style="color: #f70505;">Job Start Date is required</small>
@@ -87,7 +87,7 @@
                             <div class="button-content">
                                 <ion-label class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-datetime (ionChange)="validateEndDate($event.target.value);" displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date"></ion-datetime>
+                                    <ion-datetime (ionChange)="validateEndDate($event.target.value);" displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                 </ion-item>
                                 <div *ngIf="ExperienceForm.controls.expEnd.hasError('required') && ExperienceForm.controls.expEnd.touched">
                                     <small style="color: #f70505;">Job End Date is required</small>
@@ -134,15 +134,16 @@
                                         <!-- <div ngModel>
                                             <ckeditor [(ngModel)]="content" formControlName="ckeditor" [config]="editorConfig"></ckeditor>
                                           </div> -->
-                                        <div *ngIf="!edit" class="button-content" style="width: 50%;
-                                      margin: auto;">
-                                      <ion-button color="primary" fill="outline" (click)="saveCertification()">Save</ion-button>
-                                      </div>
-
-                                      <div *ngIf="edit" class="button-content" style="width: 50%;
-                                      margin: auto;">
-                                      <ion-button color="primary" fill="outline" (click)="updateCertification()">Update</ion-button>
-                                      </div>
+                                    <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">
+                                     <div class="display-justify">
+                                        <ion-button class="custom-button" (click)="saveCertification()">Save</ion-button>
+                                     </div>
+                                    </div>
+                                    <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
+                                     <div class="display-justify">
+                                        <ion-button class="custom-button" (click)="updateCertification()">Update</ion-button>
+                                     </div>
+                                    </div> 
                 </div>
    
 

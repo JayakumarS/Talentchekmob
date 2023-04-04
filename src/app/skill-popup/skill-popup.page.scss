@@ -341,3 +341,14 @@ ion-progress-bar {
   list-style: none;
   font-size: 25px;
 }
+.display-justify {
+  display: flex;
+  justify-content: center;
+  padding-top: 35px;
+}
+.custom-button {
+  width: 120px;
+  --border-radius: 50px;
+  height: 40px;
+  font-size: 16px;
+}

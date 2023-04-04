@@ -68,7 +68,7 @@
                           <div class="button-content">
                               <ion-label class="labels">Date of Birth<small style="color: #f70505;">*</small></ion-label>
                               <ion-item fill="outline" class="input-field">
-                                  <ion-datetime displayFormat="DD.MM.YYYY" placeholder="Date of Birth " formControlName="dob" presentation="date"></ion-datetime>
+                                  <ion-datetime displayFormat="DD.MM.YYYY" placeholder="Date of Birth " formControlName="dob" presentation="date" [max]="getMaxDate()"></ion-datetime>
                               </ion-item>
                               <div *ngIf="profileForm.controls.dob.hasError('required') && profileForm.controls.dob.touched">
                                 <small style="color: #f70505;">Date of Birth is required</small>
@@ -236,8 +236,10 @@
                                        
                                         <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <ion-button color="primary" fill="outline" (click)="Update()">Update</ion-button>
-                                        </div>
+                                        <div class="display-justify">
+                                          <ion-button class="custom-button" (click)="Update()">Update</ion-button>
+                                       </div>
+                                         </div>
 
                 
                 
