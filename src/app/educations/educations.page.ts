@@ -1,11 +1,12 @@
 
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 
 
 @Component({
@@ -51,7 +52,9 @@ export class EducationsPage implements OnInit {
   desiredItem: any;
   disabled: boolean =false;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
-    private toastController: ToastController,private route: ActivatedRoute) {
+    private toastController: ToastController,private route: ActivatedRoute,
+    public modalController: ModalController,private elementRef: ElementRef
+    ,public alertController: AlertController) {
 
     const initialDate = new Date(2023, 2);
     this.courseStart = initialDate.toISOString();
@@ -371,7 +374,10 @@ export class EducationsPage implements OnInit {
           this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
             console.log("Image upload response: " + result)
             if (result["success"] == true) {
-              // this.router.navigate(['/job']);
+              setTimeout(() => {
+                const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+               profilePage.updateData();
+              }, 800);
               this.presentToast()
             }
           });
@@ -571,7 +577,10 @@ export class EducationsPage implements OnInit {
       this.storageservice.postrequest(updateclub, this.EducationForm).subscribe(async result => {
         console.log("Image upload response: " + result)
         if (result["success"] == true) {
-         
+          setTimeout(() => {
+            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
           this.updateToast()
         } else {
 
@@ -582,11 +591,8 @@ export class EducationsPage implements OnInit {
           header: '',
           message: 'course End date should be greater than Course Start date.',
           duration: 3000,
-        });
-       
-       
-       // window.location.reload();
-         await alert.present();
+        }); 
+          await alert.present();
       }
 
       
@@ -600,8 +606,7 @@ export class EducationsPage implements OnInit {
       cssClass: 'custom-toast'
     });
     this.router.navigate(['/profile-view']);
-      window.location.reload();
-    await toast.present();
+     await toast.present();
   }
 
 

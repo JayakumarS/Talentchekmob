@@ -1,10 +1,11 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 
 @Component({
   selector: 'app-club',
@@ -30,8 +31,9 @@ export class ClubPage implements OnInit {
   edit: boolean = false;
   disabled: boolean =false;
   desiredItem: any;
-  constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,
-     public storageservice: StorageService, private toastController: ToastController) { }
+  constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,public modalController: ModalController,
+     public storageservice: StorageService, private toastController: ToastController,private elementRef: ElementRef
+     ,public alertController: AlertController,) { }
 
   ngOnInit() {
 
@@ -232,7 +234,10 @@ getOrganisationList(){
          this.storageservice.postrequest(saveperonalinfo, this.Extracurricular).subscribe(result => {
      
            if (result["success"] == true) {
-             // this.router.navigate(['/job']);
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800);
              this.presentToast()
            }
          });
@@ -401,7 +406,10 @@ getOrganisationList(){
    this.storageservice.postrequest(updateclub, this.clubFrom).subscribe(async result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
-     
+      setTimeout(() => {
+        const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+       profilePage.updateData();
+      }, 800);
       this.updateToast()
        }else{  
 

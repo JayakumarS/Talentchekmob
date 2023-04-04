@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import moment from 'moment';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+
 @Component({
   selector: 'app-skill-popup',
   templateUrl: './skill-popup.page.html',
@@ -24,9 +26,9 @@ export class SkillPopupPage implements OnInit {
   userId: string;
   edit: boolean = false;
   skillform: any;
-  constructor(public modalController: ModalController,
+  constructor(public modalController: ModalController,public alertController: AlertController,
     private fb: FormBuilder,private toastController: ToastController,
-    public storageservice:StorageService,
+    public storageservice:StorageService,private elementRef: ElementRef,
     public router :Router,private route: ActivatedRoute) { } 
 
   ngOnInit() {
@@ -131,7 +133,10 @@ export class SkillPopupPage implements OnInit {
          this.storageservice.postrequest(saveSkill, this.skillform).subscribe(async result => {  
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
-             
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800);
             this.presentToast()
              }else{  
              }
@@ -156,8 +161,11 @@ export class SkillPopupPage implements OnInit {
          this.storageservice.postrequest(updateSkill, this.skillform).subscribe(async result => {  
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
-             this.router.navigate(['/profile-view']);
-            this.updateToast()
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800);
+             this.updateToast()
              }else{  
              }
          }); 

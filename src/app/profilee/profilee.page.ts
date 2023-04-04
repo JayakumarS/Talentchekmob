@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import moment from 'moment';
 import { formatDate } from '@angular/common';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 
 
 
@@ -48,7 +49,8 @@ countryIdVal:string;
   desiredstateItem: any;
   desiredcityItem: any;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,public modalController: ModalController,
-    private camera: Camera,private toastController: ToastController) { }
+    private camera: Camera,private toastController: ToastController,private elementRef: ElementRef
+    ,public alertController: AlertController) { }
 
   ngOnInit() {
 
@@ -229,7 +231,10 @@ goTostateSelectedItem( stateId) {
        this.storageservice.postrequest(updateprofile, this.profiledetails).subscribe(result => {  
           console.log("Image upload response: " + result)
          if (result["success"] == true) {
-        
+          setTimeout(() => {
+            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
           this.presentToast()
           }
        });
@@ -244,8 +249,7 @@ goTostateSelectedItem( stateId) {
       cssClass: 'custom-toast'
     });
     this.router.navigate(['/profile-view']);
-   // window.location.reload();
-   
+    
   await toast.present();
 }
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 
 @Component({
   selector: 'app-connection',
@@ -26,7 +27,9 @@ export class ConnectionPage implements OnInit {
   roleId: any;
   RoleID: any;
 
-  constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,private toastController: ToastController) { 
+  constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,
+    private toastController: ToastController,public modalController: ModalController,private elementRef: ElementRef
+    ,public alertController: AlertController ) { 
 
 
     
@@ -162,7 +165,10 @@ export class ConnectionPage implements OnInit {
      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
         console.log("Image upload response: " + result)
        if (result["isSuccess"] == true) {
-      
+        setTimeout(() => {
+          const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+         profilePage.updateData();
+        }, 800);
         this.presentToast()
         }
         else if (result["isSuccess"] == false) {
