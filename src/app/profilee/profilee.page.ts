@@ -277,17 +277,19 @@ checkFormValidity(form: FormGroup): string[] {
     var industryURL = "api/auth/app/mobile/editprofiledetails?currentUserId="+this.currentUserId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
-      this.searchForId(result["profileList"][0].permCountry); 
+      
+
+      if (result["success"] == true) {
+        this.getCountryList();
+         this.profileList = result["profileList"]; 
+        this.searchForId(result["profileList"][0].permCountry); 
       this.selectedCountry = this.desiredItem.text;
 
       this.getstatelist(result["profileList"][0].permCountry);
        
       this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
       this.profileList = result["profileList"]; 
-
-      if (result["success"] == true) {
-        this.profileList = result["profileList"]; 
-        
+      
         const dob =  this.profileList[0].dob;
         const startdate = moment(dob, 'DD/MM/YYYY').toDate();
 
@@ -302,7 +304,7 @@ checkFormValidity(form: FormGroup): string[] {
        'permAddress': this.profileList[0].permAddress,
        'permCity': this.profileList[0].permCity,
        'permState':this.profileList[0].permState,
-      // 'permCountry':this.profileList[0].permCountry,
+       'permCountry':this.profileList[0].permCountry,
        'permPinCode':this.profileList[0].permPinCode,
        'email':this.profileList[0].email,
        'nationalid':this.profileList[0].nationalid,
