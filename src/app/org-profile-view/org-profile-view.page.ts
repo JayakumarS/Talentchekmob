@@ -133,10 +133,10 @@ export class OrgProfileViewPage implements OnInit {
     this.router.navigate(['/job']);
   }
   goto_home(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['/organization-dashboard']);
   }
   goto_profile(){
-    this.router.navigate(['/profile-view']);
+    this.router.navigate(['/org-profile-view']);
   }
   goto_more(){
     this.router.navigate(['/settings']);
