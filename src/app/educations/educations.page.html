@@ -118,7 +118,7 @@
                     <small style="color: #f70505;">Class/Degree/Course is required</small>
                 </div>
                     <ion-list *ngIf="IsDegreeListShow">
-                        <ion-item *ngFor="let result of degreeList" (click)="selectDegree(result.text,result.id)">
+                        <ion-item *ngFor="let result of searchDegreeResults" (click)="selectDegree(result.text,result.id);disableFiledOfStudy(result.text)">
                             {{ result.text }}
                         </ion-item>
                     </ion-list>
@@ -126,9 +126,10 @@
                 </div>
 
                 <div class="button-content">
-                    <ion-label class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
+                    <ion-label *ngIf="!fieldOfStudyDisable" class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
+                    <ion-label *ngIf="fieldOfStudyDisable" class="labels">Field of Study</ion-label>
 
-                    <ion-item fill="outline" class="input-field">
+                    <ion-item disabled="{{fieldOfStudyDisable}}" fill="outline" class="input-field">
 
                         <div (click)="remove()">{{selectStudySet}}
                             <ion-icon *ngIf="selectStudySet != undefined && selectStudySet != ''"
@@ -136,13 +137,9 @@
                         </div>
                         <ion-input warp="soft" (ionInput)="onSearchStudy($event.target.value)"
                             [formControl]="searchCtrl"></ion-input>
-                    </ion-item>
-                    <div
-                    *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
-                    <small style="color: #f70505;">Class/Degree/Course is required</small>
-                </div>
+                    </ion-item> 
                     <ion-list *ngIf="IsstudyListShow">
-                        <ion-item *ngFor="let result of studyList" (click)="selectStudy(result.text,result.id)">
+                        <ion-item *ngFor="let result of searchStudyResults" (click)="selectStudy(result.text,result.id)">
                             {{ result.text }}
                         </ion-item>
                     </ion-list>
