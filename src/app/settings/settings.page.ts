@@ -99,6 +99,14 @@ goto_profileSearch(){
 goto_jobs(){
   this.router.navigate(['/job']);
 }
+goto_instijobs(){
+
+  this.router.navigate(['/oni-job-post']);
+}
+goto_orgjobs(){
+
+  this.router.navigate(['/oni-job-post']);
+}
 goto_home(){
   this.router.navigate(['/home']);
 }

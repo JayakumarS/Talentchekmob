@@ -59,6 +59,8 @@ export class OniJobPostPage implements OnInit {
   showResultsForLocation: boolean;
   currentUserName: any;
   cityIdLocation: string;
+  roleId: any;
+  RoleID: any;
 
   constructor(private fb: FormBuilder,
     public router:Router,
@@ -76,6 +78,8 @@ export class OniJobPostPage implements OnInit {
   ngOnInit() {
     this.currentUserName = localStorage.getItem("userName");
     this.userId = localStorage.getItem("userId")  ; 
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
 
     this.jobProfileForm = this.fb.group({
 
@@ -758,10 +762,26 @@ checkFormValidity(form: FormGroup): string[] {
   this.router.navigate(['/job-search']);
 }
 goto_jobs(){
-  this.router.navigate(['/job']);
+  this.router.navigate(['/oni-job-post']);
+}
+goto_instihome(){
+  this.router.navigate(['/institution-dashboard']);
+
+}
+goto_orghome(){
+
+  this.router.navigate(['/organization-dashboard']);
 }
 goto_home(){
   this.router.navigate(['/home']);
+}
+goto_orgprofile(){
+  this.router.navigate(['/org-profile-view']);
+
+}
+goto_instiprofile(){
+
+  this.router.navigate(['/insti-profile-view']);
 }
 goto_profile(){
   this.router.navigate(['/profile-view']);

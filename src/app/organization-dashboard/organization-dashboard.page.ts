@@ -65,7 +65,7 @@ export class OrganizationDashboardPage implements OnInit {
     this.router.navigate(['/job-search']);
   }
   goto_jobs(){
-    this.router.navigate(['/job']);
+    this.router.navigate(['/oni-job-post']);
   }
   goto_home(){
     this.router.navigate(['/organization-dashboard']);

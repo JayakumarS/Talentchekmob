@@ -91,9 +91,15 @@
         <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
       <ion-icon size="large" name="search-circle"></ion-icon>
       </button>
-        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
       <ion-icon size="large" name="earth-sharp"></ion-icon>
       </button>
+      <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_orgjobs();">
+        <ion-icon size="large" name="earth-sharp"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_instijobs();">
+            <ion-icon size="large" name="earth-sharp"></ion-icon>
+            </button>
         <button  *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
       <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
       </button>
