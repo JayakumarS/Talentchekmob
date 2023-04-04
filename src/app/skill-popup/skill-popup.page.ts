@@ -201,7 +201,7 @@ export class SkillPopupPage implements OnInit {
 
   async presentToast1() {
     const toast = await this.toastController.create({
-      message: 'Please fill all deatils',
+      message: 'Please fill all details',
       duration: 3000,
       cssClass: 'custom-toast'
     });

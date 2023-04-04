@@ -203,7 +203,7 @@ export class EducationsPage implements OnInit {
       this.dateValidation =false;
       const alert = await this.toastController.create({
         header: '',
-        message: 'course End date should be greater than Course Start date.',
+        message: 'Course End date should be greater than Course Start date.',
         duration: 3000,
       });
       this.EducationForm.patchValue({
@@ -225,7 +225,7 @@ export class EducationsPage implements OnInit {
       if (endDate <= frm) {
         const alert = await this.toastController.create({
           header: '',
-          message: 'course End date should be greater than Course Start date.',
+          message: 'Course End date should be greater than Course Start date.',
           duration: 3000,
         });
         // this.EducationForm.patchValue({
@@ -596,7 +596,7 @@ export class EducationsPage implements OnInit {
       }else{
         const alert = await this.toastController.create({
           header: '',
-          message: 'course End date should be greater than Course Start date.',
+          message: 'Course End date should be greater than Course Start date.',
           duration: 3000,
         }); 
           await alert.present();

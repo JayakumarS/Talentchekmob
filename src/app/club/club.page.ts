@@ -177,14 +177,14 @@ getOrganisationList(){
     
   }
 
-  // validationForCurWorking(event){
-  //   var value  = event;
-  //   if(value == true){
-  //     this.clubFrom.get("coursparticipatedTilleEnd").disable(); 
-  //   }else{
-  //     this.clubFrom.get("courseEnd").enable();
-  //   }
-  // }
+  validationForCurMember(event){
+    var value  = event;
+    if(value == true){
+      this.clubFrom.get("participatedTill").disable(); 
+    }else{
+      this.clubFrom.get("participatedTill").enable();
+    }
+  }
   
 
   getTitle(bookId) {
@@ -226,7 +226,9 @@ getOrganisationList(){
          }
   
          this.clubFrom.value.participatedFrom =formatDate(this.clubFrom.value.participatedFrom, 'dd/MM/yyyy','en-IN');
+         if(this.clubFrom.value.participatedTill != undefined){
          this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');          
+         }
          this.clubFrom.value.currentUserId = this.userId;
         // this.clubFrom.value.clubName = this.clubid; 
          this.Extracurricular = this.clubFrom.value;
@@ -319,6 +321,16 @@ getOrganisationList(){
         this.selectedOrganisation = this.desiredItem.text;
         const participatedFrom =  this.extracurricularBean.participatedFrom;
         const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
+
+        this.validationForCurMember(this.extracurricularBean.currentMember);
+
+        if(this.extracurricularBean.participatedTill != null &&  this.extracurricularBean.participatedTill != ""){
+          const expEnd = this.extracurricularBean.participatedTill;
+          const enddate = moment(expEnd, 'DD/MM/YYYY').toDate();
+          this.clubFrom.patchValue({
+            'participatedTill' :enddate.toISOString(),
+          })
+          }
  
           const participatedTill =  this.extracurricularBean.participatedTill;
           const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
@@ -333,7 +345,7 @@ getOrganisationList(){
           // 'participatedFromObj' : extFromdate,
            'participatedFrom': startdate.toISOString(),
            //'participatedTillObj' : extTodate,
-           'participatedTill' :Enddate.toISOString(),
+          // 'participatedTill' :Enddate.toISOString(),
            'currentMember': this.extracurricularBean.currentMember,
            'extId': this.extracurricularBean.extId,
            })
@@ -400,8 +412,9 @@ getOrganisationList(){
      this.clubFrom.value.currentUserId = this.userId; 
 
      this.clubFrom.value.participatedFrom =formatDate(this.clubFrom.value.participatedFrom, 'dd/MM/yyyy','en-IN');
-     this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');
-  this.clubFrom = this.clubFrom.value;
+     if(this.clubFrom.value.participatedTill != undefined){
+      this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');          
+      }  this.clubFrom = this.clubFrom.value;
   console.log(` data: ${JSON.stringify(this.clubFrom)}`);
   var updateclub = "api/auth/app/IndividualProfileDetails/UpdateExtracurricular";
 
