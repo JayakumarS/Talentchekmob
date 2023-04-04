@@ -44,6 +44,12 @@ export class InstitutionDashboardPage implements OnInit {
   
   }
 
+
+  selectedTab: string = 'profile';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
   goto_subscribe(){
 
     this.router.navigate(['/subscription-insorg']) 
@@ -61,5 +67,23 @@ export class InstitutionDashboardPage implements OnInit {
     };
     this.router.navigate(['/institution-dashboard-list'], navigationExtras);
   }
+
+
+// footer
+goto_profileSearch(){
+  this.router.navigate(['/job-search']);
+}
+goto_jobs(){
+  this.router.navigate(['/job']);
+}
+goto_home(){
+  this.router.navigate(['/institution-dashboard']);
+}
+goto_profile(){
+  this.router.navigate(['/insti-profile-view']);
+}
+goto_more(){
+  this.router.navigate(['/settings']);
+} 
 
 }
