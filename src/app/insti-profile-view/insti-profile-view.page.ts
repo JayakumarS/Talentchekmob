@@ -28,6 +28,7 @@ export class InstiProfileViewPage implements OnInit {
   feeAmount: any;
   ifscCode: any;
   connectionList: any;
+  connectioncard:boolean = false;
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
@@ -49,6 +50,10 @@ export class InstiProfileViewPage implements OnInit {
     var profileInstView = "api/auth/app/IndividualProfileDetails/instviewprofiledetails?currentUserId="+this.userId;
     this.storageservice.getrequest(profileInstView).subscribe(result => {
      console.log(result); 
+
+     if(result['profileViewList'][0].connectionList.length != 0 && result['profileViewList'] != null){
+      this.connectioncard = true;
+      }
 
      //profileview INSTI
      this.instlocation = result['profileViewList'][0]['instlocation'];
