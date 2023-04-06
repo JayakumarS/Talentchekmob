@@ -16,7 +16,7 @@
 
 <ion-content>
   <form [formGroup]="profileVisForm">
-    <ion-list>
+    <ion-list style="padding: 14px;">
       <ion-radio-group formControlName="profileVisibility" (ionChange)="updateProfileVisibility()" [allowEmptySelection]="false" value="turtles">
         <ion-item class="ion-item">
           <ion-label><b>Public</b><h6 style="color: gray;">Anyone on Talent Chek can view your profile</h6></ion-label>

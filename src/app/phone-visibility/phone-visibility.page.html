@@ -16,7 +16,7 @@
 
 <ion-content>
   <form [formGroup]="phoneVisForm">
-  <ion-list>
+  <ion-list style="padding: 14px;">
     <ion-radio-group formControlName="phoneVisibility" (ionChange)="updatePhoneVisibility()" [allowEmptySelection]="true" value="turtles">
       <ion-item class="ion-item">
         <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label>
