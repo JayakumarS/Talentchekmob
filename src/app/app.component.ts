@@ -17,240 +17,10 @@ import { timer } from 'rxjs/internal/observable/timer';
 })
 export class AppComponent {
 
-  /* 	public BeforeLogin = [
-      
-      {
-        title: 'Login',
-        url: '/login',
-        icon: 'person-circle-outline'
-      },
-     {
-        title: 'Register',
-        url: '/signup',
-        icon: 'people-circle-outline'
-      },
-            
-      
-    ]; */
-  public AfterLogin = [
-    {
-      title: 'Profile update',
-      icon: 'person-outline',
-      children: [{ title: 'Profile', url: '/profile-individual' },
-      { title: 'Personal information', url: '/personal-info' },
-      { title: 'Contact info', url: '/contact-info' },
-      { title: 'Academic info', url: '/academic-information' },
-      { title: 'Trainings and certifications', url: '/certifications' },
-      { title: 'Category', url: '/user-type-chooser' },
-      { title: 'Professional experience', url: '/professional-experience' },
-      { title: 'Special skills / talents', url: '/skills' },
-      { title: 'Family', url: '/family-information' },
-      { title: 'Refer a friend & earn credits', url: '/refer-a-friend' },
-      { title: 'Subscription', url: '/subscription-individual' },
-      { title: 'Delete my account', url: '/delete-my-account' }
-      ]
-    },
-    {
-      title: 'Job search',
-      url: '/job-search-individual-list',
-      icon: 'search'
-    },
-    {
-      title: 'Profile search',
-      url: '/profile-search',
-      icon: 'search'
-    },
-    // {
-    //   title: 'Services',
-    //   icon: 'server-outline',
-    //   children: [{ title: 'Reference', url: '/yettostart-frommenu' },
-    //   { title: 'Career plan', url: '/yettostart-frommenu' },
-    //   { title: 'Mentoring', url: '/yettostart-frommenu' },
-    //   { title: 'Alumni connect', url: '/yettostart-frommenu' },
-    //   { title: 'Domestic', url: '/yettostart-frommenu' },
-    //   { title: 'Quiz / Poll', url: '/yettostart-frommenu' },
-    //   { title: 'Training', url: '/yettostart-frommenu' }]
-    // },
-    {
-      title: 'Services',
-      icon: 'server-outline',
-      children: [
-        { title: 'Seeking service', url: '/seeking-services' }
-      ]
-    },
-    {
-      title: 'Credits',
-      icon: 'basket-outline',
-      children: [
-        // { title: 'Manage credits - Buy / Park', url: '/yettostart-frommenu' },
-        { title: 'Transfer credits', url: '/credit-transfer' },
-        { title: 'Credit report', url: '/credit-report' }]
-    },
-    {
-      title: 'Alumni',
-      icon: 'school-outline',
-      children: [{ title: 'Alumni details', url: '/alumni-details' }]
-    },
-    {
-      title: 'DMS',
-      icon: 'layers-outline',
-      children: [
-        { title: 'Knowledge bank', url: '/km-portal' }]
-    },
-    {
-      title: 'Support',
-      icon: 'headset-outline',
-      children: [
-        { title: 'Help desk', url: '/support-list' }]
-    }
-    // {
-    //   title: 'Support',
-    //   icon: 'headset-outline',
-    //   children: [
-    //   { title: 'IT support', url: '' },
-    //   { title: 'Dispute', url: '/dispute' }]
-    // }
-    // {
-    //   title: 'Features',
-    //   icon: 'logo-buffer',
-    //   children: [{ title: 'Events', url: '/yettostart-frommenu' },
-    //   { title: 'Alumni', url: '/yettostart-frommenu' },
-    //   { title: 'Seek a mentor', url: '/yettostart-frommenu' },
-    //   { title: 'Contribute/Giving back', url: '/yettostart-frommenu' }]
-    // },
-    // {
-    //   title: 'Messages',    
-    //   //url: '/launages',
-    //   url: '/yettostart-frommenu',
-    //   icon: 'mail-open-outline'
-    // },
-    // {
-    //   title: 'Calendar',    
-    //   //url: '/services',
-    //   url: '/yettostart-frommenu',
-    //   icon: 'calendar-outline'
-    // },
-    // {
-    //   title: 'Notifications',    
-    //   //url: '/yettostart',
-    //   url: '/yettostart-frommenu',
-    //   icon: 'notifications-outline'
-    // }
-  ];
+  userId:any;
 
-  public AfterLoginCorporate = [
-    {
-      title: 'My profile',
-      icon: 'person-outline',
-      children: [
-        { title: 'Profile', url: '/profile-corporate' },
-        { title: 'Person in charge', url: '/person-in-charge' },
-        { title: 'Bank details', url: '/org-bank-details' },
-        { title: 'Configuration', url: '/add-org-configuration' },
-        { title: 'Generate referral code', url: '/add-org-referralcode' },
-        { title: 'Subscription', url: '/subscription-insorg' },
-        { title: 'Delete my account', url: '/delete-my-account' }
-      ]
-    },
-    {
-      title: 'Job post',
-      url: '/job-post-organization-list',
-      icon: 'paper-plane-outline'
-    },
-    {
-      title: 'Profile search',
-      url: '/profile-search',
-      icon: 'search'
-    },
-    {
-      title: 'Services',
-      icon: 'server-outline',
-      children: [
-        { title: 'Seeking service', url: '/seeking-services' }
-      ]
-    },
-    {
-      title: 'Credits',
-      icon: 'basket-outline',
-      children: [
-        //{ title: 'Manage credits - Buy / Park', url: '/yettostart-frommenu' },
-        { title: 'Transfer credits', url: '/credit-transfer' },
-        { title: 'Credit report', url: '/credit-report' }]
-    },
-    {
-      title: 'Alumni',
-      icon: 'school-outline',
-      children: [{ title: 'Alumni details', url: '/alumni-details' }]
-    },
-    {
-      title: 'DMS',
-      icon: 'layers-outline',
-      children: [
-        { title: 'Knowledge bank', url: '/km-portal' }]
-    },
-    {
-      title: 'Support',
-      icon: 'headset-outline',
-      children: [
-        { title: 'Help desk', url: '/support-list' }]
-    }
-  ];
 
-  public AfterLoginInstitution = [
-    {
-      title: 'My profile',
-      icon: 'person-outline',
-      children: [
-        { title: 'Profile', url: '/profile-institution' },
-        { title: 'Person in charge', url: '/person-in-charge' },
-        { title: 'Courses', url: '/course-list' },
-        { title: 'Generate referral code', url: '/add-org-referralcode' },
-        { title: 'Subscription', url: '/subscription-insorg' },
-        { title: 'Delete my account', url: '/delete-my-account' }
-      ]
-    },
-    {
-      title: 'Job post',
-      url: '/job-post-organization-list',
-      icon: 'paper-plane-outline'
-    },
-    {
-      title: 'Profile search',
-      url: '/profile-search',
-      icon: 'search'
-    },
-    {
-      title: 'Services',
-      icon: 'server-outline',
-      children: [
-        { title: 'Seeking service', url: '/seeking-services' }
-      ]
-    },
-    {
-      title: 'Credits',
-      icon: 'basket-outline',
-      children: [
-        { title: 'Transfer credits', url: '/credit-transfer' },
-        { title: 'Credit report', url: '/credit-report' }]
-    },
-    {
-      title: 'Alumni',
-      icon: 'school-outline',
-      children: [{ title: 'Alumni details', url: '/alumni-details' }]
-    },
-    {
-      title: 'DMS',
-      icon: 'layers-outline',
-      children: [
-        { title: 'Knowledge bank', url: '/km-portal' }]
-    },
-    {
-      title: 'Support',
-      icon: 'headset-outline',
-      children: [
-        { title: 'Help desk', url: '/support-list' }]
-    }
-  ];
+
 
   loginstatus: boolean = true;
   status: any;
@@ -275,7 +45,7 @@ export class AppComponent {
     //private push: Push
   ) {
     this.initializeApp();
-
+    this.userId = localStorage.getItem("userId")  ; 
     //To get the details from DB
 
     var empId = localStorage.getItem("empId");
@@ -386,7 +156,8 @@ export class AppComponent {
   //#region OnInit
   ngOnInit() {
     //Test language
-    console.log("OnInit: Test language")
+    console.log("OnInit: Test language");
+    this.getImgandCreditpoints();
     // if (!this.languageService.selectedLang) {
     //   this.languageService.setInitialAppLanguage();
     // }
@@ -543,6 +314,23 @@ export class AppComponent {
     // this.fcm.unsubscribeFromTopic('marketing'); 
   }
 
+  getImgandCreditpoints(){
+
+    var ImgUrl = "api/auth/app/fileUpload/getImgfile?talentId="+this.userId;
+
+    this.storageservice.getrequest(ImgUrl).subscribe(result => {
+      if (result["success"] == true) {
+       console.log(result);
+       localStorage.setItem('creditPoints', result["creditpoints"]);
+       localStorage.setItem('profilePic', result["imageUrl"]);
+       }
+    });
+
+}
+
+
+
+
   goto_Dashboard() {
     var userRefFlag = localStorage.getItem("userRefFlag");
     console.log("userRefFlag: " + userRefFlag)
@@ -570,270 +358,7 @@ export class AppComponent {
       console.log("logoutLabel: " + value)
     });
 
-    if (this.IsIndividual) {
-
-      //#region Profile update
-      this.translate.get('Menu.profileUpdate').subscribe(value => {
-        this.AfterLogin[0].title = value;
-      });
-      this.translate.get('Menu.profile').subscribe(value => {
-        this.AfterLogin[0].children[0].title = value;
-      });
-      this.translate.get('Menu.personalInformation').subscribe(value => {
-        this.AfterLogin[0].children[1].title = value;
-      });
-      this.translate.get('Menu.contactInfo').subscribe(value => {
-        this.AfterLogin[0].children[2].title = value;
-      });
-      this.translate.get('Menu.academicInfo').subscribe(value => {
-        this.AfterLogin[0].children[3].title = value;
-      });
-      this.translate.get('Menu.trainingsAndCertifications').subscribe(value => {
-        this.AfterLogin[0].children[4].title = value;
-      });
-      this.translate.get('Menu.category').subscribe(value => {
-        this.AfterLogin[0].children[5].title = value;
-      });
-      this.translate.get('Menu.professionalExperience').subscribe(value => {
-        this.AfterLogin[0].children[6].title = value;
-      });
-      this.translate.get('Menu.specialSkillsTalents').subscribe(value => {
-        this.AfterLogin[0].children[7].title = value;
-      });
-      this.translate.get('Menu.family').subscribe(value => {
-        this.AfterLogin[0].children[8].title = value;
-      });
-      this.translate.get('Menu.referAFriend').subscribe(value => {
-        this.AfterLogin[0].children[9].title = value;
-      });
-      this.translate.get('Menu.subscription').subscribe(value => {
-        this.AfterLogin[0].children[10].title = value;
-      });
-      this.translate.get('DeleteMyAccount.deleteMyAcc').subscribe(value => {
-        this.AfterLogin[0].children[11].title = value;
-      });
-      //#endregion
-
-      //#region Others
-      //Job search
-      this.translate.get('Menu.jobSearch').subscribe(value => {
-        this.AfterLogin[1].title = value;
-      });
-
-      //Profile search
-      this.translate.get('Menu.profileSearch').subscribe(value => {
-        this.AfterLogin[2].title = value;
-      });
-
-      //Services
-      this.translate.get('Menu.services').subscribe(value => {
-        this.AfterLogin[3].title = value;
-      });
-      this.translate.get('Menu.seekingService').subscribe(value => {
-        this.AfterLogin[3].children[0].title = value;
-      });
-
-      //Credits
-      this.translate.get('Menu.credits').subscribe(value => {
-        this.AfterLogin[4].title = value;
-      });
-      this.translate.get('Menu.transCredits').subscribe(value => {
-        this.AfterLogin[4].children[0].title = value;
-      });
-      this.translate.get('Menu.creditReport').subscribe(value => {
-        this.AfterLogin[4].children[1].title = value;
-      });
-
-      //Alumni
-      this.translate.get('Menu.alumni').subscribe(value => {
-        this.AfterLogin[5].title = value;
-      });
-      this.translate.get('Menu.alumniDetails').subscribe(value => {
-        this.AfterLogin[5].children[0].title = value;
-      });
-
-      //DMS
-      this.translate.get('Menu.dms').subscribe(value => {
-        this.AfterLogin[6].title = value;
-      });
-      this.translate.get('Menu.knowBank').subscribe(value => {
-        this.AfterLogin[6].children[0].title = value;
-      });
-
-      //Support
-      this.translate.get('Menu.support').subscribe(value => {
-        this.AfterLogin[7].title = value;
-      });
-      this.translate.get('Menu.helpDesk').subscribe(value => {
-        this.AfterLogin[7].children[0].title = value;
-      });
-      //#endregion
-    }
-    else if (this.IsInstitution) {
-
-      //#region My profile
-      this.translate.get('Menu.myProfile').subscribe(value => {
-        this.AfterLoginInstitution[0].title = value;
-      });
-
-      this.translate.get('Menu.profile').subscribe(value => {
-        this.AfterLoginInstitution[0].children[0].title = value;
-      });
-      this.translate.get('Menu.personIncharge').subscribe(value => {
-        this.AfterLoginInstitution[0].children[1].title = value;
-      });
-      this.translate.get('Menu.courses').subscribe(value => {
-        this.AfterLoginInstitution[0].children[2].title = value;
-      });
-      this.translate.get('Menu.genRefCode').subscribe(value => {
-        this.AfterLoginInstitution[0].children[3].title = value;
-      });
-      this.translate.get('Menu.subscription').subscribe(value => {
-        this.AfterLoginInstitution[0].children[4].title = value;
-      });
-      this.translate.get('DeleteMyAccount.deleteMyAcc').subscribe(value => {
-        this.AfterLoginInstitution[0].children[5].title = value;
-      });
-      //#endregion
-
-      //Job search
-      this.translate.get('Menu.jobSearch').subscribe(value => {
-        this.AfterLoginInstitution[1].title = value;
-      });
-
-      //Profile search
-      this.translate.get('Menu.profileSearch').subscribe(value => {
-        this.AfterLoginInstitution[2].title = value;
-      });
-
-      //Services
-      this.translate.get('Menu.services').subscribe(value => {
-        this.AfterLoginInstitution[3].title = value;
-      });
-      this.translate.get('Menu.seekingService').subscribe(value => {
-        this.AfterLoginInstitution[3].children[0].title = value;
-      });
-
-      //Credits
-      this.translate.get('Menu.credits').subscribe(value => {
-        this.AfterLoginInstitution[4].title = value;
-      });
-      this.translate.get('Menu.transCredits').subscribe(value => {
-        this.AfterLoginInstitution[4].children[0].title = value;
-      });
-      this.translate.get('Menu.creditReport').subscribe(value => {
-        this.AfterLoginInstitution[4].children[1].title = value;
-      });
-
-      //Alumni
-      this.translate.get('Menu.alumni').subscribe(value => {
-        this.AfterLoginInstitution[5].title = value;
-      });
-      this.translate.get('Menu.alumniDetails').subscribe(value => {
-        this.AfterLoginInstitution[5].children[0].title = value;
-      });
-
-      //DMS
-      this.translate.get('Menu.dms').subscribe(value => {
-        this.AfterLoginInstitution[6].title = value;
-      });
-      this.translate.get('Menu.knowBank').subscribe(value => {
-        this.AfterLoginInstitution[6].children[0].title = value;
-      });
-
-      //Support
-      this.translate.get('Menu.support').subscribe(value => {
-        this.AfterLoginInstitution[7].title = value;
-      });
-      this.translate.get('Menu.helpDesk').subscribe(value => {
-        this.AfterLoginInstitution[7].children[0].title = value;
-      });
-
-    }
-    else {
-
-      //#region My profile
-      this.translate.get('Menu.myProfile').subscribe(value => {
-        this.AfterLoginCorporate[0].title = value;
-      });
-
-      this.translate.get('Menu.profile').subscribe(value => {
-        this.AfterLoginCorporate[0].children[0].title = value;
-      });
-      this.translate.get('Menu.personIncharge').subscribe(value => {
-        this.AfterLoginCorporate[0].children[1].title = value;
-      });
-      this.translate.get('Menu.bankDetails').subscribe(value => {
-        this.AfterLoginCorporate[0].children[2].title = value;
-      });
-      this.translate.get('Menu.configuration').subscribe(value => {
-        this.AfterLoginCorporate[0].children[3].title = value;
-      });
-      this.translate.get('Menu.genRefCode').subscribe(value => {
-        this.AfterLoginCorporate[0].children[4].title = value;
-      });
-      this.translate.get('Menu.subscription').subscribe(value => {
-        this.AfterLoginCorporate[0].children[5].title = value;
-      });
-      this.translate.get('DeleteMyAccount.deleteMyAcc').subscribe(value => {
-        this.AfterLoginCorporate[0].children[6].title = value;
-      });
-      //#endregion
-
-      //Job search
-      this.translate.get('Menu.jobSearch').subscribe(value => {
-        this.AfterLoginCorporate[1].title = value;
-      });
-
-      //Profile search
-      this.translate.get('Menu.profileSearch').subscribe(value => {
-        this.AfterLoginCorporate[2].title = value;
-      });
-
-      //Services
-      this.translate.get('Menu.services').subscribe(value => {
-        this.AfterLoginCorporate[3].title = value;
-      });
-      this.translate.get('Menu.seekingService').subscribe(value => {
-        this.AfterLoginCorporate[3].children[0].title = value;
-      });
-
-      //Credits
-      this.translate.get('Menu.credits').subscribe(value => {
-        this.AfterLoginCorporate[4].title = value;
-      });
-      this.translate.get('Menu.transCredits').subscribe(value => {
-        this.AfterLoginCorporate[4].children[0].title = value;
-      });
-      this.translate.get('Menu.creditReport').subscribe(value => {
-        this.AfterLoginCorporate[4].children[1].title = value;
-      });
-
-      //Alumni
-      this.translate.get('Menu.alumni').subscribe(value => {
-        this.AfterLoginCorporate[5].title = value;
-      });
-      this.translate.get('Menu.alumniDetails').subscribe(value => {
-        this.AfterLoginCorporate[5].children[0].title = value;
-      });
-
-      //DMS
-      this.translate.get('Menu.dms').subscribe(value => {
-        this.AfterLoginCorporate[6].title = value;
-      });
-      this.translate.get('Menu.knowBank').subscribe(value => {
-        this.AfterLoginCorporate[6].children[0].title = value;
-      });
-
-      //Support
-      this.translate.get('Menu.support').subscribe(value => {
-        this.AfterLoginCorporate[7].title = value;
-      });
-      this.translate.get('Menu.helpDesk').subscribe(value => {
-        this.AfterLoginCorporate[7].children[0].title = value;
-      });
-
-    }
+ 
   }
 }
 

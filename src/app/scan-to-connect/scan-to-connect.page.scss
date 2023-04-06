@@ -1,0 +1,28 @@
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png');
+    background-size: cover;
+    --background: #EDF1FC;
+}
+
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+.display-justify {
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.scan-card {
+    background: #ffffffb3;
+    width: 88%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    border-radius: 10%;
+    box-shadow: 0px 8px 24px #00000026;
+}

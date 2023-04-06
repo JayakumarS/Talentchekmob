@@ -164,7 +164,7 @@ body {
     padding: 1rem 0.5rem 0.5rem;
     position: fixed;
     bottom: 0;
-    width: 100%; 
+    width: 100%;
 }
 
 // start here
@@ -373,6 +373,24 @@ body {
     line-height: 1.2;
 }
 
+.badge-solid-orange {
+    color: #fd7e14;
+    background-color: #fd7e1426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-blue {
+    color: #0d6efd;
+    background-color: #0d6efd26;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
 .badge {
     --bs-badge-padding-x: .65em;
     --bs-badge-padding-y: .35em;
@@ -393,9 +411,52 @@ body {
     border-radius: 24px;
     opacity: 1;
 }
+
 :root {
     .popover-content {
         left: 0 !important;
         width: 100%;
+    }
+}
+
+//spinner
+.spinner {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 300px auto;
+}
+
+.loader {
+    border: 7px solid #f3f3f3;
+    /* Light grey */
+    border-top: 7px solid #112e5b;
+    /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: loaderspin 1s linear infinite;
+    position: relative;
+}
+
+.loader-container {
+    position: absolute;
+    display: inline-block;
+    margin-left: -84%;
+}
+
+.loader-container span {
+    position: absolute;
+    top: 17%;
+    left: 12%;
+    width: 73%;
+}
+
+@keyframes loaderspin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

@@ -12,6 +12,7 @@ import { ModalController } from '@ionic/angular';
 export class ProfileViewPopupPage implements OnInit {
 
   talentId : string;
+  currendUserId: string;
   basicProfileDetails = [];
   educationList = [];
   certificationsList =[];
@@ -23,7 +24,8 @@ export class ProfileViewPopupPage implements OnInit {
 
     this.talentId = this.navParams.data.talentId;
     console.log(this.talentId);
-
+    this.currendUserId = localStorage.getItem("userId")  ; 
+    this.lessCredit();
     var profileViewUrl = "api/auth/app/IndividualProfileDetails/viewmatchesprofile"+"?talentId=" +this.talentId;
 
     this.storageservice.getrequest(profileViewUrl).subscribe(result => {
@@ -32,7 +34,18 @@ export class ProfileViewPopupPage implements OnInit {
     this.educationList = result['profileViewList'][0]["educationList"];
     this.certificationsList = result['profileViewList'][0]["certificationsList"];
     this.clubsList = result['profileViewList'][0]["clubsList"];
-      console.log(result["profileViewList"]);  
+      console.log(result["profileViewList"]); 
+       
+   });
+  }
+
+  lessCredit(){
+
+    var lessCreditURL = "api/auth/app/CommonUtility/creditPointdebit?talentId="+this.currendUserId+"&id="+this.talentId; 
+    this.storageservice.getrequest(lessCreditURL).subscribe(result => {
+     if (result["success"] == true) {
+     console.log(result);
+      }
    });
   }
 

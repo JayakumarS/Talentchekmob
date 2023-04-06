@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
   loginform: FormGroup;
   private loginInfo: AuthLoginInfo;
   error = "";
+  spinnerFlag: boolean = false;
 
 
   
@@ -42,8 +43,10 @@ export class SignInComponent implements OnInit {
   goto_signup(){
 
     this.error = "";
+    this.spinnerFlag = true;
     if (this.loginform.invalid) {
       this.error = "Invalid credentials";
+      this.spinnerFlag = false;
       return;
     }
     else{
@@ -57,7 +60,7 @@ export class SignInComponent implements OnInit {
   
             if (data) {
               if (data.success) {
-
+                this.spinnerFlag = false;
                 console.log(data);
                 localStorage.setItem('userId', data["username"]);
                 localStorage.setItem('userName', data["firstNameLastName"]);

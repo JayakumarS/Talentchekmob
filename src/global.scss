@@ -68,8 +68,8 @@
 .alert-title.sc-ion-alert-md {
     font-size: 25px;
     font-weight: 600;
-    font-family: "AustralisProSwash-Italic";
-    color: #b71f1f80;
+    font-family: Mr-eaves;
+    color: black;
 }
 
 // checkbox border color
@@ -91,11 +91,12 @@
 
 // Button color
 .alert-button-inner.sc-ion-alert-md {
-    color: #27246f;
+    color: #fff;
     font-weight: bold;
     font-size: larger;
+    font-family: 'Mr-eaves';
 }
 
-form{
+form {
     padding-bottom: 65px;
 }

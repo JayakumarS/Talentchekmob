@@ -36,6 +36,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Sim } from '@ionic-native/sim/ngx';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -81,6 +82,7 @@ export function createTranslateLoader(http: HttpClient) {
     UniqueDeviceID,
     AndroidPermissions,
     Sim,
+    BarcodeScanner,
     DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

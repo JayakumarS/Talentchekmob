@@ -42,6 +42,13 @@
 
     <br>
     <form>
+
+        <div class="spinner" *ngIf="spinnerFlag">
+            <div class="loader-container">
+                <span><img src="../../assets/img/faviconcircle.png"></span>
+                <div class="loader"></div>
+            </div>
+        </div>
         <ion-row *ngIf="basicprofilesearchList.length == 0">
             <ion-col size="12">
                 <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
@@ -52,13 +59,13 @@
         </ion-row>
         <div style="display: flex;justify-content: center;" *ngIf="basicprofilesearchList.length == 0">No Results to Display</div>
         <div *ngIf="basicprofilesearchList.length != 0">
-            <ion-card class="profilesearchcard" *ngFor="let profile of basicprofilesearchList" (click)="profileView(profile.talentid)">
+            <ion-card class="profilesearchcard" *ngFor="let profile of basicprofilesearchList" (click)="profileView(profile.talentid,profile.accounttype)">
                 <ion-card-content style="padding-bottom: 0px;">
 
                     <ion-row>
                         <ion-col size="2">
                             <ion-avatar size="medium">
-                                <img alt="Silhouette of a person's head" style=" height: 80%;width: 80%;" src="{{profile.profilepic}}" />
+                                <img alt="" style=" height: 80%;width: 80%;" src="{{profile.profilepic}}" />
                             </ion-avatar>
                         </ion-col>
 
@@ -69,7 +76,9 @@
 
                         </ion-col>
                         <ion-col size="2">
-                            <div class="badge badge-solid-green" style="border-radius: 11px;    margin-left: -10%;">{{profile.accounttype}}</div>
+                            <div *ngIf="profile.accounttype == 'public'" class="badge badge-solid-green" style="border-radius: 11px; text-transform: capitalize;   margin-left: -10%;">{{profile.accounttype}}</div>
+                            <div *ngIf="profile.accounttype == 'private'" class="badge badge-solid-orange" style="border-radius: 11px; text-transform: capitalize;   margin-left: -10%;">{{profile.accounttype}}</div>
+                            <div *ngIf="profile.accounttype == 'on demand'" class="badge badge-solid-blue" style="border-radius: 11px; text-transform: capitalize;   margin-left: -64%;">{{profile.accounttype}}</div>
                         </ion-col>
                     </ion-row>
 
@@ -85,10 +94,10 @@
                         margin-top: 2%;">{{profile.currentwork}}</ion-title>
 
                         </ion-col>
-                        <ion-col size="1" style="    margin-top: -11%;">
+                        <!-- <ion-col size="1" style="    margin-top: -11%;">
 
                             <ion-icon size="large" name="arrow-forward"></ion-icon>
-                        </ion-col>
+                        </ion-col> -->
 
                     </ion-row>
 
@@ -159,6 +168,8 @@
       </ul>
     </div>
   </div> -->
+
+
 
 
 </ion-content>

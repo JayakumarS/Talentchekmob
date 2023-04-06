@@ -1,74 +1,58 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-row>
+    <ion-toolbar>
+        <ion-row>
 
-      <ion-col size="0.5">
+            <ion-col size="0.5">
 
-      </ion-col>
-      <ion-col size="2">
-          <ion-icon size="large" name="arrow-back-circle-outline" (click)="connections()" style="margin-top:21%"></ion-icon>
-      </ion-col>
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="go_to_jobs()" style="margin-top:21%"></ion-icon>
+            </ion-col>
 
-      <ion-col size="7">
-          <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Application Received</ion-title>
-      </ion-col>
-  </ion-row>
-  
-  </ion-toolbar>
+            <ion-col size="7">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Application Received</ion-title>
+            </ion-col>
+        </ion-row>
+
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<form>
-  <ion-row  style="padding: 20px;font-size: 20px; font-family: sans-serif;font-weight: 600;
+    <form>
+        <ion-row style="padding: 20px;font-size: 20px; font-family: sans-serif;font-weight: 600;
   text-align: center; margin-top: 10%; color: #0d70df;">
-    <ion-col>
-      <ion-label>Application Submitted Successfully!</ion-label>
-    </ion-col>
-    
-    </ion-row>
-  <ion-row  >
-    <ion-col size="12" >
-        <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: -3%;height: 90%;">
-            <img alt="Silhouette of a person's head"src="\assets\img\Social 04.png">
-           
-        </ion-avatar>
-    </ion-col>
-</ion-row>
+            <ion-col>
+                <ion-label style="font-family: Mr-eaves;">Application Submitted Successfully!</ion-label>
+            </ion-col>
 
-<ion-row  style="padding: 20px;font-size: 18px;font-family: sans-serif;margin-top: -15%;font-weight: 600;">
-<ion-col>
-  <ion-label>Check your mail inbox for further communication from the company.</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: -3%;height: 90%;">
+                    <img alt="Silhouette of a person's head" src="\assets\img\Social 04.png">
+
+                </ion-avatar>
+            </ion-col>
+        </ion-row>
+
+        <ion-row style="padding: 20px;font-size: 18px;font-family: sans-serif;margin-top: -15%;font-weight: 600;">
+            <ion-col>
+                <p style="text-align: center;">Check your mail inbox for further communication from the company.</p>
 
 
-</ion-col>
+            </ion-col>
 
-</ion-row>
-<ion-row  style="font-size: 20px;font-family: sans-serif;
+        </ion-row>
+        <ion-row style="font-size: 20px;font-family: sans-serif;
 text-align: center;font-weight: 600;">
-  <ion-col>
-    <ion-button  class="search-button" style="    width: 55px;
+            <ion-col>
+                <ion-button class="search-button" style="
     font-size: 17px;" (click)="Apply()">Ok</ion-button>
-  
-  
-  </ion-col>
-  
-  </ion-row>
-<div class="footer-nav">
-  <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
-    <ion-icon size="large" name="search-circle"></ion-icon>
-  </button>
-  <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
-    <ion-icon size="large" name="earth-sharp"></ion-icon>
-  </button>
-  <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
-    <ion-icon size="large" name="apps"></ion-icon>
-  </button>
-  <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
-    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-  </button>
-  <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
-    <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-  </button>
-</div>
-</form>
+
+
+            </ion-col>
+
+        </ion-row>
+
+    </form>
 </ion-content>

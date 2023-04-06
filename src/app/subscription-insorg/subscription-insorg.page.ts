@@ -167,7 +167,7 @@ export class SubscriptionInsorgPage implements OnInit {
 
     var subscripamt = (amountVal * 100); //To conver to paisa/units
     this.exchangeAmount = amountVal ; // without paisa coversion to in to the table insertions
-    let orderURL = "/api/company/SubscriptionpaymentLiveMob";
+    let orderURL = "api/auth/app/subscription/payments/Subscriptionpayment";
     var options = {
       "amount": subscripamt,
       "currency": this.currencyVal,
@@ -213,7 +213,7 @@ export class SubscriptionInsorgPage implements OnInit {
       image: 'https://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png',
       order_id: orderId,
       currency: this.currencyVal,
-      key: 'rzp_live_ABLgrHfsy2Fhkb',
+      key: 'rzp_test_VTDYOGZm0Ivt3N',
       amount: subscripamt,
       name: 'Talent Chek',
       theme: {

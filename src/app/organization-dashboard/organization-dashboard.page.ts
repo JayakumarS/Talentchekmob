@@ -59,6 +59,10 @@ export class OrganizationDashboardPage implements OnInit {
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
+
+  goto_subscribe(){
+    this.router.navigate(['subscription-insorg']);
+  }
   // footer nav
 
   goto_profileSearch(){

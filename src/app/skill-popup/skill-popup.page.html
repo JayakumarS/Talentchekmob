@@ -1,93 +1,74 @@
 <ion-header>
-  <ion-toolbar class="new-background-color">
-      <ion-row>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
 
-          <ion-col size="0.5">
+            <ion-col size="0.5">
 
-          </ion-col>
-          <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
+            </ion-col>
 
-          <ion-col size="7">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Connections</ion-title>
-          </ion-col>
-      </ion-row>
+            <ion-col size="7">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Connections</ion-title>
+            </ion-col>
+        </ion-row>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
- 
- 
-    
+
+
+
 <ion-content>
-  <form [formGroup]="skillForm">
-    <ion-card-content>
-    <ion-row class="talentrow">
-        <ion-col>
-            <div class="button-content">
-               
-              <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
-              <ion-item fill="outline" class="input-field">
-                <div>{{ selectedSkills }}
-                  <ion-icon *ngIf="selectedSkills != undefined && selectedSkills != ''"
-                      name="close-circle" (click)="removeSkill(selectedSkills)"></ion-icon>
-                </div> 
-                   <ion-input  warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-input>
-              </ion-item> 
-  
-              <ion-list *ngIf="showSkillResults">
-                  <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text,result.id)">
-                      {{ result.text }}
-                  </ion-item>
-              </ion-list>
+    <form [formGroup]="skillForm">
+        <ion-card-content>
+            <ion-row class="talentrow">
+                <ion-col>
+                    <div class="button-content">
+
+                        <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <div>{{ selectedSkills }}
+                                <ion-icon *ngIf="selectedSkills != undefined && selectedSkills != ''" name="close-circle" (click)="removeSkill(selectedSkills)"></ion-icon>
+                            </div>
+                            <ion-input warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                        </ion-item>
+
+                        <ion-list *ngIf="showSkillResults">
+                            <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text,result.id)">
+                                {{ result.text }}
+                            </ion-item>
+                        </ion-list>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="talentrow">
+                <ion-col>
+                    <ion-range min="0" style="   display: flex;     width: 112%;
+            align-items: flex-end; margin-left: -8%;" max="100" formControlName="expertise" [(ngModel)]="sliderValue" (ionChange)="onSliderChange($event.target.value)">
+                        <ion-label slot="start">Beginner</ion-label>
+                        <ion-label slot="end">Expert</ion-label>
+                    </ion-range>
+
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <div *ngIf="!edit" class="button-content" style="margin: auto;">
+                    <div class="display-justify">
+                        <ion-button class="custom-button" (click)="saveSkill()">Add</ion-button>
+                    </div>
                 </div>
-        </ion-col>
-    </ion-row>
 
-    <ion-row class="talentrow">
-        <ion-col>
-            <ion-range min="0" style="   display: flex;     width: 112%;
-            align-items: flex-end; margin-left: -8%;" max="100"  formControlName="expertise" [(ngModel)]="sliderValue" (ionChange)="onSliderChange($event.target.value)">
-                <ion-label  slot="start">Beginner</ion-label>
-                <ion-label  slot="end">Expert</ion-label>
-              </ion-range>
-              
-        </ion-col>
-    </ion-row>
-    <ion-row>
-      <div *ngIf="!edit" class="button-content" style="margin: auto;">
-        <div class="display-justify">
-          <ion-button class="custom-button" (click)="saveSkill()">Add</ion-button>
-       </div>
-        </div>
- 
-       <div *ngIf="edit" class="button-content" style="margin: auto;">
-        <div class="display-justify">
-          <ion-button class="custom-button" (click)="updateSkill()">Update</ion-button>
-       </div>
-      </div>
-    </ion-row>
-    
-</ion-card-content>
-</form>
+                <div *ngIf="edit" class="button-content" style="margin: auto;">
+                    <div class="display-justify">
+                        <ion-button class="custom-button" (click)="updateSkill()">Update</ion-button>
+                    </div>
+                </div>
+            </ion-row>
 
-<div class="footer-nav">
-  <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-<ion-icon size="large" name="search-circle"></ion-icon>
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-<ion-icon size="large" name="earth-sharp"></ion-icon>
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+        </ion-card-content>
+    </form>
 
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-<ion-icon size="large" name="person-circle-sharp"></ion-icon>
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
 
-</button>
-</div>
 </ion-content>

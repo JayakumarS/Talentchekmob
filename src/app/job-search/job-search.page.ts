@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class JobSearchPage implements OnInit {
   formValues: any; 
   roleId: any;
   RoleID: any;
+  currentUserId:any;
   presentPopover(e: Event) {
     this.popover.event = e;
     this.isOpen = true;
@@ -27,11 +28,21 @@ export class JobSearchPage implements OnInit {
   jobSearchForm : FormGroup;
   uls :any = [];
   basicprofilesearchList =[];
+  spinnerFlag: boolean = false;
   flagChange:boolean=false;
   flag: boolean =false;
-  constructor(private fb: FormBuilder,
-    private route: ActivatedRoute,public storageservice: StorageService, public modalController: ModalController,public router:Router) {
+  creditPoints: any;
 
+
+  
+  
+  constructor(private fb: FormBuilder,
+    private route: ActivatedRoute,public storageservice: StorageService, public modalController: ModalController,
+    public router:Router,private loadingCtrl: LoadingController,public alertController: AlertController) {
+
+   this.creditPoints = localStorage.getItem("creditPoints") ;
+   this.roleId = localStorage.getItem("roleId");
+   this.currentUserId = localStorage.getItem("userId");
       
   this.route.queryParams.subscribe(params => {
     if (params) {
@@ -39,16 +50,28 @@ export class JobSearchPage implements OnInit {
       if (params != null) {
     
         this.formValues = params;
-
+        this.spinnerFlag = true;
+   
         var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
 
         this.storageservice.postrequest(BasicSearcUrl, this.formValues).subscribe(result => {
           this.basicprofilesearchList = result['basicprofilesearchList'];
           if(this.basicprofilesearchList.length>=1){
+
+            this.basicprofilesearchList.forEach(element=>{
+              if(element.profilepic=="null" || element.profilepic==""){
+               element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
+              }
+               
+             });
            this.flagChange =true;
+           this.spinnerFlag = false;
+       
            }
            else{
              this.flagChange=false;
+             this.spinnerFlag = false;
+        
            }
           console.log(result);
    
@@ -112,6 +135,8 @@ export class JobSearchPage implements OnInit {
   };
 
   search(){
+
+    this.spinnerFlag = true;
    console.log(this.jobSearchHeadForm.value); 
 
        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
@@ -125,10 +150,20 @@ export class JobSearchPage implements OnInit {
      this.storageservice.postrequest(BasicSearcUrl, postData).subscribe(result => {
        this.basicprofilesearchList = result['basicprofilesearchList'];
        if(this.basicprofilesearchList.length>=1){
+
+        this.basicprofilesearchList.forEach(element=>{
+         if(element.profilepic=="null" || element.profilepic==""){
+          element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
+         }
+          
+        });
+
         this.flagChange =true;
+        this.spinnerFlag = false;
         }
         else{
           this.flagChange=false;
+          this.spinnerFlag = false;
         }
        console.log(result);
 
@@ -136,6 +171,8 @@ export class JobSearchPage implements OnInit {
    }
 
    goto_advanceSearch(){
+
+    this.basicprofilesearchList = [];
 
     this.router.navigate(['/search-settings']);
    }
@@ -153,28 +190,249 @@ export class JobSearchPage implements OnInit {
     node.classList.add(className);
   }
 
-  async profileView(talentId) {
+  async profileView(talentId,accounttype) {
 
-    const modal = await this.modalController.create({
-      component: ProfileViewPopupPage,
-      cssClass: 'my-custom-class',
-      componentProps: {
-        "talentId": talentId,
+
+    if(this.creditPoints < 2){
+
+      {
+        let alert = await this.alertController.create({
+          header: 'Credit Points Alert!',
+          message: "You're low on credits. Go to Pricing & Credits to recharge.",
+          cssClass: 'alertclass',
+          buttons: [
+            {
+              text: '',
+              role: 'cancel',
+              handler: () => {
+               console.log('Confirm Cancel');
+              }
+            },
+            {
+              text: 'Recharge Now',
+              role: 'btn',
+              handler: () => {
+
+                if (this.roleId.includes('1')) {
+                  this.router.navigate(['/subscription-individual']);
+                } else if (this.roleId.includes('2')) {
+                  this.router.navigate(['/subscription-insorg']);
+                } else if (this.roleId.includes( '3')) {
+                  this.router.navigate(['/subscription-insorg']);
+                }
+             //   console.log('Confirm Cancel');
+              }
+            }
+          ]
+        });
+        await alert.present();
       }
-    });
+    }
+    else if(accounttype == "private"){
+     this.PrivateUserAccTypeAlert();
+    }
+    else if (accounttype == "on demand"){
+    
+    // this.OnDemandUserAccTypeAlert(talentId);
+    this.checkOnDemandUserProp(talentId);
+    }
+    else{
 
-    modal.onDidDismiss().then((dataReturned) => {
+     const modal = await this.modalController.create({
+       component: ProfileViewPopupPage,
+       cssClass: 'my-custom-class',
+       componentProps: {
+         "talentId": talentId,
+      }
+     });
+
+     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
 
-        //#region Getting values from popup
-        console.table("One: " + dataReturned);
-        //#endregion
+         //#region Getting values from popup
+         console.table("One: " + dataReturned);
+         //#endregion
 
       }
-    });
+     });
 
     return await modal.present();
+    }
   }
+
+
+  checkOnDemandUserProp(action1){
+
+    let onDemandUrl =  "api/auth/app/profileLookUp/onDemandReuest?currentUserId="+this.currentUserId +"&action1="+action1;
+
+    this.storageservice.getrequest(onDemandUrl).subscribe(async result => {
+      
+      console.log(result);
+
+
+      if(result["Success"] == true){
+
+        if(result["onDemandStatus"] == "showrequestpopup"){
+
+          this.OnDemandUserAccTypeAlert(action1);
+        }
+        else if(result["onDemandStatus"] == "requested"){
+
+         let message = "Awaiting access permission from user.";
+         this.OndemandAccTypeAlert(message);
+
+        }
+
+        else if(result["onDemandStatus"] == "true"){
+
+          const modal = await this.modalController.create({
+            component: ProfileViewPopupPage,
+            cssClass: 'my-custom-class',
+            componentProps: {
+              "talentId": action1,
+           }
+          });
+     
+          modal.onDidDismiss().then((dataReturned) => {
+           if (dataReturned !== null) {
+     
+              //#region Getting values from popup
+              console.table("One: " + dataReturned);
+              //#endregion
+     
+           }
+          });
+     
+         return await modal.present();
+        }
+
+        else if(result["onDemandStatus"] == "false"){
+
+          let message = "Access to view profile denied by user."
+
+          this.OndemandAccTypeAlert(message);
+
+        }
+      }
+
+   });
+
+  }
+
+  async OndemandAccTypeAlert(Message) {
+    let alert = await this.alertController.create({
+      header: 'Alert!',
+      message: Message,
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }
+      ]
+    });
+    await alert.present();
+
+  }
+
+
+  async OnDemandUserAccTypeAlert(talentId) {
+    let alert = await this.alertController.create({
+      header: 'Alert!',
+      message: 'Please send a request to view full profile.',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'Send request',
+          //cssClass: 'btncss',
+          handler: () => {
+            console.log('Send request now, Confirm Okay');
+
+            //Main concept.
+            console.log("Id: " + talentId);
+            //this.showLoadingIndicator(); // Show Loading indicator
+
+            // try {
+            //   var postData = {
+            //     'empExpId': empExpId
+            //   }
+
+            //   console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
+
+            //   var deleteExperienceServiceUrl = "/hrms/master/employeeAdminMaster/deleteExperiance";
+
+            //   this.storageservice.postrequest(deleteExperienceServiceUrl, postData).subscribe(result => {
+            //     console.log(result);
+
+            //     if (result["success"] == true) {
+            //       this.storageservice.successToast('Deleted successfully');
+
+            //       //this.BindExistingValues();
+
+            //       this.hideLoadingIndicator(); //Hide loading indicator
+            //     }
+            //     else if (result["success"] == false) {
+            //       var msg = result["message"];
+            //       if (msg == null) {
+            //         msg = "Web service does not give proper message";
+            //       }
+            //       this.storageservice.warningToast(msg);
+            //       this.hideLoadingIndicator(); //Hide loading indicator
+            //     }
+            //     else {
+            //       this.storageservice.warningToast("Connection unavailable!");
+            //       this.hideLoadingIndicator(); //Hide loading indicator
+            //     }
+            //   });
+            // }
+            // catch (Exception) {
+            //   this.storageservice.warningToast('Connection unavailable!');
+            //   this.hideLoadingIndicator(); //Hide loading indicator
+            // }
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+
+  async PrivateUserAccTypeAlert() {
+    let alert = await this.alertController.create({
+      header: 'Alert!',
+      message: 'This is a private profile, No access to view full details.',
+      cssClass: 'alertclass',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          //cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
 
 
   // footer nav
@@ -217,6 +475,22 @@ export class JobSearchPage implements OnInit {
   }
   goto_more(){
     this.router.navigate(['/settings']);
+  }
+
+
+  showLoadingIndicator() {
+    this.loadingCtrl.create({
+      message: 'Processing...',
+      spinner: 'bubbles',
+      cssClass: 'loadingIndicatorCustom'
+    }).then((loading) => {
+      loading.present();
+    });
+  }
+  hideLoadingIndicator() {
+    setTimeout(() => {
+      this.loadingCtrl.dismiss();
+    });
   }
  
 }

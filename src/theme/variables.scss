@@ -123,7 +123,7 @@
         --ion-color-medium-contrast-rgb: 0, 0, 0;
         --ion-color-medium-shade: #86888f;
         --ion-color-medium-tint: #a2a4ab;
-        --ion-color-light: #222428;
+        --ion-color-light: #fff;
         --ion-color-light-rgb: 34, 36, 40;
         --ion-color-light-contrast: #ffffff;
         --ion-color-light-contrast-rgb: 255, 255, 255;
@@ -160,16 +160,16 @@
         --ion-color-step-850: #d9d9d9;
         --ion-color-step-900: #e6e6e6;
         --ion-color-step-950: #f2f2f2;
-        --ion-toolbar-background: #0d0d0d;
-        --ion-item-background: #000000;
-        --ion-card-background: #1c1c1d;
+        --ion-toolbar-background: #fff;
+        --ion-item-background: #ffff;
+        --ion-card-background: #ffff;
     }
     /*
      * Material Design Dark Theme
      * -------------------------------------------
      */
     .md body {
-        --ion-background-color: #121212;
+        --ion-background-color: #fff;
         --ion-background-color-rgb: 18, 18, 18;
         --ion-text-color: #121212;
         --ion-text-color-rgb: 255, 255, 255;
@@ -193,10 +193,10 @@
         --ion-color-step-850: #dbdbdb;
         --ion-color-step-900: #e7e7e7;
         --ion-color-step-950: #f3f3f3;
-        --ion-item-background: #1e1e1e;
-        --ion-toolbar-background: #1f1f1f;
-        --ion-tab-bar-background: #1f1f1f;
-        --ion-card-background: #1e1e1e;
+        --ion-item-background: #ffff;
+        --ion-toolbar-background: #ffff;
+        --ion-tab-bar-background: #fff;
+        --ion-card-background: #fff;
     }
 }
 

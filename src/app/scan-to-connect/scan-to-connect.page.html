@@ -1,0 +1,134 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+
+        <ion-row>
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileSearch()" style="margin-top:14%"></ion-icon>
+            </ion-col>
+            <ion-col size="10" style="align-self: center;">
+                <ion-title class="pageHeaderTitle">
+                    <div class="ion-text-wrap" style="font-family: Mr-eaves;">Scan to Connect</div>
+                </ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="display-justify">
+
+        <ion-card class="scan-card">
+            <br>
+            <br>
+            <img width="80px" alt="Silhouette of mountains" src="../../assets/img/scan _to_connect.png" />
+            <ion-card-header>
+                <ion-card-title style="font-size: 22px; font-weight: bold;color:black;">QR scanning
+                </ion-card-title>
+                <ion-card-subtitle>Know about profile</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-button style="--background: #112e5a;" expand="block" (click)="scanBarcode()">Scan a Code
+                </ion-button>
+
+                <div *ngIf="IsShowProfile">
+                    <div>
+                        <ion-row class="profilehome">
+                            <ion-col size="2">
+                            </ion-col>
+                            <ion-col size="8" class="profiletext" style="text-align: -webkit-center;">
+                                <div>
+                                    <ion-avatar class="item-avatar">
+                                        <img [src]="profileImageURL" id="prfoileImage">
+                                    </ion-avatar>
+                                </div>
+                            </ion-col>
+                            <ion-col size="2">
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <form [formGroup]="talentform" novalidate>
+                        <ion-row>
+                            <div class="ion-text-center" style="margin:auto">
+                                <p>Add <span style="color: black;font-size:'18px';">{{scanned_UserName}}</span> from
+                                    <ion-input *ngIf="isformLoc == false" style="color: black;font-size:'18px';border: orange 1px solid; border-radius: 10px;" type="text" formControlName="fromLocation" [(ngModel)]="fromLocationVal"></ion-input> as my
+                                    <ion-select style="color: black;font-size:'18px';border: orange 1px solid; border-radius: 10px;" okText="Okay" cancelText="Dismiss" formControlName="relationShip" [(ngModel)]="relationShipVal">
+                                        <ion-select-option *ngFor='let blElement of relationShipResponse' value="{{blElement.id}}">
+                                            {{blElement.text.charAt(0).toUpperCase() + blElement.text.substr(1).toLowerCase()}}
+                                        </ion-select-option>
+                                    </ion-select>
+                                    to my talent connections
+                                </p>
+
+                                <div style="padding-top: 16px;">
+                                    <div style="display: flex; align-items: center; height: 100%;font-size: 16px;">
+                                        <ion-label class="blackTheme">Favorite </ion-label>
+                                        <ion-icon style="color: #f70505;font-size: x-large;" name="heart-circle-outline"></ion-icon>
+                                        <ion-label class="blackTheme"> ?</ion-label>
+                                    </div>
+                                    <ion-row class="talentrow" style="text-align: -webkit-center;">
+                                        <ion-radio-group formControlName="favourite" [(ngModel)]="favouriteVal" style="width:100%">
+                                            <ion-row>
+                                                <ion-col size="4">
+                                                    <div class="genderbg">
+                                                        <div class="genderpadding">
+                                                            <span class="emojitext">Yes</span>
+                                                            <ion-radio mode="md" class="ion-item-left" value="Yes"></ion-radio>
+                                                        </div>
+                                                    </div>
+                                                </ion-col>
+
+                                                <ion-col size="4">
+                                                    <div class="genderbg">
+                                                        <div class="genderpadding">
+                                                            <span class="emojitext">No</span>
+                                                            <ion-radio mode="md" class="ion-item-left" value="No"></ion-radio>
+                                                        </div>
+                                                    </div>
+                                                </ion-col>
+                                            </ion-row>
+                                        </ion-radio-group>
+                                    </ion-row>
+                                </div>
+
+                                <!-- Rate the organization -->
+                                <ion-row class="talentrow">
+                                    <ion-col>
+                                        <ion-item class="formitem itemborderNoBottom" lines="none">
+                                            <ion-label class="blackTheme" position="floating">Rate the Connection</ion-label>
+                                            <ion-row style="padding-top: 20px;">
+                                                <ion-button *ngFor="let index of iconsArray" id="{{index}}" icon-only (click)="changeRating(index)">
+                                                    <ion-icon style="color: yellow;" *ngIf="rateOrgVal >= index" name="star"></ion-icon>
+                                                    <ion-icon style="color: yellow;" *ngIf="index > rateOrgVal" name="star-outline"></ion-icon>
+                                                </ion-button>
+                                            </ion-row>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+
+                            </div>
+                        </ion-row>
+                        <br />
+
+                        <!-- Save button -->
+                        <div class="yesnoButtonPanel">
+                            <ion-row>
+                                <ion-col style="text-align: center;" class="ion-margin-top">
+                                    <ion-button type="submit" shape="round" class="ButtonNormal" color="success" (click)="SaveAndInvite()">
+                                        <ion-icon slot="start" name="paper-plane-outline"></ion-icon>Send Invite
+                                    </ion-button>
+                                    <ion-button shape="round" class="ButtonNormal" color="danger" (click)="close()">
+                                        <ion-icon slot="start" name="close-circle-outline"></ion-icon>Cancel
+                                    </ion-button>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </form>
+                </div>
+            </ion-card-content>
+
+        </ion-card>
+
+    </div>
+</ion-content>

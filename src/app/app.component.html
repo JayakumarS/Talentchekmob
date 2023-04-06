@@ -1,8 +1,11 @@
 <ion-app>
 
-    <div *ngIf="showSplash">
 
-        <div class="spinner"></div>
+    <div class="spinner" *ngIf="showSplash">
+        <div class="loader-container">
+            <span><img src="../../assets/img/faviconcircle.png"></span>
+            <div class="loader"></div>
+        </div>
     </div>
 
 

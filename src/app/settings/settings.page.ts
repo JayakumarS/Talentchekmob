@@ -46,9 +46,17 @@ export class SettingsPage implements OnInit {
     this.router.navigate(['/visibility']);
   }
 
+  goto_consent(){
+    this.router.navigate(['/consent-form'])
+  }
+
   goto_subscribe(){
     this.router.navigate(['/subscription-individual']);
 
+  }
+
+  goto_scantoconnect(){
+    this.router.navigate(['/scan-to-connect']);
   }
 
   logOut() {

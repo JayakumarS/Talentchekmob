@@ -1,74 +1,73 @@
-
 <ion-header>
-  <ion-toolbar class="new-background-color">
-      <ion-row>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
 
-          <ion-col size="0.5">
+            <ion-col size="0.5">
 
-          </ion-col>
-          <ion-col size="2">
-              <ion-icon size="large" name="arrow-back-circle-outline"  (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
+            </ion-col>
 
-          <ion-col size="7">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Ceritications</ion-title>
-          </ion-col>
-      </ion-row>
+            <ion-col size="7">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Ceritications</ion-title>
+            </ion-col>
+        </ion-row>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="certificationForm">
+    <form [formGroup]="certificationForm">
 
-  <ion-card-content>
-      <ion-row class="talentrow">
-          <ion-col>
-              <div class="button-content">
-                  <ion-label class="labels">Certification/License/Patent/Publication Name <small style="color: #f70505;">*</small></ion-label>
-                  <ion-item fill="outline" class="input-field">
-                      <ion-input formControlName="certificationName"></ion-input>
-                  </ion-item>
-                  <div *ngIf=" certificationForm.controls.certificationName.hasError('required') && certificationForm.controls.certificationName.touched">
-                    <small style="color: #f70505;">Certification/License/Patent/Publication Name is required</small>
-                  </div>
-                  </div>
-                  <div class="button-content">
-                      <ion-label class="labels">Issuing Organisation<small style="color: #f70505;">*</small></ion-label>
-                      <ion-item fill="outline" class="input-field">
-                          <ion-input formControlName="issuedBy"></ion-input>
-                      </ion-item>
-                      <div *ngIf=" certificationForm.controls.issuedBy.hasError('required') && certificationForm.controls.issuedBy.touched">
-                        <small style="color: #f70505;">Issuing Organisation is required</small>
-                      </div>
-                      </div>
-                      <div class="button-content">
-                          <ion-label class="labels">Certification/License/Patent/Publication Number<small style="color: #f70505;">*</small></ion-label>
-                          <ion-item fill="outline" class="input-field">
-                              <ion-input formControlName="certificationId"></ion-input>
-                          </ion-item>
-                          <div *ngIf=" certificationForm.controls.certificationId.hasError('required') && certificationForm.controls.certificationId.touched">
+        <ion-card-content>
+            <ion-row class="talentrow">
+                <ion-col>
+                    <div class="button-content">
+                        <ion-label class="labels">Certification/License/Patent/Publication Name <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="certificationName"></ion-input>
+                        </ion-item>
+                        <div *ngIf=" certificationForm.controls.certificationName.hasError('required') && certificationForm.controls.certificationName.touched">
+                            <small style="color: #f70505;">Certification/License/Patent/Publication Name is required</small>
+                        </div>
+                    </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Issuing Organisation<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="issuedBy"></ion-input>
+                        </ion-item>
+                        <div *ngIf=" certificationForm.controls.issuedBy.hasError('required') && certificationForm.controls.issuedBy.touched">
+                            <small style="color: #f70505;">Issuing Organisation is required</small>
+                        </div>
+                    </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Certification/License/Patent/Publication Number<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="certificationId"></ion-input>
+                        </ion-item>
+                        <div *ngIf=" certificationForm.controls.certificationId.hasError('required') && certificationForm.controls.certificationId.touched">
                             <small style="color: #f70505;">Certification/License/Patent/Publication No is required</small>
-                          </div>
-                          </div>
-                          <div class="button-content">
-                              <ion-label class="labels">Issue Date<small style="color: #f70505;">*</small></ion-label>
-                              <ion-item fill="outline" class="input-field">
-                                  <ion-datetime (ionChange)="validateStartDate($event.target.value)"  displayFormat="DD.MM.YYYY"  formControlName="issuedDateObj" presentation="date"></ion-datetime>
-                              </ion-item>
-                              <div *ngIf=" certificationForm.controls.issuedDateObj.hasError('required') && certificationForm.controls.issuedDateObj.touched">
-                                <small style="color: #f70505;">Issue Date is required</small>
-                              </div>
-                              </div>
-                              <div class="button-content">
-                                  <ion-label class="labels">Expiry Date(if applicable) </ion-label>
-                                  <ion-item fill="outline" class="input-field">
-                                      <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY"  formControlName="expiryDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
-                                  </ion-item>
-                                 
-                                    
-                                  </div>
-                                  <!-- <div class="button-content">
+                        </div>
+                    </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Issue Date<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-datetime (ionChange)="validateStartDate($event.target.value)" displayFormat="DD.MM.YYYY" formControlName="issuedDateObj" presentation="date"></ion-datetime>
+                        </ion-item>
+                        <div *ngIf=" certificationForm.controls.issuedDateObj.hasError('required') && certificationForm.controls.issuedDateObj.touched">
+                            <small style="color: #f70505;">Issue Date is required</small>
+                        </div>
+                    </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Expiry Date(if applicable) </ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY" formControlName="expiryDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                        </ion-item>
+
+
+                    </div>
+                    <!-- <div class="button-content">
                                       <ion-button style="background: #3880ff;border-radius:20px">
                                           <ion-icon lazy="true" slot="start" name="image"></ion-icon>
                                            <input type="file" formControlName="certificationPath" (change)="loadImageFromDevice($event)" id="file-input"
@@ -76,58 +75,40 @@
                                         </ion-button>
                                   </div> -->
 
-                                  <!-- Upload file -->
-                  <ion-row class="talentrow">
-                    <ion-col>
-                      <ion-item class="formitem itemborder" lines="none">
-                        <ion-label class="blackTheme" >uploadFile<span style="color:red">*</span></ion-label>
-                        
-                        <ion-input type="file" formControlName="uploadFile" (change)="upload($event)"></ion-input> 
-                     
-                      </ion-item>
-                    </ion-col>
-                  </ion-row>
+                    <!-- Upload file -->
+                    <ion-row class="talentrow">
+                        <ion-col>
+                            <ion-item class="formitem itemborder" lines="none">
+                                <ion-label class="blackTheme">uploadFile<span style="color:red">*</span></ion-label>
 
-                                  <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">
-                                    <div class="display-justify">
-                                      <ion-button class="custom-button" (click)="saveCertification()">Save</ion-button>
-                                   </div>
-                                         </div>
-                                  <div *ngIf="edit" class="button-content" style="width: 50%; margin: auto;">
-                                    <div class="display-justify">
-                                      <ion-button class="custom-button" (click)="UpdateCertification()">Update</ion-button>
-                                   </div>
-                                         </div>
-                    
-                
-                
-          </ion-col>
-      </ion-row>
+                                <ion-input type="file" formControlName="uploadFile" (change)="upload($event)"></ion-input>
 
-      
-      
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
 
-  </ion-card-content>
+                    <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">
+                        <div class="display-justify">
+                            <ion-button class="custom-button" (click)="saveCertification()">Save</ion-button>
+                        </div>
+                    </div>
+                    <div *ngIf="edit" class="button-content" style="width: 50%; margin: auto;">
+                        <div class="display-justify">
+                            <ion-button class="custom-button" (click)="UpdateCertification()">Update</ion-button>
+                        </div>
+                    </div>
 
-</form>
 
-<div class="footer-nav">
-  <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-<ion-icon size="large" name="search-circle"></ion-icon>
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-<ion-icon size="large" name="earth-sharp"></ion-icon>
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
 
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-<ion-icon size="large" name="person-circle-sharp"></ion-icon>
-</button>
-  <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon> 
-</button>
-</div>
+                </ion-col>
+            </ion-row>
+
+
+
+
+        </ion-card-content>
+
+    </form>
+
 
 </ion-content>

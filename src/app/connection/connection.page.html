@@ -1,34 +1,34 @@
 <ion-header>
-  <ion-toolbar class="new-background-color">
-      <ion-row>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
 
-          <ion-col size="0.5">
+            <ion-col size="0.5">
 
-          </ion-col>
-          <ion-col size="2" *ngIf="RoleID.includes('1')">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
-          <ion-col size="2" *ngIf="RoleID.includes('2')">
-            <ion-icon size="large" name="arrow-back-circle-outline"  (click)="newOrgprofileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
-          <ion-col size="2" *ngIf="RoleID.includes('3')">
-            <ion-icon size="large" name="arrow-back-circle-outline"  (click)="newInstiprofileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
+            </ion-col>
+            <ion-col size="2" *ngIf="RoleID.includes('1')">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
+            </ion-col>
+            <ion-col size="2" *ngIf="RoleID.includes('2')">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="newOrgprofileView()" style="margin-top:21%"></ion-icon>
+            </ion-col>
+            <ion-col size="2" *ngIf="RoleID.includes('3')">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="newInstiprofileView()" style="margin-top:21%"></ion-icon>
+            </ion-col>
 
-          <ion-col size="7">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Connections</ion-title>
-          </ion-col>
-      </ion-row>
+            <ion-col size="7">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Connections</ion-title>
+            </ion-col>
+        </ion-row>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <form  [formGroup]="ConnectionsForm">
+    <form [formGroup]="ConnectionsForm">
 
-  <ion-card-content>
-      <!-- <ion-row>
+        <ion-card-content>
+            <!-- <ion-row>
           <ion-col size="8">
               <ion-title style="color:black; margin-left: -5%;">Connections</ion-title>
           </ion-col>
@@ -37,7 +37,7 @@
           </ion-col>
       </ion-row> -->
 
-      <!-- <ion-row class="talentrow" style="display: flex;" style="column-count: 2">
+            <!-- <ion-row class="talentrow" style="display: flex;" style="column-count: 2">
           <ion-col size="6">
               <div class="row">
                   <h5>2</h5>
@@ -53,125 +53,135 @@
 
       </ion-row> -->
 
-      <form  [formGroup]="ConnectionsForm" (ngSubmit)="onSubmit()">
-          <div id="test-l-1" class="content">
-              <div class="button-content">
-                  <ion-label class="labels">Connection's Mobile Number <small style="color: #f70505;">*</small></ion-label>
-                  <ion-item fill="outline" class="input-field">
-                      <ion-input formControlName="receiverMobileNo" (ionChange)="getconnectionDetails($event.target.value)"></ion-input>
-                  </ion-item>
-                  <ion-sub-title style="color:gray">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title>
-                <br>
-                  <h6>
-                  <span *ngIf="receiverRegistered" style="color: #30ae30;">Connection is a registered user :{{this.ConnectionsForm.value.receiverTalentId}} </span>
-                  <span *ngIf="!receiverRegistered" style="color: #ae3030;">{{this.Message}}</span>
-                </h6>
-                </div>
-                  <ion-spacer size="large"></ion-spacer><br>
-                   <div class="button-content">
-                      <ion-label class="labels">Connection's Name <small style="color: #f70505;">*</small></ion-label>
-                      <ion-item fill="outline" class="input-field">
-                          <ion-input formControlName="receiverName"></ion-input>
-                      </ion-item>
-                      </div>
+            <form [formGroup]="ConnectionsForm" (ngSubmit)="onSubmit()">
+                <div id="test-l-1" class="content">
+                    <div class="button-content">
+                        <ion-label class="labels">Connection's Mobile Number <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="receiverMobileNo" (ionChange)="getconnectionDetails($event.target.value)"></ion-input>
+                        </ion-item>
+                        <ion-sub-title style="color:gray; font-family: poppins; ">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title>
+                        <br>
+                        <h6>
+                            <span *ngIf="receiverRegistered" style="color: #30ae30;">Connection is a registered user :{{this.ConnectionsForm.value.receiverTalentId}} </span>
+                            <span *ngIf="!receiverRegistered" style="color: #ae3030;">{{this.Message}}</span>
+                        </h6>
+                    </div>
+                    <ion-spacer size="large"></ion-spacer><br>
+                    <div class="button-content">
+                        <ion-label class="labels">Connection's Name <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="receiverName"></ion-input>
+                        </ion-item>
+                    </div>
 
-                      <div class="button-content">
-                          <ion-label class="labels">Connection's Email Id<small style="color: #f70505;">*</small></ion-label>
-                          <ion-item fill="outline" class="input-field">
-                              <ion-input formControlName="receiverEmailId"></ion-input>
-                          </ion-item>
-                          </div>
-                      <div class="button-content">
-                           <!-- <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label> -->
-                         
-                              <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label>
-                              <ion-item fill="outline" class="input-field">
-                      <ion-select style="background-color: white;" formControlName="relationship">
-                        <ion-select-option  *ngFor="let tittle of relationshipList" [value]="tittle.id">
-                          {{tittle.text}}</ion-select-option>
-                        </ion-select>
-                             
-                          </ion-item> 
+                    <div class="button-content">
+                        <ion-label class="labels">Connection's Email Id<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="receiverEmailId"></ion-input>
+                        </ion-item>
+                    </div>
+                    <div class="button-content">
+                        <!-- <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label> -->
 
-                          
-                          </div>
-                          <div class="button-content">
-                              <ion-label class="labels">Acquainted From </ion-label>
-                              <ion-item fill="outline" class="input-field">
-                                  <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedFromObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
-                              </ion-item>
-                              </div>
-                              <div class="button-content">
-                                  <ion-label class="labels">Acquainted Till </ion-label>
-                                  <ion-item fill="outline" class="input-field">
-                                      <ion-datetime displayFormat="DD.MM.YYYY"  formControlName="acquaintedToObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
-                                  </ion-item>
-                                 
-                                    <div style="    display: flex;">
-                                      <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyAcquainted"></ion-checkbox>&nbsp;&nbsp;Currently acquainted
-                                    </div>
-                                    
-                                  </div>
-                                  <ion-spacer size="large"></ion-spacer><br>
-                                  <div class="button-content">
-                                      <ion-label class="labels">Where did you come across this connection</ion-label>
-                                      <ion-item fill="outline" class="input-field">
-                                          <ion-input  placeholder="Ex: Logwiz Institute for logistics" formControlName="relationshipAt"></ion-input>
-                                      </ion-item>
-                                      </div>
+                        <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-select style="background-color: white;" formControlName="relationship">
+                                <ion-select-option *ngFor="let tittle of relationshipList" [value]="tittle.id">
+                                    {{tittle.text}}</ion-select-option>
+                            </ion-select>
 
-                                      <div class="button-content">
-                                          <ion-label class="labels">Is this connection your favourite?</ion-label>
-                                       <ion-row >   <ion-label style=" font-size: 20px; ">Yes</ion-label>  <ion-toggle formControlName="markedFavByInitiator" [checked]="true">
-                                       </ion-toggle><ion-label style=" font-size: 20px; ">No</ion-label>
-                                       </ion-row>   </div>
-                                       
+                        </ion-item>
 
-                                       <!-- <div class="button-content">
+
+                    </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Acquainted From </ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="acquaintedFromObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                        </ion-item>
+                    </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Acquainted Till </ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="acquaintedToObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                        </ion-item>
+
+                        <div style="    display: flex;">
+                            <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyAcquainted"></ion-checkbox>&nbsp;&nbsp;Currently acquainted
+                        </div>
+
+                    </div>
+                    <ion-spacer size="large"></ion-spacer><br>
+                    <div class="button-content">
+                        <ion-label class="labels">Where did you come across this connection</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input placeholder="Ex: Logwiz Institute for logistics" formControlName="relationshipAt"></ion-input>
+                        </ion-item>
+                    </div>
+
+                    <div class="button-content">
+                        <ion-label class="labels">Is this connection your favourite?</ion-label>
+                        <ion-row>
+                            <ion-label style=" font-size: 20px; ">Yes</ion-label>
+                            <ion-toggle formControlName="markedFavByInitiator" [checked]="true">
+                            </ion-toggle>
+                            <ion-label style=" font-size: 20px; ">No</ion-label>
+                        </ion-row>
+                    </div>
+
+
+                    <!-- <div class="button-content">
                                           <ion-spacer size="large"></ion-spacer><br>
                                           <ion-item fill="outline" class="input-field">
                                               <ion-textarea formControlName="markedFavByInitiator" placeholder="Remarks about the connection"></ion-textarea>
                                           </ion-item>
                                           </div> -->
-                                          
 
-                                         <!-- <div class="button-content">
+
+                    <!-- <div class="button-content">
                                          
                                              
                                              </div> -->
-                                              <ion-label>Rate the Connection</ion-label>
-                                              <div> 
-                                                <ul class="list-inline rating-list" *ngFor="let star of stars"  style="display: inline-block;padding-inline-start: 0px;">
-                                                  <li  (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}"><ion-icon name="star"></ion-icon></li>
-                                                </ul> 
-                                              </div>
+                    <ion-label>Rate the Connection</ion-label>
+                    <div>
+                        <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
+                            <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
+                                <ion-icon name="star"></ion-icon>
+                            </li>
+                        </ul>
+                    </div>
 
-                                          <div class="button-content">
-                                              <ion-label class="labels">Do you want to keep this connection private?</ion-label>
-                                           <ion-row>   <ion-label style="font-size: 20px;">Yes</ion-label>  <ion-toggle  [checked]="true" formControlName="markedPrivateByInitiator">
-                                           </ion-toggle><ion-label style="font-size: 20px; ">No</ion-label>
-                                           </ion-row>   </div>
+                    <div class="button-content">
+                        <ion-label class="labels">Do you want to keep this connection private?</ion-label>
+                        <ion-row>
+                            <ion-label style="font-size: 20px;">Yes</ion-label>
+                            <ion-toggle [checked]="true" formControlName="markedPrivateByInitiator">
+                            </ion-toggle>
+                            <ion-label style="font-size: 20px; ">No</ion-label>
+                        </ion-row>
+                    </div>
 
-                                         
-                                           <div class="button-content" style="width: 50%;
+
+                    <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                                        <div class="display-justify">
-                                            <ion-button class="custom-button" (click)="save()">Send Invite</ion-button>
-                                         </div>
-                                         </div>
+                        <div class="display-justify">
+                            <ion-button class="custom-button" (click)="save()">Send Invite</ion-button>
+                        </div>
+                    </div>
 
 
 
 
-                                       
 
-                                      
-                  </div>
-              </form>
 
-  </ion-card-content>
 
-</form>
+                </div>
+            </form>
+
+        </ion-card-content>
+
+    </form>
 
 
 </ion-content>

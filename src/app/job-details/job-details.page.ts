@@ -46,7 +46,14 @@ export class JobDetailsPage implements OnInit {
   }
   Apply(){
 
-    this.router.navigate(['/apply-for-job']) 
+    var jobapplyURL = "api/auth/app/jobportal/applyForJob?jobId="+this.jobId;
+    this.storageservice.getrequest(jobapplyURL).subscribe(result => {
+  console.log(result);
+    });
+
+
+    this.router.navigate(['/apply-for-job']);
+
 
   }
 

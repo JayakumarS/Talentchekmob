@@ -6,10 +6,10 @@
             </ion-col>
 
             <ion-col size="6">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">search-settings</ion-title>
+                <ion-title style="font-family: Mr-eaves; color: black; margin-top: 7%;">Search Settings</ion-title>
             </ion-col>
             <ion-col size="3">
-                <ion-title style="margin-top:19%" (click)="searchresults()">Done</ion-title>
+                <ion-title style="font-family: Mr-eaves; color: black; margin-top: 7%;" (click)="searchresults()">Done</ion-title>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -44,7 +44,7 @@
                         <ion-icon name="close-circle" (click)="removeCountry(country)"></ion-icon>
                     </div>
                 </div>
-                <ion-input  (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                <ion-input (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showcountyResults">
@@ -60,7 +60,7 @@
                         <ion-icon name="close-circle" (click)="removeState(state)"></ion-icon>
                     </div>
                 </div>
-                <ion-input  (ionInput)="onstateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
+                <ion-input (ionInput)="onstateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showStateResults">
@@ -77,7 +77,7 @@
                         <ion-icon name="close-circle" (click)="removeCity(skill)"></ion-icon>
                     </div>
                 </div>
-                <ion-input  (ionInput)="onSearch($event.target.value)" [formControl]="citysearchCtrl"></ion-input>
+                <ion-input (ionInput)="onSearch($event.target.value)" [formControl]="citysearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showResults">
