@@ -50,7 +50,7 @@
                     <div class="button-content">
                         <ion-label class="labels">Title Held<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input type="text" formControlName="titleHeld" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
+                            <ion-input type="text" formControlName="titleHeld"></ion-input>
                         </ion-item>
                         <div *ngIf="clubFrom.controls.titleHeld.hasError('required') && clubFrom.controls.titleHeld.touched">
                           <small style="color: #f70505;">Title Held is required</small>
