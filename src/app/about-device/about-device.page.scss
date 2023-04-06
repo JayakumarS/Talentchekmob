@@ -45,13 +45,13 @@
     --ion-safe-area-bottom: 8vh; /* set the safe area bottom to 8% of the viewport height */
   }
   .custom-button{
-    width: 188px;
+    width: 160px;
     border-radius: 30px;
-    height: 70px;
-    font-size: 18px;
+    height: 60px;
+    font-size: 13px;
     background-color: antiquewhite;
     display: flex;
-    padding: 0px 5px;
+    padding: 0px 0px;
     align-items: center;
     justify-content: center; 
     background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
@@ -66,9 +66,10 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: center;
 }
 .company-card{
-    padding: 10px;
+    padding: 3px;
     background: #112E5B;
     border-radius: 13px;
     display: flex;

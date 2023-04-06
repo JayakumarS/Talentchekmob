@@ -120,17 +120,17 @@
      <div style="color:gray;font-size: 12px;">{{exp.organisationName}}</div>
      <div style="color:gray;font-size: 12px;">{{exp.expStart}} - {{exp.expEnd}}</div>
 
-     <div style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="exp.status=='Verified Experience' || exp.status=='In Notice Period'">
+     <div style="text-align: start;margin: 0px px 0px -3px;" *ngIf="exp.status=='Verified Experience' || exp.status=='In Notice Period'">
       <div style="font-size: 12px;" class="badge badge-solid-green">{{exp.status}}</div> 
   </div>
-  <div style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="exp.status=='Fake Experience' || exp.status=='Absconded from Work' || exp.status=='Fired' || exp.status=='Information Mismatch' || exp.status=='Unverified'">
+  <div style="text-align: start;margin: 0px px 0px -3px;" *ngIf="exp.status=='Fake Experience' || exp.status=='Absconded from Work' || exp.status=='Fired' || exp.status=='Information Mismatch' || exp.status=='Unverified'">
       <div style="font-size: 12px;" class="badge badge-solid-red">{{exp.status}}</div> 
       </div>
-  <div style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="exp.status=='Verification Pending'">
+  <div style="text-align: start;margin: 0px px 0px -3px;" *ngIf="exp.status=='Verification Pending'">
       <div style="font-size: 12px;" class="badge badge-solid-blue">{{exp.status}}</div> 
       </div>
 
-      <div style="color:gray;font-size: 12px; display: flex; justify-content: flex-end;">
+      <div style="color:gray;font-size: 12px;">
         {{exp.orgLocation}} 
     </div>
 </div>    
@@ -153,16 +153,16 @@
   <p style="color:gray;font-size: 12px;">
     {{edu.courseStart}}</p>
 
-  <div style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="edu.status=='Verified Experience' || edu.status=='In Notice Period'">
+  <div style="text-align: start;margin: 0px px 0px -3px" *ngIf="edu.status=='Verified Experience' || edu.status=='In Notice Period'">
       <div style="font-size: 12px;" class="badge badge-solid-green">{{edu.status}}</div> 
   </div>
-  <div style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="edu.status=='Fake Experience' || edu.status=='Absconded from Work' || edu.status=='Fired' || edu.status=='Information Mismatch' || edu.status=='Unverified'">
+  <div style="text-align: start;margin: 0px px 0px -3px" *ngIf="edu.status=='Fake Experience' || edu.status=='Absconded from Work' || edu.status=='Fired' || edu.status=='Information Mismatch' || edu.status=='Unverified'">
       <div style="font-size: 12px;" class="badge badge-solid-red">{{edu.status}}</div> 
   </div>
-  <div  style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="edu.status=='Verification Pending'">
+  <div  style="text-align: start;margin: 0px px 0px -3px" *ngIf="edu.status=='Verification Pending'">
       <div style="font-size: 12px;" class="badge badge-solid-blue">{{edu.status}}</div> 
   </div>
-  <div style="color:gray;font-size: 12px; display: flex; justify-content: flex-end;">
+  <div style="color:gray;font-size: 12px;">
       {{edu.institutionLocation}} 
   </div>
     <div style="font-size: 14px;" innerHtml="{{edu.eduDescription}}"> 
@@ -198,7 +198,7 @@
 
   <div style="color:gray;font-size: 12px;">{{club.titleHeld}}</div>
   <div style="margin: 10px 0px;color:gray;font-size: 12px;">{{club.participatedFrom}}</div>
-  <div style="text-align: end;margin: 0px -5px 0px 0px;" *ngIf="club.status">
+  <div style="text-align: start;margin: -10px 0px 5px -3px;" *ngIf="club.status">
     <div style="font-size: 12px;" class="badge badge-solid-cyan">{{club.status}}</div>
 </div>
 <div style="font-size: 14px;"  innerHtml="{{club.rolePlayed}}"></div>

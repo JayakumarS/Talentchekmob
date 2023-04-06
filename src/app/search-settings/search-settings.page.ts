@@ -303,8 +303,8 @@ removeState(state: string) {
     }
   }
 
-  unDegreeList() {
-    // this.ionSearchListShow = false;
+  goto_profileSearch() {
+    this.router.navigate(['/job-search']);
   }
 
   goToDegreeListItem( instName,instId) {
@@ -344,9 +344,7 @@ removeState(state: string) {
     return InsList;
   }
 
-  unstudyList() {
-    // this.ionSearchListShow = false;
-  }
+  
   goTostudyListItem( instName,instId) {
     console.log("InsName: " + instName);
     console.log("InsId: " + instId);
