@@ -35,7 +35,7 @@
               <small style="color: #f70505;">Participated From is required</small>
             </div>
             <ion-list *ngIf="IsorgListShow">
-              <ion-item *ngFor="let result of organisationList" (click)="selectOrganisation(result.text,result.id);getTitle(result.id)">
+              <ion-item *ngFor="let result of searchOrganisationResults" (click)="selectOrganisation(result.text,result.id);getTitle(result.id)">
                   {{ result.text }}
               </ion-item>
           </ion-list>
@@ -48,12 +48,12 @@
                     </ion-item>
                     </div>
                     <div class="button-content">
-                        <ion-label class="labels">Time held<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">Title Held<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input type="number" formControlName="titleHeld"></ion-input>
+                            <ion-input type="text" formControlName="titleHeld" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
                         </ion-item>
                         <div *ngIf="clubFrom.controls.titleHeld.hasError('required') && clubFrom.controls.titleHeld.touched">
-                          <small style="color: #f70505;">Time held is required</small>
+                          <small style="color: #f70505;">Title Held is required</small>
                         </div>
                         </div>
 

@@ -45,7 +45,7 @@ export class ClubPage implements OnInit {
     this.clubFrom = this.fb.group({
        clubName: [""],
       clubBranch: [""],
-      titleHeld: ["",Validators.compose([Validators.required])],
+      titleHeld: [""],
       rolePlayed: [""],
       participatedFrom: ["",Validators.required],
       participatedTill: ["",Validators.required],
@@ -181,6 +181,9 @@ getOrganisationList(){
     var value  = event;
     if(value == true){
       this.clubFrom.get("participatedTill").disable(); 
+      this.clubFrom.patchValue({
+          'participatedTill':""
+        })
     }else{
       this.clubFrom.get("participatedTill").enable();
     }

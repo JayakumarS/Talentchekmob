@@ -233,6 +233,9 @@ export class WorkExperiencesPage implements OnInit {
     var value  = event;
     if(value == true){
       this.ExperienceForm.get("expEnd").disable(); 
+      this.ExperienceForm.patchValue({
+          'expEnd':""
+        })
     }else{
       this.ExperienceForm.get("expEnd").enable();
     }

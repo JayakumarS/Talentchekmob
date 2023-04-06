@@ -64,9 +64,7 @@ export class EducationsPage implements OnInit {
     public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController) {
 
-    const initialDate = new Date(2023, 2);
-    this.courseStart = initialDate.toISOString();
-    this.courseEnd = initialDate.toISOString();
+     
   }
   Exp = {
     orgName: '',
@@ -87,7 +85,7 @@ export class EducationsPage implements OnInit {
       degree: [""],
       fieldofStudy: ["", Validators.required],
       stuRegisterNumber: ["", Validators.required],
-      aggregateMarks: ["", Validators.required],
+      aggregateMarks: [""],
       eduDescription: [""],
       eduId: [""],
       currentUserId: [""]

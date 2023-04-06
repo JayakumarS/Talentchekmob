@@ -22,6 +22,12 @@ import { TcFormPage } from '../tc-form/tc-form.page';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
+
+  getMaxDate() {
+    let maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() - 10);
+    return maxDate.toISOString().split('T')[0];
+  }
 talentform: FormGroup;
 step:any
 private stepper: Stepper;

@@ -51,7 +51,7 @@
                     <small style="color: #f70505;">Institution Name is required</small>
                 </div>
                     <ion-list *ngIf="IsSearchListShow">
-                        <ion-item *ngFor="let result of institutionList"
+                        <ion-item *ngFor="let result of searchInstitutionResults"
                             (click)="selectInstitution(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
                             {{ result.text }}
                         </ion-item>
@@ -79,7 +79,7 @@
                     </ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart" displayFormat="MM/YYYY"
-                        (ionChange)="validateStartDate($event.target.value);" presentation="date" (monthSelected)="setMonthAndYearStr($event, picker1,'courseStart')" [max]="getMaxDate()"></ion-datetime>
+                        (ionChange)="validateStartDate($event.target.value);" presentation="date"  [max]="getMaxDate()"></ion-datetime>
                     </ion-item>
                     <div
                         *ngIf=" EducationForm.controls.courseStart.hasError('required') && EducationForm.controls.courseStart.touched">
@@ -90,7 +90,7 @@
                     <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-datetime formControlName="courseEnd" displayFormat="MM/YYYY"presentation="date"(ionChange)="validateEndDate($event.target.value);"
-                        (monthSelected)="setMonthAndYearStr($event, picker1,'courseEnd')"   [(ngModel)]="selectedDate" [max]="getMaxDate()"></ion-datetime>
+                           [(ngModel)]="selectedDate" [max]="getMaxDate()"></ion-datetime>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
@@ -159,8 +159,7 @@
                 </div>
 
                 <div class="button-content">
-                    <ion-label class="labels">Aggregate Marks or GPA obtained<small
-                            style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">Aggregate Marks or GPA obtained</ion-label>
                     <ion-item fill="outline"  class="input-field">
                         <ion-input formControlName="aggregateMarks" type="number"></ion-input>
                     </ion-item>
@@ -171,7 +170,9 @@
                 </div>
 
                 <div class="button-content">
-                    <ckeditor formControlName="eduDescription"></ckeditor>
+                    <ion-label class="labels">Course Description and Acheivements</ion-label>
+                    <ckeditor formControlName="eduDescription"
+                    ></ckeditor>
                 </div>
 
 
