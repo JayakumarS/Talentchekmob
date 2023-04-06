@@ -819,6 +819,10 @@ ion-card #card-4.ios {
     background: white;
 }
 
+.alert-button-group.sc-ion-alert-md {
+    background-color: #112e5b !important;
+}
+
 .servicebg {
     background-color: orange;
 }
