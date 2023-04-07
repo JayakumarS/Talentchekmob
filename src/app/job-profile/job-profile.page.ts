@@ -13,6 +13,7 @@ import moment from 'moment';
   styleUrls: ['./job-profile.page.scss'],
 })
 export class JobProfilePage implements OnInit {
+  editJobTitle: any;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -181,10 +182,11 @@ export class JobProfilePage implements OnInit {
           }
 
           console.log(this.jobShiftArray)
+          this.editJobTitle = result["jobSeekList"][0].jobTitle;
 
           this.jobProfileForm.patchValue({
             'industry': industry,
-            'jobTitle': result["jobSeekList"][0].jobTitle,
+            //'jobTitle': result["jobSeekList"][0].jobTitle,
             'jobType': result["jobSeekList"][0].jobType,
             'jobExperience':result["jobSeekList"][0].jobExperience,
             'jobExperienceFormat': result["jobSeekList"][0].jobExperienceFormat,
@@ -424,6 +426,11 @@ nextStep(currentStep: string, nextStep: string) {
 
     const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
       this.jobTitleList = result["jobTitleList"];
+      if(this.jobTitleList.length != 0 ){
+        this.jobProfileForm.patchValue({
+          'jobTitle': this.editJobTitle,
+        })
+      }
       
       console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);
     });
