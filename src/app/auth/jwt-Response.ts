@@ -9,6 +9,7 @@ export class JwtResponse {
     defaultRoleId: any;
     defaultRole: string;
     companyCode:string;
+    categoryType:string;
     imgurl:string;
     firstNameLastName:string;
     pharmaciesType:string;

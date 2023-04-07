@@ -39,6 +39,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+  
 }
 
 @NgModule({
@@ -49,9 +50,11 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent, TranslatePipe],
   entryComponents: [],
   imports: [
+  
     ReactiveFormsModule, FormsModule,
-    HttpClientModule,
+    HttpClientModule,  
     BrowserModule,
+    
     IonicModule.forRoot(), AppRoutingModule, CKEditorModule,
     Ng2GoogleChartsModule,
     IonicStorageModule.forRoot(),
@@ -63,6 +66,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+   
   ],
 
   providers: [

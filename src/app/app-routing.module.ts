@@ -58,6 +58,7 @@ const routes: Routes = [
     path: 'yettostart-frommenu',
     loadChildren: () => import('./yettostart-frommenu/yettostart-frommenu.module').then( m => m.YettostartFrommenuPageModule)
   },
+
   {
     path: 'forget-password',
     loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
@@ -67,6 +68,7 @@ const routes: Routes = [
     path: 'profile-search',
     loadChildren: () => import('./profile-search/profile-search.module').then( m => m.ProfileSearchPageModule)
   },
+
   {
     path: 'forget-password-reset-success',
     loadChildren: () => import('./forget-password-reset-success/forget-password-reset-success.module').then( m => m.ForgetPasswordResetSuccessPageModule)
@@ -295,9 +297,15 @@ const routes: Routes = [
 },
 {  path: 'oni-job-post',
     loadChildren: () => import('./oni-job-post/oni-job-post.module').then( m => m.OniJobPostPageModule)
-  },  {
+  },
+  {
+
     path: 'scan-to-connect',
     loadChildren: () => import('./scan-to-connect/scan-to-connect.module').then( m => m.ScanToConnectPageModule)
+  },{
+    path: 'category-popup',
+    loadChildren: () => import('./category-popup/category-popup.module').then( m => m.CategoryPopupPageModule)
+
   }
 
 ];

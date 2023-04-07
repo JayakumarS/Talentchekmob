@@ -302,6 +302,8 @@ baseURL:string ="http://localhost:8080//";
           this.userObj["defaultRoleId"] = user.defaultRoleId;
           this.userObj["companyCode"] = user.companyCode;
           this.userObj['firstNameLastName'] = user.firstNameLastName;
+          this.userObj['categoryType'] = user.categoryType;
+          
           console.log(this.userObj);
         // this.currentUserSubject.next(this.userObj);
           return user;

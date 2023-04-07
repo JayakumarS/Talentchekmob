@@ -69,6 +69,7 @@ export class SignInComponent implements OnInit {
                 localStorage.setItem('profilePic', data["imgurl"]);
                 localStorage.setItem('access', data["accessToken"]);
                 localStorage.setItem("tokenType: ", data["tokenType"]);
+                localStorage.setItem('categoryType', data["categoryType"]);
                 localStorage.setItem('isloggedIn', "true");
         
                 localStorage.setItem('isloggedIn', "true");

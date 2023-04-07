@@ -15,17 +15,20 @@ export class HomePage implements OnInit {
   networkCount:any;
   matchedJobsCount:any;
   avgrating:any;
+  categoryType: string;
 
   constructor(public router:Router,public storageservice: StorageService) { }
 
   ngOnInit() {
 
     this.userId = localStorage.getItem("userId")  ; 
+    this.categoryType = localStorage.getItem("categoryType")  ; 
+    this.getcategoryreg();
    this.creditPoints = localStorage.getItem("creditPoints") ;
 //Profile View Count
     var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
     this.storageservice.getrequest(indiProfileViewCountURL).subscribe(result => {
-     console.log(result); 
+     console.log(result); 888
      this.profileViewCount = result['profileviewcount']
         });
 
@@ -69,6 +72,18 @@ this.storageservice.getrequest(indiRatingsCountURL).subscribe(result => {
     this.router.navigate(['/subscription-individual']) 
   }
 
+  getcategoryreg(){
+
+    if(this.categoryType == ""){
+
+      this.router.navigate(['/category-popup']);
+      
+    }else{
+
+      this.router.navigate(['/home']);
+    }
+
+  }
 
      // footer
      goto_profileSearch(){
