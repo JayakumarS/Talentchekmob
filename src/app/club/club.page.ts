@@ -14,9 +14,9 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 })
 export class ClubPage implements OnInit {
 
-  public model = {
-    placeholder: '<p>Hello, world!</p>'
-};
+//   public model = {
+//     placeholder: '<p>Hello, world!</p>'
+// };
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
