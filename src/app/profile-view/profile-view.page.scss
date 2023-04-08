@@ -294,3 +294,56 @@ ion-content {
     display: block;
   }
   
+  
+.badge-solid-green {
+    color: #198754;
+    background-color: #19875426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    border-radius: 15%;
+    line-height: 1.2;
+}
+
+.badge-solid-orange {
+    color: #fd7e14;
+    background-color: #fd7e1426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    border-radius: 15%;
+    line-height: 1.2;
+}
+
+.badge-solid-blue {
+    color: #0d6efd;
+    background-color: #0d6efd26;
+    border: none;
+    border-radius: 15%;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.badge-solid-cyan {
+    color: #2db0be;
+    background-color: rgba(13, 202, 240, 0.15);
+    border: none;
+    padding: 5px 12px;
+    border-radius: 15%;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge {
+    --bs-badge-padding-x: .65em;
+    --bs-badge-padding-y: .35em;
+    --bs-badge-font-size: .75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: .375rem;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
