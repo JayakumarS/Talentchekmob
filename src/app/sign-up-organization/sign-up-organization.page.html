@@ -70,14 +70,7 @@
                             <div *ngIf="talentorgform.controls.organizationName.hasError('minlength')">
                                 <small style="color: #f70505;">Institution name must be atleast 3 characters long</small>
                             </div>
-                            <ion-label class="labels">Registration number <small style="color: #f70505;">*</small>
-                            </ion-label>
-                            <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="regNo" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
-                            </ion-item>
-                            <div *ngIf=" talentorgform.controls.regNo.hasError('required') && talentorgform.controls.regNo.touched">
-                                <small style="color: #f70505;">Registration number is required</small>
-                              </div>
+
                             <ion-label class="labels">Organization Type<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 
@@ -87,10 +80,30 @@
 
                                 </ion-select>
                             </ion-item>
-
                             <div *ngIf=" talentorgform.controls.orgType.hasError('required') && talentorgform.controls.orgType.touched">
                                 <small style="color: #f70505;">Organization Type is required</small>
                               </div>
+                              <ion-label class="labels">Domain <small style="color: #f70505;">*</small></ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                  <ion-select placeholder="Select Domain" formControlName="domainId">
+                                      <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
+                                          {{domain.text}}</ion-select-option>
+  
+                                  </ion-select>
+                              </ion-item>
+                              <div *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
+                                  <small style="color: #f70505;">Domain is required</small>
+                                </div>
+
+                            <ion-label class="labels">Organisation Registration No (CIN, ACRA etc.)<small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="regNo" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
+                            </ion-item>
+                            <div *ngIf=" talentorgform.controls.regNo.hasError('required') && talentorgform.controls.regNo.touched">
+                                <small style="color: #f70505;">Registration number is required</small>
+                              </div>
+                           
                             <ion-label class="labels">Date of Registration<small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -101,17 +114,7 @@
                                 <small style="color: #f70505;">Date of Registration is required</small>
                               </div>
 
-                            <ion-label class="labels">Domain <small style="color: #f70505;">*</small></ion-label>
-                            <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="Select Domain" formControlName="domainId">
-                                    <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
-                                        {{domain.text}}</ion-select-option>
-
-                                </ion-select>
-                            </ion-item>
-                            <div *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
-                                <small style="color: #f70505;">Domain is required</small>
-                              </div>
+                            
 
                             <ion-label class="labels">Upload logo<small style="color: #f70505;">*</small></ion-label>
                             <ion-row>
