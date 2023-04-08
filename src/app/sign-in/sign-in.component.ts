@@ -15,10 +15,9 @@ export class SignInComponent implements OnInit {
   private loginInfo: AuthLoginInfo;
   error = "";
 
-
-
-  
-
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye'; 
+ 
   constructor(public formbuilder: FormBuilder,public router: Router,public storageservice: StorageService) { 
 
     this.loginform = formbuilder.group({
@@ -39,6 +38,15 @@ export class SignInComponent implements OnInit {
     return this.loginform.controls;
   }
 
+  passwordToggle() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.passwordIcon = 'eye-off';
+    } else {
+      this.passwordType = 'password';
+      this.passwordIcon = 'eye';
+    }
+  }
 
   goto_signup(){
 
