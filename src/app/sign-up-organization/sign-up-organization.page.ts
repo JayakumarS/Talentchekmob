@@ -55,6 +55,9 @@ base64img1: string = '';
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
 
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye'; 
+
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder,public storageservice:StorageService, private transfer: FileTransfer,
     private translate: TranslateService,public modalController: ModalController, ) { 
 
@@ -436,4 +439,14 @@ async goto_ConsentFormModal() {
   return await modal.present();
 }
 
+
+passwordToggle() {
+  if (this.passwordType === 'password') {
+    this.passwordType = 'text';
+    this.passwordIcon = 'eye-off';
+  } else {
+    this.passwordType = 'password';
+    this.passwordIcon = 'eye';
+  }
+}
 }

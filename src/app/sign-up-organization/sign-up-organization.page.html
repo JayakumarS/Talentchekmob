@@ -261,7 +261,8 @@
 
                             <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="pwd"></ion-input>
+                                <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
+                                <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
                                 <small style="color: #f70505;">Password is required</small>

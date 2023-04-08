@@ -53,6 +53,8 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   countryId: string;
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye'; 
 
   constructor(public formbuilder: FormBuilder,public router: Router,private camera: Camera,
     public storageservice:StorageService, private transfer: FileTransfer,public modalController: ModalController,
@@ -445,5 +447,14 @@ removeCountry() {
     });
 
     return await modal.present();
+  }
+  passwordToggle() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.passwordIcon = 'eye-off';
+    } else {
+      this.passwordType = 'password';
+      this.passwordIcon = 'eye';
+    }
   }
 }
