@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-job-details',
@@ -14,8 +15,11 @@ export class JobDetailsPage implements OnInit {
   jobSkills:[];
 
   jobId :any;
+  userId: string;
+  userName: string;
 
-  constructor(public router:Router,private route: ActivatedRoute,public storageservice: StorageService) { 
+  constructor(public router:Router,private route: ActivatedRoute,public storageservice: StorageService,
+    private toastController: ToastController) { 
 
     
     this.route.queryParams.subscribe(params => {
@@ -32,6 +36,9 @@ export class JobDetailsPage implements OnInit {
 
   ngOnInit() {
 
+    this.userId = localStorage.getItem("userId");
+    this.userName = localStorage.getItem("userName");
+
     this.getJobDetails(this.jobId)
   }
 
@@ -46,17 +53,39 @@ export class JobDetailsPage implements OnInit {
   }
   Apply(){
 
-    var jobapplyURL = "api/auth/app/jobportal/applyForJob?jobId="+this.jobId;
-    this.storageservice.getrequest(jobapplyURL).subscribe(result => {
+    var jobapplyURL = "api/auth/app/jobportal/applyForJob";
+    this.storageservice.getrequest(jobapplyURL + "?jobId=" + this.jobId + "&talentId="+this.userId +"&currentUserName="+this.userName).subscribe(result => {
   console.log(result);
+  if (result["success"] == true) {
+      
+    this.presentToast()
+    }else if (result["success"] == false) {
+                  var message = result["message"];
+                  if (message == null) {
+                    "message" 
+                  }
+                  
+                  this.storageservice.warningToast(message);
+                  
+                }
     });
 
 
-    this.router.navigate(['/apply-for-job']);
+   
 
 
   }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+     
+    });
+    this.router.navigate(['/apply-for-job']);
 
+    await toast.present();
+  }
 
    getJobDetails(jobID){
 
