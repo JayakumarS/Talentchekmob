@@ -313,6 +313,10 @@ const routes: Routes = [
   {
     path: 'activity-verification',
     loadChildren: () => import('./activity-verification/activity-verification.module').then( m => m.ActivityVerificationPageModule)
+  },
+  {
+    path: 'edu-verification',
+    loadChildren: () => import('./edu-verification/edu-verification.module').then( m => m.EduVerificationPageModule)
   }
 
 
