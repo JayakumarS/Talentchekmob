@@ -14,7 +14,7 @@ export class SignInComponent implements OnInit {
   loginform: FormGroup;
   private loginInfo: AuthLoginInfo;
   error = "";
-  spinnerFlag: boolean = false;
+
 
 
   
@@ -43,10 +43,10 @@ export class SignInComponent implements OnInit {
   goto_signup(){
 
     this.error = "";
-    this.spinnerFlag = true;
+    this.storageservice.showLoading();
     if (this.loginform.invalid) {
       this.error = "Invalid credentials";
-      this.spinnerFlag = false;
+      this.storageservice.dismissLoading();
       return;
     }
     else{
@@ -59,8 +59,9 @@ export class SignInComponent implements OnInit {
           data => {
   
             if (data) {
+              
               if (data.success) {
-                this.spinnerFlag = false;
+                this.storageservice.dismissLoading();
                 console.log(data);
                 localStorage.setItem('userId', data["username"]);
                 localStorage.setItem('userName', data["firstNameLastName"]);
@@ -94,19 +95,19 @@ export class SignInComponent implements OnInit {
                 }
               }
               else {
-
+                this.storageservice.dismissLoading();
                 this.error = data.message;
               }
   
             } else {
-
+              this.storageservice.dismissLoading();
               this.error = "Invalid Login";
             }
   
   
           },
           error => {
-    
+            this.storageservice.dismissLoading();
             this.error = "Server Down!!!";
             console.log(error);
   

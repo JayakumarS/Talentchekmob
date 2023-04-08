@@ -43,12 +43,6 @@
     <br>
     <form>
 
-        <div class="spinner" *ngIf="spinnerFlag">
-            <div class="loader-container">
-                <span><img src="../../assets/img/faviconcircle.png"></span>
-                <div class="loader"></div>
-            </div>
-        </div>
         <ion-row *ngIf="basicprofilesearchList.length == 0">
             <ion-col size="12">
                 <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
@@ -59,7 +53,7 @@
         </ion-row>
         <div style="display: flex;justify-content: center;" *ngIf="basicprofilesearchList.length == 0">No Results to Display</div>
         <div *ngIf="basicprofilesearchList.length != 0">
-            <ion-card class="profilesearchcard" *ngFor="let profile of basicprofilesearchList" (click)="profileView(profile.talentid,profile.accounttype)">
+            <ion-card class="profilesearchcard" *ngFor="let profile of basicprofilesearchList" (click)="profileView(profile.talentid,profile.accounttype,profile.username)">
                 <ion-card-content style="padding-bottom: 0px;">
 
                     <ion-row>
@@ -116,29 +110,29 @@
         <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
       <ion-icon size="large" name="earth-sharp"></ion-icon>
     </button>
-    <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_orgjobs();">
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_orgjobs();">
         <ion-icon size="large" name="earth-sharp"></ion-icon>
       </button>
-      <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_instijobs();">
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_instijobs();">
         <ion-icon size="large" name="earth-sharp"></ion-icon>
       </button>
         <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')"> 
     </button>
-    <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
         <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')"> 
      </button>
-     <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
         <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')"> 
      </button>
-     
+
         <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
       <ion-icon size="large" name="person-circle-sharp"></ion-icon>
     </button>
-    <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
         <ion-icon size="large" name="person-circle-sharp"></ion-icon>
       </button>
-      <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">
         <ion-icon size="large" name="person-circle-sharp"></ion-icon>
       </button>
         <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">

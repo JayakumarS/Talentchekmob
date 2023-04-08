@@ -68,7 +68,7 @@ export class JobPage implements OnInit {
 
   }
 
-  goto_addJob(){
+  goto_editJob(){
 
     let edit = {
 
@@ -79,6 +79,11 @@ export class JobPage implements OnInit {
       queryParams: edit
     };
     this.router.navigate(['/job-profile'], navigationExtras);
+  }
+
+
+  goto_addJob(){
+    this.router.navigate(['/job-profile']);
   }
 
 

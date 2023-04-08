@@ -7,11 +7,15 @@ import { AuthLoginInfo } from './auth/login-Info';
 import {JwtResponse} from './auth/jwt-Response';
 import { map } from "rxjs/operators";
 import { User } from "./auth/user";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
+
+  loading = new BehaviorSubject(false);
+
   register(value: any) {
     throw new Error('Method not implemented.');
   }
@@ -31,6 +35,19 @@ baseURL:string ="http://localhost:8080//";
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {
 
 
+  }
+
+
+  showLoading(){
+    this.loading.next(true);
+  }
+
+  dismissLoading(){
+    this.loading.next(false);
+  }
+
+  watchLoading(){
+    return this.loading.asObservable();
   }
 
   loginUrl = `${this.mobileserverurl}api/auth/signin`;
@@ -165,7 +182,7 @@ baseURL:string ="http://localhost:8080//";
       color: 'warning',
       cssClass: "toast-success",
       message: msg,
-      duration: 3000
+      duration: 300000
     });
     toast.present();
   }

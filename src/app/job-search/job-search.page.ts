@@ -20,6 +20,7 @@ export class JobSearchPage implements OnInit {
   roleId: any;
   RoleID: any;
   currentUserId:any;
+  currentUserName:any;
   presentPopover(e: Event) {
     this.popover.event = e;
     this.isOpen = true;
@@ -28,7 +29,6 @@ export class JobSearchPage implements OnInit {
   jobSearchForm : FormGroup;
   uls :any = [];
   basicprofilesearchList =[];
-  spinnerFlag: boolean = false;
   flagChange:boolean=false;
   flag: boolean =false;
   creditPoints: any;
@@ -43,6 +43,7 @@ export class JobSearchPage implements OnInit {
    this.creditPoints = localStorage.getItem("creditPoints") ;
    this.roleId = localStorage.getItem("roleId");
    this.currentUserId = localStorage.getItem("userId");
+   this.currentUserName = localStorage.getItem("userName");
       
   this.route.queryParams.subscribe(params => {
     if (params) {
@@ -50,7 +51,7 @@ export class JobSearchPage implements OnInit {
       if (params != null) {
     
         this.formValues = params;
-        this.spinnerFlag = true;
+      this.storageservice.showLoading();
    
         var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
 
@@ -65,12 +66,12 @@ export class JobSearchPage implements OnInit {
                
              });
            this.flagChange =true;
-           this.spinnerFlag = false;
+           this.storageservice.dismissLoading();
        
            }
            else{
              this.flagChange=false;
-             this.spinnerFlag = false;
+             this.storageservice.dismissLoading();
         
            }
           console.log(result);
@@ -136,7 +137,7 @@ export class JobSearchPage implements OnInit {
 
   search(){
 
-    this.spinnerFlag = true;
+    this.storageservice.showLoading();
    console.log(this.jobSearchHeadForm.value); 
 
        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
@@ -159,11 +160,11 @@ export class JobSearchPage implements OnInit {
         });
 
         this.flagChange =true;
-        this.spinnerFlag = false;
+        this.storageservice.dismissLoading();
         }
         else{
           this.flagChange=false;
-          this.spinnerFlag = false;
+          this.storageservice.dismissLoading();
         }
        console.log(result);
 
@@ -190,7 +191,7 @@ export class JobSearchPage implements OnInit {
     node.classList.add(className);
   }
 
-  async profileView(talentId,accounttype) {
+  async profileView(talentId,accounttype,username) {
 
 
     if(this.creditPoints < 2){
@@ -234,7 +235,7 @@ export class JobSearchPage implements OnInit {
     else if (accounttype == "on demand"){
     
     // this.OnDemandUserAccTypeAlert(talentId);
-    this.checkOnDemandUserProp(talentId);
+    this.checkOnDemandUserProp(talentId,username);
     }
     else{
 
@@ -261,20 +262,20 @@ export class JobSearchPage implements OnInit {
   }
 
 
-  checkOnDemandUserProp(action1){
+  checkOnDemandUserProp(action1,username){
 
-    let onDemandUrl =  "api/auth/app/profileLookUp/onDemandReuest?currentUserId="+this.currentUserId +"&action1="+action1;
+    let onDemandUrl =  "api/auth/app/profileLookUp/onDemandRequest?currentUserId="+this.currentUserId+"&approvedId="+action1;
 
     this.storageservice.getrequest(onDemandUrl).subscribe(async result => {
       
       console.log(result);
 
 
-      if(result["Success"] == true){
+      if(result["success"] == true){
 
         if(result["onDemandStatus"] == "showrequestpopup"){
 
-          this.OnDemandUserAccTypeAlert(action1);
+          this.OnDemandUserAccTypeAlert(action1,username);
         }
         else if(result["onDemandStatus"] == "requested"){
 
@@ -340,7 +341,7 @@ export class JobSearchPage implements OnInit {
   }
 
 
-  async OnDemandUserAccTypeAlert(talentId) {
+  async OnDemandUserAccTypeAlert(talentId,userName) {
     let alert = await this.alertController.create({
       header: 'Alert!',
       message: 'Please send a request to view full profile.',
@@ -362,45 +363,30 @@ export class JobSearchPage implements OnInit {
 
             //Main concept.
             console.log("Id: " + talentId);
-            //this.showLoadingIndicator(); // Show Loading indicator
 
-            // try {
-            //   var postData = {
-            //     'empExpId': empExpId
-            //   }
+            var postData = {
+              "talentid":talentId,
+              "username":userName,
+              "currentUserId":this.currentUserId,
+              "currentUserName":this.currentUserName
+            }
 
-            //   console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
 
-            //   var deleteExperienceServiceUrl = "/hrms/master/employeeAdminMaster/deleteExperiance";
+            let onDemandUrl =  "api/auth/app/profileLookUp/saveOnDemand";
 
-            //   this.storageservice.postrequest(deleteExperienceServiceUrl, postData).subscribe(result => {
-            //     console.log(result);
+             this.storageservice.postrequest(onDemandUrl,postData).subscribe(async result => {
+      
+             console.log(result);
 
-            //     if (result["success"] == true) {
-            //       this.storageservice.successToast('Deleted successfully');
+             if (result['success']== true){
 
-            //       //this.BindExistingValues();
+              this.storageservice.generalAlertToast("View Access Requested!");
+             }
+             else if (result['success']== false){
 
-            //       this.hideLoadingIndicator(); //Hide loading indicator
-            //     }
-            //     else if (result["success"] == false) {
-            //       var msg = result["message"];
-            //       if (msg == null) {
-            //         msg = "Web service does not give proper message";
-            //       }
-            //       this.storageservice.warningToast(msg);
-            //       this.hideLoadingIndicator(); //Hide loading indicator
-            //     }
-            //     else {
-            //       this.storageservice.warningToast("Connection unavailable!");
-            //       this.hideLoadingIndicator(); //Hide loading indicator
-            //     }
-            //   });
-            // }
-            // catch (Exception) {
-            //   this.storageservice.warningToast('Connection unavailable!');
-            //   this.hideLoadingIndicator(); //Hide loading indicator
-            // }
+              this.storageservice.generalAlertToast("Access Request Failed!");
+             }
+             });
 
           }
         }

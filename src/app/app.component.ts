@@ -19,7 +19,7 @@ export class AppComponent {
 
   userId:any;
 
-
+loading = false;
 
 
   loginstatus: boolean = true;
@@ -199,6 +199,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.watchLoading();
+
 
       // subscribe to a topic
       // this.fcm.subscribeToTopic('Deals');
@@ -208,8 +210,6 @@ export class AppComponent {
       });
 
       // ionic push notification example
-
-
 
 
       // refresh the FCM token
@@ -329,7 +329,12 @@ export class AppComponent {
 }
 
 
+watchLoading(){
 
+  this.storageservice.watchLoading().subscribe(loading => {
+    this.loading = loading;
+  })
+}
 
   goto_Dashboard() {
     var userRefFlag = localStorage.getItem("userRefFlag");
