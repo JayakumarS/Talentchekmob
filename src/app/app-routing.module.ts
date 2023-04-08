@@ -306,7 +306,11 @@ const routes: Routes = [
     path: 'category-popup',
     loadChildren: () => import('./category-popup/category-popup.module').then( m => m.CategoryPopupPageModule)
 
+  },  {
+    path: 'exp-verification',
+    loadChildren: () => import('./exp-verification/exp-verification.module').then( m => m.ExpVerificationPageModule)
   }
+
 
 ];
 
