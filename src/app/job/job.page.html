@@ -47,14 +47,14 @@
                         </ion-col>
                         <ion-col size="8">
                             <ion-button class="custom-button-job-edit" (click)="goto_addJob()">
-                                <ion-icon name="add-circle-outline"></ion-icon> &nbsp; Edit Job Preference</ion-button>
+                                 Edit Job Preference  &nbsp; <ion-icon name="add-circle-outline"></ion-icon></ion-button>
                         </ion-col>
                     </ion-row>
                 </ion-card-content>
             </ion-card>
         </div>
 
-        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;" *ngIf="matchedJobList">&nbsp;&nbsp;&nbsp; Recent Jobs</span>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;" *ngIf="matchedJobList">&nbsp;&nbsp;&nbsp; Matched Jobs</span>
         <div class="display-justify" *ngFor="let cElement of matchedJobList" (click)="goto_jobdetails(cElement.jobId)">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
@@ -64,7 +64,7 @@
                             <img style="width: 50%;height: 50%;" alt="" src="{{cElement.onilogo}}" />
                         </ion-avatar>
                     </ion-col>
-                    <ion-col size="8">
+                    <ion-col size="10">
                         <ion-row>
                             <div class="b">{{cElement.postedBy}}</div>
                         </ion-row>
@@ -72,13 +72,13 @@
                             <div class="c">{{cElement.salarybudget}}</div>
                         </ion-row>
                     </ion-col>
-                    <ion-col size="2">
+                    <!-- <ion-col size="2">
                         <div>
                             <ion-avatar>
                                 <img style="margin-top: -32%;" src="../../assets/icon/add_button.png" />
                             </ion-avatar>
                         </div>
-                    </ion-col>
+                    </ion-col> -->
                 </ion-row>
 
                 <ion-row>

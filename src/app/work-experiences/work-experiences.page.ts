@@ -180,6 +180,7 @@ export class WorkExperiencesPage implements OnInit {
   }
   goto_jobProfile()
   {
+    this.ExperienceForm.reset();
     this.router.navigate(['/profile-view']) 
   }
 

@@ -211,6 +211,7 @@ export class SkillPopupPage implements OnInit {
 
 
 goto_profileView(){
+  this.skillForm.reset();
   this.router.navigate(['/profile-view']);
 }
 

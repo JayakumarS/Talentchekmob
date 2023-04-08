@@ -382,6 +382,7 @@ async updateToast() {
   }
 
   goto_profileView(){
+    this.certificationForm.reset();
     this.router.navigate(['/profile-view']);
   }
 
