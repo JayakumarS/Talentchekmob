@@ -5,9 +5,12 @@
         <div style="text-align: right;margin: 0px 0px 0px 5px;">
           <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_jobProfile()" style="margin-top:21%"></ion-icon>
         </div>
-        <div style="text-align: center;display: contents;">
+        <div  *ngIf="!edit" style="text-align: center;display: contents;">
           <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Add Work Experience</ion-title>
         </div>
+        <div  *ngIf="edit" style="text-align: center;display: contents;">
+            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Edit Work Experience</ion-title>
+          </div>
     </div>
       
       <!-- <ion-row>

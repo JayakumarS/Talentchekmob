@@ -10,9 +10,11 @@
                     style="margin-top:21%"></ion-icon>
             </ion-col>
 
-            <ion-col size="7">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add
-                    Education</ion-title>
+            <ion-col *ngIf="!edit">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add  Education</ion-title>
+            </ion-col>
+            <ion-col *ngIf="edit">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit  Education</ion-title>
             </ion-col>
         </ion-row>
 
