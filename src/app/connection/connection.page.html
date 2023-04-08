@@ -146,7 +146,7 @@
                                          
                                              
                                              </div> -->
-                    <ion-label>Rate the Connection</ion-label>
+                    <ion-label style="    margin-left: 4%;">Rate the Connection</ion-label>
                     <div>
                         <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
                             <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
