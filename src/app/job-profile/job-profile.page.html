@@ -84,27 +84,27 @@
 
                     <ion-label class="labels">Work experience<small style="color: #f70505;">*</small></ion-label>
                     <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <div>I have</div>
-                        <div style="width: 30%;">
-                            <ion-item fill="outline" class="input-field">
-                                <ion-input  formControlName="jobExperience"></ion-input>
+                         <div style="width: 30%;">
+                            <ion-item fill="outline" class="input-field" style="text-align: center;">
+                                <ion-input type="number"  formControlName="jobExperience"></ion-input>
                             </ion-item>
                         </div>
-                        <div>
+                        <div style="margin: 0px 5px;">
                             <ion-item fill="outline" class="input-field">
-                                <ion-select formControlName="jobExperienceFormat" placeholder="Years">
-                                    <ion-select-option value="Years">Years</ion-select-option>
-                                    <ion-select-option value="Months">Months</ion-select-option>
-                                    <ion-select-option value="Weeks">Weeks</ion-select-option>
-                                    <ion-select-option value="Days">Days</ion-select-option>
-                                    <ion-select-option value="Hours">Hours</ion-select-option>
+                                <ion-select formControlName="jobExperienceFormat" placeholder="Year(s)">
+                                    <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+                                    <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+                                    <ion-select-option value="Week(s)">Week(s)</ion-select-option>
+                                    <ion-select-option value="Day(s)">Day(s)</ion-select-option>
+                                    <ion-select-option value="Hour(s)">Hour(s)</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </div>
+                        <div style=" white-space: nowrap; ">
+                            of relevant Experience
+                        </div>
                     </div>
-                    <div>
-                        of relevant Experience
-                    </div>
+                    
 
                     <div *ngIf="jobProfileForm.controls.jobExperience.hasError('required') && jobProfileForm.controls.jobExperience.touched">
                         <small style="color: #f70505;">Work experience is required</small>
@@ -232,7 +232,7 @@
                         </div>
                         <div>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="jobExpWorkHrs"></ion-input>
+                                <ion-input type="number" formControlName="jobExpWorkHrs"></ion-input>
                             </ion-item>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                     <div class="ion-stepper-title">Additional information</div>
                 </div>
                 <div class="ion-stepper-content">
-                    <ion-label class="labels">Choose prefered Work Location<small style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">Choose Preferred Work Location<small style="color: #f70505;">*</small></ion-label>
                     
                     <ion-item fill="outline" class="input-field">
                         <div class="selected-skills-container">
@@ -359,13 +359,13 @@
                         <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;">
                             <div style="margin: 0px 15px 0px 0px;">
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-input  (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
+                                    <ion-input type="number"  (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
                                 </ion-item>
                             </div>
                             <h4>to</h4>
                             <div style="margin: 0px 0px 0px 15px;">
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-input  (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
+                                    <ion-input type="number"  (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
                                 </ion-item>
                             </div>
                         </div>

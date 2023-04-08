@@ -78,7 +78,7 @@ export class JobProfilePage implements OnInit {
         jobType: ["",Validators.required],
         jobSkills: [""],
         jobExperience:["",Validators.required],
-        jobExperienceFormat: ["Years"],
+        jobExperienceFormat: ["Year(s)"],
         jobShiftDM: false,
         jobShiftDT: false,
         jobShiftDW: false,
