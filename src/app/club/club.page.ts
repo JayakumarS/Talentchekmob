@@ -13,6 +13,10 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./club.page.scss'],
 })
 export class ClubPage implements OnInit {
+
+  public model = {
+    placeholder: '<p>Hello, world!</p>'
+};
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -39,7 +43,7 @@ export class ClubPage implements OnInit {
   constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,public modalController: ModalController,
      public storageservice: StorageService, private toastController: ToastController,private elementRef: ElementRef
      ,public alertController: AlertController,) { }
-
+    
   ngOnInit() {
 
     this.clubFrom = this.fb.group({

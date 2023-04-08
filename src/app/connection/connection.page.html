@@ -98,13 +98,15 @@
                     <div class="button-content">
                         <ion-label class="labels">Acquainted From </ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="acquaintedFromObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                            <ion-datetime formControlName="acquaintedFrom" displayFormat="MM/YYYY"presentation="date"
+                          [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
                     </div>
                     <div class="button-content">
                         <ion-label class="labels">Acquainted Till </ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-datetime displayFormat="DD.MM.YYYY" formControlName="acquaintedToObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                            <ion-datetime formControlName="acquaintedTo" displayFormat="MM/YYYY"presentation="date"(ionChange)="validateEndDate($event.target.value);"
+                           [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
 
                         <div style="    display: flex;">
@@ -123,10 +125,11 @@
                     <div class="button-content">
                         <ion-label class="labels">Is this connection your favourite?</ion-label>
                         <ion-row>
-                            <ion-label style=" font-size: 20px; ">Yes</ion-label>
+                            <ion-label style=" font-size: 20px; ">No</ion-label>
                             <ion-toggle formControlName="markedFavByInitiator" [checked]="true">
                             </ion-toggle>
-                            <ion-label style=" font-size: 20px; ">No</ion-label>
+                            <ion-label style=" font-size: 20px; ">Yes</ion-label>
+                          
                         </ion-row>
                     </div>
 
@@ -155,10 +158,11 @@
                     <div class="button-content">
                         <ion-label class="labels">Do you want to keep this connection private?</ion-label>
                         <ion-row>
-                            <ion-label style="font-size: 20px;">Yes</ion-label>
+                            <ion-label style="font-size: 20px; ">No</ion-label>
                             <ion-toggle [checked]="true" formControlName="markedPrivateByInitiator">
                             </ion-toggle>
-                            <ion-label style="font-size: 20px; ">No</ion-label>
+                            <ion-label style="font-size: 20px;">Yes</ion-label>
+                            
                         </ion-row>
                     </div>
 

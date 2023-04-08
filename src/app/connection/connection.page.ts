@@ -5,6 +5,7 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 import moment from 'moment';
 import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-connection',
@@ -76,7 +77,7 @@ export class ConnectionPage implements OnInit {
    });
 
    this.getrelationshipList();
-   this.editconnectionDetails(108,'receiver');
+ 
 
    
    this.roleId = localStorage.getItem("roleId");
@@ -161,6 +162,10 @@ export class ConnectionPage implements OnInit {
 
   save(){
 
+
+    
+    this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+    this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
     this.ConnectionsForm.value.currentUserId=this.userId;
     this.ConnectionsForm.value.currentUserName = this.username
     this.Connection = this.ConnectionsForm.value;
@@ -168,19 +173,19 @@ export class ConnectionPage implements OnInit {
     var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
   
      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
-        console.log("Image upload response: " + result)
+       
        if (result["isSuccess"] == true) {
-        setTimeout(() => {
-          const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-         profilePage.updateData();
-        }, 800);
+        // setTimeout(() => {
+        //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        //  profilePage.updateData();
+        // }, 800);
         this.presentToast()
         }
         else if (result["isSuccess"] == false) {
           var message = result["message"];
-          if (message == null) {
+          
             "message" 
-          }
+          
           // this.showNotification('snackbar-danger',result['msg'],'top','Right');
           this.storageservice.warningToast(message);
           //this.hideLoadingIndicator(); //Hide loading indicator
@@ -196,7 +201,7 @@ export class ConnectionPage implements OnInit {
       cssClass: 'custom-toast'
     });
     this.router.navigate(['/profile-view']);
-    window.location.reload();
+
   await toast.present();
 }
 

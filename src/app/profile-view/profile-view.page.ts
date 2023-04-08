@@ -204,8 +204,8 @@ export class ProfileViewPage implements OnInit {
 
    async deleteCertificateCard(certId: number) {
     let alert = await this.alertController.create({
-      header: 'Delete request!',
-      message: 'Are you sure you want to delete?',
+      
+      message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
@@ -267,8 +267,8 @@ export class ProfileViewPage implements OnInit {
 
   async deleteSkills(skillId: number) {
     let alert = await this.alertController.create({
-      header: 'Delete request!',
-      message: 'Are you sure you want to delete?',
+     
+      message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
@@ -330,8 +330,8 @@ export class ProfileViewPage implements OnInit {
 
   async deleteeducation(eduId: number) {
     let alert = await this.alertController.create({
-      header: 'Delete request!',
-      message: 'Are you sure you want to delete?',
+     
+      message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
@@ -393,8 +393,8 @@ export class ProfileViewPage implements OnInit {
 
   async deleteExperiences(expId: number) {
     let alert = await this.alertController.create({
-      header: 'Delete request!',
-      message: 'Are you sure you want to delete?',
+      
+      message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
@@ -457,8 +457,8 @@ export class ProfileViewPage implements OnInit {
   
   async deleteExtracurricular(expId: number) {
     let alert = await this.alertController.create({
-      header: 'Delete request!',
-      message: 'Are you sure you want to delete?',
+    
+      message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
