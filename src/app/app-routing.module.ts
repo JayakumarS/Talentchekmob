@@ -321,6 +321,10 @@ const routes: Routes = [
   {
     path: 'exp-verifier-details',
     loadChildren: () => import('./exp-verifier-details/exp-verifier-details.module').then( m => m.ExpVerifierDetailsPageModule)
+  },
+  {
+    path: 'edu-verifier-details',
+    loadChildren: () => import('./edu-verifier-details/edu-verifier-details.module').then( m => m.EduVerifierDetailsPageModule)
   }
 
 
