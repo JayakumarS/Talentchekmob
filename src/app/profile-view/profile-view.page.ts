@@ -37,6 +37,7 @@ export class ProfileViewPage implements OnInit {
    certifications: any;
   prof:boolean=false;
   profAvatar: boolean=false;
+  connectionList: any;
   constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef,
     public modalController: ModalController,public alertController: AlertController,) { }
   @ViewChild('picker', { static: false })
@@ -100,7 +101,9 @@ export class ProfileViewPage implements OnInit {
     //Extracurricular
     this.club=result['profileViewList'][0].clubsList;
     //certifications
-    this.certifications= result['profileViewList'][0].certificationsList
+    this.certifications= result['profileViewList'][0].certificationsList;
+    //connection
+    this.connectionList= result['profileViewList'][0].connectionList
 
         });
 

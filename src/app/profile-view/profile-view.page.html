@@ -405,37 +405,31 @@
                         
                         </ion-title>
                     </ion-col>
-                    <ion-col size="2">
+                    <!-- <ion-col size="2">
                         <img src="./assets/icon/edit_icon.png" (click)="Connections()" id="prfoileimg1">
-                    </ion-col>
+                    </ion-col> -->
                 </ion-row>
 
-                <ion-row class="talentrow">
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
-                        <ion-label>Name : <b>kesavan M</b></ion-label>
-                    </ion-col>
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Category : Job Seeker,Business Owner,Freelancer</ion-label>
-                    </ion-col>
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Location : Madurai,India</ion-label>
-                    </ion-col>
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Phone No :8838656535</ion-label>
-                    </ion-col>
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Email Id: kesavan1542@gmail.com</ion-label>
-                    </ion-col>
+                <ion-card class="talentcard2" *ngFor="let x of connectionList">
+                    <ion-card-content>
 
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>language Know: Tamil,English</ion-label>
-                    </ion-col>
-
-
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Hobbies: Cricket,Football</ion-label>
-                    </ion-col>
-                </ion-row>
+                       
+                       
+                              <ion-row class="talentrow">
+                                <ion-col size="12">
+                                    <ion-label>{{x.connectionCount}}</ion-label>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <ion-label>{{x.relationship}}</ion-label>
+                                </ion-col>
+                                <!-- <ion-col size="12" >
+                                    <h5  style="color:black;" >{{x.connectionCount}}</h5>
+                                    <small  style="color:black;">{{x.relationship}}</small>
+                                </ion-col> -->
+                            </ion-row>
+                    </ion-card-content>
+                </ion-card>
+                
 
             </ion-card-content>
         </ion-card>
