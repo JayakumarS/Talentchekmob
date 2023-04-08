@@ -38,10 +38,19 @@
                             <ion-input type="text" formControlName="userName"></ion-input>
                         </ion-item>
 
-                        <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
+
+                        <!-- <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input type="password" formControlName="password"></ion-input>
-                        </ion-item>
+                        </ion-item> -->
+
+                        
+                           <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+                            <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="password"></ion-input>
+                            <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
+                          </ion-item>
+                          
 
                     </div>
 
