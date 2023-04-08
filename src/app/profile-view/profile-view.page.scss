@@ -34,6 +34,7 @@ ion-label {
     margin: 3% 0% 0% 0%;
     --background: #dae4ff no-repeat padding-box;
     border-radius: 24px;
+    min-height: 120px !important;
 }
 
 .blackTheme {
@@ -58,18 +59,18 @@ ion-title {
     font-family: Mr-eaves;
 }
 
-.container {
-    background-color: #fff;
-    width: auto;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 25%;
-    margin-left: 5%;
-    margin-right: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+// .container {
+//     // background-color: #fff;
+//     // width: auto;
+//     // height: auto;
+//     // border-radius: 10px;
+//     margin-top: 0%;
+//     margin-left: 95%;
+//     margin-right: 5%;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+// }
 
 .talentrow {
     margin: 2px 0px;
@@ -191,10 +192,10 @@ ion-content {
     height: 15px;
 }
 
-.container {
-    position: relative;
-    display: inline-block;
-}
+// .container {
+//     position: relative;
+//     display: inline-block;
+// }
 
 .image {
     width: 200px;
@@ -212,3 +213,84 @@ ion-content {
 .action-btn {
     margin: 0 10px;
 }
+
+.container {
+    position: relative;
+    margin-top: 5%;
+   }
+  
+  .three-dots-button {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 10px;
+    height: 11px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .three-dots-button span {
+    width: 3px;
+    height: 3px;
+    background-color: #000;
+    border-radius: 50%;
+  }
+  
+  .popup {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: -5px;
+    background-color: #fff;
+     box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    padding: 5px;
+    display: none;
+    z-index: 1;
+    border-radius: 5px;
+  }
+  
+  .popup-triangle {
+    position: absolute;
+    top: -6px;
+    right: 1px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #fff transparent;
+   }
+  
+  .popup-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-button, .delete-button {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    white-space: nowrap; 
+    cursor: pointer;
+  }
+
+ .delete-button {
+    background-color: #fff;
+    border-bottom: 0px solid #ccc;
+    padding: 5px 10px;
+    color: red;
+    margin-bottom: 0px;
+    white-space: nowrap; 
+    cursor: pointer;
+  }
+  
+  .edit-button:hover, .delete-button:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .container:hover .popup {
+    display: block;
+  }
+  
