@@ -309,6 +309,10 @@ const routes: Routes = [
   },  {
     path: 'exp-verification',
     loadChildren: () => import('./exp-verification/exp-verification.module').then( m => m.ExpVerificationPageModule)
+  },
+  {
+    path: 'activity-verification',
+    loadChildren: () => import('./activity-verification/activity-verification.module').then( m => m.ActivityVerificationPageModule)
   }
 
 
