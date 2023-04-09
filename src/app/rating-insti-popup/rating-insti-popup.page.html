@@ -1,0 +1,35 @@
+
+
+<ion-content>
+ 
+
+  <ion-row>
+      <ion-col>
+          <div class="imageCss"><img  style="width: 40%;  padding: 10px;"src="./assets\img\Illustration-slide4.png" /></div>
+      </ion-col>
+  </ion-row>
+  <div class="button-content">
+  <ion-label style=" font-size: 20px;   margin-left: 4%;">Rate the Institution  </ion-label>
+  <div style="     margin-top: -6%;   margin-left: 14%;">
+      <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
+          <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
+              <ion-icon name="star"></ion-icon>
+          </li>
+      </ul>
+  </div>
+</div>
+<div class="button-content" style="margin-top: -7%;">
+  <ion-label class="labels" style=" font-size: 20px;   margin-left: 4%;">Short Feedback about Institution</ion-label>
+  
+  <ion-item style=" margin-top: 12px;width: 90%;margin-left: 4%;"fill="outline" class="input-field">
+      <ion-textarea style="height: 171px;" placeholder="Give us your thoughts..."></ion-textarea>
+  </ion-item>
+  </div>
+
+  <div class="display-justify" style="padding-top: 10%;">
+      <button class="but1" (click)="requestVerification()">Submit</button>
+  </div>
+  <div class="display-justify">
+    <button class="but2" (click)="move(1)">Skip </button>
+</div>
+</ion-content>

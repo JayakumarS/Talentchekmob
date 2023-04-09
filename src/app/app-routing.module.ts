@@ -329,6 +329,14 @@ const routes: Routes = [
   {
     path: 'academic-verifier-details',
     loadChildren: () => import('./academic-verifier-details/academic-verifier-details.module').then( m => m.AcademicVerifierDetailsPageModule)
+  },
+  {
+    path: 'rating-org-popup',
+    loadChildren: () => import('./rating-org-popup/rating-org-popup.module').then( m => m.RatingOrgPopupPageModule)
+  },
+  {
+    path: 'rating-insti-popup',
+    loadChildren: () => import('./rating-insti-popup/rating-insti-popup.module').then( m => m.RatingInstiPopupPageModule)
   }
 
 
