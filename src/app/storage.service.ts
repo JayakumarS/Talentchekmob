@@ -70,6 +70,12 @@ baseURL:string ="http://localhost:8080//";
 
   }
 
+
+  public post<T>(url: string, model: T): Observable<T> {
+    return this.http.post<T>(this.mobileserverurl+url, (model));
+
+  }
+
   postrequest_WithBaseURL(url, data) {
 
     const headers = new HttpHeaders({

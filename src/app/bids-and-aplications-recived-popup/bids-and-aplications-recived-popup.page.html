@@ -274,9 +274,15 @@
 
 
 
-    <div class="display-justify">
+    <div class="display-justify" *ngIf="appRecvFlag">
         <ion-button class="apply-button" (click)="Apply()">Invite to Interview</ion-button>
     </div>
+
+    <div class="display-justify" *ngIf="bidsRecvFlag">
+        <ion-button class="apply-button" (click)="Apply()">Invite to Interview</ion-button>
+    </div>
+
+
 
 
 </ion-content>

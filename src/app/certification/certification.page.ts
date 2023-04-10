@@ -139,6 +139,27 @@ export class CertificationPage implements OnInit {
          this.uploadFileIcon = "/img/dm/file.png";
          break;
      }
+
+     var fileExtension = files.name;
+    var frmData: FormData = new FormData();
+    frmData.append("file", files);
+    frmData.append("fileName", fileExtension);
+    frmData.append("folderName", "AssetProfileImg");
+
+    var filepathurl = "api/auth/app/fileUpload/uploadFile";
+
+    this.storageservice.post<any>(filepathurl, frmData).subscribe({
+      next: (data) => {
+
+        console.log(data);
+
+      },
+      error: (error) => {
+        console.log(error);
+
+      }
+
+    });
  
  
      if (files && file) {
