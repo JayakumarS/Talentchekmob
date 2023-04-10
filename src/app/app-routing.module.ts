@@ -363,7 +363,11 @@ const routes: Routes = [
   {
     path: 'bids-and-aplications-recived-popup',
     loadChildren: () => import('./bids-and-aplications-recived-popup/bids-and-aplications-recived-popup.module').then( m => m.BidsAndAplicationsRecivedPopupPageModule)
+  },  {
+    path: 'rating-extra-popup',
+    loadChildren: () => import('./rating-extra-popup/rating-extra-popup.module').then( m => m.RatingExtraPopupPageModule)
   }
+
 
 
 ];

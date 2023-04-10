@@ -19,40 +19,42 @@
 
 
   <ion-card-content>
+    <form [formGroup]="ExtracurricularFrom">
     <div id="test-l-1" class="content">
       <div class="button-content">
         <ion-label class="labels">Verifier Name <small style="color: #f70505;">*</small></ion-label>
         <ion-item fill="outline" class="input-field">
-          <ion-input type="text"></ion-input>
+          <ion-input type="text" formControlName="verifierName"></ion-input>
         </ion-item>
       </div>
     </div>
     <div class="button-content">
       <ion-label class="labels">Verifier Designation <small style="color: #f70505;">*</small></ion-label>
       <ion-item fill="outline" class="input-field">
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="verifierDesignation" ></ion-input>
       </ion-item>
     </div>
     <div class="button-content">
       <ion-label class="labels">Verifier Email ID<small style="color: #f70505;">*</small></ion-label>
       <ion-item fill="outline" class="input-field">
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="verifierEmail"></ion-input>
       </ion-item>
     </div>
     <div class="button-content">
       <ion-label class="labels">Verifier Mobile Number</ion-label>
       <ion-item fill="outline" class="input-field">
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="verifierMobile"></ion-input>
       </ion-item>
     </div>
 
 
     <div class="display-justify">
-      <button class="but1" (click)="goto_signup()">Save & Continue</button>
+      <button class="but1" (click)="addverifier()">Save & Continue</button>
     </div>
     <div class="display-justify">
-      <button class="but2" (click)="goto_signup()">Skip for Now</button>
+      <button class="but2" (click)="move(extId)">Skip for Now</button>
     </div>
-
+</form>
   </ion-card-content>
+
 </ion-content>
