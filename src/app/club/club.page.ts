@@ -245,10 +245,10 @@ getOrganisationList(){
          this.storageservice.postrequest(saveperonalinfo, this.Extracurricular).subscribe(result => {
      
            if (result["success"] == true) {
-            setTimeout(() => {
-              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-             profilePage.updateData();
-            }, 800);
+            // setTimeout(() => {
+            //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            //  profilePage.updateData();
+            // }, 800);
              this.presentToast()
 
              
