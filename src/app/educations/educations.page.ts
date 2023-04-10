@@ -589,6 +589,9 @@ export class EducationsPage implements OnInit {
   //UpdateEducation
 
   async UpdateEducation() {
+    this.EducationForm.patchValue({
+      'fieldofStudy':this.selectStudySet
+      })
     const errors = this.checkFormValidity(this.EducationForm);
 
     if (errors.length > 0) {
