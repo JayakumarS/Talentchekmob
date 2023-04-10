@@ -48,7 +48,7 @@ export class ExpVerificationPage implements OnInit {
         if(!org.includes('TF')){
           let edit = {
             org,
-            expid
+            exp:this.expid
          }
          let navigationExtras: NavigationExtras = {
            queryParams: edit
@@ -58,7 +58,7 @@ export class ExpVerificationPage implements OnInit {
         }else if(org.includes('TF')){
           let edit = {
             org,
-            expid
+            exp:this.expid
          }
          let navigationExtras: NavigationExtras = {
            queryParams: edit
