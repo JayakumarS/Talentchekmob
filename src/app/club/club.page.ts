@@ -13,6 +13,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./club.page.scss'],
 })
 export class ClubPage implements OnInit {
+  name: string;
 
 //   public model = {
 //     placeholder: '<p>Hello, world!</p>'
@@ -116,6 +117,7 @@ export class ClubPage implements OnInit {
 
 selectOrganisation(institutionName: string,id:string) {
   this.selectedOrganisation = institutionName;
+  this.name=institutionName;
   this.IsorgListShow = false;
   this.clubid = id;
   this.clubFrom.patchValue({
@@ -237,7 +239,7 @@ getOrganisationList(){
          this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');          
          }
          this.clubFrom.value.currentUserId = this.userId;
-        // this.clubFrom.value.clubName = this.clubid; 
+         this.clubFrom.value.clubName =  this.name; 
          this.Extracurricular = this.clubFrom.value;
          console.log(` data: ${JSON.stringify(this.Extracurricular)}`);
          var saveperonalinfo = "api/auth/app/IndividualProfileDetails/saveExtracurricular";

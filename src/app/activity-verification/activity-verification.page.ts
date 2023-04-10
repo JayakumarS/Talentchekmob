@@ -60,7 +60,7 @@ export class ActivityVerificationPage implements OnInit {
          let navigationExtras: NavigationExtras = {
            queryParams: edit
          };
-          this.router.navigate(['/rating-insti-popup'],navigationExtras)
+          this.router.navigate(['/rating-extra-popup'],navigationExtras)
       
         }
     });
@@ -79,14 +79,14 @@ export class ActivityVerificationPage implements OnInit {
   await toast.present();
 }
 
-move(eduId){
+move(extId){
   let edit = {
     
-   exp:eduId
+    extId:extId
  }
  let navigationExtras: NavigationExtras = {
    queryParams: edit
  };
-  this.router.navigate(['/rating-insit-popup'],navigationExtras)
+  this.router.navigate(['/rating-extra-popup'],navigationExtras)
 }
 }
