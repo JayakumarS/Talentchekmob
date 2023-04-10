@@ -11,9 +11,10 @@ import { ToastController } from '@ionic/angular';
 })
 export class ExpVerificationPage implements OnInit {
   org: any;
-  expid: any;
+
   ExperienceForm:FormGroup;
   Experience: any;
+  expId: any;
   constructor(public router:Router,private route: ActivatedRoute,public toastController:ToastController,
     private fb: FormBuilder, public storageservice:StorageService) { }
 
@@ -22,7 +23,7 @@ export class ExpVerificationPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
     this.org=params.orgId;
-    this.expid=params.exp;
+    this.expId=params.expId;
     });
    
     this.ExperienceForm= this.fb.group({
@@ -35,9 +36,9 @@ export class ExpVerificationPage implements OnInit {
    });
   }
 
-  requestVerification(org,expid){
+  requestVerification(org,expId){
 
-    this.ExperienceForm.value.expId = this.expid;
+    this.ExperienceForm.value.expId = this.expId;
     this.Experience = this.ExperienceForm.value;
       var saveExperience = "api/auth/app/IndividualProfileDetails/verificationRequestExp";
       this.storageservice.postrequest(saveExperience,this.Experience).subscribe(async result => {  
@@ -48,7 +49,7 @@ export class ExpVerificationPage implements OnInit {
         if(!org.includes('TF')){
           let edit = {
             org,
-            exp:this.expid
+            expId:this.expId
          }
          let navigationExtras: NavigationExtras = {
            queryParams: edit
@@ -58,7 +59,7 @@ export class ExpVerificationPage implements OnInit {
         }else if(org.includes('TF')){
           let edit = {
             org,
-            exp:this.expid
+            expId:this.expId
          }
          let navigationExtras: NavigationExtras = {
            queryParams: edit
@@ -80,10 +81,10 @@ export class ExpVerificationPage implements OnInit {
 
   await toast.present();
 }
-  move(org,expid){
+  move(org,expId){
     let edit = {
       
-     exp:expid
+      expId:expId
    }
    let navigationExtras: NavigationExtras = {
      queryParams: edit

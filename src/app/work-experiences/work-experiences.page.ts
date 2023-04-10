@@ -370,15 +370,15 @@ export class WorkExperiencesPage implements OnInit {
     this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
        console.log("Image upload response: " + result)
       if (result["success"] == true) {
-        setTimeout(() => {
-           const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-           profilePage.updateData();
-          }, 800);
+        // setTimeout(() => {
+        //    const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        //    profilePage.updateData();
+        //   }, 800);
         this.presentToast()
         
         let edit = {
           orgId:result["experienceBean"].organisationId,
-          exp:result["experienceBean"].expId,
+          expId:result["experienceBean"].expId,
        }
        let navigationExtras: NavigationExtras = {
          queryParams: edit

@@ -23,7 +23,7 @@ export class ExpVerifierDetailsPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
   this.orgId= params.org;
-   this.expId= params.expid;
+   this.expId= params.expId;
     });
 
     this.ExperienceForm= this.fb.group({
@@ -59,7 +59,7 @@ export class ExpVerifierDetailsPage implements OnInit {
       this.presentToast()
       let edit = {
         
-       exp:this.expId
+        expId:this.expId
            }
      let navigationExtras: NavigationExtras = {
        queryParams: edit
@@ -84,7 +84,7 @@ move(expId){
 
   let edit = {
       
-    exp:expId
+    expId:expId
   }
   let navigationExtras: NavigationExtras = {
     queryParams: edit
