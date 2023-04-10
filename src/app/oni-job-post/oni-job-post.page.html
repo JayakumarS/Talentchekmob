@@ -58,7 +58,7 @@
                     <ion-label class="labels">Number of Openings<small style="color: #f70505;">*</small></ion-label>
                     <div style="margin: 0px 15px 0px 0px;">
                         <ion-item fill="outline" class="input-field">
-                            <ion-input (ionBlur)="validateOpenings($event.target.value);" formControlName="openings" placeholder="Number Of Openings"></ion-input>
+                            <ion-input type="number" formControlName="openings" placeholder="Number Of Openings"></ion-input>
                         </ion-item>
                     </div>
 
@@ -112,17 +112,17 @@
                         <div>Atleast</div>
                         <div style="width: 30%;">
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="jobExperience"></ion-input>
+                                <ion-input type="number" formControlName="jobExperience"></ion-input>
                             </ion-item>
                         </div>
                         <div>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select formControlName="jobExperienceFormat" placeholder="Years">
-                                    <ion-select-option value="Years">Years</ion-select-option>
-                                    <ion-select-option value="Months">Months</ion-select-option>
-                                    <ion-select-option value="Weeks">Weeks</ion-select-option>
-                                    <ion-select-option value="Days">Days</ion-select-option>
-                                    <ion-select-option value="Hours">Hours</ion-select-option>
+                                <ion-select formControlName="jobExperienceFormat" placeholder="Year(s)">
+                                    <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+                                    <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+                                    <ion-select-option value="Week(s)">Week(s)</ion-select-option>
+                                    <ion-select-option value="Day(s)">Day(s)</ion-select-option>
+                                    <ion-select-option value="Hour(s)">Hour(s)</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </div>
@@ -183,13 +183,13 @@
                         <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;">
                             <div style="margin: 0px 15px 0px 0px;">
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-input (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
+                                    <ion-input type="number" (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
                                 </ion-item>
                             </div>
                             <h4>to</h4>
                             <div style="margin: 0px 0px 0px 15px;">
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-input (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
+                                    <ion-input type="number" (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
                                 </ion-item>
                             </div>
                         </div>
@@ -246,7 +246,7 @@
             </div>
 
 
-            <div class="ion-stepper-step" id="step4">
+            <!-- <div class="ion-stepper-step" id="step4">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">4</div>
                     <div class="ion-stepper-title">Job Schedule</div>
@@ -363,7 +363,7 @@
                         </div>
                         <div>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="jobExpWorkHrs"></ion-input>
+                                <ion-input type="number" formControlName="jobExpWorkHrs"></ion-input>
                             </ion-item>
                         </div>
                     </div>
@@ -392,19 +392,19 @@
                         <button class="ion-stepper-next" (click)="validateJobshedule()">Next</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
-            <div class="ion-stepper-step" id="step5">
+            <div class="ion-stepper-step" id="step4">
                 <div class="ion-stepper-header">
-                    <div class="ion-stepper-circle">5</div>
+                    <div class="ion-stepper-circle">4</div>
                     <div class="ion-stepper-title"> Additional Informatione</div>
                 </div>
                 <div class="ion-stepper-content">
 
                     <ion-label class="labels">Mention the deadline for applications<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-datetime (ionChange)="validateStartDate($event.target.value);" formControlName="appDeadline" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                        <ion-datetime  formControlName="appDeadline" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                     </ion-item>
 
 
@@ -426,7 +426,7 @@
                     </ion-list>
 
 
-                    <ion-label class="labels">Receive applications from<small style="color: #f70505;">*</small></ion-label>
+                    <!-- <ion-label class="labels">Receive applications from<small style="color: #f70505;">*</small></ion-label>
 
                     <ion-item fill="outline" class="input-field">
                         <div class="selected-skills-container">
@@ -442,7 +442,7 @@
                         <ion-item *ngFor="let result of searchResultsOffLocation" (click)="selectCityForLocation(result.text,result.id)">
                             {{ result.text }}
                         </ion-item>
-                    </ion-list>
+                    </ion-list> -->
 
 
                     <ion-label class="labels">Mention languages requirements for the job<small style="color: #f70505;">*</small></ion-label>
@@ -455,11 +455,11 @@
 
                     <ion-label class="labels">Enter Contact number to let the applicants call you Directly</ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-input formControlName="phoneNo"></ion-input>
+                        <ion-input type="number" formControlName="phoneNo"></ion-input>
                     </ion-item>
 
 
-                    <div class="line-with-text">
+                    <!-- <div class="line-with-text">
                         <hr class="hr1">
                     </div>
 
@@ -477,10 +477,10 @@
                                 </div>
                             </div>
                         </ion-radio-group>
-                    </div>
+                    </div> -->
 
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step5', 'step4')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step4', 'step3')">Back</button>
                         <button class="ion-stepper-next" (click)="validateAdditional()">Next</button>
                     </div>
 
@@ -491,7 +491,7 @@
 
 
 
-            <div class="ion-stepper-step" id="step6">
+            <div class="ion-stepper-step" id="step5">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">5</div>
                     <div class="ion-stepper-title"> Auction the Job</div>
@@ -509,12 +509,12 @@
 
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step6', 'step5')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step5', 'step4')">Back</button>
                         <button class="ion-stepper-submit" (click)="savejobadvertisement()">Save</button>
                     </div>
 
                     <div *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step6', 'step5')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step5', 'step4')">Back</button>
                         <button class="ion-stepper-submit" (click)="updatejobseek()">Update</button>
                     </div>
                 </div>

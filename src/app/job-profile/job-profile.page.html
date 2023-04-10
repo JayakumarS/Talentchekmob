@@ -116,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="ion-stepper-step" id="step2">
+            <!-- <div class="ion-stepper-step" id="step2">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">2</div>
                     <div class="ion-stepper-title">Availability</div>
@@ -265,11 +265,11 @@
                         <button class="ion-stepper-next" (click)="validateAvailability()">Next</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="ion-stepper-step" id="step3">
+            <div class="ion-stepper-step" id="step2">
                 <div class="ion-stepper-header">
-                    <div class="ion-stepper-circle">3</div>
+                    <div class="ion-stepper-circle">2</div>
                     <div class="ion-stepper-title">Additional information</div>
                 </div>
                 <div class="ion-stepper-content">
@@ -314,7 +314,7 @@
                         <hr class="hr1">
                     </div>
 
-                    <div>
+                    <!-- <div>
                         <ion-radio-group formControlName="relocatewill" value="false">
                             <div>
                                 <ion-label>Are you willing to relocate?</ion-label>
@@ -326,13 +326,13 @@
                                 </div>
                             </div>
                         </ion-radio-group>
-                    </div>
+                    </div> -->
 
-                    <div class="line-with-text">
+                    <!-- <div class="line-with-text">
                         <hr class="hr1">
-                    </div>
+                    </div> -->
 
-                    <div>
+                    <!-- <div>
                         <ion-radio-group formControlName="travelwill" value="No">
                             <div>
                                 <ion-label>Are you willing to travel?</ion-label>
@@ -346,11 +346,11 @@
                                 </div>
                             </div>
                         </ion-radio-group>
-                    </div>
+                    </div> -->
 
-                    <div class="line-with-text">
+                    <!-- <div class="line-with-text">
                         <hr class="hr1">
-                    </div>
+                    </div> -->
 
                     <div>
                         <div>
@@ -398,12 +398,12 @@
                     </div>
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
                         <button class="ion-stepper-submit" (click)="validateInformation('save')">Save</button>
                     </div>
 
                     <div  *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
                         <button class="ion-stepper-submit" (click)="validateInformation('update')">Update</button>
                     </div>
                 </div>
