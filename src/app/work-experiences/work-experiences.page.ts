@@ -375,19 +375,15 @@ export class WorkExperiencesPage implements OnInit {
            profilePage.updateData();
           }, 800);
         this.presentToast()
-        }if(!result["experienceBean"].organisationId.includes('TF')){
-
-          let edit = {
-            orgId:result["experienceBean"].organisationId,
-            exp:result["experienceBean"].expId,
-         }
-         let navigationExtras: NavigationExtras = {
-           queryParams: edit
-         };
-          this.router.navigate(['/exp-verification'],navigationExtras)
-
-          
-        }else {
+        
+        let edit = {
+          orgId:result["experienceBean"].organisationId,
+          exp:result["experienceBean"].expId,
+       }
+       let navigationExtras: NavigationExtras = {
+         queryParams: edit
+       };
+        this.router.navigate(['/exp-verification'],navigationExtras)
 
         }
     });
