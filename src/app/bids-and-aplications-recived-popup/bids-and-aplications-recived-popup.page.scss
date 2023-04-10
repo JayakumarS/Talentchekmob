@@ -1,0 +1,241 @@
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+@font-face {
+    font-family: alina-sans;
+    src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+}
+
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png');
+    background-size: cover;
+    --background: #EDF1FC;
+}
+
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+.filter-button {
+    margin-left: 8px;
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 97%;
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
+    background: #112e5b;
+    display: flex;
+    padding: 19px;
+    margin: 0px 10px 10px 10px;
+    justify-content: space-around;
+    border-radius: 30px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.footer-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.footer-nav button ion-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.footer-nav button.selected {
+    color: aliceblue;
+    border-radius: 50%;
+}
+
+
+/* Set the padding at the bottom of the ion-content to the height of the footer */
+
+ion-content {
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
+}
+
+.display-justify {
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.custom-button {
+    width: 360px;
+    border-radius: 30px;
+    height: 210px;
+    font-size: 18px;
+    background-color: antiquewhite;
+    // display: flex;
+    padding: 0px 15px;
+    // align-items: center;
+    // justify-content: center; 
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+    margin-left: 4px;
+    margin-right: 4px;
+    overflow: auto;
+    /* add this line */
+}
+
+.line-with-text .hr1 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.log-out {
+    display: flex;
+    padding-top: 127px;
+    margin: 0px 111px;
+    justify-content: center;
+}
+
+.log-out-button {
+    width: 360px;
+    --border-radius: 30px;
+    height: 56px;
+    font-size: 18px;
+}
+
+.full-part-time {
+    width: 25%;
+    text-align: center;
+    background: #FA7070;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0px;
+}
+
+.experience {
+    width: 35%;
+    text-align: center;
+    background: #568FEA;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0px;
+}
+
+.apply-button {
+    background: #568FEA;
+    border-radius: 30px;
+    height: 32px;
+    width: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-button-details {
+    width: 360px;
+    border-radius: 30px;
+    // height: 320px;
+    font-size: 18px;
+    background-color: antiquewhite;
+    padding: 14px 14px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+    margin-left: 4px;
+    margin-right: 4px;
+    overflow: auto;
+    /* add this line */
+}
+
+.contact-details {
+    display: flex;
+    align-items: stretch;
+    margin: -10px 0px 25px 0px;
+    font-size: 16px;
+    columns: #191D1E;
+    flex-direction: column;
+}
+
+.badge-solid-green {
+    color: #198754;
+    background-color: #19875426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-red {
+    color: #eb3939;
+    background-color: #87191926;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-blue {
+    color: #3e3be0;
+    background-color: #19248726;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-cyan {
+    color: #3D478F;
+    background-color: #D1D6FA;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge {
+    --bs-badge-padding-x: .65em;
+    --bs-badge-padding-y: .35em;
+    --bs-badge-font-size: .75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: .375rem;
+    display: inline-block;
+    line-height: 1;
+    border-radius: 20px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.apply-button {
+    width: 360px;
+    --border-radius: 50px;
+    height: 56px;
+    font-size: 18px;
+    font-family: Mr-eaves;
+}

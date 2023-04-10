@@ -5,7 +5,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_jobs()"></ion-icon>
             </ion-col>
             <ion-col size="9">
-                <h1 style="font-size:20px ; font-family: Mr-eaves;">Add Job Preference</h1>
+                <h1 style="font-size:20px ; font-family: Mr-eaves;">Job Post</h1>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -35,7 +35,7 @@
 
                     <ion-label class="labels">Job Title<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select placeholder="Job title"  formControlName="jobTitle1" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                        <ion-select placeholder="Job title" formControlName="jobTitle1" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -137,18 +137,18 @@
 
 
                     <ion-list>
-                        <ion-radio-group formControlName="jobExperienceMandatory"  [allowEmptySelection]="true" value="turtles">
-                          <ion-item class="ion-item">
-                            <ion-label><b>Must have</b></ion-label>
-                            <ion-radio slot="end" value="true"></ion-radio>
-                          </ion-item>  
-                          
-                          <ion-item class="ion-item">
-                            <ion-label><b>Good to have</b></ion-label>
-                            <ion-radio slot="end" value="false"></ion-radio>
-                          </ion-item>
+                        <ion-radio-group formControlName="jobExperienceMandatory" [allowEmptySelection]="true" value="turtles">
+                            <ion-item class="ion-item">
+                                <ion-label><b>Must have</b></ion-label>
+                                <ion-radio slot="end" value="true"></ion-radio>
+                            </ion-item>
+
+                            <ion-item class="ion-item">
+                                <ion-label><b>Good to have</b></ion-label>
+                                <ion-radio slot="end" value="false"></ion-radio>
+                            </ion-item>
                         </ion-radio-group>
-                      </ion-list> 
+                    </ion-list>
 
 
                     <!-- <div class="line-with-text">
@@ -464,7 +464,7 @@
                     </div>
 
                     <div>
-                        <ion-radio-group formControlName="gender" >
+                        <ion-radio-group formControlName="gender">
                             <div>
                                 <ion-label>Gender Preferences</ion-label>
                                 <div style="display: flex;justify-content: space-evenly;">
@@ -503,7 +503,9 @@
                     <p>Would you like to Auction this Job Vacancy?</p>
                     <p>Auction your organisation's vacant positions and invite top bidders that fit your expectations and budget for an interview.</p>
 
-                    <div><ion-toggle formControlName="auctioned"></ion-toggle></div>
+                    <div>
+                        <ion-toggle formControlName="auctioned"></ion-toggle>
+                    </div>
 
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">
@@ -531,11 +533,11 @@
         <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
    <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
 </button>
-<button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
     <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
  </button>
- 
- <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
+
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
     <ion-icon size="large" name="person-circle-sharp"></ion-icon>
   </button>
         <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">

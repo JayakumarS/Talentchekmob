@@ -306,7 +306,8 @@ const routes: Routes = [
     path: 'category-popup',
     loadChildren: () => import('./category-popup/category-popup.module').then( m => m.CategoryPopupPageModule)
 
-  },  {
+  },
+  {
     path: 'exp-verification',
     loadChildren: () => import('./exp-verification/exp-verification.module').then( m => m.ExpVerificationPageModule)
   },
@@ -337,6 +338,31 @@ const routes: Routes = [
   {
     path: 'rating-insti-popup',
     loadChildren: () => import('./rating-insti-popup/rating-insti-popup.module').then( m => m.RatingInstiPopupPageModule)
+  },
+  {
+    path: 'category-popup',
+    loadChildren: () => import('./category-popup/category-popup.module').then( m => m.CategoryPopupPageModule)
+
+  },
+  {
+    path: 'organization-dashboard-list',
+    loadChildren: () => import('./organization-dashboard-list/organization-dashboard-list.module').then(m => m.OrganizationDashboardListPageModule)
+  },
+  {
+    path: 'institution-dashboard-list',
+    loadChildren: () => import('./institution-dashboard-list/institution-dashboard-list.module').then(m => m.InstitutionDashboardListPageModule)
+  },
+  {
+    path: 'oni-job-post-list',
+    loadChildren: () => import('./oni-job-post-list/oni-job-post-list.module').then( m => m.OniJobPostListPageModule)
+  },
+  {
+    path: 'oni-view-job-profile-matches-list',
+    loadChildren: () => import('./oni-view-job-profile-matches-list/oni-view-job-profile-matches-list.module').then( m => m.OniViewJobProfileMatchesListPageModule)
+  },
+  {
+    path: 'bids-and-aplications-recived-popup',
+    loadChildren: () => import('./bids-and-aplications-recived-popup/bids-and-aplications-recived-popup.module').then( m => m.BidsAndAplicationsRecivedPopupPageModule)
   }
 
 

@@ -16,7 +16,7 @@
 
 <ion-content>
 
-    <div class="display-justify">
+    <div class="display-justify" *ngIf="!IsShowProfile">
 
         <ion-card class="scan-card">
             <br>
@@ -32,7 +32,19 @@
                 <ion-button style="--background: #112e5a;" expand="block" (click)="scanBarcode()">Scan a Code
                 </ion-button>
 
-                <div *ngIf="IsShowProfile">
+
+            </ion-card-content>
+
+        </ion-card>
+
+    </div>
+
+
+    <div class="display-justify" *ngIf="!IsShowProfile">
+        <ion-card class="scan-card">
+
+            <ion-card-content>
+                <div>
                     <div>
                         <ion-row class="profilehome">
                             <ion-col size="2">
@@ -52,8 +64,8 @@
                         <ion-row>
                             <div class="ion-text-center" style="margin:auto">
                                 <p>Add <span style="color: black;font-size:'18px';">{{scanned_UserName}}</span> from
-                                    <ion-input *ngIf="isformLoc == false" style="color: black;font-size:'18px';border: orange 1px solid; border-radius: 10px;" type="text" formControlName="fromLocation" [(ngModel)]="fromLocationVal"></ion-input> as my
-                                    <ion-select style="color: black;font-size:'18px';border: orange 1px solid; border-radius: 10px;" okText="Okay" cancelText="Dismiss" formControlName="relationShip" [(ngModel)]="relationShipVal">
+                                    <ion-input *ngIf="isformLoc == false" style="color: black;font-size:'18px';border: #112e5b 1px solid; border-radius: 10px;" type="text" formControlName="fromLocation" [(ngModel)]="fromLocationVal"></ion-input> as my
+                                    <ion-select style="color: black;font-size:'18px';border: #112e5b 1px solid; border-radius: 10px;" okText="Okay" cancelText="Dismiss" formControlName="relationShip" [(ngModel)]="relationShipVal">
                                         <ion-select-option *ngFor='let blElement of relationShipResponse' value="{{blElement.id}}">
                                             {{blElement.text.charAt(0).toUpperCase() + blElement.text.substr(1).toLowerCase()}}
                                         </ion-select-option>
@@ -108,6 +120,8 @@
                                 </ion-row>
 
                             </div>
+
+                            <div>{{this.scannedData}}</div>
                         </ion-row>
                         <br />
 
@@ -127,8 +141,6 @@
                     </form>
                 </div>
             </ion-card-content>
-
         </ion-card>
-
     </div>
 </ion-content>

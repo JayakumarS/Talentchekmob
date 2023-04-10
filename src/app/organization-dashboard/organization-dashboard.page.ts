@@ -54,6 +54,11 @@ export class OrganizationDashboardPage implements OnInit {
     this.router.navigate(['/organization-dashboard-list'], navigationExtras);
   }
 
+  viewmatchesList(){
+
+    this.router.navigate(['/oni-oni-job-post-list']);
+  }
+
   selectedTab: string = 'profile';
 
   setSelectedTab(tabName: string) {

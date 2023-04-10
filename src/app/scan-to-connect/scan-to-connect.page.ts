@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../storage.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-scan-to-connect',
@@ -31,7 +32,7 @@ export class ScanToConnectPage implements OnInit {
   iconsArray: any = [1, 2, 3, 4, 5];
   rateOrgVal: number;
 
-  constructor(private barcodeScanner: BarcodeScanner,public storageservice: StorageService,
+  constructor(public router:Router,private barcodeScanner: BarcodeScanner,public storageservice: StorageService,
      public formbuilder: FormBuilder) {
 
     this.profileImageURL = "assets/img/avatar1.png";
@@ -48,7 +49,8 @@ export class ScanToConnectPage implements OnInit {
 
   ngOnInit() {
 
-    this.Bind_Relationship_DD
+    this.Bind_Relationship_DD();
+    this.BindProfileImage("test");
   }
 
 
@@ -80,33 +82,33 @@ export class ScanToConnectPage implements OnInit {
 
   BindProfileImage(scan_tfId: any) {
     console.log('scan_tfId', scan_tfId);
-    var url = 'api/company/getuserById?userId=' + scan_tfId;
+    var url = 'api/auth/app/mobile/editprofiledetails?currentUserId='+scan_tfId;
 
     this.storageservice.getrequest(url).subscribe(result => {
       console.log(`result data: ${JSON.stringify(result)}`);
       //this.storageservice.hideLoadingIndicator();
       if (result["success"] == true) {
         //Employee details
-        var data = result["editList"][0];
+        var data = result["profileList"][0];
 
         //To show the values
-        if (data["uploadPhoto"] == null) {
+        if (data["uploadImg"] == null) {
           this.profileImageURL = "assets/img/avatar1.png";
         }
 
-        if (data != null && data["uploadPhoto"] != null) {
+        if (data != null && data["uploadImg"] != null) {
           var dtTicks = new Date();
           var strTicks = dtTicks.getTime().toString().replace('.', '') + dtTicks.getHours() + dtTicks.getMinutes() + dtTicks.getSeconds() + dtTicks.getMilliseconds();
           console.log(`dtTicks Response : ${JSON.stringify(strTicks)}`);
 
-          var photoPath = data["uploadPhoto"];
-          this.profileImageURL = this.storageservice.getProperImageUrl(photoPath) + "?" + strTicks;
+          var photoPath = data["uploadImg"];
+          this.profileImageURL = data["uploadImg"];
           console.log("ProfileImageURL: " + this.profileImageURL);
         }
 
-        this.scanned_UserId = data['userId'];
-        this.scanned_UserName = data['firstName'].trim() + ' ' + data['lastName'].trim();
-        this.scanned_EmailId = data['emailId'];
+        this.scanned_UserId = scan_tfId;
+        this.scanned_UserName = data['firstname'].trim() +' '+ data['lastname'].trim();
+        this.scanned_EmailId = data['email'];
 
         //End
 
@@ -172,6 +174,89 @@ export class ScanToConnectPage implements OnInit {
 
     }
     return tfId;
+  }
+
+  changeRating(value) {
+    console.log(`Event data: ${JSON.stringify(value)}`);
+    this.rateOrgVal = value;
+  }
+
+  close() {
+    this.router.navigate(['/settings']);
+  }
+
+
+  SaveAndInvite() {
+    this.isSubmitted = true;
+    if (!this.talentform.valid) {
+    //  this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
+    }
+    else {
+
+      var relationShip = this.talentform.controls['relationShip'].value;
+      var fromLocation = this.talentform.controls['fromLocation'].value;
+      var favourite = this.talentform.controls['favourite'].value;
+      console.log("relationShip: " + relationShip);
+      console.log("fromLocation: " + fromLocation);
+      console.log("favourite: " + favourite);
+
+      var IsFavourite: Boolean = false;
+      if (favourite == 'Yes') {
+        IsFavourite = true;
+      }
+      console.log("IsFavourite: " + IsFavourite);
+
+        if (relationShip != "") {
+          var postData = {
+            "acquaintancePeriodFrom": "",
+            "acquaintancePeriodTo": "",
+            "currentlyAcquainted": "",
+            "email": this.scanned_EmailId,
+            "favourite": IsFavourite,
+            "firstName": "",
+            "receiverMobile": "",
+            "receiverName": this.scanned_UserName,
+            "userId": this.scanned_UserId, //receiverTalentId
+            "receiverRegistered": true,
+            "relationshipAt": fromLocation,
+            "relationshipId": relationShip,
+            "initiatorName": this.userName,
+            "initiatorTalentId": this.userId,
+            "ratingByInitiator": this.rateOrgVal
+          }
+
+          console.log(`Save posting data: ${JSON.stringify(postData)}`);
+
+          var saveUrl = "api/company/sendConnectionInviteMob";
+
+          this.storageservice.postrequest(saveUrl, postData).subscribe(result => {
+            var response = result;
+            console.log("Save response: " + response);
+
+            if (result["success"] == true || result["success"] == null) {
+              this.storageservice.successToastCustom('Congratulations', 'Your feedback has been saved successfully.');
+
+              let navigationExtras: NavigationExtras = {
+                queryParams: {
+                  refreshPage: 'yes'
+                }
+              };
+              this.router.navigate(['/dashboard-individual'], navigationExtras);
+
+            }
+            else if (result["success"] == false) {
+              var msg = result["message"];
+              if (msg == null) {
+                msg = "Web service does not give proper message";
+              }
+              this.storageservice.warningToast(msg);
+            }
+          });
+        }
+        else {
+       //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('Connections.reqRelationShip'));
+        }
+    }
   }
 
 }

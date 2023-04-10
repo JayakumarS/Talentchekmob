@@ -1,0 +1,334 @@
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+@font-face {
+    font-family: alina-sans;
+    src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+}
+
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png');
+    background-size: cover;
+    --background: #EDF1FC;
+}
+
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+.filter-button {
+    margin-left: 8px;
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 97%;
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
+    background: #112e5b;
+    display: flex;
+    padding: 19px;
+    margin: 0px 10px 10px 10px;
+    justify-content: space-around;
+    border-radius: 30px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.footer-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.footer-nav button ion-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.footer-nav button.selected {
+    color: #FF9E3F;
+    border-radius: 50%;
+}
+
+
+/* Set the padding at the bottom of the ion-content to the height of the footer */
+
+ion-content {
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
+}
+
+.display-justify {
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+div.b {
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Poppins';
+    font-size: 15px;
+    font-weight: 800;
+    color: #000;
+}
+
+div.c {
+    white-space: nowrap;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Poppins';
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.adv-card {
+    width: 360px;
+    border-radius: 30px;
+    font-size: 18px;
+    background-color: antiquewhite;
+    padding: 0px 15px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.custom-button {
+    width: 360px;
+    border-radius: 30px;
+    height: 200px;
+    font-size: 18px;
+    background-color: antiquewhite;
+    // display: flex;
+    padding: 0px 15px;
+    // align-items: center;
+    // justify-content: center; 
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.line-with-text .hr1 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.log-out {
+    display: flex;
+    padding-top: 127px;
+    margin: 0px 111px;
+    justify-content: center;
+}
+
+.log-out-button {
+    width: 360px;
+    --border-radius: 30px;
+    height: 56px;
+    font-size: 18px;
+}
+
+.full-part-time {
+    width: 25%;
+    text-align: center;
+    background: #FA7070;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0px;
+}
+
+.experience {
+    width: 35%;
+    text-align: center;
+    background: #568FEA;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 0px;
+}
+
+.apply-button {
+    background: #568FEA;
+    border-radius: 30px;
+    height: 42px;
+    width: 35%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-justify-button {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 35px;
+}
+
+.custom-button-job {
+    width: 274px;
+    --border-radius: 50px;
+    height: 48px;
+    font-size: 18px;
+    font-family: alina-sans;
+    text-transform: capitalize;
+}
+
+.custom-button-job-edit {
+    width: 200px;
+    --border-radius: 50px;
+    height: 43px;
+    font-size: 14px;
+    font-family: alina-sans;
+    text-transform: capitalize;
+}
+
+.c-pill {
+    align-items: center;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 11px;
+    display: inline-block;
+    height: 100%;
+    white-space: nowrap;
+    width: auto;
+    position: relative;
+    border-radius: 100px;
+    line-height: 1;
+    overflow: hidden;
+    padding: 4px 12px 0px 20px;
+    text-overflow: ellipsis;
+    line-height: 1.25rem;
+    color: #000;
+    word-break: break-word;
+    margin-left: 10%;
+    margin-top: -4%;
+    &:before {
+        border-radius: 50%;
+        content: '';
+        height: 10px;
+        left: 6px;
+        margin-top: -5px;
+        position: absolute;
+        top: 50%;
+        width: 10px;
+    }
+}
+
+.c-pill--success {
+    background: #b4eda0;
+}
+
+.c-pill--success:before {
+    background: #6BC167;
+}
+
+.c-pill--warning {
+    background: #ffebb6;
+}
+
+.c-pill--warning:before {
+    background: #ffc400;
+}
+
+.c-pill--danger {
+    background: #eceef1;
+}
+
+ion-icon {
+    font-size: 26px;
+}
+
+.title-match {
+    color: black;
+    font-size: 15px;
+    font-weight: 800;
+    margin-top: 20px;
+    white-space: nowrap;
+}
+
+.title-count {
+    color: black;
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 15px;
+    white-space: nowrap;
+    text-align: end;
+}
+
+.profilesearchcard {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+}
+
+.badge-solid-green {
+    color: #198754;
+    background-color: #19875426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-orange {
+    color: #fd7e14;
+    background-color: #fd7e1426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-blue {
+    color: #0d6efd;
+    background-color: #0d6efd26;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge {
+    --bs-badge-padding-x: .65em;
+    --bs-badge-padding-y: .35em;
+    --bs-badge-font-size: .75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: .375rem;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
