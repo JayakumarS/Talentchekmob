@@ -2,7 +2,7 @@
 
 <ion-content>
  
-
+<form [formGroup]="ExperienceForm">
   <ion-row>
       <ion-col>
           <div class="imageCss"><img  style="width: 40%;  padding: 10px;"src="./assets\img\Illustration-slide4.png" /></div>
@@ -22,14 +22,15 @@
   <ion-label class="labels" style=" font-size: 20px;   margin-left: 4%;">Short Feedback about Organisation</ion-label>
   
   <ion-item style=" margin-top: 12px;width: 90%;margin-left: 4%;"fill="outline" class="input-field">
-      <ion-textarea style="height: 171px;" placeholder="Give us your thoughts..."></ion-textarea>
+      <ion-textarea style="height: 171px;" placeholder="Give us your thoughts..."formControlName="remarks"></ion-textarea>
   </ion-item>
   </div>
 
   <div class="display-justify" style="padding-top: 10%;">
-      <button class="but1" (click)="requestVerification()">Submit</button>
+      <button class="but1" (click)="updateRatingOrg()">Submit</button>
   </div>
   <div class="display-justify">
     <button class="but2" (click)="move(1)">Skip </button>
 </div>
+</form>
 </ion-content>

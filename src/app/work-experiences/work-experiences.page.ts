@@ -1,6 +1,6 @@
 import { Component, ElementRef, forwardRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
@@ -375,8 +375,20 @@ export class WorkExperiencesPage implements OnInit {
            profilePage.updateData();
           }, 800);
         this.presentToast()
-        }else{  
- 
+        }if(!result["experienceBean"].organisationId.includes('TF')){
+
+          let edit = {
+            orgId:result["experienceBean"].organisationId,
+            exp:result["experienceBean"].expId,
+         }
+         let navigationExtras: NavigationExtras = {
+           queryParams: edit
+         };
+          this.router.navigate(['/exp-verification'],navigationExtras)
+
+          
+        }else {
+
         }
     });
     }else{
@@ -397,7 +409,7 @@ export class WorkExperiencesPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    this.router.navigate(['/profile-view']);
+
 
   await toast.present();
 }
