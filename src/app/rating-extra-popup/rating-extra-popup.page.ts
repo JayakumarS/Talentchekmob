@@ -78,4 +78,8 @@ export class RatingExtraPopupPage implements OnInit {
     this.router.navigate(['/profile-view']);
   await toast.present();
 }
+move(){
+
+  this.router.navigate(['/profile-view']); 
+}
 }
