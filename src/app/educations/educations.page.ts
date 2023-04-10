@@ -2,7 +2,7 @@
 import { formatDate } from '@angular/common';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
@@ -404,6 +404,16 @@ export class EducationsPage implements OnInit {
                profilePage.updateData();
               }, 800);
               this.presentToast()
+
+              let edit = {
+                instiId:result["educationBean"].institutionId,
+                edu:result["educationBean"].eduId,
+             }
+             let navigationExtras: NavigationExtras = {
+               queryParams: edit
+             };
+              this.router.navigate(['/edu-verification'],navigationExtras)
+      
             }
           });
         }else{
@@ -432,7 +442,7 @@ export class EducationsPage implements OnInit {
       cssClass: 'custom-toast'
     });
 
-    this.router.navigate(['/profile-view']);
+   
    
     await toast.present();
    
