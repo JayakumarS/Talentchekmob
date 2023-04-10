@@ -79,27 +79,27 @@ export class JobProfilePage implements OnInit {
         jobSkills: [""],
         jobExperience:["",Validators.required],
         jobExperienceFormat: ["Year(s)"],
-        jobShiftDM: false,
-        jobShiftDT: false,
-        jobShiftDW: false,
-        jobShiftDTH: false,
-        jobShiftDF: false,
-        jobShiftDS: false,
-        jobShiftDSU: false,
-        jobShiftNM: false,
-        jobShiftNT: false,
-        jobShiftNW: false,
-        jobShiftNTH: false,
-        jobShiftNF: false,
-        jobShiftNS: false,
-        jobShiftNSU: false,
-      jobExpWorkHrs: ["",Validators.required],
-      jobStartDateFrom:["",Validators.required],
-       jobStartDateTo:["",Validators.required],
+      //   jobShiftDM: false,
+      //   jobShiftDT: false,
+      //   jobShiftDW: false,
+      //   jobShiftDTH: false,
+      //   jobShiftDF: false,
+      //   jobShiftDS: false,
+      //   jobShiftDSU: false,
+      //   jobShiftNM: false,
+      //   jobShiftNT: false,
+      //   jobShiftNW: false,
+      //   jobShiftNTH: false,
+      //   jobShiftNF: false,
+      //   jobShiftNS: false,
+      //   jobShiftNSU: false,
+      // jobExpWorkHrs: ["",Validators.required],
+      // jobStartDateFrom:["",Validators.required],
+      //  jobStartDateTo:["",Validators.required],
        location: [""],
       reqLanguages: ["",Validators.required],
-      relocatewill: ["false"],
-      travelwill: ["No"],
+      // relocatewill: ["false"],
+      // travelwill: ["No"],
       jobSalaryFrom: ["",Validators.required],
       jobSalaryTo: ["",Validators.required],
       jobSalaryCurrency: ["INR"],
@@ -161,25 +161,25 @@ export class JobProfilePage implements OnInit {
             this.selectedCities.push(location);
           }
 
-          const jobStartDateFrom = result["jobSeekList"][0].jobStartDateFrom;
-          const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
+          // const jobStartDateFrom = result["jobSeekList"][0].jobStartDateFrom;
+          // const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
 
-          const jobStartDateTo = result["jobSeekList"][0].jobStartDateTo;
-          const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
+          // const jobStartDateTo = result["jobSeekList"][0].jobStartDateTo;
+          // const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
 
-          const shits = result["jobSeekList"][0].jobShift
-          const arr: string[] = shits.split(",");
+          // const shits = result["jobSeekList"][0].jobShift
+          // const arr: string[] = shits.split(",");
 
-          for(let i=0;i<arr.length;i++){
-           var job = false;
-            var shift = arr[i]
-            if(shift=="f"){
-              job = false;
-            }else{
-              job = true;
-            }
-            this.jobShiftArray.push(job);
-          }
+          // for(let i=0;i<arr.length;i++){
+          //  var job = false;
+          //   var shift = arr[i]
+          //   if(shift=="f"){
+          //     job = false;
+          //   }else{
+          //     job = true;
+          //   }
+          //   this.jobShiftArray.push(job);
+          // }
 
           console.log(this.jobShiftArray)
           this.editJobTitle = result["jobSeekList"][0].jobTitle;
@@ -190,32 +190,32 @@ export class JobProfilePage implements OnInit {
             'jobType': result["jobSeekList"][0].jobType,
             'jobExperience':result["jobSeekList"][0].jobExperience,
             'jobExperienceFormat': result["jobSeekList"][0].jobExperienceFormat,
-            'jobExpWorkHrs': result["jobSeekList"][0].jobExpWorkHrs,
-            'jobStartDateFrom': startdate.toISOString(),
-            'jobStartDateTo': enddate.toISOString(),
+            // 'jobExpWorkHrs': result["jobSeekList"][0].jobExpWorkHrs,
+            // 'jobStartDateFrom': startdate.toISOString(),
+            // 'jobStartDateTo': enddate.toISOString(),
             'reqLanguages': result["jobSeekList"][0].reqLanguages,
-            'relocatewill': result["jobSeekList"][0].relocatewill.toString(),
-            'travelwill': result["jobSeekList"][0].travelwill,
+            // 'relocatewill': result["jobSeekList"][0].relocatewill.toString(),
+            // 'travelwill': result["jobSeekList"][0].travelwill,
             'jobSalaryFrom': result["jobSeekList"][0].jobSalaryFrom,
             'jobSalaryTo': result["jobSeekList"][0].jobSalaryTo,
             'jobSalaryCurrency': result["jobSeekList"][0].jobSalaryCurrency,
             'jobSalaryFrequency': result["jobSeekList"][0].jobSalaryFrequency,
 
-            'jobShiftDM':this.jobShiftArray[0],
-            'jobShiftDT':this.jobShiftArray[1],
-            'jobShiftDW':this.jobShiftArray[2],
-            'jobShiftDTH':this.jobShiftArray[3],
-            'jobShiftDF':this.jobShiftArray[4],
-            'jobShiftDS':this.jobShiftArray[5],
-            'jobShiftDSU':this.jobShiftArray[6],
+            // 'jobShiftDM':this.jobShiftArray[0],
+            // 'jobShiftDT':this.jobShiftArray[1],
+            // 'jobShiftDW':this.jobShiftArray[2],
+            // 'jobShiftDTH':this.jobShiftArray[3],
+            // 'jobShiftDF':this.jobShiftArray[4],
+            // 'jobShiftDS':this.jobShiftArray[5],
+            // 'jobShiftDSU':this.jobShiftArray[6],
             
-            'jobShiftNM':this.jobShiftArray[7],
-            'jobShiftNT':this.jobShiftArray[8],
-            'jobShiftNW':this.jobShiftArray[9],
-            'jobShiftNTH':this.jobShiftArray[10],
-            'jobShiftNF':this.jobShiftArray[11],
-            'jobShiftNS':this.jobShiftArray[12],
-            'jobShiftNSU':this.jobShiftArray[13],
+            // 'jobShiftNM':this.jobShiftArray[7],
+            // 'jobShiftNT':this.jobShiftArray[8],
+            // 'jobShiftNW':this.jobShiftArray[9],
+            // 'jobShiftNTH':this.jobShiftArray[10],
+            // 'jobShiftNF':this.jobShiftArray[11],
+            // 'jobShiftNS':this.jobShiftArray[12],
+            // 'jobShiftNSU':this.jobShiftArray[13],
 
           })
           console.log(this.jobProfileForm.value) 
@@ -236,15 +236,15 @@ export class JobProfilePage implements OnInit {
        }
     }  
 
-    validateAvailability(){
-      if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 
-      && this.jobProfileForm.value.jobExpWorkHrs !=null && this.jobProfileForm.value.jobStartDateFrom !=null &&
-      this.jobProfileForm.value.jobStartDateTo !="" && this.jobProfileForm.value.jobStartDateTo !=null){
-        this.nextStep('step2', 'step3') 
-       }else{
-        this.errorToast();
-       } 
-    }
+    // validateAvailability(){
+    //   if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 
+    //   && this.jobProfileForm.value.jobExpWorkHrs !=null && this.jobProfileForm.value.jobStartDateFrom !=null &&
+    //   this.jobProfileForm.value.jobStartDateTo !="" && this.jobProfileForm.value.jobStartDateTo !=null){
+    //     this.nextStep('step2', 'step3') 
+    //    }else{
+    //     this.errorToast();
+    //    } 
+    // }
 
     validateInformation(value){
       if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryFrom !=null
@@ -498,7 +498,7 @@ nextStep(currentStep: string, nextStep: string) {
     // Display errors in a popup
     const alert = await this.toastController.create({
       header: '',
-      message: errors.join('<br>'),
+      message: 'Please provide all the required values!',
       duration: 3000,
     });
 
@@ -507,8 +507,8 @@ nextStep(currentStep: string, nextStep: string) {
      this.jobProfileForm.value.jobSkills = this.selectedSkills
     this.jobProfileForm.value.location = this.selectedCities;
 
-    this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
-    this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
+    // this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
+    // this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
 
 
     const myNumber: number = parseInt(this.jobProfileForm.value.industry);
@@ -527,13 +527,13 @@ nextStep(currentStep: string, nextStep: string) {
       this.router.navigate(['/job']);
       this.presentToast()
       }else{
-        const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
-          const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
-          this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
+        // const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
+        //   const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
+        //   this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
 
-          const jobStartDateTo = this.jobProfileForm.value.jobStartDateTo;
-          const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
-          this.jobProfileForm.value.jobStartDateTo = enddate.toISOString();
+        //   const jobStartDateTo = this.jobProfileForm.value.jobStartDateTo;
+        //   const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
+        //   this.jobProfileForm.value.jobStartDateTo = enddate.toISOString();
       }
    });
   }
@@ -549,7 +549,7 @@ nextStep(currentStep: string, nextStep: string) {
     // Display errors in a popup
     const alert = await this.toastController.create({
       header: '',
-      message: errors.join('<br>'),
+      message: 'Please provide all the required values!',
       duration: 3000,
     });
 
@@ -559,8 +559,8 @@ nextStep(currentStep: string, nextStep: string) {
      this.jobProfileForm.value.jobSkills = this.selectedSkills
     this.jobProfileForm.value.location = this.selectedCities;
 
-    this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
-    this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
+    // this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
+    // this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
 
     const myNumber: number = parseInt(this.jobProfileForm.value.industry);
     this.jobProfileForm.value.industry = myNumber;
@@ -578,13 +578,13 @@ nextStep(currentStep: string, nextStep: string) {
       this.router.navigate(['/job']);
       this.updateToast()
       }else{
-        const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
-          const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
-          this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
+        // const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
+        //   const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
+        //   this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
 
-          const jobStartDateTo = this.jobProfileForm.value.jobStartDateTo;
-          const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
-          this.jobProfileForm.value.jobStartDateTo = enddate.toISOString();
+        //   const jobStartDateTo = this.jobProfileForm.value.jobStartDateTo;
+        //   const enddate = moment(jobStartDateTo, 'DD/MM/YYYY').toDate();
+        //   this.jobProfileForm.value.jobStartDateTo = enddate.toISOString();
       }
    });
   }
