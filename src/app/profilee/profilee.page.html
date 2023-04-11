@@ -9,7 +9,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
             </ion-col>
 
-            <ion-col >
+            <ion-col>
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit General Info</ion-title>
             </ion-col>
         </ion-row>
@@ -194,6 +194,36 @@
                     </div>
 
                     <div class="button-content">
+                        <ion-label class="labels">Emergency Contact Number</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="emergencyContact"></ion-input>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.emergencyContact.hasError('required') && profileForm.controls.emergencyContact.touched">
+                            <small style="color: #f70505;"> Emergency Contact Number is required</small>
+                        </div>
+                    </div>
+
+                    <div class="button-content">
+                        <ion-label class="labels">Blood Group</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-select placeholder="Select Blood Group" formControlName="bloodgroup">
+
+                                <ion-select-option value="A+">A+</ion-select-option>
+                                <ion-select-option value="A-">A-</ion-select-option>
+                                <ion-select-option value="B+">B+</ion-select-option>
+                                <ion-select-option value="B-">B-</ion-select-option>
+                                <ion-select-option value="O+">O+</ion-select-option>
+                                <ion-select-option value="O-">O-</ion-select-option>
+                                <ion-select-option value="AB+">AB+</ion-select-option>
+                                <ion-select-option value="AB-">AB-</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.bloodgroup.hasError('required') && profileForm.controls.bloodgroup.touched">
+                            <small style="color: #f70505;"> Blood Group is required</small>
+                        </div>
+                    </div>
+
+                    <div class="button-content">
                         <ion-label slot="end">Upload Image<small style="color: #f70505;">*</small></ion-label>
                         <ion-row>
                             <ion-col size="6">
@@ -243,10 +273,6 @@
 
                 </ion-col>
             </ion-row>
-
-
-
-
         </ion-card-content>
 
     </form>

@@ -73,6 +73,8 @@ countryIdVal:string;
       email: ["", [Validators.required, Validators.email, Validators.minLength(5)],],
       nationalid: ["",[Validators.required]],
       category: ["",[Validators.required]],
+      emergencyContact:["",[Validators.required]],
+      bloodgroup: ["", Validators.required],
       linkurl:[""],
       details:[""],
       permCity:[""], 
@@ -320,8 +322,10 @@ checkFormValidity(form: FormGroup): string[] {
        'details': this.profileList[0].details,
        'hobbies':this.profileList[0].hobbies,
        'languagesknown':this.profileList[0].languagesknown,
+       'emergencyContact': this.profileList[0].emergencyContact,
+       'bloodgroup': this.profileList[0].bloodgroup,
       })
-  
+      this.base64img1 = this.profileList[0].uploadImg;
     }
 
   })   
