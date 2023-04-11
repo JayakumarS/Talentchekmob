@@ -6,6 +6,7 @@ import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
+import { JobPage as JobPage} from '../job/job.page';
 
 @Component({
   selector: 'app-job-profile',
@@ -524,6 +525,10 @@ nextStep(currentStep: string, nextStep: string) {
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
       this.jobProfileForm.reset();
+      setTimeout(() => {
+      const jobpage = new JobPage(this.router, this.storageservice);
+      jobpage.reload();
+      }, 800);
       this.router.navigate(['/job']);
       this.presentToast()
       }else{
@@ -576,6 +581,10 @@ nextStep(currentStep: string, nextStep: string) {
      if (result["success"] == true) {
       this.jobProfileForm.reset();
       this.router.navigate(['/job']);
+      setTimeout(() => {
+        const jobpage = new JobPage(this.router, this.storageservice);
+        jobpage.reload();
+        }, 800);
       this.updateToast()
       }else{
         // const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;

@@ -11,6 +11,7 @@ export class JobPage implements OnInit {
 
   public matchedJobList:any;
   userId:string; 
+  showflag:any;
   
 
   constructor(public router:Router,public storageservices: StorageService) { 
@@ -42,6 +43,10 @@ export class JobPage implements OnInit {
     this.router.navigate(['/job-details'], navigationExtras);
   }
 
+  reload(){
+    window.location.reload();
+  }
+
   
   BindMatchedJobsList(){
 
@@ -51,19 +56,25 @@ export class JobPage implements OnInit {
 
 
     const matchedJobList = this.storageservices.getrequest(MatchedJobsURL).subscribe(result => {
-
+      this.showflag = false;
       this.matchedJobList = result['jobSeekList'];
-      this.matchedJobList.forEach(element=>{
-        let jobType = "";
-        for(let jb=0;jb<element.jobType.length;jb++){
-          jobType += element.jobType[jb]+", ";
+      if(result["success"]== true){
+        if(this.matchedJobList.length !=0){
+          this.showflag = true;
+          this.matchedJobList.forEach(element=>{
+            let jobType = "";
+            for(let jb=0;jb<element.jobType.length;jb++){
+              jobType += element.jobType[jb]+", ";
+            }
+            element.jobTypeStr = jobType.substring(0, jobType.length-2);
+          });
+          var str = result['jobSeekList'][0]['jobType'].toString(); 
+    
+          console.log("Returned string is : " + str );
+          console.log(this.matchedJobList);
         }
-        element.jobTypeStr = jobType.substring(0, jobType.length-2);
-      });
-      var str = result['jobSeekList'][0]['jobType'].toString(); 
-
-      console.log("Returned string is : " + str );
-      console.log(this.matchedJobList);
+      
+      } 
     })
 
   }

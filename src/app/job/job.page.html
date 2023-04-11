@@ -45,8 +45,18 @@
                 </ion-card-content>
             </ion-card>
         </div>
+        <ion-row *ngIf="!showflag && matchedJobList">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="Silhouette of a person's head" src="\assets\img\search.png" />
+                </ion-avatar>
+            </ion-col>
 
-        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;" *ngIf="matchedJobList">&nbsp;&nbsp;&nbsp; Matched Jobs</span>
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="!showflag">No Results to Display</div>
+       <div *ngIf="showflag && matchedJobList">
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;" >&nbsp;&nbsp;&nbsp; Matched Jobs</span>
+ 
         <div class="display-justify" *ngFor="let cElement of matchedJobList" (click)="goto_jobdetails(cElement.jobId)">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
@@ -82,7 +92,7 @@
                 <ion-row>&nbsp;</ion-row>
             </ion-card>
         </div>
-
+    </div>
     </form>
 
 </ion-content>
