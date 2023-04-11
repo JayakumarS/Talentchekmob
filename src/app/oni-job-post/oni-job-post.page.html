@@ -1,13 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-row>
-            <ion-col size="3">
-                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_jobs()"></ion-icon>
-            </ion-col>
-            <ion-col size="9">
-                <h1 style="font-size:20px ; font-family: Mr-eaves;">Job Post</h1>
-            </ion-col>
-        </ion-row>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline"  (click)="goto_jobs()"></ion-icon>
+            </div>
+            <div style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Job Post</ion-title>
+            </div>  
+        </div>  
     </ion-toolbar>
 
 </ion-header>
@@ -76,16 +77,16 @@
                 </div>
                 <div class="ion-stepper-content">
 
-                    <ion-label class="labels">Roles & Responsibilities<small style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">Job Description<small style="color: #f70505;">*</small></ion-label>
                     <div class="button-content">
                         <ckeditor formControlName="roles"></ckeditor>
                     </div>
 
 
-                    <ion-label class="labels">Required Skills & Qualifications<small style="color: #f70505;">*</small></ion-label>
+                    <!-- <ion-label class="labels">Required Skills & Qualifications<small style="color: #f70505;">*</small></ion-label>
                     <div class="button-content">
                         <ckeditor formControlName="jobQualification"></ckeditor>
-                    </div>
+                    </div> -->
 
 
 
@@ -151,32 +152,11 @@
                     </ion-list>
 
 
-                    <!-- <div class="line-with-text">
+                   <div class="line-with-text">
                         <hr class="hr1">
-                    </div>
+                    </div>  
 
-                    <div class="line-with-text">
-                        <hr class="hr1">
-                    </div> -->
-
-
-
-                    <div class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
-                        <button class="ion-stepper-next" (click)="validateJobDesc()">Next</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="ion-stepper-step" id="step3">
-                <div class="ion-stepper-header">
-                    <div class="ion-stepper-circle">3</div>
-                    <div class="ion-stepper-title">Salary & Benefits</div>
-                </div>
-                <div class="ion-stepper-content">
-
-                    <div>
+                   <div>
                         <div>
                             <ion-label class="labels">What is the approximate salary range for this job?<small style="color: #f70505;">*</small></ion-label>
                         </div>
@@ -221,19 +201,80 @@
                         </div>
                     </div>
 
+
+
+                    <div class="ion-stepper-buttons" style="justify-content: space-between;">
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
+                        <button class="ion-stepper-next" (click)="validateJobDesc()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="ion-stepper-step" id="step3">
+                <div class="ion-stepper-header">
+                    <div class="ion-stepper-circle">3</div>
+                    <div class="ion-stepper-title">Salary & Benefits</div>
+                </div>
+                <div class="ion-stepper-content">
+
+                    <div>
+                        <div>
+                            <ion-label class="labels">What is the approximate salary range for this job?<small style="color: #f70505;">*</small></ion-label>
+                        </div>
+                        <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;">
+                            <div style="margin: 0px 15px 0px 0px;">
+                                <ion-item fill="outline" class="input-field">
+                                    <ion-input type="number" (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
+                                </ion-item>
+                            </div>
+                            <h4>to</h4>
+                            <div style="margin: 0px 0px 0px 15px;">
+                                <ion-item fill="outline" class="input-field">
+                                    <ion-input type="number" (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
+                                </ion-item>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;">
+                            <div style="margin: 0px 15px 0px 0px;">
+                                <ion-item fill="outline" class="input-field">
+                                    <ion-select formControlName="jobSalaryCurrency" placeholder="INR">
+                                        <ion-select-option value="INR">INR</ion-select-option>
+                                        <ion-select-option value="USD">USD</ion-select-option>
+                                        <ion-select-option value="AED">AED</ion-select-option>
+                                        <ion-select-option value="EUR">EUR</ion-select-option>
+                                        <ion-select-option value="SGD">SGD</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </div>
+                             <div style="margin: 0px 0px 0px 15px;">
+                                <ion-item fill="outline" class="input-field">
+                                    <ion-select formControlName="jobSalaryFrequency" placeholder="Per Year">
+                                        <ion-select-option value="Per Year">Per Year</ion-select-option>
+                                        <ion-select-option value="Per Month">Per Month</ion-select-option>
+                                        <ion-select-option value="Per Week">Per Week</ion-select-option>
+                                        <ion-select-option value="Per Day">Per Day</ion-select-option>
+                                        <ion-select-option value="Per Hour">Per Hour</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="line-with-text">
                         <hr class="hr1">
                     </div>
 
-                    <ion-label class="labels">Is there any form of additional perks offered for this job?<small style="color: #f70505;">*</small></ion-label>
+                 <ion-label class="labels">Is there any form of additional perks offered for this job?<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-select formControlName="additionalpay" multiple="true" (ionChange)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let tittle of additionalPaylist" value="{{tittle.id}}">{{tittle.text}}</ion-select-option>
                         </ion-select>
-                    </ion-item>
-                    <!-- <div *ngIf="jobProfileForm.controls.jobType.hasError('required') && jobProfileForm.controls.jobType.touched">
+                    </ion-item> 
+                    <div *ngIf="jobProfileForm.controls.jobType.hasError('required') && jobProfileForm.controls.jobType.touched">
                         <small style="color: #f70505;"> Please select perks offered</small>
-                    </div> -->
+                    </div> 
 
 
 
@@ -243,7 +284,7 @@
                         <button class="ion-stepper-next" (click)="validateSalary()">Next</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <!-- <div class="ion-stepper-step" id="step4">
@@ -395,9 +436,9 @@
             </div> -->
 
 
-            <div class="ion-stepper-step" id="step4">
+            <div class="ion-stepper-step" id="step3">
                 <div class="ion-stepper-header">
-                    <div class="ion-stepper-circle">4</div>
+                    <div class="ion-stepper-circle">3</div>
                     <div class="ion-stepper-title"> Additional Informatione</div>
                 </div>
                 <div class="ion-stepper-content">
@@ -453,10 +494,10 @@
                     </ion-item>
 
 
-                    <ion-label class="labels">Enter Contact number to let the applicants call you Directly</ion-label>
+                    <!-- <ion-label class="labels">Enter Contact number to let the applicants call you Directly</ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-input type="number" formControlName="phoneNo"></ion-input>
-                    </ion-item>
+                    </ion-item> -->
 
 
                     <!-- <div class="line-with-text">
@@ -480,7 +521,7 @@
                     </div> -->
 
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step4', 'step3')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">Back</button>
                         <button class="ion-stepper-next" (click)="validateAdditional()">Next</button>
                     </div>
 
@@ -491,9 +532,9 @@
 
 
 
-            <div class="ion-stepper-step" id="step5">
+            <div class="ion-stepper-step" id="step4">
                 <div class="ion-stepper-header">
-                    <div class="ion-stepper-circle">5</div>
+                    <div class="ion-stepper-circle">4</div>
                     <div class="ion-stepper-title"> Auction the Job</div>
                 </div>
                 <div class="ion-stepper-content">
@@ -509,12 +550,12 @@
 
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step5', 'step4')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step4', 'step3')">Back</button>
                         <button class="ion-stepper-submit" (click)="savejobadvertisement()">Save</button>
                     </div>
 
                     <div *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">
-                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step5', 'step4')">Back</button>
+                        <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step4', 'step3')">Back</button>
                         <button class="ion-stepper-submit" (click)="updatejobseek()">Update</button>
                     </div>
                 </div>

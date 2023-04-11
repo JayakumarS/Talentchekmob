@@ -12,13 +12,22 @@ export class OniJobPostListPage implements OnInit {
 
   jobPostList:[];
   userId:string;
+  roleId: string;
+  RoleID: string[];
 
   constructor(public router:Router,public storageservice: StorageService,public alertController: AlertController) {
 
     this.userId = localStorage.getItem("userId") ;
    }
+   selectedTab: string = 'earth';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
 
   ngOnInit() {
+      this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
 
     this.bindJobAdvertiseMentList();
   }
@@ -143,6 +152,41 @@ goto_addJobPost(){
   reload(){
     window.location.reload();
   }
+
+
+    // footer
+
+    goto_profileSearch(){
+      this.router.navigate(['/job-search']);
+    }
+    goto_jobs(){
+      this.router.navigate(['/oni-job-post-list']);
+    }
+    goto_instihome(){
+      this.router.navigate(['/institution-dashboard']);
+    
+    }
+    goto_orghome(){
+    
+      this.router.navigate(['/organization-dashboard']);
+    }
+    goto_home(){
+      this.router.navigate(['/home']);
+    }
+    goto_orgprofile(){
+      this.router.navigate(['/org-profile-view']);
+    
+    }
+    goto_instiprofile(){
+    
+      this.router.navigate(['/insti-profile-view']);
+    }
+    goto_profile(){
+      this.router.navigate(['/profile-view']);
+    }
+    goto_more(){
+      this.router.navigate(['/settings']);
+    }
 
 }
 

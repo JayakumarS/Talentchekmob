@@ -94,7 +94,7 @@ export class OniJobPostPage implements OnInit {
       openings: ["",Validators.required],
 
       roles: ["",Validators.required],
-      jobQualification: ["",Validators.required],
+      // jobQualification: ["",Validators.required],
       jobSkills: [""],
       jobExperience: ["",Validators.required],
       jobExperienceFormat :["Year(s)"],
@@ -105,7 +105,7 @@ export class OniJobPostPage implements OnInit {
       jobSalaryTo:["",Validators.required],
       jobSalaryCurrency: ["INR"],
       jobSalaryFrequency:["Per Year"],
-      additionalpay: ["",Validators.required], 
+      // additionalpay: ["",Validators.required], 
 
       //  jobShiftDM: false,
       // jobShiftDT: false,
@@ -131,7 +131,7 @@ export class OniJobPostPage implements OnInit {
       // locationAdvertise: [""],
       // gender:["NP"],
       reqLanguages:[""],
-      phoneNo:[""],
+      // phoneNo:[""],
       currentUserName:[""],
       currentUserId:[""],
 
@@ -258,15 +258,15 @@ export class OniJobPostPage implements OnInit {
           'jobExpWorkHrs': result["jobAdvertisementList"][0].jobExpWorkHrs, 
           'reqLanguages': result["jobAdvertisementList"][0].reqLanguages,
           'auctioned': result["jobAdvertisementList"][0].isauctioned,
-          'additionalpay': result["jobAdvertisementList"][0].additionalpay,
+          // 'additionalpay': result["jobAdvertisementList"][0].additionalpay,
           'jobExperienceMandatory': result["jobAdvertisementList"][0].jobExperienceMandatory.toString(),
           'jobId': result["jobAdvertisementList"][0].jobId,
-          'jobQualification': result["jobAdvertisementList"][0].jobQualification,
+          // 'jobQualification': result["jobAdvertisementList"][0].jobQualification,
           'jobSkills': result["jobAdvertisementList"][0].jobSkills,
           
           'locationOffer': result["jobAdvertisementList"][0].locationOffer,
            'openings': result["jobAdvertisementList"][0].openings,
-          'phoneNo': result["jobAdvertisementList"][0].phoneNo,
+          // 'phoneNo': result["jobAdvertisementList"][0].phoneNo,
           'roles': result["jobAdvertisementList"][0].roles, 
 
           // 'relocatewill': result["jobAdvertisementList"][0].relocatewill.toString(),
@@ -321,7 +321,7 @@ export class OniJobPostPage implements OnInit {
   // }
 
   validateJobDesc(){
-if(this.jobProfileForm.value.roles != "" && this.jobProfileForm.value.jobQualification != ""
+if(this.jobProfileForm.value.roles != ""
  &&this.selectedSkills.length != 0 && this.jobProfileForm.value.jobExperience !="" &&
  this.jobProfileForm.value.jobExperience !=null ){
 
@@ -332,17 +332,17 @@ else{
 }   
   }
 
-  validateJobshedule(){
-    this.nextStep('step4', 'step5')
-  }
+  // validateJobshedule(){
+  //   this.nextStep('step4', 'step5')
+  // }
 
-  validateSalary(){
+  // validateSalary(){
     
-    this.nextStep('step3', 'step4')
-  }
+  //   this.nextStep('step3', 'step4')
+  // }
 
   validateAdditional(){
-    this.nextStep('step4', 'step5')
+    this.nextStep('step3', 'step4')
   }
 
   validateInformation(value){
@@ -715,7 +715,7 @@ if (errors.length > 0) {
   this.jobProfileForm.value.locationOffer = this.selectedCities;
   // this.jobProfileForm.value.locationAdvertise = this.locationAdvertise;
   //this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'MM/yyyy','en-IN');
-  this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'yyyy-MM-dd','en-IN');
+  this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'dd/MM/yyyy','en-IN');
 
 
   const myNumber: number = parseInt(this.jobProfileForm.value.industry);
