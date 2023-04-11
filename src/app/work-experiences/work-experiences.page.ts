@@ -16,7 +16,8 @@ import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.pag
 
  
 })
-export class WorkExperiencesPage implements OnInit {  
+export class WorkExperiencesPage implements OnInit {
+ 
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -38,6 +39,7 @@ export class WorkExperiencesPage implements OnInit {
   edit: boolean = false;
   desiredItem: any;
   dateValidation: boolean;
+  nonMandatory: boolean = false;
    constructor(public router:Router,private fb: FormBuilder,private route: ActivatedRoute,
     public storageservice:StorageService,public toastController:ToastController,private elementRef: ElementRef,
     public modalController: ModalController,public alertController: AlertController,) { }
@@ -233,11 +235,13 @@ export class WorkExperiencesPage implements OnInit {
   validationForCurWorking(event){
     var value  = event;
     if(value == true){
+      this.nonMandatory = true
       this.ExperienceForm.get("expEnd").disable(); 
       this.ExperienceForm.patchValue({
           'expEnd':""
         })
     }else{
+      this.nonMandatory = false
       this.ExperienceForm.get("expEnd").enable();
     }
   }

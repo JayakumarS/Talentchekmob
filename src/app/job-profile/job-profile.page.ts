@@ -72,7 +72,7 @@ export class JobProfilePage implements OnInit {
   }
 
     ngOnInit() {
-
+      this.userId = localStorage.getItem("userId"); 
       this.jobProfileForm = this.fb.group({
         industry: ["",Validators.required],
         jobTitle: ["",Validators.required],

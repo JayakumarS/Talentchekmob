@@ -98,7 +98,8 @@
                               </div>
                             </div>
                             <div class="button-content">
-                                <ion-label class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
+                                <ion-label *ngIf="!nonMandatory" class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
+                                <ion-label *ngIf="nonMandatory"class="labels">Job End Date</ion-label>
                                 <ion-item fill="outline" class="input-field">
                                     <ion-datetime (ionChange)="validateEndDate($event.target.value);" displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                 </ion-item>
