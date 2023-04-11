@@ -1,18 +1,8 @@
 <ion-header>
-    <ion-toolbar class="new-background-color">
-        <ion-row>
-
-            <ion-col size="0.5">
-
-            </ion-col>
-            <ion-col size="2">
-                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_welcome()"></ion-icon>
-            </ion-col>
-
-            <ion-col size="8">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-left: 17%; margin-top: 5%;">Jobs</ion-title>
-            </ion-col>
-        </ion-row>
+    <ion-toolbar>
+        <ion-title style="text-align: center;
+        font-family: 'Mr-eaves';
+        font-size: 28px;">Jobs</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -74,13 +64,7 @@
                             <div class="c">{{cElement.salarybudget}}</div>
                         </ion-row>
                     </ion-col>
-                    <!-- <ion-col size="2">
-                        <div>
-                            <ion-avatar>
-                                <img style="margin-top: -32%;" src="../../assets/icon/add_button.png" />
-                            </ion-avatar>
-                        </div>
-                    </ion-col> -->
+
                 </ion-row>
 
                 <ion-row>
@@ -98,56 +82,6 @@
                 <ion-row>&nbsp;</ion-row>
             </ion-card>
         </div>
-
-
-
-
-
-
-        <!-- <div class="display-justify" *ngFor="let cElement of matchedJobList">
-        <div class="custom-button" (click)="goto_jobdetails()">
-            <div style="display: flex; justify-content: space-between;align-items: center;">
-                <div style="display: flex; justify-content: center;padding: 5px;">
-                    <ion-avatar slot="start">
-                        <img src="../../assets/icon/useremployee.png" />
-                    </ion-avatar>
-                </div>
-                <div class="full-part-time">
-                    <ion-label>Full time</ion-label>
-                </div>
-                <div class="experience">
-                    <ion-label>Experience 5+</ion-label>
-                </div>
-                <div style="display: flex; justify-content: end;">
-                    <ion-avatar style="width: 35%;" slot="start">
-                        <img src="../../assets/icon/add_button.png" />
-                    </ion-avatar>
-                </div>
-            </div>
-            <div style="display: flex;flex-direction: column;">
-                <div style="font-size: 18px; font-weight: 600;">
-                    {{cElement.jobTitleName}}
-                </div>
-                <div style="font-size: 16px;">
-                    {{cElement.postedBy}}
-                </div>
-                <div style="font-size: 10px;color: gray;">
-                    USA, New-York
-                </div>
-            </div>
-
-            <div style="display: flex;justify-content: space-between;align-items: center;">
-                <div style="font-size: 18px; font-weight: 700;">
-                    3950-5800$/mo
-                </div>
-                <div (click)="goto_jobdetails()" class="apply-button">
-                    View profile
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
 
     </form>
 

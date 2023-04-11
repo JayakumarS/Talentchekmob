@@ -295,56 +295,46 @@ ion-content {
     display: block;
 }
 
-.badge-solid-green {
-    color: #198754;
-    background-color: #19875426;
-    border: none;
-    padding: 5px 12px;
-    font-weight: 500;
-    border-radius: 15%;
-    line-height: 1.2;
+.col-green {
+    color: #4caf50!important;
 }
 
-.badge-solid-orange {
-    color: #fd7e14;
-    background-color: #fd7e1426;
-    border: none;
-    padding: 5px 12px;
-    font-weight: 500;
-    border-radius: 15%;
-    line-height: 1.2;
+.col-red {
+    color: #f44336!important;
 }
 
-.badge-solid-blue {
-    color: #0d6efd;
-    background-color: #0d6efd26;
-    border: none;
-    border-radius: 15%;
-    padding: 5px 12px;
-    font-weight: 500;
-    line-height: 1.2;
+.col-purple {
+    color: #9c27b0!important;
 }
 
-.badge-solid-cyan {
-    color: #2db0be;
-    background-color: rgba(13, 202, 240, 0.15);
-    border: none;
-    padding: 5px 12px;
-    border-radius: 15%;
-    font-weight: 500;
-    line-height: 1.2;
+.col-indigo {
+    color: #3f51b5!important;
+}
+
+.col-orange {
+    color: #ff9800!important;
 }
 
 .badge {
-    --bs-badge-padding-x: .65em;
+    padding: 5px 8px;
+    line-height: 12px;
+    border: 1px solid;
+    font-weight: 400;
+    font-size: 13px;
+    --bs-badge-padding-x: .85em;
     --bs-badge-padding-y: .35em;
-    --bs-badge-font-size: .75em;
-    --bs-badge-font-weight: 700;
+    --bs-badge-font-size: .65em;
+    --bs-badge-font-weight: 400;
     --bs-badge-color: #fff;
     --bs-badge-border-radius: .375rem;
     display: inline-block;
+    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+    font-size: var(--bs-badge-font-size);
+    font-weight: var(--bs-badge-font-weight);
     line-height: 1;
+    color: var(--bs-badge-color);
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
+    border-radius: var(--bs-badge-border-radius);
 }
