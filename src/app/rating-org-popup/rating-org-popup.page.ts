@@ -20,6 +20,7 @@ export class RatingOrgPopupPage implements OnInit {
   expid: any;
   Experience: any;
   expId: any;
+  currendUserId: string;
   constructor(public router:Router, public storageservice:StorageService,public toastController:ToastController,
     public fb: FormBuilder,private route: ActivatedRoute,  public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController) { }
@@ -34,7 +35,7 @@ export class RatingOrgPopupPage implements OnInit {
       expId: [""],
       currentUserId: [""]
    });
-
+   this.currendUserId = localStorage.getItem("userId")  ; 
    this.route.queryParams.subscribe(params => {
     
      this.expId= params.expId;
@@ -56,6 +57,7 @@ export class RatingOrgPopupPage implements OnInit {
         this.router.navigate(['/profile-view']);
       }else if(this.ExperienceForm.value.remarks && this.ExperienceForm.value.rating){
       this.ExperienceForm.value.expId = this.expId;
+      this.ExperienceForm.value.currendUserId = this.currendUserId;
       this.Experience = this.ExperienceForm.value;
       var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingOrg";
 

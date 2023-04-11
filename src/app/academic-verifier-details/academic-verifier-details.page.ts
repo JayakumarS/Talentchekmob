@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-academic-verifier-details',
@@ -27,9 +27,9 @@ export class AcademicVerifierDetailsPage implements OnInit {
       this.userId = localStorage.getItem("userId") ;  
       
     this.ExtracurricularFrom = this.fb.group({
-      verifierName: [""],
-      verifierEmail:[""],
-      verifierDesignation:[""],
+      verifierName: ["",Validators.required],
+      verifierEmail:["",Validators.required],
+      verifierDesignation:["",Validators.required],
       verifierMobile:[""],
       oniCode:[""],
       extId: [""],

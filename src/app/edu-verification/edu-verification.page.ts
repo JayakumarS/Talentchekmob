@@ -82,7 +82,7 @@ export class EduVerificationPage implements OnInit {
 move(eduId){
   let edit = {
     
-   exp:eduId
+    eduId:eduId
  }
  let navigationExtras: NavigationExtras = {
    queryParams: edit

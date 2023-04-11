@@ -18,6 +18,7 @@ export class RatingExtraPopupPage implements OnInit {
 
   extId: any;
   Extracurricular: any;
+  currendUserId: string;
 
   constructor(public router:Router, public storageservice:StorageService,public toastController:ToastController,
     public fb: FormBuilder,private route: ActivatedRoute,  public modalController: ModalController,private elementRef: ElementRef,
@@ -32,7 +33,7 @@ export class RatingExtraPopupPage implements OnInit {
       extId: [""],
       currentUserId: [""]
    });
-
+   this.currendUserId = localStorage.getItem("userId")  ; 
    this.route.queryParams.subscribe(params => {
     this.extId=params.extId;
       });
@@ -59,6 +60,7 @@ export class RatingExtraPopupPage implements OnInit {
         this.router.navigate(['/profile-view']);
       }else if(this.ExtracurricularFrom.value.remarks && this.ExtracurricularFrom.value.rating){
       this.ExtracurricularFrom.value.extId = this.extId;
+      this.ExtracurricularFrom.value.currendUserId = this.currendUserId;
       this.Extracurricular = this.ExtracurricularFrom.value;
       var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingClub";
 

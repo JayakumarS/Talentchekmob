@@ -18,6 +18,7 @@ export class RatingInstiPopupPage implements OnInit {
   selectedValue: number;
   eduId: any;
   Education: any;
+  currendUserId: string;
   
   constructor(public fb: FormBuilder,private route: ActivatedRoute,   public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController,
@@ -32,7 +33,7 @@ export class RatingInstiPopupPage implements OnInit {
       eduId: [""],
       currentUserId: [""]
    });
-
+   this.currendUserId = localStorage.getItem("userId")  ; 
    this.route.queryParams.subscribe(params => {
     
     this.eduId=params.eduId;
@@ -55,16 +56,18 @@ export class RatingInstiPopupPage implements OnInit {
         this.router.navigate(['/profile-view']);
       }else if(this.EducationForm.value.remarks && this.EducationForm.value.rating){
       this.EducationForm.value.eduId = this.eduId;
+      this.EducationForm.value.currendUserId = this.currendUserId;
       this.Education = this.EducationForm.value;
       var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingInst";
 
       this.storageservice.postrequest(updateRatingUrl,this.Education).subscribe(async result => {  
         if (result["success"] == true) {
+         
+          this.presentToast()
           setTimeout(() => {
             const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
            profilePage.updateData();
-          }, 800);
-          this.presentToast() 
+          }, 800); 
     }
   });
 }

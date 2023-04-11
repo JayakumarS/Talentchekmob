@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
@@ -29,9 +29,9 @@ export class EduVerifierDetailsPage implements OnInit {
       this.userId = localStorage.getItem("userId")  ;   
 
       this.EducationForm= this.fb.group({
-        verifierName: [""],
-        verifierEmail:[""],
-        verifierDesignation:[""],
+        verifierName: ["",Validators.required],
+        verifierEmail:["",Validators.required],
+        verifierDesignation:["",Validators.required],
         verifierMobile:[""],
         oniCode:[""],
         remarks: [""],
@@ -57,7 +57,7 @@ export class EduVerifierDetailsPage implements OnInit {
       this.presentToast()
       let edit = {
         
-       exp:this.eduId
+        eduId:this.eduId
            }
      let navigationExtras: NavigationExtras = {
        queryParams: edit
@@ -80,7 +80,7 @@ export class EduVerifierDetailsPage implements OnInit {
   move(eduId){
     let edit = {
       
-     exp:eduId
+      eduId:eduId
    }
    let navigationExtras: NavigationExtras = {
      queryParams: edit
