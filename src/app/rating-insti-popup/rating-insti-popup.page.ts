@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { ToastController } from '@ionic/angular';
-
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 @Component({
   selector: 'app-rating-insti-popup',
   templateUrl: './rating-insti-popup.page.html',
@@ -19,7 +19,8 @@ export class RatingInstiPopupPage implements OnInit {
   eduId: any;
   Education: any;
   
-  constructor(public fb: FormBuilder,private route: ActivatedRoute, 
+  constructor(public fb: FormBuilder,private route: ActivatedRoute,   public modalController: ModalController,private elementRef: ElementRef
+    ,public alertController: AlertController,
     public toastController:ToastController,public router:Router,public storageservice:StorageService,) { }
 
   ngOnInit() {
@@ -59,6 +60,10 @@ export class RatingInstiPopupPage implements OnInit {
 
       this.storageservice.postrequest(updateRatingUrl,this.Education).subscribe(async result => {  
         if (result["success"] == true) {
+          setTimeout(() => {
+            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
           this.presentToast() 
     }
   });

@@ -399,10 +399,7 @@ export class EducationsPage implements OnInit {
           this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
             console.log("Image upload response: " + result)
             if (result["success"] == true) {
-              setTimeout(() => {
-                const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-               profilePage.updateData();
-              }, 800);
+              
               this.presentToast()
 
               let edit = {

@@ -6,7 +6,10 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit { 
+export class ProfilePage implements OnInit {
+  updateData() {
+    throw new Error('Method not implemented.');
+  } 
 
   constructor(public router:Router) { }
 

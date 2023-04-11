@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 
 @Component({
   selector: 'app-rating-org-popup',
@@ -20,7 +21,8 @@ export class RatingOrgPopupPage implements OnInit {
   Experience: any;
   expId: any;
   constructor(public router:Router, public storageservice:StorageService,public toastController:ToastController,
-    public fb: FormBuilder,private route: ActivatedRoute,) { }
+    public fb: FormBuilder,private route: ActivatedRoute,  public modalController: ModalController,private elementRef: ElementRef
+    ,public alertController: AlertController) { }
 
   ngOnInit() {
 
@@ -59,6 +61,10 @@ export class RatingOrgPopupPage implements OnInit {
 
       this.storageservice.postrequest(updateRatingUrl,this.Experience).subscribe(async result => {  
         if (result["success"] == true) {
+          setTimeout(() => {
+            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
           this.presentToast() 
     }
   });
