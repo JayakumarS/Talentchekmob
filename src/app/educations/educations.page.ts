@@ -619,18 +619,27 @@ export class EducationsPage implements OnInit {
       // this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
 
 
-      this.EducationForm = this.EducationForm.value;
-      console.log(` data: ${JSON.stringify(this.EducationForm)}`);
+      // this.EducationForm = this.EducationForm.value;
+      console.log(` data: ${JSON.stringify(this.Education)}`);
       var updateclub = "api/auth/app/IndividualProfileDetails/UpdateEducation";
 
-      this.storageservice.postrequest(updateclub, this.EducationForm).subscribe(async result => {
+      this.storageservice.postrequest(updateclub, this.Education).subscribe(async result => {
         console.log("Image upload response: " + result)
         if (result["success"] == true) {
-          setTimeout(() => {
-            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-           profilePage.updateData();
-          }, 800);
+          // setTimeout(() => {
+          //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+          //  profilePage.updateData();
+          // }, 800);
           this.updateToast()
+          let edit = {
+            instiId:this.desiredItem.id,
+            edu:this.Education.eduId,
+         }
+         let navigationExtras: NavigationExtras = {
+           queryParams: edit
+         };
+          this.router.navigate(['/edu-verification'],navigationExtras)
+  
         } else {
 
         }
@@ -654,7 +663,7 @@ export class EducationsPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    this.router.navigate(['/profile-view']);
+ 
      await toast.present();
   }
 

@@ -434,18 +434,27 @@ getOrganisationList(){
      this.clubFrom.value.participatedFrom =formatDate(this.clubFrom.value.participatedFrom, 'dd/MM/yyyy','en-IN');
      if(this.clubFrom.value.participatedTill != undefined){
       this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');          
-      }  this.clubFrom = this.clubFrom.value;
-  console.log(` data: ${JSON.stringify(this.clubFrom)}`);
+      }  this.club = this.clubFrom.value;
+  console.log(` data: ${JSON.stringify(this.club)}`);
   var updateclub = "api/auth/app/IndividualProfileDetails/UpdateExtracurricular";
 
-   this.storageservice.postrequest(updateclub, this.clubFrom).subscribe(async result => {  
+   this.storageservice.postrequest(updateclub, this.club).subscribe(async result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
-      setTimeout(() => {
-        const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-       profilePage.updateData();
-      }, 800);
+      // setTimeout(() => {
+      //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+      //  profilePage.updateData();
+      // }, 800);
       this.updateToast()
+      let edit = {
+        clubId:this.desiredItem.id,
+        extId:this.club.extId,
+     }
+     let navigationExtras: NavigationExtras = {
+       queryParams: edit
+     };
+      this.router.navigate(['/activity-verification'],navigationExtras)
+
        }else{  
 
        }
@@ -461,7 +470,7 @@ async updateToast() {
     cssClass: 'custom-toast'
   });
 
-  this.router.navigate(['/profile-view']);
+  // this.router.navigate(['/profile-view']);
 
 await toast.present();
 }

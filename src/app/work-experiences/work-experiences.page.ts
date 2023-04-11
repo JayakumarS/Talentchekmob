@@ -442,11 +442,20 @@ if (errors.length > 0) {
         this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
-            setTimeout(() => {
-              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-              profilePage.updateData();
-             }, 800);
+            // setTimeout(() => {
+            //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            //   profilePage.updateData();
+            //  }, 800);
              this.updateToast()
+             let edit = {
+              orgId:this.desiredItem.id,
+              expId:this.Experience.expId,
+           }
+           let navigationExtras: NavigationExtras = {
+             queryParams: edit
+           };
+            this.router.navigate(['/exp-verification'],navigationExtras)
+    
             }else{  
       
             }
@@ -470,7 +479,6 @@ async updateToast() {
     cssClass: 'custom-toast'
   });
 
-  this.router.navigate(['/profile-view']);
 
 await toast.present();
 }
