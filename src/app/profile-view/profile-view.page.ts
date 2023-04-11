@@ -189,6 +189,43 @@ export class ProfileViewPage implements OnInit {
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
+//education verifier
+  eduIdverifierCall(eduId,instiId){
+
+    let edit = {
+      instiId:instiId,
+      edu:eduId,
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/edu-verification'],navigationExtras)
+  }
+  //experience verifier
+  expIdverifierCall(expId,orgId){
+    let edit = {
+      orgId:orgId,
+      expId:expId,
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/exp-verification'],navigationExtras)
+  }
+  //Extracurricular verifier
+  clubIdverifierCall(clubId,orgId){
+
+    let edit = {
+      clubId:clubId,
+      extId:orgId,
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/activity-verification'],navigationExtras)
+
+
+  }
 
   //delete
 

@@ -87,7 +87,7 @@ move(eduId){
  let navigationExtras: NavigationExtras = {
    queryParams: edit
  };
-  this.router.navigate(['/rating-insit-popup'],navigationExtras)
+  this.router.navigate(['/rating-insti-popup'],navigationExtras)
 }
 
 }

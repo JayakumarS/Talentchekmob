@@ -274,6 +274,7 @@ ion-content {
     margin-bottom: 5px;
     white-space: nowrap;
     cursor: pointer;
+    text-align: start;
 }
 
 .delete-button {
@@ -284,6 +285,7 @@ ion-content {
     margin-bottom: 0px;
     white-space: nowrap;
     cursor: pointer;
+    text-align: start;
 }
 
 .edit-button:hover,
@@ -293,6 +295,7 @@ ion-content {
 
 .container:hover .popup {
     display: block;
+    width: 148px;
 }
 
 .col-green {

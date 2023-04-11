@@ -88,5 +88,9 @@ export class RatingExtraPopupPage implements OnInit {
 move(){
 
   this.router.navigate(['/profile-view']); 
+  setTimeout(() => {
+    const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+   profilePage.updateData();
+  }, 800);
 }
 }
