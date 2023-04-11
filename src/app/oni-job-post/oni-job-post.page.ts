@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import moment from 'moment';
 import { formatDate } from '@angular/common';
-
+import { OniJobPostListPage as listpage } from '../oni-job-post-list/oni-job-post-list.page';
 @Component({
   selector: 'app-oni-job-post',
   templateUrl: './oni-job-post.page.html',
@@ -71,7 +71,7 @@ export class OniJobPostPage implements OnInit {
     public router:Router,
     private http: HttpClient,
     private toastController: ToastController,
-    public storageservice:StorageService,private route: ActivatedRoute) { }
+    public storageservice:StorageService,private route: ActivatedRoute,public alertController: AlertController) { }
 
     selectedTab: string = 'earth';
 
@@ -763,7 +763,11 @@ transformDate(date) {
       cssClass: 'custom-toast'
     });
     this.router.navigate(['/oni-job-post-list']);
-  await toast.present();
+    setTimeout(() => {
+      const profilePage = new listpage(this.router, this.storageservice, this.alertController);
+     profilePage.reload();
+    }, 800);
+   await toast.present();
 }
 
 async updateToast() {
@@ -773,6 +777,10 @@ async updateToast() {
     cssClass: 'custom-toast'
   });
   this.router.navigate(['/oni-job-post-list']);
+  setTimeout(() => {
+    const profilePage = new listpage(this.router, this.storageservice, this.alertController);
+   profilePage.reload();
+  }, 800);
 await toast.present();
 }
 

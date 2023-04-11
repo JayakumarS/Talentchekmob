@@ -140,6 +140,10 @@ goto_addJobPost(){
     await alert.present();
   }
 
+  reload(){
+    window.location.reload();
+  }
+
 }
 
  
