@@ -74,7 +74,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         stateName: ['', Validators.required],
         pinCode: ['', Validators.required],
         referalCode: [''],
-        profileVisibility: ['', Validators.required],
+        // profileVisibility: ['', Validators.required],
         cBoxIAgree:[''],
         cBoxIAgreeConsent:['']
   
@@ -108,7 +108,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
           var emailId = this.talentform.controls['email'].value;
           var dob = this.talentform.controls['dob'].value;
           var refCode = this.talentform.controls['referalCode'].value;
-          var profileVisibility = this.talentform.controls['profileVisibility'].value; 
+          // var profileVisibility = this.talentform.controls['profileVisibility'].value; 
           var address = this.talentform.controls['address'].value;
           var areaName = this.talentform.controls['areaName'].value; 
            var country = this.talentform.controls['country'].value;
@@ -146,7 +146,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                       'referralCode': refCode,
                       'companyCode': '',
                       'isIndv': 'S',
-                      'profileVisibility': profileVisibility,
+                      // 'profileVisibility': profileVisibility,
                       'uploadImg': this.base64img1,
   
                       'address': address,

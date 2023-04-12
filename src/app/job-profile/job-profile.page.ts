@@ -57,6 +57,7 @@ export class JobProfilePage implements OnInit {
   disable1: boolean = false;
   disable2: boolean = false;
   edit: boolean  = false;
+  catagoaryType:any;
   jobShiftArray  = [];
   constructor(private fb: FormBuilder,
     public router:Router,
@@ -73,7 +74,8 @@ export class JobProfilePage implements OnInit {
 
     ngOnInit() {
       this.userId = localStorage.getItem("userId"); 
-      this.jobProfileForm = this.fb.group({
+      this.catagoaryType= localStorage.getItem("categoryType");
+       this.jobProfileForm = this.fb.group({
         industry: ["",Validators.required],
         jobTitle: ["",Validators.required],
         jobType: ["",Validators.required],
@@ -381,6 +383,16 @@ nextStep(currentStep: string, nextStep: string) {
     this.storageservice.getrequest(getIndustryListUrl).subscribe(result => {
      if (result["success"] == true) {
       this.industryList = result["industryList"]; 
+      if(this.catagoaryType.includes('IC10')){
+        this.jobProfileForm.patchValue({
+          'industry': [this.industryList[46].id1.toString()]
+
+          });
+          this.jobtitleList(this.industryList[46].id1);
+
+      }else{
+        this.industryList = result["industryList"];
+      }
      }
    });
   }
@@ -392,6 +404,15 @@ nextStep(currentStep: string, nextStep: string) {
      if (result["success"] == true) {
       this.jobTypeList = result["jobTypeList"]; 
       this.cities = result["jobTypeList"];
+      this.jobTypeList.push(result["jobTypeList"][0].id);
+        if(this.catagoaryType.includes('IC10')){
+          this.jobProfileForm.patchValue({
+            'jobType': (this.jobTypeList)
+
+            }); 
+        }else{
+          this.jobTypeList = result["jobTypeList"]
+        }
      }
    });
   }
@@ -428,9 +449,22 @@ nextStep(currentStep: string, nextStep: string) {
     const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
       this.jobTitleList = result["jobTitleList"];
       if(this.jobTitleList.length != 0 ){
+      if(this.catagoaryType.includes('IC10')){
+        this.jobTitleList.push(result["jobTitleList"][17].id); 
+        this.jobProfileForm.patchValue({
+          'jobTitle': (this.jobTitleList)
+
+          });
+
+      }else{
+        this.jobTitleList=result["jobTitleList"];
+      }
+      if(this.edit==true){
         this.jobProfileForm.patchValue({
           'jobTitle': this.editJobTitle,
         })
+      }
+        
       }
       
       console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);

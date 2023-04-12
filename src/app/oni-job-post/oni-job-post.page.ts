@@ -321,9 +321,10 @@ export class OniJobPostPage implements OnInit {
   // }
 
   validateJobDesc(){
-if(this.jobProfileForm.value.roles != ""
- &&this.selectedSkills.length != 0 && this.jobProfileForm.value.jobExperience !="" &&
- this.jobProfileForm.value.jobExperience !=null ){
+if(this.jobProfileForm.value.roles != ""&&this.selectedSkills.length != 0
+ && this.jobProfileForm.value.jobExperience !="" &&this.jobProfileForm.value.jobExperience !=null
+ && this.jobProfileForm.value.jobSalaryFrom !=""&& this.jobProfileForm.value.jobSalaryTo !=""
+ && this.jobProfileForm.value.jobSalaryFrom !=null&& this.jobProfileForm.value.jobSalaryTo !=null){
 
   this.nextStep('step2', 'step3')
 }
@@ -341,23 +342,31 @@ else{
   //   this.nextStep('step3', 'step4')
   // }
 
-  validateAdditional(){
-    this.nextStep('step3', 'step4')
-  }
+  validateInformation(){
+    if(this.jobProfileForm.value.appDeadline != ""&&this.selectedCities.length != 0
+ && this.jobProfileForm.value.reqLanguages !="" &&this.jobProfileForm.value.reqLanguages !=null){
 
-  validateInformation(value){
-    if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryFrom !=null
-     && this.jobProfileForm.value.jobSalaryTo !=""  && this.jobProfileForm.value.jobSalaryTo !=null
-    && this.selectedCities.length !=0 && this.jobProfileForm.value.reqLanguages != 0){
-      if(value =='save'){
-        this.savejobadvertisement();   
-      }else{
-        this.updatejobseek();
-      }
-    }else{
-      this.errorToast();
-     } 
+  this.nextStep('step3', 'step4')
+}
+else{
+  this.errorToast();
+}   
   }
+   
+
+  // validateInformation(value){
+  //   if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryFrom !=null
+  //    && this.jobProfileForm.value.jobSalaryTo !=""  && this.jobProfileForm.value.jobSalaryTo !=null
+  //   && this.selectedCities.length !=0 && this.jobProfileForm.value.reqLanguages != 0){
+  //     if(value =='save'){
+  //       this.savejobadvertisement();   
+  //     }else{
+  //       this.updatejobseek();
+  //     }
+  //   }else{
+  //     this.errorToast();
+  //    } 
+  // }
 
   async validateStartDate(event){
     var currentDate = new Date(new Date().setFullYear(new Date().getFullYear())); //Currentdate - one year.
@@ -816,6 +825,10 @@ checkFormValidity(form: FormGroup): string[] {
   this.router.navigate(['/job-search']);
 }
 goto_jobs(){
+  this.jobProfileForm.reset();
+  this.selectedCities =[];
+  this.selectedSkills = [];
+  this.selectedCitiesOffLocation = [];
   this.router.navigate(['/oni-job-post-list']);
 }
 goto_instihome(){
