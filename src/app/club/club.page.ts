@@ -41,6 +41,7 @@ export class ClubPage implements OnInit {
   edit: boolean = false;
   disabled: boolean =false;
   desiredItem: any;
+  nonMandatory: boolean= false; 
   constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,public modalController: ModalController,
      public storageservice: StorageService, private toastController: ToastController,private elementRef: ElementRef
      ,public alertController: AlertController,) { }
@@ -186,11 +187,13 @@ getOrganisationList(){
   validationForCurMember(event){
     var value  = event;
     if(value == true){
+      this.nonMandatory = true
       this.clubFrom.get("participatedTill").disable(); 
       this.clubFrom.patchValue({
           'participatedTill':""
         })
     }else{
+      this.nonMandatory = false
       this.clubFrom.get("participatedTill").enable();
     }
   }

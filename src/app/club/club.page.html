@@ -75,7 +75,8 @@
                             </div>
                             </div>
                             <div class="button-content">
-                                <ion-label class="labels">Participated Till<small style="color: #f70505;">*</small></ion-label>
+                                <ion-label *ngIf="!nonMandatory" class="labels">Participated Till<small style="color: #f70505;">*</small></ion-label>
+                                <ion-label *ngIf="nonMandatory" class="labels">Participated Till</ion-label>
                                 <ion-item fill="outline" class="input-field">
                                     <ion-datetime displayFormat="DD.MM.YYYY" (ionChange)="validateEndDate($event.target.value);" formControlName="participatedTill" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                 </ion-item>

@@ -445,7 +445,7 @@
 
                     <ion-label class="labels">Mention the deadline for applications<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-datetime  formControlName="appDeadline" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                        <ion-datetime (ionChange)="validateStartDate($event.target.value);" formControlName="appDeadline" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
                     </ion-item>
 
 

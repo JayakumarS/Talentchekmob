@@ -222,9 +222,9 @@ export class OniJobPostPage implements OnInit {
           })
         }
     
-        if(result["jobAdvertisementList"][0].lastPostedDate != null && result["jobAdvertisementList"][0].lastPostedDate !=""){
-          const lastPostedDate = result["jobAdvertisementList"][0].lastPostedDate;
-          this.lastPosted = moment(lastPostedDate, 'DD/MM/YYYY').toDate();
+        if(result["jobAdvertisementList"][0].appDeadline != null && result["jobAdvertisementList"][0].appDeadline !=""){
+          const appDeadline = result["jobAdvertisementList"][0].appDeadline;
+          this.lastPosted = moment(appDeadline, 'DD/MM/YYYY').toDate();
           this.jobProfileForm.patchValue({
             'appDeadline': this.lastPosted.toISOString(),
           })
@@ -363,18 +363,15 @@ else{
     var currentDate = new Date(new Date().setFullYear(new Date().getFullYear())); //Currentdate - one year.
     console.log("currentDate: " + currentDate);
     console.log("startDate: " + event);
-    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
-    // this.jobProfileForm.patchValue({
-    //   'jobStartDateTo':""
-    // })
+    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0)); 
     if (frm <= currentDate) {
       const alert = await this.toastController.create({
         header: '',
-        message: 'Start date should be greater than current date.',
+        message: 'Dead line date should be greater than current date.',
         duration: 3000,
       });
       this.jobProfileForm.patchValue({
-        'jobStartDateFrom':""
+        'appDeadline':""
       })
        await alert.present();
     }
