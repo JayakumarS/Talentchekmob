@@ -38,8 +38,8 @@
 
                     <ion-label class="labels">Job title<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select placeholder="Job title" multiple="true" formControlName="jobTitle" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
-                            <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
+                        <ion-select placeholder="Job title" multiple="true" formControlName="jobTitle" (ionChange)="Driver($event.target.value)" cancelText="Cancel" okText="Okay">
+                            <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}" >{{jobtitle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
                     <div *ngIf="jobProfileForm.controls.jobTitle.hasError('required') && jobProfileForm.controls.jobTitle.touched">
@@ -81,7 +81,7 @@
                     </div>
 
                     <ion-list *ngIf="showSkillResults">
-                        <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text,result.id)">
+                        <ion-item *ngFor="let result of searchSkillResults" (click)="selectSkill(result.text)">
                             {{ result.text }}
                         </ion-item>
                     </ion-list>

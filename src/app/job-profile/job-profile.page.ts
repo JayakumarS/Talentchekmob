@@ -15,6 +15,8 @@ import { JobPage as JobPage} from '../job/job.page';
 })
 export class JobProfilePage implements OnInit {
   editJobTitle: any;
+  jobTitleLists: string[] = [];
+  id: any;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -31,7 +33,7 @@ export class JobProfilePage implements OnInit {
   industryList =[];
   jobTitleList = [];
   jobTypeList =[];
-
+  DrvierList= [];
   searchTerm = '';
  
   cities = [];
@@ -115,7 +117,7 @@ export class JobProfilePage implements OnInit {
       this.getJobType();
       this.workLocationList();
       this.getlanguageList();
-      this.getSkillList();
+      // this.getSkillList();
       
      
       this.route.queryParams.subscribe(params => {
@@ -450,12 +452,12 @@ nextStep(currentStep: string, nextStep: string) {
       this.jobTitleList = result["jobTitleList"];
       if(this.jobTitleList.length != 0 ){
       if(this.catagoaryType.includes('IC10')){
-        this.jobTitleList.push(result["jobTitleList"][17].id); 
+        this.jobTitleLists.push(result["driverid"].toString()); 
         this.jobProfileForm.patchValue({
-          'jobTitle': (this.jobTitleList)
+          'jobTitle': (this.jobTitleLists)
 
           });
-
+          this.Driver(this.jobTitleLists);
       }else{
         this.jobTitleList=result["jobTitleList"];
       }
@@ -470,6 +472,16 @@ nextStep(currentStep: string, nextStep: string) {
       console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);
     });
   }
+
+  Driver(id){
+   
+     this.id= this.jobProfileForm["value"]["jobTitle"].toString();
+    var jobtitleurl = "api/auth/app/CommonUtility/DriverListUrl?id=" +id;
+
+    const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
+      this.skillList = result["text"]; 
+    }); 
+   }
 
  
     workLocationList(){
@@ -509,10 +521,8 @@ nextStep(currentStep: string, nextStep: string) {
       }
     }
   
-    selectSkill(skill: string,id:string) {
+    selectSkill(skill: string) {
       this.selectedSkills.push(skill);
-      this.cityName = skill;
-      this.cityId = id;
       this.showSkillResults = false;
       this.searchSkillResults = [];
       this.searchCtrl.setValue('');
