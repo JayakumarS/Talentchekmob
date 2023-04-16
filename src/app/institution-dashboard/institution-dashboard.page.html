@@ -1,19 +1,9 @@
-<ion-header style="background-color: white;">
-    <ion-toolbar style="padding: 20px 10px 15px;">
-        <ion-row style="display: flex;justify-content: space-between;">
-            <div>
-                <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
-            </div>
-            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
-      align-items: center;align-items: center;">
-                Home
-            </div>
-            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
-            </div>
-        </ion-row>
+<ion-header>
+    <ion-toolbar>
+        <ion-title style="text-align: center;
+        font-family: 'Mr-eaves';
+        font-size: 28px;">Home</ion-title>
     </ion-toolbar>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </ion-header>
 
 <ion-content>
@@ -23,7 +13,7 @@
                 <ion-col size="6">
                     <ion-card class="recharge-card" (click)="goto_subscribe()">
                         <ion-card-content>
-                            <p style="text-align: center;font-size: 16px; color: #fff;"> Avalible</p>
+                            <p style="text-align: center;font-size: 16px; color: #fff;"> Available</p>
                             <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">Talent credits</p>
 
                             <div class="card-content p-0 flex">
@@ -90,8 +80,8 @@
 
 
 
-            <div class="ag-courses_item">
-                <a class="ag-courses-item_link" (click)="viewList('referrals','Network - Referrals')">
+            <div class="ag-courses_item" (click)="viewList('referrals','Network - Referrals')">
+                <a class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
                     <br>
                     <ion-row class="ag-courses-item_date-box">

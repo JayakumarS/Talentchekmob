@@ -37,9 +37,7 @@ export class OrganizationDashboardListPage implements OnInit {
             console.log(params)
             this.getAllApplicantList();
           }
-          else{
-
-            
+          else{            
             this.getAllList(params.btntype);
           }
 
@@ -59,12 +57,14 @@ export class OrganizationDashboardListPage implements OnInit {
     var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardList?currentUserId="+this.userId+"&selectedType="+btntype;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
 
-      this.oniList = result['oniDashboardList'];
+     // this.oniList = result['oniDashboardList'];
            console.log(result); 
         });
 
 
   }
+
+ 
 
 
   getAllApplicantList(){
@@ -109,24 +109,6 @@ export class OrganizationDashboardListPage implements OnInit {
   }
 
 
-
-  // footer nav
-
-  goto_profileSearch(){
-    this.router.navigate(['/job-search']);
-  }
-  goto_jobs(){
-    this.router.navigate(['/job']);
-  }
-  goto_home(){
-    this.router.navigate(['/home']);
-  }
-  goto_profile(){
-    this.router.navigate(['/profile-view']);
-  }
-  goto_more(){
-    this.router.navigate(['/settings']);
-  }
 
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 
 @Component({
   selector: 'app-institution-dashboard-list',
@@ -14,6 +15,8 @@ export class InstitutionDashboardListPage implements OnInit {
   userId: string;
   creditPoints: any;
   referralsList:[];
+  oniList:[];
+  oniListCount:any;
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,public storageservice: StorageService) { 
 
@@ -29,17 +32,8 @@ export class InstitutionDashboardListPage implements OnInit {
           console.log(params);
           this.title = params.title;
 
-          if(params.btntype == "referrals")
-          {
             console.log(params)
-            this.getAllReferralsList();
-          }
-          else{
-
-            
-          //  this.getAllList(params.btntype);
-          }
-
+            this.getAllList(params.btntype);
           
         }
       }
@@ -52,16 +46,48 @@ export class InstitutionDashboardListPage implements OnInit {
   ngOnInit() {
   }
 
-  getAllReferralsList(){
 
-    var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardList?currentUserId="+this.userId;
+
+
+  getAllList(btntype): void {
+ 
+    var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardList?currentUserId="+this.userId+"&selectedType="+btntype;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
 
-      this.referralsList = result['referralsDashboardList'];
+      this.oniList = result['oniDashboardList'];
+      this.oniListCount = result['oniDashboardList'].length;
            console.log(result); 
         });
 
+  }
 
+
+  async profileView(talentId) {
+
+    const modal = await this.modalController.create({
+      component: ProfileViewPopupPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        "talentId": talentId,
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        //#endregion
+
+      }
+    });
+
+    return await modal.present();
+  }
+
+  goto_insHome(){
+
+    this.router.navigate(['/institution-dashboard']);
   }
 
 }

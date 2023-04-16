@@ -82,6 +82,7 @@ export class ScanToConnectPage implements OnInit {
 
   BindProfileImage(scan_tfId: any) {
     console.log('scan_tfId', scan_tfId);
+    scan_tfId = 'TFIN10000000106'
     var url = 'api/auth/app/mobile/editprofiledetails?currentUserId='+scan_tfId;
 
     this.storageservice.getrequest(url).subscribe(result => {

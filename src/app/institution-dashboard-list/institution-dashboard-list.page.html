@@ -1,9 +1,63 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>institution-dashboard-list</ion-title>
-  </ion-toolbar>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
+
+            <ion-col size="0.5">
+
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" (click)="goto_insHome()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </ion-col>
+
+            <ion-col size="8">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 5%;">{{title}} List</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+    <form>
+        <div class="display-justify" *ngFor="let cElement of oniList" (click)="profileView(cElement.talentid)">
+            <ion-card class="adv-card">
+                <ion-row>&nbsp;</ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="small">
+                            <img style="width: 50%;height: 50%;" alt="" src="{{cElement.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-row>
+                            <div class="b">{{cElement.username}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <div class="c">{{cElement.degortitle}}</div>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size="4">
+                        <div>
+                            <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-card>
+        </div>
+
+        <ion-row *ngIf="oniListCount == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="Silhouette of a person's head" src="\assets\img\search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="oniListCount == 0">No Results to Display</div>
+
+
+    </form>
 
 </ion-content>

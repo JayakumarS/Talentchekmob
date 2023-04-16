@@ -366,6 +366,14 @@ const routes: Routes = [
   },  {
     path: 'rating-extra-popup',
     loadChildren: () => import('./rating-extra-popup/rating-extra-popup.module').then( m => m.RatingExtraPopupPageModule)
+  },
+  {
+    path: 'oni-alumni',
+    loadChildren: () => import('./oni-alumni/oni-alumni.module').then( m => m.OniAlumniPageModule)
+  },
+  {
+    path: 'oni-alumni-list',
+    loadChildren: () => import('./oni-alumni-list/oni-alumni-list.module').then( m => m.OniAlumniListPageModule)
   }
 
 

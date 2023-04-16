@@ -70,12 +70,12 @@
 
     <div class="display-justify">
 
-        <!-- <div class="custom-button">
-            <div style="display: flex; align-items: center;" (click)="goto_consent()">
+        <div class="custom-button" *ngIf="roleId == 2 || roleId == 3">
+            <div style="display: flex; align-items: center;" (click)="goto_alumni()">
                 <ion-avatar slot="start">
-                    <img src="../../assets/icon/privacy policy.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Privacy Policy</span></div>
-        </div> -->
+                    <img src="../../assets/icon/Alumni.png" />
+                </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
+        </div>
 
         <div class="custom-button">
             <div style="display: flex; align-items: center;" (click)="goto_AboutApp()">

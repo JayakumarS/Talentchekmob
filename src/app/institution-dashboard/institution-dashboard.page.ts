@@ -45,7 +45,7 @@ export class InstitutionDashboardPage implements OnInit {
   }
 
 
-  selectedTab: string = 'profile';
+  selectedTab: string = 'apps';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
