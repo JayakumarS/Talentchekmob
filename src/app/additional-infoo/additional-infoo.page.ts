@@ -172,10 +172,11 @@ unCheckFocus() {
   }
 
   connections() {
-    this.router.navigate(['/profile/addConnections'])
+    this.router.navigate(['/profile/addConnections']);
   }
 
   save(){
+    this.storageservice.showLoading();
     this.additionalform.value.currentUserId=this.userId;
 this.additional=this.additionalform.value;
 console.log(` data: ${JSON.stringify(this.additional)}`);
@@ -185,6 +186,7 @@ var saveperonalinfo = "api/auth/app/mobile/saveadditionalinfo";
    
    if (result["success"] == true) {
    // this.router.navigate(['/job']);
+   this.storageservice.dismissLoading();
     this.presentToast()
     }
  });

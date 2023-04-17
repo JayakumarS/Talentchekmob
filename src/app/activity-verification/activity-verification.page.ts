@@ -33,12 +33,13 @@ export class ActivityVerificationPage implements OnInit {
 
 
   requestVerification(clubId,extId){
-
+    this.storageservice.showLoading();
     this.ExtracurricularFrom.value.extId = extId;
     this.Extracurricular = this.ExtracurricularFrom.value;
       var saveExtracurricular = "api/auth/app/IndividualProfileDetails/verificationRequestExt";
       this.storageservice.postrequest(saveExtracurricular,this.Extracurricular).subscribe(async result => {  
         if (result["success"] == true) {
+          this.storageservice.dismissLoading();
           this.presentToast()
 
         }

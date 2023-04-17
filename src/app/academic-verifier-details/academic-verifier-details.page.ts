@@ -41,7 +41,7 @@ export class AcademicVerifierDetailsPage implements OnInit {
 
 
   addverifier(){
-   
+    this.storageservice.showLoading();
     this.ExtracurricularFrom.value.currentUserId =this.userId;
     this.ExtracurricularFrom.value.oniCode =this.clubId;
     this.Extracurricular=this.ExtracurricularFrom.value;
@@ -50,7 +50,7 @@ export class AcademicVerifierDetailsPage implements OnInit {
 
   this.storageservice.postrequest(saveEducation,this.Extracurricular).subscribe(async result => {  
     if (result["success"] == true) {
-      
+      this.storageservice.dismissLoading();
         //  const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
         //  profilePage.updateData();
     

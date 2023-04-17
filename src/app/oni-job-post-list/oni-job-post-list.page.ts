@@ -35,14 +35,21 @@ export class OniJobPostListPage implements OnInit {
 
 bindJobAdvertiseMentList(){
 
+  this.storageservice.showLoading();
   var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementList?currentUserId="+this.userId;
 
 
     const JobPostList = this.storageservice.getrequest(JobPostListsURL).subscribe(result => {
 
-      this.jobPostList = result['JobAdvertisementList'];
+      if(result['success'] == true) {
+        this.storageservice.dismissLoading(); 
+        this.jobPostList = result['JobAdvertisementList'];
   
-      console.log(this.jobPostList);
+        console.log(this.jobPostList);
+
+      }
+
+
     });
 
   

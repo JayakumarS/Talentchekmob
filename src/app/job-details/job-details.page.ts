@@ -52,12 +52,12 @@ export class JobDetailsPage implements OnInit {
     this.router.navigate(['/job']) 
   }
   Apply(){
-
+    this.storageservice.showLoading();
     var jobapplyURL = "api/auth/app/jobportal/applyForJob";
     this.storageservice.getrequest(jobapplyURL + "?jobId=" + this.jobId + "&talentId="+this.userId +"&currentUserName="+this.userName).subscribe(result => {
   console.log(result);
   if (result["success"] == true) {
-      
+    this.storageservice.dismissLoading();
     this.presentToast()
     }else if (result["success"] == false) {
                   var message = result["message"];

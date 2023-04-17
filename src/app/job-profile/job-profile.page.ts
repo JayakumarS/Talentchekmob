@@ -549,6 +549,8 @@ nextStep(currentStep: string, nextStep: string) {
 
     await alert.present();
   } else {
+
+    this.storageservice.showLoading();
      this.jobProfileForm.value.jobSkills = this.selectedSkills
     this.jobProfileForm.value.location = this.selectedCities;
 
@@ -568,6 +570,7 @@ nextStep(currentStep: string, nextStep: string) {
    this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
+      this.storageservice.dismissLoading();
       this.jobProfileForm.reset();
       setTimeout(() => {
       const jobpage = new JobPage(this.router, this.storageservice);
@@ -604,7 +607,7 @@ nextStep(currentStep: string, nextStep: string) {
 
     await alert.present();
   } else {
-
+    this.storageservice.showLoading();
      this.jobProfileForm.value.jobSkills = this.selectedSkills
     this.jobProfileForm.value.location = this.selectedCities;
 
@@ -623,6 +626,7 @@ nextStep(currentStep: string, nextStep: string) {
    this.storageservice.postrequest(saveJobProfile, this.jobpostMaster).subscribe(result => {  
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
+      this.storageservice.dismissLoading();
       this.jobProfileForm.reset();
       this.router.navigate(['/job']);
       setTimeout(() => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bids-and-aplications-recived-popup',
@@ -23,7 +24,8 @@ export class BidsAndAplicationsRecivedPopupPage implements OnInit {
   appRecvFlag : boolean = false;
   bidsRecvFlag : boolean = false;
 
-  constructor(public modalController: ModalController,private navParams: NavParams,public storageservice: StorageService) { }
+  constructor(public modalController: ModalController,private navParams: NavParams,
+    public storageservice: StorageService,public router: Router) { }
 
   ngOnInit() {
     this.talentId = this.navParams.data.talentId;
@@ -116,6 +118,10 @@ export class BidsAndAplicationsRecivedPopupPage implements OnInit {
       this.bidDetails = result['bidpostDetails'][0];
        
    });
+  }
+
+  Apply(){
+ this.router.navigate(['/web-app-nav']);
   }
 
 }

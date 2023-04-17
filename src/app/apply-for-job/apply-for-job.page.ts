@@ -19,11 +19,11 @@ export class ApplyForJobPage implements OnInit {
   }
   Apply(){
 
-    this.router.navigate(['/job']) 
+    this.router.navigate(['/job']); 
 
   }
 
   go_to_jobs(){
-    this.router.navigate(['/job']) 
+    this.router.navigate(['/job']);
   }
 }

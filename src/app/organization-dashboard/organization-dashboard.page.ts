@@ -56,7 +56,7 @@ export class OrganizationDashboardPage implements OnInit {
 
   viewmatchesList(){
 
-    this.router.navigate(['/oni-oni-job-post-list']);
+    this.router.navigate(['/oni-job-post-list']);
   }
 
   selectedTab: string = 'profile';

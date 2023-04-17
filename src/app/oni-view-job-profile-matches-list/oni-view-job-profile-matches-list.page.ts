@@ -55,8 +55,9 @@ export class OniViewJobProfileMatchesListPage implements OnInit {
     this.getMatchesData();
   }
 
-  viewMatches(){
+  goto_matches_list(){
 
+    this.router.navigate(['/oni-job-post-list']);
   }
 
   getMatchesData(){

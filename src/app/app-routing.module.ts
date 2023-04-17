@@ -374,6 +374,10 @@ const routes: Routes = [
   {
     path: 'oni-alumni-list',
     loadChildren: () => import('./oni-alumni-list/oni-alumni-list.module').then( m => m.OniAlumniListPageModule)
+  },
+  {
+    path: 'web-app-nav',
+    loadChildren: () => import('./web-app-nav/web-app-nav.module').then( m => m.WebAppNavPageModule)
   }
 
 
