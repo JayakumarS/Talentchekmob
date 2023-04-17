@@ -26,7 +26,9 @@ export class SettingsPage implements OnInit {
   }
   
  
-
+  goto_oniSubscription(){
+this.router.navigate(['subscription-insorg'])
+  }
   goto_language(){
     this.router.navigate(['/language']);
   }

@@ -3,12 +3,12 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
-                <ion-icon size="large" name="arrow-back-circle-outline"  (click)="goto_jobs()"></ion-icon>
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_jobs()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Job Post</ion-title>
-            </div>  
-        </div>  
+            </div>
+        </div>
     </ion-toolbar>
 
 </ion-header>
@@ -152,11 +152,11 @@
                     </ion-list>
 
 
-                   <div class="line-with-text">
+                    <div class="line-with-text">
                         <hr class="hr1">
-                    </div>  
+                    </div>
 
-                   <div>
+                    <div>
                         <div>
                             <ion-label class="labels">What is the approximate salary range for this job?<small style="color: #f70505;">*</small></ion-label>
                         </div>
@@ -564,30 +564,6 @@
     </form>
 
 
-    <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-  <ion-icon size="large" name="search-circle"></ion-icon>
-</button>
-        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-  <ion-icon size="large" name="earth-sharp"></ion-icon>
-</button>
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
-   <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-</button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
-    <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
- </button>
 
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
-    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-  </button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">
-  <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-</button>
-        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-  <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-  
-</button>
-    </div>
 
 </ion-content>

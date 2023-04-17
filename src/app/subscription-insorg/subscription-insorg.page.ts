@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 //For using Razorpay
 declare var RazorpayCheckout: any;
@@ -32,16 +33,15 @@ export class SubscriptionInsorgPage implements OnInit {
   amtUltimateVal: number;
   exchangeAmount:any;
 
-  constructor(private http: HttpClient, public storageservice: StorageService,private translate: TranslateService) {
+  constructor(private http: HttpClient,public router:Router, public storageservice: StorageService,private translate: TranslateService) {
 
     this.userId = localStorage.getItem("userId");
 
-    this.currencyVal = "USD";
+    this.currencyVal = "INR";
     this.amtProfessionalVal = 100;
     this.amtEnterpriseVal = 200;
     this.amtUltimateVal = 1000;
-    this.currencySymbolVal = "$";
-
+    this.currencySymbolVal = "₹";
     this.BindDefaultCurrencyAsPerCurrentUser();
 
   }
@@ -267,6 +267,10 @@ export class SubscriptionInsorgPage implements OnInit {
     RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(options);
 
+  }
+
+  goto_settings(){
+    this.router.navigate(['/settings'])
   }
 
 }

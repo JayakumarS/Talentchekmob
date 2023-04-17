@@ -76,6 +76,11 @@ baseURL:string ="http://localhost:8080//";
 
   }
 
+
+  public get<T>(url: string, params?: any): Observable<T> {
+    return this.http.get<T>(this.mobileserverurl+url, { params });
+  }
+
   postrequest_WithBaseURL(url, data) {
 
     const headers = new HttpHeaders({

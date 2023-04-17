@@ -11,6 +11,8 @@ export class InstiProfileViewPage implements OnInit {
   userId: string;
   img: string;
   email: any;
+  roleId: any;
+  RoleID: any;
   entitytype: any;
   foundedin: any;
   instlocation: any;
@@ -33,7 +35,8 @@ export class InstiProfileViewPage implements OnInit {
 
   ngOnInit() {
 
-
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
     this.userId = localStorage.getItem("userId")  ; 
     this.img = localStorage.getItem("profilePic")  ;
 
@@ -115,15 +118,40 @@ payment(userId)
     this.router.navigate(['/job-search']);
   }
   goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_orgjobs(){
+
     this.router.navigate(['/oni-job-post']);
   }
-  goto_home(){
+  goto_instijobs(){
+    this.router.navigate(['/oni-job-post-list']);
+
+  }
+  goto_orghome(){
+
+    this.router.navigate(['/organization-dashboard']);
+  }
+  goto_instihome(){
     this.router.navigate(['/institution-dashboard']);
+  
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_instiprofile(){
+
+    this.router.navigate(['/insti-profile-view']);
+  }
+  goto_orgprofile(){
+  
+    this.router.navigate(['/org-profile-view']);
   }
   goto_profile(){
-    this.router.navigate(['/insti-profile-view']);
+    this.router.navigate(['/profile-view']);
   }
   goto_more(){
     this.router.navigate(['/settings']);
-  } 
+  }
+
 }

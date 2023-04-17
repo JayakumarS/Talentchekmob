@@ -1,17 +1,16 @@
-<ion-header style="background-color: white;">
-    <ion-toolbar style="padding: 20px 10px 15px;">
-        <ion-row style="display: flex;justify-content: space-between;">
-            <div>
-                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_profile()"></ion-icon>
+<ion-header>
+    <ion-toolbar>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
-            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 24px;display: flex;
-    align-items: center;align-items: center;">
-                Subscription
+            <div style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Subscription</ion-title>
             </div>
-            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
-            </div>
-        </ion-row>
+        </div>
     </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
@@ -200,25 +199,3 @@
 
 
 </ion-content>
-
-
-
-<div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-<ion-icon size="large" name="search-circle"></ion-icon>
-</button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-<ion-icon size="large" name="earth-sharp"></ion-icon>
-</button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-
-</button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-<ion-icon size="large" name="person-circle-sharp"></ion-icon>
-</button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-
-</button>
-</div>
