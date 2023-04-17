@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,15 @@ export class HomePage implements OnInit {
   avgrating:any;
   categoryType: string;
 
-  constructor(public router:Router,public storageservice: StorageService) { }
+  constructor(public router:Router,public storageservice: StorageService,) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/home') {
+        this.setSelectedTab('apps');
+      }
+    });
 
     this.userId = localStorage.getItem("userId")  ; 
     this.categoryType = localStorage.getItem("categoryType")  ; 
@@ -62,6 +69,7 @@ this.storageservice.getrequest(indiRatingsCountURL).subscribe(result => {
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
+ 
 
   goto_settings(){
     this.router.navigate(['/settings']) 

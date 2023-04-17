@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
+import {  NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-profile-view',
@@ -44,7 +45,14 @@ export class ProfileViewPage implements OnInit {
   pickerInst: any;
  
   ngOnInit() {
-     this.setSelectedTab('profile');
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/profile-view') {
+        this.setSelectedTab('profile');
+      }
+    });
+
+     
     this.userId = localStorage.getItem("userId")  ; 
     this.img = localStorage.getItem("profilePic")  ;
 

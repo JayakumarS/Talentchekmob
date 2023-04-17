@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NavigationEnd } from '@angular/router';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -14,6 +16,11 @@ export class SettingsPage implements OnInit {
   constructor(public router:Router,public storageservice: StorageService,public nativeStorage: NativeStorage) { }
 
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/settings') {
+        this.setSelectedTab('menu');
+      }
+    });
 
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);

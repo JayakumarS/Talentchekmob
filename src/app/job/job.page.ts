@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-job',
@@ -21,6 +22,11 @@ export class JobPage implements OnInit {
   }
 
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/job') {
+        this.setSelectedTab('earth');
+      }
+    });
 
     this.BindMatchedJobsList();
   }

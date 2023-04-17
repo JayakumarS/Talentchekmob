@@ -5,6 +5,7 @@ import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-job-search',
@@ -88,6 +89,11 @@ export class JobSearchPage implements OnInit {
 
 
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/job-search') {
+        this.setSelectedTab('search');
+      }
+    });
  
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
