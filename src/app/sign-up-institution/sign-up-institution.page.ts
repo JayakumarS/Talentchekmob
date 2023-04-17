@@ -65,6 +65,7 @@ base64img1: string = '';
       state: ['',Validators.required],
       pincode: ['',Validators.required],
       referralCode: [''],
+      uploadImg: [''],
       profileVisibility: [''],
       cBoxIAgree:[''],
       cBoxIAgreeConsent:['']
@@ -277,6 +278,7 @@ removeCountry() {
         'state': state,
         'referralCode': referralCode,
         'profileVisibility': profileVisibility,
+        'uploadImg': this.base64img1,
 
       }
       console.log(`Posting Data: ${JSON.stringify(postData)}`);

@@ -76,6 +76,7 @@ base64img1: string = '';
       mobileNo:['',Validators.required],
       state: ['',Validators.required],
       pincode: ['',Validators.required],
+      uploadImg: [''],
       referralCode: [''],
       profileVisibility: ['', ''],
      countryId:[''],
@@ -314,6 +315,7 @@ onSubmit(){
       'state': state,
       'referralCode': referralCode,
       'profileVisibility': profileVisibility,
+      'uploadImg': this.base64img1,
 
     }
     console.log(`Posting Data: ${JSON.stringify(postData)}`);
