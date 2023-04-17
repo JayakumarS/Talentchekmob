@@ -5,10 +5,10 @@
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()" style="margin-top:14%"></ion-icon>
             </div>
-            <div  style="text-align: center;display: contents;">
+            <div style="text-align: center;display: contents;">
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Scan to Connect</ion-title>
-            </div> 
-        </div>   
+            </div>
+        </div>
     </ion-toolbar>
 </ion-header>
 
@@ -38,7 +38,7 @@
     </div>
 
 
-    <div class="display-justify" *ngIf="!IsShowProfile">
+    <div class="display-justify" *ngIf="IsShowProfile">
         <ion-card class="scan-card">
 
             <ion-card-content>

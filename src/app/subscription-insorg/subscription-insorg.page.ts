@@ -32,6 +32,7 @@ export class SubscriptionInsorgPage implements OnInit {
   amtEnterpriseVal: number;
   amtUltimateVal: number;
   exchangeAmount:any;
+  usercountry: string;
 
   constructor(private http: HttpClient,public router:Router, public storageservice: StorageService,private translate: TranslateService) {
 
@@ -50,11 +51,11 @@ export class SubscriptionInsorgPage implements OnInit {
   }
 
   BindDefaultCurrencyAsPerCurrentUser() {
-    // var getCurrencyURL = "api/auth/app/mobil/getCurrenyCodeOfCurrentUser?currentUserId="+this.userId;
-    // this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
-    //   var currencyResponse = result[0];
-    //   console.log("currencyResponse: " + currencyResponse);
-    let  currencyResponse = "test";
+    var getCurrencyURL = "api/auth/app/mobile/getCurrenyCodeOfCurrentUser?currentUserId=" + this.userId;
+    this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
+      var currencyResponse = result[0];
+      this.usercountry = result[0]['country'];
+      console.log("currencyResponse: " + currencyResponse);
       if (currencyResponse != null) {
         var currency = "INR";
         console.log("In currency: " + currency);
@@ -105,7 +106,7 @@ export class SubscriptionInsorgPage implements OnInit {
         this.amtUltimateVal = 1000;
         this.currencySymbolVal = "$";
       }
-   // });
+    });
   }
 
   CurrencyChangeEvent(event) {
@@ -243,7 +244,8 @@ export class SubscriptionInsorgPage implements OnInit {
         "userId": userId,
         "subscriptype": subscriptype,
         "subscripamt": subscripamt,
-        "currency":currency
+        "currency":currency,
+        "country":this.usercountry
       }
       console.log(`myJSONObject payment data: ${JSON.stringify(myJSONObject)}`);
 

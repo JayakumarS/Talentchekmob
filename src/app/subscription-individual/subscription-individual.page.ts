@@ -44,15 +44,12 @@ export class SubscriptionIndividualPage implements OnInit {
   ngOnInit() {
   }
 
-  selectedTab: string = 'menu';
 
-  setSelectedTab(tabName: string) {
-    this.selectedTab = tabName;
-  }
   BindDefaultCurrencyAsPerCurrentUser() {
-    var getCurrencyURL = "api/auth/app/mobil/getCurrenyCodeOfCurrentUser?currentUserId=" + this.userId;
+    var getCurrencyURL = "api/auth/app/mobile/getCurrenyCodeOfCurrentUser?currentUserId=" + this.userId;
     this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
       var currencyResponse = result[0];
+      this.usercountry = result[0]['country'];
       console.log("currencyResponse: " + currencyResponse);
       if (currencyResponse != null) {
         var currency = currencyResponse["currency"];
@@ -205,7 +202,8 @@ export class SubscriptionIndividualPage implements OnInit {
         "signature": success.razorpay_signature,
         "userId": userId,
         "subscriptype": subscriptype,
-        "subscripamt": subscripamt
+        "subscripamt": subscripamt,
+        "country":this.usercountry
       }
       console.log(`myJSONObject payment data: ${JSON.stringify(myJSONObject)}`);
 
@@ -229,6 +227,10 @@ export class SubscriptionIndividualPage implements OnInit {
     RazorpayCheckout.on('payment.cancel', cancelCallback);
     RazorpayCheckout.open(options);
 
+  }
+
+  goto_settings(){
+    this.router.navigate(['/settings'])
   }
 
 

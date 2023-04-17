@@ -18,6 +18,7 @@ export class ScanToConnectPage implements OnInit {
   scanned_UserId: string;
   scanned_UserName: string;
   scanned_EmailId: string;
+  scanned_MobNo: string;
 
   IsShowProfile: boolean = false;
   talentform: FormGroup;
@@ -36,7 +37,7 @@ export class ScanToConnectPage implements OnInit {
      public formbuilder: FormBuilder) {
 
     this.profileImageURL = "assets/img/avatar1.png";
-
+    this.userId = localStorage.getItem("userId")  ; 
     this.favouriteVal = 'No';
     this.rateOrgVal = 0;
 
@@ -82,7 +83,6 @@ export class ScanToConnectPage implements OnInit {
 
   BindProfileImage(scan_tfId: any) {
     console.log('scan_tfId', scan_tfId);
-    scan_tfId = 'TFIN10000000106'
     var url = 'api/auth/app/mobile/editprofiledetails?currentUserId='+scan_tfId;
 
     this.storageservice.getrequest(url).subscribe(result => {
@@ -110,6 +110,7 @@ export class ScanToConnectPage implements OnInit {
         this.scanned_UserId = scan_tfId;
         this.scanned_UserName = data['firstname'].trim() +' '+ data['lastname'].trim();
         this.scanned_EmailId = data['email'];
+        this.scanned_MobNo = data['mobile'];
 
         //End
 
@@ -215,30 +216,30 @@ export class ScanToConnectPage implements OnInit {
           var postData = {
             "acquaintancePeriodFrom": "",
             "acquaintancePeriodTo": "",
-            "currentlyAcquainted": "",
-            "email": this.scanned_EmailId,
             "favourite": IsFavourite,
-            "firstName": "",
-            "receiverMobile": "",
             "receiverName": this.scanned_UserName,
-            "userId": this.scanned_UserId, //receiverTalentId
+            "userId": this.scanned_UserId, 
             "receiverRegistered": true,
             "relationshipAt": fromLocation,
             "relationshipId": relationShip,
-            "initiatorName": this.userName,
-            "initiatorTalentId": this.userId,
-            "ratingByInitiator": this.rateOrgVal
+            "ratingByInitiator": this.rateOrgVal,
+            "currentUserName": this.userName,
+            "currentUserId":this.userId,
+            "receiverEmailId":this.scanned_EmailId,
+            "receiverTalentId":this.scanned_UserId,
+            "relationship":relationShip,
+            "receiverMobileNo":this.scanned_MobNo,
           }
 
           console.log(`Save posting data: ${JSON.stringify(postData)}`);
 
-          var saveUrl = "api/company/sendConnectionInviteMob";
+          var saveUrl = "api/auth/app/IndividualProfileDetails/saveConnections";
 
           this.storageservice.postrequest(saveUrl, postData).subscribe(result => {
             var response = result;
             console.log("Save response: " + response);
 
-            if (result["success"] == true || result["success"] == null) {
+            if (result["isSuccess"] == true ) {
               this.storageservice.successToastCustom('Congratulations', 'Your feedback has been saved successfully.');
 
               let navigationExtras: NavigationExtras = {
@@ -246,15 +247,16 @@ export class ScanToConnectPage implements OnInit {
                   refreshPage: 'yes'
                 }
               };
-              this.router.navigate(['/dashboard-individual'], navigationExtras);
+              this.router.navigate(['/home'], navigationExtras);
 
             }
-            else if (result["success"] == false) {
+            else if (result["isSuccess"] == false || result["isSuccess"] == null) {
               var msg = result["message"];
               if (msg == null) {
                 msg = "Web service does not give proper message";
               }
               this.storageservice.warningToast(msg);
+              this.router.navigate(['/settings']);
             }
           });
         }
