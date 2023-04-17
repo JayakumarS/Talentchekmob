@@ -121,6 +121,10 @@ export class ScanToConnectPage implements OnInit {
 
   }
 
+  goto_settings(){
+    this.router.navigate(['/settings']);
+  }
+
   Bind_Relationship_DD() {
     var URL = "api/auth/app/IndividualProfileDetails/relationshipList";
 

@@ -1,16 +1,14 @@
 <ion-header>
     <ion-toolbar class="new-background-color">
 
-        <ion-row>
-            <ion-col size="2">
-                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileSearch()" style="margin-top:14%"></ion-icon>
-            </ion-col>
-            <ion-col size="10" style="align-self: center;">
-                <ion-title class="pageHeaderTitle">
-                    <div class="ion-text-wrap" style="font-family: Mr-eaves;">Scan to Connect</div>
-                </ion-title>
-            </ion-col>
-        </ion-row>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()" style="margin-top:14%"></ion-icon>
+            </div>
+            <div  style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Scan to Connect</ion-title>
+            </div> 
+        </div>   
     </ion-toolbar>
 </ion-header>
 
