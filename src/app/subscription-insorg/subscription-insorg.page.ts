@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { NavigationEnd } from '@angular/router';
+import { Location } from '@angular/common';
 
 //For using Razorpay
 declare var RazorpayCheckout: any;
@@ -17,6 +19,7 @@ function _window(): any {
   styleUrls: ['./subscription-insorg.page.scss'],
 })
 export class SubscriptionInsorgPage implements OnInit {
+  previousUrl: string;
 
   get nativeWindow(): any {
     return _window();
@@ -34,7 +37,7 @@ export class SubscriptionInsorgPage implements OnInit {
   exchangeAmount:any;
   usercountry: string;
 
-  constructor(private http: HttpClient,public router:Router, public storageservice: StorageService,private translate: TranslateService) {
+  constructor(private http: HttpClient,private location: Location,public router:Router, public storageservice: StorageService,private translate: TranslateService) {
 
     this.userId = localStorage.getItem("userId");
 
@@ -48,6 +51,7 @@ export class SubscriptionInsorgPage implements OnInit {
   }
 
   ngOnInit() {
+    this.previousUrl = this.location.path();
   }
 
   BindDefaultCurrencyAsPerCurrentUser() {
@@ -272,7 +276,9 @@ export class SubscriptionInsorgPage implements OnInit {
   }
 
   goto_settings(){
-    this.router.navigate(['/settings'])
+    if (this.previousUrl) {
+      this.location.back();
+    }
   }
 
 }

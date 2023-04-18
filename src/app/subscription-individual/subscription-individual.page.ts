@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from '../storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 //For using Razorpay
 declare var RazorpayCheckout: any;
@@ -17,6 +18,7 @@ function _window(): any {
   styleUrls: ['./subscription-individual.page.scss'],
 })
 export class SubscriptionIndividualPage implements OnInit {
+  previousUrl: string;
 
   
   get nativeWindow(): any {
@@ -31,7 +33,7 @@ export class SubscriptionIndividualPage implements OnInit {
   empId: string;
   usercountry: string;
 
-  constructor(private http: HttpClient,public router:Router, public storageservice: StorageService, private translate: TranslateService) {
+  constructor(private http: HttpClient,private location: Location,public router:Router, public storageservice: StorageService, private translate: TranslateService) {
 
     this.userId = localStorage.getItem("userId");
     this.currencyVal = "USD";
@@ -42,6 +44,7 @@ export class SubscriptionIndividualPage implements OnInit {
    }
 
   ngOnInit() {
+    this.previousUrl = this.location.path();
   }
 
 
@@ -230,9 +233,10 @@ export class SubscriptionIndividualPage implements OnInit {
   }
 
   goto_settings(){
-    this.router.navigate(['/settings'])
+    if (this.previousUrl) {
+      this.location.back();
+    }
   }
-
 
    // footer
    goto_profileSearch(){
