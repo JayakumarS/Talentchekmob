@@ -59,6 +59,10 @@ bindJobAdvertiseMentList(){
 
   
 }
+goto_profileView(){
+ 
+  this.router.navigate(['/organization-dashboard']);
+}
 
 goto_jobdetails(jobId){
   let edit = {
