@@ -1,6 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>oni-alumni</ion-title>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
+            </div>
+            <div style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Alumni</ion-title>
+            </div>
+        </div>
     </ion-toolbar>
 </ion-header>
 
@@ -8,7 +16,7 @@
     <form>
         <div class="display-justify">
             <ion-row class="container">
-                <ion-col size="6">
+                <ion-col size="6" *ngIf="RoleID.includes('3')">
                     <ion-card class="recharge-card" (click)="goto_AlumniList('Student')">
                         <ion-card-content>
                             <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">Student</p>

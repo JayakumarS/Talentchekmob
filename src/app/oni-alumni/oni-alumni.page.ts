@@ -15,6 +15,8 @@ export class OniAlumniPage implements OnInit {
   @ViewChild('slider', { static: true }) private slider: IonSlides;
 
   studentNetwork : FormGroup;
+
+  RoleID: any;
   constantHighlights:[];
   constCount:any;
   recntCount:any;
@@ -47,7 +49,9 @@ export class OniAlumniPage implements OnInit {
    }
 
   ngOnInit() {
-
+this.storageservice.showLoading();
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
 
     this.studentNetwork = this.fb.group({
       degree: [""],
@@ -63,12 +67,12 @@ export class OniAlumniPage implements OnInit {
     });
 
     this.studentNetwork.value['talentId'] =this.currentUserId;
-
+this.storageservice.showLoading();
     var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkList";
   this.storageservice.get(indiRatingsCountURL,this.studentNetwork.value).subscribe(result => {
 
 if(result['success'] == true) {
-
+  this.storageservice.dismissLoading();
   this.constantHighlights =result['constantHighlightsStudentNetworkList'];
   this.recentHighlights = result['recentHighlightsStudentNetworkList'];
   this.constCount = result['constantHighlightsStudentNetworkList'].length;
@@ -81,12 +85,12 @@ if(result['success'] == true) {
 
 
 var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
-
+this.storageservice.showLoading();
 this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
 
   console.log(res);
   this.corporateCount = res['corporateNetworkList'].length;
-
+  this.storageservice.dismissLoading();
 });
 
 
@@ -331,6 +335,11 @@ async PrivateUserAccTypeAlert() {
   });
 
   await alert.present();
+}
+
+goto_Settings(){
+
+  this.router.navigate(['/settings']);
 }
 
 
