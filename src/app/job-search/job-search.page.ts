@@ -437,7 +437,7 @@ export class JobSearchPage implements OnInit {
   }
   goto_orgjobs(){
 
-    this.router.navigate(['/oni-job-post']);
+    this.router.navigate(['/oni-job-post-list']);
   }
   goto_instijobs(){
     this.router.navigate(['/oni-job-post-list']);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { NavigationExtras, Router } from '@angular/router';
  import { AlertController } from '@ionic/angular';
-
+ import { NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-oni-job-post-list',
   templateUrl: './oni-job-post-list.page.html',
@@ -26,6 +26,11 @@ export class OniJobPostListPage implements OnInit {
   }
 
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/oni-job-post-list') {
+        this.setSelectedTab('earth');
+      }
+    });
       this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
 

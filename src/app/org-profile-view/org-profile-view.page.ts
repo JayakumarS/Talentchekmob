@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-org-profile-view',
@@ -36,6 +37,12 @@ export class OrgProfileViewPage implements OnInit {
   constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/org-profile-view') {
+        this.setSelectedTab('profile');
+      }
+    });
 
     this.userId = localStorage.getItem("userId")  ; 
     this.logo = localStorage.getItem("profilePic")  ;
@@ -130,7 +137,7 @@ export class OrgProfileViewPage implements OnInit {
     this.router.navigate(['/job-search']);
   }
   goto_jobs(){
-    this.router.navigate(['/oni-job-post']);
+    this.router.navigate(['/oni-job-post-list']);
   }
   goto_home(){
     this.router.navigate(['/organization-dashboard']);

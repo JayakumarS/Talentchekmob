@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-organization-dashboard',
@@ -16,6 +17,12 @@ export class OrganizationDashboardPage implements OnInit {
   orgCountList:any;
   constructor(public router:Router,public storageservice: StorageService) { }
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/organization-dashboard') {
+        this.setSelectedTab('apps');
+      }
+    });
 
     this.userId = localStorage.getItem("userId")  ; 
     this.creditPoints = localStorage.getItem("creditPoints") ;
@@ -59,7 +66,7 @@ export class OrganizationDashboardPage implements OnInit {
     this.router.navigate(['/oni-job-post-list']);
   }
 
-  selectedTab: string = 'profile';
+  selectedTab: string = 'apps';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
@@ -74,7 +81,7 @@ export class OrganizationDashboardPage implements OnInit {
     this.router.navigate(['/job-search']);
   }
   goto_jobs(){
-    this.router.navigate(['/oni-job-post']);
+    this.router.navigate(['/oni-job-post-list']);
   }
   goto_home(){
     this.router.navigate(['/organization-dashboard']);
