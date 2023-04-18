@@ -304,10 +304,20 @@ ion-content {
 
 .col-red {
     color: #f44336!important;
+    background-color: #87191926;
+    width: 30%;
+    height: 93%;
+    margin-top: -3%;
+    padding: 2px;
 }
 
 .col-purple {
     color: #9c27b0!important;
+    background-color: #87191926;
+    width: 30%;
+    height: 93%;
+    margin-top: -3%;
+    padding: 2px;
 }
 
 .col-indigo {
@@ -316,28 +326,63 @@ ion-content {
 
 .col-orange {
     color: #ff9800!important;
+    background-color: #87191926;
+    width: 53%;
+    height: 93%;
+    margin-top: -3%;
+    padding: 2px;
+}
+
+.badge-solid-green {
+    color: #198754;
+    background-color: #19875426;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-red {
+    color: #eb3939;
+    background-color: #87191926;
+    width: 30%;
+    height: 93%;
+    margin-top: -3%;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-blue {
+    color: #3e3be0;
+    background-color: #19248726;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.badge-solid-cyan {
+    color: #3D478F;
+    background-color: #D1D6FA;
+    border: none;
+    padding: 5px 12px;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 .badge {
-    padding: 5px 8px;
-    line-height: 12px;
-    border: 1px solid;
-    font-weight: 400;
-    font-size: 13px;
-    --bs-badge-padding-x: .85em;
+    --bs-badge-padding-x: .65em;
     --bs-badge-padding-y: .35em;
-    --bs-badge-font-size: .65em;
-    --bs-badge-font-weight: 400;
+    --bs-badge-font-size: .75em;
+    --bs-badge-font-weight: 700;
     --bs-badge-color: #fff;
     --bs-badge-border-radius: .375rem;
     display: inline-block;
-    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
-    font-size: var(--bs-badge-font-size);
-    font-weight: var(--bs-badge-font-weight);
     line-height: 1;
-    color: var(--bs-badge-color);
+    border-radius: 20px;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: var(--bs-badge-border-radius);
 }
