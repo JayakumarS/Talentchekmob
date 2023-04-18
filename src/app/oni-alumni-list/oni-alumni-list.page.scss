@@ -160,9 +160,7 @@ div.c {
     padding: 2px 11px 0px 20px;
     text-overflow: ellipsis;
     line-height: 1.25rem;
-    color: #000;
     word-break: break-word;
-    margin-left: -18%;
     &:before {
         border-radius: 50%;
         content: '';
@@ -179,18 +177,22 @@ div.c {
     background: #b4eda0;
 }
 
-.c-pill--success:before {
-    background: #6BC167;
+.c-pill--green {
+    background: #19875426;
 }
 
-.c-pill--warning {
+.c-pill--blue {
     background: #ffebb6;
 }
 
-.c-pill--warning:before {
+.c-pill--orange {
     background: #ffc400;
 }
 
-.c-pill--danger {
-    background: #eceef1;
+.c-pill--purple {
+    background: #6f42c126;
+}
+
+.c-pill--red {
+    background: #f1154126;
 }

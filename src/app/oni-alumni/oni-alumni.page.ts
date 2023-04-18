@@ -49,7 +49,7 @@ export class OniAlumniPage implements OnInit {
    }
 
   ngOnInit() {
-this.storageservice.showLoading();
+
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
 
@@ -66,35 +66,51 @@ this.storageservice.showLoading();
       department: [""]
     });
 
-    this.studentNetwork.value['talentId'] =this.currentUserId;
-this.storageservice.showLoading();
-    var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkList";
-  this.storageservice.get(indiRatingsCountURL,this.studentNetwork.value).subscribe(result => {
+    this.storageservice.showLoading();
+    this.get_studentNetwork();
 
-if(result['success'] == true) {
-  this.storageservice.dismissLoading();
-  this.constantHighlights =result['constantHighlightsStudentNetworkList'];
-  this.recentHighlights = result['recentHighlightsStudentNetworkList'];
-  this.constCount = result['constantHighlightsStudentNetworkList'].length;
-  this.recntCount = result['recentHighlightsStudentNetworkList'].length;
-  this.studCount = result['studentNetworkList'].length;
-}
-   console.log(result); 
-  
-});
+   this.storageservice.showLoading();
 
-
-var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
-this.storageservice.showLoading();
-this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
-
-  console.log(res);
-  this.corporateCount = res['corporateNetworkList'].length;
-  this.storageservice.dismissLoading();
-});
-
+   this.get_CorporateNetwork();
 
   }
+
+get_studentNetwork(){
+
+  
+  this.studentNetwork.value['talentId'] =this.currentUserId;
+  var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkList";
+this.storageservice.get(indiRatingsCountURL,this.studentNetwork.value).subscribe(result => {
+
+if(result['success'] == true) {
+this.storageservice.dismissLoading();
+this.constantHighlights =result['constantHighlightsStudentNetworkList'];
+this.recentHighlights = result['recentHighlightsStudentNetworkList'];
+this.constCount = result['constantHighlightsStudentNetworkList'].length;
+this.recntCount = result['recentHighlightsStudentNetworkList'].length;
+this.studCount = result['studentNetworkList'].length;
+}
+ console.log(result); 
+
+});
+
+
+}
+
+
+get_CorporateNetwork(){
+
+  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
+  this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
+
+    console.log(res);
+    this.corporateCount = res['corporateNetworkList'].length;
+    this.storageservice.dismissLoading();
+  });
+  
+}
+
+
 
 goto_AlumniList(titleText){
 
