@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
-
+import { NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-organization-dashboard-list',
   templateUrl: './organization-dashboard-list.page.html',
@@ -48,8 +48,18 @@ export class OrganizationDashboardListPage implements OnInit {
    }
 
   ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url.split('?')[0] === '/organization-dashboard-list') {
+        this.setSelectedTab('apps');
+      }
+    });
 
+  }
 
+  selectedTab: string = 'apps';
+
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
   }
 
   getAllList(btntype){
@@ -116,7 +126,23 @@ if(result['success'] == true){
     this.router.navigate(['/organization-dashboard']);
   }
 
+  // footer nav
 
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/oni-job-post-list']);
+  }
+  goto_home(){
+    this.router.navigate(['/organization-dashboard']);
+  }
+  goto_profile(){
+    this.router.navigate(['/org-profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
+  }
 
 
 }
