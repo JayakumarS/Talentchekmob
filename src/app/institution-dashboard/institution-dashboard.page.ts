@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-institution-dashboard',
@@ -17,6 +18,12 @@ export class InstitutionDashboardPage implements OnInit {
   constructor(public router:Router,public storageservice: StorageService) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/institution-dashboard') {
+        this.setSelectedTab('apps');
+      }
+    });
 
     
     this.userId = localStorage.getItem("userId")  ; 
@@ -74,7 +81,7 @@ goto_profileSearch(){
   this.router.navigate(['/job-search']);
 }
 goto_jobs(){
-  this.router.navigate(['/oni-job-post']);
+  this.router.navigate(['/oni-job-post-list']);
 }
 goto_home(){
   this.router.navigate(['/institution-dashboard']);

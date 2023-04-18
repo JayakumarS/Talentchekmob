@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-insti-profile-view',
@@ -34,6 +35,12 @@ export class InstiProfileViewPage implements OnInit {
   constructor(public router: Router,public storageservice: StorageService) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/insti-profile-view') {
+        this.setSelectedTab('profile');
+      }
+    });
 
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
@@ -122,7 +129,7 @@ payment(userId)
   }
   goto_orgjobs(){
 
-    this.router.navigate(['/oni-job-post']);
+    this.router.navigate(['/oni-job-post-list']);
   }
   goto_instijobs(){
     this.router.navigate(['/oni-job-post-list']);
