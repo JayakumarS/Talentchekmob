@@ -15,11 +15,11 @@
                     <img src="../../assets/icon/profile_status.png" />
                 </ion-avatar><span style="font-family: Mr-eaves;">Language</span></div>
         </div>
-        <div class="custom-button" (click)="goto_visibility()">
-            <div style="display: flex; align-items: center;">
+        <div class="custom-button" *ngIf="roleId == 2 || roleId == 3">
+            <div style="display: flex; align-items: center;" (click)="goto_alumni()">
                 <ion-avatar slot="start">
-                    <img src="../../assets/icon/push message.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Visibility</span></div>
+                    <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
+                </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
         </div>
     </div>
     <div class="line-with-text">
@@ -77,11 +77,13 @@
 
     <div class="display-justify">
 
-        <div class="custom-button" *ngIf="roleId == 2 || roleId == 3">
-            <div style="display: flex; align-items: center;" (click)="goto_alumni()">
+
+
+        <div class="custom-button" (click)="goto_visibility()" *ngIf="roleId == 1">
+            <div style="display: flex; align-items: center;">
                 <ion-avatar slot="start">
-                    <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
+                    <img src="../../assets/icon/push message.png" />
+                </ion-avatar><span style="font-family: Mr-eaves;">Visibility</span></div>
         </div>
 
         <div class="custom-button">

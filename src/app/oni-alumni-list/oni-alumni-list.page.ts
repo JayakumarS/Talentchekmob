@@ -66,18 +66,18 @@ export class OniAlumniListPage implements OnInit {
 
   ngOnInit() {
 
-
+    this.storageservice.showLoading();
   }
 
   get_StudentNetwork(){
     this.studentNetwork.value['talentId'] =this.currentUserId;
-
+this.storageservice.showLoading();
     var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkList";
   this.storageservice.get(indiRatingsCountURL,this.studentNetwork.value).subscribe(result => {
 
 if(result['success'] == true) {
   console.log(result);
-  
+  this.storageservice.dismissLoading();
   this.studentNetworkCount = result['studentNetworkList'].lenght;
   this.commonList = result['studentNetworkList'];
 }    
@@ -86,14 +86,18 @@ if(result['success'] == true) {
 
 get_CorporateNetwork(){
   this.studentNetwork.value['talentId'] =this.currentUserId;
-
+  this.storageservice.showLoading();
   var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
 
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
   
     console.log(res);
-    this.corporateNetworkCount = res['corporateNetworkList'].length;
-    this.commonList = res['corporateNetworkList'];
+    if(res['success'] == true){
+      this.storageservice.dismissLoading();
+      this.corporateNetworkCount = res['corporateNetworkList'].length;
+      this.commonList = res['corporateNetworkList'];
+    }
+    this.storageservice.dismissLoading();
   
   }); 
 }
@@ -323,6 +327,14 @@ async PrivateUserAccTypeAlert() {
   });
 
   await alert.present();
+}
+
+
+
+goto_orgHome(){
+
+    this.router.navigate(['/oni-alumni']);
+
 }
 
 
