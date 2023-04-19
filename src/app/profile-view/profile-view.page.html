@@ -261,15 +261,15 @@
                             <ion-col size="12">
                                 <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.fieldofStudy}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Verified Qualification'">
+                            <ion-col size="12"  *ngIf="x.status=='Verified Qualification'">
                                 <ion-label> <span class="badge col-green">
                                         {{x.status}}</span></ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Verification Pending'">
+                            <ion-col size="12"  *ngIf="x.status=='Verification Pending'">
                                 <ion-label> <span class="badge col-orange">
                                         {{x.status}}</span></ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Fake Qualification' || x.status=='Discontinued' ||x.status=='Debarred' || x.status=='Information Mismatch' ||x.status=='Unverified'">
+                            <ion-col size="12"  *ngIf="x.status=='Fake Qualification' || x.status=='Discontinued' ||x.status=='Debarred' || x.status=='Information Mismatch' ||x.status=='Unverified'">
                                 <ion-label> <span class="badge col-red">
                                         {{x.status}}</span></ion-label>
                             </ion-col>
@@ -364,13 +364,13 @@
                             <ion-col size="12">
                                 <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.orgLocation}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
+                            <ion-col size="12"  *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
                                 <ion-label class="badge col-red">{{x.status}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Verification Pending'">
+                            <ion-col size="12"  *ngIf="x.status=='Verification Pending'">
                                 <ion-label class="badge col-orange">{{x.status}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
+                            <ion-col size="12" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
                                 <ion-label class="badge col-green">{{x.status}}</ion-label>
                             </ion-col>
                         </ion-row>
@@ -512,13 +512,13 @@
                             <ion-col size="12">
                                 <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.clubBranch }}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
+                            <ion-col size="12"  *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
                                 <ion-label class="badge col-red">{{x.status}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Verification Pending'">
+                            <ion-col size="12"  *ngIf="x.status=='Verification Pending'">
                                 <ion-label class="badge col-orange">{{x.status}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" style="text-align: end;" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
+                            <ion-col size="12"  *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
                                 <ion-label class="badge col-green">{{x.status}}</ion-label>
                             </ion-col>
                         </ion-row>
