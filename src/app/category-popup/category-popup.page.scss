@@ -48,30 +48,18 @@ ion-content {
 }
 
 .display-justify {
-    padding: 20px 10px;
+    padding: 20px 20px;
 }
 
 .custom-button {
-    width: 165px;
-    border-radius: 30px;
-    height: 70px;
+    width: 360px;
+    --border-radius: 50px;
+    height: 56px;
     font-size: 18px;
- 
-    display: flex;
-    padding: 0px 5px;
-    align-items: center;
-    justify-content: center;
-    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-    
-    border-radius: 24px;
-    opacity: 1;
-    margin-left: 4px;
-    margin-right: 4px;
 }
 
 .container {
     display: flex;
- 
 }
 
 .company-card {
@@ -112,7 +100,6 @@ ion-content {
     border-radius: 24px;
     opacity: 1;
 }
-
 
 .imageCss {
     display: block;
@@ -219,31 +206,19 @@ ion-content {
     }
 }
 
-
-
-    
-    
-    
-        
-        
-        
-        
 input[type="checkbox"][id^="myCheckbox"] {
+    display: none;
+}
 
-display: none;
-  }
-  
-  label {
+label {
     border: 1px solid #fff;
-    
     display: block;
     position: relative;
-   
     cursor: pointer;
     text-align: center;
-  }
-  
-  label:before {
+}
+
+label:before {
     background-color: white;
     color: white;
     content: " ";
@@ -259,36 +234,31 @@ display: none;
     line-height: 28px;
     transition-duration: 0.4s;
     transform: scale(0);
-  }
-  
-  label img {
+}
+
+label img {
     height: 100px;
     width: 100px;
     transition-duration: 0.2s;
     transform-origin: 50% 50%;
-  }
-  
-  :checked + label:before {
+}
+
+ :checked+label:before {
     content: "\2713";
     background-color: #1082f4;
     transform: scale(1);
-  }
-  
-  :checked + label img {
-    transform: scale(0.9);
-  }
-  
+}
 
-  [type=checkbox]:checked +label:before {
+ :checked+label img {
+    transform: scale(0.9);
+}
+
+[type=checkbox]:checked+label:before {
     top: -10px;
     left: -10px;
     width: 22px;
     height: 26px;
-  }
-
-   
- 
-
+}
 
 //   ion-label:before {
 //     background-color: white;
@@ -307,20 +277,15 @@ display: none;
 //     transition-duration: 0.4s;
 //     transform: scale(0);
 //   }
-
 // input[type="checkbox"][id^="myCheckbox"] {
 //     display: none;
 // }
-
 // input:checked +  ion-label {
 //     border: solid 1px red;
 //     color: #F00;
 // }
-
 // input:checked +  ion-label:before {
 //     content: "\2713 ";
 //     background-color: #1082f4;
 //     transform: scale(1);
 // }
-
-
