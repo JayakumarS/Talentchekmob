@@ -36,7 +36,7 @@
 
                     <ion-label class="labels">Job Title<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select placeholder="Job title" formControlName="jobTitle1" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                        <ion-select placeholder="Job title" formControlName="jobTitle1" (click)="onSelectionChange($event)"(ionChange)="Driver($event.target.value)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -96,7 +96,7 @@
                             {{ skill }}
                             <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
                         </ion-chip>
-                        <ion-textarea rows="1" warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
+                        <ion-textarea rows="1" warp="soft" (click)="skills()"(ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
                     </ion-item>
                     <div *ngIf="jobProfileForm.controls.jobSkills.hasError('required') && jobProfileForm.controls.jobSkills.touched">
                         <small style="color: #f70505;">Skills is required</small>

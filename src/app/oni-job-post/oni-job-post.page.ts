@@ -66,6 +66,8 @@ export class OniJobPostPage implements OnInit {
   editJobTitle: any;
   start: Date;
   lastPosted: Date;
+  skillsList: any;
+  id: any;
 
   constructor(private fb: FormBuilder,
     public router:Router,
@@ -588,10 +590,13 @@ jobtitleList(event){
 
   const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
     this.jobTitleList = result["jobTitleList"];
+    this.Driver(this.jobTitleList);
     if(this.jobTitleList.length != 0 ){
       this.jobProfileForm.patchValue({
         'jobTitle1': this.editJobTitle,
+        
       })
+     
     }
     
     console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);
@@ -617,6 +622,26 @@ jobtitleList(event){
    });
   }
 
+  skills(){
+
+    this.id= this.jobProfileForm["value"]["jobTitle1"].toString();
+    this.showSkillResults = true;
+     this.searchSkillResults = this.skillsList.filter(Skill => Skill.text.toLowerCase());
+  
+  }
+
+  //Driver
+  
+  Driver(id){
+   
+    this.id= this.jobProfileForm["value"]["jobTitle1"].toString();
+   var jobtitleurl = "api/auth/app/CommonUtility/DriverListUrl?id=" +id;
+
+   const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
+     this.skillsList = result["text"]; 
+    
+   }); 
+  }
   getSkillList(){
     var getskillListUrl = "api/auth/app/CommonUtility/skillList"; 
     this.storageservice.getrequest(getskillListUrl).subscribe(result => {
