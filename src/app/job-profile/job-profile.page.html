@@ -67,7 +67,7 @@
                               <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
                             </ion-chip>
                           </ng-container>
-                          <ion-input
+                          <ion-input (click)="skills()"
                             (ionInput)="onSearchSkill($event.target.value)"
                             [formControl]="searchCtrl"
                             style="width: 100%"

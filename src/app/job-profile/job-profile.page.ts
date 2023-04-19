@@ -17,6 +17,7 @@ export class JobProfilePage implements OnInit {
   editJobTitle: any;
   jobTitleLists: string[] = [];
   id: any;
+  skillsList: any;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -117,7 +118,7 @@ export class JobProfilePage implements OnInit {
       this.getJobType();
       this.workLocationList();
       this.getlanguageList();
-      // this.getSkillList();
+       this.getSkillList();
       
      
       this.route.queryParams.subscribe(params => {
@@ -473,13 +474,22 @@ nextStep(currentStep: string, nextStep: string) {
     });
   }
 
+skills(){
+
+  this.id= this.jobProfileForm["value"]["jobTitle"].toString();
+  this.showSkillResults = true;
+   this.searchSkillResults = this.skillsList.filter(Skill => Skill.text.toLowerCase());
+
+}
+
   Driver(id){
    
      this.id= this.jobProfileForm["value"]["jobTitle"].toString();
     var jobtitleurl = "api/auth/app/CommonUtility/DriverListUrl?id=" +id;
 
     const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
-      this.skillList = result["text"]; 
+      this.skillsList = result["text"]; 
+     
     }); 
    }
 
@@ -512,8 +522,9 @@ nextStep(currentStep: string, nextStep: string) {
     }
 // skill auto complete 
     onSearchSkill(value: string) {
-      if (value.length > 2) {
+      if (value.length > 2 ) {
         this.showSkillResults = true;
+        
         this.searchSkillResults = this.skillList.filter(Skill => Skill.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
       } else {
         this.showSkillResults = false;
