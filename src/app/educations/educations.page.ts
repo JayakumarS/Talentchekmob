@@ -58,6 +58,7 @@ export class EducationsPage implements OnInit {
   dateValidation: boolean;
   desiredItem: any;
   disabled: boolean =false;
+
   fieldOfStudyDisable: boolean = false;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
     private toastController: ToastController,private route: ActivatedRoute,
@@ -526,7 +527,7 @@ export class EducationsPage implements OnInit {
        this.selectedDate = moment(enddate).format('DD/MM/YYYY');
        
        this.edit = true;
-       this.disabled =true
+       this.disabled =true;
        this.EducationForm.patchValue({
          'institutionName': this.Education.institutionName,
         // 'institutionLocation': this.Education.institutionLocation,
@@ -581,6 +582,7 @@ export class EducationsPage implements OnInit {
       console.log(this.desiredItem.text); 
     }
   }
+
 
 
   //UpdateEducation

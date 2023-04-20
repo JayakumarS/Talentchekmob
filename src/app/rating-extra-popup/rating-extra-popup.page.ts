@@ -71,6 +71,9 @@ export class RatingExtraPopupPage implements OnInit {
            profilePage.updateData();
           }, 800);
           this.presentToast() 
+    }else{
+
+      this.router.navigate(['/profile-view']); 
     }
   });
 }

@@ -68,6 +68,9 @@ export class RatingInstiPopupPage implements OnInit {
             const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
            profilePage.updateData();
           }, 800); 
+    }else{
+
+      this.router.navigate(['/profile-view']); 
     }
   });
 }

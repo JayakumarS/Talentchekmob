@@ -224,8 +224,8 @@ export class ProfileViewPage implements OnInit {
   clubIdverifierCall(clubId,orgId){
 
     let edit = {
-      clubId:clubId,
-      extId:orgId,
+      clubId:orgId,
+      extId:clubId,
    }
    let navigationExtras: NavigationExtras = {
      queryParams: edit

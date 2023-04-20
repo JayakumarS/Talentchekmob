@@ -19,7 +19,7 @@ export class AcademicVerifierDetailsPage implements OnInit {
     public storageservice:StorageService) { }
 
   ngOnInit() {
-
+    this.storageservice.dismissLoading();
     this.route.queryParams.subscribe(params => {
       this.clubId=params.clubId;
       this.extId=params.extId;
