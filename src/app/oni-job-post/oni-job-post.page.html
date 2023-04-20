@@ -92,12 +92,21 @@
 
                     <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-chip *ngFor="let skill of selectedSkills">
-                            {{ skill }}
-                            <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
-                        </ion-chip>
-                        <ion-textarea rows="1" warp="soft" (click)="skills()"(ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-textarea>
-                    </ion-item>
+                        <div class="chip-container">
+                          <ng-container *ngIf="selectedSkills.length > 0">
+                            <ion-chip *ngFor="let skill of selectedSkills">
+                              {{ skill }}
+                              <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
+                            </ion-chip>
+                          </ng-container>
+                          <ion-input (click)="skills()"
+                            (ionInput)="onSearchSkill($event.target.value)"
+                            [formControl]="searchCtrl"
+                            style="width: 100%"
+                            [style.order]="selectedSkills.length > 0 ? 1 : -1"
+                          ></ion-input>
+                        </div>
+                      </ion-item>
                     <div *ngIf="jobProfileForm.controls.jobSkills.hasError('required') && jobProfileForm.controls.jobSkills.touched">
                         <small style="color: #f70505;">Skills is required</small>
                     </div>
@@ -439,7 +448,7 @@
             <div class="ion-stepper-step" id="step3">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">3</div>
-                    <div class="ion-stepper-title"> Additional Informatione</div>
+                    <div class="ion-stepper-title"> Additional Information</div>
                 </div>
                 <div class="ion-stepper-content">
 

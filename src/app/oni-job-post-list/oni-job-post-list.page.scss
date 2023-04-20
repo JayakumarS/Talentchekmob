@@ -90,10 +90,7 @@ div.b {
 }
 
 div.c {
-    white-space: nowrap;
     width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     font-family: 'Poppins';
     font-size: 13px;
     font-weight: 600;
@@ -214,24 +211,24 @@ div.c {
 
 .c-pill {
     align-items: center;
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-weight: bold;
     font-size: 11px;
     display: inline-block;
     height: 100%;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     width: auto;
     position: relative;
     border-radius: 100px;
     line-height: 1;
-    overflow: hidden;
-    padding: 4px 12px 0px 20px;
+    /* overflow: hidden; */
+    padding: 5px 12px 5px 20px;
     text-overflow: ellipsis;
     line-height: 1.25rem;
     color: #000;
-    word-break: break-word;
-    margin-left: 10%;
-    margin-top: -4%;
+    /* word-break: break-word; */
+    /* margin-left: 10%; */
+    /* margin-top: 0%;*/
     &:before {
         border-radius: 50%;
         content: '';
@@ -266,4 +263,10 @@ div.c {
 
 ion-icon {
     font-size: 26px;
+}
+
+.postedcards{
+    font-family: 'Poppins';
+    font-size: 13px;
+    font-weight: 600;
 }

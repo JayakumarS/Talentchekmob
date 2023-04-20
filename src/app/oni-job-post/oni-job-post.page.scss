@@ -164,4 +164,19 @@
         margin-right: auto;
         width: 30%;
     }
+
+    ion-chip {
+        display: block;
+      }
+      .chip-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 5px;
+        width: 260px;
+        align-items: center;
+      }
+      
+      ion-chip {
+        margin: 5px;
+      }
 }

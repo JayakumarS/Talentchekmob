@@ -144,8 +144,8 @@ export class JobProfilePage implements OnInit {
         if(result["jobSeekList"].length !=0){ 
           this.jobProfileForm.reset(); 
           this.edit=true;
-           console.log(result);
-
+          console.log(result);
+          this.getlanguageList();
           const industry = [result["jobSeekList"][0].industry.toString()]
           const indId = result["jobSeekList"][0].industry;
           this.jobtitleList(indId)

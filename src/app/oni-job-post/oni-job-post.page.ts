@@ -634,7 +634,7 @@ jobtitleList(event){
   
   Driver(id){
    
-    this.id= this.jobProfileForm["value"]["jobTitle1"].toString();
+    //this.id= this.jobProfileForm["value"]["jobTitle1"].toString();
    var jobtitleurl = "api/auth/app/CommonUtility/DriverListUrl?id=" +id;
 
    const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {

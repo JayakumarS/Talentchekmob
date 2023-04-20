@@ -45,33 +45,50 @@
                     <ion-row>
                         <div class="b">{{cElement.jobTitleName}}</div>
                         <br>
-                    </ion-row>
+                    </ion-row> 
+                         <div style="display: flex;justify-content: space-between;align-items: center;">
+                            <div class="postedcards">
+                                <ion-label class="labels">Location :</ion-label> 
+                            </div>
+                            <div  class="postedcards"> 
+                                {{cElement.offeredLocations}}  
+                            </div>
+                            <div>
+                                <ion-icon size="medium" style="color:forestgreen;" name="create" (click)="editCall(cElement.jobId)"></ion-icon>
+                            </div>
+                          </div> 
 
-                    <ion-row>
-                        <ion-col>
-                            <div class="c"><b>Location :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>{{cElement.offeredLocations}}</div>
-                        </ion-col>
-                        <ion-col size="3">
-                            <ion-icon size="medium" style="color:forestgreen;" name="create" (click)="editCall(cElement.jobId)"></ion-icon>
-                        </ion-col>
+                          <div style="display: flex;justify-content: space-between;align-items: center;">
+                            <div class="postedcards">
+                                <ion-label class="labels">Posted date :</ion-label> 
+                            </div>
+                            <div  class="postedcards"> 
+                                {{cElement.lastPostedDate}}  
+                            </div>
+                            <div>
+                                <ion-icon size="medium" style="color:red;" name="trash" (click)="deletejob(cElement.jobId)"></ion-icon>
+                            </div>
+                          </div> 
 
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            <div class="c"><b>Posted date :&nbsp;&nbsp; </b>{{cElement.lastPostedDate}}</div>
-                        </ion-col>
-                        <ion-col size="3">
-                            <ion-icon size="medium" style="color:red;" name="trash" (click)="deletejob(cElement.jobId)"></ion-icon>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
+                          <div style="display: flex;justify-content: space-between;align-items: center;">
+                            <div class="postedcards">
+                                <ion-label class="labels">Closes on :</ion-label> 
+                            </div>
+                            <div  class="postedcards"> 
+                                {{cElement.appDeadline}}  
+                            </div>
+                            <div *ngIf="cElement.appDeadline != 'Closed'">
+                                     <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">View Matches</span>
+                            </div>
+                          </div>
+                    <!-- <ion-row>
                         <ion-col>
                             <div class="c"><b>Closed on :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>{{cElement.appDeadline}}</div>
                         </ion-col>
                         <ion-col *ngIf="cElement.appDeadline != 'Closed'">
                             <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">View Matches</span>
                         </ion-col>
-                    </ion-row>
+                    </ion-row> -->
 
                 </ion-col>
 
