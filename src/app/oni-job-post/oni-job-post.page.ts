@@ -14,6 +14,17 @@ import { OniJobPostListPage as listpage } from '../oni-job-post-list/oni-job-pos
 })
 export class OniJobPostPage implements OnInit {
 
+  getMaxDate() {
+    const currentDate = new Date();
+    const minDate = new Date(currentDate.getFullYear() , currentDate.getMonth(), currentDate.getDate()+2);
+    const maxDate = new Date(currentDate.getFullYear() + 10, currentDate.getMonth(), currentDate.getDate());
+    return {
+      minDate: minDate.toISOString().split('T')[0],
+      maxDate: maxDate.toISOString().split('T')[0]
+    };
+  }
+  
+
   userId:string
 
   
@@ -370,23 +381,23 @@ else{
   //    } 
   // }
 
-  async validateStartDate(event){
-    var currentDate = new Date(new Date().setFullYear(new Date().getFullYear())); //Currentdate - one year.
-    console.log("currentDate: " + currentDate);
-    console.log("startDate: " + event);
-    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0)); 
-    if (frm <= currentDate) {
-      const alert = await this.toastController.create({
-        header: '',
-        message: 'Dead line date should be greater than current date.',
-        duration: 3000,
-      });
-      this.jobProfileForm.patchValue({
-        'appDeadline':""
-      })
-       await alert.present();
-    }
-  }
+  // async validateStartDate(event){
+  //   var currentDate = new Date(new Date().setFullYear(new Date().getFullYear())); //Currentdate - one year.
+  //   console.log("currentDate: " + currentDate);
+  //   console.log("startDate: " + event);
+  //   var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0)); 
+  //   if (frm <= currentDate) {
+  //     const alert = await this.toastController.create({
+  //       header: '',
+  //       message: 'Dead line date should be greater than current date.',
+  //       duration: 3000,
+  //     });
+  //     this.jobProfileForm.patchValue({
+  //       'appDeadline':""
+  //     })
+  //      await alert.present();
+  //   }
+  // }
 
 
   async validateEndDate(event){
@@ -684,7 +695,7 @@ if (errors.length > 0) {
   // Display errors in a popup
   const alert = await this.toastController.create({
     header: '',
-    message: errors.join('<br>'),
+    message: 'Please provide all the required values!',
     duration: 3000,
   });
 
@@ -735,7 +746,7 @@ if (errors.length > 0) {
   // Display errors in a popup
   const alert = await this.toastController.create({
     header: '',
-    message: errors.join('<br>'),
+    message: 'Please provide all the required values!',
     duration: 3000,
   });
 
@@ -778,13 +789,7 @@ if (errors.length > 0) {
  });
 }
 } 
-
-
-
-
-transformDate(date) {
-  return date.substring(0, 4) + "/" + date.substring(5, 7) + "/" + date.substring(8, 10); //YYY-MM-DD
-}
+ 
 
 
   async presentToast() {

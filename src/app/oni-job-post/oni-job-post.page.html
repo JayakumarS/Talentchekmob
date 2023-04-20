@@ -94,10 +94,10 @@
                     <ion-item fill="outline" class="input-field">
                         <div class="chip-container">
                           <ng-container *ngIf="selectedSkills.length > 0">
-                            <ion-chip *ngFor="let skill of selectedSkills">
+                            <div *ngFor="let skill of selectedSkills">
                               {{ skill }}
                               <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
-                            </ion-chip>
+                            </div>
                           </ng-container>
                           <ion-input (click)="skills()"
                             (ionInput)="onSearchSkill($event.target.value)"
@@ -454,7 +454,7 @@
 
                     <ion-label class="labels">Mention the deadline for applications<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-datetime (ionChange)="validateStartDate($event.target.value);" formControlName="appDeadline" displayFormat="DD.MM.YYYY" presentation="date"></ion-datetime>
+                        <ion-datetime  formControlName="appDeadline" displayFormat="DD.MM.YYYY" presentation="date" [min]="getMaxDate().minDate" [max]="getMaxDate().maxDate"></ion-datetime>
                     </ion-item>
 
 
