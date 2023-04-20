@@ -16,6 +16,7 @@ import { JobPage as JobPage} from '../job/job.page';
 export class JobProfilePage implements OnInit {
   editJobTitle: any;
   jobTitleLists: string[] = [];
+  jobTypeLists: string[] = [];
   id: any;
   skillsList: any;
 
@@ -407,10 +408,10 @@ nextStep(currentStep: string, nextStep: string) {
      if (result["success"] == true) {
       this.jobTypeList = result["jobTypeList"]; 
       this.cities = result["jobTypeList"];
-      this.jobTypeList.push(result["jobTypeList"][0].id);
+      this.jobTypeLists.push(result["jobTypeList"][0].id);
         if(this.catagoaryType.includes('IC10')){
           this.jobProfileForm.patchValue({
-            'jobType': (this.jobTypeList)
+            'jobType': (this.jobTypeLists)
 
             }); 
         }else{
@@ -476,7 +477,7 @@ nextStep(currentStep: string, nextStep: string) {
 
 skills(){
 
-  this.id= this.jobProfileForm["value"]["jobTitle"].toString();
+  //this.id= this.jobProfileForm["value"]["jobTitle"].toString();
   this.showSkillResults = true;
    this.searchSkillResults = this.skillsList.filter(Skill => Skill.text.toLowerCase());
 
@@ -484,7 +485,7 @@ skills(){
 
   Driver(id){
    
-     this.id= this.jobProfileForm["value"]["jobTitle"].toString();
+    // this.id= this.jobProfileForm["value"]["jobTitle"].toString();
     var jobtitleurl = "api/auth/app/CommonUtility/DriverListUrl?id=" +id;
 
     const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
@@ -590,6 +591,8 @@ skills(){
       this.router.navigate(['/job']);
       this.presentToast()
       }else{
+        this.storageservice.dismissLoading();
+        this.saveError()
         // const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
         //   const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
         //   this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
@@ -646,6 +649,8 @@ skills(){
         }, 800);
       this.updateToast()
       }else{
+        this.storageservice.dismissLoading();
+        this.saveError();
         // const jobStartDateFrom = this.jobProfileForm.value.jobStartDateFrom;
         //   const startdate = moment(jobStartDateFrom, 'DD/MM/YYYY').toDate();
         //   this.jobProfileForm.value.jobStartDateFrom = startdate.toISOString();
@@ -675,6 +680,17 @@ skills(){
 
     await toast.present();
   }
+
+
+  async saveError() {
+    const toast = await this.toastController.create({
+      message: 'Unable to save',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+}
 
   async updateToast() {
     const toast = await this.toastController.create({

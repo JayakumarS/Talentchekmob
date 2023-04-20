@@ -20,7 +20,7 @@ export class SignUpOrganizationPage implements OnInit {
   response: Object;
   Four:string;
   isSubmitted: boolean;
-  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©_+]*$";
 talentorgform: FormGroup;
 step:any
 stateVal: string;
@@ -63,7 +63,7 @@ base64img1: string = '';
 
 
     this.talentorgform = formbuilder.group({
-      organizationName: ['',Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+      organizationName: ['',Validators.compose([Validators.maxLength(50), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
       regNo: ['',Validators.required],
       orgType: ['',Validators.required],
       regDate: ['',Validators.required],
@@ -88,6 +88,13 @@ base64img1: string = '';
 
 
   }
+
+  limitInputLength($event, maxLength=25) {
+    if($event.target.value.length>=maxLength) {
+        $event.preventDefault();
+        return;
+    }
+}
 
   next() {
     this.stepper.next();

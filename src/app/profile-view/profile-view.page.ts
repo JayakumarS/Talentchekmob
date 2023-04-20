@@ -119,6 +119,7 @@ export class ProfileViewPage implements OnInit {
   }
 
   updateData() {
+    this.storageservice.showLoading();
      window.location.reload();
   }
 
