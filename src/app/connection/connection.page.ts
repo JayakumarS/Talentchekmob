@@ -32,7 +32,7 @@ export class ConnectionPage implements OnInit {
   username: string;
   roleId: any;
   RoleID: any;
-
+  nonMandatory: boolean = false;
   constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,
     private toastController: ToastController,public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController ) { 
@@ -159,6 +159,22 @@ export class ConnectionPage implements OnInit {
    });
   }
 
+  
+  //validationForCurWorking
+  
+  validationForCurWorking(event){
+    var value  = event;
+    if(value == true){
+      this.nonMandatory = true
+      this.ConnectionsForm.get("acquaintedTo").disable(); 
+      this.ConnectionsForm.patchValue({
+          'acquaintedTo':""
+        })
+    }else{
+      this.nonMandatory = false
+      this.ConnectionsForm.get("acquaintedTo").enable();
+    }
+  }
 
   save(){
 

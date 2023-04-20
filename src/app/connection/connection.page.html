@@ -110,7 +110,7 @@
                         </ion-item>
 
                         <div style="    display: flex;">
-                            <ion-checkbox [(ngModel)]="isChecked" formControlName="currentlyAcquainted"></ion-checkbox>&nbsp;&nbsp;Currently acquainted
+                            <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurWorking($event.detail.checked);" formControlName="currentlyAcquainted"></ion-checkbox>&nbsp;&nbsp;Currently acquainted
                         </div>
 
                     </div>
