@@ -15,9 +15,17 @@ import { BehaviorSubject } from 'rxjs';
 export class StorageService {
 
   loading = new BehaviorSubject(false);
+  private refreshData$ = new Subject<void>();
 
   register(value: any) {
     throw new Error('Method not implemented.');
+  }
+  refreshData() {
+    this.refreshData$.next();
+  }
+
+  get refreshDataObservable() {
+    return this.refreshData$.asObservable();
   }
 
   baseurl: any;
@@ -28,8 +36,8 @@ export class StorageService {
 // baseURL:string ="http://192.168.5.25:8080/talentchek/";
 
 //Local server
-mobileserverurl:string ="http://localhost:8080/";
-baseURL:string ="http://localhost:8080//";
+mobileserverurl:string ="http://localhost:8085/";
+baseURL:string ="http://localhost:8085/";
   mobileserverserive: any;
   
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {

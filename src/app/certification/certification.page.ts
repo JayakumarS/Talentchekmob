@@ -152,6 +152,9 @@ export class CertificationPage implements OnInit {
       next: (data) => {
 
         console.log(data);
+        this.certificationForm.patchValue({
+          'uploadFile':data.filePath,
+        })
 
       },
       error: (error) => {
