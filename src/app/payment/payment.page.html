@@ -79,7 +79,11 @@
           <div class="button-content">
             <ion-label class="labels">Account Type<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-input formControlName="accType"></ion-input>
+              <ion-select placeholder="Select Account Type" formControlName="accType">
+                <ion-select-option value="Saving">Saving</ion-select-option>
+                <ion-select-option value="Current">Current</ion-select-option>
+                </ion-select>
+              
             </ion-item>
             <div *ngIf="docForm.controls.accType.hasError('required') && docForm.controls.accType.touched">
               <small style="color: #f70505;">Account Type is required</small>

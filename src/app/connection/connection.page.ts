@@ -177,10 +177,154 @@ export class ConnectionPage implements OnInit {
   }
 
   save(){
-
-
     
     this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+    if(this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != ""){
+      this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+  
+      this.ConnectionsForm.value.currentUserId=this.userId;
+      this.ConnectionsForm.value.currentUserName = this.username
+      this.Connection = this.ConnectionsForm.value;
+      console.log(` data: ${JSON.stringify(this.Connection)}`);
+      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+    
+       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
+         
+         if (result["isSuccess"] == true) {
+          // setTimeout(() => {
+          //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+          //  profilePage.updateData();
+          // }, 800);
+          this.presentToast1()
+          }
+          else if (result["isSuccess"] == false) {
+            var message = result["message"];
+            
+              "message" 
+            
+            // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+            this.storageservice.warningToast(message);
+            //this.hideLoadingIndicator(); //Hide loading indicator
+          }
+       });
+  
+    }else{
+    this.ConnectionsForm.value.currentUserId=this.userId;
+    this.ConnectionsForm.value.currentUserName = this.username
+    this.Connection = this.ConnectionsForm.value;
+    console.log(` data: ${JSON.stringify(this.Connection)}`);
+    var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+  
+     this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
+       
+       if (result["isSuccess"] == true) {
+        // setTimeout(() => {
+        //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        //  profilePage.updateData();
+        // }, 800);
+        this.presentToast1()
+        }
+        else if (result["isSuccess"] == false) {
+          var message = result["message"];
+          
+            "message" 
+          
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+     });
+    }
+  }
+  async presentToast1() {
+    const toast = await this.toastController.create({
+      message: 'Saved Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+    this.router.navigate(['/profile-view']);
+
+  await toast.present();
+}
+
+
+/// org save 
+
+orgsave(){
+  this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+  if(this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != ""){
+    this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+
+    this.ConnectionsForm.value.currentUserId=this.userId;
+    this.ConnectionsForm.value.currentUserName = this.username
+    this.Connection = this.ConnectionsForm.value;
+    console.log(` data: ${JSON.stringify(this.Connection)}`);
+    var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+  
+     this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
+       
+       if (result["isSuccess"] == true) {
+        // setTimeout(() => {
+        //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        //  profilePage.updateData();
+        // }, 800);
+        this.presentToast2()
+        }
+        else if (result["isSuccess"] == false) {
+          var message = result["message"];
+          
+            "message" 
+          
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+     });
+
+  }else{
+  this.ConnectionsForm.value.currentUserId=this.userId;
+  this.ConnectionsForm.value.currentUserName = this.username
+  this.Connection = this.ConnectionsForm.value;
+  console.log(` data: ${JSON.stringify(this.Connection)}`);
+  var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+   this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
+     
+     if (result["isSuccess"] == true) {
+      // setTimeout(() => {
+      //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+      //  profilePage.updateData();
+      // }, 800);
+      this.presentToast2()
+      }
+      else if (result["isSuccess"] == false) {
+        var message = result["message"];
+        
+          "message" 
+        
+        // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+        this.storageservice.warningToast(message);
+        //this.hideLoadingIndicator(); //Hide loading indicator
+      }
+   });
+  }
+}
+async presentToast2() {
+  const toast = await this.toastController.create({
+    message: 'Saved Successfully',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+  this.router.navigate(['/org-profile-view']);
+
+await toast.present();
+}
+/// insti save////
+
+instisave(){
+    
+  this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+  if(this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != ""){
     this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
     this.ConnectionsForm.value.currentUserId=this.userId;
     this.ConnectionsForm.value.currentUserName = this.username
@@ -195,7 +339,7 @@ export class ConnectionPage implements OnInit {
         //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
         //  profilePage.updateData();
         // }, 800);
-        this.presentToast()
+        this.presentToast3()
         }
         else if (result["isSuccess"] == false) {
           var message = result["message"];
@@ -207,16 +351,44 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
      });
+
+  }else{
+
+  
+  this.ConnectionsForm.value.currentUserId=this.userId;
+  this.ConnectionsForm.value.currentUserName = this.username
+  this.Connection = this.ConnectionsForm.value;
+  console.log(` data: ${JSON.stringify(this.Connection)}`);
+  var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+   this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
+     
+     if (result["isSuccess"] == true) {
+      // setTimeout(() => {
+      //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+      //  profilePage.updateData();
+      // }, 800);
+      this.presentToast3()
+      }
+      else if (result["isSuccess"] == false) {
+        var message = result["message"];
+        
+          "message" 
+        
+        // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+        this.storageservice.warningToast(message);
+        //this.hideLoadingIndicator(); //Hide loading indicator
+      }
+   });
   }
-
-
-  async presentToast() {
+}
+  async presentToast3() {
     const toast = await this.toastController.create({
       message: 'Saved Successfully',
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    this.router.navigate(['/profile-view']);
+    this.router.navigate(['/insti-profile-view']);
 
   await toast.present();
 }

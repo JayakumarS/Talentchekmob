@@ -169,9 +169,17 @@
 
                     <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                        <div class="display-justify">
+                        <div class="display-justify"*ngIf="RoleID.includes('1')">
                             <ion-button class="custom-button" (click)="save()">Send Invite</ion-button>
                         </div>
+                        <div class="display-justify"*ngIf="RoleID.includes('2')">
+                            <ion-button class="custom-button" (click)="orgsave()">Send Invite</ion-button>
+                        </div>
+                        <div class="display-justify"*ngIf="RoleID.includes('3')">
+                            <ion-button class="custom-button" (click)="instisave()">Send Invite</ion-button>
+                        </div>
+                      
+                      
                     </div>
 
 
