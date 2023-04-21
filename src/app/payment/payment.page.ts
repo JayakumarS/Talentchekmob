@@ -115,20 +115,61 @@ async Update(){
         //console.log("Image upload response: " + result)
        if (result["success"] == true) {
       
-        this.presentToast()
+        this.presentToast1()
         }
      });
 }
   
 }
 
-async presentToast() {
+async presentToast1() {
   const toast = await this.toastController.create({
     message: 'Update Successfully',
     duration: 3000,
     cssClass: 'custom-toast'
   });
   this.router.navigate(['/org-profile-view']);
+await toast.present();
+}
+
+///paymentDetails  Update
+async instiUpdate(){
+  const errors = this.checkFormValidity(this.docForm);
+
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+    
+      message: 'Please provide all the required values!',
+      duration: 3000,
+    });
+
+    await alert.present();
+  } else{
+   
+    this.docForm.value.currentUserId=this.currentUserId;
+    this.paymentDetails = this.docForm.value;
+    console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
+    var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
+  
+     this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
+        //console.log("Image upload response: " + result)
+       if (result["success"] == true) {
+      
+        this.presentToast2()
+        }
+     });
+}
+  
+}
+
+async presentToast2() {
+  const toast = await this.toastController.create({
+    message: 'Update Successfully',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+  this.router.navigate(['/insti-profile-view']);
 await toast.present();
 }
 

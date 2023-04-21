@@ -69,7 +69,7 @@
           <div class="button-content">
             <ion-label class="labels">IFSC Code<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-input formControlName="ifscCode"></ion-input>
+              <ion-input formControlName="ifscCode"onkeyup="this.value = this.value.toUpperCase();"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.ifscCode.hasError('required') && docForm.controls.ifscCode.touched">
               <small style="color: #f70505;">IFSC Code is required</small>
@@ -155,9 +155,12 @@
             </div>
            </div>
            <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
-            <div class="display-justify">
+            <div class="display-justify" *ngIf="RoleID.includes('2')">
                <ion-button class="custom-button" (click)="Update()">Update</ion-button>
             </div>
+            <div class="display-justify" *ngIf="RoleID.includes('3')">
+              <ion-button class="custom-button" (click)="instiUpdate()">Update</ion-button>
+           </div>
            </div> 
         </ion-col>
       </ion-row>
