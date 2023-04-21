@@ -28,7 +28,7 @@
 
       <ion-row class="talentrow">
         <ion-col>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">Institution Name<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="instName"></ion-input>
@@ -37,7 +37,7 @@
               <small style="color: #f70505;">Institution Name is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isAbout">
             <ion-label class="labels">Institution Type<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-select placeholder="Select Institution Type" formControlName="instType"
@@ -51,7 +51,7 @@
               <small style="color: #f70505;">Institution Type is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">Email<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="instEmail"></ion-input>
@@ -60,7 +60,7 @@
               <small style="color: #f70505;">Email is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">Mobile<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="instMobile"></ion-input>
@@ -69,7 +69,7 @@
               <small style="color: #f70505;">Mobile is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isAbout">
             <ion-label class="labels">Tax Id<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="taxId"></ion-input>
@@ -78,7 +78,7 @@
               <small style="color: #f70505;">Tax Id is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">Address <small style="color: #f70505;">*</small></ion-label>
 
             <ion-item fill="outline" class="input-field">
@@ -88,7 +88,7 @@
               <small style="color: #f70505;">Address is required</small>
             </div> -->
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
 
             <ion-item fill="outline" class="input-field">
@@ -108,7 +108,7 @@
               </ion-item>
             </ion-list>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
 
@@ -119,7 +119,7 @@
               </ion-select>
             </ion-item>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-select formControlName="permCity">
@@ -129,13 +129,13 @@
               </ion-select>
             </ion-item>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isProfile">
             <ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="permPinCode"></ion-input>
             </ion-item>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isAbout">
             <ion-label class="labels">Year of Establishment<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="dob"></ion-input>
@@ -144,7 +144,7 @@
               <small style="color: #f70505;">Year of Establishment is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isAbout">
             <ion-label slot="end">Upload Image</ion-label>
             <ion-row>
               <ion-col size="6">
@@ -168,7 +168,7 @@
               </ion-col>
             </ion-row>
           </div><br>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isAbout">
             <ion-label class="labels">Accreditation<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="accreditation"></ion-input>
@@ -177,7 +177,7 @@
               <small style="color: #f70505;">Accreditation is required</small>
             </div>
           </div>
-          <div class="button-content">
+          <div class="button-content"*ngIf="isAbout">
             <ion-label class="labels">About the Institution<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-textarea formControlName="details" placeholder="About You"></ion-textarea>

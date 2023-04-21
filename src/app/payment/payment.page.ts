@@ -189,4 +189,15 @@ checkFormValidity(form: FormGroup): string[] {
   return errors;
 }
 
+keyPressAlphaNumeric(event) {
+
+  var inp = String.fromCharCode(event.keyCode);
+
+  if (/^[a-zA-Z\s]*$/ .test(inp)) {
+    return true;
+  } else {
+    event.preventDefault();
+    return false;
+  }
+}
 }

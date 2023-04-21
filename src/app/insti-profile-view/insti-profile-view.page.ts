@@ -89,11 +89,29 @@ export class InstiProfileViewPage implements OnInit {
   })
 }
 
+Aboutinsti(id){
+  let edit = {
+    id
+ }
+ let navigationExtras: NavigationExtras = {
+   queryParams: edit
+ };
+
+  this.router.navigate(['/insti-profile'],navigationExtras);
 
 
+}
 
-profileinsti(){
-  this.router.navigate(['/insti-profile']);
+
+profileinsti(id){
+  let edit = {
+    id
+ }
+ let navigationExtras: NavigationExtras = {
+   queryParams: edit
+ };
+
+  this.router.navigate(['/insti-profile'],navigationExtras);
 
 }
 

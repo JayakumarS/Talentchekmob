@@ -5,7 +5,7 @@ import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ModalController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -38,9 +38,10 @@ cBoxIAgreeConsentVal: boolean = true;
   desiredItem: any;
   desiredcityItem: any;
   desiredstateItem: any;
- 
+  isProfile: boolean = false;
+  isAbout: boolean = false;
   constructor(private fb: FormBuilder,public storageservice:StorageService,public modalController: ModalController,
-    private camera: Camera, public router:Router,private toastController: ToastController) { }
+    private camera: Camera, public router:Router,private toastController: ToastController,private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -68,7 +69,28 @@ cBoxIAgreeConsentVal: boolean = true;
 
     this.getCountryList(); 
     this.InsttypeList();
-    this.editinstiprofile();
+    
+
+
+    this.route.queryParams.subscribe(params => {
+      if (params) {
+
+        if (params != null) {
+          console.log(params);
+        
+          if (params.id == 1) {
+
+            this.isProfile = true;
+            this.editinstiprofile();
+          } else if (params.id == 2) {
+            this.isAbout = true;
+            this.editinstiprofile();
+
+          }
+        }
+      }
+    });
+
   }
 
 
@@ -180,9 +202,11 @@ editinstiprofile(){
   this.storageservice.getrequest(EditinstiprofileDetails).subscribe(result => {
   
     if (result["success"] == true) {
-      this.profileList = result["profileList"]; 
+     
       this.getCountryList();
-
+      this.profileList = result["profileList"]; 
+      
+      
 
       this.searchForId(result["profileList"][0].permCountry); 
       this.selectedCountry = this.desiredItem.text;
@@ -206,7 +230,7 @@ editinstiprofile(){
       'permAddress':this.profileList[0].permAddress,
         'permCity':this.profileList[0].permCity,
          'permState':this.profileList[0].permState,
-         //'permCountry':this.profileList[0].permCountry,
+         'permCountry':this.profileList[0].permCountry,
          'permPinCode':this.profileList[0].permPinCode,
      'languagesknown':this.profileList[0].languagesknown,
     })
