@@ -58,7 +58,7 @@ export class JobDetailsPage implements OnInit {
   console.log(result);
   if (result["success"] == true) {
     this.storageservice.dismissLoading();
-    this.presentToast()
+    this.router.navigate(['/apply-for-job']);
     }else if (result["success"] == false) {
                   var message = result["message"];
                   if (message == null) {
@@ -66,6 +66,7 @@ export class JobDetailsPage implements OnInit {
                   }
                   
                   this.storageservice.warningToast(message);
+                  this.storageservice.dismissLoading();
                   
                 }
     });
