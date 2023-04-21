@@ -10,11 +10,7 @@ import {  NavigationEnd } from '@angular/router';
   templateUrl: './profile-view.page.html',
   styleUrls: ['./profile-view.page.scss'],
 })
-export class ProfileViewPage implements OnInit { 
-
-  ngAfterViewInit() {
-    this.storageservice.refreshData();
-  }
+export class ProfileViewPage implements OnInit {  
 
   @ViewChild('popover') popover;
    showDropdownFlag: number;
@@ -59,8 +55,7 @@ export class ProfileViewPage implements OnInit {
           cancelable: true,
           target: contentElement
         };
-        const event = new CustomEvent('ionRefresh', eventInit);
-        this.doRefresh(eventInit);
+         this.doRefresh(eventInit);
       });
     }      
 
@@ -68,13 +63,20 @@ export class ProfileViewPage implements OnInit {
        this.ngOnInit();
        setTimeout(() => {
         event.target.complete();
-      }, 2000);
+       }, 2000);
     }
 
   @ViewChild('picker', { static: false })
   pickerInst: any;
  
   ngOnInit() {
+    
+    this.educationcard = false;
+    this.clubscard = false;
+    this.experiencecard = false;
+    this.skillscard = false;
+    this.connectioncard = false;
+    this.certificationcard = false;
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/profile-view') {
@@ -314,7 +316,7 @@ export class ProfileViewPage implements OnInit {
 
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.storageservice.refreshData();
+                  window.location.reload();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -377,7 +379,7 @@ export class ProfileViewPage implements OnInit {
 
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.storageservice.refreshData();
+                  window.location.reload();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -440,7 +442,7 @@ export class ProfileViewPage implements OnInit {
 
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.storageservice.refreshData();
+                  window.location.reload();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -503,7 +505,7 @@ export class ProfileViewPage implements OnInit {
 
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.storageservice.refreshData();
+                  window.location.reload();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -567,7 +569,7 @@ export class ProfileViewPage implements OnInit {
 
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.storageservice.refreshData();
+                 window.location.reload();
                   }
                 else if (result == false) {
                   var msg = result["message"];

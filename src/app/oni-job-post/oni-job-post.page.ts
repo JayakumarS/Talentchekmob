@@ -705,7 +705,7 @@ if (errors.length > 0) {
   this.jobProfileForm.value.locationOffer = this.locationOffer;
   // this.jobProfileForm.value.locationAdvertise = this.locationAdvertise;
   //this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'MM/yyyy','en-IN');
-  this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'yyyy-MM-dd','en-IN');
+  this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'dd/MM/yyyy','en-IN');
 
 
   const myNumber: number = parseInt(this.jobProfileForm.value.industry);

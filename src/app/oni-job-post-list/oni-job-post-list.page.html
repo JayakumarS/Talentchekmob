@@ -70,16 +70,23 @@
                             </div>
                           </div> 
 
-                          <div style="display: flex;justify-content: space-between;align-items: center;">
+                          <div *ngIf="cElement.appDeadline != 'Closed'" style="display: flex;justify-content: space-between;align-items: center;margin-top: 3px;">
                             <div class="postedcards">
                                 <ion-label class="labels">Closes on :</ion-label> 
                             </div>
                             <div  class="postedcards"> 
                                 {{cElement.appDeadline}}  
                             </div>
-                            <div *ngIf="cElement.appDeadline != 'Closed'">
+                            <div>
                                      <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">View Matches</span>
                             </div>
+                          </div>
+
+                          <div *ngIf="cElement.appDeadline == 'Closed'" style="display: flex;justify-content: space-between;align-items: center;">
+                            
+                            <div class="postedcards" style="color: maroon;margin-top: 3px;"> 
+                                Application {{cElement.appDeadline}}  
+                            </div> 
                           </div>
                     <!-- <ion-row>
                         <ion-col>

@@ -62,10 +62,10 @@
                     <ion-item fill="outline" class="input-field">
                         <div class="chip-container">
                           <ng-container *ngIf="selectedSkills.length > 0">
-                            <ion-chip *ngFor="let skill of selectedSkills">
-                              {{ skill }}
-                              <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
-                            </ion-chip>
+                            <div *ngFor="let skill of selectedSkills">
+                                {{ skill }}
+                                <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
+                            </div>
                           </ng-container>
                           <ion-input (click)="skills()"
                             (ionInput)="onSearchSkill($event.target.value)"
