@@ -32,6 +32,7 @@ export class OrgProfileViewPage implements OnInit {
   connectioncard:boolean = false;
   showDropdownFlag: any;
   connectionList: any;
+  orgLogo: string;
 
 
   constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { }
@@ -45,12 +46,12 @@ export class OrgProfileViewPage implements OnInit {
     });
 
     this.userId = localStorage.getItem("userId")  ; 
-    this.logo = localStorage.getItem("profilePic")  ;
+    this.orgLogo = localStorage.getItem("profilePic")  ;
 
 
   
 
-    if(this.logo!="null" && this.logo!=""){
+    if(this.orgLogo!="null" && this.orgLogo!=""){
       this.prof = true
       // this.profAvatar = false
     }else{
@@ -109,8 +110,24 @@ export class OrgProfileViewPage implements OnInit {
     this.selectedTab = tabName;
   }
 
-  profileorg(){
-    this.router.navigate(['/org-profile']);
+  profileorg1(one){
+    let edit = {
+    id:one
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/org-profile'],navigationExtras);
+
+  }
+  profileorg2(two){
+    let edit = {
+    id:two
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/org-profile'],navigationExtras);
 
   }
 

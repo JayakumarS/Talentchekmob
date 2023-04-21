@@ -30,7 +30,7 @@
           <ion-col size="2">
             <ion-avatar size="small" *ngIf="prof">
                 <img style=" height: 60%;width: 60%;"(click)="profile( )"
-                    src={{logo}} />
+                    src={{orgLogo}} />
             </ion-avatar>
 
             <ion-avatar size="small" *ngIf="!prof">
@@ -54,7 +54,7 @@
                         <ion-title style="color:black; margin-left: -9%;">Profile</ion-title>
                     </ion-col>
                     <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="profileorg( )" id="prfoileimg1">
+                        <img src="./assets/icon/edit_icon.png" (click)="profileorg1(1)" id="prfoileimg1">
                     </ion-col>
                 </ion-row>
 
@@ -86,7 +86,7 @@
                       <ion-title style="color:black; margin-left: -9%;">About the Organization</ion-title>
                   </ion-col>
                   <ion-col size="2">
-                      <img src="./assets/icon/edit_icon.png" (click)="profileorg( )" id="prfoileimg1">
+                      <img src="./assets/icon/edit_icon.png" (click)="profileorg2(2)" id="prfoileimg1">
                   </ion-col>
               </ion-row>
            
