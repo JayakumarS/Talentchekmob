@@ -377,7 +377,11 @@ const routes: Routes = [
   {
     path: 'web-app-nav',
     loadChildren: () => import('./web-app-nav/web-app-nav.module').then( m => m.WebAppNavPageModule)
+  },  {
+    path: 'reset-password',
+    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   }
+
 
 
 
