@@ -126,9 +126,12 @@ export class SignInComponent implements OnInit {
       }
 
     
-
+     
 
   //  this.router.navigate(['/job-search']) 
+  }
+  Forgotpass(){
+    this.router.navigate(['/job-search']) 
   }
 
 }

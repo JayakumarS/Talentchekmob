@@ -23,7 +23,7 @@
     <div class="container">
 
         <div class="bs-stepper-content">
-            <form [formGroup]="loginform">
+            <form [formGroup]="loginform" style="padding-bottom: 30px;">
                 <div id="test-l-1" class="content">
                     <div class="button-content">
                         <ion-label class="labels">Talent Id/Email Id/Mobile Number <small style="color: #f70505;">*</small></ion-label>
@@ -48,6 +48,10 @@
                     </div>
 
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0 alertColor">{{error}}</div>
+                </div>
+                <div class="sign-in">
+                    <a   href="forgotpassword"style="font-size: 18px; font-family: Mr-eaves;color: #007bff;" >Forgot Password?</a>
+                   
                 </div>
             </form>
         </div>

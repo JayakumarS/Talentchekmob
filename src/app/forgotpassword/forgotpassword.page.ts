@@ -25,8 +25,11 @@ export class ForgotpasswordPage {
 
   //#region Button click
   pass_click() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/sign-in'])
   }
   //#endregion
-  
+  Sign(){
+
+    this.router.navigate(['/sign-in'])
+  }
 }

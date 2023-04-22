@@ -16,6 +16,7 @@ const routes: Routes = [
     path: 'forgotpassword',
     loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
   },
+
   
   
   {
@@ -59,10 +60,7 @@ const routes: Routes = [
     loadChildren: () => import('./yettostart-frommenu/yettostart-frommenu.module').then( m => m.YettostartFrommenuPageModule)
   },
 
-  {
-    path: 'forget-password',
-    loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
-  },
+ 
   
   {
     path: 'profile-search',
@@ -363,7 +361,8 @@ const routes: Routes = [
   {
     path: 'bids-and-aplications-recived-popup',
     loadChildren: () => import('./bids-and-aplications-recived-popup/bids-and-aplications-recived-popup.module').then( m => m.BidsAndAplicationsRecivedPopupPageModule)
-  },  {
+  },
+  {
     path: 'rating-extra-popup',
     loadChildren: () => import('./rating-extra-popup/rating-extra-popup.module').then( m => m.RatingExtraPopupPageModule)
   },
