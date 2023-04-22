@@ -230,13 +230,13 @@ div.c {
     line-height: 1.25rem;
     color: #000;
     word-break: break-word;
-    margin-left: 10%;
+    
     &:before {
         border-radius: 50%;
-        content: '';
+        content: "";
         height: 10px;
-        left: 6px;
-        margin-top: -5px;
+        left: 21px;
+        margin-top: -6px;
         position: absolute;
         top: 50%;
         width: 10px;
@@ -261,4 +261,10 @@ div.c {
 
 .c-pill--danger {
     background: #eceef1;
+}
+
+.postedcards{
+    font-family: 'Poppins';
+    font-size: 13px;
+    font-weight: 600;
 }

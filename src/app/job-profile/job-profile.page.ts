@@ -592,11 +592,9 @@ skills(){
      if (result["success"] == true) {
       this.storageservice.dismissLoading();
       this.jobProfileForm.reset();
-      setTimeout(() => {
-      const jobpage = new JobPage(this.router, this.storageservice);
+       const jobpage = new JobPage(this.router, this.storageservice);
       jobpage.reload();
-      }, 800);
-      this.router.navigate(['/job']);
+       this.router.navigate(['/job']);
       this.presentToast()
       }else{
         this.storageservice.dismissLoading();
@@ -649,13 +647,11 @@ skills(){
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
       this.storageservice.dismissLoading();
+      const jobpage = new JobPage(this.router, this.storageservice);
+      jobpage.reload();
       this.jobProfileForm.reset();
-      this.router.navigate(['/job']);
-      setTimeout(() => {
-        const jobpage = new JobPage(this.router, this.storageservice);
-        jobpage.reload();
-        }, 800);
-      this.updateToast()
+      this.router.navigate(['/job']); 
+       this.updateToast()
       }else{
         this.storageservice.dismissLoading();
         this.saveError();
