@@ -43,6 +43,7 @@ export class OrgProfilePage implements OnInit {
   desiredstateItem: any;
   isProfile: boolean = false;
   isAbout: boolean = false;
+  isLogo:boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,
     private camera: Camera, public router: Router, private toastController: ToastController, private route: ActivatedRoute) { }
 
@@ -64,6 +65,11 @@ export class OrgProfilePage implements OnInit {
             this.editprofile();
           } else if (params.id == 2) {
             this.isAbout = true;
+            this.editprofile();
+
+          }
+          if(params.id == 3){
+            this.isLogo = true;
             this.editprofile();
 
           }
@@ -223,7 +229,8 @@ export class OrgProfilePage implements OnInit {
 
         this.getstatelist(result["profileList"][0].permCountry);
 
-        this.getcitylist(result["profileList"][0].permState, result["profileList"][0].permCountry)
+        this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
+        
         this.profileList = result["profileList"];
       }
       const dob = this.profileList[0].dob;
@@ -248,6 +255,7 @@ export class OrgProfilePage implements OnInit {
         'permState': this.profileList[0].permState,
          'permCountry':this.desiredItem.id,
         'permPinCode': this.profileList[0].permPinCode,
+        'orgLogo': this.profileList[0].orgLogo,
         'languagesknown': this.profileList[0].languagesknown,
       })
       this.base64img1 = this.profileList[0].orgLogo;

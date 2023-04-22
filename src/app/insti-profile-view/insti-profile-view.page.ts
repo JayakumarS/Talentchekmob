@@ -101,7 +101,18 @@ Aboutinsti(id){
 
 
 }
+profileimg(id){
+  let edit = {
+    id
+ }
+ let navigationExtras: NavigationExtras = {
+   queryParams: edit
+ };
 
+  this.router.navigate(['/insti-profile'],navigationExtras);
+
+
+}
 
 profileinsti(id){
   let edit = {

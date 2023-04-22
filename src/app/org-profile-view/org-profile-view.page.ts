@@ -130,6 +130,18 @@ export class OrgProfileViewPage implements OnInit {
     this.router.navigate(['/org-profile'],navigationExtras);
 
   }
+  profileimg(id){
+    let edit = {
+      id
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+  
+    this.router.navigate(['/org-profile'],navigationExtras);
+  
+  
+  }
 
   Connections()
   {
