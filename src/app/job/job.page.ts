@@ -25,9 +25,21 @@ export class JobPage implements OnInit {
 
   constructor(public router:Router,public storageservices: StorageService) { 
    this.userId = localStorage.getItem("userId") ;
-
-   // this.userId = "TFIN10000000106" ;
+   interface MyCustomEventInit extends CustomEventInit {
+    target?: HTMLElement;
   }
+
+  this.storageservices.refreshDataObservable.subscribe(() => {
+    const contentElement = document.getElementById('my-content');
+    const eventInit: MyCustomEventInit = {
+      detail: {},
+      bubbles: true,
+      cancelable: true,
+      target: contentElement
+    };
+     this.doRefresh(eventInit);
+  });
+   }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
