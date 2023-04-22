@@ -10,6 +10,13 @@ import { ToastController } from '@ionic/angular';
 })
 export class JobDetailsPage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
 
   jobDetails:any;
   jobSkills:[];
@@ -89,31 +96,35 @@ export class JobDetailsPage implements OnInit {
   }
 
    getJobDetails(jobID){
-
+    this.storageservice.showLoading();
     var oniDashboardListURL = "api/auth/app/jobportal/JobAdvertisementview?jobId="+jobID;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+      if(result['success'] == true) {
+        this.jobDetails = result['JobAdvertisementList'][0];
+        this.jobSkills = result['JobAdvertisementList'][0]['jobSkills'];
   
-      this.jobDetails = result['JobAdvertisementList'][0];
-      this.jobSkills = result['JobAdvertisementList'][0]['jobSkills'];
-
-      //job Type string 
-
-      result['JobAdvertisementList'].forEach(element=>{
-        let jobType = "";
-        for(let jb=0;jb<element.jobType.length;jb++){
-          jobType += element.jobType[jb]+", ";
-        }
-        element.jobTypeStr = jobType.substring(0, jobType.length-2);
-      });
-
-
-      result['JobAdvertisementList'].forEach(element=>{
-        let reqLanguages = "";
-        for(let jb=0;jb<element.reqLanguages.length;jb++){
-          reqLanguages += element.reqLanguages[jb]+", ";
-        }
-        element.reqLanguagesStr = reqLanguages.substring(0, reqLanguages.length-2);
-      });
+        //job Type string 
+        this.storageservice.dismissLoading();
+        result['JobAdvertisementList'].forEach(element=>{
+          let jobType = "";
+          for(let jb=0;jb<element.jobType.length;jb++){
+            jobType += element.jobType[jb]+", ";
+          }
+          element.jobTypeStr = jobType.substring(0, jobType.length-2);
+        });
+  
+  
+        result['JobAdvertisementList'].forEach(element=>{
+          let reqLanguages = "";
+          for(let jb=0;jb<element.reqLanguages.length;jb++){
+            reqLanguages += element.reqLanguages[jb]+", ";
+          }
+          element.reqLanguagesStr = reqLanguages.substring(0, reqLanguages.length-2);
+        });
+      }else{
+        this.storageservice.dismissLoading();
+      }
+      
 
            console.log(result);
            console.log(this.jobSkills); 

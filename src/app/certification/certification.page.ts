@@ -15,6 +15,13 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./certification.page.scss'],
 })
 export class CertificationPage implements OnInit {
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -183,13 +190,14 @@ export class CertificationPage implements OnInit {
 
 
   fetchEditDeatils(certId){
+    this.storageservice.showLoading();
     var getEditValues= "api/auth/app/IndividualProfileDetails/editCertification";
          
     this.storageservice.getrequest(getEditValues + "?certId=" + certId).subscribe(result => {
 
      if (result["success"] == true) {
       this.edit = true;
- 
+      this.storageservice.dismissLoading();
       
       if(result["skillandCertificationsBean"].issuedDate != null &&  result["skillandCertificationsBean"].issuedDate != ""){
         const issuedate = result["skillandCertificationsBean"].issuedDate;
@@ -216,6 +224,8 @@ export class CertificationPage implements OnInit {
       'certificationId': result["skillandCertificationsBean"].certificationId,
       'certificationPath': result["skillandCertificationsBean"].uploadCertification
       })
+     }else{
+      this.storageservice.dismissLoading();
      }
    });
   }

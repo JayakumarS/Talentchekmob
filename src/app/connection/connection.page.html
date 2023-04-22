@@ -25,6 +25,9 @@
 
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
     <form [formGroup]="ConnectionsForm">
 
         <ion-card-content>
@@ -105,7 +108,7 @@
                     <div class="button-content">
                         <ion-label class="labels">Acquainted Till </ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-datetime formControlName="acquaintedTo" displayFormat="MM/YYYY"presentation="date"(ionChange)="validateEndDate($event.target.value);"
+                            <ion-datetime formControlName="acquaintedTo" displayFormat="MM/YYYY"presentation="date"
                            [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
 

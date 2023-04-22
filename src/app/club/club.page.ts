@@ -14,10 +14,12 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 })
 export class ClubPage implements OnInit {
   name: string;
-
-//   public model = {
-//     placeholder: '<p>Hello, world!</p>'
-// };
+  doRefresh(event) {
+    this.ngOnInit();
+     setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -43,11 +45,11 @@ export class ClubPage implements OnInit {
   desiredItem: any;
   nonMandatory: boolean= false; 
   constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,public modalController: ModalController,
-     public storageservice: StorageService, private toastController: ToastController,private elementRef: ElementRef
+     public storageservice: StorageService, private toastController: ToastController
      ,public alertController: AlertController,) { }
     
   ngOnInit() {
-
+    this.edit = false;
     this.clubFrom = this.fb.group({
        clubName: [""],
       clubBranch: [""],
@@ -79,6 +81,21 @@ export class ClubPage implements OnInit {
 
   }
 
+  cleardata(){
+    this.clubFrom.patchValue({
+      'clubName': '',
+      'clubBranch': '',
+      'titleHeld': '',
+      'rolePlayed': '',
+      'participatedFrom': '',
+      'participatedTill': '',
+      'currentMember': '',
+      'extId': '',
+      'checked': '',
+      'unregisteredClub': '',
+    })
+  }
+
 
 
   selectedTab: string = 'profile';
@@ -97,8 +114,9 @@ export class ClubPage implements OnInit {
     }
     this.isunregIns = false;
     this.IsorgListShow = true;
-    this.searchOrganisationResults = this.organisationList.filter(Organisation => Organisation.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
- 
+   
+    this.searchOrganisationResults = this.organisationList.filter(Organisation => Organisation.text && Organisation.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  
     if (this.searchOrganisationResults == 0) {
       this.IsorgListShow = false;
       this.clubFrom.patchValue({
@@ -136,7 +154,6 @@ getOrganisationList(){
     }
  });
 }
- 
 
  removeOrganisation(selectedOrganisation: string) {
   this.selectedOrganisation = undefined;
@@ -282,7 +299,8 @@ getOrganisationList(){
      
     });
     
-
+    this.cleardata();
+    this.selectedOrganisation = undefined;
     await toast.present();
   }
 
@@ -316,20 +334,22 @@ getOrganisationList(){
 
   profileView()
   {
+    this.cleardata();
+    this.selectedOrganisation = undefined;
     this.router.navigate(['/profile-view']) 
   }
 
 
    //editextracurricularDetails
    editextracurricular(extId){
-
+    this.storageservice.showLoading();
     var industryURL = "api/auth/app/IndividualProfileDetails/EditExtracurricular?extId=" + extId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
       
       
       if (result["success"] == true) {
-
+        this.storageservice.dismissLoading();
         this.clubFrom.get("clubName").disable();
        
         this.extracurricularBean = result["extracurricularBean"]; 
@@ -372,6 +392,8 @@ getOrganisationList(){
            'currentMember': this.extracurricularBean.currentMember,
            'extId': this.extracurricularBean.extId,
            })
+       }else{
+        this.storageservice.dismissLoading();
        }
       
     })
@@ -472,7 +494,8 @@ async updateToast() {
     duration: 3000,
     cssClass: 'custom-toast'
   });
-
+  this.cleardata();
+  this.selectedOrganisation = undefined;
   // this.router.navigate(['/profile-view']);
 
 await toast.present();

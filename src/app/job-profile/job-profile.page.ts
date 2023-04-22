@@ -14,6 +14,14 @@ import { JobPage as JobPage} from '../job/job.page';
   styleUrls: ['./job-profile.page.scss'],
 })
 export class JobProfilePage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   editJobTitle: any;
   jobTitleLists: string[] = [];
   jobTypeLists: string[] = [];

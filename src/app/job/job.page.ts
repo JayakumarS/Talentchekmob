@@ -10,6 +10,14 @@ import { NavigationEnd } from '@angular/router';
 })
 export class JobPage implements OnInit {
 
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   public matchedJobList:any;
   userId:string; 
   showflag:any;

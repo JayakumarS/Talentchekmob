@@ -18,6 +18,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
     <form [formGroup]="certificationForm">
 
         <ion-card-content>

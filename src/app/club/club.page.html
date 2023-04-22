@@ -24,6 +24,9 @@
 
 
 <ion-card-content> 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
     <ion-row class="talentrow">
         <ion-col>
             <div class="button-content">

@@ -10,6 +10,13 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class OniJobPostListPage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   jobPostList:[];
   userId:string;
   roleId: string;

@@ -13,6 +13,14 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./connection.page.scss'],
 })
 export class ConnectionPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);

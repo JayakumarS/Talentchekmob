@@ -17,6 +17,13 @@ import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.pag
  
 })
 export class WorkExperiencesPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
  
   getMaxDate() {
     let maxDate = new Date();
@@ -88,9 +95,11 @@ export class WorkExperiencesPage implements OnInit {
   }
 
   fetchEditDeatils(expId){
+    this.storageservice.showLoading();
     var getEditValues= "api/auth/app/IndividualProfileDetails/EditExperience";
      this.storageservice.getrequest(getEditValues + "?expId=" + expId).subscribe(result => {
      if (result["success"] == true) {
+      this.storageservice.dismissLoading();
       this.edit = true;
       this.initializeItems();
 
@@ -132,6 +141,8 @@ export class WorkExperiencesPage implements OnInit {
       'ckeditor':result["experienceBean"].ckeditor,
       'expId':result["experienceBean"].expId
       })
+     }else{
+      this.storageservice.dismissLoading();
      }
    });
   }

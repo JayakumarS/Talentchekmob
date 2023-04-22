@@ -18,6 +18,14 @@ function _window(): any {
   styleUrls: ['./subscription-individual.page.scss'],
 })
 export class SubscriptionIndividualPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+     setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   previousUrl: string;
 
   

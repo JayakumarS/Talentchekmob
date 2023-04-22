@@ -15,6 +15,13 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./educations.page.scss'],
 })
 export class EducationsPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
  
   getMaxDate() {
     let maxDate = new Date();
@@ -124,7 +131,28 @@ export class EducationsPage implements OnInit {
   }
 
   profileView() {
+    this.institutionList = [];
+    this.degreeList = [];
+    this.studyList = [];
+    this.refreshdata();
     this.router.navigate(['/profile-view'])
+  }
+
+  refreshdata(){
+    this.EducationForm.patchValue({
+      'institutionName': '', 
+      'currentlyStudy': '',
+      'degree': '',
+      'stuRegisterNumber': '',
+      'aggregateMarks': '',
+      'eduDescription': '',
+      'eduId': '',
+      'courseStart': '',
+      'courseEnd': '',
+      'ckeditor':'',
+      'fieldofStudy':'',
+      'institutionLocation':'',
+     })  
   }
 
 
@@ -399,7 +427,7 @@ export class EducationsPage implements OnInit {
   
           this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
             console.log("Image upload response: " + result)
-            if (result["success"] == true) {
+            if (result["success"] == true) { 
               
               this.presentToast()
 
@@ -439,8 +467,10 @@ export class EducationsPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-
-   
+    this.institutionList = [];
+    this.degreeList = [];
+    this.studyList = [];
+    this.refreshdata();
    
     await toast.present();
    
@@ -478,10 +508,13 @@ export class EducationsPage implements OnInit {
   //editEducationDetails
   editEducation(eduId) {
 
+    this.storageservice.showLoading();
+
     var industryURL = "api/auth/app/IndividualProfileDetails/EditEducation?eduId=" + eduId;
     this.storageservice.getrequest(industryURL).subscribe(result => {
 
       if (result["success"] == true) {
+        this.storageservice.dismissLoading();
         this.Education = result["educationBean"];
 
       
@@ -521,9 +554,16 @@ export class EducationsPage implements OnInit {
 
         const courseStart =  this.Education.courseStart;
         const startdate = moment(courseStart, 'MM/yyyy').toDate();
+        this.EducationForm.patchValue({
+          'courseStart':startdate.toISOString(),
+        })
         this.courseStart = moment(startdate).format('DD/MM/YYYY');
+
        const courseEnd =  this.Education.courseEnd;
        const enddate = moment(courseEnd, 'MM/yyyy').toDate();
+       this.EducationForm.patchValue({
+        'courseEnd':enddate.toISOString(),
+       })
        this.selectedDate = moment(enddate).format('DD/MM/YYYY');
        
        this.edit = true;
@@ -532,13 +572,15 @@ export class EducationsPage implements OnInit {
          'institutionName': this.Education.institutionName,
         // 'institutionLocation': this.Education.institutionLocation,
           
-         'currentlyStudy': this.Education.currentlyStudy,
+          'currentlyStudy': this.Education.currentlyStudy,
          'degree': this.Education.degree,
           'stuRegisterNumber': this.Education.stuRegisterNumber,
          'aggregateMarks': this.Education.aggregateMarks,
          'eduDescription': this.Education.eduDescription,
          'eduId': this.Education.eduId,
         })  
+      }else{
+        this.storageservice.dismissLoading();
       }
       
     })
@@ -662,6 +704,10 @@ export class EducationsPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
+    this.institutionList = [];
+    this.degreeList = [];
+    this.studyList = [];
+    this.refreshdata();
  
      await toast.present();
   }

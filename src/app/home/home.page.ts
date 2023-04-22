@@ -10,6 +10,13 @@ import { NavigationEnd } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   userId: string;
   creditPoints: any;
   profileViewCount:any;
