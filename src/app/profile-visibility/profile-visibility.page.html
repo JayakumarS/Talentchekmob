@@ -19,17 +19,35 @@
     <ion-list style="padding: 14px;">
       <ion-radio-group formControlName="profileVisibility" (ionChange)="updateProfileVisibility()" [allowEmptySelection]="false" value="turtles">
         <ion-item class="ion-item">
-          <ion-label><b>Public</b><h6 style="color: gray;">Anyone on Talent Chek can view your profile</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+            <div><b>Public</b></div>
+            <div style="color: gray;font-size: 12px;">
+              Anyone on Talent Chek can view your profile
+           </div> 
+          </div>
+          <!-- <ion-label><b>Public</b><h6 style="color: gray;">Anyone on Talent Chek can view your profile</h6></ion-label> -->
           <ion-radio slot="end" value="public"></ion-radio>
         </ion-item>
   
         <ion-item class="ion-item">
-          <ion-label><b>On Demand</b><h6 style="color: gray;">Users can request permission to view your profile</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+            <div><b>On Demand</b></div>
+            <div style="color: gray;font-size: 12px;">
+              Users can request permission to view your profile
+           </div> 
+          </div>
+          <!-- <ion-label><b>On Demand</b><h6 style="color: gray;">Users can request permission to view your profile</h6></ion-label> -->
           <ion-radio slot="end" value="ondemand"></ion-radio>
         </ion-item>
   
         <ion-item class="ion-item">
-          <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+            <div><b>Private</b></div>
+            <div style="color: gray;font-size: 12px;">
+              Only visible to you
+           </div> 
+          </div>
+          <!-- <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label> -->
           <ion-radio slot="end" value="private"></ion-radio>
         </ion-item> 
       </ion-radio-group>

@@ -58,7 +58,7 @@ export class JobPage implements OnInit {
   }
 
   reload(){
-    window.location.reload();
+    this.storageservices.refreshData();
   }
 
   

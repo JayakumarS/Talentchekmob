@@ -20,22 +20,45 @@
     <ion-list style="padding: 14px;">
       <ion-radio-group formControlName="emailVisibility" (ionChange)="updateEmailVisibility()" [allowEmptySelection]="true" value="turtles">
         <ion-item class="ion-item">
-          <ion-label><b>Private</b><h6 style="color: gray;">Only visible to you</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+          <div><b>Private</b></div>
+          <div style="color: gray;font-size: 12px;">
+            Only visible to you
+         </div> 
+        </div>
           <ion-radio slot="end" value="private"></ion-radio>
         </ion-item>  
         
         <ion-item class="ion-item">
-          <ion-label><b>Network</b><h6 style="color: gray;">Connections verified by you & your university corporate alumni network can view</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+            <div><b>Network</b></div>
+            <div style="color: gray;font-size: 12px;">
+               Connections verified by you & your university corporate alumni network can view 
+            </div>
+          </div>
+          <!-- <ion-label><b>Network</b><h6 style="color: gray;">Connections verified by you & your university corporate alumni network can view</h6></ion-label> -->
           <ion-radio slot="end" value="network"></ion-radio>
         </ion-item> 
         
         <ion-item class="ion-item">
-          <ion-label><b>Employers</b><h6 style="color: gray;">Visible to organisations & recruiters</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+            <div><b>Employers</b></div>
+            <div style="color: gray;font-size: 12px;">
+              Visible to organisations & recruiters 
+            </div>
+          </div>
+          <!-- <ion-label><b>Employers</b><h6 style="color: gray;">Visible to organisations & recruiters</h6></ion-label> -->
           <ion-radio slot="end" value="employers"></ion-radio>
         </ion-item> 
 
         <ion-item class="ion-item">
-          <ion-label><b>Public</b><h6 style="color: gray;">Anyone on talent chek can see your email ID</h6></ion-label>
+          <div style="padding: 5px 0px 4px 8px;">
+            <div><b>Public</b></div>
+            <div style="color: gray;font-size: 12px;">
+              Anyone on talent chek can see your email ID
+            </div>
+          </div>
+          <!-- <ion-label><b>Public</b><h6 style="color: gray;">Anyone on talent chek can see your email ID</h6></ion-label> -->
           <ion-radio slot="end" value="public"></ion-radio>
         </ion-item>
       </ion-radio-group>

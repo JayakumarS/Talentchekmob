@@ -14,6 +14,13 @@ import { NavigationEnd } from '@angular/router';
 })
 
 export class JobSearchPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+     setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
   @ViewChild('popover') popover;
   
   isOpen:boolean = false;
