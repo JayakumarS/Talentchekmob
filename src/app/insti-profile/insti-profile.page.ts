@@ -7,6 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
 
 @Component({
   selector: 'app-insti-profile',
@@ -261,8 +262,7 @@ export class InstiProfilePage implements OnInit {
 
       this.storageservice.postrequest(updateprofile, this.Instidetails).subscribe(result => {
         // console.log("Image upload response: " + result)
-        if (result["success"] == true) {
-
+        if (result["success"] == true) { 
           this.presentToast()
         }
       });
@@ -279,6 +279,8 @@ export class InstiProfilePage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+    insprofileview.reload(); 
     this.router.navigate(['/insti-profile-view']);
     await toast.present();
   }

@@ -18,6 +18,9 @@
 
 
 <ion-content> 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="display-justify">
     <div class="custom-button" *ngFor ="let title of basicProfileDetails">
      <div style="display: flex; justify-content: space-between;align-items: center;" >

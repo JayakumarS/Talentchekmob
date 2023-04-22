@@ -10,6 +10,12 @@ import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.p
   styleUrls: ['./institution-dashboard-list.page.scss'],
 })
 export class InstitutionDashboardListPage implements OnInit {
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
 
   public title : string ;
   userId: string;
@@ -24,6 +30,13 @@ export class InstitutionDashboardListPage implements OnInit {
     this.userId = localStorage.getItem("userId")  ; 
     this.creditPoints = localStorage.getItem("creditPoints") ;
 
+    
+  }
+
+  
+
+
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params) {
   
@@ -38,12 +51,6 @@ export class InstitutionDashboardListPage implements OnInit {
         }
       }
     });
-  }
-
-  
-
-
-  ngOnInit() {
   }
 
 

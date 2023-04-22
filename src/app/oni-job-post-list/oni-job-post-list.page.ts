@@ -25,6 +25,20 @@ export class OniJobPostListPage implements OnInit {
   constructor(public router:Router,public storageservice: StorageService,public alertController: AlertController) {
 
     this.userId = localStorage.getItem("userId") ;
+    interface MyCustomEventInit extends CustomEventInit {
+      target?: HTMLElement;
+    }
+
+    this.storageservice.refreshDataObservable.subscribe(() => {
+      const contentElement = document.getElementById('my-content');
+      const eventInit: MyCustomEventInit = {
+        detail: {},
+        bubbles: true,
+        cancelable: true,
+        target: contentElement
+      };
+       this.doRefresh(eventInit);
+    });
    }
    selectedTab: string = 'earth';
 
@@ -46,8 +60,7 @@ export class OniJobPostListPage implements OnInit {
 
 
 bindJobAdvertiseMentList(){
-
-  this.storageservice.showLoading();
+   this.storageservice.showLoading();
   var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementList?currentUserId="+this.userId;
 
 
@@ -173,7 +186,7 @@ goto_addJobPost(){
   }
 
   reload(){
-    window.location.reload();
+    this.storageservice.refreshData();
   }
 
 

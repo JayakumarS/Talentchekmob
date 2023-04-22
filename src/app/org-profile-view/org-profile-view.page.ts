@@ -10,6 +10,13 @@ import { NavigationEnd } from '@angular/router';
   styleUrls: ['./org-profile-view.page.scss'],
 })
 export class OrgProfileViewPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
   userId: string;
   img: string;
   orglocation: any;
@@ -35,7 +42,23 @@ export class OrgProfileViewPage implements OnInit {
   orgLogo: string;
 
 
-  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { }
+  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { 
+
+    interface MyCustomEventInit extends CustomEventInit {
+      target?: HTMLElement;
+    }
+
+    this.storageservice.refreshDataObservable.subscribe(() => {
+      const contentElement = document.getElementById('my-content');
+      const eventInit: MyCustomEventInit = {
+        detail: {},
+        bubbles: true,
+        cancelable: true,
+        target: contentElement
+      };
+       this.doRefresh(eventInit);
+    });
+  }
 
   ngOnInit() {
 
@@ -95,7 +118,9 @@ export class OrgProfileViewPage implements OnInit {
     })
   }
 
-
+  reload(){
+    this.storageservice.refreshData();
+  }
 
   showDropdown(userId :string) {
     this.showDropdownFlag = userId;

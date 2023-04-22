@@ -2,12 +2,13 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import moment from 'moment';
+import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
 
 @Component({
   selector: 'app-org-profile',
@@ -44,7 +45,7 @@ export class OrgProfilePage implements OnInit {
   isProfile: boolean = false;
   isAbout: boolean = false;
   isLogo:boolean = false;
-  constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,
+  constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,public alertController: AlertController,
     private camera: Camera, public router: Router, private toastController: ToastController, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -285,8 +286,9 @@ export class OrgProfilePage implements OnInit {
 
       this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {
         console.log("Image upload response: " + result)
-        if (result["success"] == true) {
-
+        if (result["success"] == true) { 
+           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController);
+           orgprofileview.reload(); 
           this.presentToast()
         }
       });

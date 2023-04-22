@@ -11,6 +11,13 @@ import { NavigationEnd } from '@angular/router';
 })
 export class OrganizationDashboardListPage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   public title : string ;
   userId: string;
   creditPoints: any;

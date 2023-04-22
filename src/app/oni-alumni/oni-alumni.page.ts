@@ -11,6 +11,12 @@ import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.p
   styleUrls: ['./oni-alumni.page.scss'],
 })
 export class OniAlumniPage implements OnInit {
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
 
   @ViewChild('slider', { static: true }) private slider: IonSlides;
 

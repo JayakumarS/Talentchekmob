@@ -6,6 +6,8 @@ import moment from 'moment';
 import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { formatDate } from '@angular/common';
+import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
+import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
 
 @Component({
   selector: 'app-connection',
@@ -250,6 +252,8 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
+    const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    profilePage.updateData();
     this.router.navigate(['/profile-view']);
 
   await toast.present();
@@ -271,11 +275,7 @@ orgsave(){
   
      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
        
-       if (result["isSuccess"] == true) {
-        // setTimeout(() => {
-        //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-        //  profilePage.updateData();
-        // }, 800);
+       if (result["isSuccess"] == true) { 
         this.presentToast2()
         }
         else if (result["isSuccess"] == false) {
@@ -298,11 +298,7 @@ orgsave(){
 
    this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
      
-     if (result["isSuccess"] == true) {
-      // setTimeout(() => {
-      //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-      //  profilePage.updateData();
-      // }, 800);
+     if (result["isSuccess"] == true) { 
       this.presentToast2()
       }
       else if (result["isSuccess"] == false) {
@@ -323,6 +319,8 @@ async presentToast2() {
     duration: 3000,
     cssClass: 'custom-toast'
   });
+  const profilePage = new OrgProfileViewPage(this.router, this.storageservice,this.alertController);
+   profilePage.reload();
   this.router.navigate(['/org-profile-view']);
 
 await toast.present();
@@ -396,6 +394,8 @@ instisave(){
       duration: 3000,
       cssClass: 'custom-toast'
     });
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+    insprofileview.reload(); 
     this.router.navigate(['/insti-profile-view']);
 
   await toast.present();

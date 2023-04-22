@@ -10,6 +10,12 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./profile-view-popup.page.scss'],
 })
 export class ProfileViewPopupPage implements OnInit {
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
 
   talentId : string;
   currendUserId: string;

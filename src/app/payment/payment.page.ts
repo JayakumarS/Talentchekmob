@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { StorageService } from '../storage.service';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
 
 @Component({
   selector: 'app-payment',
@@ -19,7 +20,7 @@ export class PaymentPage implements OnInit {
   roleId: any;
   RoleID: any;
   edit: boolean = false;
-  constructor(private fb: FormBuilder,public storageservice:StorageService,private toastController: ToastController, public router:Router) { }
+  constructor(private fb: FormBuilder,public storageservice:StorageService,public alertController: AlertController,private toastController: ToastController, public router:Router) { }
 
   ngOnInit() {
 
@@ -66,26 +67,30 @@ export class PaymentPage implements OnInit {
 
   //editpaymentDetails 
   editpayment(){
-
+    this.storageservice.showLoading();
   var EditpaymentDetails = "api/auth/app/PaymentInfo/getBankDetails?currentUserId="+this.currentUserId ;
   this.storageservice.getrequest(EditpaymentDetails).subscribe(result => {
   
     
     if (result["success"] == true) {
+      this.storageservice.dismissLoading(); 
       this.edit = true;
       this.bankDetails = result["bankDetails"]; 
+      this.docForm.patchValue({
+        'accountHolderName': this.bankDetails[0].accountHolderName,
+           'bankAccountNo': this.bankDetails[0].bankAccountNo,
+           'holderEmailId':this.bankDetails[0].holderEmailId,
+           'ifscCode':this.bankDetails[0].ifscCode,
+           'accType':this.bankDetails[0].accType,
+            'businessName':this.bankDetails[0].businessName,
+           'businessType':this.bankDetails[0].businessType,
+           'amount':this.bankDetails[0].amount,
+           'currency':this.bankDetails[0].currency,
+      })
+     }else{
+      this.storageservice.dismissLoading(); 
      }
-    this.docForm.patchValue({
-      'accountHolderName': this.bankDetails[0].accountHolderName,
-         'bankAccountNo': this.bankDetails[0].bankAccountNo,
-         'holderEmailId':this.bankDetails[0].holderEmailId,
-         'ifscCode':this.bankDetails[0].ifscCode,
-         'accType':this.bankDetails[0].accType,
-          'businessName':this.bankDetails[0].businessName,
-         'businessType':this.bankDetails[0].businessType,
-         'amount':this.bankDetails[0].amount,
-         'currency':this.bankDetails[0].currency,
-    })
+   
 
   })
 }
@@ -114,7 +119,8 @@ async Update(){
      this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
        if (result["success"] == true) {
-      
+        const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController);
+        orgprofileview.reload(); 
         this.presentToast1()
         }
      });

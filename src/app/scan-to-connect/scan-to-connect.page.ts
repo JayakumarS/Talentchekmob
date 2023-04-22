@@ -10,6 +10,13 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./scan-to-connect.page.scss'],
 })
 export class ScanToConnectPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
   scannedData: any;
   profileImageURL: any;
   empId: string;

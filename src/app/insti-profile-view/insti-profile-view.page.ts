@@ -9,6 +9,12 @@ import { NavigationEnd } from '@angular/router';
   styleUrls: ['./insti-profile-view.page.scss'],
 })
 export class InstiProfileViewPage implements OnInit {
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
   userId: string;
   img: string;
   email: any;
@@ -32,7 +38,22 @@ export class InstiProfileViewPage implements OnInit {
   ifscCode: any;
   connectionList: any;
   connectioncard:boolean = false;
-  constructor(public router: Router,public storageservice: StorageService) { }
+  constructor(public router: Router,public storageservice: StorageService) { 
+    interface MyCustomEventInit extends CustomEventInit {
+      target?: HTMLElement;
+    }
+
+    this.storageservice.refreshDataObservable.subscribe(() => {
+      const contentElement = document.getElementById('my-content');
+      const eventInit: MyCustomEventInit = {
+        detail: {},
+        bubbles: true,
+        cancelable: true,
+        target: contentElement
+      };
+       this.doRefresh(eventInit);
+    });
+  }
 
   ngOnInit() {
 
@@ -87,6 +108,10 @@ export class InstiProfileViewPage implements OnInit {
      this.connectionList = result['profileViewList'][0]['connectionList'] 
 
   })
+}
+
+reload(){
+  this.storageservice.refreshData();
 }
 
 Aboutinsti(id){

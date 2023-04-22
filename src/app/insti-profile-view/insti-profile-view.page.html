@@ -44,6 +44,9 @@
 
 
 <ion-content style="padding-bottom: 60px;">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
     <form>
         <ion-card class="talentcard1">
             <ion-card-content>

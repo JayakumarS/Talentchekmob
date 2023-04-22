@@ -11,6 +11,13 @@ import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.p
   styleUrls: ['./oni-alumni-list.page.scss'],
 })
 export class OniAlumniListPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
   studentNetwork : FormGroup;
   commonList:[];
   studentNetworkCount:any;
@@ -43,6 +50,11 @@ export class OniAlumniListPage implements OnInit {
       department: [""]
     });
 
+    
+   }
+
+  ngOnInit() {
+
     this.route.queryParams.subscribe(params => {
       if (params) {
   
@@ -62,12 +74,8 @@ export class OniAlumniListPage implements OnInit {
         }
       }
     });
+
    }
-
-  ngOnInit() {
-
-    this.storageservice.showLoading();
-  }
 
   get_StudentNetwork(){
     this.studentNetwork.value['talentId'] =this.currentUserId;
@@ -80,7 +88,9 @@ if(result['success'] == true) {
   this.storageservice.dismissLoading();
   this.studentNetworkCount = result['studentNetworkList'].lenght;
   this.commonList = result['studentNetworkList'];
-}    
+}else{
+  this.storageservice.dismissLoading();
+}   
 });
 }
 
