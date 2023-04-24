@@ -40,6 +40,7 @@ export class ClubPage implements OnInit {
   searchOrganisationResults: any;
   selectedOrganisation: any;
   extracurricularBean: any;
+  experienceBean:any;
   edit: boolean = false;
   disabled: boolean =false;
   desiredItem: any;
@@ -142,10 +143,20 @@ selectOrganisation(institutionName: string,id:string) {
   this.clubFrom.patchValue({
     'clubName':this.clubid
   })
+  this.orgLocation(this.clubid)
   this.searchOrganisationResults = [];
   this.searchCtrl.setValue('');
 }
-
+//organisation Location
+orgLocation(orgid:any){
+  var saveperonalinfo = "api/auth/app/IndividualProfileDetails/orgLocation";
+  this.storageservice.getrequest(saveperonalinfo + "?orgid=" + orgid ).subscribe(result => {
+    this.clubFrom.patchValue({
+      'clubBranch' : result["experienceBean"].orgLocation
+    })
+    this.clubFrom.get("clubBranch").disable();
+});
+}
 getOrganisationList(){
   var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
   this.storageservice.getrequest(organisationListUrl).subscribe(result => {
@@ -249,7 +260,7 @@ getOrganisationList(){
       } else{
   
         if(this.unregisteredIns == ""){
-          this.clubFrom.value.unregisteredClub = this.clubid;
+          this.clubFrom.value.clubId = this.clubid;
          }else{
           this.clubFrom.value.unregisteredClub = this.unregisteredIns;
          }
@@ -275,7 +286,7 @@ getOrganisationList(){
 
              
              let edit = {
-              clubId:result["extracurricularBean"].clubId,
+              clubId : this.clubFrom.value.clubId,
               extId:result["extracurricularBean"].extId,
            }
            let navigationExtras: NavigationExtras = {
@@ -392,6 +403,10 @@ getOrganisationList(){
            'currentMember': this.extracurricularBean.currentMember,
            'extId': this.extracurricularBean.extId,
            })
+           if(this.extracurricularBean.value.clubName.includes('TF')){
+            this.orgLocation(this.desiredItem.id,);
+          }else{
+          }
        }else{
         this.storageservice.dismissLoading();
        }

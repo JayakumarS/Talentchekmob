@@ -10,7 +10,7 @@
   </ion-row>
   <div class="button-content">
   <ion-label style=" font-size: 20px;   margin-left: 4%;">Rate the Organisation  </ion-label>
-  <div style="     margin-top: -6%;   margin-left: 14%;">
+  <div style="    margin-left: 14%;">
       <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
           <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
               <ion-icon name="star"></ion-icon>
