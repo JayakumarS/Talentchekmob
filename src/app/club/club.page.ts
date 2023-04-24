@@ -143,9 +143,10 @@ selectOrganisation(institutionName: string,id:string) {
   this.clubFrom.patchValue({
     'clubName':this.clubid
   })
-  this.orgLocation(this.clubid)
+
   this.searchOrganisationResults = [];
   this.searchCtrl.setValue('');
+  this.orgLocation(this.clubid)
 }
 //organisation Location
 orgLocation(orgid:any){
@@ -286,7 +287,7 @@ getOrganisationList(){
 
              
              let edit = {
-              clubId : this.clubFrom.value.clubId,
+              clubId :result["extracurricularBean"].clubId,
               extId:result["extracurricularBean"].extId,
            }
            let navigationExtras: NavigationExtras = {
