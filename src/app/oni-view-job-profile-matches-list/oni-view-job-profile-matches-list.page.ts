@@ -11,6 +11,12 @@ import { BidsAndAplicationsRecivedPopupPage } from '../bids-and-aplications-reci
   styleUrls: ['./oni-view-job-profile-matches-list.page.scss'],
 })
 export class OniViewJobProfileMatchesListPage implements OnInit {
+  doRefresh(event) {
+    this.ngOnInit();
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
 
   jobId:any;
   applicationsReceivedList:[];

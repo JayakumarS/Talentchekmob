@@ -17,6 +17,13 @@ import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
 })
 export class OrgProfilePage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+     setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   docForm: FormGroup;
   industryList: any;
   orgTypeList: any;

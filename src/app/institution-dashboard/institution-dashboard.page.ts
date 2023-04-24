@@ -10,6 +10,11 @@ import { NavigationEnd } from '@angular/router';
 })
 export class InstitutionDashboardPage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit(); 
+     event.target.complete(); 
+ }
+
   userId: string;
   creditPoints: any;
   profileViewCount:any;

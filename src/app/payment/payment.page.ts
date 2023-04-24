@@ -3,14 +3,18 @@ import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { StorageService } from '../storage.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
-
+import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.page.html',
   styleUrls: ['./payment.page.scss'],
 })
 export class PaymentPage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+      event.target.complete();
+  }
 
 
   docForm:FormGroup;
@@ -138,8 +142,8 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
      this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
        if (result["success"] == true) {
-        const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController);
-        orgprofileview.reload(); 
+        const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+        Instprofileview.reload(); 
         this.presentToast1()
         }
       })

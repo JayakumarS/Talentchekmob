@@ -13,10 +13,8 @@ export class OrgProfileViewPage implements OnInit {
 
   doRefresh(event) {
     this.ngOnInit();
-    setTimeout(() => {
-     event.target.complete();
-    }, 2000);
- }
+      event.target.complete();
+  }
   userId: string;
   img: string;
   orglocation: any;

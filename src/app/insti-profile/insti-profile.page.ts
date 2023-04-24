@@ -16,6 +16,13 @@ import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.p
 })
 export class InstiProfilePage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+     setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   docForm: FormGroup;
   currentUserId: string;
   showcountyResults: boolean = false;
@@ -201,12 +208,12 @@ export class InstiProfilePage implements OnInit {
 
   //editprofileDetails 
   editinstiprofile() {
-
+    this.storageservice.showLoading();
     var EditinstiprofileDetails = "api/auth/app/InstitutionProfileDetails/insteditprofiledetails?currentUserId=" + this.currentUserId;
     this.storageservice.getrequest(EditinstiprofileDetails).subscribe(result => {
 
       if (result["success"] == true) {
-
+        this.storageservice.dismissLoading();
         this.getCountryList();
         this.profileList = result["profileList"];
 
@@ -217,26 +224,31 @@ export class InstiProfilePage implements OnInit {
 
         this.getcitylist(result["profileList"][0].permState, result["profileList"][0].permCountry)
         this.profileList = result["profileList"];
+
+        this.docForm.patchValue({
+          'instName': this.profileList[0].instName,
+          'instType': this.profileList[0].instType,
+          'instEmail': this.profileList[0].instEmail,
+          'instMobile': this.profileList[0].instMobile,
+          'cinReg': this.profileList[0].cinReg,
+          'dob': this.profileList[0].dob,
+          'accreditation': this.profileList[0].accreditation,
+          'instLogo': this.profileList[0].instLogo,
+          'taxId': this.profileList[0].taxId,
+          'details': this.profileList[0].details,
+          'permAddress': this.profileList[0].permAddress,
+          'permCity': this.profileList[0].permCity,
+          'permState': this.profileList[0].permState,
+          'permCountry': this.profileList[0].permCountry,
+          'permPinCode': this.profileList[0].permPinCode,
+          'languagesknown': this.profileList[0].languagesknown,
+        })
+        this.base64img1 = this.profileList[0].instLogo;
+
+      }else{
+        this.storageservice.dismissLoading();
       }
-      this.docForm.patchValue({
-        'instName': this.profileList[0].instName,
-        'instType': this.profileList[0].instType,
-        'instEmail': this.profileList[0].instEmail,
-        'instMobile': this.profileList[0].instMobile,
-        'cinReg': this.profileList[0].cinReg,
-        'dob': this.profileList[0].dob,
-        'accreditation': this.profileList[0].accreditation,
-        'instLogo': this.profileList[0].instLogo,
-        'taxId': this.profileList[0].taxId,
-        'details': this.profileList[0].details,
-        'permAddress': this.profileList[0].permAddress,
-        'permCity': this.profileList[0].permCity,
-        'permState': this.profileList[0].permState,
-        'permCountry': this.profileList[0].permCountry,
-        'permPinCode': this.profileList[0].permPinCode,
-        'languagesknown': this.profileList[0].languagesknown,
-      })
-      this.base64img1 = this.profileList[0].instLogo;
+      
     })
   }
 
