@@ -110,9 +110,28 @@ async Update(){
 
     await alert.present();
   } else{
-   
+
     this.docForm.value.currentUserId=this.currentUserId;
     this.paymentDetails = this.docForm.value;
+    let bankdetails = {
+      "name":this.docForm.value.accountHolderName,
+      "email":this.docForm.value.holderEmailId,
+      "tnc_accepted":true,
+      "account_details":{
+         "business_name":this.docForm.value.businessName,
+         "business_type":this.docForm.value.businessType
+      },
+      "bank_account":{
+         "ifsc_code":this.docForm.value.ifscCode,
+         "beneficiary_name":this.docForm.value.accountHolderName,
+         "account_type":this.docForm.value.accType,
+         "account_number":parseInt(this.docForm.value.bankAccountNo)
+      }
+}
+let createAccountIdurl = "api/auth/app/subscription/payments/createActIdRazorpay";
+
+this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(result => {
+  console.log(result)
     console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
     var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
   
@@ -123,6 +142,7 @@ async Update(){
         orgprofileview.reload(); 
         this.presentToast1()
         }
+      })
      });
 }
   
@@ -155,6 +175,25 @@ async instiUpdate(){
    
     this.docForm.value.currentUserId=this.currentUserId;
     this.paymentDetails = this.docForm.value;
+    let bankdetails = {
+      "name":this.docForm.value.accountHolderName,
+      "email":this.docForm.value.holderEmailId,
+      "tnc_accepted":true,
+      "account_details":{
+         "business_name":this.docForm.value.businessName,
+         "business_type":this.docForm.value.businessType
+      },
+      "bank_account":{
+         "ifsc_code":this.docForm.value.ifscCode,
+         "beneficiary_name":this.docForm.value.accountHolderName,
+         "account_type":this.docForm.value.accType,
+         "account_number":parseInt(this.docForm.value.bankAccountNo)
+      }
+}
+let createAccountIdurl = "api/auth/app/subscription/payments/createActIdRazorpay";
+
+this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(result => {
+  console.log(result)
     console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
     var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
   
@@ -164,6 +203,7 @@ async instiUpdate(){
       
         this.presentToast2()
         }
+      })
      });
 }
   
