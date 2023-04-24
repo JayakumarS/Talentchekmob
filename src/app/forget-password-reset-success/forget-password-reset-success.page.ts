@@ -37,7 +37,8 @@ export class ForgetPasswordResetSuccessPage implements OnInit {
         empId: this.data.talentId
       }
     };
-    this.router.navigate(['/login'], navigationExtras);
+   
+    this.router.navigate(['/sign-in'], navigationExtras);
     //this.router.navigate(['/login'])
   }
 
@@ -57,7 +58,7 @@ export class ForgetPasswordResetSuccessPage implements OnInit {
 
       console.log(`Posting Data: ${JSON.stringify(postData)}`);
 
-      var forgetPassServiceUrl = "/master/forgotpwd/forgotpassword";
+      var forgetPassServiceUrl = "api/auth/forgotpasswordemail";
 
       this.storageservice.postrequest(forgetPassServiceUrl, postData).subscribe(result => {
 
