@@ -20,7 +20,7 @@ function _window(): any {
 export class SubscriptionIndividualPage implements OnInit {
 
   doRefresh(event) {
-    this.ngOnInit();
+    this.BindDefaultCurrencyAsPerCurrentUser();
      setTimeout(() => {
      event.target.complete();
     }, 2000);

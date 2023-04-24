@@ -12,6 +12,14 @@ import { JobSearchPage } from '../job-search/job-search.page';
 })
 export class SearchSettingsPage implements OnInit {
 
+  doRefresh(event) {
+    this.ngOnInit();
+    this.refreshData()
+    setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
+
   advsearchForm: FormGroup;
 
   skillList = [];
@@ -88,6 +96,25 @@ formValues: any = {};
     var listConstant =  this.studyListItems();
     var listConstant = this.initializeOrgItems();
   
+
+  }
+
+  refreshData(){
+    this.advsearchForm.patchValue({
+      'skillsearch':'',
+      'designationsearch': '',
+      'experiencesearch':'',
+      'countrysearch': '',
+      'statesearch':'',
+      'citysearch': '',
+      'qualificationsearch' :'',
+      'fieldofstudysearch':'',
+      'onisearch':[""],
+    })
+    this.selectedSkills = [];
+    this.selectedCountry = [];
+    this.selectedState = [];
+    this.selectedCities = [];
 
   }
  

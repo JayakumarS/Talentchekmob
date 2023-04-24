@@ -21,7 +21,7 @@ function _window(): any {
 export class SubscriptionInsorgPage implements OnInit {
 
   doRefresh(event) {
-    this.ngOnInit();
+    this.BindDefaultCurrencyAsPerCurrentUser();
     setTimeout(() => {
      event.target.complete();
     }, 2000);
