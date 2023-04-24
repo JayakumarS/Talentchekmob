@@ -270,7 +270,7 @@ getOrganisationList(){
          this.clubFrom.value.participatedTill =formatDate(this.clubFrom.value.participatedTill, 'dd/MM/yyyy','en-IN');          
          }
          this.clubFrom.value.currentUserId = this.userId;
-         this.clubFrom.value.clubName =  this.name; 
+         this.clubFrom.value.clubName = this.clubFrom.value.clubId;
          this.Extracurricular = this.clubFrom.value;
          console.log(` data: ${JSON.stringify(this.Extracurricular)}`);
          var saveperonalinfo = "api/auth/app/IndividualProfileDetails/saveExtracurricular";
