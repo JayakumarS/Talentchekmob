@@ -87,6 +87,13 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     this.stepper.next();
   }
 
+  limitInputLength($event, maxLength=25) {
+    if($event.target.value.length>=maxLength) {
+        $event.preventDefault();
+        return;
+    }
+}
+
   
   onSubmit() {
       this.isSubmitted = true;

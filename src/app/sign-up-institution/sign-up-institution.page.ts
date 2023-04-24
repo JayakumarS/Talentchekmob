@@ -51,7 +51,7 @@ base64img1: string = '';
     private translate: TranslateService, private loadingCtrl: LoadingController,public modalController: ModalController,) {
 
     this.talentinstform = formbuilder.group({
-      instituteName: ['',Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+      instituteName: ['',Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.required])],
       regNo: ['',Validators.required],
       taxId: ['',Validators.required],
       regDate: ['',Validators.required],
@@ -341,15 +341,12 @@ removeCountry() {
     return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
   }
 
-  // showNotification(colorName, text, placementFrom, placementAlign) {
-  //   this.snackBar.open(text, "", {
-  //     duration: 2000,
-  //     verticalPosition: placementFrom,
-  //     horizontalPosition: placementAlign,
-  //     panelClass: colorName,
-  //   });
-  // }
-
+  limitInputLength($event, maxLength=25) {
+    if($event.target.value.length>=maxLength) {
+        $event.preventDefault();
+        return;
+    }
+  }
 
   openTCForm() {
     this.goto_TCFormModal();

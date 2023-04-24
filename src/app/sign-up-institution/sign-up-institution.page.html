@@ -47,7 +47,7 @@
                 <div class="step" data-target="#test-l-3">
                     <button class="step-trigger">
                         <span class="bs-stepper-circle">3</span>
-                        <span class="bs-stepper-label">Registeration Info</span>
+                        <span class="bs-stepper-label">Registration Info</span>
                     </button>
                 </div>
             </div>
@@ -234,13 +234,13 @@
                         <div class="button-content">
 
 
-                            <ion-label class="labels">Contact Phone number <small style="color: #f70505;">*</small>
+                            <ion-label class="labels">Contact number <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input type="number" formControlName="mobileNo"></ion-input>
+                                <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="mobileNo"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentinstform.controls.mobileNo.hasError('required') && talentinstform.controls.mobileNo.touched">
-                                <small style="color: #f70505;">Phone number is required</small>
+                                <small style="color: #f70505;">Contact number is required</small>
                               </div>
 
                             <ion-label class="labels">Institution's email <small style="color: #f70505;">*</small>

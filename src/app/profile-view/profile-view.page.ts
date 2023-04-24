@@ -61,9 +61,9 @@ export class ProfileViewPage implements OnInit {
 
     doRefresh(event) {
        this.ngOnInit();
-       setTimeout(() => {
+      // setTimeout(() => {
         event.target.complete();
-       }, 2000);
+      // }, 2000);
     }
 
   @ViewChild('picker', { static: false })

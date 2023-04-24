@@ -18,6 +18,10 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
     <form [formGroup]="profileForm">
 
         <ion-card-content>
@@ -196,7 +200,7 @@
                     <div class="button-content">
                         <ion-label class="labels">Emergency Contact Number</ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input type="number" formControlName="emergencyContact"></ion-input>
+                            <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="emergencyContact"></ion-input>
                         </ion-item>
                         <div *ngIf="profileForm.controls.emergencyContact.hasError('required') && profileForm.controls.emergencyContact.touched">
                             <small style="color: #f70505;"> Emergency Contact Number is required</small>

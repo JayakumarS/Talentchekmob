@@ -18,6 +18,13 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./profilee.page.scss'],
 })
 export class ProfileePage implements OnInit {
+
+  doRefresh(event) {
+    this.ngOnInit();
+    //setTimeout(() => {
+     event.target.complete();
+    //}, 2000);
+ }
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -473,6 +480,13 @@ async goto_ConsentFormModal() {
   });
 
   return await modal.present();
+}
+
+limitInputLength($event, maxLength=25) {
+  if($event.target.value.length>=maxLength) {
+      $event.preventDefault();
+      return;
+  }
 }
 
 }
