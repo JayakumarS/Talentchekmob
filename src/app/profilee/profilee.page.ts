@@ -299,10 +299,10 @@ checkFormValidity(form: FormGroup): string[] {
          this.profileList = result["profileList"]; 
         this.searchForId(result["profileList"][0].permCountry); 
       this.selectedCountry = this.desiredItem.text;
-
+      this.getCountryList();
       this.getstatelist(result["profileList"][0].permCountry);
       
-       
+      this.getCountryList();
       this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
       this.profileList = result["profileList"]; 
       
@@ -334,6 +334,7 @@ checkFormValidity(form: FormGroup): string[] {
        'bloodgroup': this.profileList[0].bloodgroup,
       })
       this.base64img1 = this.profileList[0].uploadImg;
+    
     }
 
   })   
