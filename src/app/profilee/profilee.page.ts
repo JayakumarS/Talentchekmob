@@ -294,6 +294,7 @@ checkFormValidity(form: FormGroup): string[] {
       this.selectedCountry = this.desiredItem.text;
 
       this.getstatelist(result["profileList"][0].permCountry);
+      
        
       this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
       this.profileList = result["profileList"]; 
