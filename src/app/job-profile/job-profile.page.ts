@@ -27,6 +27,8 @@ export class JobProfilePage implements OnInit {
   jobTypeLists: string[] = [];
   id: any;
   skillsList: any;
+  jobtype:any;
+  language:any;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -153,11 +155,12 @@ export class JobProfilePage implements OnInit {
         if(result["jobSeekList"].length !=0){ 
           this.jobProfileForm.reset(); 
           this.edit=true;
-          console.log(result);
-          this.getlanguageList();
+          
           const industry = [result["jobSeekList"][0].industry.toString()]
           const indId = result["jobSeekList"][0].industry;
-          this.jobtitleList(indId)
+          this.jobtitleList(indId);
+          this.getJobType();
+          this.getlanguageList();
 
           this.selectedCities =[];
           this.selectedSkills = [];
@@ -198,17 +201,19 @@ export class JobProfilePage implements OnInit {
 
           console.log(this.jobShiftArray)
           this.editJobTitle = result["jobSeekList"][0].jobTitle;
+          this.jobtype = result["jobSeekList"][0].jobType;
+          this.language = result["jobSeekList"][0].reqLanguages;
 
           this.jobProfileForm.patchValue({
             'industry': industry,
             //'jobTitle': result["jobSeekList"][0].jobTitle,
-            'jobType': result["jobSeekList"][0].jobType,
+            //'jobType': result["jobSeekList"][0].jobType,
             'jobExperience':result["jobSeekList"][0].jobExperience,
             'jobExperienceFormat': result["jobSeekList"][0].jobExperienceFormat,
             // 'jobExpWorkHrs': result["jobSeekList"][0].jobExpWorkHrs,
             // 'jobStartDateFrom': startdate.toISOString(),
             // 'jobStartDateTo': enddate.toISOString(),
-            'reqLanguages': result["jobSeekList"][0].reqLanguages,
+           // 'reqLanguages': result["jobSeekList"][0].reqLanguages,
             // 'relocatewill': result["jobSeekList"][0].relocatewill.toString(),
             // 'travelwill': result["jobSeekList"][0].travelwill,
             'jobSalaryFrom': result["jobSeekList"][0].jobSalaryFrom,
@@ -419,11 +424,15 @@ nextStep(currentStep: string, nextStep: string) {
       this.jobTypeLists.push(result["jobTypeList"][0].id);
         if(this.catagoaryType.includes('IC10')){
           this.jobProfileForm.patchValue({
-            'jobType': (this.jobTypeLists)
-
+            'jobType': (this.jobTypeLists) 
             }); 
         }else{
           this.jobTypeList = result["jobTypeList"]
+        }
+        if(this.edit == true){
+          this.jobProfileForm.patchValue({
+            'jobType': this.jobtype,
+          })
         }
      }
    });
@@ -517,6 +526,11 @@ skills(){
       this.storageservice.getrequest(getlanguageListUrl).subscribe(result => {
        if (result["success"] == true) {
         this.languageList = result["languageList"]; 
+        if(this.edit == true){
+          this.jobProfileForm.patchValue({
+            'reqLanguages': this.language,
+          })
+        }
         }
      });
     }

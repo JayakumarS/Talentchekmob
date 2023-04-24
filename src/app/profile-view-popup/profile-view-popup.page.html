@@ -29,7 +29,12 @@
        <img src="" /> 
         </ion-avatar>  -->
       </div>
-    <div style="display: flex; justify-content: center;padding: 5px;">
+    <div *ngIf="title.profilepic =='null' " style="display: flex; justify-content: center;padding: 5px;">
+      <ion-avatar slot="start" style="width: 105px; height: 105px;">
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar> 
+    </div>
+    <div *ngIf="title.profilepic !='null' " style="display: flex; justify-content: center;padding: 5px;">
       <ion-avatar slot="start" style="width: 105px; height: 105px;">
       <img src="{{title.profilepic}}" />
       </ion-avatar> 

@@ -27,7 +27,12 @@
                 <div style="display: flex; justify-content: start;">
 
                 </div>
-                <div style="display: flex; justify-content: center;padding: 5px;">
+                <div *ngIf="!profileFlag" style="display: flex; justify-content: center;padding: 5px;">
+                    <ion-avatar slot="start">
+                        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                    </ion-avatar>
+                </div>
+                <div *ngIf="profileFlag"  style="display: flex; justify-content: center;padding: 5px;">
                     <ion-avatar slot="start">
                         <img src="{{jobDetails?.onilogo}}" />
                     </ion-avatar>

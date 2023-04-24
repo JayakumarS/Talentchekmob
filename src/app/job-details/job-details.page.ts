@@ -20,7 +20,7 @@ export class JobDetailsPage implements OnInit {
 
   jobDetails:any;
   jobSkills:[];
-
+  profileFlag:boolean =false;
   jobId :any;
   userId: string;
   userName: string;
@@ -102,7 +102,10 @@ export class JobDetailsPage implements OnInit {
       if(result['success'] == true) {
         this.jobDetails = result['JobAdvertisementList'][0];
         this.jobSkills = result['JobAdvertisementList'][0]['jobSkills'];
-  
+        if(result['JobAdvertisementList'][0].profileimg != null){
+          this.profileFlag = true
+        }
+       
         //job Type string 
         this.storageservice.dismissLoading();
         result['JobAdvertisementList'].forEach(element=>{

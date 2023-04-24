@@ -87,10 +87,11 @@ export class OrgProfileViewPage implements OnInit {
     var profileOrgView = "api/auth/app/IndividualProfileDetails/orgviewprofiledetails?currentUserId="+this.userId;
     this.storageservice.getrequest(profileOrgView).subscribe(result => {
      console.log(result); 
-
-     if(result['profileViewList'][0].connectionList.length != 0 && result['profileViewList'] != null){
-      this.connectioncard = true;
-      }
+      if(result["success"] != false){
+ 
+     if(result['profileViewList'] != null && result['profileViewList'].length != 0){
+     
+      
                    //profileview ORG
                    this.orglocation = result['profileViewList'][0]['orglocation'];
                    this.orgname = result['profileViewList'][0]['orgname'];
@@ -110,9 +111,15 @@ export class OrgProfileViewPage implements OnInit {
                    this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
                    this.feeAmount = result['profileViewList'][0]['feeAmount'];
                    this.ifscCode = result['profileViewList'][0]['ifscCode'];
-                  this.connectionList = result['profileViewList'][0]['connectionList'];
+                 
 
+                  if(result['profileViewList'][0].connectionList.length != 0){
+                    this.connectioncard = true;
+                    this.connectionList = result['profileViewList'][0]['connectionList'];
+                  }
 
+                }
+              }
     })
   }
 

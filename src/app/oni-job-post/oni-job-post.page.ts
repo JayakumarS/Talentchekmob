@@ -13,6 +13,14 @@ import { OniJobPostListPage as listpage } from '../oni-job-post-list/oni-job-pos
   styleUrls: ['./oni-job-post.page.scss'],
 })
 export class OniJobPostPage implements OnInit {
+  buttonEnable: boolean = false; 
+
+  doRefresh(event) {
+    this.ngOnInit();
+     setTimeout(() => {
+     event.target.complete();
+    }, 2000);
+ }
 
   getMaxDate() {
     const currentDate = new Date();
@@ -28,6 +36,8 @@ export class OniJobPostPage implements OnInit {
   userId:string
 
   
+  language:any;
+  jobtype:any;
 
   jobProfileForm: FormGroup;
   industryList =[];
@@ -94,6 +104,7 @@ export class OniJobPostPage implements OnInit {
 
 
   ngOnInit() {
+    this.buttonEnable = false;
     this.currentUserName = localStorage.getItem("userName");
     this.userId = localStorage.getItem("userId")  ; 
     this.roleId = localStorage.getItem("roleId");
@@ -164,7 +175,7 @@ export class OniJobPostPage implements OnInit {
     this.getlanguageList();
     this.getSkillList();
     this.getAdditionalPay();
-    
+    this.timeoutFunction();
    
     this.route.queryParams.subscribe(params => {
       if (params) {
@@ -172,21 +183,53 @@ export class OniJobPostPage implements OnInit {
         if (params != null) { 
           console.log(params);
           this.jobId = params.id;
+
           this.fetchdetails(this.jobId);
         }
       }
-    });
+    });  
+  } 
+
+
+  timeoutFunction(){
+    setTimeout(() => {
+      this.buttonEnable = true;
+      }, 2000);
   }
 
-  fetchdetails(Id){
+  refreshData(){
+   this.jobProfileForm.patchValue({
+      'industry': '',
+      'jobTitle1': '',
+      'jobType': '',
+      'openings': '', 
+      'roles': '',
+      'jobSkills': '',
+      'jobExperience': '',
+       'jobSalaryFrom':'',
+      'jobSalaryTo':'',
+       'appDeadlineObj':'',
+       'appDeadline': '',
+       'locationOffer': '', 
+       'reqLanguages':'', 
+  }) 
+  this.selectedCities =[];
+  this.selectedSkills = [];
+  this.selectedCitiesOffLocation = []; 
+  this.jobProfileForm.reset();
+  }
+
+  fetchdetails(Id){ 
     var BasicSearcUrl = "api/auth/app/jobportal/JobAdvertisementedit?jobId="+ Id ;
 
     this.storageservice.getrequest(BasicSearcUrl).subscribe(result => {
       if(result["success"] == true){ 
         console.log(result["jobAdvertisementList"]);
       if(result["jobAdvertisementList"].length !=0){ 
-        this.jobProfileForm.reset(); 
+        this.refreshData();
         this.edit=true;
+        this.getJobType();
+        this.getlanguageList();
          console.log(result);
 
         const industry = [result["jobAdvertisementList"][0].industry.toString()]
@@ -200,7 +243,7 @@ export class OniJobPostPage implements OnInit {
         let str = result["jobAdvertisementList"][0].jobSkills; 
         for(let i=0;i<str.length;i++){
           var skill = str[i]
-          this.selectedSkills.push(skill);
+          this.selectedSkills.push(skill); 
         } 
 
         //cities
@@ -241,6 +284,11 @@ export class OniJobPostPage implements OnInit {
           this.jobProfileForm.patchValue({
             'appDeadline': this.lastPosted.toISOString(),
           })
+          // if(result["jobAdvertisementList"][0].roles != "" && result["jobAdvertisementList"][0].roles != null){
+          //   this.jobProfileForm.patchValue({
+               
+          //   })
+          //  } 
         }
         
         if(result["jobAdvertisementList"][0].jobShift != null && result["jobAdvertisementList"][0].jobShift !=""){
@@ -262,14 +310,19 @@ export class OniJobPostPage implements OnInit {
 
         console.log(this.jobShiftArray)
         this.editJobTitle = [result["jobAdvertisementList"][0].jobTitle1.toString()];
+        this.language = result["jobAdvertisementList"][0].reqLanguages;
+        this.jobtype = result["jobAdvertisementList"][0].jobType;
+
+        
 
         this.jobProfileForm.patchValue({
           'industry': industry,
-          'jobType': result["jobAdvertisementList"][0].jobType,
+          'roles': result["jobAdvertisementList"][0].roles,
+          //'jobType': result["jobAdvertisementList"][0].jobType,
           'jobExperience':result["jobAdvertisementList"][0].jobExperience,
           'jobExperienceFormat': result["jobAdvertisementList"][0].jobExperienceFormat,
           'jobExpWorkHrs': result["jobAdvertisementList"][0].jobExpWorkHrs, 
-          'reqLanguages': result["jobAdvertisementList"][0].reqLanguages,
+          //'reqLanguages': result["jobAdvertisementList"][0].reqLanguages,
           'auctioned': result["jobAdvertisementList"][0].isauctioned,
           // 'additionalpay': result["jobAdvertisementList"][0].additionalpay,
           'jobExperienceMandatory': result["jobAdvertisementList"][0].jobExperienceMandatory.toString(),
@@ -279,8 +332,7 @@ export class OniJobPostPage implements OnInit {
           
           'locationOffer': result["jobAdvertisementList"][0].locationOffer,
            'openings': result["jobAdvertisementList"][0].openings,
-          // 'phoneNo': result["jobAdvertisementList"][0].phoneNo,
-          'roles': result["jobAdvertisementList"][0].roles, 
+          // 'phoneNo': result["jobAdvertisementList"][0].phoneNo, 
 
           // 'relocatewill': result["jobAdvertisementList"][0].relocatewill.toString(),
           'jobSalaryFrom': result["jobAdvertisementList"][0].jobSalaryFrom,
@@ -526,7 +578,11 @@ getJobType(){
   this.storageservice.getrequest(getJobTypeListUrl).subscribe(result => {
    if (result["success"] == true) {
     this.jobTypeList = result["jobTypeList"]; 
-    this.cities = result["jobTypeList"];
+    if(this.edit==true){
+      this.jobProfileForm.patchValue({
+        'jobType': this.jobtype,
+      })
+    }
    }
  });
 }
@@ -601,7 +657,7 @@ jobtitleList(event){
 
   const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
     this.jobTitleList = result["jobTitleList"];
-    this.Driver(this.jobTitleList);
+    //this.Driver(this.jobTitleList);
     if(this.jobTitleList.length != 0 ){
       this.jobProfileForm.patchValue({
         'jobTitle1': this.editJobTitle,
@@ -610,7 +666,7 @@ jobtitleList(event){
      
     }
     
-    console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);
+   // console.log(`jobTitleList: ${JSON.stringify(this.jobTitleList)}`);
   });
 }
 
@@ -629,6 +685,11 @@ jobtitleList(event){
     this.storageservice.getrequest(getlanguageListUrl).subscribe(result => {
      if (result["success"] == true) {
       this.languageList = result["languageList"]; 
+      if(this.edit==true){
+        this.jobProfileForm.patchValue({
+          'reqLanguages': this.language,
+        })
+      }
       }
    });
   }
@@ -854,11 +915,8 @@ checkFormValidity(form: FormGroup): string[] {
  goto_profileSearch(){
   this.router.navigate(['/job-search']);
 }
-goto_jobs(){
-  this.jobProfileForm.reset();
-  this.selectedCities =[];
-  this.selectedSkills = [];
-  this.selectedCitiesOffLocation = [];
+goto_jobs(){ 
+  this.refreshData();
   this.router.navigate(['/oni-job-post-list']);
 }
 goto_instihome(){
