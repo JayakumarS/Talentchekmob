@@ -164,7 +164,7 @@
                             <div class="popup">
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
-                                    <button (click)="certification(x.certId)" class="edit-button">
+                                    <button style="color: black;" (click)="certification(x.certId)" class="edit-button">
                                     <ion-icon name="create-outline"></ion-icon>Edit</button>
                                     <button (click)="deleteCertificateCard(x.certId)" class="delete-button">
                                     <ion-icon name="trash-outline"></ion-icon>Delete</button>
@@ -229,11 +229,11 @@
                             <div class="popup">
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
-                                    <button (click)="educations(x.eduId)" class="edit-button">
+                                    <button style="color: black;" (click)="educations(x.eduId)" class="edit-button">
                                     <ion-icon name="create-outline"></ion-icon>&nbsp;Edit</button>
 
                                      
-                                    <button (click)="eduIdverifierCall(x.eduId,x.institutionId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                    <button style="color: black;"(click)="eduIdverifierCall(x.eduId,x.institutionId)" *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;Verification</button>
                                     <button (click)="deleteeducation(x.eduId)" class="delete-button">
                                     <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete</button>
@@ -331,9 +331,9 @@
                             <div class="popup">
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
-                                    <button (click)="experiences(x.expId)" class="edit-button">
+                                    <button style="color: black;" (click)="experiences(x.expId)" class="edit-button">
                                     <ion-icon name="create-outline"></ion-icon>Edit</button>
-                                    <button (click)="expIdverifierCall(x.expId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                    <button  style="color: black;"(click)="expIdverifierCall(x.expId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;Verification</button>
                                     <button (click)="deleteExperiences(x.expId)" class="delete-button">
                                     <ion-icon name="trash-outline"></ion-icon>Delete</button>
@@ -484,9 +484,9 @@
                             <div class="popup">
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
-                                    <button (click)="Extracurricular(x.clubId)" class="edit-button">
+                                    <button style="color: black;"(click)="Extracurricular(x.clubId)" class="edit-button">
                                     <ion-icon name="create-outline"></ion-icon>Edit</button>
-                                    <button (click)="clubIdverifierCall(x.clubId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                    <button style="color: black;"(click)="clubIdverifierCall(x.clubId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;Verification</button>
                                     <button (click)="deleteExtracurricular(x.clubId)" class="delete-button">
                                     <ion-icon name="trash-outline"></ion-icon>Delete</button>

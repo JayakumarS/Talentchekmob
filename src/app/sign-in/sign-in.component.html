@@ -50,7 +50,7 @@
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0 alertColor">{{error}}</div>
                 </div>
                 <div class="sign-in">
-                    <a   href="reset-password"style="font-size: 18px; font-family: Mr-eaves;color: #007bff;" >Forgot Password?</a>
+                    <a (click)="reset()"  style="font-size: 18px; font-family: Mr-eaves;color: #007bff;" >Forgot Password?</a>
                    
                 </div>
             </form>
@@ -67,7 +67,7 @@
 
         <div class="sign-in">
             <div style="font-size: 16px;">Are you a new member in talentchek? </div>
-            &nbsp;<a href="register-cat" style="font-size: 18px; font-family: Mr-eaves;">Sign up</a>
+            &nbsp;<a  (click)="register()" style="font-size: 18px; font-family: Mr-eaves;color: #007bff;">Sign up</a>
         </div>
 
 

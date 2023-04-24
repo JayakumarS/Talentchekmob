@@ -130,6 +130,14 @@ export class SignInComponent implements OnInit {
 
   //  this.router.navigate(['/job-search']) 
   }
+  register(){
+
+    this.router.navigate(['/register-cat'])
+  }
+  reset(){
+
+    this.router.navigate(['/reset-password'])
+  }
   Forgotpass(){
     this.router.navigate(['/job-search']) 
   }
