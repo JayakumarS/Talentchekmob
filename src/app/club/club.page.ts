@@ -169,6 +169,11 @@ getOrganisationList(){
 
  removeOrganisation(selectedOrganisation: string) {
   this.selectedOrganisation = undefined;
+  this.clubFrom.patchValue({
+    'clubBranch':""
+
+  })
+  this.clubFrom.get("clubBranch").enable();
 }
 
 
