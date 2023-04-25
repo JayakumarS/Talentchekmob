@@ -52,7 +52,7 @@ export class CertificationPage implements OnInit {
       certId:[""],
       currentUserId:[""],
       certificationPath :[""],
-      uploadFile:['']
+      uploadFile:['', Validators.required]
     })
 
     this.route.queryParams.subscribe(params => {
