@@ -52,7 +52,46 @@ export class RatingOrgPopupPage implements OnInit {
     }
 
     updateRatingOrg(){
+      if(this.ExperienceForm.value.remarks && !this.ExperienceForm.value.rating){
+        this.ExperienceForm.value.expId = this.expId;
+        this.ExperienceForm.value.currendUserId = this.currendUserId;
+        this.Experience = this.ExperienceForm.value;
+        var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingOrg";
+  
+        this.storageservice.postrequest(updateRatingUrl,this.Experience).subscribe(async result => {  
+          if (result["success"] == true) {
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800);
+            this.presentToast() 
+          }
+          });
+        
+      }else if(!this.ExperienceForm.value.remarks && this.ExperienceForm.value.rating){
+      this.ExperienceForm.value.expId = this.expId;
+      this.ExperienceForm.value.currendUserId = this.currendUserId;
+      this.Experience = this.ExperienceForm.value;
+      var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingOrg";
 
+      this.storageservice.postrequest(updateRatingUrl,this.Experience).subscribe(async result => {  
+        if (result["success"] == true) {
+          setTimeout(() => {
+            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+           profilePage.updateData();
+          }, 800);
+          this.presentToast() 
+          
+    }else{
+
+      this.router.navigate(['/profile-view']); 
+      setTimeout(() => {
+        const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+       profilePage.updateData();
+      }, 800);
+    }
+  });
+}
       if(!this.ExperienceForm.value.remarks && !this.ExperienceForm.value.rating){
         this.router.navigate(['/profile-view']);
       }else if(this.ExperienceForm.value.remarks && this.ExperienceForm.value.rating){

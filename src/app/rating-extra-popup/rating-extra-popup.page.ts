@@ -54,7 +54,41 @@ export class RatingExtraPopupPage implements OnInit {
       console.log('Value of star', this.selectedValue);
     }
     updateRatingExt(){
+      if(this.ExtracurricularFrom.value.remarks && !this.ExtracurricularFrom.value.rating){
+        this.ExtracurricularFrom.value.extId = this.extId;
+        this.ExtracurricularFrom.value.currendUserId = this.currendUserId;
+        this.Extracurricular = this.ExtracurricularFrom.value;
+        var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingClub";
+  
+        this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
+          if (result["success"] == true) {
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800);
+            this.presentToast() 
+          }
+          });
+          }else if(!this.ExtracurricularFrom.value.remarks && this.ExtracurricularFrom.value.rating){
+            this.ExtracurricularFrom.value.extId = this.extId;
+            this.ExtracurricularFrom.value.currendUserId = this.currendUserId;
+            this.Extracurricular = this.ExtracurricularFrom.value;
+            var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingClub";
+      
+            this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
+              if (result["success"] == true) {
+                setTimeout(() => {
+                  const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+                 profilePage.updateData();
+                }, 800);
+                this.presentToast() 
+              }
+            });
 
+          }
+        
+
+      
  
       if(!this.ExtracurricularFrom.value.remarks && !this.ExtracurricularFrom.value.rating){
         this.router.navigate(['/profile-view']);
@@ -74,6 +108,10 @@ export class RatingExtraPopupPage implements OnInit {
     }else{
 
       this.router.navigate(['/profile-view']); 
+      setTimeout(() => {
+        const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+       profilePage.updateData();
+      }, 800);
     }
   });
 }

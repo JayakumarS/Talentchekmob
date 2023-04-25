@@ -51,7 +51,40 @@ export class RatingInstiPopupPage implements OnInit {
     }
 
     updateRatingOrg(){
+      if(this.EducationForm.value.remarks && !this.EducationForm.value.rating){
+        this.EducationForm.value.eduId = this.eduId;
+        this.EducationForm.value.currendUserId = this.currendUserId;
+        this.Education = this.EducationForm.value;
+        var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingInst";
 
+        this.storageservice.postrequest(updateRatingUrl,this.Education).subscribe(async result => {  
+          if (result["success"] == true) {
+           
+            this.presentToast()
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800); 
+          }
+        });
+      }else if(!this.EducationForm.value.remarks && this.EducationForm.value.rating){
+
+        this.EducationForm.value.eduId = this.eduId;
+        this.EducationForm.value.currendUserId = this.currendUserId;
+        this.Education = this.EducationForm.value;
+        var updateRatingUrl = "api/auth/app/IndividualProfileDetails/updateRatingInst";
+  
+        this.storageservice.postrequest(updateRatingUrl,this.Education).subscribe(async result => {  
+          if (result["success"] == true) {
+           
+            this.presentToast()
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+             profilePage.updateData();
+            }, 800); 
+          }
+        });
+      }
       if(!this.EducationForm.value.remarks && !this.EducationForm.value.rating){
         this.router.navigate(['/profile-view']);
       }else if(this.EducationForm.value.remarks && this.EducationForm.value.rating){
@@ -70,7 +103,11 @@ export class RatingInstiPopupPage implements OnInit {
           }, 800); 
     }else{
 
-      this.router.navigate(['/profile-view']); 
+      this.router.navigate(['/profile-view']);
+      setTimeout(() => {
+        const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+       profilePage.updateData();
+      }, 800); 
     }
   });
 }
