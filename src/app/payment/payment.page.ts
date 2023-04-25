@@ -204,7 +204,8 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
      this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
        if (result["success"] == true) {
-      
+        const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+        Instprofileview.reload();
         this.presentToast2()
         }
       })
