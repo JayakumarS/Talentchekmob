@@ -16,6 +16,8 @@ import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
   styleUrls: ['./org-profile.page.scss'],
 })
 export class OrgProfilePage implements OnInit {
+  editstate: any;
+  editCity: any;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -168,6 +170,9 @@ export class OrgProfilePage implements OnInit {
     this.storageservice.getrequest(industryURL).subscribe(result => {
       this.stateResponseBackup = result["stateList"];
       this.stateResponse = result["stateList"];
+      this.docForm.patchValue({
+        'permState':this.editstate
+      })
       console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
 
@@ -181,6 +186,9 @@ export class OrgProfilePage implements OnInit {
     this.storageservice.getrequest(industryURL).subscribe(result => {
       this.cityList = result['cityList'];
       this.cityOptions = result['cityList'];
+      this.docForm.patchValue({
+        'permCity':this.editCity
+      })
       console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
 
     });
@@ -234,9 +242,9 @@ export class OrgProfilePage implements OnInit {
 
         this.searchForId(result["profileList"][0].permCountry); 
         this.selectedCountry = this.desiredItem.text;
-
+        this.editstate = result["profileList"][0].permState; 
         this.getstatelist(result["profileList"][0].permCountry);
-
+        this.editCity = result["profileList"][0].permCity
         this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
         
         this.profileList = result["profileList"];
