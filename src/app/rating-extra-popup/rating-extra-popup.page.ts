@@ -123,7 +123,7 @@ export class RatingExtraPopupPage implements OnInit {
       cssClass: 'custom-toast'
     });
     setTimeout(() => {
-      const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+      const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
      profilePage.updateData();
     }, 800);
     this.router.navigate(['/profile-view']);
