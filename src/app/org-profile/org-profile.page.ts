@@ -269,7 +269,7 @@ export class OrgProfilePage implements OnInit {
         'permAddress': this.profileList[0].permAddress,
         'permCity': this.profileList[0].permCity,
         'permState': this.profileList[0].permState,
-         'permCountry':this.desiredItem.id,
+         'permCountry':this.profileList[0].permCountry,
         'permPinCode': this.profileList[0].permPinCode,
         'orgLogo': this.profileList[0].orgLogo,
         'languagesknown': this.profileList[0].languagesknown,

@@ -98,7 +98,7 @@ countryIdVal:string;
       permState:[""],
       permCountry:[""],
      permPinCode:[""],
-     
+     uploadImg:[""],
       permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:[""],
@@ -236,6 +236,7 @@ goTostateSelectedItem( stateId) {
   }
 
   async Update(){
+    this.profileForm.value.uploadImg = this.base64img1;
     const errors = this.checkFormValidity(this.profileForm);
 
     if (errors.length > 0) {
