@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -29,7 +29,7 @@ export class SkillPopupPage implements OnInit {
   constructor(public modalController: ModalController,public alertController: AlertController,
     private fb: FormBuilder,private toastController: ToastController,
     public storageservice:StorageService,private elementRef: ElementRef,
-    public router :Router,private route: ActivatedRoute) { } 
+    public router :Router,private route: ActivatedRoute, private ngZone: NgZone) { } 
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId");
@@ -134,7 +134,7 @@ export class SkillPopupPage implements OnInit {
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
              profilePage.updateData();
             }, 800);
             this.presentToast()
@@ -162,7 +162,7 @@ export class SkillPopupPage implements OnInit {
             console.log("Image upload response: " + result)
            if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
              profilePage.updateData();
             }, 800);
              this.updateToast()

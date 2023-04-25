@@ -1,5 +1,5 @@
-import { Component, OnInit,  ElementRef, HostListener, ViewChild  } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit,  ElementRef, HostListener, ViewChild, NgZone  } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
@@ -40,23 +40,38 @@ export class ProfileViewPage implements OnInit {
   prof:boolean=false;
   profAvatar: boolean=false;
   connectionList: any;
-  constructor(public router: Router,public storageservice: StorageService,private elementRef: ElementRef,
+  fromAddPage: any;
+  constructor(public router: Router, private ngZone: NgZone,public route:ActivatedRoute,public storageservice: StorageService,private elementRef: ElementRef,
     public modalController: ModalController,public alertController: AlertController,) { 
 
       interface MyCustomEventInit extends CustomEventInit {
         target?: HTMLElement;
       }
 
-      this.storageservice.refreshDataObservable.subscribe(() => {
-        const contentElement = document.getElementById('my-content');
-        const eventInit: MyCustomEventInit = {
-          detail: {},
-          bubbles: true,
-          cancelable: true,
-          target: contentElement
-        };
-         this.doRefresh(eventInit);
-      });
+      if (this.storageservice && this.storageservice.refreshDataObservable) {
+        this.storageservice.refreshDataObservable.subscribe(() => {
+          const contentElement = document.getElementById('my-content');
+          const eventInit: MyCustomEventInit = {
+            detail: {},
+            bubbles: true,
+            cancelable: true,
+            target: contentElement
+          };
+          this.doRefresh(eventInit);
+        });
+      }
+
+      if (this.route && this.route.queryParams) {
+        this.route.queryParams.subscribe(params => {
+          if (params) {
+            this.fromAddPage = params; 
+            if (this.fromAddPage != null && this.fromAddPage.refreshPage != null) {
+              console.log("hello");
+              this.listFunction();
+            }
+          }
+        });
+      } 
     }      
 
     doRefresh(event) {
@@ -147,6 +162,58 @@ export class ProfileViewPage implements OnInit {
         });
 
      
+  }
+
+
+  listFunction(){
+    var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
+    this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
+     console.log(result); 
+ 
+   
+     if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){ 
+      this.educationcard = true;
+      }
+      if(result['profileViewList'][0].clubsList.length != 0 && result['profileViewList'] != null){
+        this.clubscard = true;
+        }
+        if(result['profileViewList'][0].experienceList.length != 0 && result['profileViewList'] != null){
+          this.experiencecard = true;
+          }
+          if(result['profileViewList'][0].skillList.length != 0 && result['profileViewList'] != null){
+            this.skillscard = true;
+            }
+            if(result['profileViewList'][0].connectionList.length != 0 && result['profileViewList'] != null){
+              this.connectioncard = true;
+              }
+              if(result['profileViewList'][0].certificationsList.length != 0 && result['profileViewList'] != null){
+                this.certificationcard = true;
+                }
+
+                    //profileview 
+     this.location = result['profileViewList'][0]['userlocation'];
+     this.username = result['profileViewList'][0]['username'];
+     this.category =result['profileViewList'][0]['category'];
+     this.hobbies =result['profileViewList'][0]['hobbies'];
+     this.mobile = result['profileViewList'][0]['phone'];
+     this.email = result['profileViewList'][0]['email'];
+     this.language = result['profileViewList'][0]['languages'];
+     
+
+     //skills
+     this.skillList = result['profileViewList'][0].skillList;
+    //educations
+    this.education=result['profileViewList'][0].educationList;
+    //experience
+    this.experience=result['profileViewList'][0].experienceList;
+    //Extracurricular
+    this.club=result['profileViewList'][0].clubsList;
+    //certifications
+    this.certifications= result['profileViewList'][0].certificationsList;
+    //connection
+    this.connectionList= result['profileViewList'][0].connectionList
+
+        });
   }
 
   updateData() { 
@@ -313,10 +380,10 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteCertification";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.certId).subscribe(async result => {  
-
+                this.listFunction();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  window.location.reload();
+                  this.listFunction();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -330,6 +397,23 @@ export class ProfileViewPage implements OnInit {
                   this.storageservice.warningToast("Connection unavailable!");
                 
                 }
+              },
+              error =>{
+                console.log("error")
+              },
+              ()=>{
+                console.log("start")
+                   this.ngZone.run(() => {
+                    const randomString = this.generateRandomString(); 
+ 
+                   let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      refreshPage: randomString
+                    }
+                  }; 
+                    this.router.navigate(['profile-view'], navigationExtras)
+                  });
+                 console.log("end")
               });
             }
             catch (Exception) {
@@ -342,6 +426,15 @@ export class ProfileViewPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  generateRandomString(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 3; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
   }
 
   async deleteSkills(skillId: number) {
@@ -376,10 +469,10 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteKeyskill";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.skillId).subscribe(async result => {  
-
+                this.listFunction();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  window.location.reload();
+                  this.listFunction();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -393,6 +486,23 @@ export class ProfileViewPage implements OnInit {
                   this.storageservice.warningToast("Connection unavailable!");
                 
                 }
+              },
+              error =>{
+                console.log("error")
+              },
+              ()=>{
+                console.log("start")
+                   this.ngZone.run(() => {
+                    const randomString = this.generateRandomString(); 
+ 
+                   let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      refreshPage: randomString
+                    }
+                  }; 
+                    this.router.navigate(['profile-view'], navigationExtras)
+                  });
+                 console.log("end")
               });
             }
             catch (Exception) {
@@ -439,10 +549,10 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteEducation";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.eduId).subscribe(async result => {  
-
+                this.listFunction();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  window.location.reload();
+                  this.listFunction();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -456,6 +566,23 @@ export class ProfileViewPage implements OnInit {
                   this.storageservice.warningToast("Connection unavailable!");
                 
                 }
+              },
+              error =>{
+                console.log("error")
+              },
+              ()=>{
+                console.log("start")
+                   this.ngZone.run(() => {
+                    const randomString = this.generateRandomString(); 
+ 
+                   let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      refreshPage: randomString
+                    }
+                  }; 
+                    this.router.navigate(['profile-view'], navigationExtras)
+                  });
+                 console.log("end")
               });
             }
             catch (Exception) {
@@ -502,10 +629,10 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExperience";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
-
+                this.listFunction();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  window.location.reload();
+                  this.listFunction();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -519,6 +646,23 @@ export class ProfileViewPage implements OnInit {
                   this.storageservice.warningToast("Connection unavailable!");
                 
                 }
+              },
+              error =>{
+                console.log("error")
+              },
+              ()=>{
+                console.log("start")
+                   this.ngZone.run(() => {
+                    const randomString = this.generateRandomString(); 
+ 
+                   let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      refreshPage: randomString
+                    }
+                  }; 
+                    this.router.navigate(['profile-view'], navigationExtras)
+                  });
+                 console.log("end")
               });
             }
             catch (Exception) {
@@ -566,10 +710,10 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExtracurricular";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
-
+                this.listFunction();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                 window.location.reload();
+                  this.listFunction();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -583,6 +727,23 @@ export class ProfileViewPage implements OnInit {
                   this.storageservice.warningToast("Connection unavailable!");
                 
                 }
+              },
+              error =>{
+                console.log("error")
+              },
+              ()=>{
+                console.log("start")
+                   this.ngZone.run(() => {
+                    const randomString = this.generateRandomString(); 
+ 
+                   let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      refreshPage: randomString
+                    }
+                  }; 
+                    this.router.navigate(['profile-view'], navigationExtras)
+                  });
+                 console.log("end")
               });
             }
             catch (Exception) {

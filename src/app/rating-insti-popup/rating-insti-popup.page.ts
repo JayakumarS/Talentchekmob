@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
@@ -21,7 +21,7 @@ export class RatingInstiPopupPage implements OnInit {
   currendUserId: string;
   
   constructor(public fb: FormBuilder,private route: ActivatedRoute,   public modalController: ModalController,private elementRef: ElementRef
-    ,public alertController: AlertController,
+    ,public alertController: AlertController, private ngZone: NgZone,
     public toastController:ToastController,public router:Router,public storageservice:StorageService,) { }
 
   ngOnInit() {
@@ -62,7 +62,7 @@ export class RatingInstiPopupPage implements OnInit {
            
             this.presentToast()
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
              profilePage.updateData();
             }, 800); 
           }
@@ -79,7 +79,7 @@ export class RatingInstiPopupPage implements OnInit {
            
             this.presentToast()
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
              profilePage.updateData();
             }, 800); 
           }
@@ -98,14 +98,14 @@ export class RatingInstiPopupPage implements OnInit {
          
           this.presentToast()
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
            profilePage.updateData();
           }, 800); 
     }else{
 
       this.router.navigate(['/profile-view']);
       setTimeout(() => {
-        const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
        profilePage.updateData();
       }, 800); 
     }
@@ -127,7 +127,7 @@ move(){
 
   this.router.navigate(['/profile-view']); 
   setTimeout(() => {
-    const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
    profilePage.updateData();
   }, 800);
 }

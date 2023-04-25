@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
@@ -45,7 +45,7 @@ export class ConnectionPage implements OnInit {
   nonMandatory: boolean = false;
   constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,
     private toastController: ToastController,public modalController: ModalController,private elementRef: ElementRef
-    ,public alertController: AlertController ) { 
+    ,public alertController: AlertController, private ngZone: NgZone,public route:ActivatedRoute ) { 
 
 
     
@@ -281,7 +281,7 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
     profilePage.updateData();
     this.router.navigate(['/profile-view']);
 

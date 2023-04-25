@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
@@ -94,7 +94,7 @@ export class OniJobPostPage implements OnInit {
     public router:Router,
     private http: HttpClient,
     private toastController: ToastController,
-    public storageservice:StorageService,private route: ActivatedRoute,public alertController: AlertController) { }
+    public storageservice:StorageService,private route: ActivatedRoute,public alertController: AlertController, private ngZone: NgZone) { }
 
     selectedTab: string = 'earth';
 
@@ -861,7 +861,7 @@ if (errors.length > 0) {
     });
     this.router.navigate(['/oni-job-post-list']);
     setTimeout(() => {
-      const profilePage = new listpage(this.router, this.storageservice, this.alertController);
+      const profilePage = new listpage(this.router,this.ngZone,this.route ,this.storageservice, this.alertController);
      profilePage.reload();
     }, 800);
    await toast.present();
@@ -875,7 +875,7 @@ async updateToast() {
   });
   this.router.navigate(['/oni-job-post-list']);
   setTimeout(() => {
-    const profilePage = new listpage(this.router, this.storageservice, this.alertController);
+    const profilePage = new listpage(this.router,this.ngZone,this.route, this.storageservice, this.alertController);
    profilePage.reload();
   }, 800);
 await toast.present();

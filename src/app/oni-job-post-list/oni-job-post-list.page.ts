@@ -1,28 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { NavigationExtras, Router } from '@angular/router';
  import { AlertController } from '@ionic/angular';
  import { NavigationEnd } from '@angular/router';
+ import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-oni-job-post-list',
   templateUrl: './oni-job-post-list.page.html',
   styleUrls: ['./oni-job-post-list.page.scss'],
 })
 export class OniJobPostListPage implements OnInit {
-
-  doRefresh(event) {
-    this.ngOnInit();
-    setTimeout(() => {
-     event.target.complete();
-    }, 2000);
- }
+ 
 
   jobPostList:[];
   userId:string;
   roleId: string;
   RoleID: string[];
+  fromAddPage: any;
+  queryParams: any;
 
-  constructor(public router:Router,public storageservice: StorageService,public alertController: AlertController) {
+  constructor(public router:Router, private ngZone: NgZone,public route:ActivatedRoute,public storageservice: StorageService,public alertController: AlertController) {
 
     this.userId = localStorage.getItem("userId") ;
     interface MyCustomEventInit extends CustomEventInit {
@@ -39,7 +37,30 @@ export class OniJobPostListPage implements OnInit {
       };
        this.doRefresh(eventInit);
     });
+
+    this.route.queryParams.subscribe(params => {
+      if (params) {
+        this.fromAddPage = params; 
+         if (this.fromAddPage != null && this.fromAddPage.refreshPage != null) {
+         console.log("hello");
+         this.jobPostList = [];
+          this.bindJobAdvertiseMentList();
+           }
+           else{
+            this.bindJobAdvertiseMentList();
+            console.log("there")
+          }
+      }
+    });
+   
    }
+
+   doRefresh(event) {
+     this.ngOnInit();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+ }
    selectedTab: string = 'earth';
 
   setSelectedTab(tabName: string) {
@@ -53,8 +74,7 @@ export class OniJobPostListPage implements OnInit {
       }
     });
       this.roleId = localStorage.getItem("roleId");
-    this.RoleID =  this.roleId.split(",", 3);
-
+    this.RoleID =  this.roleId.split(",", 3); 
     this.bindJobAdvertiseMentList();
   }
 
@@ -73,9 +93,15 @@ bindJobAdvertiseMentList(){
         console.log(this.jobPostList);
 
       }
-
-
-    });
+    }, error =>{
+      this.storageservice.dismissLoading(); 
+      console.log('Error');
+    },
+    () =>{
+      this.storageservice.dismissLoading(); 
+      console.log('Completed bind.');
+    }
+    );
 
   
 }
@@ -154,10 +180,11 @@ goto_addJobPost(){
               var deleteExperienceServiceUrl = "api/auth/app/jobportal/deletejobadvertisement";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.jobId).subscribe(async result => {  
-
+                 //this.jobPostList(index,1)
+                this.bindJobAdvertiseMentList();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  window.location.reload()
+                 this.bindJobAdvertiseMentList();
                   }
                 else if (result == false) {
                   var msg = result["message"];
@@ -168,9 +195,25 @@ goto_addJobPost(){
                 //  this.hideLoadingIndicator(); //Hide loading indicator
                 }
                 else {
-                  this.storageservice.warningToast("Connection unavailable!");
-                
+                  this.storageservice.warningToast("Connection unavailable!");                
                 }
+              },
+              error =>{
+                console.log("error")
+              },
+              ()=>{
+                console.log("start")
+                   this.ngZone.run(() => {
+                    const randomString = this.generateRandomString(); 
+ 
+                   let navigationExtras: NavigationExtras = {
+                    queryParams: {
+                      refreshPage: randomString
+                    }
+                  }; 
+                    this.router.navigate(['oni-job-post-list'], navigationExtras)
+                  });
+                 console.log("end")
               });
             }
             catch (Exception) {
@@ -185,6 +228,15 @@ goto_addJobPost(){
     await alert.present();
   }
 
+
+   generateRandomString(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 3; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
   reload(){
     this.storageservice.refreshData();
   }
