@@ -18,6 +18,11 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./profilee.page.scss'],
 })
 export class ProfileePage implements OnInit {
+  country: any;
+  states: any;
+  city: any;
+  editstate: any;
+  editCity: any;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -68,8 +73,13 @@ countryIdVal:string;
   ngOnInit() {
 
     this.currentUserId = localStorage.getItem("userId");
-    
+    this.getCountryList()
+
+    this.hobbeList();
+    this.List();
+    this.editprofile();
     this.getIndustry();
+
     this.profileForm = this.fb.group({
       firstname: ["", [Validators.required]],
       lastname: ["",[Validators.required]],
@@ -95,15 +105,9 @@ countryIdVal:string;
     
       currentUserId:[""],
     });
-    this.getCountryList()
+ 
 
-    this.hobbeList();
-    this.List();
-    this.editprofile();
-;
   }
-
-
   
   hobbeList () {
     var gethobbyListUrl = "api/auth/app/CommonUtility/hobbyList";
@@ -181,6 +185,10 @@ async getstatelist(CtryId): Promise<any> {
   this.storageservice.getrequest(industryURL).subscribe(result => {
     this.stateResponseBackup = result["stateList"];
     this.stateResponse = result["stateList"];
+      this.profileForm.patchValue({
+        'permState':this.editstate
+      })
+   
     console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
   });
 
@@ -194,6 +202,9 @@ getcitylist(stateId,countryId){
   this.storageservice.getrequest(industryURL).subscribe(result => {
    this.cityList = result['cityList'];
    this.cityOptions = result['cityList'];
+   this.profileForm.patchValue({
+    'permCity':this.editCity
+  })
   console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
    
 });
@@ -299,11 +310,11 @@ checkFormValidity(form: FormGroup): string[] {
          this.profileList = result["profileList"]; 
         this.searchForId(result["profileList"][0].permCountry); 
       this.selectedCountry = this.desiredItem.text;
-      this.getCountryList();
+      this.editstate = result["profileList"][0].permState; 
       this.getstatelist(result["profileList"][0].permCountry);
-      
-      this.getCountryList();
+      this.editCity = result["profileList"][0].permCity
       this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
+     
       this.profileList = result["profileList"]; 
       
         const dob =  this.profileList[0].dob;
@@ -318,8 +329,8 @@ checkFormValidity(form: FormGroup): string[] {
        //'dob':this.profileList[0].dob,
        'dobObj':result,
        'permAddress': this.profileList[0].permAddress,
-       'permCity': this.profileList[0].permCity,
-       'permState':this.profileList[0].permState,
+       //'permCity': this.profileList[0].permCity,
+       //'permState':this.profileList[0].permState,
        'permCountry':this.profileList[0].permCountry,
        'permPinCode':this.profileList[0].permPinCode,
        'email':this.profileList[0].email,
@@ -335,6 +346,9 @@ checkFormValidity(form: FormGroup): string[] {
       })
       this.base64img1 = this.profileList[0].uploadImg;
     
+     
+   
+   
     }
 
   })   
