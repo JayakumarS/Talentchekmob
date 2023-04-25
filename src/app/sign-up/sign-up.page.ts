@@ -75,7 +75,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         pinCode: ['', Validators.required],
         referalCode: [''],
         // profileVisibility: ['', Validators.required],
-        uploadImg: [''],
+        uploadImg: ['', Validators.required],
         cBoxIAgree:[''],
         cBoxIAgreeConsent:['']
   
@@ -133,7 +133,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
             console.log("dateOfBirthAlt: " + dateOfBirth);
             var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
             if (frm <= currentDate) {
-                // if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
+                 if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
   
                 // if (cBoxIAgree == true) {
   
@@ -216,11 +216,11 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                 //   //this.storageservice.warningToast('Please accept the "Terms and Conditions.');
                 //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsAccTmNCon'));
                 // }
-              //  }  //img if condition ends
-              //  else {
-              //    this.storageservice.warningToast('Please upload image.');
-              //    this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsUpImg'));
-              //  }
+               }  //img if condition ends
+               else {
+                 this.storageservice.warningToast('Please upload image.');
+                 this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsUpImg'));
+               }
             }
             else {
               this.storageservice.warningToast('User must have minimum one year old to register. Future date is not applicable, Please change.');
