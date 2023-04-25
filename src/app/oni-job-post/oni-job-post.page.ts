@@ -657,7 +657,7 @@ jobtitleList(event){
 
   const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
     this.jobTitleList = result["jobTitleList"];
-    //this.Driver(this.jobTitleList);
+    this.Driver(this.jobTitleList);
     if(this.jobTitleList.length != 0 ){
       this.jobProfileForm.patchValue({
         'jobTitle1': this.editJobTitle,
