@@ -42,7 +42,7 @@
           <div class="button-content">
             <ion-label class="labels">Account Holder Name<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-input formControlName="accountHolderName" (keypress)="keyPressAlphaNumeric($event)"></ion-input>
+              <ion-input formControlName="accountHolderName"  onkeypress="return /[0-9a-zA-Z.]/i.test(event.key)"></ion-input>
             </ion-item>
             <div
               *ngIf="docForm.controls.accountHolderName.hasError('required') && docForm.controls.accountHolderName.touched">

@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
@@ -55,7 +55,7 @@ export class OrgProfilePage implements OnInit {
   isAbout: boolean = false;
   isLogo:boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,public alertController: AlertController,
-    private camera: Camera, public router: Router, private toastController: ToastController, private route: ActivatedRoute) { }
+    private camera: Camera, public router: Router, private ngZone: NgZone,private toastController: ToastController, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -283,7 +283,8 @@ export class OrgProfilePage implements OnInit {
 
   ///profileDetails  Update
   async Update() {
-    // this.docForm.value.permCountry = this.desiredItem.id;
+    this.profileList[0].orgLogo= this.base64img1;
+    // this.docForm.value.permCountry = this.desiredItem.id
     const errors = this.checkFormValidity(this.docForm);
 
     if (errors.length > 0) {
@@ -320,6 +321,7 @@ export class OrgProfilePage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
+
     this.router.navigate(['/org-profile-view']);
     await toast.present();
   }

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { StorageService } from '../storage.service';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
+
 
 @Component({
   selector: 'app-insti-profile',
@@ -52,7 +53,8 @@ export class InstiProfilePage implements OnInit {
   isAbout: boolean = false;
   isLogo: boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,
-    private camera: Camera, public router: Router, private toastController: ToastController, private route: ActivatedRoute) { }
+    private camera: Camera, public router: Router,private toastController: ToastController,private elementRef: ElementRef
+    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone) { }
 
   ngOnInit() {
 
@@ -262,6 +264,7 @@ export class InstiProfilePage implements OnInit {
 
   ///profileDetails  Update
   async Update() {
+    this.profileList[0].instLogo= this.base64img1 ;
     const errors = this.checkFormValidity(this.docForm);
 
     if (errors.length > 0) {
@@ -283,6 +286,8 @@ export class InstiProfilePage implements OnInit {
       this.storageservice.postrequest(updateprofile, this.Instidetails).subscribe(result => {
         // console.log("Image upload response: " + result)
         if (result["success"] == true) { 
+          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+        Instprofileview.reload();
           this.presentToast()
         }
       });
