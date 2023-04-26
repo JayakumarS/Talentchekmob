@@ -1,6 +1,5 @@
 <ion-header>
     <ion-toolbar class="new-background-color">
-
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
@@ -11,7 +10,6 @@
             <div *ngIf="edit" style="text-align: center;display: contents;">
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Edit Ceritications</ion-title>
             </div>
-            
         </div> 
 
     </ion-toolbar>
@@ -67,18 +65,7 @@
                         <ion-item fill="outline" class="input-field">
                             <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY" formControlName="expiryDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
-
-
                     </div>
-                    <!-- <div class="button-content">
-                                      <ion-button style="background: #3880ff;border-radius:20px">
-                                          <ion-icon lazy="true" slot="start" name="image"></ion-icon>
-                                           <input type="file" formControlName="uploadCertification" (change)="loadImageFromDevice($event)" id="file-input"
-                                            accept="image/png, image/jpeg">
-                                        </ion-button>
-                                  </div> -->
-
-                    <!-- Upload file -->
                     <ion-row class="talentrow">
                         <ion-col>
                             <ion-item class="formitem itemborder" lines="none">
@@ -104,15 +91,8 @@
                             <ion-button class="custom-button" (click)="UpdateCertification()">Update</ion-button>
                         </div>
                     </div>
-
-
-
                 </ion-col>
             </ion-row>
-
-
-
-
         </ion-card-content>
 
     </form>

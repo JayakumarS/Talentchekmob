@@ -39,12 +39,9 @@ export class SkillPopupPage implements OnInit {
       skillId:[""],
       currentUserId:[""]
     })
-   this.getSkillList();
-  // this.fetchEditDeatils();
-
-
+   this.getSkillList(); 
    this.route.queryParams.subscribe(params => {
-    if (params) { 
+   if (params) { 
       if (params != null || params != undefined ) {  
           this.fetchEditDeatils(params.id); 
         console.log(params);
@@ -52,7 +49,7 @@ export class SkillPopupPage implements OnInit {
     }
   });
   } 
-
+  //skill dropDown list
   getSkillList(){
     var getskillListUrl = "api/auth/app/CommonUtility/skillList"; 
     this.storageservice.getrequest(getskillListUrl).subscribe(result => {
@@ -62,37 +59,30 @@ export class SkillPopupPage implements OnInit {
    });
   }
 
+  //edit function
   fetchEditDeatils(skillId){
     var getEditValues= "api/auth/app/IndividualProfileDetails/editKeyskill";
-         this.skillForm.reset();
-         this.selectedSkills= [];
+    this.skillForm.reset();
+    this.selectedSkills= [];
     this.storageservice.getrequest(getEditValues + "?skillId=" + skillId).subscribe(result => {
      if (result["success"] == true) {
-       this.edit = true;
-      this.selectedSkills = result["skillandCertificationsBean"].keySkill;
-      // const arr: string[] = str.split(",");
-
-      // for(let i=0;i<arr.length;i++){
-      //   var skill = arr[i]
-      //   this.selectedSkills.push(skill);
-      // }
-       this.skillForm.patchValue({ 
-       'expertise': result["skillandCertificationsBean"].expertise,
+      this.edit = true;
+      this.selectedSkills = result["skillandCertificationsBean"].keySkill; 
+      this.skillForm.patchValue({ 
+      'expertise': result["skillandCertificationsBean"].expertise,
       'skillId': result["skillandCertificationsBean"].skillId, 
       })
      }
    });
   }
 
+  // nav bar
   selectedTab: string = 'profile';
-
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
  
- 
-
-    // skill auto complete 
+  // skill auto complete starts
   onSearchSkill(value: string) {
     if (value.length > 2) {
       this.showSkillResults = true;
@@ -120,19 +110,19 @@ export class SkillPopupPage implements OnInit {
   onSliderChange(value){
     this.skillForm.value.expertise = value;
   }
+  // skill auto complete starts
 
-     //save
-     async saveSkill(){
+   //save
+  async saveSkill(){
       if(this.skillForm.value.keySkill  != "" && this.skillForm.value.keySkill  != null && this.skillForm.value.expertise != "" && this.skillForm.value.expertise  != null){
-          this.skillForm.value.currentUserId = this.userId;
+        this.skillForm.value.currentUserId = this.userId;
              
         this.skillform = this.skillForm.value;
         console.log(` data: ${JSON.stringify(this.skillform)}`);
         var saveSkill = "api/auth/app/mobile/saveSkill";
-      
-         this.storageservice.postrequest(saveSkill, this.skillform).subscribe(async result => {  
-            console.log("Image upload response: " + result)
-           if (result["success"] == true) {
+        this.storageservice.postrequest(saveSkill, this.skillform).subscribe(async result => {  
+          console.log("Image upload response: " + result)
+          if (result["success"] == true) {
             setTimeout(() => {
               const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
              profilePage.updateData();
@@ -140,65 +130,58 @@ export class SkillPopupPage implements OnInit {
             this.presentToast()
              }else{  
              }
-         }); 
+          }); 
        }else{
         this.presentToast1()
        } 
-    } 
-
+  } 
 
      //update
-     async updateSkill(){
+  async updateSkill(){
       this.skillForm.value.keySkill = this.selectedSkills
        if(this.skillForm.value.keySkill != "" && this.skillForm.value.keySkill  != null && this.skillForm.value.expertise != "" && this.skillForm.value.expertise  != null){
-           this.skillForm.value.keySkill = this.selectedSkills 
+          this.skillForm.value.keySkill = this.selectedSkills 
           this.skillForm.value.currentUserId = this.userId;
-             
-        this.skillform = this.skillForm.value;
-        console.log(` data: ${JSON.stringify(this.skillform)}`);
-        var updateSkill = "api/auth/app/mobile/updateKeyskillmobile";
-      
-         this.storageservice.postrequest(updateSkill, this.skillform).subscribe(async result => {  
-            console.log("Image upload response: " + result)
-           if (result["success"] == true) {
+          this.skillform = this.skillForm.value;
+          console.log(` data: ${JSON.stringify(this.skillform)}`);
+          var updateSkill = "api/auth/app/mobile/updateKeyskillmobile";
+          this.storageservice.postrequest(updateSkill, this.skillform).subscribe(async result => {  
+          console.log("Image upload response: " + result)
+          if (result["success"] == true) {
             setTimeout(() => {
               const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
              profilePage.updateData();
             }, 800);
-             this.updateToast()
-             }else{  
-             }
+          this.updateToast()
+          }
          }); 
        }else{
         this.presentToast1()
        } 
-    }
+  }
 
-    async presentToast() {
+  // success toast popup
+  async presentToast() {
       const toast = await this.toastController.create({
         message: 'Saved Successfully',
         duration: 3000,
         cssClass: 'custom-toast'
-      });
-
-      this.router.navigate(['/profile-view']);
-    //  window.location.reload();
-    await toast.present();
+      }); 
+  this.router.navigate(['/profile-view']);
+  await toast.present();
   }
 
+  //update toast popup
   async updateToast() {
     const toast = await this.toastController.create({
       message: 'Updated Successfully',
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    
-    this.router.navigate(['/profile-view']);
-    // window.location.reload();
-
+  this.router.navigate(['/profile-view']);
   await toast.present();
 }
-
+  //required details toast
   async presentToast1() {
     const toast = await this.toastController.create({
       message: 'Please fill all details',
@@ -209,7 +192,7 @@ export class SkillPopupPage implements OnInit {
   await toast.present();
 } 
 
-
+//back button
 goto_profileView(){
   this.skillForm.reset();
   this.router.navigate(['/profile-view']);

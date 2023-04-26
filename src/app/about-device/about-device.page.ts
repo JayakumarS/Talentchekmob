@@ -12,31 +12,32 @@ export class AboutDevicePage implements OnInit {
 
   ngOnInit() {
   }
-  selectedTab: string = 'menu';
 
+  //nav bar
+  selectedTab: string = 'menu'; 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
 
+  //back button
   goto_settings(){
     this.router.navigate(['/settings']) 
-  }
-
+  } 
 
   // footer
-goto_profileSearch(){
-  this.router.navigate(['/job-search']);
-}
-goto_jobs(){
-  this.router.navigate(['/job']);
-}
-goto_home(){
-  this.router.navigate(['/home']);
-}
-goto_profile(){
-  this.router.navigate(['/profile-view']);
-}
-goto_more(){
-  this.router.navigate(['/settings']);
-}
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_profile(){
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
+  }
 }

@@ -7,7 +7,6 @@
 </ion-header>
 
 <ion-content>
-
     <div class="display-justify">
         <div class="custom-button" (click)="goto_language()">
             <div style="display: flex; align-items: center;">
@@ -41,7 +40,6 @@
                 </ion-avatar><span style="font-family: Mr-eaves;">Subscription</span></div>
         </div>
 
-
         <div class="custom-button">
             <div style="display: flex; align-items: center;" (click)="goto_scantoconnect()">
                 <ion-avatar slot="start">
@@ -56,7 +54,6 @@
         <hr class="hr1">
     </div>
     <div class="display-justify">
-
         <div class="custom-button">
             <div style="display: flex; align-items: center;" (click)="goto_policy()">
                 <ion-avatar slot="start">
@@ -70,15 +67,8 @@
                     <img src="../../assets/icon/terms and conditions.png" />
                 </ion-avatar><span style="font-family: Mr-eaves;">Terms & Conditions</span></div>
         </div>
-
-
     </div>
-
-
     <div class="display-justify">
-
-
-
         <div class="custom-button" (click)="goto_visibility()" *ngIf="roleId == 1">
             <div style="display: flex; align-items: center;">
                 <ion-avatar slot="start">
@@ -92,8 +82,6 @@
                     <img src="../../assets/icon/about.png" />
                 </ion-avatar><span style="font-family: Mr-eaves;">About app</span></div>
         </div>
-
-
     </div>
 
     <div style="display: flex;justify-content: center;">
@@ -108,13 +96,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="contact-list">
-        <a class="icon-link" (click)="logOut()">
-			<img style="max-width: 330%;" class="cont-icon" src="/assets/icon/power.png">
-		</a>
-    </div> -->
-
-
 
     <div class="footer-nav">
         <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">

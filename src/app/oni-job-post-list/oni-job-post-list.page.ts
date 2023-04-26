@@ -42,28 +42,25 @@ export class OniJobPostListPage implements OnInit {
       if (params) {
         this.fromAddPage = params; 
          if (this.fromAddPage != null && this.fromAddPage.refreshPage != null) {
-         console.log("hello");
-         this.jobPostList = [];
-          this.bindJobAdvertiseMentList();
-           }
-           else{
-            this.bindJobAdvertiseMentList();
-            console.log("there")
-          }
+            console.log("hello");
+            this.jobPostList = [];
+             this.bindJobAdvertiseMentList();
+         }
       }
     });
-   
    }
 
+   //refresh page function
    doRefresh(event) {
      this.ngOnInit();
     setTimeout(() => {
       event.target.complete();
     }, 2000);
- }
-   selectedTab: string = 'earth';
+   }
 
-  setSelectedTab(tabName: string) {
+   //nav bar
+   selectedTab: string = 'earth';
+   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
 
@@ -78,22 +75,17 @@ export class OniJobPostListPage implements OnInit {
     this.bindJobAdvertiseMentList();
   }
 
-
+// list function
 bindJobAdvertiseMentList(){
    this.storageservice.showLoading();
-  var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementList?currentUserId="+this.userId;
-
-
-    const JobPostList = this.storageservice.getrequest(JobPostListsURL).subscribe(result => {
-
+  var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementList?currentUserId="+this.userId; 
+    const JobPostList = this.storageservice.getrequest(JobPostListsURL).subscribe(result => { 
       if(result['success'] == true) {
         this.storageservice.dismissLoading(); 
-        this.jobPostList = result['JobAdvertisementList'];
-  
-        console.log(this.jobPostList);
-
+        this.jobPostList = result['JobAdvertisementList']; 
+        console.log(this.jobPostList); 
       }
-    }, error =>{
+    },error =>{
       this.storageservice.dismissLoading(); 
       console.log('Error');
     },
@@ -101,64 +93,60 @@ bindJobAdvertiseMentList(){
       this.storageservice.dismissLoading(); 
       console.log('Completed bind.');
     }
-    );
+  );
 
   
 }
-goto_profileView(){
- 
-  this.router.navigate(['/organization-dashboard']);
-}
 
-goto_jobdetails(jobId){
-  let edit = {
-
-    jobID :jobId
+  //back button
+  goto_profileView(){ 
+    this.router.navigate(['/organization-dashboard']);
   }
 
+  goto_jobdetails(jobId){
+    let edit = { 
+      jobID :jobId
+    } 
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/job-details'], navigationExtras);
+  }
+
+  viewMatches(jobId){
+    let edit = { 
+      jobID :jobId
+    } 
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/oni-view-job-profile-matches-list'], navigationExtras);
+  }
+
+  editCall(id){
+    let edit = {
+      id
+  }
   let navigationExtras: NavigationExtras = {
     queryParams: edit
   };
-  this.router.navigate(['/job-details'], navigationExtras);
-}
-
-viewMatches(jobId){
-  let edit = {
-
-    jobID :jobId
+  this.router.navigate(['/oni-job-post'], navigationExtras);
   }
 
-  let navigationExtras: NavigationExtras = {
-    queryParams: edit
-  };
-  this.router.navigate(['/oni-view-job-profile-matches-list'], navigationExtras);
-}
-
-editCall(id){
-  let edit = {
-    id
- }
- let navigationExtras: NavigationExtras = {
-   queryParams: edit
- };
- this.router.navigate(['/oni-job-post'], navigationExtras);
-}
-
-goto_addJobPost(){
-  this.router.navigate(['/oni-job-post']);
-}
+  goto_addJobPost(){
+    this.router.navigate(['/oni-job-post']);
+  }
   
+  //delete function
   async deletejob(jobid){ 
-    let alert = await this.alertController.create({
-     
+    let alert = await this.alertController.create({ 
       message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
           text: 'CANCEL',
           role: 'cancel',
-          //cssClass: 'secondary',
-          handler: () => {
+           handler: () => {
             console.log('Confirm Cancel');
           }
         },
@@ -166,22 +154,16 @@ goto_addJobPost(){
           text: 'YES',
           cssClass: 'btncss',
           handler: () => {
-            console.log('Confirm Okay');
-
-            //Main concept.
-            console.log("Id: " + jobid);
-           // this.showLoadingIndicator(); // Show Loading indicator
-            try {
+            console.log('Confirm Okay'); 
+             console.log("Id: " + jobid);
+             try {
               var postData = {
                 'jobId': jobid
               }
-              console.log(`Delete family posting data: ${JSON.stringify(postData)}`);
-
-              var deleteExperienceServiceUrl = "api/auth/app/jobportal/deletejobadvertisement";
-
+              console.log(`Delete family posting data: ${JSON.stringify(postData)}`); 
+              var deleteExperienceServiceUrl = "api/auth/app/jobportal/deletejobadvertisement"; 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.jobId).subscribe(async result => {  
-                 //this.jobPostList(index,1)
-                this.bindJobAdvertiseMentList();
+                 this.bindJobAdvertiseMentList();
                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
                  this.bindJobAdvertiseMentList();
@@ -192,8 +174,7 @@ goto_addJobPost(){
                     msg = "Web service does not give proper message";
                   }
                   this.storageservice.warningToast(msg);
-                //  this.hideLoadingIndicator(); //Hide loading indicator
-                }
+                 }
                 else {
                   this.storageservice.warningToast("Connection unavailable!");                
                 }
@@ -219,8 +200,7 @@ goto_addJobPost(){
             catch (Exception) {
               this.storageservice.warningToast('Connection unavailable!');
              // this.hideLoadingIndicator(); //Hide loading indicator
-            }
-
+            } 
           }
         }
       ]
@@ -228,7 +208,7 @@ goto_addJobPost(){
     await alert.present();
   }
 
-
+  // random string generator
    generateRandomString(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -237,13 +217,15 @@ goto_addJobPost(){
     }
     return result;
   }
+
+
+  // refresh screen
   reload(){
     this.storageservice.refreshData();
   }
 
 
-    // footer
-
+    // footer 
     goto_profileSearch(){
       this.router.navigate(['/job-search']);
     }
@@ -251,22 +233,18 @@ goto_addJobPost(){
       this.router.navigate(['/oni-job-post-list']);
     }
     goto_instihome(){
-      this.router.navigate(['/institution-dashboard']);
-    
+      this.router.navigate(['/institution-dashboard']); 
     }
-    goto_orghome(){
-    
+    goto_orghome(){ 
       this.router.navigate(['/organization-dashboard']);
     }
     goto_home(){
       this.router.navigate(['/home']);
     }
     goto_orgprofile(){
-      this.router.navigate(['/org-profile-view']);
-    
+      this.router.navigate(['/org-profile-view']); 
     }
-    goto_instiprofile(){
-    
+    goto_instiprofile(){ 
       this.router.navigate(['/insti-profile-view']);
     }
     goto_profile(){

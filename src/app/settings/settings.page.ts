@@ -19,21 +19,21 @@ export class SettingsPage implements OnInit {
       if (event instanceof NavigationEnd && event.url === '/settings') {
         this.setSelectedTab('menu');
       }
-    });
-
+    }); 
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
   }
 
-  selectedTab: string = 'menu';
-
+  //nav bar
+  selectedTab: string = 'menu'; 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
   
  
+  //settings button navigation
   goto_oniSubscription(){
-this.router.navigate(['subscription-insorg'])
+  this.router.navigate(['subscription-insorg'])
   }
   goto_language(){
     this.router.navigate(['/language']);
@@ -61,8 +61,7 @@ this.router.navigate(['subscription-insorg'])
   goto_subscribe(){
     this.router.navigate(['/subscription-individual']);
 
-  }
-
+  } 
   goto_scantoconnect(){
     this.router.navigate(['/scan-to-connect']);
   }
@@ -71,8 +70,8 @@ this.router.navigate(['subscription-insorg'])
     this.router.navigate(['/oni-alumni']);
   }
 
+  //logout function
   logOut() {
-
     localStorage.setItem("userId", "");
     localStorage.setItem("userName", "");
     localStorage.setItem("creditPoints", "");

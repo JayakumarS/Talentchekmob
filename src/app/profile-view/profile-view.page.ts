@@ -76,10 +76,8 @@ export class ProfileViewPage implements OnInit {
 
     doRefresh(event) {
        this.ngOnInit();
-      // setTimeout(() => {
-        event.target.complete();
-      // }, 2000);
-    }
+       event.target.complete();
+     }
 
   @ViewChild('picker', { static: false })
   pickerInst: any;
@@ -104,11 +102,8 @@ export class ProfileViewPage implements OnInit {
 
     if(this.img!="null" && this.img!=""){
       this.prof = true
-      // this.profAvatar = false
-    }else{
-
-      // this.profAvatar = true
-      this.prof = false
+     }else{ 
+       this.prof = false
       
     }
 
@@ -159,12 +154,10 @@ export class ProfileViewPage implements OnInit {
     //connection
     this.connectionList= result['profileViewList'][0].connectionList
 
-        });
-
-     
+        }); 
   }
 
-
+//list function
   listFunction(){
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
@@ -216,6 +209,7 @@ export class ProfileViewPage implements OnInit {
         });
   }
 
+  //this is for refresh without load the screen
   updateData() { 
     this.storageservice.refreshData();
   }
@@ -227,12 +221,12 @@ export class ProfileViewPage implements OnInit {
   closeDropdown() {
     this.showDropdownFlag = null;
   }
-  profile()
-  {
+  profile(){
     this.router.navigate(['/profilee']) 
   }
-  educations(id)
-  {
+
+  //edit funtions start
+  educations(id){
     let edit = {
       id
    }
@@ -241,8 +235,7 @@ export class ProfileViewPage implements OnInit {
    };
     this.router.navigate(['/educations'],navigationExtras) 
   }
-  experiences(id)
-  {
+  experiences(id){
     let edit = {
       id
    }
@@ -251,8 +244,7 @@ export class ProfileViewPage implements OnInit {
    };
      this.router.navigate(['/work-experiences'],navigationExtras) 
   }
-  Extracurricular(id)
-  {
+  Extracurricular(id){
     let edit = {
       id
    }
@@ -261,8 +253,7 @@ export class ProfileViewPage implements OnInit {
    };
     this.router.navigate(['/club'],navigationExtras) 
   }
-  Skill(id)
-  {
+  Skill(id){
     let edit = {
        id
     }
@@ -272,8 +263,7 @@ export class ProfileViewPage implements OnInit {
     this.router.navigate(['/skill-popup'], navigationExtras);
   
   }
-  certification(id)
-  {
+  certification(id){
     let edit = {
       id
    }
@@ -282,31 +272,33 @@ export class ProfileViewPage implements OnInit {
    };
    this.router.navigate(['/certification'], navigationExtras);
   }
-  Connections()
-  {
-    this.router.navigate(['/connection']) 
+  Connections(){
+    this.router.navigate(['/connection']);
   }
   Additional(){
-    this.router.navigate(['/additional-infoo']) 
+    this.router.navigate(['/additional-infoo']);
+  } 
+  // edit functions end
 
-  }
-  selectedTab: string = 'profile';
 
+  //nav bar 
+  selectedTab: string = 'profile'; 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
-//education verifier
-  eduIdverifierCall(eduId,instiId){
 
+//education verifier
+  eduIdverifierCall(eduId,instiId){ 
     let edit = {
       instiId:instiId,
       edu:eduId,
-   }
+    }
    let navigationExtras: NavigationExtras = {
      queryParams: edit
    };
     this.router.navigate(['/edu-verification'],navigationExtras)
   }
+
   //experience verifier
   expIdverifierCall(expId,orgId){
     let edit = {
@@ -318,6 +310,7 @@ export class ProfileViewPage implements OnInit {
    };
     this.router.navigate(['/exp-verification'],navigationExtras)
   }
+
   //Extracurricular verifier
   clubIdverifierCall(clubId,orgId){
 
@@ -333,21 +326,8 @@ export class ProfileViewPage implements OnInit {
 
   }
 
-  //delete
-
-  // async presentModal() {
-  //   const modal = await this.modalController.create({
-  //      component: SkillDeletePage,
-  //      cssClass: 'my-custom-class1'
-  //    });
-  //    return await modal.present();
-  //  }
-  // BindExistingValues() {
-  //   var editFamilyServiceUrl = "/hrms/master/employeeAdminMaster/edit?empId=" + this.empId;
-  //   var postData = {
-  //     'empid': this.empId
-  //   }
-
+  
+  //delete certificate
    async deleteCertificateCard(certId: number) {
     let alert = await this.alertController.create({
       
@@ -357,8 +337,7 @@ export class ProfileViewPage implements OnInit {
         {
           text: 'CANCEL',
           role: 'cancel',
-          //cssClass: 'secondary',
-          handler: () => {
+           handler: () => {
             console.log('Confirm Cancel');
           }
         },
@@ -366,12 +345,9 @@ export class ProfileViewPage implements OnInit {
           text: 'YES',
           cssClass: 'btncss',
           handler: () => {
-            console.log('Confirm Okay');
-
-            //Main concept.
-            console.log("Id: " + certId);
-           // this.showLoadingIndicator(); // Show Loading indicator
-            try {
+            console.log('Confirm Okay'); 
+             console.log("Id: " + certId);
+             try {
               var postData = {
                 'certId': certId
               }
@@ -391,11 +367,9 @@ export class ProfileViewPage implements OnInit {
                     msg = "Web service does not give proper message";
                   }
                   this.storageservice.warningToast(msg);
-                //  this.hideLoadingIndicator(); //Hide loading indicator
-                }
+                 }
                 else {
-                  this.storageservice.warningToast("Connection unavailable!");
-                
+                  this.storageservice.warningToast("Connection unavailable!"); 
                 }
               },
               error =>{
@@ -403,10 +377,9 @@ export class ProfileViewPage implements OnInit {
               },
               ()=>{
                 console.log("start")
-                   this.ngZone.run(() => {
-                    const randomString = this.generateRandomString(); 
- 
-                   let navigationExtras: NavigationExtras = {
+                    this.ngZone.run(() => {
+                    const randomString = this.generateRandomString();  
+                    let navigationExtras: NavigationExtras = {
                     queryParams: {
                       refreshPage: randomString
                     }
@@ -418,9 +391,7 @@ export class ProfileViewPage implements OnInit {
             }
             catch (Exception) {
               this.storageservice.warningToast('Connection unavailable!');
-             // this.hideLoadingIndicator(); //Hide loading indicator
-            }
-
+             } 
           }
         }
       ]
@@ -428,6 +399,7 @@ export class ProfileViewPage implements OnInit {
     await alert.present();
   }
 
+  //random strings
   generateRandomString(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -437,6 +409,7 @@ export class ProfileViewPage implements OnInit {
     return result;
   }
 
+  //delete skills
   async deleteSkills(skillId: number) {
     let alert = await this.alertController.create({
      
@@ -446,8 +419,7 @@ export class ProfileViewPage implements OnInit {
         {
           text: 'CANCEL',
           role: 'cancel',
-          //cssClass: 'secondary',
-          handler: () => {
+           handler: () => {
             console.log('Confirm Cancel');
           }
         },
@@ -455,12 +427,9 @@ export class ProfileViewPage implements OnInit {
           text: 'YES',
           cssClass: 'btncss',
           handler: () => {
-            console.log('Confirm Okay');
-
-            //Main concept.
-            console.log("Id: " + skillId);
-           // this.showLoadingIndicator(); // Show Loading indicator
-            try {
+            console.log('Confirm Okay'); 
+             console.log("Id: " + skillId);
+             try {
               var postData = {
                 'skillId': skillId
               }
@@ -480,11 +449,9 @@ export class ProfileViewPage implements OnInit {
                     msg = "Web service does not give proper message";
                   }
                   this.storageservice.warningToast(msg);
-                //  this.hideLoadingIndicator(); //Hide loading indicator
-                }
+                 }
                 else {
-                  this.storageservice.warningToast("Connection unavailable!");
-                
+                  this.storageservice.warningToast("Connection unavailable!"); 
                 }
               },
               error =>{
@@ -493,7 +460,7 @@ export class ProfileViewPage implements OnInit {
               ()=>{
                 console.log("start")
                    this.ngZone.run(() => {
-                    const randomString = this.generateRandomString(); 
+                   const randomString = this.generateRandomString(); 
  
                    let navigationExtras: NavigationExtras = {
                     queryParams: {
@@ -507,9 +474,7 @@ export class ProfileViewPage implements OnInit {
             }
             catch (Exception) {
               this.storageservice.warningToast('Connection unavailable!');
-             // this.hideLoadingIndicator(); //Hide loading indicator
-            }
-
+             } 
           }
         }
       ]
@@ -517,17 +482,16 @@ export class ProfileViewPage implements OnInit {
     await alert.present();
   }
 
+  //delete education
   async deleteeducation(eduId: number) {
-    let alert = await this.alertController.create({
-     
+    let alert = await this.alertController.create({ 
       message: 'Are you sure that you want to permanently delete the selected item?',
       cssClass: 'alertclass',
       buttons: [
         {
           text: 'CANCEL',
           role: 'cancel',
-          //cssClass: 'secondary',
-          handler: () => {
+           handler: () => {
             console.log('Confirm Cancel');
           }
         },
@@ -535,12 +499,9 @@ export class ProfileViewPage implements OnInit {
           text: 'YES',
           cssClass: 'btncss',
           handler: () => {
-            console.log('Confirm Okay');
-
-            //Main concept.
-            console.log("Id: " + eduId);
-           // this.showLoadingIndicator(); // Show Loading indicator
-            try {
+            console.log('Confirm Okay'); 
+             console.log("Id: " + eduId);
+             try {
               var postData = {
                 'eduId': eduId
               }
@@ -560,8 +521,7 @@ export class ProfileViewPage implements OnInit {
                     msg = "Web service does not give proper message";
                   }
                   this.storageservice.warningToast(msg);
-                //  this.hideLoadingIndicator(); //Hide loading indicator
-                }
+                 }
                 else {
                   this.storageservice.warningToast("Connection unavailable!");
                 
@@ -587,8 +547,7 @@ export class ProfileViewPage implements OnInit {
             }
             catch (Exception) {
               this.storageservice.warningToast('Connection unavailable!');
-             // this.hideLoadingIndicator(); //Hide loading indicator
-            }
+             }
 
           }
         }
@@ -597,6 +556,7 @@ export class ProfileViewPage implements OnInit {
     await alert.present();
   }
 
+  //delete experience
   async deleteExperiences(expId: number) {
     let alert = await this.alertController.create({
       
@@ -606,8 +566,7 @@ export class ProfileViewPage implements OnInit {
         {
           text: 'CANCEL',
           role: 'cancel',
-          //cssClass: 'secondary',
-          handler: () => {
+           handler: () => {
             console.log('Confirm Cancel');
           }
         },
@@ -615,12 +574,9 @@ export class ProfileViewPage implements OnInit {
           text: 'YES',
           cssClass: 'btncss',
           handler: () => {
-            console.log('Confirm Okay');
-
-            //Main concept.
-            console.log("Id: " + expId);
-           // this.showLoadingIndicator(); // Show Loading indicator
-            try {
+            console.log('Confirm Okay'); 
+             console.log("Id: " + expId);
+             try {
               var postData = {
                 'expId': expId
               }
@@ -640,8 +596,7 @@ export class ProfileViewPage implements OnInit {
                     msg = "Web service does not give proper message";
                   }
                   this.storageservice.warningToast(msg);
-                //  this.hideLoadingIndicator(); //Hide loading indicator
-                }
+                 }
                 else {
                   this.storageservice.warningToast("Connection unavailable!");
                 
@@ -667,8 +622,7 @@ export class ProfileViewPage implements OnInit {
             }
             catch (Exception) {
               this.storageservice.warningToast('Connection unavailable!');
-             // this.hideLoadingIndicator(); //Hide loading indicator
-            }
+             }
 
           }
         }
@@ -677,7 +631,7 @@ export class ProfileViewPage implements OnInit {
     await alert.present();
   }
 
-  
+  // delete club
   async deleteExtracurricular(expId: number) {
     let alert = await this.alertController.create({
     
@@ -687,8 +641,7 @@ export class ProfileViewPage implements OnInit {
         {
           text: 'CANCEL',
           role: 'cancel',
-          //cssClass: 'secondary',
-          handler: () => {
+           handler: () => {
             console.log('Confirm Cancel');
           }
         },
@@ -696,12 +649,9 @@ export class ProfileViewPage implements OnInit {
           text: 'YES',
           cssClass: 'btncss',
           handler: () => {
-            console.log('Confirm Okay');
-
-            //Main concept.
-            console.log("Id: " + expId);
-           // this.showLoadingIndicator(); // Show Loading indicator
-            try {
+            console.log('Confirm Okay'); 
+             console.log("Id: " + expId);
+             try {
               var postData = {
                 'expId': expId
               }
@@ -721,8 +671,7 @@ export class ProfileViewPage implements OnInit {
                     msg = "Web service does not give proper message";
                   }
                   this.storageservice.warningToast(msg);
-                //  this.hideLoadingIndicator(); //Hide loading indicator
-                }
+                 }
                 else {
                   this.storageservice.warningToast("Connection unavailable!");
                 
@@ -748,8 +697,7 @@ export class ProfileViewPage implements OnInit {
             }
             catch (Exception) {
               this.storageservice.warningToast('Connection unavailable!');
-             // this.hideLoadingIndicator(); //Hide loading indicator
-            }
+             }
 
           }
         }

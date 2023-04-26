@@ -15,16 +15,16 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./certification.page.scss'],
 })
 export class CertificationPage implements OnInit {
-  filename: any;
   filename1: any;
   doRefresh(event) {
     this.ngOnInit();
-    setTimeout(() => {
+  setTimeout(() => {
      event.target.complete();
-    }, 2000);
+  }, 2000);
  }
 
-  getMaxDate() {
+ //date function
+  getMaxDate(){
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
     return maxDate.toISOString().split('T')[0];
@@ -34,17 +34,19 @@ export class CertificationPage implements OnInit {
   userId: string;
   CertificationForm: any;
   edit: boolean =false;
-  dateValidation: boolean;
-  private acceptFileTypes = ["image/jpg", "image/png", "image/jpeg"]
-
+  dateValidation: boolean; 
+  uploadedFilenameWithoutExt: string;
+  uploadedFileSize: string;
+  uploadedFileExtension: string;
+  
   constructor(public router:Router,public modalController: ModalController,
     public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,
     public storageservice: StorageService,private toastController: ToastController,) { }
 
   ngOnInit() {
-    this.userId = localStorage.getItem("userId");
-    this.certificationForm = this.fb.group({
+      this.userId = localStorage.getItem("userId");
+      this.certificationForm = this.fb.group({
       certificationName:['', Validators.required],
       issuedBy:['', Validators.required],
       issuedDateObj:['', Validators.required],
@@ -56,7 +58,7 @@ export class CertificationPage implements OnInit {
       currentUserId:[""],
       uploadCertification :["", Validators.required],
       uploadFile:['']
-    })
+    }) 
 
     this.route.queryParams.subscribe(params => {
       this.filename1 = '';
@@ -66,57 +68,16 @@ export class CertificationPage implements OnInit {
           console.log(params);
         }
       }
-    }); 
-
+    });  
    }
 
-
-   selectedTab: string = 'profile';
-
+   //nav bar
+   selectedTab: string = 'profile'; 
    setSelectedTab(tabName: string) {
      this.selectedTab = tabName;
    }
-
-   _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    console.log("binaryString: " + binaryString);
-
-    var base64textString = btoa(binaryString);
-    console.log("base64textString: " + base64textString);
-
-    var base64img1 = "data:image/jpeg;base64," + base64textString
-
-    console.log(`readerEvt Data: ${JSON.stringify(readerEvt)}`);
-    console.log(`readerEvt.target Data: ${JSON.stringify(readerEvt.target)}`);
-    //var uploadFileServiceUrl = "/hrms/master/employeeAdminMaster/uploadfile";
-     
-  }
-
-  imgFileNameWithPath: string = "";
-  // uploadImageToServer(imgSixtyFourData) {
-
-  //   var uploadImgServiceUrl = "api/auth/app/mobile/uploadImageMob";
-  //   var postDataUpload = {
-  //     "file": imgSixtyFourData,
-  //     "firstName": ''
-  //   }
-
-  //   console.log(`Upload image posting data: ${JSON.stringify(postDataUpload)}`);
-
-  //   this.storageservice.postrequest(uploadImgServiceUrl, postDataUpload).subscribe(result => {
-  //     var response = result;
-  //     console.log(`Image upload response: ${JSON.stringify(result)}`);
-  //     if (result["success"] == true) {
-  //       this.imgFileNameWithPath = result["uploadPhoto"];
-  //       console.log("imgFileNameWithPath: " + this.imgFileNameWithPath)
-  //     }
-  //   });
-  // }
-   base64textString: string;
-   uploadedFilenameWithoutExt: string;
-   uploadedFileSize: string;
-   uploadedFileExtension: string;
-   uploadFileIcon: string;
+ 
+   // file upload
    upload(event) {
      var files = event.target.files[0];
      var file = files;
@@ -129,35 +90,13 @@ export class CertificationPage implements OnInit {
      console.log(`uploadedFilenameWithoutExt: ${JSON.stringify(this.uploadedFilenameWithoutExt)}`);
      console.log(`uploadedFileExtension: ${JSON.stringify(this.uploadedFileExtension)}`);
      console.log(`uploadedFileSize: ${JSON.stringify(this.uploadedFileSize)}`);
- 
-    //  switch (this.uploadedFileExtension) {
-    //    case ".pdf":
-    //    case ".jpg":
-    //    case ".jpeg":
-    //    case ".png":
-    //      this.uploadFileIcon = "/img/dm/books.png";
-    //      break;
-    //    case ".doc":
-    //    case ".docx":
-    //      this.uploadFileIcon = "/img/dm/doc.png";
-    //      break;
-    //    case ".ppt":
-    //    case ".pptx":
-    //      this.uploadFileIcon = "/img/dm/ppt.png";
-    //      break;
-    //    default:
-    //      this.uploadFileIcon = "/img/dm/file.png";
-    //      break;
-    //  }
 
-     var fileExtension = files.name;
+    var fileExtension = files.name;
     var frmData: FormData = new FormData();
     frmData.append("file", files);
     frmData.append("fileName", fileExtension);
     frmData.append("folderName", "AssetProfileImg");
 
-    //if(file.size > 2000000){
-       
     var filepathurl = "api/auth/app/fileUpload/uploadFile";
     this.storageservice.post<any>(filepathurl, frmData).subscribe({
       next: (data) => {
@@ -170,27 +109,15 @@ export class CertificationPage implements OnInit {
         }else{
             this.filename1='';
             this.fileAlert();
-          }
-       
-      },
+          } 
+        },
       error: (error) => {
         console.log(error);
       }
-    }); 
-    //}else{
-    //   this.filename='';
-    //   this.fileAlert();
-    // }
-    //  if (files && file) {
-    //    var reader = new FileReader();
-    //    reader.onload = this._handleReaderLoaded.bind(this);
- 
-    //    var ans = reader.readAsBinaryString(file);
-    //    console.log("ans: " + ans);
-    //  }
- 
+    });
    }
 
+   // Unable to upload toast
    async fileAlert(){
     const alert = await this.toastController.create({
       header: '',
@@ -200,19 +127,18 @@ export class CertificationPage implements OnInit {
      await alert.present();
    }
 
+   //remove file extension
    removeExtension(filename) {
     var lastDotPosition = filename.lastIndexOf(".");
     if (lastDotPosition === -1) return filename;
     else return filename.substr(0, lastDotPosition);
   }
-
-
+ 
+  //edit function
   fetchEditDeatils(certId){
     this.storageservice.showLoading();
-    var getEditValues= "api/auth/app/IndividualProfileDetails/editCertification";
-         
-    this.storageservice.getrequest(getEditValues + "?certId=" + certId).subscribe(result => {
-
+    var getEditValues= "api/auth/app/IndividualProfileDetails/editCertification"; 
+    this.storageservice.getrequest(getEditValues + "?certId=" + certId).subscribe(result => { 
      if (result["success"] == true) {
       this.edit = true;
       this.storageservice.dismissLoading();
@@ -245,62 +171,11 @@ export class CertificationPage implements OnInit {
      }else{
       this.storageservice.dismissLoading();
      }
+     this.storageservice.dismissLoading();
    });
   }
-
-
-
-
-  clubs()
-  {
-    this.router.navigate(['/profile/addClubs']) 
-  }
-
-  experience()
-  {
-    this.router.navigate(['/profile/addExperience']) 
-  }
-
   
-  
-//FOR File UPLOAD
-// loadImageFromDevice(event) {
-//   var file = event.target.files[0]; 
-//   if (file.size > 2000000) { 
-//   }
-//    var fileExtension = file.name;
-//   var frmData: FormData = new FormData();
-//   frmData.append("file", file);
-//   frmData.append("fileName", fileExtension);
-//   frmData.append("folderName", "knowledgebankfiles");
-
-//   var filepathurl = "api/auth/app/commonServices/uploadFile";
-//   this.storageservice.postrequest(filepathurl, frmData).subscribe(async result => {  
-//     console.log("Image upload response: " + result)
-//    if (result["success"] == true) {
-//     if (result["filePath"] != undefined && result["filePath"] != null && result["filePath"] != '') {
-//       this.certificationForm.patchValue({
-//        'uploadCertification': result["filePath"],
-//        'certificationName': file.name,
-//        'fileSize': file.size, 
-//      })
-//     }
-//  } else { 
-//  //  window.location.reload();
-//  }
-//   //  this.router.navigate(['/profile-view']);
-     
-//  });
-   
-// }
-
-
-   presentModal() {
-     this.router.navigate(['/skill-popup']);
-  }
-
-
-  //save
+  // save function
   async saveCertification(){
     const errors = this.checkFormValidity(this.certificationForm);  
       if (errors.length > 0) {
@@ -309,10 +184,9 @@ export class CertificationPage implements OnInit {
           header: '',
           message: 'Please provide all the required values!',
           duration: 3000,
-        });
-    
+        }); 
         await alert.present();
-      } else {
+       } else {
         if(this.dateValidation == true || this.dateValidation == undefined){
          this.certificationForm.value.currentUserId = this.userId; 
     
@@ -322,21 +196,19 @@ export class CertificationPage implements OnInit {
           if(this.certificationForm.value.expiryDateObj != "" && this.certificationForm.value.expiryDateObj != null){
           this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
          }
-      this.CertificationForm = this.certificationForm.value;
-      console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
-      var saveSkill = "api/auth/app/mobile/saveCretification";
+        this.CertificationForm = this.certificationForm.value;
+        console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
+        var saveSkill = "api/auth/app/mobile/saveCretification";
     
-       this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
-          console.log("Image upload response: " + result)
-         if (result["success"] == true) {
-          setTimeout(() => {
-            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
-           profilePage.updateData();
-          }, 800);
-             this.presentToast()
-           }else{  
-    
-           }
+        this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
+            console.log("Image upload response: " + result)
+            if (result["success"] == true) {
+            setTimeout(() => {
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            profilePage.updateData();
+            }, 800);
+              this.presentToast()
+            }
        });
       }else{
         const alert = await this.toastController.create({
@@ -349,17 +221,16 @@ export class CertificationPage implements OnInit {
     } 
   } 
 
+  // update function
   async UpdateCertification(){
-    const errors = this.checkFormValidity(this.certificationForm);
-
-  if (errors.length > 0) {
+    const errors = this.checkFormValidity(this.certificationForm); 
+    if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
       header: '',
       message: 'Please provide all the required values!',
       duration: 3000,
-    });
-
+    }); 
     await alert.present();
   } else {
      if(this.dateValidation == true || this.dateValidation == undefined){
@@ -371,12 +242,12 @@ export class CertificationPage implements OnInit {
       this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
      }
        this.CertificationForm = this.certificationForm.value;
-  console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
-  var saveSkill = "api/auth/app/IndividualProfileDetails/updateCertification";
+    console.log(` data: ${JSON.stringify(this.CertificationForm)}`);
+    var saveSkill = "api/auth/app/IndividualProfileDetails/updateCertification";
 
    this.storageservice.postrequest(saveSkill, this.CertificationForm).subscribe(async result => {  
       console.log("Image upload response: " + result)
-     if (result["success"] == true) {
+      if (result["success"] == true) {
       setTimeout(() => {
          const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
         profilePage.updateData();
@@ -397,6 +268,7 @@ export class CertificationPage implements OnInit {
   }
   }
 
+  // success toast popup
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Saved Successfully',
@@ -407,19 +279,20 @@ export class CertificationPage implements OnInit {
    await toast.present();
 }
 
-async updateToast() {
-  const toast = await this.toastController.create({
-    message: 'Updated Successfully',
-    duration: 3000,
-    cssClass: 'custom-toast'
-  });
-  this.router.navigate(['/profile-view']);
- await toast.present();
-}
+//update toast popup
+  async updateToast() {
+    const toast = await this.toastController.create({
+      message: 'Updated Successfully',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+    this.router.navigate(['/profile-view']);
+  await toast.present();
+  }
 
+  // validation check function
   checkFormValidity(form: FormGroup): string[] {
-    const errors: string[] = [];
-    
+    const errors: string[] = []; 
     // Check each form control for errors
     Object.keys(form.controls).forEach(key => {
       const controlErrors: ValidationErrors = form.controls[key].errors;
@@ -428,16 +301,17 @@ async updateToast() {
           errors.push(`${key} ${keyError}`);
         });
       }
-    });
-  
+    }); 
     return errors;
   }
 
+  //back button
   goto_profileView(){
     this.certificationForm.reset();
     this.router.navigate(['/profile-view']);
   }
 
+  //end date validation
   async validateEndDate(event){
     var startdate = new Date(new Date(this.certificationForm.value.issuedDateObj).setFullYear(new Date(this.certificationForm.value.issuedDateObj).getFullYear())); //Currentdate - one year.
     console.log("startdate: " + startdate);
@@ -459,8 +333,8 @@ async updateToast() {
   }
 
 
-  async validateStartDate(event){
-
+  // start date validation
+  async validateStartDate(event){ 
     if(this.certificationForm.value.expiryDateObj != "" && this.certificationForm.value.expiryDateObj != null){
       var endDate = new Date(new Date(this.certificationForm.value.expiryDateObj).setFullYear(new Date(this.certificationForm.value.expiryDateObj).getFullYear())); //Currentdate - one year.
       console.log("endDate: " + endDate);
@@ -473,14 +347,10 @@ async updateToast() {
           header: '',
           message: 'Expiry Date should be greater than Issue date.1',
           duration: 3000,
-        });
-        // this.certificationForm.patchValue({
-        //   'issuedDateObj':""
-        // })
+        }); 
          await alert.present();
       }
-    }
-    
+    } 
   }
 
 

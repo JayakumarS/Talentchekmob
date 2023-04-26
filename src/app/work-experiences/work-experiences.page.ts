@@ -5,26 +5,23 @@ import { StorageService } from '../storage.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
-//import { ProfileViewPage } from '../profile-view/profile-view.page';
-import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.page';
-
+ 
 @Component({
   selector: 'app-work-experiences',
-  //template: '<ckeditor [(ngModel)]="content" [config]="editorConfig"></ckeditor>',
   templateUrl: './work-experiences.page.html',
-  styleUrls: ['./work-experiences.page.scss'],
-
- 
+  styleUrls: ['./work-experiences.page.scss'],  
 })
 export class WorkExperiencesPage implements OnInit {
 
+  //refresh function
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
      event.target.complete();
     }, 2000);
- }
+  }
  
+  // date function
   getMaxDate() {
     let maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 10);
@@ -55,15 +52,15 @@ export class WorkExperiencesPage implements OnInit {
   }
   
   ngOnInit() {
-    this.userId = localStorage.getItem("userId");
-    this.isunregOrg = false;
-    this.ExperienceForm= this.fb.group({
+      this.userId = localStorage.getItem("userId");
+      this.isunregOrg = false;
+      this.ExperienceForm= this.fb.group({
       designation: ["", Validators.required],
       organisationName: ["", Validators.required],
       department: ["", Validators.required],
       registrationNumber: ["", Validators.required],
-       expStart: ["", Validators.required],
-       expEnd: ["", Validators.required],
+      expStart: ["", Validators.required],
+      expEnd: ["", Validators.required],
       currentlyWork: [""],
       jobType: ["", Validators.required],
       orgLocation: ["", Validators.required],
@@ -74,26 +71,25 @@ export class WorkExperiencesPage implements OnInit {
       expId:[""]
    });
    this.getJobtype();
-   var listConstant =  this.initializeItems(); 
-
+   this.initializeItems();  
    this.route.queryParams.subscribe(params => {
-    if (params) { 
+   if (params) { 
       if (params != null || params != undefined ) {  
           this.fetchEditDeatils(params.id); 
         console.log(params);
       }
     }
-  });
- 
+  }); 
   }
 
 
-  selectedTab: string = 'profile';
-
+  //nav bar
+  selectedTab: string = 'profile'; 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
 
+  //edit function
   fetchEditDeatils(expId){
     this.storageservice.showLoading();
     var getEditValues= "api/auth/app/IndividualProfileDetails/EditExperience";
@@ -101,21 +97,18 @@ export class WorkExperiencesPage implements OnInit {
      if (result["success"] == true) {
       this.storageservice.dismissLoading();
       this.edit = true;
-      this.initializeItems();
-
+      this.initializeItems(); 
       const containsTF = this.checkForTF(result["experienceBean"].organisationName)
       if(containsTF == true){
         this.searchForId(result["experienceBean"].organisationName);  
       }else{
         this.searchForText(result["experienceBean"].organisationName); 
-      }
-
-
-      this.ExperienceForm.get("organisationName").disable(); 
-
-      this.orgLocation(this.desiredItem.id);
+      } 
+      this.ExperienceForm.get("organisationName").disable();  
+      this.orgLocation(this.desiredItem.id); 
 
       this.validationForCurWorking(result["experienceBean"].currentlyWork)
+
       const expStart = result["experienceBean"].expStart;
       const startdate = moment(expStart, 'DD/MM/YYYY').toDate();
 
@@ -126,8 +119,6 @@ export class WorkExperiencesPage implements OnInit {
         'expEnd': enddate.toISOString(),
       })
       }
-
-
       this.ExperienceForm.patchValue({ 
       'designation': result["experienceBean"].designation,
       'organisationName': this.desiredItem.text,
@@ -148,7 +139,7 @@ export class WorkExperiencesPage implements OnInit {
    this.storageservice.dismissLoading();
   }
 
-
+  //check the data contains TF or Not
   checkForTF(data: string): boolean {
     if (data.indexOf('TF') !== -1) {
       return true;
@@ -157,6 +148,7 @@ export class WorkExperiencesPage implements OnInit {
     }
   }
 
+  //search ID from data array
   searchForId(id: string) {
     this.desiredItem = null;
     for (const item of this.organisationList) {
@@ -172,7 +164,7 @@ export class WorkExperiencesPage implements OnInit {
     }
   }
 
-
+ //search text from data array
   searchForText(text: string) {
     this.desiredItem = null;
     for (const item of this.organisationList) {
@@ -187,18 +179,14 @@ export class WorkExperiencesPage implements OnInit {
       console.log(this.desiredItem.text); 
     }
   }
-
-  certifications()
-  {
-    this.router.navigate(['/profile/addCertifications']) 
-  }
-  goto_jobProfile()
-  {
+ 
+  //back button
+  goto_jobProfile(){
     this.ExperienceForm.reset();
     this.router.navigate(['/profile-view']) 
   }
 
-
+  // end date validation
   async validateEndDate(event){
     var startdate = new Date(new Date(this.ExperienceForm.value.expStart).setFullYear(new Date(this.ExperienceForm.value.expStart).getFullYear())); //Currentdate - one year.
     console.log("startdate: " + startdate);
@@ -220,8 +208,8 @@ export class WorkExperiencesPage implements OnInit {
   }
 
 
+  // start date validation
   async validateStartDate(event){
-
     if(this.ExperienceForm.value.expEnd != ""){
       var endDate = new Date(new Date(this.ExperienceForm.value.expEnd).setFullYear(new Date(this.ExperienceForm.value.expEnd).getFullYear())); //Currentdate - one year.
       console.log("endDate: " + endDate);
@@ -235,15 +223,13 @@ export class WorkExperiencesPage implements OnInit {
           message: 'Job end date should be greater than Start date.',
           duration: 3000,
         });
-        // this.ExperienceForm.patchValue({
-        //   'expStart':""
-        // })
          await alert.present();
       }
     }
     
   }
 
+  //validation for currently working or not
   validationForCurWorking(event){
     var value  = event;
     if(value == true){
@@ -260,15 +246,13 @@ export class WorkExperiencesPage implements OnInit {
 
   goToSearchSelectedItem( instName,instId) {
     console.log("InsName: " + instName)
-    console.log("InsId: " + instId)
-    
+    console.log("InsId: " + instId) 
     this.organisationVal = instName;
     this.Exp.orgName = instId;
     this.IsorgListShow = false;
-    //this.getstatelist(CtryId);
-  }
-    async initializeItems(): Promise<any> {
-  
+   }
+
+   async initializeItems(): Promise<any> { 
       var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
       const InsList = this.storageservice.getrequest(organisationListUrl).subscribe(result => {
         this.organisationList = result["organisationList"];
@@ -276,7 +260,8 @@ export class WorkExperiencesPage implements OnInit {
        });
     
       return InsList;
-    }
+   }
+
     async filterList(evt) {
       const filterValue = evt.srcElement.value.toLowerCase();
       if(this.isunregOrg == false){
@@ -328,18 +313,18 @@ export class WorkExperiencesPage implements OnInit {
       return value;
     }
 
-    //Jobtype
+    //Jobtype list
     getJobtype(){
       var getjobTypeListUrl= "api/auth/app/jobportal/jobTypeList";
-         
       this.storageservice.getrequest(getjobTypeListUrl).subscribe(result => {
        if (result["success"] == true) {
         this.jobTypeList = result["jobTypeList"]; 
        }
      });
     }
-    orgLocation(orgid:any){
 
+    //location list
+    orgLocation(orgid:any){
       var getlocationUrl = "api/auth/app/IndividualProfileDetails/orgLocation";
       this.storageservice.getrequest(getlocationUrl + "?orgid=" + orgid).subscribe(result => {
         if (result["success"] == true) {
@@ -350,21 +335,19 @@ export class WorkExperiencesPage implements OnInit {
         }
       });
   }
-    //save
+
+  //save
   async saveCertification(){
     const errors = this.checkFormValidity(this.ExperienceForm);
-
-  if (errors.length > 0) {
+    if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
       header: '',
       message: 'Please provide all the required values!',
       duration: 3000,
     });
-
     await alert.present();
-  } else {
-
+    } else {
     if(this.dateValidation == true || this.dateValidation == undefined){
       this.ExperienceForm.value.currentUserId = this.userId; 
 
@@ -372,7 +355,6 @@ export class WorkExperiencesPage implements OnInit {
       if(this.ExperienceForm.value.expEnd != undefined){
        this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
       }
- 
       if(this.unregisteredOrg == ""){
        this.ExperienceForm.value.organisationName = this.Exp.orgName;
       }else{
@@ -380,18 +362,13 @@ export class WorkExperiencesPage implements OnInit {
       }
       this.ExperienceForm.value.unregisteredOrg = this.unregisteredOrg;
       this.Experience = this.ExperienceForm.value;
-    console.log(` data: ${JSON.stringify(this.Experience)}`);
-   var saveExperience = "api/auth/app/IndividualProfileDetails/saveExperience";
+      console.log(` data: ${JSON.stringify(this.Experience)}`);
+      var saveExperience = "api/auth/app/IndividualProfileDetails/saveExperience";
  
-    this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
+      this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
        console.log("Image upload response: " + result)
       if (result["success"] == true) {
-        // setTimeout(() => {
-        //    const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-        //    profilePage.updateData();
-        //   }, 800);
         this.presentToast()
-        
         let edit = {
           orgId:result["experienceBean"].organisationId,
           expId:result["experienceBean"].expId,
@@ -399,8 +376,7 @@ export class WorkExperiencesPage implements OnInit {
        let navigationExtras: NavigationExtras = {
          queryParams: edit
        };
-        this.router.navigate(['/exp-verification'],navigationExtras)
-
+        this.router.navigate(['/exp-verification'],navigationExtras) 
         }
     });
     }else{
@@ -411,39 +387,31 @@ export class WorkExperiencesPage implements OnInit {
       });  
        await alert.present();
     }
-    
   }
   } 
 
+  // success toast popup
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Saved Successfully',
       duration: 3000,
       cssClass: 'custom-toast'
     });
-
-
   await toast.present();
 }
 
-
-
 /// update 
-
 async updateCertification(){
   const errors = this.checkFormValidity(this.ExperienceForm);
-
-if (errors.length > 0) {
-  // Display errors in a popup
-  const alert = await this.toastController.create({
-    header: '',
-    message: 'Please provide all the required values!',
-    duration: 3000,
-  });
-
-  await alert.present();
-} else {
-
+  if (errors.length > 0) {
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+      header: '',
+      message: 'Please provide all the required values!',
+      duration: 3000,
+    });
+    await alert.present();
+  } else {
   if(this.dateValidation == true || this.dateValidation == undefined){
           this.ExperienceForm.value.currentUserId = this.userId; 
 
@@ -452,16 +420,12 @@ if (errors.length > 0) {
           this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
           }
           this.Experience = this.ExperienceForm.value;
-        console.log(` data: ${JSON.stringify(this.Experience)}`);
-      var saveExperience = "api/auth/app/mobile/UpdateExperience";
+          console.log(` data: ${JSON.stringify(this.Experience)}`);
+          var saveExperience = "api/auth/app/mobile/UpdateExperience";
       
         this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
-            // setTimeout(() => {
-            //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-            //   profilePage.updateData();
-            //  }, 800);
              this.updateToast()
              let edit = {
               orgId:this.desiredItem.id,
@@ -471,12 +435,9 @@ if (errors.length > 0) {
              queryParams: edit
            };
             this.router.navigate(['/exp-verification'],navigationExtras)
-    
-            }else{  
-      
             }
         });
-  }else{
+    }else{
       const alert = await this.toastController.create({
         header: '',
         message: 'Job end date should be greater than Start date.',
@@ -487,7 +448,7 @@ if (errors.length > 0) {
 }
 } 
 
-
+//update toast popup
 async updateToast() {
   const toast = await this.toastController.create({
     message: 'Updated Successfully',
@@ -499,9 +460,9 @@ async updateToast() {
 await toast.present();
 }
  
-  checkFormValidity(form: FormGroup): string[] {
+//check form validation before save
+checkFormValidity(form: FormGroup): string[] {
     const errors: string[] = [];
-    
     // Check each form control for errors
     Object.keys(form.controls).forEach(key => {
       const controlErrors: ValidationErrors = form.controls[key].errors;
@@ -511,25 +472,7 @@ await toast.present();
         });
       }
     });
-  
     return errors;
   }
 
-
-//   // footer
-// goto_profileSearch(){
-//   this.router.navigate(['/job-search']);
-// }
-// goto_jobs(){
-//   this.router.navigate(['/job']);
-// }
-// goto_home(){
-//   this.router.navigate(['/home']);
-// }
-// goto_profile(){
-//   this.router.navigate(['/profile-view']);
-// }
-// goto_more(){
-//   this.router.navigate(['/settings']);
-// }
 }

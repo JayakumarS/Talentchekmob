@@ -10,18 +10,17 @@ import { NavigationEnd } from '@angular/router';
 })
 export class JobPage implements OnInit {
 
-
+  // refresh screen 
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
      event.target.complete();
     }, 2000);
- }
-
+  }
+ 
   public matchedJobList:any;
   userId:string; 
-  showflag:any;
-  
+  showflag:any; 
 
   constructor(public router:Router,public storageservices: StorageService) { 
    this.userId = localStorage.getItem("userId") ;
@@ -46,23 +45,20 @@ export class JobPage implements OnInit {
       if (event instanceof NavigationEnd && event.url === '/job') {
         this.setSelectedTab('earth');
       }
-    });
-
+    }); 
     this.BindMatchedJobsList();
   }
 
-  selectedTab: string = 'earth';
-
+  //nav bar
+  selectedTab: string = 'earth'; 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
   
   goto_jobdetails(jobId){
-    let edit = {
-
+    let edit = { 
       jobID :jobId
-    }
-
+    } 
     let navigationExtras: NavigationExtras = {
       queryParams: edit
     };
@@ -73,14 +69,9 @@ export class JobPage implements OnInit {
     this.storageservices.refreshData();
   }
 
-  
-  BindMatchedJobsList(){
-
-    
-
-    var MatchedJobsURL = "api/auth/app/jobportal/getJobMatchDetails"+"?currentUserId=" + this.userId;
-
-
+  //list function
+  BindMatchedJobsList(){ 
+    var MatchedJobsURL = "api/auth/app/jobportal/getJobMatchDetails"+"?currentUserId=" + this.userId;  
     const matchedJobList = this.storageservices.getrequest(MatchedJobsURL).subscribe(result => {
       this.showflag = false;
       this.matchedJobList = result['jobSeekList'];
@@ -105,27 +96,21 @@ export class JobPage implements OnInit {
 
   }
 
-  goto_editJob(){
-
-    let edit = {
-
+  goto_editJob(){ 
+    let edit = { 
       call : "edit-call"
-    }
-
+    } 
     let navigationExtras: NavigationExtras = {
       queryParams: edit
     };
     this.router.navigate(['/job-profile'], navigationExtras);
   }
-
-
+  
   goto_addJob(){
     this.router.navigate(['/job-profile']);
   }
-
-
-  // footer nav
-
+ 
+  // footer nav 
   goto_profileSearch(){
     this.router.navigate(['/job-search']);
   }
@@ -140,7 +125,5 @@ export class JobPage implements OnInit {
   }
   goto_more(){
     this.router.navigate(['/settings']);
-  }
-
-
+  } 
 }

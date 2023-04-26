@@ -75,9 +75,7 @@
             </ion-card-content>
         </ion-card>
 
-        <!------- Skills card------ -->
-
-
+        <!------- Skills card------ --> 
         <ion-card class="talentcard1" *ngIf="skillscard">
             <ion-card-content>
                 <ion-row>
@@ -101,27 +99,12 @@
                     </ion-col>
                     <ion-col size="2" style="margin-top: 7%;display: flex;">
                         <img src="./assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill(x.skillId)">
-
-
                         <ion-icon name="trash-outline" style="padding-left: 24%;" (click)="deleteSkills(x.skillId)"></ion-icon>
-
-                    </ion-col>
-                    <!-- <ion-col size="2">
-                        <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>
-
-                    </ion-col> -->
-                </ion-row>
-                <!-- <ion-row class="talentrow">
-
-                <ion-col>
-                    <ion-label> Website Devlopement</ion-label>
-                    <ion-progress-bar value="0.6"></ion-progress-bar>
-                </ion-col>
-
-            </ion-row> -->
-
+                    </ion-col> 
+                </ion-row> 
             </ion-card-content>
         </ion-card>
+
         <!-- Add card empty -->
         <ion-card *ngIf="!skillscard" class="talentcard1" style="padding-bottom: 35px ;">
             <ion-card-content>
@@ -139,9 +122,8 @@
                 </ion-row>
             </ion-card-content>
         </ion-card>
-        <!-------  Certifications card------ -->
 
-
+        <!-------  Certifications card------ --> 
         <ion-card class="talentcard1" *ngIf="certificationcard">
             <ion-card-content>
                 <ion-row style="    padding-bottom: 10px;">
@@ -203,8 +185,7 @@
                 </ion-row>
             </ion-card-content>
         </ion-card>
-        <!------- Academics card------ -->
-
+        <!------- Academics card------ --> 
         <ion-card class="talentcard1" *ngIf="educationcard">
             <ion-card-content>
                 <ion-row style="    padding-bottom: 10px;">
@@ -252,9 +233,7 @@
                                 <ion-col size="10">
                                     <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.institutionName}}</ion-label>
                                    </ion-col>
-                                <!-- <img src="{{x.instLogo}}"  style="  width: 12%;border-radius: 50%;">&nbsp;&nbsp; -->
-                                <!-- <ion-label style="font-size: 18px; font-weight: bolder;">{{x.institutionName}}</ion-label> -->
-                            </ion-col>
+                              </ion-col>
                             <ion-col size="12">
                                 <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.institutionLocation}}</ion-label>
                             </ion-col>
@@ -354,9 +333,7 @@
                                 <ion-col size="10">
                                     <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.organisationName }}</ion-label>
                                    </ion-col>
-                                <!-- <img src="{{x.orgLogo}}" style="    width: 12%;border-radius: 50%;" >&nbsp;&nbsp; -->
-                                <!-- <ion-label style="font-size: 18px;  font-weight: bolder;    margin-top: 2%;   ">{{x.organisationName }}</ion-label> -->
-                            </ion-col>
+                             </ion-col>
                             <ion-col size="12">
                                 <ion-label style=" font-size: 17px; color: #8b8b8b;">{{x.designation}}</ion-label>
                             </ion-col>
@@ -413,11 +390,7 @@
                     </ion-col>
                     <ion-col style="    text-align: end;">
                         <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Connections()"></ion-icon>
-                    </ion-col>
-
-                    <!-- <ion-col size="2">
-                        <img src="./assets/icon/edit_icon.png" (click)="Connections()" id="prfoileimg1">
-                    </ion-col> -->
+                    </ion-col> 
                 </ion-row>
 
                 <ion-card class="talentcard2" *ngFor="let x of connectionList">
@@ -429,11 +402,7 @@
                             <ion-col size="12">
                                 <ion-label style=" color: #8b8b8b;font-size: 16px;"><b>{{x.connectionCount}}</b></ion-label>
                                 <ion-label style=" color: #8b8b8b;font-size: 16px;"><b>&nbsp;{{x.relationship}}</b></ion-label>
-                            </ion-col>
-                            <!-- <ion-col size="12" >
-                                    <h5  style="color:black;" >{{x.connectionCount}}</h5>
-                                    <small  style="color:black;">{{x.relationship}}</small>
-                                </ion-col> -->
+                            </ion-col> 
                         </ion-row>
                     </ion-card-content>
                 </ion-card>

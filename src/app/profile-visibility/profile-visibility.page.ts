@@ -15,9 +15,8 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 export class ProfileVisibilityPage implements OnInit {
 
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
-  profileVisForm: FormGroup;
-
-   selectedRadioGroup:any;
+  profileVisForm: FormGroup; 
+  selectedRadioGroup:any;
   response:any;
   type: string;
   currentUserId:any;
@@ -26,7 +25,7 @@ export class ProfileVisibilityPage implements OnInit {
     private http: HttpClient,
     public storageservice:StorageService,
     public toastController :ToastController) {
-      this.profileVisForm = this.fb.group({
+    this.profileVisForm = this.fb.group({
         profileVisibility: [""], 
         currentUserId: [""]
       });
@@ -34,8 +33,8 @@ export class ProfileVisibilityPage implements OnInit {
 
   ngOnInit() {  
       this.currentUserId = localStorage.getItem("userId"); 
-       var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId=" + this.currentUserId;
-       
+       var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId="
+        + this.currentUserId; 
        this.storageservice.getrequest(geteditVisibilityUrl).subscribe(result => {
         if (result["success"] == true) {
           this.profileVisForm.patchValue({
@@ -47,28 +46,27 @@ export class ProfileVisibilityPage implements OnInit {
       }); 
    }
 
-  selectedTab: string = 'menu';
-
+   //nav bar
+  selectedTab: string = 'menu'; 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   } 
+
+  //back button
   goto_visibility(){
     this.router.navigate(['/visibility']) 
   }
 
+  //update Function
   updateProfileVisibility(){
     this.currentUserId = localStorage.getItem("userId"); 
     var data = {
       "profileVisibility": this.profileVisForm.value.profileVisibility,
       "currentUserId":this.currentUserId,
       "phoneVisibility":"",
-      "emailVisibility":""
-
-     } 
-    //console.log(` data: ${JSON.stringify(data)}`);
-
-    var updateprofileVisibilityUrl = "api/auth/app/setting/updateVisibilityMoblie";
- 
+      "emailVisibility":"" 
+     }  
+    var updateprofileVisibilityUrl = "api/auth/app/setting/updateVisibilityMoblie"; 
     this.storageservice.postrequest(updateprofileVisibilityUrl, data).subscribe(async result => {  
       this.response = result;
       console.log("Image upload response: " + result)
@@ -77,6 +75,8 @@ export class ProfileVisibilityPage implements OnInit {
         }
     });
    }
+
+   //update toast popup
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Updated Successfully',
@@ -88,19 +88,19 @@ export class ProfileVisibilityPage implements OnInit {
   }
 
    // footer
-goto_profileSearch(){
-  this.router.navigate(['/job-search']);
-}
-goto_jobs(){
-  this.router.navigate(['/job']);
-}
-goto_home(){
-  this.router.navigate(['/home']);
-}
-goto_profile(){
-  this.router.navigate(['/profile-view']);
-}
-goto_more(){
-  this.router.navigate(['/settings']);
-}
+  goto_profileSearch(){
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs(){
+    this.router.navigate(['/job']);
+  }
+  goto_home(){
+    this.router.navigate(['/home']);
+  }
+  goto_profile(){
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more(){
+    this.router.navigate(['/settings']);
+  }
 }
