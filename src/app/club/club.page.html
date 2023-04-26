@@ -32,8 +32,9 @@
             <div class="button-content">
                 <ion-label class="labels">Name of the Club/Association <small style="color: #f70505;">*</small></ion-label>
                 <ion-item fill="outline" class="input-field">
-                  <div class="selected-skill">{{ selectedOrganisation }} 
-                    <ion-icon *ngIf="selectedOrganisation != undefined && selectedOrganisation != ''" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
+                  <div class="selected-skill"  >{{ selectedOrganisation }} 
+                    
+                    <ion-icon  *ngIf="selectedOrganisation != undefined && selectedOrganisation != '' && !disabled==true" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
                  </div>
                 <ion-input  *ngIf="!disabled==true" (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
             </ion-item>
@@ -56,7 +57,7 @@
                     <div class="button-content">
                         <ion-label class="labels">Title Held<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input type="text" formControlName="titleHeld"(optionSelected)="orgLocation($event.option.value)"></ion-input>
+                            <ion-input type="text"   formControlName="titleHeld"(optionSelected)="orgLocation($event.option.value)"></ion-input>
                         </ion-item>
                         <div *ngIf="clubFrom.controls.titleHeld.hasError('required') && clubFrom.controls.titleHeld.touched">
                           <small style="color: #f70505;">Title Held is required</small>

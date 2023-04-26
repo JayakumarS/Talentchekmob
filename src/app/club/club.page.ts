@@ -396,8 +396,10 @@ getOrganisationList(){
           const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
      
          this.edit = true;
-         this.disabled =true
+         this.disabled =true;
+      
          this.clubFrom.patchValue({
+          
             'clubName':this.desiredItem.text,
            'clubBranch' :this.extracurricularBean.clubBranch,
            'titleHeld': this.extracurricularBean.titleHeld,
@@ -409,6 +411,9 @@ getOrganisationList(){
            'currentMember': this.extracurricularBean.currentMember,
            'extId': this.extracurricularBean.extId,
            })
+           
+           this.clubFrom.get("clubBranch").disable();
+         
            if(this.extracurricularBean.value.clubName.includes('TF')){
             this.orgLocation(this.desiredItem.id,);
           }else{
