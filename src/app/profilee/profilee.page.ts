@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import moment from 'moment';
@@ -68,7 +68,7 @@ countryIdVal:string;
   desiredcityItem: any;
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,public modalController: ModalController,
     private camera: Camera,private toastController: ToastController,private elementRef: ElementRef
-    ,public alertController: AlertController) { }
+    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone) { }
 
   ngOnInit() {
 
@@ -259,7 +259,7 @@ goTostateSelectedItem( stateId) {
           console.log("Image upload response: " + result)
          if (result["success"] == true) {
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
            profilePage.updateData();
           }, 800);
           this.presentToast()
