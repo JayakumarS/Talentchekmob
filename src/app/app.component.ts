@@ -173,26 +173,33 @@ loading = false;
   //#endregion
 
   logOut() {
-
     localStorage.removeItem('token');
     localStorage.removeItem('user_name');
     localStorage.removeItem('user_mobile');
     localStorage.removeItem('user_email');
     localStorage.removeItem('user_address');
-
     localStorage.removeItem('Id');
     localStorage.removeItem('Pwd');
     localStorage.removeItem('userRefFlag');
-
+  
     this.storageservice.publishSomeData({
       status_get: false
     });
+  
     localStorage.clear();
-
+  
     this.nativeStorage.clear();
-
+  
     this.router.navigate(['/login']);
+  
+    if (window && window.caches) {
+      caches.keys().then(function (names) {
+        for (let name of names)
+          caches.delete(name);
+      });
+    }
   }
+  
 
   initializeApp() {
 
