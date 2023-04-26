@@ -26,6 +26,15 @@
         <ion-item fill="outline" class="input-field">
           <ion-input type="text" formControlName="verifierName"></ion-input>
         </ion-item>
+        <div *ngIf=" ExperienceForm.controls.verifierName.hasError('required') && ExperienceForm.controls.verifierName.touched">
+          <small style="color: #f70505;">Verifier name is required</small>
+      </div>
+      <div *ngIf="ExperienceForm.controls.verifierName.hasError('pattern')">
+          <small style="color: #f70505;">In special character only .is allowed</small>
+      </div>
+      <div *ngIf="ExperienceForm.controls.verifierName.hasError('minlength')">
+          <small style="color: #f70505;">Verifier name must be atleast 3 characters long</small>
+      </div>
       </div>
     </div>
     <div class="button-content">

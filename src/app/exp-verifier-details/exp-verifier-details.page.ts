@@ -16,6 +16,7 @@ export class ExpVerifierDetailsPage implements OnInit {
   ExperienceForm:FormGroup;
   userId: string;
   Experience: any;
+  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(public router:Router,private fb: FormBuilder,public toastController:ToastController,
      public storageservice:StorageService,private route: ActivatedRoute,) { }
 
@@ -27,8 +28,8 @@ export class ExpVerifierDetailsPage implements OnInit {
     });
 
     this.ExperienceForm= this.fb.group({
-      verifierName: ["", Validators.required],
-      verifierEmail:["", Validators.required],
+      verifierName: ["",Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+      verifierEmail:["", Validators.compose([Validators.maxLength(70),Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
       verifierDesignation:["", Validators.required],
       verifierMobile:[""],
       oniCode:[""],

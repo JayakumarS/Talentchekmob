@@ -15,6 +15,7 @@ export class AcademicVerifierDetailsPage implements OnInit {
   ExtracurricularFrom:FormGroup;
   Extracurricular: any;
   userId: string;
+  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(private fb: FormBuilder,private route: ActivatedRoute, public router:Router,public toastController:ToastController,
     public storageservice:StorageService) { }
 
@@ -27,8 +28,8 @@ export class AcademicVerifierDetailsPage implements OnInit {
       this.userId = localStorage.getItem("userId") ;  
       
     this.ExtracurricularFrom = this.fb.group({
-      verifierName: ["",Validators.required],
-      verifierEmail:["",Validators.required],
+      verifierName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+      verifierEmail:["",Validators.compose([Validators.maxLength(70),Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
       verifierDesignation:["",Validators.required],
       verifierMobile:[""],
       oniCode:[""],
