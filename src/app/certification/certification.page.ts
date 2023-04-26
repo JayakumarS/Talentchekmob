@@ -15,6 +15,8 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./certification.page.scss'],
 })
 export class CertificationPage implements OnInit {
+  filename: any;
+  filename1: any;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -33,6 +35,7 @@ export class CertificationPage implements OnInit {
   CertificationForm: any;
   edit: boolean =false;
   dateValidation: boolean;
+  private acceptFileTypes = ["image/jpg", "image/png", "image/jpeg"]
 
   constructor(public router:Router,public modalController: ModalController,
     public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
@@ -51,19 +54,19 @@ export class CertificationPage implements OnInit {
       certificationId:["", Validators.required],
       certId:[""],
       currentUserId:[""],
-      certificationPath :[""],
-      uploadFile:['', Validators.required]
+      uploadCertification :["", Validators.required],
+      uploadFile:['']
     })
 
     this.route.queryParams.subscribe(params => {
+      this.filename1 = '';
       if (params) { 
-        if (params != null || params != undefined ) {  
+        if (params != null || params != undefined ) {   
             this.fetchEditDeatils(params.id); 
           console.log(params);
         }
       }
-    });
-
+    }); 
 
    }
 
@@ -86,29 +89,29 @@ export class CertificationPage implements OnInit {
     console.log(`readerEvt Data: ${JSON.stringify(readerEvt)}`);
     console.log(`readerEvt.target Data: ${JSON.stringify(readerEvt.target)}`);
     //var uploadFileServiceUrl = "/hrms/master/employeeAdminMaster/uploadfile";
-    this.uploadImageToServer(base64img1);
+     
   }
 
   imgFileNameWithPath: string = "";
-  uploadImageToServer(imgSixtyFourData) {
+  // uploadImageToServer(imgSixtyFourData) {
 
-    var uploadImgServiceUrl = "api/auth/app/mobile/uploadImageMob";
-    var postDataUpload = {
-      "file": imgSixtyFourData,
-      "firstName": ''
-    }
+  //   var uploadImgServiceUrl = "api/auth/app/mobile/uploadImageMob";
+  //   var postDataUpload = {
+  //     "file": imgSixtyFourData,
+  //     "firstName": ''
+  //   }
 
-    console.log(`Upload image posting data: ${JSON.stringify(postDataUpload)}`);
+  //   console.log(`Upload image posting data: ${JSON.stringify(postDataUpload)}`);
 
-    this.storageservice.postrequest(uploadImgServiceUrl, postDataUpload).subscribe(result => {
-      var response = result;
-      console.log(`Image upload response: ${JSON.stringify(result)}`);
-      if (result["success"] == true) {
-        this.imgFileNameWithPath = result["uploadPhoto"];
-        console.log("imgFileNameWithPath: " + this.imgFileNameWithPath)
-      }
-    });
-  }
+  //   this.storageservice.postrequest(uploadImgServiceUrl, postDataUpload).subscribe(result => {
+  //     var response = result;
+  //     console.log(`Image upload response: ${JSON.stringify(result)}`);
+  //     if (result["success"] == true) {
+  //       this.imgFileNameWithPath = result["uploadPhoto"];
+  //       console.log("imgFileNameWithPath: " + this.imgFileNameWithPath)
+  //     }
+  //   });
+  // }
    base64textString: string;
    uploadedFilenameWithoutExt: string;
    uploadedFileSize: string;
@@ -127,25 +130,25 @@ export class CertificationPage implements OnInit {
      console.log(`uploadedFileExtension: ${JSON.stringify(this.uploadedFileExtension)}`);
      console.log(`uploadedFileSize: ${JSON.stringify(this.uploadedFileSize)}`);
  
-     switch (this.uploadedFileExtension) {
-       case ".pdf":
-       case ".jpg":
-       case ".jpeg":
-       case ".png":
-         this.uploadFileIcon = "/img/dm/books.png";
-         break;
-       case ".doc":
-       case ".docx":
-         this.uploadFileIcon = "/img/dm/doc.png";
-         break;
-       case ".ppt":
-       case ".pptx":
-         this.uploadFileIcon = "/img/dm/ppt.png";
-         break;
-       default:
-         this.uploadFileIcon = "/img/dm/file.png";
-         break;
-     }
+    //  switch (this.uploadedFileExtension) {
+    //    case ".pdf":
+    //    case ".jpg":
+    //    case ".jpeg":
+    //    case ".png":
+    //      this.uploadFileIcon = "/img/dm/books.png";
+    //      break;
+    //    case ".doc":
+    //    case ".docx":
+    //      this.uploadFileIcon = "/img/dm/doc.png";
+    //      break;
+    //    case ".ppt":
+    //    case ".pptx":
+    //      this.uploadFileIcon = "/img/dm/ppt.png";
+    //      break;
+    //    default:
+    //      this.uploadFileIcon = "/img/dm/file.png";
+    //      break;
+    //  }
 
      var fileExtension = files.name;
     var frmData: FormData = new FormData();
@@ -153,33 +156,48 @@ export class CertificationPage implements OnInit {
     frmData.append("fileName", fileExtension);
     frmData.append("folderName", "AssetProfileImg");
 
+    //if(file.size > 2000000){
+       
     var filepathurl = "api/auth/app/fileUpload/uploadFile";
-
     this.storageservice.post<any>(filepathurl, frmData).subscribe({
       next: (data) => {
-
-        console.log(data);
-        this.certificationForm.patchValue({
-          'uploadFile':data.filePath,
-        })
-
+        if(data["success"] == true){
+          console.log(data);
+          this.filename1 = data.filePath;
+          this.certificationForm.patchValue({
+            'uploadCertification':data.filePath,
+          })
+        }else{
+            this.filename1='';
+            this.fileAlert();
+          }
+       
       },
       error: (error) => {
         console.log(error);
-
       }
+    }); 
+    //}else{
+    //   this.filename='';
+    //   this.fileAlert();
+    // }
+    //  if (files && file) {
+    //    var reader = new FileReader();
+    //    reader.onload = this._handleReaderLoaded.bind(this);
+ 
+    //    var ans = reader.readAsBinaryString(file);
+    //    console.log("ans: " + ans);
+    //  }
+ 
+   }
 
-    });
- 
- 
-     if (files && file) {
-       var reader = new FileReader();
-       reader.onload = this._handleReaderLoaded.bind(this);
- 
-       var ans = reader.readAsBinaryString(file);
-       console.log("ans: " + ans);
-     }
- 
+   async fileAlert(){
+    const alert = await this.toastController.create({
+      header: '',
+      message: 'Unable to upload Image',
+      duration: 3000,
+    }); 
+     await alert.present();
    }
 
    removeExtension(filename) {
@@ -215,14 +233,14 @@ export class CertificationPage implements OnInit {
         })
         }
 
-      
+      this.filename1 = result["skillandCertificationsBean"].uploadCertification;
  
       this.certificationForm.patchValue({ 
       'certId': result["skillandCertificationsBean"].certId,
       'certificationName': result["skillandCertificationsBean"].certificationName,
       'issuedBy': result["skillandCertificationsBean"].issuedBy,
       'certificationId': result["skillandCertificationsBean"].certificationId,
-      'certificationPath': result["skillandCertificationsBean"].uploadCertification
+      'uploadCertification': result["skillandCertificationsBean"].uploadCertification
       })
      }else{
       this.storageservice.dismissLoading();
@@ -262,7 +280,7 @@ export class CertificationPage implements OnInit {
 //    if (result["success"] == true) {
 //     if (result["filePath"] != undefined && result["filePath"] != null && result["filePath"] != '') {
 //       this.certificationForm.patchValue({
-//        'certificationPath': result["filePath"],
+//        'uploadCertification': result["filePath"],
 //        'certificationName': file.name,
 //        'fileSize': file.size, 
 //      })
@@ -298,10 +316,10 @@ export class CertificationPage implements OnInit {
         if(this.dateValidation == true || this.dateValidation == undefined){
          this.certificationForm.value.currentUserId = this.userId; 
     
-         if(this.certificationForm.value.issuedDateObj != ""){
+         if(this.certificationForm.value.issuedDateObj != "" && this.certificationForm.value.issuedDateObj != null){
           this.certificationForm.value.issuedDateObj =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
           }
-          if(this.certificationForm.value.expiryDateObj != ""){
+          if(this.certificationForm.value.expiryDateObj != "" && this.certificationForm.value.expiryDateObj != null){
           this.certificationForm.value.expiryDateObj =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
          }
       this.CertificationForm = this.certificationForm.value;
@@ -323,7 +341,7 @@ export class CertificationPage implements OnInit {
       }else{
         const alert = await this.toastController.create({
           header: '',
-          message: 'Expiry Date should be greater than Issue date.',
+          message: 'Expiry Date should be greater than Issue date.2',
           duration: 3000,
         }); 
          await alert.present();
@@ -346,10 +364,10 @@ export class CertificationPage implements OnInit {
   } else {
      if(this.dateValidation == true || this.dateValidation == undefined){
      this.certificationForm.value.currentUserId = this.userId; 
-     if(this.certificationForm.value.issuedDateObj != ""){
+     if(this.certificationForm.value.issuedDateObj != "" && this.certificationForm.value.issuedDateObj != null){
      this.certificationForm.value.issuedDate =formatDate(this.certificationForm.value.issuedDateObj, 'dd/MM/yyyy','en-IN');
      }
-     if(this.certificationForm.value.expiryDateObj != ""){
+     if(this.certificationForm.value.expiryDateObj != "" && this.certificationForm.value.expiryDateObj != null){
       this.certificationForm.value.expiryDate =formatDate(this.certificationForm.value.expiryDateObj, 'dd/MM/yyyy','en-IN');
      }
        this.CertificationForm = this.certificationForm.value;
@@ -371,7 +389,7 @@ export class CertificationPage implements OnInit {
   }else{
     const alert = await this.toastController.create({
       header: '',
-      message: 'Expiry Date should be greater than Issue date.',
+      message: 'Expiry Date should be greater than Issue date.3',
       duration: 3000,
     }); 
      await alert.present();
@@ -430,7 +448,7 @@ async updateToast() {
       this.dateValidation = false;
       const alert = await this.toastController.create({
         header: '',
-        message: 'Expiry Date should be greater than Issue date.',
+        message: 'Expiry Date should be greater than Issue date.4',
         duration: 3000,
       });
       this.certificationForm.patchValue({
@@ -443,7 +461,7 @@ async updateToast() {
 
   async validateStartDate(event){
 
-    if(this.certificationForm.value.expiryDateObj != ""){
+    if(this.certificationForm.value.expiryDateObj != "" && this.certificationForm.value.expiryDateObj != null){
       var endDate = new Date(new Date(this.certificationForm.value.expiryDateObj).setFullYear(new Date(this.certificationForm.value.expiryDateObj).getFullYear())); //Currentdate - one year.
       console.log("endDate: " + endDate);
       console.log("startDate: " + event);
@@ -453,7 +471,7 @@ async updateToast() {
         this.dateValidation = false;
         const alert = await this.toastController.create({
           header: '',
-          message: 'Expiry Date should be greater than Issue date.',
+          message: 'Expiry Date should be greater than Issue date.1',
           duration: 3000,
         });
         // this.certificationForm.patchValue({

@@ -73,7 +73,7 @@
                     <!-- <div class="button-content">
                                       <ion-button style="background: #3880ff;border-radius:20px">
                                           <ion-icon lazy="true" slot="start" name="image"></ion-icon>
-                                           <input type="file" formControlName="certificationPath" (change)="loadImageFromDevice($event)" id="file-input"
+                                           <input type="file" formControlName="uploadCertification" (change)="loadImageFromDevice($event)" id="file-input"
                                             accept="image/png, image/jpeg">
                                         </ion-button>
                                   </div> -->
@@ -84,10 +84,14 @@
                             <ion-item class="formitem itemborder" lines="none">
                                 <ion-label class="blackTheme">uploadFile<span style="color:red">*</span></ion-label>
 
-                                <ion-input type="file" formControlName="uploadFile" (change)="upload($event)"></ion-input>
+                                <ion-input type="file" style="color: transparent;" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                 formControlName="uploadCertification" (change)="upload($event)"></ion-input>
 
                             </ion-item>
-                        </ion-col>
+                            <div>
+                                {{filename1?.split('/').pop()}} 
+                            </div>
+                        </ion-col> 
                     </ion-row>
 
                     <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">

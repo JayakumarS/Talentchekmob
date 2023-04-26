@@ -145,6 +145,7 @@ export class WorkExperiencesPage implements OnInit {
       this.storageservice.dismissLoading();
      }
    });
+   this.storageservice.dismissLoading();
   }
 
 
