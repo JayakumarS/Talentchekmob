@@ -300,7 +300,7 @@ checkFormValidity(form: FormGroup): string[] {
 
   //editprofileDetails
   editprofile(){
-
+    this.storageservice.showLoading();
     var industryURL = "api/auth/app/mobile/editprofiledetails?currentUserId="+this.currentUserId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
     
@@ -346,10 +346,6 @@ checkFormValidity(form: FormGroup): string[] {
        'bloodgroup': this.profileList[0].bloodgroup,
       })
       this.base64img1 = this.profileList[0].uploadImg;
-    
-     
-   
-   
     }
     this.storageservice.dismissLoading();
   })   
