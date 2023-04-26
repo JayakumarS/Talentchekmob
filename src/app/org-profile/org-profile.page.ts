@@ -248,7 +248,7 @@ export class OrgProfilePage implements OnInit {
         this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
         
         this.profileList = result["profileList"];
-      }
+     
       const dob = this.profileList[0].dob;
       const startdate = moment(dob, 'DD/MM/YYYY').toDate();
       //this.docForm.value.dob =formatDate(this.profileList[0].dob, 'dd/MM/yyyy','en-IN');
@@ -267,14 +267,17 @@ export class OrgProfilePage implements OnInit {
         'taxId': this.profileList[0].taxId,
         'details': this.profileList[0].details,
         'permAddress': this.profileList[0].permAddress,
-        'permCity': this.profileList[0].permCity,
-        'permState': this.profileList[0].permState,
+        // 'permCity': this.profileList[0].permCity,
+        // 'permState': this.profileList[0].permState,
          'permCountry':this.profileList[0].permCountry,
         'permPinCode': this.profileList[0].permPinCode,
         'orgLogo': this.profileList[0].orgLogo,
         'languagesknown': this.profileList[0].languagesknown,
       })
       this.base64img1 = this.profileList[0].orgLogo;
+     
+    }
+    this.storageservice.dismissLoading();
     })
   }
 
