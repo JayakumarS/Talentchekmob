@@ -216,12 +216,12 @@ export class InstiProfilePage implements OnInit {
 
   //editprofileDetails 
   editinstiprofile() {
-    this.storageservice.showLoading();
+    // this.storageservice.showLoading();
     var EditinstiprofileDetails = "api/auth/app/InstitutionProfileDetails/insteditprofiledetails?currentUserId=" + this.currentUserId;
     this.storageservice.getrequest(EditinstiprofileDetails).subscribe(result => {
 
       if (result["success"] == true) {
-        this.storageservice.dismissLoading();
+       
         this.getCountryList();
         this.profileList = result["profileList"];
         this.searchForId(result["profileList"][0].permCountry); 
