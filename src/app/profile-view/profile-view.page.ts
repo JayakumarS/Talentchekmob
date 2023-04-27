@@ -82,14 +82,7 @@ export class ProfileViewPage implements OnInit {
   @ViewChild('picker', { static: false })
   pickerInst: any;
  
-  ngOnInit() {
-    
-    this.educationcard = false;
-    this.clubscard = false;
-    this.experiencecard = false;
-    this.skillscard = false;
-    this.connectioncard = false;
-    this.certificationcard = false;
+  ngOnInit() { 
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/profile-view') {
@@ -130,6 +123,27 @@ export class ProfileViewPage implements OnInit {
               if(result['profileViewList'][0].certificationsList.length != 0 && result['profileViewList'] != null){
                 this.certificationcard = true;
                 }
+
+
+                //card false
+                if(result['profileViewList'][0].educationList.length == 0){ 
+                  this.educationcard = false;
+                  }
+                  if(result['profileViewList'][0].clubsList.length == 0){
+                    this.clubscard = false;
+                    }
+                    if(result['profileViewList'][0].experienceList.length == 0){
+                      this.experiencecard = false;
+                      }
+                      if(result['profileViewList'][0].skillList.length == 0){
+                        this.skillscard = false;
+                        }
+                        if(result['profileViewList'][0].connectionList.length == 0){
+                          this.connectioncard = false;
+                          }
+                          if(result['profileViewList'][0].certificationsList.length == 0){
+                            this.certificationcard = false;
+                            }
 
                     //profileview 
      this.location = result['profileViewList'][0]['userlocation'];
@@ -183,6 +197,26 @@ export class ProfileViewPage implements OnInit {
                 this.certificationcard = true;
                 }
 
+                //card false
+                if(result['profileViewList'][0].educationList.length == 0){ 
+                  this.educationcard = false;
+                  }
+                  if(result['profileViewList'][0].clubsList.length == 0){
+                    this.clubscard = false;
+                    }
+                    if(result['profileViewList'][0].experienceList.length == 0){
+                      this.experiencecard = false;
+                      }
+                      if(result['profileViewList'][0].skillList.length == 0){
+                        this.skillscard = false;
+                        }
+                        if(result['profileViewList'][0].connectionList.length == 0){
+                          this.connectioncard = false;
+                          }
+                          if(result['profileViewList'][0].certificationsList.length == 0){
+                            this.certificationcard = false;
+                            }
+
                     //profileview 
      this.location = result['profileViewList'][0]['userlocation'];
      this.username = result['profileViewList'][0]['username'];
@@ -213,19 +247,12 @@ export class ProfileViewPage implements OnInit {
   updateData() { 
     this.storageservice.refreshData();
   }
-
-  showDropdown(eduId: number) {
-    this.showDropdownFlag = eduId;
-  }
-
-  closeDropdown() {
-    this.showDropdownFlag = null;
-  }
+ 
   profile(){
     this.router.navigate(['/profilee']) 
   }
 
-  //edit funtions start
+  //edit call functions
   educations(id){
     let edit = {
       id
@@ -356,11 +383,9 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteCertification";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.certId).subscribe(async result => {  
-                this.listFunction();
-                if (result  == true) {
+                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.listFunction();
-                  }
+                   }
                 else if (result == false) {
                   var msg = result["message"];
                   if (msg == null) {
@@ -438,11 +463,9 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteKeyskill";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.skillId).subscribe(async result => {  
-                this.listFunction();
-                if (result  == true) {
+                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.listFunction();
-                  }
+                   }
                 else if (result == false) {
                   var msg = result["message"];
                   if (msg == null) {
@@ -510,11 +533,9 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteEducation";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.eduId).subscribe(async result => {  
-                this.listFunction();
-                if (result  == true) {
+                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.listFunction();
-                  }
+                   }
                 else if (result == false) {
                   var msg = result["message"];
                   if (msg == null) {
@@ -585,11 +606,9 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExperience";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
-                this.listFunction();
-                if (result  == true) {
+                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.listFunction();
-                  }
+                   }
                 else if (result == false) {
                   var msg = result["message"];
                   if (msg == null) {
@@ -660,11 +679,9 @@ export class ProfileViewPage implements OnInit {
               var deleteExperienceServiceUrl = "api/auth/app/IndividualProfileDetails/deleteExtracurricular";
 
               this.storageservice.postrequest(deleteExperienceServiceUrl,postData.expId).subscribe(async result => {  
-                this.listFunction();
-                if (result  == true) {
+                 if (result  == true) {
                   this.storageservice.successToast('Deleted successfully');
-                  this.listFunction();
-                  }
+                   }
                 else if (result == false) {
                   var msg = result["message"];
                   if (msg == null) {
