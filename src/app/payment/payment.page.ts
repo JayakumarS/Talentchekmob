@@ -120,7 +120,7 @@ async Update(){
     let bankdetails = {
       "name":this.docForm.value.accountHolderName,
       "email":this.docForm.value.holderEmailId,
-      "currentUserId":this.currentUserId,
+      
       "tnc_accepted":true,
       "account_details":{
          "business_name":this.docForm.value.businessName,
@@ -143,18 +143,11 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
   
      this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
-       if (result["isSuccess"] == true) {
+       if (result["success"] == true) {
         const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
         Instprofileview.reload(); 
         this.presentToast1()
-        } else 
-        if (result["isSuccess"] == false) {
-          var msg = result["id"];
-           if (msg == null) {
-             "msg"
-           }
-       this.storageservice.warningToast(msg);
-      }
+        }
       })
      });
 }
@@ -210,24 +203,17 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
     console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
     var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
   
-     this.storageservice.postrequest(updatepayment, this.paymentDetails); {  
+     this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
-       if (result["isSuccess"] == true) {
+       if (result["success"] == true) {
         const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
         Instprofileview.reload();
         this.presentToast2()
-        }else 
-        if (result["isSuccess"] == false) {
-          var msg = result["id"];
-           if (msg == null) {
-             "msg"
-           }
-       this.storageservice.warningToast(msg);
-      }
-     }
-})
-  
+        }
+      })
+     });
 }
+  
 }
 
 async presentToast2() {
