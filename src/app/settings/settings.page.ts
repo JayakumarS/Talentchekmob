@@ -102,12 +102,15 @@ export class SettingsPage implements OnInit {
     this.storageservice.publishSomeData({
       status_get: false
     });
-    localStorage.clear();
-
-    this.nativeStorage.clear();
-
-    //this.router.navigate(['/login']);
-    this.router.navigateByUrl('/sign-in', { replaceUrl: true });
+    localStorage.clear(); 
+    this.nativeStorage.clear(); 
+    if (window && window.caches) {
+      caches.keys().then(function (names) {
+        for (let name of names)
+          caches.delete(name);
+      });
+    }
+     this.router.navigateByUrl('/sign-in', { replaceUrl: true });
   }
 
 
