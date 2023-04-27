@@ -78,6 +78,11 @@
             <div *ngIf="docForm.controls.ifscCode.hasError('required') && docForm.controls.ifscCode.touched">
               <small style="color: #f70505;">IFSC Code is required</small>
             </div>
+          <div *ngIf="docForm.controls.ifscCode.hasError('pattern')">
+              <small style="color: #f70505;">Invalid IFSC code</small>
+          </div>
+        
+          
           </div>
 
           <div class="button-content">
