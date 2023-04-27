@@ -37,7 +37,9 @@ export class StorageService {
 
 //Local server
 mobileserverurl:string ="http://localhost:8085/";
+
 baseURL:string ="http://localhost:8085/";
+
   mobileserverserive: any;
   
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {
@@ -175,7 +177,7 @@ baseURL:string ="http://localhost:8085/";
 
   public async warningToast(msg) {
     const toast = await this.toastController.create({
-      header: 'Oops!',
+     // header: 'Oops!',
       color: 'warning',
       cssClass: "toast-success",
       message: msg,

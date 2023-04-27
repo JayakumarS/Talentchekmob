@@ -120,6 +120,7 @@ async Update(){
     let bankdetails = {
       "name":this.docForm.value.accountHolderName,
       "email":this.docForm.value.holderEmailId,
+      "currentUserId":this.currentUserId,
       "tnc_accepted":true,
       "account_details":{
          "business_name":this.docForm.value.businessName,
@@ -130,6 +131,7 @@ async Update(){
          "beneficiary_name":this.docForm.value.accountHolderName,
          "account_type":this.docForm.value.accType,
          "account_number":parseInt(this.docForm.value.bankAccountNo)
+
       }
 }
 let createAccountIdurl = "api/auth/app/subscription/payments/createActIdRazorpay";
@@ -141,11 +143,18 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
   
      this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
-       if (result["success"] == true) {
+       if (result["isSuccess"] == true) {
         const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
         Instprofileview.reload(); 
         this.presentToast1()
-        }
+        } else 
+        if (result["isSuccess"] == false) {
+          var msg = result["id"];
+           if (msg == null) {
+             "msg"
+           }
+       this.storageservice.warningToast(msg);
+      }
       })
      });
 }
@@ -201,17 +210,24 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
     console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
     var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
   
-     this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
+     this.storageservice.postrequest(updatepayment, this.paymentDetails); {  
         //console.log("Image upload response: " + result)
-       if (result["success"] == true) {
+       if (result["isSuccess"] == true) {
         const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
         Instprofileview.reload();
         this.presentToast2()
-        }
-      })
-     });
-}
+        }else 
+        if (result["isSuccess"] == false) {
+          var msg = result["id"];
+           if (msg == null) {
+             "msg"
+           }
+       this.storageservice.warningToast(msg);
+      }
+     }
+})
   
+}
 }
 
 async presentToast2() {
