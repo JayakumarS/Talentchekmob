@@ -65,7 +65,7 @@ base64img1: string = '';
       state: ['',Validators.required],
       pincode: ['',Validators.required],
       referralCode: [''],
-      uploadImg: [''],
+      uploadImg: ['',Validators.required],
       profileVisibility: [''],
       cBoxIAgree:[''],
       cBoxIAgreeConsent:['']
