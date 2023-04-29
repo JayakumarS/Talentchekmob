@@ -119,7 +119,7 @@
 
                     </div>
                     <div class="button-content">
-                        <ion-label class="labels">Languages Known</ion-label>
+                        <ion-label class="labels">Languages Known<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-select placeholder="Select Languages Known" multiple="true" formControlName="languagesknown" style="background-color: white;">
 
@@ -127,6 +127,9 @@
                                 </ion-select-option>
                             </ion-select>
                         </ion-item>
+                        <div *ngIf="profileForm.controls.languagesknown.hasError('required') && profileForm.controls.languagesknown.touched">
+                            <small style="color: #f70505;">Languages Known is required</small>
+                        </div>
                     </div>
                     <div class="button-content">
                         <ion-label class="labels">Hobbies</ion-label>

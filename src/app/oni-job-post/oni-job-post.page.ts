@@ -530,7 +530,7 @@ export class OniJobPostPage implements OnInit {
     var jobtitleurl = "api/auth/app/CommonUtility/jobTitleList?industryid=" +value; 
     const CustDtls = this.storageservice.getrequest(jobtitleurl).subscribe(result => {
       this.jobTitleList = result["jobTitleList"];
-      this.Driver(this.jobTitleList);
+      this.skills();
       if(this.jobTitleList.length != 0 ){
         this.jobProfileForm.patchValue({
           'jobTitle1': this.editJobTitle,
@@ -542,7 +542,7 @@ export class OniJobPostPage implements OnInit {
 
   // location list for mobile
   workLocationList(){
-    var getJobTypeListUrl = "api/auth/app/CommonUtility/locationListMobile"; 
+    var getJobTypeListUrl = "api/auth/app/CommonUtility/jobLocationList"; 
     this.storageservice.getrequest(getJobTypeListUrl).subscribe(result => {
      if (result["success"] == true) {
       this.workLocation = result["locationList"]; 

@@ -513,7 +513,7 @@ skills(){
 
  
     workLocationList(){
-      var getJobTypeListUrl = "api/auth/app/CommonUtility/locationListMobile"; 
+      var getJobTypeListUrl = "api/auth/app/CommonUtility/jobLocationList"; 
       this.storageservice.getrequest(getJobTypeListUrl).subscribe(result => {
        if (result["success"] == true) {
         this.workLocation = result["locationList"]; 
