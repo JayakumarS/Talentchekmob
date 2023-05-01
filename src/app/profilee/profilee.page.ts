@@ -237,6 +237,13 @@ goTostateSelectedItem( stateId) {
 
   async Update(){
     this.profileForm.value.uploadImg = this.base64img1;
+    if(this.profileForm.value.hobbies != "" && this.profileForm.value.hobbies != null ){
+     // this.profileForm.value.hobbies = this.profileForm.value.hobbies.toString();
+
+    }else{
+      this.profileForm.patchValue({hobbies:null});
+ 
+    }
     const errors = this.checkFormValidity(this.profileForm);
 
     if (errors.length > 0) {
@@ -251,6 +258,7 @@ goTostateSelectedItem( stateId) {
     } else{
       this.profileForm.value.dob =formatDate(this.profileForm.value.dob, 'dd/MM/yyyy','en-IN');
       this.profileForm.value.currentUserId=this.currentUserId;
+     
       this.profiledetails = this.profileForm.value;
       console.log(` data: ${JSON.stringify(this.profiledetails)}`);
       var updateprofile = "api/auth/app/mobile/updateprofile";
