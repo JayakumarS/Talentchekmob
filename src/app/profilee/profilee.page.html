@@ -34,7 +34,7 @@
 
             <ion-row class="talentrow">
                 <ion-col>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">First Name<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="firstname"></ion-input>
@@ -42,8 +42,14 @@
                         <div *ngIf="profileForm.controls.firstname.hasError('required') && profileForm.controls.firstname.touched">
                             <small style="color: #f70505;">First Name is required</small>
                         </div>
+                        <div *ngIf="profileForm.controls.firstname.hasError('pattern')">
+                            <small style="color: #f70505;">Should accept only alphabets</small>
+                        </div>
+                        <div *ngIf="profileForm.controls.firstname.hasError('minlength')">
+                            <small style="color: #f70505;">First name must be atleast 3 characters long</small>
+                        </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Last Name<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="lastname"></ion-input>
@@ -51,8 +57,11 @@
                         <div *ngIf="profileForm.controls.lastname.hasError('required') && profileForm.controls.lastname.touched">
                             <small style="color: #f70505;">Last Name is required</small>
                         </div>
+                        <div *ngIf="profileForm.controls.lastname.hasError('pattern')">
+                            <small style="color: #f70505;">Should accept only alphabets</small>
+                        </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Gender<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
 
@@ -68,7 +77,7 @@
 
                     </div>
 
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Date of Birth<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-datetime displayFormat="DD.MM.YYYY" placeholder="Date of Birth " formControlName="dob" presentation="date" [max]="getMaxDate()"></ion-datetime>
@@ -77,7 +86,7 @@
                             <small style="color: #f70505;">Date of Birth is required</small>
                         </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Email Id<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="email"></ion-input>
@@ -86,7 +95,7 @@
                             <small style="color: #f70505;">Email Id is required</small>
                         </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Mobile Number<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="mobile"></ion-input>
@@ -95,7 +104,7 @@
                             <small style="color: #f70505;">Mobile Number is required</small>
                         </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Unique National ID(Aadhar ID/SSN/Emirates ID etc)<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="nationalid"></ion-input>
@@ -104,7 +113,7 @@
                             <small style="color: #f70505;">Unique National ID(Aadhar ID/SSN/Emirates ID etc) is required</small>
                         </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Category<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
 
@@ -118,7 +127,7 @@
                         </div>
 
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Languages Known<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-select placeholder="Select Languages Known" multiple="true" formControlName="languagesknown" style="background-color: white;">
@@ -131,7 +140,7 @@
                             <small style="color: #f70505;">Languages Known is required</small>
                         </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Hobbies</ion-label>
 
                         <ion-item fill="outline" class="input-field">
@@ -143,7 +152,7 @@
                         </ion-item>
 
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Address <small style="color: #f70505;">*</small></ion-label>
 
                         <ion-item fill="outline" class="input-field">
@@ -153,7 +162,7 @@
                             <small style="color: #f70505;">Address is required</small>
                         </div>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
 
                         <ion-item fill="outline" class="input-field">
@@ -171,7 +180,7 @@
                             </ion-item>
                         </ion-list>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
 
@@ -182,7 +191,7 @@
                             </ion-select>
                         </ion-item>
                     </div>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-select formControlName="permCity">
@@ -193,14 +202,14 @@
                         </ion-item>
                     </div>
 
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="permPinCode"></ion-input>
                         </ion-item>
                     </div>
 
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Emergency Contact Number</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="emergencyContact"></ion-input>
@@ -210,7 +219,7 @@
                         </div>
                     </div>
 
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">Blood Group</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-select placeholder="Select Blood Group" formControlName="bloodgroup">
@@ -230,7 +239,7 @@
                         </div>
                     </div>
 
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isLogo">
                         <ion-label slot="end">Upload Image<small style="color: #f70505;">*</small></ion-label>
                         <ion-row>
                             <ion-col size="6">
@@ -254,7 +263,7 @@
                             </ion-col>
                         </ion-row>
                     </div><br>
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">URL link to your video profile</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="linkurl"></ion-input>
@@ -262,7 +271,7 @@
                     </div>
 
 
-                    <div class="button-content">
+                    <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">About You</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-textarea formControlName="details" placeholder="About You"></ion-textarea>

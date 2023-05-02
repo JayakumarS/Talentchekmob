@@ -88,5 +88,10 @@ export class EduVerifierDetailsPage implements OnInit {
    };
     this.router.navigate(['/rating-insti-popup'],navigationExtras)
   }
-
+  limitInputLength($event, maxLength=10) {
+    if($event.target.value.length>=maxLength) {
+        $event.preventDefault();
+        return;
+    }
+}
 }

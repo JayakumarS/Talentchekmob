@@ -248,9 +248,9 @@ export class ProfileViewPage implements OnInit {
     this.storageservice.refreshData();
   }
  
-  profile(){
-    this.router.navigate(['/profilee']) 
-  }
+  // profile(){
+  //   this.router.navigate(['/profilee']) 
+  // }
 
   //edit call functions
   educations(id){
@@ -298,6 +298,27 @@ export class ProfileViewPage implements OnInit {
      queryParams: edit
    };
    this.router.navigate(['/certification'], navigationExtras);
+  }
+
+  profile1(one){
+    let edit = {
+    id:one
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/profilee'],navigationExtras);
+
+  }
+  profile2(two){
+    let edit = {
+    id:two
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/profilee'],navigationExtras);
+   
   }
   Connections(){
     this.router.navigate(['/connection']);

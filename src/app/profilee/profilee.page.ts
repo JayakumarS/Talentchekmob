@@ -66,6 +66,9 @@ countryIdVal:string;
   desiredItem: any;
   desiredstateItem: any;
   desiredcityItem: any;
+  isProfile: boolean = false;
+  isLogo:boolean = false;
+  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,public modalController: ModalController,
     private camera: Camera,private toastController: ToastController,private elementRef: ElementRef
     ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone) { }
@@ -75,14 +78,32 @@ countryIdVal:string;
     this.currentUserId = localStorage.getItem("userId");
     this.getCountryList()
 
-    this.hobbeList();
+  this.hobbeList();
     this.List();
     this.editprofile();
     this.getIndustry();
+    this.route.queryParams.subscribe(params => {
+      if (params) {
 
+        if (params != null) {
+          console.log(params);
+        
+          if (params.id == 1) {
+
+            this.isProfile = true;
+            this.editprofile();
+          } else if (params.id == 2) {
+            this.isLogo = true;
+            this.editprofile();
+
+          }
+        
+        }
+      }
+    });
     this.profileForm = this.fb.group({
-      firstname: ["", [Validators.required]],
-      lastname: ["",[Validators.required]],
+      firstname: ["", Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+      lastname: ["",Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
       gender: ["", [Validators.required]],
       dob:["",[Validators.required]],
       dobObj:[""],
@@ -506,6 +527,18 @@ limitInputLength($event, maxLength=25) {
   if($event.target.value.length>=maxLength) {
       $event.preventDefault();
       return;
+  }
+}
+
+keyPressAlphaNumeric(event) {
+
+  var inp = String.fromCharCode(event.keyCode);
+
+  if (/^[a-zA-Z\s]*$/ .test(inp)) {
+    return true;
+  } else {
+    event.preventDefault();
+    return false;
   }
 }
 

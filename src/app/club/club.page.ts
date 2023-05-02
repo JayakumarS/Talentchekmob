@@ -14,6 +14,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 })
 export class ClubPage implements OnInit {
   name: string;
+  clubBranch: any;
   doRefresh(event) {
     this.ngOnInit();
      setTimeout(() => {
@@ -155,8 +156,12 @@ orgLocation(orgid:any){
     this.clubFrom.patchValue({
       'clubBranch' : result["experienceBean"].orgLocation
     })
+
     this.clubFrom.get("clubBranch").disable();
+      
+    this.clubBranch = result["experienceBean"].orgLocation
 });
+
 }
 getOrganisationList(){
   var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
@@ -252,6 +257,7 @@ getOrganisationList(){
   }
 
   async Save() { 
+    this.clubFrom.value.clubBranch = this.clubBranch ;
     if(this.clubFrom.value.clubName != ""){
       const errors = this.checkFormValidity(this.clubFrom); 
       if (errors.length > 0) {
@@ -414,10 +420,10 @@ getOrganisationList(){
            
            this.clubFrom.get("clubBranch").disable();
          
-           if(this.extracurricularBean.value.clubName.includes('TF')){
-            this.orgLocation(this.desiredItem.id,);
-          }else{
-          }
+          //  if(this.extracurricularBean.value.clubName.includes('TF')){
+          //   this.orgLocation(this.desiredItem.id,);
+          // }else{
+          // }
        }else{
         this.storageservice.dismissLoading();
        }
