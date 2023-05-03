@@ -65,7 +65,7 @@ base64img1: string = '';
       state: ['',Validators.required],
       pincode: ['',Validators.required],
       referralCode: [''],
-      uploadImg: ['',Validators.required],
+      uploadImg: [''],
       profileVisibility: [''],
       cBoxIAgree:[''],
       cBoxIAgreeConsent:['']
@@ -105,6 +105,7 @@ base64img1: string = '';
   }
 
 
+ 
   opengallery() {
     const options: CameraOptions = {
       quality: 70,
@@ -112,6 +113,13 @@ base64img1: string = '';
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: false
     }
+    this.camera.getPicture(options).then((ImageData => {
+      this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      console.log(this.base64img1);
+    }), error => {
+      console.log(error);
+    })
+
   }
 
   opencamera() {
@@ -123,6 +131,7 @@ base64img1: string = '';
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      console.log(this.base64img1);
     }), error => {
       console.log(error);
     })

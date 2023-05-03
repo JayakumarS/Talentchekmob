@@ -95,6 +95,38 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
 }
 
   
+  opengallery() {
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false
+    }
+    this.camera.getPicture(options).then((ImageData => {
+      this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      console.log(this.base64img1);
+    }), error => {
+      console.log(error);
+    })
+
+  }
+
+  opencamera() {
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((ImageData => {
+      this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      console.log(this.base64img1);
+    }), error => {
+      console.log(error);
+    })
+  }
+
+  
   onSubmit() {
       this.isSubmitted = true;
       if (!this.talentform.valid) {
@@ -360,36 +392,6 @@ removeCountry() {
   goto_signin(){
 
     this.router.navigate(['/sign-in']) 
-  }
-
-
-  opengallery() {
-    const options: CameraOptions = {
-      quality: 70,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum: false
-    }
-    this.camera.getPicture(options).then((ImageData => {
-      this.base64img1 = "data:image/jpeg;base64," + ImageData;
-    }), error => {
-      console.log(error);
-    })
-
-  }
-
-  opencamera() {
-    const options: CameraOptions = {
-      quality: 70,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((ImageData => {
-      this.base64img1 = "data:image/jpeg;base64," + ImageData;
-    }), error => {
-      console.log(error);
-    })
   }
 
   openTCForm() {

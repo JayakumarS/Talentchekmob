@@ -76,7 +76,7 @@ base64img1: string = '';
       mobileNo:['',Validators.required],
       state: ['',Validators.required],
       pincode: ['',Validators.required],
-      uploadImg: ['',Validators.required],
+      uploadImg: [''],
       referralCode: [''],
       profileVisibility: ['', ''],
      countryId:[''],
@@ -141,6 +141,7 @@ goToSearchSelectedItem( CtryName,CtryId) {
   }
 
 
+
   opengallery() {
     const options: CameraOptions = {
       quality: 70,
@@ -148,6 +149,13 @@ goToSearchSelectedItem( CtryName,CtryId) {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: false
     }
+    this.camera.getPicture(options).then((ImageData => {
+      this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      console.log(this.base64img1);
+    }), error => {
+      console.log(error);
+    })
+
   }
 
   opencamera() {
@@ -159,6 +167,7 @@ goToSearchSelectedItem( CtryName,CtryId) {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      console.log(this.base64img1);
     }), error => {
       console.log(error);
     })

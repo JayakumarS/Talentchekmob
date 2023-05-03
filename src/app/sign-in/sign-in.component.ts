@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthLoginInfo } from '../auth/login-Info';
 import { StorageService } from '../storage.service';
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,13 +14,15 @@ import { StorageService } from '../storage.service';
 export class SignInComponent implements OnInit {
 
   loginform: FormGroup;
+  fcmToken: any;
   private loginInfo: AuthLoginInfo;
   error = "";
 
   passwordType: string = 'password';
   passwordIcon: string = 'eye'; 
  
-  constructor(public formbuilder: FormBuilder,public router: Router,public storageservice: StorageService) { 
+  constructor(public formbuilder: FormBuilder,public router: Router,private fcm: FCM,
+    public storageservice: StorageService,private nativeStorage: NativeStorage) { 
 
     this.loginform = formbuilder.group({
       userName: ['', Validators.required],
@@ -90,6 +94,18 @@ export class SignInComponent implements OnInit {
                 console.log("access: " + data["accessToken"])
                 console.log("userName: " + data["username"])
                 console.log("tokenType: " + data["tokenType"])
+
+
+
+                // this.fcm.getToken().then(token => {
+                //   console.log("FCM token123", token);
+                //   this.nativeStorage.setItem('FCMToken', token)
+                //   localStorage.setItem('FCMToken', token);
+    
+                //   this.SaveFCMTokenAndUUID(data["username"]);
+                //   console.log("SaveFCMTokenAndUUID 2");
+                // });
+
   
                 if (data.roles[0].roleId.includes('1')) {
                   this.router.navigate(['/home']);
@@ -101,6 +117,8 @@ export class SignInComponent implements OnInit {
                 else if (data.roles[0].roleId.includes('5')) {
                   this.router.navigate(['/job-search']);
                 }
+
+
               }
               else {
                 this.storageservice.dismissLoading();
@@ -125,7 +143,7 @@ export class SignInComponent implements OnInit {
   
       }
 
-    
+ 
      
 
   //  this.router.navigate(['/job-search']) 
@@ -141,5 +159,36 @@ export class SignInComponent implements OnInit {
   Forgotpass(){
     this.router.navigate(['/job-search']) 
   }
+
+
+  SaveFCMTokenAndUUID(userIdStr: string) {
+    console.log("Before1");
+    // var uuidStr = "";
+    // this.uniqueDeviceID.get().then((uuid: any) => {
+    //   console.log("UUID: " + uuid);
+    var uuidStr = "";//uuid;
+
+    console.log("Inside 2" + uuidStr);
+
+    var updateGcmtokenURL = "/api/auth/app/mobile/updateGcmtoken";
+    this.fcmToken = localStorage.getItem("FCMToken");
+    console.log("login page123", this.fcmToken);
+    var postDataGCM = {
+      "gcmToken": this.fcmToken,
+      "uuid": uuidStr,
+      "currentUserId": userIdStr
+    }
+    console.log(`postDataGCM2: ${JSON.stringify(postDataGCM)}`);
+    console.log("URL2: " + updateGcmtokenURL);
+    this.storageservice.postrequest(updateGcmtokenURL, postDataGCM).subscribe(result => {
+      console.log(result);
+      console.log("updateGcmtoken result2: " + result["success"]);
+    });
+
+    // })
+    //   .catch((error: any) => console.log(error));
+
+    console.log("Before2");
+  } 
 
 }
