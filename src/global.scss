@@ -80,8 +80,8 @@
 // wrap the text
 .alert-radio-label.sc-ion-alert-md {
     white-space: pre-line !important;
-    color: #27246f;
-    font-weight: bold;
+    color: #27246f !important;
+    font-size: 14px !important;
 }
 
 // Checked text color
@@ -98,7 +98,9 @@
 }
 
 .alert-checkbox-label.sc-ion-alert-md {
-    color: #112e5b;
+    color: #27246f !important;
+    white-space: pre-wrap !important;
+    font-weight: bold;
 }
 
 form {

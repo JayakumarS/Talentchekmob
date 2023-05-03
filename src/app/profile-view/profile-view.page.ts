@@ -103,7 +103,7 @@ export class ProfileViewPage implements OnInit {
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
      console.log(result); 
- 
+     this.storageservice.showLoading();
    
      if(result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null){ 
       this.educationcard = true;
@@ -167,12 +167,14 @@ export class ProfileViewPage implements OnInit {
     this.certifications= result['profileViewList'][0].certificationsList;
     //connection
     this.connectionList= result['profileViewList'][0].connectionList
-
+    this.storageservice.dismissLoading()
         }); 
+        this.storageservice.dismissLoading()
   }
 
 //list function
   listFunction(){
+    this.storageservice.showLoading();
     var indiProfileViewURL = "api/auth/app/IndividualProfileDetails/viewmatchesprofile?talentId="+this.userId;
     this.storageservice.getrequest(indiProfileViewURL).subscribe(result => {
      console.log(result); 
@@ -239,8 +241,9 @@ export class ProfileViewPage implements OnInit {
     this.certifications= result['profileViewList'][0].certificationsList;
     //connection
     this.connectionList= result['profileViewList'][0].connectionList
-
+    this.storageservice.dismissLoading()
         });
+        this.storageservice.dismissLoading()
   }
 
   //this is for refresh without load the screen
