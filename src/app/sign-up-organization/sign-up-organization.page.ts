@@ -57,7 +57,14 @@ base64img1: string = '';
 
   passwordType: string = 'password';
   passwordIcon: string = 'eye'; 
-
+  showStateResults : boolean = false;
+  searchStateResults: string[] = [];
+  searchCityResults: string[] = [];
+  citySearchCtrl = new FormControl('');
+  selectedState: string;
+  selectedCity: string;
+  statesearchCtrl = new FormControl('');
+  showCityResults: boolean= false;
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder,public storageservice:StorageService, private transfer: FileTransfer,
     private translate: TranslateService,public modalController: ModalController, ) { 
 
@@ -458,6 +465,51 @@ async goto_ConsentFormModal() {
 }
 
 
+onStateSearch(value: string) {
+  if (value.length > 1) {
+    this.showStateResults = true;
+    this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showStateResults = false;
+    this.searchStateResults = [];
+  }
+}
+selectState(state: string,id:string) {
+  this.selectedState = state; 
+  this.talentorgform.patchValue({
+    'state' : id
+  })
+   this.showStateResults = false;
+  this.searchStateResults = []; 
+  var CtryId=this.talentorgform.value.country;
+  this.getcitylist(id,CtryId);
+  this.statesearchCtrl.setValue('');
+}
+onCitySearch(value: string) {
+  if (value.length > 1) {
+    this.showCityResults = true;
+    this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  } else {
+    this.showCityResults = false;
+    this.searchCityResults = [];
+  }
+}
+
+selectCity(state: string,id:string) {
+  this.selectedCity = state; 
+  this.talentorgform.patchValue({
+    'city' : id
+  })
+   this.showCityResults = false;
+  this.searchCityResults = [];  
+  this.citySearchCtrl.setValue('');
+}
+removeState() {
+  this.selectedState = undefined;
+}
+removeCity() {
+  this.selectedCity = undefined;
+}
 passwordToggle() {
   if (this.passwordType === 'password') {
     this.passwordType = 'text';

@@ -71,7 +71,7 @@ base64img1: string = '';
       state: ['',Validators.required],
       pincode: ['',Validators.required],
       referralCode: [''],
-      uploadImg: [''],
+      uploadImg: ['',Validators.required],
       profileVisibility: [''],
       cBoxIAgree:[''],
       cBoxIAgreeConsent:['']
@@ -440,7 +440,7 @@ removeCountry() {
   selectState(state: string,id:string) {
     this.selectedState = state; 
     this.talentinstform.patchValue({
-      'stateName' : id
+      'state' : id
     })
      this.showStateResults = false;
     this.searchStateResults = []; 
@@ -461,7 +461,7 @@ removeCountry() {
   selectCity(state: string,id:string) {
     this.selectedCity = state; 
     this.talentinstform.patchValue({
-      'areaName' : id
+      'city' : id
     })
      this.showCityResults = false;
     this.searchCityResults = [];  
