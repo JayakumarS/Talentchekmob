@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { ModalController, NavController } from "@ionic/angular";
+import { ModalController, NavController, ToastController } from "@ionic/angular";
 import { JobSearchPage } from '../job-search/job-search.page';
+
 
 @Component({
   selector: 'app-search-settings',
@@ -63,10 +64,7 @@ institutionVal: any;
 organisationVal: any;
 formValues: any = {};
 
-
-
-
-  constructor(public router:Router,public storageservice: StorageService,private fb: FormBuilder,
+  constructor(public router:Router,public storageservice: StorageService,private toastController: ToastController,private fb: FormBuilder,
     private navCtrl: NavController,public modalController: ModalController) {
 
     this.advsearchForm = this.fb.group({
@@ -133,6 +131,25 @@ if (this.advsearchForm.value['onisearch'] == undefined){
   this.advsearchForm.value['onisearch']= "";
 }
 
+if(this.advsearchForm.value.citysearch == "" && this.advsearchForm.value.countrysearch == "" && 
+this.advsearchForm.value.designationsearch == "" && this.advsearchForm.value.experiencesearch == "" && 
+this.advsearchForm.value.fieldofstudysearch == "" && this.advsearchForm.value.onisearch == "" && 
+this.advsearchForm.value.qualificationsearch == "" && this.advsearchForm.value.skillsearch == "" && 
+this.advsearchForm.value.statesearch == ""){
+
+  const alert = await this.toastController.create({
+    header: '',
+    message: 'No Filter Selected',
+    cssClass: 'yourClass',
+    position: 'middle',
+    duration: 3000,
+
+  });
+  await alert.present();
+}
+
+else{
+
   let navigationExtras: NavigationExtras = {
     queryParams: this.advsearchForm.value
   };
@@ -141,6 +158,10 @@ if (this.advsearchForm.value['onisearch'] == undefined){
   this.formValues = this.advsearchForm.value;
 
   this.router.navigate(['/job-search'], navigationExtras);
+
+}
+
+
 
   }
 

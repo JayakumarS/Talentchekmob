@@ -3,14 +3,14 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileSearch()" style="margin-top:21%"></ion-icon>
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileSearch()" style="margin-top:21%"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Advanced search</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Advanced search</ion-title>
             </div>
             <div style="text-align: left;">
                 <ion-title style="font-family: Mr-eaves; color: black; margin-top: 7%;" (click)="searchresults()">Done</ion-title>
-              </div>
+            </div>
         </div>
         <!-- <ion-row>
             <ion-col size="3">
@@ -31,7 +31,7 @@
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <form [formGroup]="advsearchForm">
 
         <div class="button-content">
@@ -115,7 +115,7 @@
 
             <ion-label class="labels">Qualification</ion-label>
             <ion-item fill="outline" class="input-field">
-                <ion-searchbar class="blackTheme"  showcancelbutton="" debounce="100" (ionInput)="filterdegreeList($event)" formControlName="qualificationsearch" [(ngModel)]="degreeListVal" (ionBlur)="unDegreeList()" search-icon=“undefined”></ion-searchbar>
+                <ion-searchbar class="blackTheme" showcancelbutton="" debounce="100" (ionInput)="filterdegreeList($event)" formControlName="qualificationsearch" [(ngModel)]="degreeListVal" (ionBlur)="unDegreeList()" search-icon=“undefined”></ion-searchbar>
             </ion-item>
             <ion-row>
                 <ion-col>
@@ -133,8 +133,7 @@
             <ion-label class="labels">Field of Study</ion-label>
 
             <ion-item fill="outline" class="input-field">
-
-                <ion-searchbar class="blackTheme"  showcancelbutton="" debounce="100" (ionInput)="filterstudyList($event)" formControlName="fieldofstudysearch" [(ngModel)]="studyListVal" (ionBlur)="unstudyList()" search-icon=“undefined”></ion-searchbar>
+                <ion-searchbar class="blackTheme" showcancelbutton="" debounce="100" (ionInput)="filterstudyList($event)" formControlName="fieldofstudysearch" [(ngModel)]="studyListVal" (ionBlur)="unstudyList()" search-icon=“undefined”></ion-searchbar>
 
 
             </ion-item>
@@ -153,7 +152,8 @@
             <ion-label class="labels">Organisation Name / Institution Name </ion-label>
 
             <ion-item fill="outline" class="input-field">
-                <ion-searchbar class="blackTheme"  showcancelbutton="" debounce="100" (ionInput)="filterOrgList($event)" formControlName="onisearch" [(ngModel)]="organisationVal" (ionBlur)="unCheckFocus()" search-icon=“undefined”></ion-searchbar>
+
+                <ion-searchbar class="blackTheme" showcancelbutton="" debounce="100" (ionInput)="filterOrgList($event)" [ngModelOptions]="{standalone: true}" [(ngModel)]="organisationVal" (ionBlur)="unCheckFocus()" search-icon=“undefined”></ion-searchbar>
             </ion-item>
             <ion-row>
                 <ion-col>

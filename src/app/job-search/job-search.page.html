@@ -21,13 +21,13 @@
       align-items: center;">
                 <ion-col size="12">
                     <div class="search-container">
-                        <select formControlName="searchType" class="search-dropdown">
-              <option value="talentid">Talent Id</option>
-              <option value="name">Name</option>
-              <option value="email">Email Id</option>
-              <option value="phone">Mobile No</option>
-            </select>
-                        <input type="text" formControlName="searchValue" class="search-input" placeholder="Search...">
+                        <ion-select formControlName="searchType" class="search-dropdown" (ionChange)="ChangeOptionEvent($event)">
+                            <ion-select-option value="talentid">Talent Id</ion-select-option>
+                            <ion-select-option value="name">Name</ion-select-option>
+                            <ion-select-option value="email">Email Id</ion-select-option>
+                            <ion-select-option value="phone">Mobile No</ion-select-option>
+                        </ion-select>
+                        <input type="text" formControlName="searchValue" class="search-input" placeholder="Search..." />
                         <ion-button (click)="search()" class="search-button">Go</ion-button>
                     </div>
                 </ion-col>
@@ -40,7 +40,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
 
     <br>
     <form>
@@ -100,8 +100,6 @@
                 </ion-card-content>
 
             </ion-card>
-
-
         </div>
     </form>
 
@@ -142,9 +140,4 @@
       
     </button>
     </div>
-
-
-
-
-
 </ion-content>

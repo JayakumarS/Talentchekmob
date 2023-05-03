@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { Router } from '@angular/router';
@@ -45,7 +45,7 @@ export class JobSearchPage implements OnInit {
   
   
   constructor(private fb: FormBuilder,
-    private route: ActivatedRoute,public storageservice: StorageService, public modalController: ModalController,
+    private route: ActivatedRoute,public storageservice: StorageService,private toastController: ToastController, public modalController: ModalController,
     public router:Router,private loadingCtrl: LoadingController,public alertController: AlertController) {
 
    this.creditPoints = localStorage.getItem("creditPoints") ;
@@ -147,8 +147,22 @@ export class JobSearchPage implements OnInit {
     initialSlide: 1,
     speed: 400
   };
+  async search(){
 
-  search(){
+    if(this.jobSearchHeadForm.value.searchValue == "" || this.jobSearchHeadForm.value.searchValue == null ){
+
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Please Enter the Valid Details',
+        cssClass: 'yourClass',
+        position: 'middle',
+        duration: 3000,
+
+      });
+      await alert.present();
+    }
+
+    else{
 
     this.storageservice.showLoading();
    console.log(this.jobSearchHeadForm.value); 
@@ -182,11 +196,28 @@ export class JobSearchPage implements OnInit {
        console.log(result);
 
     });
+
+  }
+   }
+
+   ChangeOptionEvent(event){
+    console.log("SelectedValue: " + event.target.value);
+
+    this.jobSearchHeadForm = this.fb.group({
+      searchValue: [""],
+      searchType : [event.target.value]
+    });
+    this.basicprofilesearchList = [];
    }
 
    goto_advanceSearch(){
 
     this.basicprofilesearchList = [];
+
+    this.jobSearchHeadForm = this.fb.group({
+      searchValue: [""],
+      searchType : ["talentid"]
+    });
 
     this.router.navigate(['/search-settings']);
    }

@@ -10,8 +10,8 @@
             </div>
             <div *ngIf="edit" style="text-align: center;display: contents;">
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Edit Job Preference</ion-title>
-            </div> 
-        </div>  
+            </div>
+        </div>
     </ion-toolbar>
 
 </ion-header>
@@ -19,7 +19,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <form [formGroup]="jobProfileForm">
         <div class="ion-stepper">
             <div class="ion-stepper-step" id="step1">
@@ -30,7 +30,7 @@
                 <div class="ion-stepper-content">
                     <ion-label class="labels">Industry<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field" required>
-                        <ion-select  (ionChange)="jobtitleList($event.target.value)"formControlName="industry" placeholder="Industry">
+                        <ion-select (ionChange)="jobtitleList($event.target.value)" formControlName="industry" placeholder="Industry">
                             <ion-select-option *ngFor="let tittle of industryList" value="{{tittle.id1}}">{{tittle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -42,7 +42,7 @@
                     <ion-label class="labels">Job title<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-select placeholder="Job title" multiple="true" formControlName="jobTitle" (ionChange)="Driver($event.target.value)" cancelText="Cancel" okText="Okay">
-                            <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}" >{{jobtitle.text}}</ion-select-option>
+                            <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
                     <div *ngIf="jobProfileForm.controls.jobTitle.hasError('required') && jobProfileForm.controls.jobTitle.touched">
@@ -64,21 +64,16 @@
                     <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <div class="chip-container">
-                          <ng-container *ngIf="selectedSkills.length > 0">
-                            <div *ngFor="let skill of selectedSkills">
-                                {{ skill }}
-                                <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
-                            </div>
-                          </ng-container>
-                          <ion-input (click)="skills()"
-                            (ionInput)="onSearchSkill($event.target.value)"
-                            [formControl]="searchCtrl"
-                            style="width: 100%"
-                            [style.order]="selectedSkills.length > 0 ? 1 : -1"
-                          ></ion-input>
+                            <ng-container *ngIf="selectedSkills.length > 0">
+                                <div *ngFor="let skill of selectedSkills">
+                                    {{ skill }}
+                                    <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
+                                </div>
+                            </ng-container>
+                            <ion-input (click)="skills()" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl" style="width: 100%" [style.order]="selectedSkills.length > 0 ? 1 : -1"></ion-input>
                         </div>
-                      </ion-item>
-                      
+                    </ion-item>
+
                     <div *ngIf="jobProfileForm.controls.jobSkills.hasError('required') && jobProfileForm.controls.jobSkills.touched">
                         <small style="color: #f70505;">Skills is required</small>
                     </div>
@@ -91,9 +86,9 @@
 
                     <ion-label class="labels">Work experience<small style="color: #f70505;">*</small></ion-label>
                     <div style="display: flex; align-items: center; justify-content: space-between;">
-                         <div style="width: 30%;">
+                        <div style="width: 30%;">
                             <ion-item fill="outline" class="input-field" style="text-align: center;">
-                                <ion-input type="number"  formControlName="jobExperience"></ion-input>
+                                <ion-input type="number" formControlName="jobExperience"></ion-input>
                             </ion-item>
                         </div>
                         <div style="margin: 0px 5px;">
@@ -111,7 +106,7 @@
                             of relevant Experience
                         </div>
                     </div>
-                    
+
 
                     <div *ngIf="jobProfileForm.controls.jobExperience.hasError('required') && jobProfileForm.controls.jobExperience.touched">
                         <small style="color: #f70505;">Work experience is required</small>
@@ -281,20 +276,18 @@
                 </div>
                 <div class="ion-stepper-content">
                     <ion-label class="labels">Choose Preferred Work Location<small style="color: #f70505;">*</small></ion-label>
-                    
+
                     <ion-item fill="outline" class="input-field">
                         <div class="selected-skills-container">
                             <ng-container *ngIf="selectedCities.length > 0">
-                            <div *ngFor="let city of selectedCities" class="selected-skill">{{ city }}
-                                <ion-icon name="close-circle" (click)="removeCity(city)"></ion-icon>
-                            </div>
-                       </ng-container>
-                        <ion-input style="width: 100%"
-                        [style.order]="selectedCities.length > 0 ? 1 : -1" 
-                        (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-input>
-                    </div>
+                                <div *ngFor="let city of selectedCities" class="selected-skill">{{ city }}
+                                    <ion-icon name="close-circle" (click)="removeCity(city)"></ion-icon>
+                                </div>
+                            </ng-container>
+                            <ion-input style="width: 100%" [style.order]="selectedCities.length > 0 ? 1 : -1" (ionInput)="onSearch($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                        </div>
                     </ion-item>
-                    
+
                     <!-- <ion-item fill="outline" class="input-field">
                         <ion-chip *ngFor="let city of selectedCities" (click)="removeCity(city)">
                             {{ city }}
@@ -311,7 +304,7 @@
 
                     <ion-label class="labels">Known languages<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select  formControlName="reqLanguages" placeholder="Known languages" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                        <ion-select formControlName="reqLanguages" placeholder="Known languages" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let title of languageList" value="{{title.id}}">{{title.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -366,13 +359,13 @@
                         <div style="display: flex; justify-content: center;margin: 10px 0px 0px 0px;">
                             <div style="margin: 0px 15px 0px 0px;">
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-input type="number"  (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
+                                    <ion-input type="number" (ionBlur)="validateSalaryFrom($event.target.value);" formControlName="jobSalaryFrom" placeholder="From"></ion-input>
                                 </ion-item>
                             </div>
                             <h4>to</h4>
                             <div style="margin: 0px 0px 0px 15px;">
                                 <ion-item fill="outline" class="input-field">
-                                    <ion-input type="number"  (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
+                                    <ion-input type="number" (ionBlur)="validateSalaryTo($event.target.value);" formControlName="jobSalaryTo" placeholder="To"></ion-input>
                                 </ion-item>
                             </div>
                         </div>
@@ -409,7 +402,7 @@
                         <button class="ion-stepper-submit" (click)="validateInformation('save')">Save</button>
                     </div>
 
-                    <div  *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">
+                    <div *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
                         <button class="ion-stepper-submit" (click)="validateInformation('update')">Update</button>
                     </div>
