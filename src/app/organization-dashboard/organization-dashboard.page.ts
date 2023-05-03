@@ -28,10 +28,12 @@ export class OrganizationDashboardPage implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/organization-dashboard') {
         this.setSelectedTab('apps');
+        this.getCreditpoints();
       }
     });
 
     this.userId = localStorage.getItem("userId")  ; 
+    this.getCreditpoints();
     this.creditPoints = localStorage.getItem("creditPoints") ;
  
     var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
@@ -52,6 +54,21 @@ export class OrganizationDashboardPage implements OnInit {
          console.log(result); 
          this.orgCountList = result['orgCountlist'];
             });
+  }
+
+  getCreditpoints(){
+
+    
+    var creditpointsURL = "api/auth/app/fileUpload/getImgfile?talentId="+this.userId;
+    this.storageservice.getrequest(creditpointsURL).subscribe(data => {
+    console.log(data);
+    if(data['success'] == true){
+
+      localStorage.setItem('creditPoints', data["creditpoints"]);;
+      localStorage.setItem('profilePic', data["imageUrl"]);
+      localStorage.setItem('categoryType', data["categoryType"]);
+    }
+    });
   }
 
 
