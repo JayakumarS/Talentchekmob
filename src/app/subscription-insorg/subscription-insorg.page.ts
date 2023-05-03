@@ -101,7 +101,7 @@ export class SubscriptionInsorgPage implements OnInit {
           this.amtProfessionalVal = 120;
           this.amtEnterpriseVal = 240;
           this.amtUltimateVal = 1200;
-          this.currencySymbolVal = "$";
+          this.currencySymbolVal = "S$";
         }
         else {
           this.currencyVal = "USD";
@@ -154,7 +154,7 @@ export class SubscriptionInsorgPage implements OnInit {
       this.amtProfessionalVal = 120;
       this.amtEnterpriseVal = 240;
       this.amtUltimateVal = 1200;
-      this.currencySymbolVal = "$";
+      this.currencySymbolVal = "S$";
     }
     else {
       this.amtProfessionalVal = 2499;
@@ -238,7 +238,7 @@ export class SubscriptionInsorgPage implements OnInit {
         }
       }
     };
-
+    localStorage.setItem('currency', this.currencyVal);
     console.log("paymentStore URL: " + paymentStoreURL);
     console.log(`Main Options: ${JSON.stringify(options)}`);
 
@@ -269,6 +269,18 @@ export class SubscriptionInsorgPage implements OnInit {
         var data = JSON.parse(this.responseText);
         console.log(`Completed payment response data: ${JSON.stringify(data)}`);
       };
+
+      var roleId = localStorage.getItem("roleId");
+
+      if(roleId.includes('2'))
+      {
+        this.router.navigate(['/organization-dashboard']);
+      }
+      else if(roleId.includes('3')){
+
+        this.router.navigate(['/institution-dashboard']);
+      }
+
 
     };
 

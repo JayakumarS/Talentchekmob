@@ -85,7 +85,7 @@ export class SubscriptionIndividualPage implements OnInit {
         }
         else if (this.currencyVal == 'SGD') {
           this.amountVal = 10;
-          this.currencySymbolVal = "$";
+          this.currencySymbolVal = "S$";
         }
         else {
           this.currencyVal = "USD";
@@ -124,7 +124,7 @@ export class SubscriptionIndividualPage implements OnInit {
     }
     else if (this.currencyVal == 'SGD') {
       this.amountVal = 10;
-      this.currencySymbolVal = "$";
+      this.currencySymbolVal = "S$";
     }
     else {
       this.amountVal = 100;
@@ -165,7 +165,7 @@ export class SubscriptionIndividualPage implements OnInit {
       () => {
         // 'onCompleted' callback.
         if (orderId != null && orderId != '') {
-          var paymentStoreURL = this.storageservice.mobileserverurl + "api/auth/app/subscription/payments/paymentHistory";
+          var paymentStoreURL = this.storageservice.mobileserverurl +"api/auth/app/subscription/payments/paymentHistory";
           var subscriptype = "Standard";
           this.payWithRazorOne(paymentStoreURL, orderId, this.userId, subscriptype, subscripamt);
         }
@@ -196,7 +196,8 @@ export class SubscriptionIndividualPage implements OnInit {
         }
       }
     };
-
+    localStorage.setItem('currency', this.currencyVal);
+    console.log(localStorage.getItem("currency"));
     console.log("paymentStore URL: " + paymentStoreURL);
     console.log(`Main Options: ${JSON.stringify(options)}`);
 
@@ -207,28 +208,31 @@ export class SubscriptionIndividualPage implements OnInit {
       console.log('order_id: ' + success.razorpay_order_id);
       console.log('signature: ' + success.razorpay_signature);
 
-      var myJSONObject = {
-        "orderid": success.razorpay_order_id,
-        "paymentid": success.razorpay_payment_id,
-        "signature": success.razorpay_signature,
-        "userId": userId,
-        "subscriptype": subscriptype,
-        "subscripamt": subscripamt,
-        "country":this.usercountry
+      var payhistory = {
+        "orderid":success.razorpay_order_id,
+        "paymentid":success.razorpay_payment_id,
+        "signature":success.razorpay_signature,
+        "subscriptype":subscriptype,
+        "subscripamt":subscripamt,
+        "userId":localStorage.getItem("userId"),
+        "country":localStorage.getItem("countryCode"),
+        "currency":localStorage.getItem("currency"),
+        "userName":localStorage.getItem("userName"),
+        "email":localStorage.getItem("email")
       }
-      console.log(`myJSONObject payment data: ${JSON.stringify(myJSONObject)}`);
+      console.log(`myJSONObject payment data: ${JSON.stringify(payhistory)}`);
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", paymentStoreURL, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify(myJSONObject));
+      xhr.send(JSON.stringify(payhistory));
       xhr.onload = function () {
         var data = JSON.parse(this.responseText);
         console.log(`Completed payment response data: ${JSON.stringify(data)}`);
       };
 
     };
-
+    this.router.navigate(['/home']);
     var cancelCallback = function (error) {
       //alert(error.description + ' (Error ' + error.code + ')');
       console.log(error.description + ' (Error ' + error.code + ')');
