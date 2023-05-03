@@ -15,7 +15,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./educations.page.scss'],
 })
 export class EducationsPage implements OnInit {
-
+  uploadedFile: any;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -31,6 +31,7 @@ export class EducationsPage implements OnInit {
 
   industryList = [];
   EducationForm: FormGroup;
+  work: boolean = false;
   IsSearchListShow: boolean = false;
   institutionList: any;
   institutionVal: String;
@@ -65,7 +66,10 @@ export class EducationsPage implements OnInit {
   dateValidation: boolean;
   desiredItem: any;
   disabled: boolean =false;
-
+  uploadedFilenameWithoutExt: string;
+  uploadedFileSize: string;
+  uploadedFileExtension: string;
+  nonMandatory: boolean = false;
   fieldOfStudyDisable: boolean = false;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
     private toastController: ToastController,private route: ActivatedRoute,
@@ -89,6 +93,7 @@ export class EducationsPage implements OnInit {
       courseStart: ["", Validators.required],
       courseEnd: ["", Validators.required],
       ckeditor: [""],
+      uploadUrl:["",Validators.required],
       currentlyStudy: [""],
       degree: [""],
       fieldofStudy: ["", Validators.required],
@@ -578,7 +583,9 @@ export class EducationsPage implements OnInit {
          'aggregateMarks': this.Education.aggregateMarks,
          'eduDescription': this.Education.eduDescription,
          'eduId': this.Education.eduId,
+         'uploadUrl': this.Education.uploadUrl,
         })  
+        this.uploadedFile =  this.Education.uploadUrl;
       }else{
         this.storageservice.dismissLoading();
       }
@@ -712,7 +719,92 @@ export class EducationsPage implements OnInit {
      await toast.present();
   }
 
+   // file upload
+   upload(event) {
+    var files = event.target.files[0];
+    var file = files;
+    var fileName = file.name;
+    this.uploadedFilenameWithoutExt = this.removeExtension(fileName);
+    this.uploadedFileExtension = fileName.split('.').pop().toLowerCase();
+    this.uploadedFileSize = Math.round((file.size / 1000)) + " KB";
 
+    console.log(`fileName: ${JSON.stringify(fileName)}`);
+    console.log(`uploadedFilenameWithoutExt: ${JSON.stringify(this.uploadedFilenameWithoutExt)}`);
+    console.log(`uploadedFileExtension: ${JSON.stringify(this.uploadedFileExtension)}`);
+    console.log(`uploadedFileSize: ${JSON.stringify(this.uploadedFileSize)}`);
+
+   var fileExtension = files.name;
+   var frmData: FormData = new FormData();
+   frmData.append("file", files);
+   frmData.append("fileName", fileExtension);
+   frmData.append("folderName", "AssetProfileImg");
+
+   var filepathurl = "api/auth/app/fileUpload/uploadFile";
+   if(this.uploadedFileExtension == "pdf"){
+     this.storageservice.post<any>(filepathurl, frmData).subscribe({
+       next: (data) => {
+         if(data["success"] == true){
+           console.log(data);
+           this.uploadedFile = data.filePath;
+           this.EducationForm.patchValue({
+             'uploadUrl':data.filePath,
+           })
+         }else{
+             this.uploadedFile='';
+             this.fileAlert();
+           } 
+         },
+       error: (error) => {
+         console.log(error);
+       }
+     });
+   }else{
+     this.EducationForm.patchValue({
+       'uploadUrl':'',
+     })
+     this.uploadedFile='';
+     this.pdfError();
+   }
+   
+  }
+    // Unable to upload toast
+    async fileAlert(){
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Unable to upload Image',
+        duration: 3000,
+      }); 
+       await alert.present();
+     }
+        // Unable to upload toast
+    async pdfError(){
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Invalid File Type',
+        duration: 3000,
+      }); 
+       await alert.present();
+     }
+      //remove file extension
+   removeExtension(filename) {
+    var lastDotPosition = filename.lastIndexOf(".");
+    if (lastDotPosition === -1) return filename;
+    else return filename.substr(0, lastDotPosition);
+  }
+  //validation for currently working or not
+  validationForCurWorking(event){
+    var value  = event;
+    if(value == true){
+      this.nonMandatory = true
+      this.EducationForm.get("uploadUrl").disable(); 
+      this.EducationForm.patchValue({
+          'uploadUrl':""
+        })
+    }else{
+      this.nonMandatory = false
+    this.EducationForm.get("uploadUrl").enable();
+    }
+  }
 //   // footer
 // goto_profileSearch(){
 //   this.router.navigate(['/job-search']);
