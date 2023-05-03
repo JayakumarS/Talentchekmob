@@ -21,7 +21,9 @@ export class JobProfilePage implements OnInit {
      event.target.complete();
     }, 2000);
  }
-
+ locationId=[];
+ location=[];
+ selectedCitiesId=[];
   editJobTitle: any;
   jobTitleLists: string[] = [];
   jobTypeLists: string[] = [];
@@ -203,6 +205,8 @@ export class JobProfilePage implements OnInit {
           this.editJobTitle = result["jobSeekList"][0].jobTitle;
           this.jobtype = result["jobSeekList"][0].jobType;
           this.language = result["jobSeekList"][0].reqLanguages;
+          this.location= result["jobSeekList"][0].location;
+          this.locationId= result["jobSeekList"][0].locationId;
 
           this.jobProfileForm.patchValue({
             'industry': industry,
@@ -452,6 +456,7 @@ nextStep(currentStep: string, nextStep: string) {
 
   selectCity(city: string,id:string) {
     this.selectedCities.push(city);
+    this.locationId.push(id)
     this.cityName = city;
     this.cityId = id;
     this.showResults = false;
@@ -459,8 +464,18 @@ nextStep(currentStep: string, nextStep: string) {
     this.searchCtrl.setValue('');
   }
 
-  removeCity(city: string) {
-    this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+  // removeCity(city: string) {
+  //   this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+  // }
+  removeCity(city: string,id:string) {
+    const index = this.location.indexOf(city)
+    // this.selectedCities.splice(this.selectedCities.indexOf(id), 1);
+    if(index>=0)
+    {
+    this.location.splice(index, 1);
+    this.selectedCities.splice(index, 1)
+    this.locationId.splice(index, 1);
+    }
   }
  
   jobtitleList(event){
@@ -570,7 +585,7 @@ skills(){
     //save
   async savejobseek(){
     this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.location = this.selectedCities;
+    this.jobProfileForm.value.location = this.locationId
   const errors = this.checkFormValidity(this.jobProfileForm);
 
   if (errors.length > 0) {
@@ -586,7 +601,7 @@ skills(){
 
     this.storageservice.showLoading();
      this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.location = this.selectedCities;
+     this.jobProfileForm.value.location = this.locationId;
 
     // this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
     // this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');
@@ -628,7 +643,7 @@ skills(){
   //Update
   async updatejobseek(){
     this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.location = this.selectedCities;
+    this.jobProfileForm.value.location = this.locationId;
   const errors = this.checkFormValidity(this.jobProfileForm);
 
   if (errors.length > 0) {
@@ -643,7 +658,7 @@ skills(){
   } else {
     this.storageservice.showLoading();
      this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.location = this.selectedCities;
+     this.jobProfileForm.value.location = this.locationId;
 
     // this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'dd/MM/yyyy','en-IN');
     // this.jobProfileForm.value.jobStartDateTo =formatDate(this.jobProfileForm.value.jobStartDateTo, 'dd/MM/yyyy','en-IN');

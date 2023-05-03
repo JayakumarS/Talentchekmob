@@ -82,7 +82,8 @@ export class OniJobPostPage implements OnInit {
   lastPosted: Date;
   skillsList: any;
   id: any;
-
+  locationId=[];
+  location=[];
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
@@ -277,6 +278,8 @@ export class OniJobPostPage implements OnInit {
         this.editJobTitle = [result["jobAdvertisementList"][0].jobTitle1.toString()];
         this.language = result["jobAdvertisementList"][0].reqLanguages;
         this.jobtype = result["jobAdvertisementList"][0].jobType; 
+        this.location= result["jobAdvertisementList"][0].locationOffer;
+        this.locationId= result["jobAdvertisementList"][0].locationOfferId;
 
         this.jobProfileForm.patchValue({
           'industry': industry,
@@ -486,6 +489,7 @@ export class OniJobPostPage implements OnInit {
 
   selectCity(city: string,id:string) {
     this.selectedCities.push(city);
+    this.locationId.push(id)
     this.cityName = city;
     this.locationOffer.push(id);
     this.showResults = false;
@@ -493,8 +497,19 @@ export class OniJobPostPage implements OnInit {
     this.searchCtrl.setValue('');
   }
 
-  removeCity(city: string) {
-    this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+  // removeCity(city: string) {
+  //   this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+  // }
+
+  removeCity(city: string,id:string) {
+    const index = this.selectedCities.indexOf(city)
+    // this.selectedCities.splice(this.selectedCities.indexOf(city), 1);
+    if(index>=0)
+    {
+      this.location.splice(index, 1);
+      this.selectedCities.splice(index, 1);
+      this.locationId.splice(index, 1);
+    }
   }
 //ends
 
@@ -618,7 +633,7 @@ export class OniJobPostPage implements OnInit {
   //save
   async savejobadvertisement(){
   this.jobProfileForm.value.jobSkills = this.selectedSkills
-  this.jobProfileForm.value.locationOffer = this.locationOffer; 
+  this.jobProfileForm.value.locationOffer =this.locationId; 
   const errors = this.checkFormValidity(this.jobProfileForm); 
   if (errors.length > 0) {
   // Display errors in a popup
@@ -630,7 +645,7 @@ export class OniJobPostPage implements OnInit {
   await alert.present();
 } else {
   this.jobProfileForm.value.jobSkills = this.selectedSkills
-  this.jobProfileForm.value.locationOffer = this.locationOffer;
+  this.jobProfileForm.value.locationOffer =this.locationId;
   this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'dd/MM/yyyy','en-IN');
   const myNumber: number = parseInt(this.jobProfileForm.value.industry);
   this.jobProfileForm.value.industry = myNumber; 
@@ -655,7 +670,7 @@ export class OniJobPostPage implements OnInit {
   //Update
   async updatejobseek(){
     this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.locationOffer = this.selectedCities; 
+    this.jobProfileForm.value.locationOffer = this.locationId; 
     const errors = this.checkFormValidity(this.jobProfileForm); 
     if (errors.length > 0) {
     // Display errors in a popup
@@ -668,7 +683,7 @@ export class OniJobPostPage implements OnInit {
   } else {
 
     this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.locationOffer = this.selectedCities;
+    this.jobProfileForm.value.locationOffer = this.locationId;
     // this.jobProfileForm.value.locationAdvertise = this.locationAdvertise;
     //this.jobProfileForm.value.jobStartDateFrom =formatDate(this.jobProfileForm.value.jobStartDateFrom, 'MM/yyyy','en-IN');
     this.jobProfileForm.value.appDeadline =formatDate(this.jobProfileForm.value.appDeadline, 'dd/MM/yyyy','en-IN');
