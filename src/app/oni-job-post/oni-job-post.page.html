@@ -69,7 +69,7 @@
 
 
                     <div *ngIf="buttonEnable" class="ion-stepper-buttons">
-                        <button [disabled]="disable" class="ion-stepper-next" (click)="validatePreference();">Next</button>
+                        <button [disabled]="disable" class="ion-stepper-next" (click)="nextStep('step1', 'step2');">Next</button>
                     </div>
                 </div>
             </div>
@@ -218,7 +218,7 @@
 
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">Back</button>
-                        <button class="ion-stepper-next" (click)="validateJobDesc()">Next</button>
+                        <button class="ion-stepper-next" (click)="nextStep('step2', 'step3');">Next</button>
                     </div>
                 </div>
             </div>
@@ -535,7 +535,7 @@
 
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">Back</button>
-                        <button class="ion-stepper-next" (click)="validateInformation()">Next</button>
+                        <button class="ion-stepper-next" (click)="nextStep('step3', 'step4');">Next</button>
                     </div>
 
                 </div>

@@ -248,17 +248,17 @@ export class JobProfilePage implements OnInit {
      });
     }
 
-    validatePreference(){
-      if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.industry !=null
-       && this.jobProfileForm.value.jobTitle !="" &&  this.jobProfileForm.value.jobTitle !=null &&
-       this.jobProfileForm.value.jobType !="" && this.jobProfileForm.value.jobType !=null
-      && this.selectedSkills.length != 0 && this.jobProfileForm.value.jobExperience !="" &&
-      this.jobProfileForm.value.jobExperience !=null){
-        this.nextStep('step1', 'step2'); 
-       }else{
-        this.errorToast();
-       }
-    }  
+    // validatePreference(){
+    //   if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.industry !=null
+    //    && this.jobProfileForm.value.jobTitle !="" &&  this.jobProfileForm.value.jobTitle !=null &&
+    //    this.jobProfileForm.value.jobType !="" && this.jobProfileForm.value.jobType !=null
+    //   && this.selectedSkills.length != 0 && this.jobProfileForm.value.jobExperience !="" &&
+    //   this.jobProfileForm.value.jobExperience !=null){
+    //     this.nextStep('step1', 'step2'); 
+    //    }else{
+    //     this.errorToast();
+    //    }
+    // }  
 
     // validateAvailability(){
     //   if(this.jobProfileForm.value.jobExpWorkHrs !="" && this.jobProfileForm.value.jobStartDateFrom !="" 

@@ -321,40 +321,40 @@ export class OniJobPostPage implements OnInit {
   }
 
   // step1 validation
-  validatePreference(){
-    if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.industry !=null
-     && this.jobProfileForm.value.jobTitle1 !="" &&  this.jobProfileForm.value.jobTitle1 !=null &&
-     this.jobProfileForm.value.jobType !="" && this.jobProfileForm.value.jobType !=null
-    &&this.jobProfileForm.value.openings !=null){
-      this.nextStep('step1', 'step2'); 
-     }else{
-      this.errorToast();
-     }
-  }  
+  // validatePreference(){
+  //   if(this.jobProfileForm.value.industry !="" && this.jobProfileForm.value.industry !=null
+  //    && this.jobProfileForm.value.jobTitle1 !="" &&  this.jobProfileForm.value.jobTitle1 !=null &&
+  //    this.jobProfileForm.value.jobType !="" && this.jobProfileForm.value.jobType !=null
+  //   &&this.jobProfileForm.value.openings !=null){
+  //     this.nextStep('step1', 'step2'); 
+  //    }else{
+  //     this.errorToast();
+  //    }
+  // }  
  
 // step2 validation
-  validateJobDesc(){
-    if(this.jobProfileForm.value.roles != ""&&this.selectedSkills.length != 0
-    && this.jobProfileForm.value.jobExperience !="" &&this.jobProfileForm.value.jobExperience !=null
-    && this.jobProfileForm.value.jobSalaryFrom !=""&& this.jobProfileForm.value.jobSalaryTo !=""
-    && this.jobProfileForm.value.jobSalaryFrom !=null&& this.jobProfileForm.value.jobSalaryTo !=null){ 
-      this.nextStep('step2', 'step3')
-    }
-    else{
-      this.errorToast();
-    }   
-  }
+  // validateJobDesc(){
+  //   if(this.jobProfileForm.value.roles != ""&&this.selectedSkills.length != 0
+  //   && this.jobProfileForm.value.jobExperience !="" &&this.jobProfileForm.value.jobExperience !=null
+  //   && this.jobProfileForm.value.jobSalaryFrom !=""&& this.jobProfileForm.value.jobSalaryTo !=""
+  //   && this.jobProfileForm.value.jobSalaryFrom !=null&& this.jobProfileForm.value.jobSalaryTo !=null){ 
+  //     this.nextStep('step2', 'step3')
+  //   }
+  //   else{
+  //     this.errorToast();
+  //   }   
+  // }
  
 // step3 validation
-  validateInformation(){
-    if(this.jobProfileForm.value.appDeadline != ""&&this.selectedCities.length != 0
-    && this.jobProfileForm.value.reqLanguages !="" &&this.jobProfileForm.value.reqLanguages !=null){ 
-   this.nextStep('step3', 'step4')
-    }
-    else{
-      this.errorToast();
-    }   
-  }
+  // validateInformation(){
+  //   if(this.jobProfileForm.value.appDeadline != ""&&this.selectedCities.length != 0
+  //   && this.jobProfileForm.value.reqLanguages !="" &&this.jobProfileForm.value.reqLanguages !=null){ 
+  //  this.nextStep('step3', 'step4')
+  //   }
+  //   else{
+  //     this.errorToast();
+  //   }   
+  // }
      
   //validation for deadline date
   async validateEndDate(event){
