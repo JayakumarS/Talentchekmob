@@ -5,10 +5,10 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
             </div>
             <div *ngIf="!edit" style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Add Ceritications</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Add Certifications</ion-title>
             </div>
             <div *ngIf="edit" style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Edit Ceritications</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Edit Certifications</ion-title>
             </div>
         </div> 
 
@@ -75,8 +75,9 @@
                                  formControlName="uploadCertification" (change)="upload($event)"></ion-input>
 
                             </ion-item>
-                            <div>
-                                {{filename1?.split('/').pop()}} 
+                            <div>support format: .pdf</div> 
+                            <div style="margin-top: 25px;">
+                                {{uploadedFile?.split('/').pop()}} 
                             </div>
                         </ion-col> 
                     </ion-row>

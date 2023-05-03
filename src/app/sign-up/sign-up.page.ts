@@ -22,6 +22,9 @@ import { TcFormPage } from '../tc-form/tc-form.page';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
+  selectedState: any;
+  showCityResults: boolean= false;
+  selectedCity: string;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -46,10 +49,15 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
   stateResponseBackup: any;
   stateResponse: any;
   showcountyResults : boolean = false;
+  showStateResults : boolean = false;
   selectedCountry: any;
   showResults: boolean = false; 
   searchResults: string[] = [];
+  searchStateResults: string[] = [];
+  searchCityResults: string[] = [];
   countrysearchCtrl = new FormControl('');
+  statesearchCtrl = new FormControl('');
+  citySearchCtrl = new FormControl('');
   countryId: string;
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
@@ -351,11 +359,43 @@ removeCountry() {
     this.storageservice.getrequest(industryURL).subscribe(result => {
       this.stateResponseBackup = result["stateList"];
       this.stateResponse = result["stateList"];
-      console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+      //console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
   
     return industryURL;
   }
+
+
+  onStateSearch(value: string) {
+    if (value.length > 1) {
+      this.showStateResults = true;
+      this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showStateResults = false;
+      this.searchStateResults = [];
+    }
+  }
+  
+  selectState(state: string,id:string) {
+    this.selectedState = state; 
+    this.talentform.patchValue({
+      'stateName' : id
+    })
+     this.showStateResults = false;
+    this.searchStateResults = []; 
+    var CtryId=this.talentform.value.country;
+    this.getcitylist(id,CtryId);
+    this.statesearchCtrl.setValue('');
+  }
+  
+  
+  removeState() {
+    this.selectedState = undefined;
+  }
+
+
+
+
   getcitylist(stateId,countryId){
    
     console.log(stateId)
@@ -363,9 +403,34 @@ removeCountry() {
     this.storageservice.getrequest(industryURL).subscribe(result => {
      this.cityList = result['cityList'];
      this.cityOptions = result['cityList'];
-    console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
-     
+    //console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);/
   });
+  }
+
+
+  onCitySearch(value: string) {
+    if (value.length > 1) {
+      this.showCityResults = true;
+      this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showCityResults = false;
+      this.searchCityResults = [];
+    }
+  }
+  
+  selectCity(state: string,id:string) {
+    this.selectedCity = state; 
+    this.talentform.patchValue({
+      'areaName' : id
+    })
+     this.showCityResults = false;
+    this.searchCityResults = [];  
+    this.citySearchCtrl.setValue('');
+  }
+  
+  
+  removeCity() {
+    this.selectedCity = undefined;
   }
 
   goToSearchSelectedItem(CtryName, CtryId) {  

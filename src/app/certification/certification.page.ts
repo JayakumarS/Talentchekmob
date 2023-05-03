@@ -15,7 +15,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
   styleUrls: ['./certification.page.scss'],
 })
 export class CertificationPage implements OnInit {
-  filename1: any;
+  uploadedFile: any;
   doRefresh(event) {
     this.ngOnInit();
   setTimeout(() => {
@@ -61,7 +61,7 @@ export class CertificationPage implements OnInit {
     }) 
 
     this.route.queryParams.subscribe(params => {
-      this.filename1 = '';
+      this.uploadedFile = '';
       if (params) { 
         if (params != null || params != undefined ) {   
             this.fetchEditDeatils(params.id); 
@@ -98,24 +98,43 @@ export class CertificationPage implements OnInit {
     frmData.append("folderName", "AssetProfileImg");
 
     var filepathurl = "api/auth/app/fileUpload/uploadFile";
-    this.storageservice.post<any>(filepathurl, frmData).subscribe({
-      next: (data) => {
-        if(data["success"] == true){
-          console.log(data);
-          this.filename1 = data.filePath;
-          this.certificationForm.patchValue({
-            'uploadCertification':data.filePath,
-          })
-        }else{
-            this.filename1='';
-            this.fileAlert();
-          } 
-        },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    if(this.uploadedFileExtension == "pdf"){
+      this.storageservice.post<any>(filepathurl, frmData).subscribe({
+        next: (data) => {
+          if(data["success"] == true){
+            console.log(data);
+            this.uploadedFile = data.filePath;
+            this.certificationForm.patchValue({
+              'uploadCertification':data.filePath,
+            })
+          }else{
+              this.uploadedFile='';
+              this.fileAlert();
+            } 
+          },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }else{
+      this.certificationForm.patchValue({
+        'uploadCertification':'',
+      })
+      this.uploadedFile='';
+      this.pdfError();
+    }
+    
    }
+
+    // Unable to upload toast
+    async pdfError(){
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Invalid File Type',
+        duration: 3000,
+      }); 
+       await alert.present();
+     }
 
    // Unable to upload toast
    async fileAlert(){
@@ -159,7 +178,7 @@ export class CertificationPage implements OnInit {
         })
         }
 
-      this.filename1 = result["skillandCertificationsBean"].uploadCertification;
+      this.uploadedFile = result["skillandCertificationsBean"].uploadCertification;
  
       this.certificationForm.patchValue({ 
       'certId': result["skillandCertificationsBean"].certId,
