@@ -43,10 +43,16 @@ base64img1: string = '';
   countryId: string;
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
-
+  statesearchCtrl = new FormControl('');
   passwordType: string = 'password';
   passwordIcon: string = 'eye'; 
-
+  showStateResults : boolean = false;
+  searchStateResults: string[] = [];
+  searchCityResults: string[] = [];
+  citySearchCtrl = new FormControl('');
+  selectedState: string;
+  selectedCity: string;
+  showCityResults: boolean= false;
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder, public storageservice:StorageService, private transfer: FileTransfer,
     private translate: TranslateService, private loadingCtrl: LoadingController,public modalController: ModalController,) {
 
@@ -422,7 +428,51 @@ removeCountry() {
     return await modal.present();
   }
 
-
+  onStateSearch(value: string) {
+    if (value.length > 1) {
+      this.showStateResults = true;
+      this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showStateResults = false;
+      this.searchStateResults = [];
+    }
+  }
+  selectState(state: string,id:string) {
+    this.selectedState = state; 
+    this.talentinstform.patchValue({
+      'stateName' : id
+    })
+     this.showStateResults = false;
+    this.searchStateResults = []; 
+    var CtryId=this.talentinstform.value.country;
+    this.getcitylist(id,CtryId);
+    this.statesearchCtrl.setValue('');
+  }
+  onCitySearch(value: string) {
+    if (value.length > 1) {
+      this.showCityResults = true;
+      this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showCityResults = false;
+      this.searchCityResults = [];
+    }
+  }
+  
+  selectCity(state: string,id:string) {
+    this.selectedCity = state; 
+    this.talentinstform.patchValue({
+      'areaName' : id
+    })
+     this.showCityResults = false;
+    this.searchCityResults = [];  
+    this.citySearchCtrl.setValue('');
+  }
+  removeState() {
+    this.selectedState = undefined;
+  }
+  removeCity() {
+    this.selectedCity = undefined;
+  }
   passwordToggle() {
     if (this.passwordType === 'password') {
       this.passwordType = 'text';
