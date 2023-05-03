@@ -81,6 +81,8 @@ export class ScanToConnectPage implements OnInit {
       this.IsShowProfile = true;
 
       var scan_tfId = this.Extract_TFId_FromQRCode(barcodeData.text);
+
+      console.log(scan_tfId);
       this.BindProfileImage(scan_tfId);
 
     }).catch(err => {
