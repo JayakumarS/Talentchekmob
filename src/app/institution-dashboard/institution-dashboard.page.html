@@ -10,7 +10,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <form>
         <div class="display-justify">
             <ion-row class="container">
@@ -155,6 +155,53 @@
                         </ion-col>
                     </div>
                 </ion-row>
+            </div>
+
+
+
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link" (click)="viewList('applicants','Hiring - Applicants')">
+                    <div class="ag-courses-item_bg"></div>
+                    <br>
+                    <ion-row class="ag-courses-item_date-box">
+                        <ion-col size="3">
+                            <img src="../../assets/img/applicants.png">
+                        </ion-col>
+                        <ion-col size="3">
+                            <div style="font-size: 35px;
+                      text-align: center;">
+                                <b>{{count.applicants}}</b></div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div style="text-align: end;font-size: 21px;">
+                                <b>Applications</b></div>
+                        </ion-col>
+                    </ion-row>
+                </a>
+            </div>
+
+
+
+
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link" (click)="viewmatchesList()">
+                    <div class="ag-courses-item_bg"></div>
+                    <br>
+                    <ion-row class="ag-courses-item_date-box">
+                        <ion-col size="3">
+                            <img src="../../assets/img/matched profiles.png">
+                        </ion-col>
+                        <ion-col size="3">
+                            <div style="font-size: 35px;
+                    text-align: center;">
+                                <b>{{count.matchedProfiles}}</b></div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div style="text-align: end;font-size: 21px;">
+                                <b>Matched Profiles</b></div>
+                        </ion-col>
+                    </ion-row>
+                </a>
             </div>
 
 

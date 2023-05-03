@@ -27,12 +27,17 @@ export class InstitutionDashboardPage implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/institution-dashboard') {
         this.setSelectedTab('apps');
+        this.getCreditpoints();
       }
     });
 
     
     this.userId = localStorage.getItem("userId")  ; 
+    this.getCreditpoints();
    this.creditPoints = localStorage.getItem("creditPoints") ;
+
+
+   
 
    var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
    this.storageservice.getrequest(indiProfileViewCountURL).subscribe(result => {
@@ -78,6 +83,28 @@ export class InstitutionDashboardPage implements OnInit {
       queryParams: edit
     };
     this.router.navigate(['/institution-dashboard-list'], navigationExtras);
+  }
+
+
+  getCreditpoints(){
+
+    
+    var creditpointsURL = "api/auth/app/fileUpload/getImgfile?talentId="+this.userId;
+    this.storageservice.getrequest(creditpointsURL).subscribe(data => {
+    console.log(data);
+    if(data['success'] == true){
+
+      localStorage.setItem('creditPoints', data["creditpoints"]);;
+      localStorage.setItem('profilePic', data["imageUrl"]);
+      localStorage.setItem('categoryType', data["categoryType"]);
+    }
+    });
+  }
+
+
+  viewmatchesList(){
+
+    this.router.navigate(['/oni-job-post-list']);
   }
 
 

@@ -22,6 +22,7 @@ export class InstitutionDashboardListPage implements OnInit {
   creditPoints: any;
   referralsList:[];
   oniList:[];
+  applicantsList:[];
   oniListCount:any;
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,public storageservice: StorageService) { 
@@ -45,15 +46,38 @@ export class InstitutionDashboardListPage implements OnInit {
           console.log(params);
           this.title = params.title;
 
+          
+          if(params.btntype == "applicants")
+          {
+            console.log(params)
+            this.getAllApplicantList();
+          }
+          else{
+
             console.log(params)
             this.getAllList(params.btntype);
+          
+          }
           
         }
       }
     });
   }
 
+  getAllApplicantList(){
 
+    //api/auth/app/dashboard/jobsDashboardList
+    this.storageservice.showLoading();
+    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardList?currentUserId="+this.userId;
+    this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+if(result['success'] == true){
+  this.storageservice.dismissLoading();
+  this.applicantsList = result['jobsDashboardList'];
+  console.log(result); 
+}
+     
+        });
+  }
 
 
   getAllList(btntype): void {

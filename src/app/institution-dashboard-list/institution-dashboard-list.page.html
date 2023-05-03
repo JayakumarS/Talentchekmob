@@ -4,14 +4,14 @@
         <ion-row style="display: flex;justify-content: space-between;">
             <div>
                 <ion-icon size="large" (click)="goto_insHome()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
-            </div>  
+            </div>
             <div class="ion-text-wrap" style="font-family: Mr-eaves; color: black;font-weight: 600;display: flex;
             align-items: center;text-align: center;font-size: 17px;">
-              {{title}} List
-            </div> 
-            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
+                {{title}} List
             </div>
-          </ion-row>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
+            </div>
+        </ion-row>
         <!-- <ion-row>
 
             <ion-col size="0.5">
@@ -31,7 +31,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
 
     <form>
         <div class="display-justify" *ngFor="let cElement of oniList" (click)="profileView(cElement.talentid)">
@@ -54,7 +54,39 @@
                             <span class="c-pill c-pill--danger">{{cElement.status}}</span>
                         </ion-row>
                     </ion-col>
-                        <!-- <ion-col size="4">
+                    <!-- <ion-col size="4">
+                     <ion-col size="4">
+                            <div>
+                                <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                            </div>
+                        </ion-col> -->
+
+                </ion-row>
+
+            </ion-card>
+        </div>
+
+        <div class="display-justify" *ngFor="let cElement of applicantsList" (click)="profileView(cElement.talentid)">
+            <ion-card class="adv-card">
+                <ion-row>&nbsp;</ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="small">
+                            <img style="width: 50%;height: 50%;" alt="" src="{{cElement.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="10">
+                        <ion-row>
+                            <div class="b">{{cElement.username}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <div class="c">{{cElement.degortitle}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                        </ion-row>
+                    </ion-col>
+                    <!-- <ion-col size="4">
                             <div>
                                 <span class="c-pill c-pill--danger">{{cElement.status}}</span>
                             </div>

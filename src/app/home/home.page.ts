@@ -32,43 +32,25 @@ export class HomePage implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/home') {
         this.setSelectedTab('apps');
+        this.getCreditpoints();
+        this.getAvgratingCount();
+        this.getProfileViewCount();
+        this.getmatchedJobCount();
+        this.getnetworkCount();
       }
     });
 
     this.userId = localStorage.getItem("userId")  ; 
     this.categoryType = localStorage.getItem("categoryType")  ; 
+    this.getCreditpoints();
+    this.getAvgratingCount();
+    this.getProfileViewCount();
+    this.getmatchedJobCount();
+    this.getnetworkCount();
+    this.categoryType = localStorage.getItem("categoryType")  ; 
     this.getcategoryreg();
    this.creditPoints = localStorage.getItem("creditPoints") ;
 //Profile View Count
-    var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
-    this.storageservice.getrequest(indiProfileViewCountURL).subscribe(result => {
-     console.log(result); 888
-     this.profileViewCount = result['profileviewcount']
-        });
-
-//Network Count
-        var indiProfileNetworkCountURL = "api/auth/app/dashboard/networkcount?currentUserId="+this.userId;
-        this.storageservice.getrequest(indiProfileNetworkCountURL).subscribe(result => {
-         console.log(result); 
-         this.networkCount = result['networkcount']; 
-            });
-
-//MatchedjobsCount
-var indiMatchedJobsCountURL = "api/auth/app/dashboard/matchedjobcounts?currentUserId="+this.userId;
-this.storageservice.getrequest(indiMatchedJobsCountURL).subscribe(result => {
- console.log(result); 
- this.matchedJobsCount = result['matchedJobs'] ;
-    });
-
-//avg Rating
-
-var indiRatingsCountURL = "api/auth/app/dashboard/avgrating?currentUserId="+this.userId;
-this.storageservice.getrequest(indiRatingsCountURL).subscribe(result => {
- console.log(result); 
- this.avgrating = result['avgrating'];
-    });
-
-
 
   }
   selectedTab: string = 'apps';
@@ -76,6 +58,64 @@ this.storageservice.getrequest(indiRatingsCountURL).subscribe(result => {
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
+
+
+  getProfileViewCount(){
+
+    var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
+    this.storageservice.getrequest(indiProfileViewCountURL).subscribe(result => {
+     console.log(result); 888
+     this.profileViewCount = result['profileviewcount']
+        });
+  }
+
+
+  getnetworkCount(){
+    var indiProfileNetworkCountURL = "api/auth/app/dashboard/networkcount?currentUserId="+this.userId;
+    this.storageservice.getrequest(indiProfileNetworkCountURL).subscribe(result => {
+     console.log(result); 
+     this.networkCount = result['networkcount']; 
+        });
+
+      }
+
+
+      getmatchedJobCount(){
+
+        var indiMatchedJobsCountURL = "api/auth/app/dashboard/matchedjobcounts?currentUserId="+this.userId;
+    this.storageservice.getrequest(indiMatchedJobsCountURL).subscribe(result => {
+     console.log(result); 
+     this.matchedJobsCount = result['matchedJobs'] ;
+        });
+      }
+
+
+      getAvgratingCount(){
+
+        var indiRatingsCountURL = "api/auth/app/dashboard/avgrating?currentUserId="+this.userId;
+            var indiRatingsCountURL = "api/auth/app/dashboard/avgrating?currentUserId="+this.userId;
+        this.storageservice.getrequest(indiRatingsCountURL).subscribe(result => {
+         console.log(result); 
+         this.avgrating = result['avgrating'];
+            });
+
+          }
+
+          getCreditpoints(){
+
+    
+            var creditpointsURL = "api/auth/app/fileUpload/getImgfile?talentId="+this.userId;
+            this.storageservice.getrequest(creditpointsURL).subscribe(data => {
+            console.log(data);
+            if(data['success'] == true){
+        
+              localStorage.setItem('creditPoints', data["creditpoints"]);;
+              localStorage.setItem('profilePic', data["imageUrl"]);
+              localStorage.setItem('categoryType', data["categoryType"]);
+              this.creditPoints = localStorage.getItem("creditPoints") ;
+            }
+            });
+          }
  
 
   goto_settings(){
