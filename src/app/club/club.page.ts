@@ -51,6 +51,15 @@ export class ClubPage implements OnInit {
      ,public alertController: AlertController,) { }
     
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params) { 
+        if (params != null || params != undefined ) {  
+            this.editextracurricular(params.id); 
+          console.log(params);
+        }
+      }
+    });
+    this.getOrganisationList()
     this.edit = false;
     this.clubFrom = this.fb.group({
        clubName: [""],
@@ -72,14 +81,7 @@ export class ClubPage implements OnInit {
 
     this.userId = localStorage.getItem("userId");
 
-    this.route.queryParams.subscribe(params => {
-      if (params) { 
-        if (params != null || params != undefined ) {  
-            this.editextracurricular(params.id); 
-          console.log(params);
-        }
-      }
-    });
+    
 
   }
 
@@ -372,6 +374,7 @@ getOrganisationList(){
       
       
       if (result["success"] == true) {
+        this.getOrganisationList();
         this.storageservice.dismissLoading();
         this.clubFrom.get("clubName").disable();
        
