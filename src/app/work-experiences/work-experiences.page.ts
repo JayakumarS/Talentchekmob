@@ -12,6 +12,11 @@ import moment from 'moment';
   styleUrls: ['./work-experiences.page.scss'],  
 })
 export class WorkExperiencesPage implements OnInit {
+  selectedorglist: any;
+  OrgForm: any;
+  selectedOrg: any;
+  selectedOrganisation: string;
+  locationname: any;
 
   //refresh function
   doRefresh(event) {
@@ -36,7 +41,8 @@ export class WorkExperiencesPage implements OnInit {
   organisationVal: any;
   jobTypeList: any;
   isunregOrg:boolean;
-  unregisteredOrg: string;
+   unregisteredOrg: string;
+  unregisteredIns: string;
   Experience: any;
   userId: string;
   empId:any;
@@ -44,6 +50,10 @@ export class WorkExperiencesPage implements OnInit {
   desiredItem: any;
   dateValidation: boolean;
   nonMandatory: boolean = false;
+  isunregIns: boolean;
+  searchOrganisationResults: any;
+  searchOrgResults: string[] = [];
+  searchCtrl = new FormControl('');
    constructor(public router:Router,private fb: FormBuilder,private route: ActivatedRoute,
     public storageservice:StorageService,public toastController:ToastController,private elementRef: ElementRef,
     public modalController: ModalController,public alertController: AlertController,) { }
@@ -56,7 +66,7 @@ export class WorkExperiencesPage implements OnInit {
       this.isunregOrg = false;
       this.ExperienceForm= this.fb.group({
       designation: ["", Validators.required],
-      organisationName: ["", Validators.required],
+      organisationName: [""],
       department: ["", Validators.required],
       registrationNumber: ["", Validators.required],
       expStart: ["", Validators.required],
@@ -132,6 +142,7 @@ export class WorkExperiencesPage implements OnInit {
       'ckeditor':result["experienceBean"].ckeditor,
       'expId':result["experienceBean"].expId
       })
+      this.selectedOrganisation = this.desiredItem.text
      }else{
       this.storageservice.dismissLoading();
      }
@@ -262,6 +273,80 @@ export class WorkExperiencesPage implements OnInit {
       return InsList;
    }
 
+  //  onSearchSkill(value: string) {
+  //   if (value.length > 2) {
+  //     this.showOrgResults = true;
+  //     this.searchOrgResults = this.organisationList.filter(Org => Org.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+     
+  //     console.log(this.searchOrgResults)
+  //   } else {
+  //     this.showOrgResults = false;
+  //     this.searchOrgResults = [];
+  //   }
+  // }
+  //  selectorg(org: string,id:string) {
+  //   this.selectedOrg = org;
+  //   this.showOrgResults = false;
+  //   this.ExperienceForm.patchValue({
+  //     'organisationName':this.selectedOrg
+  //   })
+  //    this.searchOrgResults = [];
+  //   this.searchCtrl.setValue('');
+  // }
+
+  // removeorg(org: string) {
+  //   this.selectedorglist = undefined;
+  // } 
+   //  Organisation auto complete 
+ onSearchOrganisation(value: string) {
+  if (value.length > 0) {
+
+    if(this.isunregIns == false){
+      this.unregisteredIns = value ;
+    }
+    this.isunregIns = false;
+    this.IsorgListShow = true;
+   
+    this.searchOrganisationResults = this.organisationList.filter(Organisation => Organisation.text && Organisation.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  
+    if (this.searchOrganisationResults == 0) {
+      this.IsorgListShow = false;
+      // this.clubFrom.patchValue({ 
+      // 'clubName':value
+
+      // })
+    }
+    else {
+      this.IsorgListShow = true;
+    }
+ 
+  } else {
+    this.IsorgListShow = false;
+    this.searchOrganisationResults = [];
+  }
+}
+selectOrganisation(institutionName: string,id:string) {
+  this.selectedOrganisation = institutionName;
+  this.Exp.orgName = id;
+  //this.name=institutionName;
+  this.IsorgListShow = false;
+  //this.clubid = id;
+  this.ExperienceForm.patchValue({
+    'orgLocation' : institutionName,
+  });
+
+  this.searchOrganisationResults = [];
+  this.searchCtrl.setValue('');
+  this.orgLocation(id)
+}
+removeOrganisation(selectedOrganisation: string) {
+  this.selectedOrganisation = undefined;
+  this.ExperienceForm.patchValue({
+    'orgLocation' : '',
+  });
+  this.ExperienceForm.get("orgLocation").enable();
+}
+
     async filterList(evt) {
       const filterValue = evt.srcElement.value.toLowerCase();
       if(this.isunregOrg == false){
@@ -281,6 +366,7 @@ export class WorkExperiencesPage implements OnInit {
         }
     
         var countVal = 0;
+        
         this.OrganisationList = this.organisationList.filter(currentinstitution => {
           countVal++;
           if (currentinstitution.text && searchTerm && countVal < 100) {
@@ -330,14 +416,20 @@ export class WorkExperiencesPage implements OnInit {
         if (result["success"] == true) {
           this.ExperienceForm.patchValue({
             'orgLocation' : result["experienceBean"].orgLocation,
+            
           })
+          
           this.ExperienceForm.get("orgLocation").disable();
+          
         }
+        this.locationname = result["experienceBean"].orgLocation
       });
   }
 
   //save
   async saveCertification(){
+    this.ExperienceForm.value.orgLocation =this.locationname
+    this.ExperienceForm.value.organisationName =this.selectedOrganisation
     const errors = this.checkFormValidity(this.ExperienceForm);
     if (errors.length > 0) {
     // Display errors in a popup
