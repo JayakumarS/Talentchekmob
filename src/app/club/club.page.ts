@@ -257,7 +257,7 @@ getOrganisationList(){
   }
 
   async Save() { 
-    this.clubFrom.value.clubBranch = this.clubBranch ;
+   // this.clubFrom.value.clubBranch = this.clubBranch ;
     if(this.clubFrom.value.clubName != ""){
       const errors = this.checkFormValidity(this.clubFrom); 
       if (errors.length > 0) {
@@ -424,6 +424,7 @@ getOrganisationList(){
           //   this.orgLocation(this.desiredItem.id,);
           // }else{
           // }
+         this.orgLocation(this.extracurricularBean.clubName)
        }else{
         this.storageservice.dismissLoading();
        }

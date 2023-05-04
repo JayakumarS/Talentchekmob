@@ -100,11 +100,12 @@ export class RatingExtraPopupPage implements OnInit {
 
       this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
         if (result["success"] == true) {
+          this.presentToast() 
           setTimeout(() => {
             const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
            profilePage.updateData();
           }, 800);
-          this.presentToast() 
+       
     }else{
 
       this.router.navigate(['/profile-view']); 
@@ -123,10 +124,11 @@ export class RatingExtraPopupPage implements OnInit {
       cssClass: 'custom-toast'
     });
     setTimeout(() => {
-      const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
-     profilePage.updateData();
-    }, 800);
+    
     this.router.navigate(['/profile-view']);
+    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    profilePage.updateData();
+   }, 800);
   await toast.present();
 }
 move(){
