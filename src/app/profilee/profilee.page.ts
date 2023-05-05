@@ -103,7 +103,7 @@ countryIdVal:string;
     });
     this.profileForm = this.fb.group({
       firstname: ["", Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
-      lastname: ["",Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+      lastname: ["",Validators.compose([Validators.maxLength(20), Validators.minLength(1), Validators.pattern(this.splCharRegex), Validators.required])],
       gender: ["", [Validators.required]],
       dob:["",[Validators.required]],
       dobObj:[""],
@@ -111,15 +111,15 @@ countryIdVal:string;
       email: ["", [Validators.required, Validators.email, Validators.minLength(5)],],
       nationalid: [""],
       category: ["",[Validators.required]],
-      emergencyContact:[""],
-      bloodgroup: [""],
+      emergencyContact:["",[Validators.required]],
+      bloodgroup: ["",[Validators.required]],
       linkurl:[""],
       details:[""],
       permCity:["",[Validators.required]], 
       permState:["",[Validators.required]],
       permCountry:["",[Validators.required]],
-     permPinCode:["",[Validators.required]],
-     uploadImg:["",[Validators.required]],
+      permPinCode:["",[Validators.required]],
+      uploadImg:["",[Validators.required]],
       permAddress:["",[Validators.required]],
       hobbies:[""],
       languagesknown:["",[Validators.required]],
@@ -300,7 +300,7 @@ goTostateSelectedItem( stateId) {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Saved Successfully',
+      message: 'Updated Successfully',
       duration: 3000,
       cssClass: 'custom-toast'
     });
@@ -376,6 +376,13 @@ checkFormValidity(form: FormGroup): string[] {
        'bloodgroup': this.profileList[0].bloodgroup,
       })
       this.base64img1 = this.profileList[0].uploadImg;
+      if(this.profileList[0].emergencyContact=='null')
+      {
+        this.profileForm.patchValue({
+          'emergencyContact': '',
+        })
+      }
+      
     }
     this.storageservice.dismissLoading();
   })   
