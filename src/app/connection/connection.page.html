@@ -61,7 +61,8 @@
                     <div class="button-content">
                         <ion-label class="labels">Connection's Mobile Number <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input formControlName="receiverMobileNo" (ionChange)="getconnectionDetails($event.target.value)"></ion-input>
+                            <ion-input formControlName="receiverMobileNo" (keypress)="keyPressmobileNo($event)" maxlength="15"
+                            (ionChange)="getconnectionDetails($event.target.value)"></ion-input>
                         </ion-item>
                         <ion-sub-title style="color:gray; font-family: poppins; ">Enter the registered mobile no of your connection so that we can fetch the rest of the details for you if they are already registered</ion-sub-title>
                         <br>
