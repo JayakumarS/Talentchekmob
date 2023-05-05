@@ -121,6 +121,9 @@ base64img1: string = '';
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.talentinstform.patchValue({
+        'uploadImg': this.base64img1,
+      })
       console.log(this.base64img1);
     }), error => {
       console.log(error);
@@ -137,6 +140,9 @@ base64img1: string = '';
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.talentinstform.patchValue({
+        'uploadImg': this.base64img1,
+      })
       console.log(this.base64img1);
     }), error => {
       console.log(error);
@@ -238,12 +244,14 @@ removeCountry() {
   //save
   onSubmit(){
     this.isSubmitted = true;
+    this.storageservice.showLoading();
     if (!this.talentinstform.valid) {
+      this.storageservice.dismissLoading();
       console.log('Please provide all the required values!');
       this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
       return false;
     } else {
-      
+      this.storageservice.showLoading();
     console.log(this.talentinstform.value);
     try {
       var instituteName = this.talentinstform.controls['instituteName'].value;
@@ -303,6 +311,7 @@ removeCountry() {
         this.response = result;
         console.log(this.response);
           if (result["success"] == true) {
+            this.storageservice.dismissLoading();
                    //  this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('Registration Successful.  Please check your inbox to confirm your email address.'));
 
                     var empid = result["empUserId"];
@@ -322,11 +331,13 @@ removeCountry() {
                     if (msg == null) {
                       "msg" 
                     }
+                    this.storageservice.dismissLoading();
                     // this.showNotification('snackbar-danger',result['msg'],'top','Right');
                     this.storageservice.warningToast(msg);
                     //this.hideLoadingIndicator(); //Hide loading indicator
                   }
                   else {
+                    this.storageservice.dismissLoading();
                    // this.storageservice.warningToast("Connection unavailable!");
                     this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
                     //this.hideLoadingIndicator(); //Hide loading indicator
@@ -346,11 +357,13 @@ removeCountry() {
 
     }
     catch (Exception) {
+      this.storageservice.dismissLoading();
       //this.storageservice.warningToast('Connection unavailable!');
       this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
       // this.hideLoadingIndicator(); //Hide loading indicator
     }
     }
+    this.storageservice.dismissLoading();
   }
   transformDate(date) {
     return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
