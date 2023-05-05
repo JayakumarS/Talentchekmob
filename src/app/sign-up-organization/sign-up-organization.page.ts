@@ -83,7 +83,7 @@ base64img1: string = '';
       mobileNo:['',Validators.required],
       state: ['',Validators.required],
       pincode: ['',Validators.required],
-      uploadImg: [''],
+      uploadImg: ['',Validators.required],
       referralCode: [''],
       profileVisibility: ['', ''],
      countryId:[''],
@@ -158,6 +158,9 @@ goToSearchSelectedItem( CtryName,CtryId) {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.talentorgform.patchValue({
+        'uploadImg': this.base64img1,
+      })
       console.log(this.base64img1);
     }), error => {
       console.log(error);
@@ -174,6 +177,9 @@ goToSearchSelectedItem( CtryName,CtryId) {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.talentorgform.patchValue({
+        'uploadImg': this.base64img1,
+      })
       console.log(this.base64img1);
     }), error => {
       console.log(error);
@@ -280,13 +286,15 @@ getcitylist(stateId,countryId){
 }
 //save
 onSubmit(){
+  this.storageservice.showLoading();
    this.isSubmitted = true;
   if (!this.talentorgform.valid) {
+    this.storageservice.dismissLoading();
     console.log('Please provide all the required values!');
     this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
     return false;
   } else {
-    
+    this.storageservice.showLoading();
     console.log(this.talentorgform.value);
   try {
     var organizationName = this.talentorgform.controls['organizationName'].value;
@@ -348,6 +356,7 @@ onSubmit(){
       this.response = result;
       console.log(this.response);
         if (result["success"] == true) {
+          this.storageservice.dismissLoading();
                    //this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('Registration Successful.  '));
 
                   var empid = result["empUserId"];
@@ -366,10 +375,12 @@ onSubmit(){
                   if (msg == null) {
                     "msg" 
                   }
+                  this.storageservice.dismissLoading();
                   this.storageservice.warningToast(msg);
                   //this.hideLoadingIndicator(); //Hide loading indicator
                 }
                 else {
+                  this.storageservice.dismissLoading();
                  // this.storageservice.warningToast("Connection unavailable!");
                   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
                   //this.hideLoadingIndicator(); //Hide loading indicator
@@ -389,10 +400,12 @@ onSubmit(){
 
   }
   catch (Exception) {
+    this.storageservice.dismissLoading();
     //this.storageservice.warningToast('Connection unavailable!');
     this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
     // this.hideLoadingIndicator(); //Hide loading indicator
   }
+  this.storageservice.dismissLoading();
   }
 }
 transformDate(date) {
