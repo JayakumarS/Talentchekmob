@@ -83,7 +83,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         pinCode: ['', Validators.required],
         referalCode: [''],
         // profileVisibility: ['', Validators.required],
-        uploadImg: [''],
+        uploadImg: ['', Validators.required],
         cBoxIAgree:[''],
         cBoxIAgreeConsent:['']
   
@@ -112,6 +112,9 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.talentform.patchValue({
+        'uploadImg': this.base64img1,
+      })
       console.log(this.base64img1);
     }), error => {
       console.log(error);
@@ -128,6 +131,9 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.talentform.patchValue({
+        'uploadImg': this.base64img1,
+      })
       console.log(this.base64img1);
     }), error => {
       console.log(error);
