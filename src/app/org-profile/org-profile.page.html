@@ -218,7 +218,7 @@
           <div class="button-content"*ngIf="isAbout">
             <ion-label class="labels">About the Organization<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-textarea formControlName="details"></ion-textarea>
+              <ion-textarea formControlName="details" rows="10" maxlength="500"></ion-textarea>
             </ion-item>
             <!-- <div *ngIf="docForm.controls.orgName.hasError('required') && docForm.controls.orgName.touched">
                           <small style="color: #f70505;">Organization Name is required</small>
