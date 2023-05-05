@@ -142,17 +142,18 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
 
   
   onSubmit() {
+    this.storageservice.showLoading();
       this.isSubmitted = true;
       if (!this.talentform.valid) {
+        this.storageservice.dismissLoading();
         console.log('Please provide all the required values!');
         //this.storageservice.warningToast('Please provide all the required values!');
         this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
         return false;
       }
       else {
+        this.storageservice.showLoading();
         console.log(this.talentform.value);
-  
-  
         try {
           var firstName = this.talentform.controls['firstName'].value;
           var lastName = this.talentform.controls['lastName'].value;
@@ -223,6 +224,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                       console.log(this.response);
   
                       if (result["success"] == true) {
+                        this.storageservice.dismissLoading();
                          //this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('Registration Successful.  Please check your inbox to confirm your email address.'));
   
                         var empid = result["empUserId"];
@@ -241,10 +243,12 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                             if (msg == null) {
                               "msg"
                             }
+                            this.storageservice.dismissLoading();
                         this.storageservice.warningToast(msg);
                         this.hideLoadingIndicator(); //Hide loading indicator
                       }
                       else {
+                        this.storageservice.dismissLoading();
                        // this.storageservice.warningToast("Connection unavailable!");
                         this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
                         this.hideLoadingIndicator(); //Hide loading indicator
@@ -265,26 +269,31 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                }  //img if condition ends
                else {
                  this.storageservice.warningToast('Please upload image.');
+                 this.storageservice.dismissLoading();
                  //this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsUpImg'));
                }
             }
             else {
+              this.storageservice.dismissLoading();
               this.storageservice.warningToast('User must have minimum one year old to register. Future date is not applicable, Please change.');
               this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.userMinOldReg'));
             }
           }
           else {
+            this.storageservice.dismissLoading();
             this.storageservice.warningToast("First name & last name should not be equal");
             this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.firNmLtNmEql'));
           }
   
         }
         catch (Exception) {
+          this.storageservice.dismissLoading();
           //this.storageservice.warningToast('Connection unavailable!');
           this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
           this.hideLoadingIndicator(); //Hide loading indicator
         }
       }
+      this.storageservice.dismissLoading();
     }
     
 
