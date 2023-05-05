@@ -35,7 +35,7 @@
             <ion-spacer size="large"></ion-spacer><br>
              <div class="button-content">
                 <ion-label class="labels">Department/Team <small style="color: #f70505;">*</small></ion-label>
-                <ion-item fill="outline" class="input-field">
+                <ion-item fill="outline" class="input-field" >
                     <ion-input formControlName="department"></ion-input>
                 </ion-item>
                 <div *ngIf="ExperienceForm.controls.department.hasError('required') && ExperienceForm.controls.department.touched">
@@ -45,18 +45,26 @@
                 <div class="button-content">
                     <ion-label class="labels">Organisation Name <small style="color: #f70505;">*</small></ion-label>
 
-                      <ion-item fill="outline" class="input-field">
+                      <ion-item fill="outline" class="input-field" *ngIf="disabled">
                         <div class="selected-skill"  >{{ selectedOrganisation }} 
                           
                           <ion-icon  *ngIf="selectedOrganisation != undefined && selectedOrganisation != '' && !disabled==true" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
                        </div>
-                      <ion-input   (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
+                      <ion-input   (ionInput)="onSearchOrganisation($event.target.value) "
+                      (optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl" disabled="true"></ion-input>
                   </ion-item>
+                  <ion-item fill="outline" class="input-field" *ngIf="!disabled">
+                    <div class="selected-skill"  >{{ selectedOrganisation }} 
+                      
+                      <ion-icon  *ngIf="selectedOrganisation != undefined && selectedOrganisation != '' && !disabled==true" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
+                   </div>
+                  <ion-input   (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
+              </ion-item>
                   <div *ngIf="ExperienceForm.controls.organisationName.hasError('required') && ExperienceForm.controls.organisationName.touched">
                     <small style="color: #f70505;">Organisation Name is required</small>
                   </div>
                   <ion-list *ngIf="IsorgListShow">
-                    <ion-item *ngFor="let result of searchOrganisationResults" (click)="selectOrganisation(result.text,result.id);getTitle(result.id)">
+                    <ion-item *ngFor="let result of searchOrganisationResults" (click)="selectOrganisation(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
                         {{ result.text }}
                     </ion-item>
                 </ion-list>
