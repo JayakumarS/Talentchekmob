@@ -10,7 +10,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <form>
         <div class="display-justify">
             <ion-row class="container">
@@ -102,6 +102,52 @@
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
                                 <b>Matched Profiles</b></div>
+                        </ion-col>
+                    </ion-row>
+                </a>
+            </div>
+
+
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+                    <br>
+                    <ion-row class="ag-courses-item_date-box">
+                        <ion-col size="3">
+                            <img src="../../assets/img/connections.png">
+                        </ion-col>
+                        <ion-col size="3">
+                            <div style="font-size: 35px;
+                        text-align: center;">
+                                <b>{{count.connections}}</b></div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div style="text-align: end;font-size: 21px;">
+                                <b>Connections</b></div>
+                        </ion-col>
+                    </ion-row>
+                </a>
+            </div>
+
+
+
+
+            <div class="ag-courses_item" (click)="viewList('referrals','Network - Referrals')">
+                <a class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+                    <br>
+                    <ion-row class="ag-courses-item_date-box">
+                        <ion-col size="3">
+                            <img src="../../assets/img/referrals.png">
+                        </ion-col>
+                        <ion-col size="3">
+                            <div style="font-size: 35px;
+                      text-align: center;">
+                                <b>{{count.referrals}}</b></div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div style="text-align: end;font-size: 21px;">
+                                <b>Referrals</b></div>
                         </ion-col>
                     </ion-row>
                 </a>

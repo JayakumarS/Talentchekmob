@@ -36,9 +36,9 @@ export class StorageService {
 // baseURL:string ="http://192.168.5.25:8080/talentchek/";
 
 //Local server
-mobileserverurl:string ="http://localhost:8085/";
+mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
 
-baseURL:string ="http://localhost:8085/";
+baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
 
   mobileserverserive: any;
   
@@ -46,6 +46,7 @@ baseURL:string ="http://localhost:8085/";
 
 
   }
+  
 
 
   showLoading(){

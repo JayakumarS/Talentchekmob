@@ -70,6 +70,10 @@ export class SettingsPage implements OnInit {
     this.router.navigate(['/oni-alumni']);
   }
 
+  goto_Indiv_alumni(){
+    this.router.navigate(['/indiv-alumni']);
+  }
+
   //logout function
   logOut() {
     localStorage.setItem("userId", "");

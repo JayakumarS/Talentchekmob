@@ -14,8 +14,15 @@
                     <img src="../../assets/icon/profile_status.png" />
                 </ion-avatar><span style="font-family: Mr-eaves;">Language</span></div>
         </div>
-        <div class="custom-button" *ngIf="roleId == 2 || roleId == 3">
+        <div class="custom-button" *ngIf="roleId == 2 || roleId == 3 ">
             <div style="display: flex; align-items: center;" (click)="goto_alumni()">
+                <ion-avatar slot="start">
+                    <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
+                </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
+        </div>
+
+        <div class="custom-button" *ngIf="roleId == 1 ">
+            <div style="display: flex; align-items: center;" (click)="goto_Indiv_alumni()">
                 <ion-avatar slot="start">
                     <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
                 </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>

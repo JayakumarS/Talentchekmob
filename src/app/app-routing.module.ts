@@ -385,7 +385,15 @@ const routes: Routes = [
   {
     path: 'splash-screen',
     loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },  {
+    path: 'indiv-alumni',
+    loadChildren: () => import('./indiv-alumni/indiv-alumni.module').then( m => m.IndivAlumniPageModule)
+  },
+  {
+    path: 'indiv-alumni-list',
+    loadChildren: () => import('./indiv-alumni-list/indiv-alumni-list.module').then( m => m.IndivAlumniListPageModule)
   }
+
 
 
 
