@@ -83,7 +83,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
         pinCode: ['', Validators.required],
         referalCode: [''],
         // profileVisibility: ['', Validators.required],
-        uploadImg: ['', Validators.required],
+        uploadImg: [''],
         cBoxIAgree:[''],
         cBoxIAgreeConsent:['']
   
