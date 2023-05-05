@@ -48,6 +48,7 @@ export class WorkExperiencesPage implements OnInit {
   empId:any;
   edit: boolean = false;
   desiredItem: any;
+  disabled: boolean =false;
   dateValidation: boolean;
   nonMandatory: boolean = false;
   isunregIns: boolean;
@@ -81,7 +82,8 @@ export class WorkExperiencesPage implements OnInit {
       expId:[""]
    });
    this.getJobtype();
-   this.initializeItems();  
+   this.initializeItems(); 
+   this.isunregIns = false; 
    this.route.queryParams.subscribe(params => {
    if (params) { 
       if (params != null || params != undefined ) {  
@@ -107,6 +109,7 @@ export class WorkExperiencesPage implements OnInit {
      if (result["success"] == true) {
       this.storageservice.dismissLoading();
       this.edit = true;
+      this.disabled =true;
       this.initializeItems(); 
       const containsTF = this.checkForTF(result["experienceBean"].organisationName)
       if(containsTF == true){
@@ -302,7 +305,11 @@ export class WorkExperiencesPage implements OnInit {
   if (value.length > 0) {
 
     if(this.isunregIns == false){
-      this.unregisteredIns = value ;
+      this.unregisteredOrg = value ;
+      this.ExperienceForm.patchValue({
+        'orgLocation': '',
+      });
+      this.ExperienceForm.get("orgLocation").enable();
     }
     this.isunregIns = false;
     this.IsorgListShow = true;
@@ -428,7 +435,13 @@ removeOrganisation(selectedOrganisation: string) {
 
   //save
   async saveCertification(){
-    this.ExperienceForm.value.orgLocation =this.locationname
+    console.log(this.isunregOrg)
+    if(this.isunregOrg == true)
+    {
+      this.ExperienceForm.value.orgLocation =this.locationname
+    }
+    // this.ExperienceForm.value.orgLocation =this.locationname
+    console.log(this.ExperienceForm.value.orgLocation)
     this.ExperienceForm.value.organisationName =this.selectedOrganisation
     const errors = this.checkFormValidity(this.ExperienceForm);
     if (errors.length > 0) {
@@ -505,17 +518,27 @@ async updateCertification(){
     await alert.present();
   } else {
   if(this.dateValidation == true || this.dateValidation == undefined){
+
+    if(this.isunregOrg == true)
+    {
+      this.ExperienceForm.value.orgLocation =this.locationname
+    }
           this.ExperienceForm.value.currentUserId = this.userId; 
 
           this.ExperienceForm.value.expStart =formatDate(this.ExperienceForm.value.expStart, 'dd/MM/yyyy','en-IN');
           if(this.ExperienceForm.value.expEnd != undefined){
           this.ExperienceForm.value.expEnd=formatDate(this.ExperienceForm.value.expEnd, 'dd/MM/yyyy','en-IN');
           }
+          if(this.unregisteredOrg == ""){
+            this.ExperienceForm.value.organisationName = this.Exp.orgName;
+           }else{
+            this.ExperienceForm.value.organisationName = this.unregisteredOrg;
+           }
           this.Experience = this.ExperienceForm.value;
           console.log(` data: ${JSON.stringify(this.Experience)}`);
-          var saveExperience = "api/auth/app/mobile/UpdateExperience";
+          var updateExperience = "api/auth/app/mobile/UpdateExperience";
       
-        this.storageservice.postrequest(saveExperience, this.Experience).subscribe(async result => {  
+        this.storageservice.postrequest(updateExperience, this.Experience).subscribe(async result => {  
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
              this.updateToast()
