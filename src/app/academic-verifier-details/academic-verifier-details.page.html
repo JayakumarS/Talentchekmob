@@ -24,7 +24,7 @@
       <div class="button-content">
         <ion-label class="labels">Verifier Name <small style="color: #f70505;">*</small></ion-label>
         <ion-item fill="outline" class="input-field">
-          <ion-input type="text" formControlName="verifierName"></ion-input>
+          <ion-input type="text" formControlName="verifierName" ></ion-input>
         </ion-item>
         <div *ngIf=" ExtracurricularFrom.controls.verifierName.hasError('required') && ExtracurricularFrom.controls.verifierName.touched">
           <small style="color: #f70505;">Verifier name is required</small>

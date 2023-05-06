@@ -15,7 +15,8 @@ export class AcademicVerifierDetailsPage implements OnInit {
   ExtracurricularFrom:FormGroup;
   Extracurricular: any;
   userId: string;
-  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  inputValue: string = '';
+  splCharRegex: string = "^[^<>{}\"/|;:,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(private fb: FormBuilder,private route: ActivatedRoute, public router:Router,public toastController:ToastController,
     public storageservice:StorageService) { }
 
@@ -87,5 +88,13 @@ move(extId){
    queryParams: edit
  };
   this.router.navigate(['/rating-extra-popup'],navigationExtras)
+}
+
+onKeyPress(event: KeyboardEvent) {
+  const pattern = /[a-zA-Z\.]/; // Regular expression pattern for alphabets and dots
+  const inputChar = String.fromCharCode(event.charCode); // Get the pressed character
+  if (!pattern.test(inputChar)) { // Check if the character is not an alphabet or dot
+    event.preventDefault(); // Prevent the character from being entered
+  }
 }
 }

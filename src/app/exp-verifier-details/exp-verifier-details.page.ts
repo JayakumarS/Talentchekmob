@@ -16,7 +16,7 @@ export class ExpVerifierDetailsPage implements OnInit {
   ExperienceForm:FormGroup;
   userId: string;
   Experience: any;
-  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  splCharRegex: string = "^[^<>{}\"/|;:,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(public router:Router,private fb: FormBuilder,public toastController:ToastController,
      public storageservice:StorageService,private route: ActivatedRoute,) { }
 

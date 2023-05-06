@@ -15,7 +15,7 @@ export class EduVerifierDetailsPage implements OnInit {
   EducationForm:FormGroup;
   Education: any;
   userId: string;
-  splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  splCharRegex: string = "^[^<>{}\"/|;:,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(private route: ActivatedRoute, public router:Router,public storageservice:StorageService,
      private fb: FormBuilder,public toastController:ToastController,) { }
 
