@@ -31,7 +31,7 @@ export class ProfileViewPage implements OnInit {
   language: any;
   skillName: any;
   expertise: any;
-  skillList: any;
+  skillList=[];
   education: any;
   experience: any;
   club: any;
@@ -41,6 +41,7 @@ export class ProfileViewPage implements OnInit {
   profAvatar: boolean=false;
   connectionList: any;
   fromAddPage: any;
+  expertiseFull:boolean=false;
   constructor(public router: Router, private ngZone: NgZone,public route:ActivatedRoute,public storageservice: StorageService,private elementRef: ElementRef,
     public modalController: ModalController,public alertController: AlertController,) { 
 
@@ -157,6 +158,11 @@ export class ProfileViewPage implements OnInit {
 
      //skills
      this.skillList = result['profileViewList'][0].skillList;
+
+      for(var i=0;i<this.skillList.length;i++){
+        this.skillList[i].expertise=this.skillList[i].expertise/100;
+      }
+     
     //educations
     this.education=result['profileViewList'][0].educationList;
     //experience
@@ -231,6 +237,9 @@ export class ProfileViewPage implements OnInit {
 
      //skills
      this.skillList = result['profileViewList'][0].skillList;
+
+     
+     
     //educations
     this.education=result['profileViewList'][0].educationList;
     //experience
