@@ -241,7 +241,7 @@ export class OrgProfilePage implements OnInit {
         this.getCountryList();
 
         this.searchForId(result["profileList"][0].permCountry); 
-        this.selectedCountry = this.desiredItem.text;
+        // this.selectedCountry = this.desiredItem.text;
         this.editstate = result["profileList"][0].permState; 
         this.getstatelist(result["profileList"][0].permCountry);
         this.editCity = result["profileList"][0].permCity
@@ -354,6 +354,7 @@ export class OrgProfilePage implements OnInit {
     } else {
       console.log(this.desiredItem.text);
     }
+    this.selectedCountry = this.desiredItem.text;
   }
   searchstateId(id: string) {
     this.desiredstateItem = null;
@@ -368,6 +369,7 @@ export class OrgProfilePage implements OnInit {
     } else {
       console.log(this.desiredstateItem.text);
     }
+    this.selectedCountry = this.desiredItem.text;
   }
   searchcityId(id: string) {
     this.desiredcityItem = null;
