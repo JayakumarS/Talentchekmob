@@ -36,7 +36,7 @@
                     
                     <ion-icon  *ngIf="selectedOrganisation != undefined && selectedOrganisation != '' && !disabled==true" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
                  </div>
-                <ion-input  *ngIf="!disabled==true" (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
+                <ion-input  *ngIf="!disabled" (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
             </ion-item>
             <div *ngIf="clubFrom.controls.clubName.hasError('required') && clubFrom.controls.clubName.touched">
               <small style="color: #f70505;">Participated From is required</small>

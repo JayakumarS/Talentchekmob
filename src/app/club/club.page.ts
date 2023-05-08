@@ -29,6 +29,7 @@ export class ClubPage implements OnInit {
 
   clubFrom: FormGroup;
   organisationList: any;
+  testOrganisationList:any;
   IsorgListShow: boolean = false;
   organisationVal: any;
   club: any;
@@ -51,31 +52,40 @@ export class ClubPage implements OnInit {
      ,public alertController: AlertController,) { }
     
   ngOnInit() {
+    this.clubFrom = this.fb.group({
+      clubName: [""],
+     clubBranch: [""],
+     titleHeld: [""],
+     rolePlayed: [""],
+     participatedFrom: ["",Validators.required],
+     participatedTill: [""],
+     currentMember: [""],
+     extId: [""],
+     checked: [""],
+     unregisteredClub: [""],
+     currentUserId: [""]
+   });
+
+    this.getOrganisationList()
+
     this.route.queryParams.subscribe(params => {
       if (params) { 
-        if (params != null || params != undefined ) {  
+        if (params.id != null || params.id != undefined ) {  
             this.editextracurricular(params.id); 
           console.log(params);
         }
+        else{
+          this.edit = false;
+          this.disabled=false;
+        }
       }
+      
     });
-    this.getOrganisationList()
-    this.edit = false;
-    this.clubFrom = this.fb.group({
-       clubName: [""],
-      clubBranch: [""],
-      titleHeld: [""],
-      rolePlayed: [""],
-      participatedFrom: ["",Validators.required],
-      participatedTill: ["",Validators.required],
-      currentMember: [""],
-      extId: [""],
-      checked: [""],
-      unregisteredClub: [""],
-      currentUserId: [""]
-    });
+    
+    // this.edit = false;
+   
 
-    this.getOrganisationList();
+    // this.getOrganisationList();
 
     //var listConstant = this.initializeItems();
 
@@ -170,9 +180,20 @@ getOrganisationList(){
   this.storageservice.getrequest(organisationListUrl).subscribe(result => {
    if (result["success"] == true) {
     this.organisationList = result["organisationList"]; 
+    this.testOrganisationList = result["organisationList"];
     }
  });
 }
+
+// async initializeItems(): Promise<any> { 
+//   var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
+//   const InsList = this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+//     this.organisationList = result["organisationList"];
+//     this.organisationList = result["organisationList"];
+//    });
+
+//   return InsList;
+// }
 
  removeOrganisation(selectedOrganisation: string) {
   this.selectedOrganisation = undefined;
@@ -367,6 +388,7 @@ getOrganisationList(){
 
    //editextracurricularDetails
    editextracurricular(extId){
+    this.edit = true;
     this.storageservice.showLoading();
     var industryURL = "api/auth/app/IndividualProfileDetails/EditExtracurricular?extId=" + extId ;
     this.storageservice.getrequest(industryURL).subscribe(result => {
@@ -374,20 +396,28 @@ getOrganisationList(){
       
       
       if (result["success"] == true) {
-        this.getOrganisationList();
-        this.storageservice.dismissLoading();
-        this.clubFrom.get("clubName").disable();
-       
         this.extracurricularBean = result["extracurricularBean"]; 
- 
+        this.storageservice.dismissLoading();
+        
+        this.disabled =true;
+        //  this.getOrganisationList();
+        //this.initializeItems();
+        
         const containsTF = this.checkForTF(this.extracurricularBean.clubName)
         if(containsTF == true){
           this.searchForId(this.extracurricularBean.clubName);  
         }else{
           this.searchForText(this.extracurricularBean.clubName); 
         }
-
-        this.selectedOrganisation = this.desiredItem.text;
+        
+        this.clubFrom.get("clubName").disable();
+       
+        // this.extracurricularBean = result["extracurricularBean"]; 
+ 
+        
+        console.log(this.selectedOrganisation)
+        // this.selectedOrganisation = this.desiredItem.text;
+        
         const participatedFrom =  this.extracurricularBean.participatedFrom;
         const startdate = moment(participatedFrom, 'DD.MM.YYYY').toDate();
 
@@ -404,12 +434,11 @@ getOrganisationList(){
           const participatedTill =  this.extracurricularBean.participatedTill;
           const Enddate = moment(participatedTill, 'DD.MM.YYYY').toDate();
      
-         this.edit = true;
-         this.disabled =true;
+       
       
          this.clubFrom.patchValue({
           
-            'clubName':this.desiredItem.text,
+            'clubName':this.selectedOrganisation,
            'clubBranch' :this.extracurricularBean.clubBranch,
            'titleHeld': this.extracurricularBean.titleHeld,
            'rolePlayed':this.extracurricularBean.rolePlayed,
@@ -445,8 +474,15 @@ getOrganisationList(){
   }
 
   searchForId(id: string) {
+    var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
+  this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.organisationList = result["organisationList"]; 
+    this.testOrganisationList = result["organisationList"];
+
     this.desiredItem = null;
-    for (const item of this.organisationList) {
+    console.log(this.organisationList)
+    for (const item of this.testOrganisationList) {
       if (item.id === id) {
         this.desiredItem = item; 
         break;
@@ -457,12 +493,33 @@ getOrganisationList(){
     } else {
       console.log(this.desiredItem.text); 
     }
+    this.selectedOrganisation = this.desiredItem.text;
+    }
+ });
+    // this.desiredItem = null;
+    // console.log(this.organisationList)
+    // for (const item of this.testOrganisationList) {
+    //   if (item.id === id) {
+    //     this.desiredItem = item; 
+    //     break;
+    //   }
+    // }
+    // if (this.desiredItem === null) {
+    //   console.log('Item not found');
+    // } else {
+    //   console.log(this.desiredItem.text); 
+    // }
   }
 
 
   searchForText(text: string) {
+    var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
+  this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.organisationList = result["organisationList"]; 
+    this.testOrganisationList = result["organisationList"];
     this.desiredItem = null;
-    for (const item of this.organisationList) {
+    for (const item of this.testOrganisationList) {
       if (item.text === text) {
         this.desiredItem = item; 
         break;
@@ -473,6 +530,22 @@ getOrganisationList(){
     } else {
       console.log(this.desiredItem.text); 
     }
+    this.selectedOrganisation = this.desiredItem.text;
+    }
+ });
+ console.log( this.selectedOrganisation)
+    // this.desiredItem = null;
+    // for (const item of this.testOrganisationList) {
+    //   if (item.text === text) {
+    //     this.desiredItem = item; 
+    //     break;
+    //   }
+    // }
+    // if (this.desiredItem === null) {
+    //   console.log('Item not found');
+    // } else {
+    //   console.log(this.desiredItem.text); 
+    // }
   }
 
 //Updateclub
