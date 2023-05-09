@@ -140,7 +140,7 @@ export class CertificationPage implements OnInit {
    async fileAlert(){
     const alert = await this.toastController.create({
       header: '',
-      message: 'Unable to upload Image',
+      message: 'Unable to upload File',
       duration: 3000,
     }); 
      await alert.present();
