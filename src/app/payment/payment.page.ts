@@ -134,26 +134,68 @@ async Update(){
 
       }
 }
+
+let usr ={
+  bankdetails,
+  "userid":this.currentUserId,
+
+}
+
 let createAccountIdurl = "api/auth/app/subscription/payments/createActIdRazorpay";
 
-this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(result => {
+this.storageservice.post(createAccountIdurl,usr).subscribe(result => {
   console.log(result)
-    console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
-    var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
+  if(result['isSuccess'] == true){
+ 
+    this.presentToast();
   
-     this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
-        //console.log("Image upload response: " + result)
-       if (result["success"] == true) {
-        const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
-        Instprofileview.reload(); 
-        this.presentToast1()
-        }
-      })
+  }else{
+    var msg = result["id"];
+     if (msg == null) {
+       "id"
+     }
+     this.storageservice.dismissLoading();
+ this.storageservice.generalAlertToast(msg);
+ //this.hideLoadingIndicator(); //Hide loading indicator
+
+
+
+  }
+   
      });
 }
   
 }
 
+
+
+update2(){
+
+  this.docForm.value.currentUserId=this.currentUserId;
+  this.paymentDetails = this.docForm.value;
+
+  console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
+  var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
+
+   this.storageservice.post(updatepayment, this.paymentDetails).subscribe(result => {  
+      //console.log("Image upload response: " + result)
+     if (result["success"] == true) {
+      const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+      Instprofileview.reload(); 
+      this.presentToast1()
+      }
+    })
+}
+
+async presentToast() {
+  const toast = await this.toastController.create({
+    message: 'Update Successfully',
+    duration: 3000,
+    cssClass: 'custom-toast'
+  });
+  this.router.navigate(['/org-profile-view']);
+await toast.present();
+}
 async presentToast1() {
   const toast = await this.toastController.create({
     message: 'Update Successfully',
