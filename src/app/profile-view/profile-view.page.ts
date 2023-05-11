@@ -610,6 +610,11 @@ export class ProfileViewPage implements OnInit {
     await alert.present();
   }
 
+  go_to_list(){
+    this.router.navigate(['/connection-list']);
+  
+   }
+
   //delete experience
   async deleteExperiences(expId: number) {
     let alert = await this.alertController.create({

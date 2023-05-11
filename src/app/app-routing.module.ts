@@ -392,6 +392,10 @@ const routes: Routes = [
   {
     path: 'indiv-alumni-list',
     loadChildren: () => import('./indiv-alumni-list/indiv-alumni-list.module').then( m => m.IndivAlumniListPageModule)
+  },
+  {
+    path: 'connection-list',
+    loadChildren: () => import('./connection-list/connection-list.module').then( m => m.ConnectionListPageModule)
   }
 
 

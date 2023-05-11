@@ -189,7 +189,10 @@ export class OrgProfileViewPage implements OnInit {
     this.router.navigate(['/payment'],navigationExtras) 
   }
 
- 
+ go_to_list(){
+  this.router.navigate(['/connection-list']);
+
+ }
 
   // footer
   goto_profileSearch(){

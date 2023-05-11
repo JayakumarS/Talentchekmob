@@ -189,7 +189,7 @@
                     <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Connections()"></ion-icon>
                     </ion-col>
             </ion-row>
-            <ion-card class="talentcard2" *ngFor="let i of connectionList" >
+            <ion-card class="talentcard2" (click)="go_to_list()"*ngFor="let i of connectionList" >
                 <ion-card-content>
 
                     <!-- <ion-row style="text-align: end;">

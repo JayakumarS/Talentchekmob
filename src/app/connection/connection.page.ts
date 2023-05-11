@@ -102,7 +102,7 @@ export class ConnectionPage implements OnInit {
     }
   }
 
-  public newOrgprofileView(): void {
+   newOrgprofileView() {
     this.router.navigate(['/org-profile-view']);
   
   // newOrgprofileView(){
@@ -110,7 +110,7 @@ export class ConnectionPage implements OnInit {
   
   // }
 
-  public newInstiprofileView(): void {
+ newInstiprofileView() {
     this.router.navigate(['/insti-profile-view']);
   }
 

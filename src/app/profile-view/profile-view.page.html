@@ -382,7 +382,7 @@
         <ion-card class="talentcard1" *ngIf="connectioncard">
             <ion-card-content>
                 <ion-row>
-                    <ion-col size="7">
+                    <ion-col >
                         <ion-title style="color:black; margin-left: -9%;"> Verified Network
 
 
@@ -393,7 +393,7 @@
                     </ion-col> 
                 </ion-row>
 
-                <ion-card class="talentcard2" *ngFor="let x of connectionList">
+                <ion-card class="talentcard2" (click)="go_to_list()"*ngFor="let x of connectionList">
                     <ion-card-content style="margin-top: 21px;">
 
 
