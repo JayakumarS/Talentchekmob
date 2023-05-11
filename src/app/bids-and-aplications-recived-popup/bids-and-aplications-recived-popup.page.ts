@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { StorageService } from '../storage.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-bids-and-aplications-recived-popup',
@@ -24,8 +25,8 @@ export class BidsAndAplicationsRecivedPopupPage implements OnInit {
   appRecvFlag : boolean = false;
   bidsRecvFlag : boolean = false;
 
-  constructor(public modalController: ModalController,private navParams: NavParams,
-    public storageservice: StorageService,public router: Router) { }
+  constructor(public modalController: ModalController,private navParams: NavParams,public formbuilder: FormBuilder,
+    public storageservice: StorageService,public router: Router, ) { }
 
   ngOnInit() {
     this.talentId = this.navParams.data.talentId;
@@ -71,7 +72,7 @@ export class BidsAndAplicationsRecivedPopupPage implements OnInit {
       }
    });
   }
-
+ 
   getappRecv(){
 
     var appRecdetailsUrl = "api/auth/app/jobportal/viewJobSeekDetailsForOrg?jspId="+this.jspid;
@@ -120,8 +121,14 @@ export class BidsAndAplicationsRecivedPopupPage implements OnInit {
    });
   }
 
+  dismiss() {
+    this.modalController.dismiss();
+  }
+
   Apply(){
+    this.modalController.dismiss();
  this.router.navigate(['/web-app-nav']);
+
   }
 
 }
