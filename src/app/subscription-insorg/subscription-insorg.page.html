@@ -34,7 +34,7 @@
             </ion-item>
 
 
-            <ion-slides pager="true" style="height: 75%;">
+            <ion-slides pager="true" style="height: 75%;"  *ngIf="RoleID.includes('3')">
                 <ion-slide>
                     <ion-card id="cardProfessional">
                         <!--PRICE CONTENT START-->
@@ -71,10 +71,13 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li><span>2700</span> Talent Credits</li>
-                                    <li><span>1350</span> Profile Access</li>
-                                    <li><span>500MB</span> Document Storage</li>
-                                    <li><span>1</span> Year Subscription</li>
+                                    <li>2700 Talent Credits</li>
+                                    <li>Student Placements</li>
+                                    <li>Student & Staff Alumni Network</li>
+                                    <li>Online Tests & Evaluation</li>
+                                    <li>Events Publishing and Funds Collection</li>
+                                    <li>500MB Document Storage
+                                        with Access Rights</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -124,10 +127,13 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li><span>6000</span> Talent Credits</li>
-                                    <li><span>3000</span> Profile Access</li>
-                                    <li><span>1GB</span> Document Storage</li>
-                                    <li><span>1</span> Year Subscription</li>
+                                    <li>6000 Talent Credits</li>
+                                    <li>Student Placements</li>
+                                    <li>Student & Staff Alumni Network</li>
+                                    <li>Online Tests & Evaluation</li>
+                                    <li>Events Publishing and Funds Collection</li>
+                                    <li>1GB Document Storage
+                                        with Access Rights</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -177,10 +183,184 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li><span>Unlimited</span> Talent Credits</li>
-                                    <li><span>Unlimited</span> Profile Access</li>
-                                    <li><span>10GB</span> Document Storage</li>
-                                    <li><span>1</span> Year Subscription</li>
+                                    <li>Unlimited Talent Credits</li>
+                                    <li>Student Placements</li>
+                                    <li>Student & Staff Alumni Network</li>
+                                    <li>Online Tests & Evaluation</li>
+                                    <li>Events Publishing and Funds Collection</li>
+                                    <li>10GB Document Storage
+                                        with Access Rights</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Ultimate')">Get Started</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+            </ion-slides>
+
+            <ion-slides pager="true" style="height: 75%;"  *ngIf="RoleID.includes('2')">
+                <ion-slide>
+                    <ion-card id="cardProfessional">
+                        <!--PRICE CONTENT START-->
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>Professional</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix">
+                                    <span class="price">
+                                              <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtProfessionalVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>2700 Talent Credits</li>
+                                    <li>Profile Background Verification</li>
+                                    <li>Hiring Module</li>
+                                    <li>Online Tests & Evaluation</li>
+                                    <li>Corporate Alumni Network</li>
+                                    <li>500MB Document Storage
+                                        with Access Rights</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Professional')">Get Started</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-card id="cardEnterprises">
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>Enterprise</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix">
+                                    <span class="price">
+                                          <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtEnterpriseVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>6000 Talent Credits</li>
+                                    <li>Profile Background Verification</li>
+                                    <li>Hiring Module</li>
+                                    <li>Online Tests & Evaluation</li>
+                                    <li>Corporate Alumni Network</li>
+                                    <li>1GB Document Storage
+                                        with Access Rights</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Enterprise')">Get Started</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-card id="cardUltimate">
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>Ultimate</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix">
+                                    <span class="price">
+                                      <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtUltimateVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>Unlimited Talent Credits</li>
+                                    <li>Profile Background Verification</li>
+                                    <li>Hiring Module</li>
+                                    <li>Online Tests & Evaluation</li>
+                                    <li>Corporate Alumni Network</li>
+                                    <li>10GB Document Storage
+                                        with Access Rights</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->

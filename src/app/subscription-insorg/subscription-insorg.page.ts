@@ -45,6 +45,9 @@ export class SubscriptionInsorgPage implements OnInit {
   exchangeAmount:any;
   usercountry: string;
 
+  roleId: any;
+  RoleID: any;
+
   constructor(private http: HttpClient,private location: Location,public router:Router, public storageservice: StorageService,private translate: TranslateService) {
 
     this.userId = localStorage.getItem("userId");
@@ -59,6 +62,11 @@ export class SubscriptionInsorgPage implements OnInit {
   }
 
   ngOnInit() {
+
+   
+    this.roleId = localStorage.getItem("roleId");
+    this.RoleID =  this.roleId.split(",", 3);
+
     this.previousUrl = this.location.path();
   }
 
@@ -86,8 +94,8 @@ export class SubscriptionInsorgPage implements OnInit {
           this.currencySymbolVal = "$";
         }
         else if (this.currencyVal == 'AED') {
-          this.amtProfessionalVal = 400;
-          this.amtEnterpriseVal = 800;
+          this.amtProfessionalVal = 600;
+          this.amtEnterpriseVal = 1200;
           this.amtUltimateVal = 3800;
           this.currencySymbolVal = "د.إ";
         }
@@ -139,8 +147,8 @@ export class SubscriptionInsorgPage implements OnInit {
       this.currencySymbolVal = "$";
     }
     else if (this.currencyVal == 'AED') {
-      this.amtProfessionalVal = 400;
-      this.amtEnterpriseVal = 800;
+      this.amtProfessionalVal = 600;
+      this.amtEnterpriseVal = 1200;
       this.amtUltimateVal = 3800;
       this.currencySymbolVal = "د.إ";
     }
