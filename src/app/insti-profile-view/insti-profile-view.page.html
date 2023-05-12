@@ -208,7 +208,7 @@
                     </ion-col>
 
                 </ion-row>
-                <ion-card class="talentcard2" (click)="go_to_list()" *ngFor="let i of connectionList">
+                <ion-card class="talentcard2" (click)="go_to_list(i.relationship)" *ngFor="let i of connectionList">
                     <ion-card-content>
 
                         <!-- <ion-row style="text-align: end;">

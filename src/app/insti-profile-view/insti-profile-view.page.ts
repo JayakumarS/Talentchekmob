@@ -150,10 +150,19 @@ profileinsti(id){
   this.router.navigate(['/insti-profile'],navigationExtras);
 
 }
-go_to_list(){
-  this.router.navigate(['/connection-list']);
+go_to_list(p){
+
+  let edit = {
+    p
+ }
+ let navigationExtras: NavigationExtras = {
+   queryParams: edit
+ };
+  this.router.navigate(['/connection-list'],navigationExtras);
 
  }
+
+ 
 
 Connections()
 {

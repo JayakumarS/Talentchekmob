@@ -610,10 +610,18 @@ export class ProfileViewPage implements OnInit {
     await alert.present();
   }
 
-  go_to_list(){
-    this.router.navigate(['/connection-list']);
+  go_to_list(p){
+    let edit = {
+      p
+   }
+   let navigationExtras: NavigationExtras = {
+     queryParams: edit
+   };
+    this.router.navigate(['/connection-list'],navigationExtras);
   
    }
+  
+   
 
   //delete experience
   async deleteExperiences(expId: number) {

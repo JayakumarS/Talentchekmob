@@ -10,6 +10,7 @@ import { NavigationEnd } from '@angular/router';
   styleUrls: ['./org-profile-view.page.scss'],
 })
 export class OrgProfileViewPage implements OnInit {
+  relationship: any;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -189,8 +190,14 @@ export class OrgProfileViewPage implements OnInit {
     this.router.navigate(['/payment'],navigationExtras) 
   }
 
- go_to_list(){
-  this.router.navigate(['/connection-list']);
+ go_to_list(p){
+  let edit = {
+    p
+ }
+ let navigationExtras: NavigationExtras = {
+   queryParams: edit
+ };
+  this.router.navigate(['/connection-list'],navigationExtras);
 
  }
 

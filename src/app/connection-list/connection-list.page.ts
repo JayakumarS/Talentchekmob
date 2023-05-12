@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
 @Component({
@@ -13,14 +13,24 @@ export class ConnectionListPage implements OnInit {
   userId: string;
   connectionList: any;
 
-  constructor(public router:Router,public storageservice: StorageService) { }
+  constructor(public router:Router,public storageservice: StorageService,private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userId = localStorage.getItem("userId")  ;
+    this.route.queryParams.subscribe(params => {
+      if (params) { 
+        if (params != null || params != undefined ) {
+          const relationship = params.p.slice(0, -3)   
+            this.getconnection(this.userId,relationship); 
+          console.log(relationship);
+        }
+      }
+    });
     
     this.userId = localStorage.getItem("userId")  ; 
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
-    this.getconnection();
+    // this.getconnection();
   }
   goto_profileView(){
     this.router.navigate(['/profile-view']);
@@ -32,12 +42,15 @@ export class ConnectionListPage implements OnInit {
     this.router.navigate(['/insti-profile-view']);
   }
 
-  getconnection(){
+  getconnection(userid,relationship){
 
-    var connectionListsURL = "api/auth/app/mobile/ConnectionList?currentUserId="+this.userId;
+    var connectionListsURL = "api/auth/app/mobile/ConnectionList";
 
 
-  this.storageservice.getrequest(connectionListsURL).subscribe(result => {
+    
+     
+
+  this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + userid +"&relationship=" + relationship).subscribe(result => {
 
      // this.jobPostList = result['JobAdvertisementList'];
 
