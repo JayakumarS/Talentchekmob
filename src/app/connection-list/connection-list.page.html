@@ -34,8 +34,12 @@
 
             <ion-row>
                 <ion-col size="2">
-                    <ion-avatar size="medium">
+                    <ion-avatar size="medium" *ngIf="x.connectionImg !=null" >
+                     
                         <img alt="" style=" height: 80%;width: 80%;" src="{{x.connectionImg}}" />
+                    </ion-avatar>
+                    <ion-avatar size="medium" *ngIf="x.connectionImg == null">
+                        <img style=" height: 60%;width: 60%;"  src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                     </ion-avatar>
                 </ion-col>
 
