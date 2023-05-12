@@ -50,15 +50,20 @@
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0 alertColor">{{error}}</div>
                 </div>
                 <div class="sign-in">
-                    <button (click)="reset()" style="background: #edf1fc;font-size: 18px; font-family: Mr-eaves;color: #007bff;">Forgot Password?</button>
+                    <h4 (click)="reset()" style="background: #edf1fc;    background: #edf1fc;
+                    border: aliceblue;font-size: 18px; font-family: Mr-eaves;color: #007bff;">Forgot Password?</h4>
                    
                 </div>
-            </form>
-        </div>
+        
 
+        <!-- <div class="display-justify">
+            <ion-button class="custom-button test" style="font-family:  Mr-eaves;" (click)="goto_signup()">Sign-in</ion-button>
+        </div> -->
         <div class="display-justify">
-            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="goto_signup()">Sign-in</ion-button>
+            <button class="custom-button test" (click)="goto_signup()">Sign-in</button>
         </div>
+    </form>
+</div>
         <div class="line-with-text">
             <hr class="hr1">
             <span class="or-text" style="font-family:  Mr-eaves;">OR</span>
