@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ModalController, NavController, ToastController } from "@ionic/angular";
@@ -35,7 +35,18 @@ export class SearchSettingsPage implements OnInit {
   selectedState: string[] = [];
   selectedCities: string[] = [];
   selectedCountry: string[] = [];
+  searchDegreeResults: string[] = [];
+  searchStudyResults: string[] = [];
+  selecteStudy: any;
+  selectStudySet: any;
+  institutionid: string;
+  selectedOrg: any;
+  selectedOrganisation: string;
+  isunregIns: boolean;
+  searchOrganisationResults: any;
   showResults: boolean = false; 
+  isunregOrg:boolean;
+  unregisteredOrg: string;
   showcountyResults : boolean = false;
   showStateResults : boolean = false;
   countrysearchCtrl = new FormControl('');
@@ -61,8 +72,11 @@ IsstudyListShow: boolean = false;
 organisationList: any;
 IsorgListShow:boolean= false;
 institutionVal: any;
+selectDegreeSet: string;
 organisationVal: any;
 formValues: any = {};
+
+
 
   constructor(public router:Router,public storageservice: StorageService,private toastController: ToastController,private fb: FormBuilder,
     private navCtrl: NavController,public modalController: ModalController) {
@@ -90,9 +104,10 @@ formValues: any = {};
     this.workLocationList();
     this.getstateList();
     this.getCountryList();
-    var listConstant =  this.DegreeListItems(); 
-    var listConstant =  this.studyListItems();
-    var listConstant = this.initializeOrgItems();
+    this.getDegreeList();
+    this.getStudyList();
+    this.organizationList();
+   // var listConstant = this.initializeOrgItems();
   
 
   }
@@ -164,6 +179,7 @@ else{
 
 
   }
+
 
 
   selectedTab: string = 'search';
@@ -322,172 +338,197 @@ removeState(state: string) {
    
 
   //degreelist
-  async filterdegreeList(evt) {
-    if (evt.srcElement.value != null && evt.srcElement.value != '') {
+
+  getDegreeList() {
+    var degreeListUrl = "api/auth/app/IndividualProfileDetails/degreeList";
+    this.storageservice.getrequest(degreeListUrl).subscribe(result => {
+      if (result["success"] == true) {
+        this.degreeList = result["degreeList"];
+      }
+    });
+  }
+
+  selectDegree(institutionName: string, id: string) {
+    this.selectDegreeSet = institutionName;
+     this.IsDegreeListShow = false;
+    this.advsearchForm.patchValue({
+    'qualificationsearch':this.selectDegreeSet
+    })
+
+  
+    this.institutionid = id;
+    this.searchDegreeResults = [];
+    this.searchCtrl.setValue('');
+  }
+
+  onSearchDegree(value: string) {
+    if (value.length > 0) {
       this.IsDegreeListShow = true;
-      this.degreeList = this.degreeList;
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
-      }
-  
-      var countVal = 0;
-      this.degreeList = this.degreeList.filter(currentdegreeList => {
-        countVal++;
-        if (currentdegreeList.text && searchTerm && countVal < 100) {
-          return (currentdegreeList.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-        }
-      });
-  
-      if (this.degreeList == 0) {
-        this.IsDegreeListShow = false;
-      }
-      else {
-        this.IsDegreeListShow = true;
-      }
-    }
-    else {
+      this.searchDegreeResults = this.degreeList.filter(Degree => Degree.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
       this.IsDegreeListShow = false;
+      this.searchDegreeResults = [];
     }
   }
+
+  removeDegree(selectDegreeSet: string) {
+    this.advsearchForm.get("qualificationsearch").enable();
+    this.selectDegreeSet = undefined;
+
+  }
+
 
   goto_profileSearch() {
     this.router.navigate(['/job-search']);
   }
 
-  goToDegreeListItem( instName,instId) {
-    console.log("InsName: " + instName)
-    console.log("InsId: " + instId)
 
-    this.advsearchForm.value['qualificationsearch']= instName;
-    
-    this.degreeListVal = instName;
-    this.advsearchForm.value.degree = instId;
-    this.IsDegreeListShow = false;
-
-  }
-  async DegreeListItems(): Promise<any> {
-  
-    var degreeListUrl = "api/auth/app/IndividualProfileDetails/degreeList";
-    const InsList = this.storageservice.getrequest(degreeListUrl).subscribe(result => {
-      this.degreeList = result["degreeList"];
-      this.degreeList = result["degreeList"];
-   //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-    });
-  
-    return InsList;
-  }
 
   // field of studyList
-  async studyListItems(): Promise<any> {
+  onSearchStudy(value: string) {
+    if (value.length > 0) {
+      this.IsstudyListShow = true;
+      this.searchStudyResults = this.studyList.filter(study => study.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.IsstudyListShow = false;
+      this.searchStudyResults = [];
+    }
+  } 
+
+
+  selectStudy(Study: string, id: string) {
+    this.selectStudySet = Study;
+    this.IsstudyListShow = false;
+    this.advsearchForm.patchValue({
+      'fieldofstudysearch':this.selectStudySet
+      })
     
-    var getstudyListUrl = "api/auth/app/IndividualProfileDetails/studyList";
-    const InsList = this.storageservice.getrequest(getstudyListUrl).subscribe(result => {
-   
+    //this.institutionid = id;
+    this.searchStudyResults = [];
+    this.searchCtrl.setValue('');
+  }
+
+
+  getStudyList() {
+    var StudyListUrl = "api/auth/app/IndividualProfileDetails/studyList";
+    this.storageservice.getrequest(StudyListUrl).subscribe(result => {
       if (result["success"] == true) {
-       this.studyList = result["studyList"]; 
+        this.studyList = result["studyList"];
       }
     });
-  
-    return InsList;
   }
 
-  
-  goTostudyListItem( instName,instId) {
-    console.log("InsName: " + instName);
-    console.log("InsId: " + instId);
-    this.advsearchForm.value['fieldofstudysearch'] = instName;
-    this. studyListVal = instName;
-    this.advsearchForm.value.fieldofStudy = instId;
-    this.IsstudyListShow = false;
-    //this.getstatelist(CtryId);
+  remove() {
+    this.selectStudySet = undefined;
   }
 
-  async filterstudyList(evt) {
-    if (evt.srcElement.value != null && evt.srcElement.value != '') {
-      this.IsstudyListShow = true;
-      this.studyList = this.studyList;
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
-      }
-  
-      var countVal = 0;
-      this.studyList = this.studyList.filter(currentstudyList => {
-        countVal++;
-        if (currentstudyList.text && searchTerm && countVal < 100) {
-          return (currentstudyList.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-        }
-      });
-  
-      if (this.studyList == 0) {
-        this.IsstudyListShow = false;
-      }
-      else {
-        this.IsstudyListShow = true;
-      }
-    }
-    else {
-      this.IsstudyListShow = false;
-    }
-  }
 
   //OniList
 
 
   //organisationList
 
-  goToOniSearchSelectedItem( instName,instId) {
-    console.log("InsName: " + instName)
-    console.log("InsId: " + instId)
+  removeOrganisation(selectedOrganisation: string) {
+    this.selectedOrganisation = undefined;
+    this.advsearchForm.patchValue({
+      'onisearch' : '',
+    });
 
-    this.advsearchForm.value['onisearch'] = instId;
-    
-    this.organisationVal = instName;
-    this.advsearchForm.value.organisationName = instId;
-    this.IsorgListShow = false;
-    //this.getstatelist(CtryId);
   }
-    async initializeOrgItems(): Promise<any> {
+
+
+  onSearchOrganisation(value: string) {
+    if (value.length > 0) {
   
-      var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
-      const InsList = this.storageservice.getrequest(organisationListUrl).subscribe(result => {
-        this.organisationList = result["organisationList"];
-        this.organisationList = result["organisationList"];
-     //   console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-      });
-    
-      return InsList;
-    }
-    async filterOrgList(evt) {
-      if (evt.srcElement.value != null && evt.srcElement.value != '') {
-        this.IsorgListShow = true;
-        this.organisationList = this.organisationList;
-        const searchTerm = evt.srcElement.value;
-        if (!searchTerm) {
-          return;
-        }
-    
-        var countVal = 0;
-        this.organisationList = this.organisationList.filter(currentinstitution => {
-          countVal++;
-          if (currentinstitution.text && searchTerm && countVal < 100) {
-            return (currentinstitution.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-          }
+      if(this.isunregIns == false){
+        this.advsearchForm.patchValue({
+          'onisearch': '',
         });
+        this.advsearchForm.get("onisearch").enable();
+      }
+      this.isunregIns = false;
+      this.IsorgListShow = true;
+     
+      this.searchOrganisationResults = this.organisationList.filter(Organisation => Organisation.text && Organisation.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
     
-        if (this.organisationList == 0) {
-          this.IsorgListShow = false;
-        }
-        else {
-          this.IsorgListShow = true;
-        }
+      if (this.searchOrganisationResults == 0) {
+        this.IsorgListShow = false;
+        // this.clubFrom.patchValue({ 
+        // 'clubName':value
+  
+        // })
       }
       else {
+        this.IsorgListShow = true;
+      }
+   
+    } else {
+      this.IsorgListShow = false;
+      this.searchOrganisationResults = [];
+    }
+  }
+
+  async filterList(evt) {
+    const filterValue = evt.srcElement.value.toLowerCase();
+    if(this.isunregOrg == false){
+      this.unregisteredOrg = filterValue ;
+      this.advsearchForm.patchValue({
+        'onisearch' : '',
+      });
+    }
+    this.isunregOrg = false;
+    if (evt.srcElement.value != null && evt.srcElement.value != '') {
+      this.IsorgListShow = true;
+      this.organisationList = this.organisationList;
+      const searchTerm = evt.srcElement.value;
+      if (!searchTerm) {
+        return;
+      }
+  
+      var countVal = 0;
+      
+      this.organisationList = this.organisationList.filter(currentinstitution => {
+        countVal++;
+        if (currentinstitution.text && searchTerm && countVal < 100) {
+          return (currentinstitution.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+        }
+      });
+  
+      if (this.organisationList == 0) {
         this.IsorgListShow = false;
       }
+      else {
+        this.IsorgListShow = true;
+      }
     }
+    else {
+      this.IsorgListShow = false;
+    }
+  }
 
 
+  selectOrganisation(institutionName: string,id:string) {
+    this.selectedOrganisation = institutionName;
+    this.IsorgListShow = false;
+
+    this.advsearchForm.patchValue({
+      'onisearch' : id,
+    });
+  
+    this.searchOrganisationResults = [];
+    this.searchCtrl.setValue('');
+  }
+
+
+  async organizationList(): Promise<any> { 
+    var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
+    const InsList = this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+      this.organisationList = result["organisationList"];
+     });
+  
+    return InsList;
+ }
+ 
+  
  
 }

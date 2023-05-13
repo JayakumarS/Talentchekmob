@@ -37,7 +37,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content> 
+<ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -53,8 +53,8 @@
             </ion-col>
 
         </ion-row>
-        <div style="display: flex;justify-content: center;" *ngIf="mySlicedArray.length == 0">No Results to Display</div>
-        <div *ngIf="mySlicedArray.length != 0">
+        <div style="display: flex;justify-content: center;" *ngIf="basicprofilesearchList.length == 0">No Results to Display</div>
+        <div *ngIf="basicprofilesearchList.length != 0">
             <ion-card class="profilesearchcard" *ngFor="let profile of mySlicedArray" (click)="profileView(profile.talentid,profile.accounttype,profile.username)">
                 <ion-card-content style="padding-bottom: 0px;">
 
@@ -101,6 +101,10 @@
 
             </ion-card>
         </div>
+
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </form>
 
     <div class="footer-nav">
@@ -142,5 +146,5 @@
     </div>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+    </ion-infinite-scroll>
 </ion-content>
