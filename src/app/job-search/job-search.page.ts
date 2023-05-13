@@ -8,6 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 import { NavigationEnd } from '@angular/router';
 import { ScrollDetail } from '@ionic/core';
 
+
 @Component({
   selector: 'app-job-search',
   templateUrl: './job-search.page.html',
