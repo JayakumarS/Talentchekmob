@@ -45,6 +45,7 @@ export class JobSearchPage implements OnInit {
   creditPoints: any;
 
 
+
   
   
   constructor(private fb: FormBuilder,
@@ -60,7 +61,7 @@ export class JobSearchPage implements OnInit {
     if (params) {
 
       if (params != null) {
-    
+    console.log(params);
         this.formValues = params;
       this.storageservice.showLoading();
    
@@ -71,11 +72,16 @@ export class JobSearchPage implements OnInit {
           if(this.basicprofilesearchList.length>=1){
 
             this.basicprofilesearchList.forEach(element=>{
-              if(element.profilepic=="null" || element.profilepic==""){
+              if(element.profilepic== null || element.profilepic==""){
                element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
               }
                
              });
+
+             
+        this.mySlicedArray = this.basicprofilesearchList.slice(0, 10);
+        console.log(this.mySlicedArray);
+
            this.flagChange =true;
            this.storageservice.dismissLoading();
        
@@ -176,6 +182,7 @@ export class JobSearchPage implements OnInit {
 
       });
       await alert.present();
+      this.basicprofilesearchList = [];
     }
 
     else{
@@ -197,13 +204,15 @@ export class JobSearchPage implements OnInit {
        if(this.basicprofilesearchList.length>=1){
 
         this.basicprofilesearchList.forEach(element=>{
-         if(element.profilepic=="null" || element.profilepic==""){
+         if(element.profilepic== null || element.profilepic==""){
           element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
          }
           
         });
-         this.mySlicedArray = this.basicprofilesearchList.slice(0, 10);
-         console.log(this.mySlicedArray);
+
+        this.mySlicedArray = this.basicprofilesearchList.slice(0, 10);
+        console.log(this.mySlicedArray);
+
         this.flagChange =true;
         this.storageservice.dismissLoading();
         }
@@ -277,6 +286,8 @@ export class JobSearchPage implements OnInit {
     this.basicprofilesearchList = [];
    }
 
+
+
    goto_advanceSearch(){
 
     this.basicprofilesearchList = [];
@@ -305,7 +316,7 @@ export class JobSearchPage implements OnInit {
   async profileView(talentId,accounttype,username) {
 
 
-    if(this.creditPoints < 2){
+    if(this.creditPoints < 2 ){
 
       {
         let alert = await this.alertController.create({

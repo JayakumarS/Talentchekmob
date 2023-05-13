@@ -232,11 +232,19 @@ bindJobAdvertiseMentList(){
     goto_jobs(){
       this.router.navigate(['/oni-job-post-list']);
     }
-    goto_instihome(){
-      this.router.navigate(['/institution-dashboard']); 
-    }
+
     goto_orghome(){ 
-      this.router.navigate(['/organization-dashboard']);
+
+      if(this.roleId.includes('2')){
+
+        console.log(this.roleId);
+
+        this.router.navigate(['/organization-dashboard']); 
+      }
+      else if(this.roleId.includes('3')){  
+        this.router.navigate(['/institution-dashboard']); 
+      }
+   
     }
     goto_home(){
       this.router.navigate(['/home']);
