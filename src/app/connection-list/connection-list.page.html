@@ -29,7 +29,7 @@
     <!-- <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
     justify-content: space-around;">&nbsp;&nbsp;&nbsp;Matched Profiles </span> -->
 
-    <ion-card class="profilesearchcard" (click)="profileView(x.connectionid)" *ngFor="let x of connectionList" >
+    <ion-card class="profilesearchcard" (click)="profileView(x.connectionid,x.accounttype,x.connectionName)" *ngFor="let x of connectionList" >
         <ion-card-content style="padding-bottom: 0px;"  >
 
             <ion-row>
