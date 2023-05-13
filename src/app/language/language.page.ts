@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-language',
@@ -8,14 +9,24 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 })
 export class LanguagePage implements OnInit {
 
-  constructor(public router:Router ) { }
+  languages = [];
+  selected = '';
+
+  constructor(public router:Router, private languageService: LanguageService ) { }
 
   ngOnInit() {
+
+    this.languages = this.languageService.getLanguages();
+    this.selected = this.languageService.selected;
   }
   selectedTab: string = 'menu';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
+  }
+
+  select(lng) {
+    this.languageService.setLanguage(lng);
   }
 
   goto_settings(){

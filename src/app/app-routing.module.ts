@@ -385,7 +385,8 @@ const routes: Routes = [
   {
     path: 'splash-screen',
     loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
-  },  {
+  },
+  {
     path: 'indiv-alumni',
     loadChildren: () => import('./indiv-alumni/indiv-alumni.module').then( m => m.IndivAlumniPageModule)
   },
@@ -396,6 +397,10 @@ const routes: Routes = [
   {
     path: 'connection-list',
     loadChildren: () => import('./connection-list/connection-list.module').then( m => m.ConnectionListPageModule)
+  },
+  {
+    path: 'language-popover',
+    loadChildren: () => import('./language-popover/language-popover.module').then( m => m.LanguagePopoverPageModule)
   }
 
 
