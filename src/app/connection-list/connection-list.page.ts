@@ -46,16 +46,16 @@ export class ConnectionListPage implements OnInit {
 
     var connectionListsURL = "api/auth/app/mobile/ConnectionList";
 
-
+    this.storageservice.showLoading();
     
      
 
   this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + userid +"&relationship=" + relationship).subscribe(result => {
-
+    
      // this.jobPostList = result['JobAdvertisementList'];
 
      if(result['success']== true){
-
+      this.storageservice.dismissLoading()
        this.connectionList = result['connectionlist']; 
       // this.matchedCount = result['matchedList'].length ;
       // this.orgBidCount = result['orgBidList'].length ;
