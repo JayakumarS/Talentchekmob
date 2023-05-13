@@ -97,6 +97,8 @@ export class InstitutionDashboardPage implements OnInit {
       localStorage.setItem('creditPoints', data["creditpoints"]);;
       localStorage.setItem('profilePic', data["imageUrl"]);
       localStorage.setItem('categoryType', data["categoryType"]);
+
+      this.creditPoints = localStorage.getItem("creditPoints") ;
     }
     });
   }
