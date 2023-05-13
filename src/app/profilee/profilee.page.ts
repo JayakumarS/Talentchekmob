@@ -88,15 +88,15 @@ countryIdVal:string;
         if (params != null) {
           console.log(params);
         
-          // if (params.id == 1) {
+          if (params.id == 1) {
 
-          //   this.isProfile = true;
-          //   this.editprofile();
-          // } else if (params.id == 2) {
-          //   this.isLogo = true;
-          //   this.editprofile();
+            this.isProfile = true;
+            this.editprofile();
+          } else if (params.id == 2) {
+            this.isLogo = true;
+            this.editprofile();
 
-          // }
+          }
         
         }
       }
