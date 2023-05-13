@@ -17,6 +17,8 @@ import { ScrollDetail } from '@ionic/core';
 export class JobSearchPage implements OnInit {
   mySlicedArray = [];
   mySlicedArray2 = [];
+  btn: any;
+  advanceFlag: boolean = false;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -56,48 +58,40 @@ export class JobSearchPage implements OnInit {
    this.roleId = localStorage.getItem("roleId");
    this.currentUserId = localStorage.getItem("userId");
    this.currentUserName = localStorage.getItem("userName");
-      
-  this.route.queryParams.subscribe(params => {
-    if (params) {
 
-      if (params != null) {
-    console.log(params);
+
+   this.route.queryParams.subscribe(params => {
+       if (Object.keys(params).length != 0) { 
         this.formValues = params;
-      this.storageservice.showLoading();
-   
-        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
-
+        this.btn = "advancebtn";
+        this.advanceFlag= true;
+      this.storageservice.showLoading(); 
+        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList"; 
         this.storageservice.postrequest(BasicSearcUrl, this.formValues).subscribe(result => {
           this.basicprofilesearchList = result['basicprofilesearchList'];
-          if(this.basicprofilesearchList.length>=1){
-
+          if(this.basicprofilesearchList.length>=1){ 
             this.basicprofilesearchList.forEach(element=>{
               if(element.profilepic== null || element.profilepic==""){
                element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
-              }
-               
+              } 
              });
 
-             
-        this.mySlicedArray = this.basicprofilesearchList.slice(0, 10);
-        console.log(this.mySlicedArray);
-
+             this.mySlicedArray = this.basicprofilesearchList;
+             console.log(this.mySlicedArray);
            this.flagChange =true;
-           this.storageservice.dismissLoading();
-       
+           this.storageservice.dismissLoading(); 
            }
            else{
              this.flagChange=false;
-             this.storageservice.dismissLoading();
-        
+             this.storageservice.dismissLoading(); 
            }
-          console.log(result);
-   
+          console.log(result); 
        });
+      }else{
+        this.advanceFlag = false;
+        this.btn = "basicbtn";
       }
-    }
-  });
-
+  }); 
 
 
      }
@@ -170,7 +164,8 @@ export class JobSearchPage implements OnInit {
     speed: 400
   };
   async search(){
-
+    this.btn = "basicbtn";
+    this.advanceFlag = false;
     if(this.jobSearchHeadForm.value.searchValue == "" || this.jobSearchHeadForm.value.searchValue == null ){
 
       const alert = await this.toastController.create({
@@ -182,7 +177,6 @@ export class JobSearchPage implements OnInit {
 
       });
       await alert.present();
-      this.basicprofilesearchList = [];
     }
 
     else{
@@ -196,7 +190,7 @@ export class JobSearchPage implements OnInit {
     var postData = {
       "searchby":this.jobSearchHeadForm.value.searchType,
       "searchvalue":this.jobSearchHeadForm.value.searchValue,
-      "btn":"basicbtn",
+      "btn":this.btn,
       "offset":offset
     }
       this.storageservice.postrequest(BasicSearcUrl, postData).subscribe(result => {
@@ -209,10 +203,8 @@ export class JobSearchPage implements OnInit {
          }
           
         });
-
-        this.mySlicedArray = this.basicprofilesearchList.slice(0, 10);
-        console.log(this.mySlicedArray);
-
+         this.mySlicedArray = this.basicprofilesearchList;
+         console.log(this.mySlicedArray);
         this.flagChange =true;
         this.storageservice.dismissLoading();
         }
@@ -237,12 +229,13 @@ export class JobSearchPage implements OnInit {
       console.log(length2)
     var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
 
-     var postData = {
-      "searchby":this.jobSearchHeadForm.value.searchType,
-      "searchvalue":this.jobSearchHeadForm.value.searchValue,
-      "btn":"basicbtn",
-      "offset":length2
-    }
+    if(this.advanceFlag == false){
+      var postData = {
+        "searchby":this.jobSearchHeadForm.value.searchType,
+        "searchvalue":this.jobSearchHeadForm.value.searchValue,
+        "btn":this.btn,
+        "offset":length2
+      }
 
       this.storageservice.postrequest(BasicSearcUrl, postData).subscribe(result => {
         this.basicprofilesearchList = result['basicprofilesearchList'];
@@ -251,39 +244,47 @@ export class JobSearchPage implements OnInit {
          this.basicprofilesearchList.forEach(element=>{
           if(element.profilepic=="null" || element.profilepic==""){
            element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
-          }
-           
+          } 
          });
-
-
          this.flagChange =true;
          this.storageservice.dismissLoading();
          }
          else{
            this.flagChange=false;
            this.storageservice.dismissLoading();
+         } 
+     }); 
+    }else{
+      this.formValues = { ...this.formValues, offset: length }; 
+      this.storageservice.postrequest(BasicSearcUrl, this.formValues).subscribe(result => {
+        this.basicprofilesearchList = result['basicprofilesearchList'];
+        if(this.basicprofilesearchList.length>=1){ 
+          this.mySlicedArray=this.mySlicedArray.concat(this.basicprofilesearchList);
+          this.basicprofilesearchList.forEach(element=>{
+            if(element.profilepic=="null" || element.profilepic==""){
+             element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
+            } 
+           });
+          this.flagChange =true;
+         this.storageservice.dismissLoading(); 
          }
-        console.log(result);
- 
+         else{
+           this.flagChange=false;
+           this.storageservice.dismissLoading(); 
+         } 
      });
-
-        this.mySlicedArray2 = this.basicprofilesearchList.slice(length, length2);
-        console.log(this.mySlicedArray2);
-        this.mySlicedArray=this.mySlicedArray.concat(this.mySlicedArray2);
-        //this.mySlicedArray2 = "";
-      
+    } 
       event.target.complete();
     }
   }
 
    ChangeOptionEvent(event){
-    console.log("SelectedValue: " + event.target.value);
-
+    console.log("SelectedValue: " + event.target.value); 
     this.jobSearchHeadForm = this.fb.group({
       searchValue: [""],
       searchType : [event.target.value]
     });
-    this.basicprofilesearchList = [];
+     this.basicprofilesearchList = [];
    }
 
 
@@ -291,7 +292,6 @@ export class JobSearchPage implements OnInit {
    goto_advanceSearch(){
 
     this.basicprofilesearchList = [];
-
     this.jobSearchHeadForm = this.fb.group({
       searchValue: [""],
       searchType : ["talentid"]
