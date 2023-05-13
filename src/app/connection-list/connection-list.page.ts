@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-connection-list',
@@ -12,8 +14,14 @@ export class ConnectionListPage implements OnInit {
   RoleID: any;
   userId: string;
   connectionList: any;
-
-  constructor(public router:Router,public storageservice: StorageService,private route: ActivatedRoute) { }
+  @ViewChild('popover') popover;
+  
+  isOpen:boolean = false;
+  presentPopover(e: Event) {
+    this.popover.event = e;
+    this.isOpen = true;
+  }
+  constructor(public router:Router,public modalController: ModalController,public storageservice: StorageService,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userId = localStorage.getItem("userId")  ;
@@ -68,5 +76,26 @@ export class ConnectionListPage implements OnInit {
     });
   }
 
+  async profileView(talentId){
+    const modal = await this.modalController.create({
+      component: ProfileViewPopupPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        "talentId": talentId,
+     }
+    });
 
+    modal.onDidDismiss().then((dataReturned) => {
+     if (dataReturned !== null) {
+
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        //#endregion
+
+     }
+    });
+
+   return await modal.present();
+
+  }
 }
