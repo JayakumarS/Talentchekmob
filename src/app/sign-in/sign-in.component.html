@@ -16,9 +16,18 @@
     </div>
 
     <div class="hello-dear">
+        <ion-buttons slot="end" style="padding-top:10px">
+            <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
+                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+            </ion-button>
+        </ion-buttons>
+
         <div style="font-size: 24px;font-family: Mr-eaves;">Welcome Back!</div>
         <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061;">Please enter login credentials</div>
     </div>
+
+
 
     <div class="container">
 
@@ -37,33 +46,32 @@
                             <ion-input type="password" formControlName="password"></ion-input>
                         </ion-item> -->
 
-                        
-                           <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
-                            <ion-item fill="outline" class="input-field">
+
+                        <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
                             <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="password"></ion-input>
-                            <ion-icon  style="color: black;"name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
-                          </ion-item>
-                          
+                            <ion-icon style="color: black;" name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
+                        </ion-item>
+
 
                     </div>
 
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0 alertColor">{{error}}</div>
                 </div>
                 <div class="sign-in">
-                    <h4 (click)="reset()" style="background: #edf1fc;    background: #edf1fc;
-                    border: aliceblue;font-size: 18px; font-family: Mr-eaves;color: #007bff;">Forgot Password?</h4>
-                   
-                </div>
-        
+                    <button (click)="reset()" style="background: #edf1fc;font-size: 18px; font-family: Mr-eaves;color: #007bff;">Forgot Password?</button>
 
-        <!-- <div class="display-justify">
+                </div>
+
+
+                <!-- <div class="display-justify">
             <ion-button class="custom-button test" style="font-family:  Mr-eaves;" (click)="goto_signup()">Sign-in</ion-button>
         </div> -->
-        <div class="display-justify">
-            <button class="custom-button test" (click)="goto_signup()">Sign-in</button>
+                <div class="display-justify">
+                    <button class="custom-button test" (click)="goto_signup()">Sign-in</button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
         <div class="line-with-text">
             <hr class="hr1">
             <span class="or-text" style="font-family:  Mr-eaves;">OR</span>
@@ -72,7 +80,7 @@
 
         <div class="sign-in">
             <div style="font-size: 16px;">Are you a new member in talentchek? </div>
-            &nbsp;<a  (click)="register()" style="font-size: 18px; font-family: Mr-eaves;color: #007bff;">Sign up</a>
+            &nbsp;<a (click)="register()" style="font-size: 18px; font-family: Mr-eaves;color: #007bff;">Sign up</a>
         </div>
 
 

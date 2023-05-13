@@ -5,6 +5,9 @@ import { AuthLoginInfo } from '../auth/login-Info';
 import { StorageService } from '../storage.service';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { PopoverController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
+import { LanguagePopoverPage } from '../language-popover/language-popover.page';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,8 +24,12 @@ export class SignInComponent implements OnInit {
   passwordType: string = 'password';
   passwordIcon: string = 'eye'; 
  
-  constructor(public formbuilder: FormBuilder,public router: Router,private fcm: FCM,
-    public storageservice: StorageService,private nativeStorage: NativeStorage) { 
+  constructor(public formbuilder: FormBuilder,public router: Router,private fcm: FCM,private languageService: LanguageService,
+    public storageservice: StorageService,private nativeStorage: NativeStorage,private popoverController: PopoverController) { 
+
+      if (!this.languageService.selectedLang) {
+        this.languageService.setInitialAppLanguage();
+      }
 
     this.loginform = formbuilder.group({
       userName: ['', Validators.required],
@@ -50,6 +57,15 @@ export class SignInComponent implements OnInit {
       this.passwordType = 'password';
       this.passwordIcon = 'eye';
     }
+  }
+
+
+  async openLanguagePopOver($event) {
+    const popover = await this.popoverController.create({
+      component: LanguagePopoverPage,
+      event: $event
+    });
+    await popover.present();
   }
 
   goto_signup(){
@@ -97,14 +113,14 @@ export class SignInComponent implements OnInit {
 
 
 
-                this.fcm.getToken().then(token => {
-                  console.log("FCM token123", token);
-                  this.nativeStorage.setItem('FCMToken', token)
-                  localStorage.setItem('FCMToken', token);
+                // this.fcm.getToken().then(token => {
+                //   console.log("FCM token123", token);
+                //   this.nativeStorage.setItem('FCMToken', token)
+                //   localStorage.setItem('FCMToken', token);
     
-                  this.SaveFCMTokenAndUUID(data["username"]);
-                  console.log("SaveFCMTokenAndUUID 2");
-                });
+                //   this.SaveFCMTokenAndUUID(data["username"]);
+                //   console.log("SaveFCMTokenAndUUID 2");
+                // });
 
   
                 if (data.roles[0].roleId.includes('1')) {
