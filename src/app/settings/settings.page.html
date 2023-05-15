@@ -21,7 +21,7 @@
                 </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
         </div>
 
-        <div class="custom-button" *ngIf="roleId == 1 ">
+        <div class="custom-button" *ngIf="roleId.includes('1')">
             <div style="display: flex; align-items: center;" (click)="goto_Indiv_alumni()">
                 <ion-avatar slot="start">
                     <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="display-justify">
-        <div class="custom-button" (click)="goto_visibility()" *ngIf="roleId == 1">
+        <div class="custom-button" (click)="goto_visibility()" *ngIf="roleId.includes('1')">
             <div style="display: flex; align-items: center;">
                 <ion-avatar slot="start">
                     <img src="../../assets/icon/push message.png" />
@@ -88,6 +88,17 @@
                 <ion-avatar slot="start">
                     <img src="../../assets/icon/about.png" />
                 </ion-avatar><span style="font-family: Mr-eaves;">About app</span></div>
+        </div>
+    </div>
+
+
+    <div class="display-justify">
+        <div class="custom-button">
+            <div style="display: flex; align-items: center;">
+
+                <ion-avatar slot="start">
+                    <img style="padding: 5px;" src="../../assets/img/phone.png" />
+                </ion-avatar><span style="font-family: Mr-eaves;"><a href="tel:9345896371">Help</a></span></div>
         </div>
     </div>
 
