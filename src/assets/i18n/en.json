@@ -367,6 +367,7 @@
       "showLess": "SHOW LESS...",
       "showMore": "SHOW MORE..."
     },
+    "addEducation": "Add Education",
     "Category": {
       "chooseYourCategory": "Choose your category",
       "student": "Student",
@@ -463,6 +464,12 @@
       "experience": "Experience",
       "comments": "Comments"
     },
+
+     "addExp":"Add Work Experience",
+     "verifiedNetwork":"Verified Network",
+     "addConnection":"Add Connection",
+     "extracurricular":"Extracurricular",
+     "addExtracurricular":"Add Extracurricular",
     "AddSkill": {
       "addSkill": "Add skill",
       "updateSkill": "Update skill",
@@ -491,6 +498,8 @@
     },
     "Certification": {
       "certificate": "Certifications",
+      "edit": "Edit",
+      "delete": "Delete",
       "name": "Name",
       "talentId": "Talent ID",
       "credits": "Credits",
@@ -499,7 +508,8 @@
       "issuingOrg": "Issuing Organization",
       "issueDate": "Issue Date",
       "id": "Id",
-      "image": "Certification Image"
+      "image": "Certification Image",
+      "academics" : "Academics"
     },
     "AddCertification": {
       "addCertificate": "Add certification",

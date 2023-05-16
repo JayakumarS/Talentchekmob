@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileViewPageRoutingModule } from './profile-view-routing.module';
 
 import { ProfileViewPage } from './profile-view.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ProfileViewPage } from './profile-view.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ProfileViewPageRoutingModule
+    ProfileViewPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ProfileViewPage]
 })

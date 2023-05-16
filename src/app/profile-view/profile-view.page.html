@@ -3,7 +3,7 @@
         <br>
 
         <ion-row>
-            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; text-align: center; font-size: 24px;">My Profile</ion-title>
+            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; text-align: center; font-size: 24px;">{{'DashboardIndividual.myProfile' | translate}}</ion-title>
         </ion-row>
         <br>
 
@@ -38,7 +38,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Profile</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">{{'Menu.profile' | translate}}</ion-title>
                     </ion-col>
                     <ion-col size="2" style="    text-align: end;">
                         <img src="./assets/icon/edit_icon.png" (click)="profile1(1)" id="prfoileimg1">
@@ -47,28 +47,28 @@
 
                 <ion-row class="talentrow">
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
-                        <ion-label>Name : <b>{{username}}</b></ion-label>
+                        <ion-label>{{'PersonalInformation.name' | translate}} : <b>{{username}}</b></ion-label>
                     </ion-col>
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Category : {{category}}</ion-label>
+                        <ion-label>{{'Menu.category' | translate}} : {{category}}</ion-label>
                     </ion-col>
                     <ion-col size="15" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Location : {{location}}</ion-label>
+                        <ion-label>{{'JobSearch.location' | translate}} : {{location}}</ion-label>
                     </ion-col>
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Phone No :{{mobile}}</ion-label>
+                        <ion-label>{{'ContactInfo.mobNo' | translate}} :{{mobile}}</ion-label>
                     </ion-col>
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Email Id: {{email}}</ion-label>
-                    </ion-col>
-
-                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label> Languages Known: {{language}}</ion-label>
+                        <ion-label>{{'ProfileCorIns.emailId' | translate}} : {{email}}</ion-label>
                     </ion-col>
 
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label> {{'PersonalInformation.languagesknown' | translate}}: {{language}}</ion-label>
+                    </ion-col>
+
 
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label>Hobbies: {{hobbies}}</ion-label>
+                        <ion-label>{{'PersonalInformation.hobbies' | translate}}: {{hobbies}}</ion-label>
                     </ion-col>
                 </ion-row>
 
@@ -80,7 +80,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col size="6">
-                        <ion-title style="color:black; margin-left: -9%;">Skill
+                        <ion-title style="color:black; margin-left: -9%;">{{'skill.skill' | translate}}
 
                         </ion-title>
                     </ion-col>
@@ -117,7 +117,7 @@
                 <ion-row>
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                   width: 112%;    text-align: center;">Add Skills</ion-title>
+                   width: 112%;    text-align: center;">{{'skill.addSkill' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -128,7 +128,7 @@
             <ion-card-content>
                 <ion-row style="    padding-bottom: 10px;">
                     <ion-col size="7">
-                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> Certifications
+                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> {{'Certification.certificate' | translate}}
 
                         </ion-title>
                     </ion-col>
@@ -147,9 +147,9 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="certification(x.certId)" class="edit-button">
-                                    <ion-icon name="create-outline"></ion-icon>Edit</button>
+                                    <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' | translate}}</button>
                                     <button (click)="deleteCertificateCard(x.certId)" class="delete-button">
-                                    <ion-icon name="trash-outline"></ion-icon>Delete</button>
+                                    <ion-icon name="trash-outline"></ion-icon>{{'Certification.delete' | translate}}</button>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                 <ion-row style="    text-align: center;">
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                    text-align: center;width: 112%;">Add Certifications</ion-title>
+                    text-align: center;width: 112%;">{{'Certification.addCert' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -190,7 +190,7 @@
             <ion-card-content>
                 <ion-row style="    padding-bottom: 10px;">
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Academics
+                        <ion-title style="color:black; margin-left: -9%;">{{'Certification.academics' | translate}}
 
                         </ion-title>
                     </ion-col>
@@ -211,13 +211,13 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="educations(x.eduId)" class="edit-button">
-                                    <ion-icon name="create-outline"></ion-icon>&nbsp;Edit</button>
+                                    <ion-icon name="create-outline"></ion-icon>&nbsp;{{'Certification.edit' | translate}}</button>
 
                                      
                                     <button style="color: black;"(click)="eduIdverifierCall(x.eduId,x.institutionId)" *ngIf="x.status == 'Unverified'" class="edit-button">
-                                        <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;Verification</button>
+                                        <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' | translate}}</button>
                                     <button (click)="deleteeducation(x.eduId)" class="delete-button">
-                                    <ion-icon name="trash-outline"></ion-icon>&nbsp;Delete</button>
+                                    <ion-icon name="trash-outline"></ion-icon>&nbsp;{{'Certification.delete' | translate}}</button>
                                 </div>
                             </div>
                         </div>
@@ -276,7 +276,7 @@
                 <ion-row style="    text-align: center;">
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                    width: 104%;">Add Education</ion-title>
+                    width: 104%;">{{'addEducation' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -290,7 +290,7 @@
             <ion-card-content>
                 <ion-row style="    padding-bottom: 10px;">
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Experience
+                        <ion-title style="color:black; margin-left: -9%;">{{'skill.experience' | translate}}
 
                         </ion-title>
                     </ion-col>
@@ -311,11 +311,11 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="experiences(x.expId)" class="edit-button">
-                                    <ion-icon name="create-outline"></ion-icon>Edit</button>
+                                    <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' | translate}}</button>
                                     <button  style="color: black;"(click)="expIdverifierCall(x.expId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
-                                        <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;Verification</button>
+                                        <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' | translate}}</button>
                                     <button (click)="deleteExperiences(x.expId)" class="delete-button">
-                                    <ion-icon name="trash-outline"></ion-icon>Delete</button>
+                                    <ion-icon name="trash-outline"></ion-icon>{{'Certification.delete' | translate}}</button>
                                 </div>
                             </div>
                         </div>
@@ -373,7 +373,7 @@
                 <ion-row style="    text-align: center;">
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                width: 104%;">Add Work Experience</ion-title>
+                width: 104%;">{{'addExp' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -383,7 +383,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col >
-                        <ion-title style="color:black; margin-left: -9%;"> Verified Network
+                        <ion-title style="color:black; margin-left: -9%;"> {{'verifiedNetwork' | translate}}
 
 
                         </ion-title>
@@ -422,7 +422,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> Add Connection
+                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> {{'addConnection' | translate}}
                         </ion-title>
                     </ion-col>
                 </ion-row>
@@ -435,7 +435,7 @@
             <ion-card-content>
                 <ion-row style="    padding-bottom: 10px;">
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Extracurricular
+                        <ion-title style="color:black; margin-left: -9%;">{{'extracurricular' | translate}}
 
                         </ion-title>
                     </ion-col>
@@ -454,11 +454,11 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;"(click)="Extracurricular(x.clubId)" class="edit-button">
-                                    <ion-icon name="create-outline"></ion-icon>Edit</button>
+                                    <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' | translate}}</button>
                                     <button style="color: black;"(click)="clubIdverifierCall(x.clubId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
-                                        <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;Verification</button>
+                                        <img src="\assets\img\verifier.png" style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' | translate}}</button>
                                     <button (click)="deleteExtracurricular(x.clubId)" class="delete-button">
-                                    <ion-icon name="trash-outline"></ion-icon>Delete</button>
+                                    <ion-icon name="trash-outline"></ion-icon>{{'Certification.delete' | translate}}</button>
                                 </div>
                             </div>
                         </div>
@@ -514,7 +514,7 @@
                 <ion-row>
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;    text-align: center;
-                    width: 104%;">Add Extracurricular</ion-title>
+                    width: 104%;">{{'addExtracurricular' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
