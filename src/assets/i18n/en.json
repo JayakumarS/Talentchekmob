@@ -636,6 +636,7 @@
       "to": "To",
       "toAlert": "Please select 'To date'",
       "addInfo": "Additional information",
+      "prefLoc": "Choose Preferred Work Location",
       "workLoc": "Work location",
       "willRelocate": "Are you willing to relocate?",
       "yes": "Yes",
@@ -666,6 +667,11 @@
       "yesAuction":"Yes"
 
     },
+    "addJobPref":"Add Job Preference",
+    "editJobPref":"Edit Job Preference",
+    
+
+    
     "ViewJobProfile": {
       "view": "View Profile",
       "jobtitle": "Interested position",

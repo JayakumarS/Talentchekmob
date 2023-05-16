@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { JobProfilePageRoutingModule } from './job-profile-routing.module';
 
 import { JobProfilePage } from './job-profile.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { JobProfilePage } from './job-profile.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    JobProfilePageRoutingModule
+    JobProfilePageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [JobProfilePage]
 })

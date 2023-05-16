@@ -8,6 +8,10 @@ import { formatDate } from '@angular/common';
 import moment from 'moment';
 import { JobPage as JobPage} from '../job/job.page';
 
+import { PopoverController } from '@ionic/angular';
+import { LanguagePopoverPage } from '../language-popover/language-popover.page';
+import { LanguageService } from '../language.service';
+
 @Component({
   selector: 'app-job-profile',
   templateUrl: './job-profile.page.html',
@@ -78,8 +82,11 @@ export class JobProfilePage implements OnInit {
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
-    private toastController: ToastController,
-    public storageservice:StorageService,private route: ActivatedRoute) {    
+    private toastController: ToastController,private popoverController: PopoverController,private languageService: LanguageService,
+    public storageservice:StorageService,private route: ActivatedRoute) {  
+      if (!this.languageService.selectedLang) {
+        this.languageService.setInitialAppLanguage();
+      }  
     }
 
   selectedTab: string = 'earth';
@@ -781,7 +788,13 @@ await toast.present();
   goto_more(){
     this.router.navigate(['/settings']);
   }
-
+  async openLanguagePopOver($event) {
+    const popover = await this.popoverController.create({
+      component: LanguagePopoverPage,
+      event: $event
+    });
+    await popover.present();
+  }
   
   
 }
