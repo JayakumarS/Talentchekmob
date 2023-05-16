@@ -8,6 +8,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { OniJobPostPageRoutingModule } from './oni-job-post-routing.module';
 
 import { OniJobPostPage } from './oni-job-post.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { OniJobPostPage } from './oni-job-post.page';
     IonicModule,
     CKEditorModule,
     ReactiveFormsModule,
-    OniJobPostPageRoutingModule
+    OniJobPostPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [OniJobPostPage]
 })

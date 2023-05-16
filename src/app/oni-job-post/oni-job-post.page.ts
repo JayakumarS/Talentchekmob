@@ -7,6 +7,9 @@ import { StorageService } from '../storage.service';
 import moment from 'moment';
 import { formatDate } from '@angular/common';
 import { OniJobPostListPage as listpage } from '../oni-job-post-list/oni-job-post-list.page';
+import { LanguagePopoverPage } from '../language-popover/language-popover.page';
+import { LanguageService } from '../language.service';
+import { PopoverController } from '@ionic/angular';
 @Component({
   selector: 'app-oni-job-post',
   templateUrl: './oni-job-post.page.html',
@@ -86,9 +89,13 @@ export class OniJobPostPage implements OnInit {
   location=[];
   constructor(private fb: FormBuilder,
     public router:Router,
-    private http: HttpClient,
+    private http: HttpClient,private popoverController: PopoverController,private languageService: LanguageService,
     private toastController: ToastController,
-    public storageservice:StorageService,private route: ActivatedRoute,public alertController: AlertController, private ngZone: NgZone) { }
+    public storageservice:StorageService,private route: ActivatedRoute,public alertController: AlertController, private ngZone: NgZone) { 
+      if (!this.languageService.selectedLang) {
+        this.languageService.setInitialAppLanguage();
+      }
+    }
 
     //nav bar
     selectedTab: string = 'earth'; 
@@ -799,6 +806,13 @@ export class OniJobPostPage implements OnInit {
   }
   goto_more(){
     this.router.navigate(['/settings']);
+  }
+  async openLanguagePopOver($event) {
+    const popover = await this.popoverController.create({
+      component: LanguagePopoverPage,
+      event: $event
+    });
+    await popover.present();
   }
  
 }
