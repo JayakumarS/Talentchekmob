@@ -16,11 +16,20 @@
         </ion-col>
     </ion-row>
     <div class="hello-dear">
-        <div style="font-size: 24px;font-family: Mr-eaves;">Hello, dear!</div>
-        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061; font-family: alina-sans;">Let's create an account. It's very simple!</div>
+        <ion-buttons style="padding-top:10px">
+            <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
+                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+            </ion-button>
+        </ion-buttons>
+        </div>
+        
+    <div class="hello-dear">
+        <div style="font-size: 24px;font-family: Mr-eaves;">{{'hello' | translate}}</div>
+        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061; font-family: alina-sans;text-align: center;">{{'createAccount' | translate}}</div>
     </div>
     <div class="display-justify">
-        <ion-button class="custom-button" (click)="goto_signup()">Sign up</ion-button>
+        <ion-button class="custom-button" (click)="goto_signup()">{{'Login.sign-up' | translate}}</ion-button>
     </div>
 
 
@@ -29,12 +38,14 @@
 
     <div class="line-with-text">
         <hr class="hr1">
-        <span class="or-text">OR</span>
+        <span class="or-text">{{'Login.or' | translate}}</span>
         <hr class="hr2">
     </div>
 
     <div class="sign-in">
-        <div style="font-size: 16px; font-family: alina-sans;">Already a Talentchek member? </div>
-        &nbsp;<a (click)="goto_login()" style="font-size: 18px; font-family: Mr-eaves;">Sign in</a>
+        <div style="font-size: 16px; font-family: alina-sans;
+        padding-left: 25px;">{{'Already a Talentchek member?' | translate}} </div>
+        &nbsp;<a (click)="goto_login()" style="font-size: 18px; font-family: Mr-eaves;
+        padding-right: 25px; ">{{'sign_in' | translate}}</a>
     </div>
 </ion-content>

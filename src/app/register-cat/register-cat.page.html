@@ -18,7 +18,7 @@
             </ion-col>
 
             <ion-col size="9">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; ">Registration</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; ">{{'registrationHeader' | translate}}</ion-title>
             </ion-col>
         </ion-row>
 
@@ -41,6 +41,14 @@
 
     <ion-row>
         <div class="ag-format-container">
+            <div class="hello-dear">
+                    <ion-buttons style="padding-top:10px">
+                        <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
+                            <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                            <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+                        </ion-button>
+                    </ion-buttons>
+                    </div>
 
             <div class="ag-courses_box">
 
@@ -50,14 +58,7 @@
                   <br>
              
                 </div>
-                <div class="hello-dear">
-                    <ion-buttons style="padding-top:10px">
-                        <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
-                            <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
-                            <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
-                        </ion-button>
-                    </ion-buttons>
-                    </div>
+                
                 <div class="ag-courses_item">
                     <a class="ag-courses-item_link" (click)="individualRegister()">
                         <div class="ag-courses-item_bg"></div>
@@ -151,7 +152,7 @@
     </div>
 
     <div class="sign-in">
-        <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;">&nbsp;<b> <a (click)="goto_login()">{{'sign_in' | translate}} </a></b></span>
+        <div style="font-size: 16px;padding-left: 25px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;padding-right: 25px;">&nbsp;<b> <a (click)="goto_login()">{{'sign_in' | translate}} </a></b></span>
     </div>
 
 </ion-content>

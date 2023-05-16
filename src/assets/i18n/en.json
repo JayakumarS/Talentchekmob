@@ -122,6 +122,13 @@
       "subscription": "Subscription"
     },
 
+    "hello":"Hello, dear!",
+    "createAccount":"Let's create an account. It's very simple!",
+
+    
+
+    "registrationHeader":"Registration",
+
     "individualRegistration":"Individual Registration",
     "indDesc":" For anyone and everyone who would like to maintain a verified portfolio",
     "orgRegistration": "Organization Registration",
