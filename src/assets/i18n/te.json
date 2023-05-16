@@ -13,11 +13,12 @@
       "frg_pass": "పాస్‌వర్డ్ మర్చిపోయారా?",
       "para1Header": "వరదలు!",
       "enter_crendentials":"దయచేసి లాగిన్ ఆధారాలను నమోదు చేయండి",
-      "sign_in":"సింగ్-ఇండ",
+     
       "or":"లేదా",
       "new_member":"మీరు టాలెంట్‌చెక్‌లో కొత్త సభ్యులా? ",
       "sign-up":"చేరడం"
     },
+    "sign_in":"సింగ్-ఇండ",
     "Register": {
       "register": "నమోదు చేయండి",
       "reg_quote": "మీ UNIQUE గ్లోబల్ ప్రొఫెషనల్ IDని పొందండి",
@@ -124,7 +125,7 @@
       "personIncharge": "బాధ్యత వహించు వ్యక్తి",
       "subscription": "చందా"
     },
-    "PersonalInfo": {
+  
       "individual": "వ్యక్తిగత",
       "headerQuote": "మీ UNIQUE గ్లోబల్ ప్రొఫెషనల్ IDని పొందండి",
       "firstName": "మొదటి పేరు",
@@ -167,8 +168,7 @@
       "iAccept": "నేను అంగీకరిస్తున్నాను",
       "tAndC": "నిబంధనలు మరియు షరతులు",
       "consentForm": "సమ్మతి రూపం",
-      "register": "నమోదు చేసుకోండి"
-    },
+      "register": "నమోదు చేసుకోండి",
     "CorReg": {
       "organization": "సంస్థ",
       "headerQuote": "మీ UNIQUE గ్లోబల్ ప్రొఫెషనల్ IDని పొందండి",

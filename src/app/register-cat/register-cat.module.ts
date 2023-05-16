@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterCatPageRoutingModule } from './register-cat-routing.module';
 
 import { RegisterCatPage } from './register-cat.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterCatPageRoutingModule
+    RegisterCatPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [RegisterCatPage]
 })

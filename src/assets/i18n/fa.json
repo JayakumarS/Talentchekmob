@@ -13,11 +13,12 @@
       "frg_pass": "رمز عبور را فراموش کرده اید؟",
       "para1Header": "سیل پاساک",
       "enter_crendentials":"لطفا اطلاعات ورود به سیستم را وارد کنید",
-      "sign_in":"سینگ ایندا",
+      
       "or":"یا",
       "new_member":"آیا شما یک عضو جدید در talentchek هستید؟",
       "sign-up":"ثبت نام"
     },
+    "sign_in":"سینگ ایندا",
     "Register": {
       "register": "ثبت نام",
       "reg_quote": "شناسه حرفه ای جهانی منحصر به فرد خود را دریافت کنید",
@@ -117,7 +118,7 @@
       "personIncharge": "مسئول",
       "subscription": "اشتراک، ابونمان"
     },
-    "PersonalInfo": {
+    
       "individual": "شخصی",
       "headerQuote": "شناسه حرفه ای جهانی منحصر به فرد خود را دریافت کنید",
       "firstName": "نام کوچک",
@@ -160,8 +161,8 @@
       "iAccept": "من قبول میکنم",
       "tAndC": "شرایط و ضوابط",
       "consentForm": "فرم رضایت",
-      "register": "ثبت نام"
-    },
+      "register": "ثبت نام",
+
     "CorReg": {
       "organization": "سازمان",
       "headerQuote": "شناسه حرفه ای جهانی منحصر به فرد خود را دریافت کنید",

@@ -13,11 +13,12 @@
       "frg_pass": "هل نسيت كلمة السر؟",
       "para1Header": "الريحان",
       "enter_crendentials":"الرجاء إدخال بيانات اعتماد تسجيل الدخول",
-      "sign_in":"سينغ إيندا",
+    
       "or":"أو",
       "new_member":"هل أنت عضو جديد في Talentchek؟",
       "sign-up":"اشتراك"
     },
+    "sign_in":"سينغ إيندا",
     "Register": {
       "register": "تسجيل",
       "reg_quote": "احصل على معرّف UNIQUE Global Professional ID الخاص بك",
@@ -117,7 +118,7 @@
       "personIncharge": "الشخص المسؤول",
       "subscription": "الاشتراك"
     },
-    "PersonalInfo": {
+    
       "individual": "فرد",
       "headerQuote": "احصل على معرّف UNIQUE Global Professional ID الخاص بك",
       "firstName": "الاسم الأول",
@@ -160,8 +161,8 @@
       "iAccept": "أقبل",
       "tAndC": "الأحكام والشروط",
       "consentForm": "نموذج الموافقة",
-      "register": "يسجل"
-    },
+      "register": "يسجل",
+  
     "CorReg": {
       "organization": "منظمة",
       "headerQuote": "احصل على معرّف UNIQUE Global Professional ID الخاص بك",

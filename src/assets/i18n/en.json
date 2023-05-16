@@ -13,11 +13,13 @@
       "frg_pass": "Forgot Password?",
       "para1Header":"Welcome Back!",
       "enter_crendentials":"Please enter login credentials",
-      "sign_in":"SIGN-IN",
+    
+      
       "or":"OR",
       "new_member":"Are you a new member in talentchek?",
       "sign-up":"Sign up"
     },
+    "sign_in":"SIGN-IN",
     
     "Register": {
       "register": "REGISTER",
@@ -26,6 +28,7 @@
       "cor_quote": "Corporate",
       "ins_quote": "Institution (School/College)"
     },
+    
     "ForgotPassword": {
       "header": "Forgot password",
       "talentId": "Talent Id",
@@ -118,12 +121,19 @@
       "personIncharge": "Person in charge",
       "subscription": "Subscription"
     },
-    "PersonalInfo": {
+
+    "individualRegistration":"Individual Registration",
+    "indDesc":" For anyone and everyone who would like to maintain a verified portfolio",
+    "orgRegistration": "Organization Registration",
+    "orgDesc": "For startups, corporates ,clubs and associations",
+    "institutionRegistration":"Institution Registration",
+    "instiDesc": "For schools, colleges, universities and training institutes",
+   
       "individual": "Individual",
       "headerQuote": "Get your UNIQUE Global Professional ID",
       "firstName": "First name",
       "reqFirstName": "Please enter first name",
-      "splCharNotAllowed": "Special characters are not allowed",
+      "splCharNotAllowed": "Should accept only alphabets",
       "firstNameMinLength": "First name must be atleast 3 characters long.",
       "lastName": "Last name",
       "reqLastName": "Please enter last name",
@@ -151,7 +161,7 @@
       "stateProvince": "State/Province",
       "pinZipCode": "Pin/Zip code",
       "reqPinZipCode": "Please enter valid pin/zip code",
-      "referralCode": "Referral code",
+      "referralCode": "Referral code (if any)",
       "maxLengthRefCode": "Referral code should not exceed above 20 length",
       "accType": "Account type",
       "private": "Private",
@@ -159,15 +169,39 @@
       "public": "Public",
       "uploadImage": "Upload Image",
       "iAccept": "I accept the",
+      "Address":"Address",
       "tAndC": "Terms and Conditions",
       "consentForm": "Consent form",
-      "register": "Register"
-    },
+      "register": "Register",
+      "uploadImagereq":"Please upload upload Image",
+      "next":"NEXT",
+      "Already a Talentchek member?":"Already a Talentchek member?",
+      "ProfileInfo":"Profile Info",
+      "AddressInfo":"Address Info",
+      "RegistrationInfo":"Registration Info",
+      "contactNo": "Contact  number",
+      "contactValid": "Please enter valid mobile no.",
+      "emailId_Req": "Please enter email",
+      "select": "Select School / College",
+      "Enter": "Enter Your Address",
+      "type": "Select Type",
+      "domain":"Select Domain",
+
+      "institutionName":"Institution Name",
+      "instReq":"Institution Name is required",
+      "instSpecialChar":"Special characters are not allowed",
+      "instCharLong":"Institution name must be atleast 3 characters long",
+      "instEmail":"Institution's email",
+      "instEmailReq":"Institution's email is required",
+      
+
+
     "CorReg": {
       "organization": "Organization",
       "headerQuote": "Get your UNIQUE Global Professional ID",
       "orgName": "Organization name",
       "reqOrgName": "Please enter organization name",
+      "firstNameMinLength": "Organization name must be atleast 3 characters long.",
       "splCharNumAreNotAllowed": "Special characters/numbers are not allowed",
       "password": "Password",
       "reqPassword": "Please enter password",
@@ -176,6 +210,7 @@
       "mobNumber": "Mobile number",
       "reqMobNo": "Please enter valid mobile no.",
       "panTaxId": "TAX ID",
+      "panTaxIdReq": "TAX ID is required",
       "reqPanTaxId": "Please enter TAX Id",
       "splCharNotAllowed": "Special characters are not allowed",
       "panValidationTenChar": "PAN no. must be 10 characters long.",
@@ -203,7 +238,19 @@
       "tAndC": "Terms and Conditions",
       "register": "Register",
       "domain": "Domain",
-      "reqDomain": "Please select domain"
+      "reqDomain": "Please select domain",
+      "OrganizationType":"Organization Type",
+      "Organizationrequired":"Organization Type is required",
+      "OrganisationRegiNo":"Organisation Registration No (CIN, ACRA etc.)",
+      "reqRegistrationNoequired":"Registration number is required",
+      "address":"Address",
+      "uploadLogoRequired":"Upload logo is required",
+      "CountryRequired":"Country is required",
+      "State/ProvinceRrequired":"State/Province is required",
+      "CityRequired":"City is required",
+      "OrganizationEemail":"Organization's email",
+      "OrganizationEmailRequired":"Organization's email is required"
+      
     },
     "Consent": {
       "header": "CONSENT FORM",
@@ -222,10 +269,12 @@
     },
     "InsReg": {
       "institution": "Institution (School / College)",
+      "instReq":"Institution (School / College) is required",
       "headerQuote": "Get your UNIQUE Global Professional ID",
       "insName": "Institution name",
       "reqInsName": "Please enter institution name",
       "password": "Password",
+      "PasswordRequired":"Password is required",
       "reqPassword": "Please enter password",
       "minPwdLength": "Password must be at least 8 characters long.",
       "pwdPattern": "Password must have at least one alphabet (small & caps), one numeric and one special character.",
@@ -236,11 +285,13 @@
       "splCharNotAllowed": "Special characters are not allowed",
       "panValidationTenChar": "PAN no. must be 10 characters long.",
       "regNumber": "Registration number",
+      "regReq": "Registration Number is required",
       "reqRegNumber": "Please enter registration number",
       "insEmail": "Institution's email",
       "reqInsEmail": "Please enter institution's email",
       "invalidMail": "Invalid email",
       "dor": "Date of registration",
+      "dorReq": "Date of Registration is required",
       "reqDor": "Please select date of registration",
       "plotFaltSt": "Plot/Flat/House/Street No.",
       "areaName": "City",
@@ -491,7 +542,8 @@
       "others": "Others",
       "adharNo": "Aadhar number",
       "adharValid": "Please enter valid aadhar no.",
-      "contactNo": "Contact phone number",
+      "contactNo": "Contact  number",
+      "Contact number is required":"Contact number is required",
       "contactValid": "Please enter valid mobile no.",
       "dependent": "Employee dependent ?",
       "yes": "Yes",

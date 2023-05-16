@@ -29,21 +29,21 @@
                 <div class="step" data-target="#test-l-1">
                     <button class="step-trigger">
           <span class="bs-stepper-circle">1</span>
-          <span class="bs-stepper-label">Profile Info</span>
+          <span class="bs-stepper-label">{{'ProfileInfo' | translate }}</span>
         </button>
                 </div>
                 <div class="line"></div>
                 <div class="step" data-target="#test-l-2">
                     <button class="step-trigger">
           <span class="bs-stepper-circle">2</span>
-          <span class="bs-stepper-label">Address Info</span>
+          <span class="bs-stepper-label">{{'AddressInfo' | translate }}</span>
         </button>
                 </div>
                 <div class="line"></div>
                 <div class="step" data-target="#test-l-3">
                     <button class="step-trigger">
           <span class="bs-stepper-circle">3</span>
-          <span class="bs-stepper-label">Registration Info</span>
+          <span class="bs-stepper-label">{{'RegistrationInfo' | translate }}</span>
         </button>
                 </div>
             </div>
@@ -52,41 +52,41 @@
                 <form [formGroup]="talentform" (ngSubmit)="onSubmit()">
                     <div id="test-l-1" class="content">
                         <div class="button-content">
-                            <ion-label class="labels">First name <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'firstName' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="text" formControlName="firstName" (keypress)="keyPressAlphaNumeric($event)"></ion-input>
 
                             </ion-item>
                             <div *ngIf=" talentform.controls.firstName.hasError('required') && talentform.controls.firstName.touched">
-                                <small style="color: #f70505;">First name is required</small>
+                                <small style="color: #f70505;">{{'reqFirstName' | translate }}</small>
                             </div>
                             <div *ngIf="talentform.controls.firstName.hasError('pattern')">
-                                <small style="color: #f70505;">Should accept only alphabets</small>
+                                <small style="color: #f70505;">{{'splCharNotAllowed' | translate }}</small>
                             </div>
                             <div *ngIf="talentform.controls.firstName.hasError('minlength')">
-                                <small style="color: #f70505;">First name must be atleast 3 characters long</small>
+                                <small style="color: #f70505;">{{'firstNameMinLength' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">Last name <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'lastName' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="text" formControlName="lastName" (keypress)="keyPressAlphaNumeric($event)"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.lastName.hasError('required') && talentform.controls.lastName.touched">
-                                <small style="color: #f70505;">Last name is required</small>
+                                <small style="color: #f70505;">{{'reqLastName' | translate }} </small>
                             </div>
                             <div *ngIf="talentform.controls.lastName.hasError('pattern')">
-                                <small style="color: #f70505;">Should accept only alphabets</small>
+                                <small style="color: #f70505;">{{'splCharNotAllowed' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">Date of Birth<small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'dob' | translate }}<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY" formControlName="dob" presentation="date" [max]="getMaxDate()"></ion-datetime>
                             </ion-item>
                             <div *ngIf=" talentform.controls.dob.hasError('required') && talentform.controls.dob.touched">
-                                <small style="color: #f70505;">Date of Birth is required</small>
+                                <small style="color: #f70505;">{{'reqDob' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">Gender<small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'gender' | translate }}<small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
                                 <ion-radio-group formControlName="gender" style="width:100%">
                                     <ion-row>
@@ -94,7 +94,7 @@
                                             <div class="genderbg">
                                                 <div class="genderpadding">
                                                     <!-- <img src="./assets/img/boys.png" class="emojiicons"> -->
-                                                    <span class="emojitext">Male</span>
+                                                    <span class="emojitext">{{'male' | translate }}</span>
                                                     <ion-radio mode="md" class="ion-item-left" value="M"></ion-radio>
                                                 </div>
                                             </div>
@@ -104,7 +104,7 @@
                                             <div class="genderbg">
                                                 <div class="genderpadding">
                                                     <!-- <img src="./assets/img/girle.jpg" class="emojiicons"> -->
-                                                    <span class="emojitext">Female</span>
+                                                    <span class="emojitext">{{'female' | translate }}</span>
                                                     <ion-radio mode="md" class="ion-item-left" value="F"></ion-radio>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@
                                             <div class="genderbg">
                                                 <div class="genderpadding">
                                                     <!-- <img src="./assets/img/others.png" class="emojiicons"> -->
-                                                    <span class="emojitext">Other</span>
+                                                    <span class="emojitext">{{'others' | translate }}</span>
                                                     <ion-radio mode="md" class="ion-item-left" value="O"></ion-radio>
                                                 </div>
                                             </div>
@@ -123,11 +123,11 @@
                                 </ion-radio-group>
                             </ion-row>
                             <div *ngIf=" talentform.controls.gender.hasError('required') && talentform.controls.gender.touched">
-                                <small style="color: #f70505;">Gender is required</small>
+                                <small style="color: #f70505;">{{'reqGender' | translate }}</small>
                             </div>
                             <br>
 
-                            <ion-label class="labels">Upload Image<small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'uploadImage' | translate }}<small style="color: #f70505;">*</small></ion-label>
                             <ion-row>
                                 <ion-col size="6">
                                     <ion-thumbnail *ngIf="base64img1">
@@ -150,12 +150,12 @@
                                 </ion-col>
                             </ion-row>
                             <div *ngIf=" talentform.controls.firstName.hasError('required') && talentform.controls.firstName.touched">
-                                <small style="color: #f70505;">Upload Image is required</small>
+                                <small style="color: #f70505;">{{'uploadImagereq' | translate }}</small>
                             </div>
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate }}</ion-button>
                         </div>
 
                         <div class="line-with-text">
@@ -165,18 +165,18 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate }} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{ 'sign_in' | translate }}</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-2" class="content">
                         <div class="button-content">
-                            <ion-label class="labels">Address</ion-label>
+                            <ion-label class="labels">{{'Address' | translate }}</ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-textarea formControlName="address" placeholder="Enter Your Address"></ion-textarea>
                             </ion-item>
 
 
-                            <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'country' | translate }} <small style="color: #f70505;">*</small></ion-label>
 
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
@@ -194,11 +194,11 @@
                             </ion-list>
 
                             <div *ngIf=" talentform.controls.country.hasError('required') && talentform.controls.country.touched">
-                                <small style="color: #f70505;">Country is required</small>
+                                <small style="color: #f70505;">{{'reqCountry' | translate }}</small>
                             </div>
 
 
-                            <ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'stateProvince' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
@@ -227,7 +227,7 @@
                                 <small style="color: #f70505;">State/Province is required</small>
                             </div>
 
-                            <ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'areaName' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
@@ -255,17 +255,17 @@
                             <div *ngIf=" talentform.controls.areaName.hasError('required') && talentform.controls.areaName.touched">
                                 <small style="color: #f70505;">City is required</small>
                             </div>
-                            <ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'pinZipCode' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pinCode"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.pinCode.hasError('required') && talentform.controls.pinCode.touched">
-                                <small style="color: #f70505;">Pin Code  is required</small>
+                                <small style="color: #f70505;">{{'reqPinZipCode' | translate }}</small>
                             </div>
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">Next</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate }}</ion-button>
                         </div>
 
                         <div class="line-with-text">
@@ -274,40 +274,40 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate }} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()">{{ 'sign_in' | translate }}</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-3" class="content text-center">
                         <div class="button-content">
 
 
-                            <ion-label class="labels">Contact number <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'contactNo' | translate }}<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="phoneNo"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.phoneNo.hasError('required') && talentform.controls.phoneNo.touched">
-                                <small style="color: #f70505;">Contact No is required</small>
+                                <small style="color: #f70505;">{{'contactValid' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">Email <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'email' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="email" formControlName="email" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentform.controls.email.hasError('required') && talentform.controls.email.touched">
-                                <small style="color: #f70505;">Email is required</small>
+                                <small style="color: #f70505;">{{'emailId_Req' | translate }}</small>
                             </div>
                             <div *ngIf="talentform.controls.email.hasError('pattern')">
-                                <small style="color: #f70505;">Invalid email</small>
+                                <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">Password <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'password' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <!-- <ion-input formControlName="password"></ion-input> -->
                                 <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="password"></ion-input>
                                 <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
                             <div *ngIf=" talentform.controls.password.hasError('required') && talentform.controls.password.touched">
-                                <small style="color: #f70505;">password is required</small>
+                                <small style="color: #f70505;">{{'reqPassword' | translate }}</small>
                             </div>
                             <!-- <ion-label class="labels">Account <small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
@@ -346,24 +346,24 @@
                                 <small style="color: #f70505;">Account is required</small>
                               </div> -->
 
-                            <ion-label class="labels">Referral code (if any)</ion-label>
+                            <ion-label class="labels">{{'referralCode' | translate }}</ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="referalCode"></ion-input>
                             </ion-item>
 
                             <ion-item lines="none">
                                 <ion-checkbox formControlName="cBoxIAgree" [(ngModel)]="cBoxIAgreeVal"></ion-checkbox>
-                                <ion-label>&emsp;I accept the <a (click)="openTCForm()" style="color: rgb(119, 191, 194);">  Terms and conditions</a><span style="color:red">*</span></ion-label>
+                                <ion-label>&emsp;{{'iAccept' | translate }} <a (click)="openTCForm()" style="color: rgb(119, 191, 194);"> {{'tAndC' | translate }} </a><span style="color:red">*</span></ion-label>
                             </ion-item><br>
 
                             <ion-item lines="none">
                                 <ion-checkbox formControlName="cBoxIAgreeConsent" [(ngModel)]="cBoxIAgreeConsentVal"></ion-checkbox>
-                                <ion-label>&emsp;I accept the <a (click)="openConsentForm()" style="color: rgb(119, 191, 194);">Consent form</a><span style="color:red">*</span></ion-label>
+                                <ion-label>&emsp;{{'iAccept' | translate }} <a (click)="openConsentForm()" style="color: rgb(119, 191, 194);">{{'consentForm' | translate }}</a><span style="color:red">*</span></ion-label>
                             </ion-item>
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!talentform.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false " (click)="onSubmit()">Register</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!talentform.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false " (click)="onSubmit()">{{'register' | translate }}</ion-button>
                         </div>
 
 
@@ -373,7 +373,7 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> Sign in</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate }} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{ 'sign_in' | translate }}</a></b></span>
                         </div>
                     </div>
                 </form>

@@ -50,12 +50,20 @@
                   <br>
              
                 </div>
+                <div class="hello-dear">
+                    <ion-buttons style="padding-top:10px">
+                        <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
+                            <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                            <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+                        </ion-button>
+                    </ion-buttons>
+                    </div>
                 <div class="ag-courses_item">
                     <a class="ag-courses-item_link" (click)="individualRegister()">
                         <div class="ag-courses-item_bg"></div>
 
                         <div class="ag-courses-item_title">
-                            Individual Registration
+                            {{'individualRegistration' | translate}}
                         </div>
 
                         <ion-row class="ag-courses-item_date-box">
@@ -64,7 +72,7 @@
                                 <ion-icon size ="large" style="color: #568FEA;" name="person-sharp"></ion-icon>
                             </ion-col>
                             <ion-col size="10">
-                                For anyone and everyone who would like to maintain a verified portfolio
+                               {{'indDesc' | translate}}
                             </ion-col>
         
                             
@@ -85,7 +93,7 @@
                         <div class="ag-courses-item_bg"></div>
 
                         <div class="ag-courses-item_title">
-                            Organization Registration
+                            {{'orgRegistration' | translate}}
                         </div>
                   <ion-row class="ag-courses-item_date-box">
 
@@ -93,7 +101,7 @@
                         <ion-icon size ="large" style="color: #FA7070;" name="business-sharp"></ion-icon>
                     </ion-col>
                     <ion-col size="10">
-                        For startups, corporates ,clubs and associations
+                        {{'orgDesc' | translate}}
                         <br><br>
                     </ion-col>
                     <br>
@@ -110,7 +118,7 @@
                         <div class="ag-courses-item_bg"></div>
 
                         <div class="ag-courses-item_title">
-                            Institution Registration
+                            {{'institutionRegistration' | translate}}
                         </div>
 
                         <ion-row class="ag-courses-item_date-box">
@@ -119,7 +127,7 @@
                                 <ion-icon size ="large" style="color: #707070;" name="school-sharp"></ion-icon>
                             </ion-col>
                             <ion-col size="10">
-                                For schools, colleges, universities and training institutes
+                                {{'instiDesc' | translate}}
                                 <br><br>
                             </ion-col>
                             <br>
@@ -138,12 +146,12 @@
 
     <div class="line-with-text">
         <hr class="hr1">
-        <span class="or-text">OR</span>
+        <span class="or-text">{{'Login.or' | translate}}</span>
         <hr class="hr2">
     </div>
 
     <div class="sign-in">
-        <div style="font-size: 16px;">Already a Talentchek member? </div><span style="font-size: 18px;">&nbsp;<b> <a (click)="goto_login()">Sign in</a></b></span>
+        <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;">&nbsp;<b> <a (click)="goto_login()">{{'sign_in' | translate}} </a></b></span>
     </div>
 
 </ion-content>

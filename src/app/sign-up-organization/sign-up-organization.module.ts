@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SignUpOrganizationPageRoutingModule } from './sign-up-organization-routing.module';
 
 import { SignUpOrganizationPage } from './sign-up-organization.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { SignUpOrganizationPage } from './sign-up-organization.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    
+    TranslateModule.forChild(),
 
     SignUpOrganizationPageRoutingModule,
   ],

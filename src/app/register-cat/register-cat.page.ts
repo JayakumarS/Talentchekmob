@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { LanguagePopoverPage } from '../language-popover/language-popover.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-register-cat',
@@ -8,7 +11,11 @@ import { Router } from '@angular/router';
 })
 export class RegisterCatPage implements OnInit {
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,private popoverController: PopoverController,private languageService: LanguageService,) {
+    if (!this.languageService.selectedLang) {
+      this.languageService.setInitialAppLanguage();
+    }
+   }
 
   ngOnInit() {
   }
@@ -32,6 +39,13 @@ export class RegisterCatPage implements OnInit {
   goto_login(){
 
     this.router.navigate(['/sign-in']); 
+  }
+  async openLanguagePopOver($event) {
+    const popover = await this.popoverController.create({
+      component: LanguagePopoverPage,
+      event: $event
+    });
+    await popover.present();
   }
 
 }

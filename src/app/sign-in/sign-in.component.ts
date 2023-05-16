@@ -9,6 +9,8 @@ import { PopoverController } from '@ionic/angular';
 import { LanguageService } from '../language.service';
 import { LanguagePopoverPage } from '../language-popover/language-popover.page';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -24,7 +26,7 @@ export class SignInComponent implements OnInit {
   passwordType: string = 'password';
   passwordIcon: string = 'eye'; 
  
-  constructor(public formbuilder: FormBuilder,public router: Router,private fcm: FCM,private languageService: LanguageService,
+  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,private fcm: FCM,
     public storageservice: StorageService,private nativeStorage: NativeStorage,private popoverController: PopoverController) { 
 
       if (!this.languageService.selectedLang) {
@@ -67,6 +69,13 @@ export class SignInComponent implements OnInit {
     });
     await popover.present();
   }
+
+  // setLanguage(text: string, lang: string, flag: string) {
+  //   this.countryName = text;
+  //   this.flagvalue = flag;
+  //   this.langStoreValue = lang;
+  //   this.languageService.setLanguage(lang);
+  // }
 
   goto_signup(){
 
