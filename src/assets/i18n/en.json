@@ -614,6 +614,20 @@
       "inviteApply": "Invitation to apply",
       "received": "Received on"
     },
+    "aboutOrg":"About the Organization",
+    "about":"About",
+    "entity":"Entity Type",
+    "companySize":"Company Size",
+    "founded":"Founded",
+    "regNo":"Registration No",
+    "paymentInfo":"Payment Info",
+    "amountHolderName":"Amount Holder Name",
+    "bankAccNo":"Bank A/C NO",
+    "ifsc":"IFSC Code",
+    "serviceFee":"Service Fee for Verification",
+
+
+
     "AddJobProfile": {
       "curate": "Curate your Ideal Job",
       "jobPref": "Job preferences",

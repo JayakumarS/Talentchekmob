@@ -502,6 +502,18 @@
     "addConnection":"இணைப்பைச் சேர்க்கவும்",
     "extracurricular":"பாடத்திற்கு புறம்பான",
     "addExtracurricular":"கூடுதல் பாடத்திட்டத்தைச் சேர்க்கவும்",
+    "aboutOrg":"அமைப்பு பற்றி",
+    "about":"பற்றி",
+    "entity":"நிறுவன வகை",
+    "companySize":"நிறுவனத்தின் அளவு",
+    "founded":"நிறுவப்பட்டது",
+    "regNo":"பதிவு எண்",
+    "paymentInfo":"கட்டண தகவல்",
+    "amountHolderName":"தொகை வைத்திருப்பவரின் பெயர்",
+    "bankAccNo":"வங்கி ஏ/சி எண்",
+    "ifsc":"IFSC குறியீடு",
+    "serviceFee":"சரிபார்ப்புக்கான சேவைக் கட்டணம்",
+
 
     "AddCertification": {
       "addCertificate": "சான்றிதழைச் சேர்க்கவும்",
