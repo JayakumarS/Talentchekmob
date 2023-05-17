@@ -149,6 +149,8 @@
       "country": "کشور",
       "reqCountry": "لطفا کشور را انتخاب کنید!",
       "stateProvince": "ایالت/استان",
+      "UniqueNationalID" : "شناسه ملی منحصر به فرد (شناسه Aadhar/SSN/ID امارات و غیره)",
+      "UniqueIdReq": "شناسه ملی منحصر به فرد (Aadhar ID / SSN / ID امارات و غیره) مورد نیاز است",
       "pinZipCode": "پین/کد پستی",
       "reqPinZipCode": "لطفا پین/کد پستی معتبر وارد کنید",
       "referralCode": "کد ارجاع",
@@ -1175,5 +1177,19 @@
       "verRat": "رتبه بندی تایید کننده",
       "verComm": "نظرات تایید کننده",
       "close": "نزدیک"
-    }
+    },
+    "selectLangKnown":"زبان های شناخته شده را انتخاب کنید",
+    "reqLangKnown":"زبان های شناخته شده مورد نیاز است",
+    "emergencyContact":"شماره تماس اورژانس",
+    "emergencyContactReq":"شماره تماس اضطراری الزامی است",
+    "urlLink":"پیوند URL به نمایه ویدیوی شما",
+    "aboutYou":"درباره شما",
+    "selectCategory":"دسته را انتخاب کنید",
+    "selectHobbies":"سرگرمی ها را انتخاب کنید",
+    "selectBG":"گروه خونی را انتخاب کنید",
+
+    "addSkills":"مهارت ها را اضافه کنید",
+    "editSkills":"مهارت های ویرایش",
+    "beginner":"مبتدی",
+    "expert":"کارشناس"
   }

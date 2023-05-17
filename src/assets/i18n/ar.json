@@ -141,6 +141,8 @@
       "email": "بريد الالكتروني",
       "invalidEmail": "بريد إلكتروني خاطئ",
       "phoneNo": "رقم الهاتف",
+      "UniqueNationalID" : "الهوية الوطنية الفريدة (Aadhar ID / SSN / Emirates ID إلخ)",
+      "UniqueIdReq": "مطلوب هوية وطنية فريدة (Aadhar ID / SSN / Emirates ID إلخ)",
       "reqMobNo": "الرجاء إدخال رقم هاتف صالح.",
       "panTaxId": "معرف الضريبة / معرف الطالب",
       "plotFaltSt": "قطعة أرض / شقة / منزل / رقم الشارع.",
@@ -1174,5 +1176,20 @@
       "verRat": "تقييم Verifer",
       "verComm": "تعليقات المدقق",
       "close": "يغلق"
-    }
+    },
+    "selectLangKnown":"حدد اللغات المعروفة",
+    "reqLangKnown":"اللغات المعروفة مطلوبة",
+    "emergencyContact":"رقم الاتصال في حالات الطوارئ",
+    "emergencyContactReq":"رقم الاتصال في حالات الطوارئ مطلوب",
+    "urlLink":"رابط URL لملف تعريف الفيديو الخاص بك",
+    "aboutYou":"حولك",
+    "selectCategory":"اختر الفئة",
+    "selectHobbies":"حدد الهوايات",
+    "selectBG":"حدد فصيلة الدم",
+
+
+    "addSkills":"أضف مهارات",
+    "editSkills":"تحرير المهارات",
+    "beginner":"مبتدئ",
+    "expert":"خبير"
   }

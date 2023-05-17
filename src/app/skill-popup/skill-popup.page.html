@@ -6,10 +6,10 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
             </div>
             <div *ngIf="!edit"  style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Add Skills</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'addSkills' | translate}}</ion-title>
             </div>
             <div  *ngIf="edit" style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Edit Skills</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'editSkills' | translate}}</ion-title>
             </div>
         </div> 
 
@@ -22,7 +22,7 @@
                 <ion-col>
                     <div class="button-content">
 
-                        <ion-label class="labels">Skills<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'AddJobProfile.skill' | translate}}<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <div>{{ selectedSkills }}
                                 <ion-icon *ngIf="selectedSkills != undefined && selectedSkills != ''" name="close-circle" (click)="removeSkill(selectedSkills)"></ion-icon>
@@ -43,21 +43,21 @@
                     <ion-range min="0" style="display: flex;width: 112%;align-items: flex-end; margin-left: -8%;" 
                     max="100" formControlName="expertise" [(ngModel)]="sliderValue" 
                     (ionChange)="onSliderChange($event.target.value)"> 
-                        <ion-label slot="start">Beginner</ion-label>
-                        <ion-label slot="end">Expert</ion-label> 
+                        <ion-label slot="start">{{'beginner' | translate}}</ion-label>
+                        <ion-label slot="end">{{'expert' | translate}}</ion-label> 
                     </ion-range> 
                 </ion-col>
             </ion-row>
             <ion-row>
                 <div *ngIf="!edit" class="button-content" style="margin: auto;">
                     <div class="display-justify">
-                        <ion-button class="custom-button" (click)="saveSkill()">Add</ion-button>
+                        <ion-button class="custom-button" (click)="saveSkill()">{{'AddJobProfile.submit' | translate}}</ion-button>
                     </div>
                 </div>
 
                 <div *ngIf="edit" class="button-content" style="margin: auto;">
                     <div class="display-justify">
-                        <ion-button class="custom-button" (click)="updateSkill()">Update</ion-button>
+                        <ion-button class="custom-button" (click)="updateSkill()">{{'AddJobProfile.update' | translate}}</ion-button>
                     </div>
                 </div>
             </ion-row>

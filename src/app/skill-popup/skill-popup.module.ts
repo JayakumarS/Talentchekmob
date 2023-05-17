@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SkillPopupPageRoutingModule } from './skill-popup-routing.module';
 
 import { SkillPopupPage } from './skill-popup.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { SkillPopupPage } from './skill-popup.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    SkillPopupPageRoutingModule
+    SkillPopupPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [SkillPopupPage]
 })

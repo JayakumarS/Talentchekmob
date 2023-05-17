@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileePageRoutingModule } from './profilee-routing.module';
 
 import { ProfileePage } from './profilee.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ProfileePage } from './profilee.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ProfileePageRoutingModule
+    ProfileePageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ProfileePage]
 })

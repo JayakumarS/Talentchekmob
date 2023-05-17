@@ -139,11 +139,11 @@
       "individual": "Individual",
       "headerQuote": "Get your UNIQUE Global Professional ID",
       "firstName": "First name",
-      "reqFirstName": "Please enter first name",
+      "reqFirstName": "First Name is required",
       "splCharNotAllowed": "Should accept only alphabets",
       "firstNameMinLength": "First name must be atleast 3 characters long.",
       "lastName": "Last name",
-      "reqLastName": "Please enter last name",
+      "reqLastName": "Last Name is required",
       "password": "Password",
       "reqPassword": "Please enter password",
       "minLengthPwd": "Password must be at least 8 characters long.",
@@ -159,6 +159,8 @@
       "invalidEmail": "Invalid email",
       "phoneNo": "Phone No",
       "reqMobNo": "Please enter valid mobile no.",
+      "UniqueNationalID" : "Unique National ID(Aadhar ID/SSN/Emirates ID etc)",
+      "UniqueIdReq": "Unique National ID(Aadhar ID/SSN/Emirates ID etc) is required",
       "panTaxId": "TAX ID/STUDENT ID",
       "plotFaltSt": "Plot/Flat/House/Street No.",
       "areaName": "City",
@@ -193,6 +195,8 @@
       "Enter": "Enter Your Address",
       "type": "Select Type",
       "domain":"Select Domain",
+      "emergencyContact":"Emergency Contact Number",
+      "emergencyContactReq":"Emergency Contact Number is required",
 
       "institutionName":"Institution Name",
       "instReq":"Institution Name is required",
@@ -684,7 +688,7 @@
       "perDay": "Per Day",
       "perHr": "Per Hour",
       "note": "Note: Your profile would be visible to potential employers upon submission",
-      "save": "Save",
+      "submit": "Save",
       "update": "Update",
       "cancel": "Cancel",
       "skillReq": "Please mention relevant skills based on the industry chosen",
@@ -1292,5 +1296,24 @@
       "verRat": "Verifer Rating",
       "verComm": "Verifier Comments",
       "close": "Close"
-    }
+    },
+
+    
+    "editGeneralInfo":"Edit General Info",
+    "selectLangKnown":"Select Languages Known",
+    "reqLangKnown":"Languages Known is required",
+    "urlLink":"URL link to your video profile",
+    "aboutYou":"About You",
+    "selectCategory":"Select Category",
+    "selectHobbies":"Select Hobbies",
+    "selectBG":"Select Blood Group",
+
+    "addSkills":"Add Skills",
+    "editSkills":"Edit Skills",
+    "beginner":"Beginner",
+    "expert":"Expert"
+
+
+
+   
   }
