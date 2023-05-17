@@ -513,6 +513,7 @@
     "bankAccNo":"வங்கி ஏ/சி எண்",
     "ifsc":"IFSC குறியீடு",
     "serviceFee":"சரிபார்ப்புக்கான சேவைக் கட்டணம்",
+    "aboutInstitution":"நிறுவனம் பற்றி",
 
 
     "AddCertification": {

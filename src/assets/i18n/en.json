@@ -470,6 +470,10 @@
      "addConnection":"Add Connection",
      "extracurricular":"Extracurricular",
      "addExtracurricular":"Add Extracurricular",
+
+     "aboutInstitution":"About the Institution",
+
+
     "AddSkill": {
       "addSkill": "Add skill",
       "updateSkill": "Update skill",

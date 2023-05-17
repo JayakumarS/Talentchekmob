@@ -18,7 +18,7 @@
             </ion-col>
 
             <ion-col size="7">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;text-align: center; ">Profile</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;text-align: center; ">{{'Menu.profile' | translate}}</ion-title>
             </ion-col>
         </ion-row>
 
@@ -74,7 +74,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">Profile</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">{{'Menu.profile' | translate}}</ion-title>
                     </ion-col>
                     <ion-col size="2">
                         <img src="./assets/icon/edit_icon.png" (click)="profileinsti(1)" id="prfoileimg1">
@@ -83,20 +83,20 @@
 
                 <ion-row class="talentrow">
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
-                        <ion-label style="color: #A3A4A5"> Name :</ion-label>
+                        <ion-label style="color: #A3A4A5"> {{'PersonalInformation.name' | translate}} :</ion-label>
                         <ion-label><b>{{instname}}</b></ion-label>
                     </ion-col>
 
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label style="color: #A3A4A5"> Phone No :</ion-label>
+                        <ion-label style="color: #A3A4A5"> {{'phoneNo' | translate}} :</ion-label>
                         <ion-label><b>{{mobile}}</b></ion-label>
                     </ion-col>
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label style="color: #A3A4A5"> Email Id :</ion-label>
+                        <ion-label style="color: #A3A4A5"> {{'email' | translate}} :</ion-label>
                         <ion-label><b>{{email}}</b></ion-label>
                     </ion-col>
                     <ion-col size="12">
-                        <ion-label style="color: #A3A4A5">Location :</ion-label>
+                        <ion-label style="color: #A3A4A5">{{'JobSearch.location' | translate}} :</ion-label>
                         <ion-label><b>{{instlocation}}</b></ion-label>
                     </ion-col>
                 </ion-row>
@@ -109,7 +109,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col size="10">
-                        <ion-title style="color:black; margin-left: -9%;">About the Institution</ion-title>
+                        <ion-title style="color:black; margin-left: -9%;">{{'aboutInstitution' | translate}}</ion-title>
                     </ion-col>
                     <ion-col size="2">
                         <img src="./assets/icon/edit_icon.png" (click)="Aboutinsti(2)" id="prfoileimg1">
@@ -120,21 +120,21 @@
 
                 <ion-row class="talentrow">
                     <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
-                        <ion-label style="color: #A3A4A5">About :</ion-label>
+                        <ion-label style="color: #A3A4A5">{{'about' | translate}} :</ion-label>
                         <ion-label><b>{{aboutdesc}}</b></ion-label>
                     </ion-col>
                     <!-- <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
                       <ion-label>Domain : <b>{{industrydomain}}</b></ion-label>
                   </ion-col> -->
                     <ion-col size="15" style="border-bottom: 1px solid #A3A4A5;">
-                        <ion-label style="color: #A3A4A5">Institution Type :</ion-label>
+                        <ion-label style="color: #A3A4A5">{{'ProfileInsti.instiType' | translate}} :</ion-label>
                         <ion-label><b>{{entitytype}}</b></ion-label>
                     </ion-col>
                     <!-- <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
                       <ion-label>Company Size :{{companysize}}</ion-label>
                   </ion-col> -->
                     <ion-col size="12">
-                        <ion-label style="color: #A3A4A5">Founded :</ion-label>
+                        <ion-label style="color: #A3A4A5">{{'founded' | translate}} :</ion-label>
                         <ion-label><b>{{foundedin}}</b></ion-label>
                     </ion-col>
                     <!-- <ion-col size="12" >
@@ -151,7 +151,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;    width: 105%; margin-left: -9%;">Payment Info
+                        <ion-title style="color:black;    width: 105%; margin-left: -9%;">{{'paymentInfo' | translate}}
 
                         </ion-title>
                     </ion-col>
@@ -171,19 +171,19 @@
 
                         <ion-row>
                             <ion-col size="12">
-                                <ion-label style="color: #A3A4A5">Amount Holder Name :</ion-label>
+                                <ion-label style="color: #A3A4A5">{{'amountHolderName' | translate}} :</ion-label>
                                 <ion-label><b>{{accountHolderName}}</b></ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="color: #A3A4A5">Bank A/C NO :</ion-label>
+                                <ion-label style="color: #A3A4A5">{{'bankAccNo' | translate}} :</ion-label>
                                 <ion-label><b>{{accountNumber}}</b></ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="color: #A3A4A5">IFSC Code :</ion-label>
+                                <ion-label style="color: #A3A4A5">{{'ifsc' | translate}} :</ion-label>
                                 <ion-label><b>{{ifscCode}}</b></ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="color: #A3A4A5">Service Fee for Verification :</ion-label>
+                                <ion-label style="color: #A3A4A5">{{'serviceFee' | translate}} :</ion-label>
                                 <ion-label><b>{{feeAmount}} {{feeCurrency}}</b></ion-label>
                             </ion-col>
 
@@ -202,7 +202,7 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;    width: 105%; margin-left: -9%;">Verified Network
+                        <ion-title style="color:black;    width: 105%; margin-left: -9%;">{{'verifiedNetwork' | translate}}
                             <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Connections()"></ion-icon>
                         </ion-title>
                     </ion-col>
@@ -231,7 +231,7 @@
 
                         <ion-row>
 
-                            Verified Network
+                            {{'verifiedNetwork' | translate}}
                             <ion-col size="12">
                                 <ion-label> <b>i.connectionCount </b></ion-label>
                                 <ion-label> <b>i.relationship </b></ion-label>
@@ -255,7 +255,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> Add Connection
+                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> {{'addConnection' | translate}}
                         </ion-title>
                     </ion-col>
                 </ion-row>
