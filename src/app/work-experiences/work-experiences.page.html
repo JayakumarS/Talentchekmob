@@ -6,10 +6,10 @@
           <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_jobProfile()" style="margin-top:21%"></ion-icon>
         </div>
         <div  *ngIf="!edit" style="text-align: center;display: contents;">
-          <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Add Work Experience</ion-title>
+          <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'addExp' | translate}}</ion-title>
         </div>
         <div  *ngIf="edit" style="text-align: center;display: contents;">
-            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Edit Work Experience</ion-title>
+            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'profilein.Edit Work Experience' | translate}}</ion-title>
           </div>
     </div>
   </ion-toolbar>
@@ -24,26 +24,26 @@
 <ion-card-content>
      <div id="test-l-1" class="content">
         <div class="button-content">
-            <ion-label class="labels">Designation/Role <small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profilein.Designation/Role' | translate}} <small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
                 <ion-input formControlName="designation"></ion-input>
             </ion-item>
             <div *ngIf="ExperienceForm.controls.designation.hasError('required') && ExperienceForm.controls.designation.touched">
-                <small style="color: #f70505;">Designation/Role is required</small>
+                <small style="color: #f70505;">{{'Designation/Role is required' | translate}}</small>
               </div>
             </div>
             <ion-spacer size="large"></ion-spacer><br>
              <div class="button-content">
-                <ion-label class="labels">Department/Team <small style="color: #f70505;">*</small></ion-label>
+                <ion-label class="labels">{{'profilein.Department/Team' | translate}} <small style="color: #f70505;">*</small></ion-label>
                 <ion-item fill="outline" class="input-field" >
                     <ion-input formControlName="department"></ion-input>
                 </ion-item>
                 <div *ngIf="ExperienceForm.controls.department.hasError('required') && ExperienceForm.controls.department.touched">
-                    <small style="color: #f70505;">Department/Team is required</small>
+                    <small style="color: #f70505;">{{'Department/Team is required' | translate}}</small>
                   </div>
                 </div>
                 <div class="button-content">
-                    <ion-label class="labels">Organisation Name <small style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">{{'profilein.Organisation Name' | translate}} <small style="color: #f70505;">*</small></ion-label>
 
                       <ion-item fill="outline" class="input-field" *ngIf="disabled">
                         <div class="selected-skill"  >{{ selectedOrganisation }} 
@@ -61,7 +61,7 @@
                   <ion-input   (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
               </ion-item>
                   <div *ngIf="ExperienceForm.controls.organisationName.hasError('required') && ExperienceForm.controls.organisationName.touched">
-                    <small style="color: #f70505;">Organisation Name is required</small>
+                    <small style="color: #f70505;">{{'Organisation Name is required' | translate}}</small>
                   </div>
                   <ion-list *ngIf="IsorgListShow">
                     <ion-item *ngFor="let result of searchOrganisationResults" (click)="selectOrganisation(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
@@ -72,75 +72,75 @@
                       </div>
                     
                     <div class="button-content">
-                        <ion-label class="labels">Organisation Location <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'profilein.Organisation Location' | translate}} <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="orgLocation"></ion-input>
                         </ion-item>
                         <div *ngIf="ExperienceForm.controls.orgLocation.hasError('required') && ExperienceForm.controls.orgLocation.touched">
-                            <small style="color: #f70505;">Organisation Location is required</small>
+                            <small style="color: #f70505;">{{'Organisation Location is required' | translate}}</small>
                           </div>
                         </div>
                         <div class="button-content">
-                            <ion-label class="labels">Job Start Date<small style="color: #f70505;">*</small> </ion-label>
+                            <ion-label class="labels">{{'profilein.Job Start Date' | translate}}<small style="color: #f70505;">*</small> </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime (ionChange)="validateStartDate($event.target.value);"  displayFormat="DD.MM.YYYY"  formControlName="expStart" presentation="date"></ion-datetime>
                             </ion-item>
                             <div *ngIf="ExperienceForm.controls.expStart.hasError('required') && ExperienceForm.controls.expStart.touched">
-                                <small style="color: #f70505;">Job Start Date is required</small>
+                                <small style="color: #f70505;">{{'Job Start Date is required' | translate}}</small>
                               </div>
                             </div>
                             <div class="button-content">
-                                <ion-label *ngIf="!nonMandatory" class="labels">Job End Date <small style="color: #f70505;">*</small></ion-label>
-                                <ion-label *ngIf="nonMandatory"class="labels">Job End Date</ion-label>
+                                <ion-label *ngIf="!nonMandatory" class="labels">{{'profilein.Job End Date' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                                <ion-label *ngIf="nonMandatory"class="labels">{{'profilein.Job End Date' | translate}}</ion-label>
                                 <ion-item fill="outline" class="input-field">
                                     <ion-datetime (ionChange)="validateEndDate($event.target.value);" displayFormat="DD.MM.YYYY"  formControlName="expEnd" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                 </ion-item>
                                 <div *ngIf="ExperienceForm.controls.expEnd.hasError('required') && ExperienceForm.controls.expEnd.touched">
-                                    <small style="color: #f70505;">Job End Date is required</small>
+                                    <small style="color: #f70505;">{{'Job End Date is required' | translate}}</small>
                                   </div>
                                
                                   <div style="    display: flex;">
-                                    <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurWorking($event.detail.checked);" formControlName="currentlyWork"></ion-checkbox>&nbsp;I currently work here
+                                    <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurWorking($event.detail.checked);" formControlName="currentlyWork"></ion-checkbox>&nbsp;{{'profilein.I currently work here' | translate}}
                                   </div>
                                   
                                 </div>
                                 <ion-spacer size="large"></ion-spacer><br>
 
                                 <div class="button-content">
-                                    <ion-label class="labels">Employee Registration Number<small style="color: #f70505;">*</small></ion-label>
+                                    <ion-label class="labels">{{'profilein.Employee Registration Number' | translate}}<small style="color: #f70505;">*</small></ion-label>
                                     <ion-item fill="outline" class="input-field">
                                         <ion-input onkeyup="this.value = this.value.toUpperCase();" formControlName="registrationNumber"></ion-input>
                                     </ion-item>
                                     <div *ngIf="ExperienceForm.controls.registrationNumber.hasError('required') && ExperienceForm.controls.registrationNumber.touched">
-                                        <small style="color: #f70505;">Employee Registration Number is required</small>
+                                        <small style="color: #f70505;">{{'Employee Registration Number is required' | translate}}</small>
                                       </div>
                                     </div>
 
                                     <div class="button-content">
-                                        <ion-label class="labels">Job Type<small style="color: #f70505;">*</small></ion-label>
+                                        <ion-label class="labels">{{'profilein.Job Type' | translate}}<small style="color: #f70505;">*</small></ion-label>
                                         <ion-item fill="outline" class="input-field">
-                                            <ion-select placeholder="Select Job type" [multiple]="true" formControlName="jobType"  style="background-color: white;">
+                                            <ion-select placeholder="{{'PopupWin.plsSelJobTy' | translate}}" [multiple]="true" formControlName="jobType"  style="background-color: white;">
                                                 <ion-select-option *ngFor="let tittle of jobTypeList" [value]="tittle.id">
                                                     {{tittle.text}}</ion-select-option>
                                                   </ion-select>
                                           </ion-item>
                                           <div *ngIf="ExperienceForm.controls.jobType.hasError('required') && ExperienceForm.controls.jobType.touched">
-                                            <small style="color: #f70505;">Job Type is required</small>
+                                            <small style="color: #f70505;">{{'AddJobPost.jobTypeReq' | translate}}</small>
                                           </div>
                                         </div>
                                         <div class="button-content">
-                                            <ion-label class="labels">Roles and Responsibilities</ion-label>
+                                            <ion-label class="labels">{{'AddJobPost.roleRes' | translate}}</ion-label>
                                          <ckeditor formControlName="expDescription" ></ckeditor>
                                         </div>
                                         
                                     <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">
                                      <div class="display-justify">
-                                        <ion-button class="custom-button" (click)="saveCertification()">Save</ion-button>
+                                        <ion-button class="custom-button" (click)="saveCertification()">{{'AddJobPost.submit' | translate}}</ion-button>
                                      </div>
                                     </div>
                                     <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
                                      <div class="display-justify">
-                                        <ion-button class="custom-button" (click)="updateCertification()">Update</ion-button>
+                                        <ion-button class="custom-button" (click)="updateCertification()">{{'AddJobPost.update' | translate}}</ion-button>
                                      </div>
                                     </div> 
                                  </div>

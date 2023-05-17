@@ -8,6 +8,7 @@ import { WorkExperiencesPageRoutingModule } from './work-experiences-routing.mod
 
 import { WorkExperiencesPage } from './work-experiences.page';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     IonicModule,
     ReactiveFormsModule,
     CKEditorModule,
-    WorkExperiencesPageRoutingModule
+    WorkExperiencesPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [WorkExperiencesPage]
 })
