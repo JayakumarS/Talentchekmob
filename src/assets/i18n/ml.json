@@ -1209,5 +1209,24 @@
     "certificationNo":"സർട്ടിഫിക്കേഷൻ/ലൈസൻസ്/പേറ്റന്റ്/പ്രസിദ്ധീകരണ നമ്പർ",
     "certificationNoReq":"സർട്ടിഫിക്കേഷൻ/ലൈസൻസ്/പേറ്റന്റ്/പ്രസിദ്ധീകരണ നമ്പർ ആവശ്യമാണ്",
     "expiryDate":"കാലഹരണ തീയതി (ബാധകമെങ്കിൽ)",
-    "supportFormat":"പിന്തുണ ഫോർമാറ്റ്: .pdf"
+    "supportFormat":"പിന്തുണ ഫോർമാറ്റ്: .pdf",
+
+    "addEducation": "വിദ്യാഭ്യാസം ചേർക്കുക",
+    "editEducation":"വിദ്യാഭ്യാസം എഡിറ്റ് ചെയ്യുക",
+    "insLocReq":"സ്ഥാപനത്തിന്റെ സ്ഥാനം ആവശ്യമാണ്",
+    "courseStart":"കോഴ്സ് ആരംഭിക്കുന്ന മാസം-വർഷം",
+    "courseStartReq":"കോഴ്‌സ് ആരംഭം ആവശ്യമാണ്",
+    "courseEnd":"കോഴ്സ് അവസാനം മാസം-വർഷം",
+    "Select course end month-year": "മാസം-വർഷാവസാനം കോഴ്സ് തിരഞ്ഞെടുക്കുക",
+    "I currently study here": "ഞാൻ ഇപ്പോൾ ഇവിടെയാണ് പഠിക്കുന്നത്",
+    "Class/Degree/Course": "ക്ലാസ്/ഡിഗ്രി/കോഴ്സ്",
+    "Select your academic degree or program": "നിങ്ങളുടെ അക്കാദമിക് ബിരുദമോ പ്രോഗ്രാമോ തിരഞ്ഞെടുക്കുക",
+    "Field of study": "പഠന മേഖല",
+    "Select your area of study or major": "നിങ്ങളുടെ പഠന മേഖല അല്ലെങ്കിൽ പ്രധാന മേഖല തിരഞ്ഞെടുക്കുക",
+    "Student Registration Number": "വിദ്യാർത്ഥി രജിസ്ട്രേഷൻ നമ്പർ",
+    "Enter the unique student ID assigned to you by your institution": "നിങ്ങളുടെ സ്ഥാപനം നിങ്ങൾക്ക് അസൈൻ ചെയ്തിരിക്കുന്ന അദ്വിതീയ വിദ്യാർത്ഥി ഐഡി നൽകുക",
+    "Aggregate Marks or GPA obtained": "ലഭിച്ച മൊത്തം മാർക്ക് അല്ലെങ്കിൽ GPA",
+    "Aggregate Marks is required" : "മൊത്തം മാർക്ക് ആവശ്യമാണ്",
+    "Description": "കോഴ്‌സ് വിവരണവും നേട്ടങ്ങളും",
+    "Upload Certificate":"സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക"
   }

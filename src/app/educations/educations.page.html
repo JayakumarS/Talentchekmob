@@ -11,10 +11,10 @@
             </ion-col>
 
             <ion-col *ngIf="!edit">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add  Education</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'addEducation' | translate}}</ion-title>
             </ion-col>
             <ion-col *ngIf="edit">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit  Education</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'editEducation' | translate}}</ion-title>
             </ion-col>
         </ion-row>
 
@@ -40,7 +40,7 @@
       </ion-row> -->
             <div id="test-l-1" class="content">
                 <div class="button-content">
-                    <ion-label class="labels">Educational Institution Name<small
+                    <ion-label class="labels">{{'institutionName' | translate}}<small
                             style="color: #f70505;">*</small></ion-label>
 
                     <ion-item fill="outline" class="input-field" *ngIf="disabled">
@@ -64,7 +64,7 @@
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.institutionName.hasError('required') && EducationForm.controls.institutionName.touched">
-                    <small style="color: #f70505;">Institution Name is required</small>
+                    <small style="color: #f70505;">{{'instReq' | translate}}</small>
                 </div>
                     <ion-list *ngIf="IsSearchListShow">
                         <ion-item *ngFor="let result of searchInstitutionResults"
@@ -79,19 +79,19 @@
                 </div>
                 <ion-spacer size="large"></ion-spacer><br>
                 <div class="button-content">
-                    <ion-label class="labels">Institution Location <small style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">{{'AddAcademicInfo.insLoc' | translate}} <small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-input formControlName="institutionLocation"></ion-input>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.institutionLocation.hasError('required') && EducationForm.controls.institutionLocation.touched">
-                    <small style="color: #f70505;">Institution Location is required</small>
+                    <small style="color: #f70505;">{{'insLocReq' | translate}}</small>
                 </div>
                 </div>
 
 
                 <div class="button-content">
-                    <ion-label class="labels">Course Start Month-Year<small style="color: #f70505;">*</small>
+                    <ion-label class="labels">{{'courseStart' | translate}}<small style="color: #f70505;">*</small>
                     </ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-datetime formControlName="courseStart" [(ngModel)]="courseStart" displayFormat="MM/YYYY"
@@ -99,28 +99,27 @@
                     </ion-item>
                     <div
                         *ngIf=" EducationForm.controls.courseStart.hasError('required') && EducationForm.controls.courseStart.touched">
-                        <small style="color: #f70505;">Course Start is required</small>
+                        <small style="color: #f70505;">{{'courseStartReq' | translate}}</small>
                     </div>
                 </div>
                 <div class="button-content">
-                    <ion-label class="labels">Course End Month-Year <small style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">{{'courseEnd' | translate}} <small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-datetime formControlName="courseEnd" displayFormat="MM/YYYY"presentation="date"(ionChange)="validateEndDate($event.target.value);"
                            [(ngModel)]="selectedDate" [max]="getMaxDate()"></ion-datetime>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
-                    <small style="color: #f70505;">Course End is required</small>
+                    <small style="color: #f70505;">{{'Select course end month-year' | translate}}</small>
                 </div>
                     <div style="display: flex;    color: black;">
-                        <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurWorking($event.detail.checked);"  formControlName="currentlyStudy"></ion-checkbox>&nbsp;I
-                        currently study here
+                        <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurWorking($event.detail.checked);"  formControlName="currentlyStudy"></ion-checkbox>&nbsp;{{'I currently study here' | translate}}
                     </div>
 
                 </div>
                 <ion-spacer size="large"></ion-spacer><br>
                 <div class="button-content">
-                    <ion-label class="labels">Class/Degree/Course<small style="color: #f70505;">*</small></ion-label>
+                    <ion-label class="labels">{{'Class/Degree/Course' | translate}}<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <div>{{ selectDegreeSet }}
                             <ion-icon *ngIf="selectDegreeSet != undefined && selectDegreeSet != ''"
@@ -131,7 +130,7 @@
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
-                    <small style="color: #f70505;">Class/Degree/Course is required</small>
+                    <small style="color: #f70505;">{{'Select your academic degree or program' | translate}}</small>
                 </div>
                     <ion-list *ngIf="IsDegreeListShow">
                         <ion-item *ngFor="let result of searchDegreeResults" (click)="selectDegree(result.text,result.id);disableFiledOfStudy(result.text)">
@@ -142,8 +141,8 @@
                 </div>
 
                 <div class="button-content">
-                    <ion-label *ngIf="!fieldOfStudyDisable" class="labels">Field of Study<small style="color: #f70505;">*</small></ion-label>
-                    <ion-label *ngIf="fieldOfStudyDisable" class="labels">Field of Study</ion-label>
+                    <ion-label *ngIf="!fieldOfStudyDisable" class="labels">{{'Field of study' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                    <ion-label *ngIf="fieldOfStudyDisable" class="labels">{{'Field of study' | translate}}</ion-label>
 
                     <ion-item disabled="{{fieldOfStudyDisable}}" fill="outline" class="input-field">
 
@@ -163,43 +162,43 @@
                 </div>
 
                 <div class="button-content">
-                    <ion-label class="labels">Student Registration Number<small
+                    <ion-label class="labels">{{'Student Registration Number' | translate}}<small
                             style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-input type="text" onkeyup="this.value = this.value.toUpperCase();" formControlName="stuRegisterNumber"></ion-input>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.stuRegisterNumber.hasError('required') && EducationForm.controls.stuRegisterNumber.touched">
-                    <small style="color: #f70505;">Student Registration Number is required</small>
+                    <small style="color: #f70505;">{{'Enter the unique student ID assigned to you by your institution' | translate}}</small>
                 </div>
                 </div>
 
                 <div class="button-content">
-                    <ion-label class="labels">Aggregate Marks or GPA obtained</ion-label>
+                    <ion-label class="labels">{{'Aggregate Marks or GPA obtained' | translate}}</ion-label>
                     <ion-item fill="outline"  class="input-field">
                         <ion-input formControlName="aggregateMarks" type="number"></ion-input>
                     </ion-item>
                     <div
                     *ngIf=" EducationForm.controls.stuRegisterNumber.hasError('required') && EducationForm.controls.stuRegisterNumber.touched">
-                    <small style="color: #f70505;">aggregateMarks is required</small>
+                    <small style="color: #f70505;">{{'Aggregate Marks is required' | translate}}</small>
                 </div>
                 </div>
 
                 <div class="button-content">
-                    <ion-label class="labels">Course Description and Acheivements</ion-label>
+                    <ion-label class="labels">{{'Description' | translate}}</ion-label>
                     <ckeditor formControlName="eduDescription"
                     ></ckeditor>
                 </div>
                 <ion-row class="talentrow" *ngIf="!nonMandatory">
                     <ion-col>
                         <ion-item class="formitem itemborder" lines="none">
-                            <ion-label class="blackTheme">Upload Certificate<span style="color:red">*</span></ion-label>
+                            <ion-label class="blackTheme">{{'Upload Certificate' | translate}}<span style="color:red">*</span></ion-label>
 
                             <ion-input type="file" style="color: transparent;" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                              formControlName="uploadUrl" (change)="upload($event)"></ion-input>
 
                         </ion-item>
-                        <div>support format: .pdf</div> 
+                        <div>{{'supportFormat' | translate}}</div> 
                         <div style="margin-top: 25px;">
                             {{uploadedFile?.split('/').pop()}} 
                         </div>
@@ -209,12 +208,12 @@
 
                 <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">
                     <div class="display-justify">
-                        <ion-button class="custom-button" (click)="save()">Save</ion-button>
+                        <ion-button class="custom-button" (click)="save()">{{'AddJobProfile.submit' | translate}}</ion-button>
                      </div>
                  </div>
                 <div *ngIf="edit" class="button-content" style="width: 50%; margin: auto;">
                     <div class="display-justify">
-                        <ion-button class="custom-button" (click)="UpdateEducation()">Update</ion-button>
+                        <ion-button class="custom-button" (click)="UpdateEducation()">{{'AddJobProfile.update' | translate}}</ion-button>
                      </div>
                  </div>
             </div>

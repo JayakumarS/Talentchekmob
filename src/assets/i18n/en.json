@@ -371,7 +371,7 @@
       "showLess": "SHOW LESS...",
       "showMore": "SHOW MORE..."
     },
-    "addEducation": "Add Education",
+    
     "Category": {
       "chooseYourCategory": "Choose your category",
       "student": "Student",
@@ -1322,7 +1322,34 @@
     "certificationNo":"Certification/License/Patent/Publication Number",
     "certificationNoReq":"Certification/License/Patent/Publication No is required",
     "expiryDate":"Expiry Date(if applicable)",
-    "supportFormat":"support format: .pdf"
+    "supportFormat":"support format: .pdf",
+
+    "addEducation": "Add Education",
+    "editEducation":"Edit Education",
+    "insLocReq":"Institution Location is required",
+    "courseStart":"Course Start Month-Year",
+    "courseStartReq":"Course Start is required",
+    "courseEnd":"Course End Month-Year",
+    "Course End Month-Year": "Course End Month-Year",
+    "Select course end month-year": "Select course end month-year",
+    "I currently study here": "I currently study here",
+    "Class/Degree/Course": "Class/Degree/Course",
+    "Select your academic degree or program": "Select your academic degree or program",
+    "Field of study": "Field of study",
+    " Select your area of study or major": "  Select your area of study or major",
+    "Student Registration Number": "Student Registration Number",
+    "Enter the unique student ID assigned to you by your institution": "Enter the unique student ID assigned to you by your institution",
+    "Aggregate Marks or GPA obtained": "Aggregate Marks or GPA obtained",
+    "Aggregate Marks is required" : "Aggregate Marks is required",
+    "Description": "Course Description and Achievements",
+    "Upload Certificate":"Upload Certificate"
+
+
+
+
+
+
+
 
 
 

@@ -1202,5 +1202,25 @@
     "certificationNo":"الشهادة / الترخيص / براءة الاختراع / رقم المنشور",
     "certificationNoReq":"الشهادة / الترخيص / براءة الاختراع / رقم المنشور مطلوب",
     "expiryDate":"تاريخ انتهاء الصلاحية (إن وجد)",
-    "supportFormat":"تنسيق الدعم: .pdf"
+    "supportFormat":"تنسيق الدعم: .pdf",
+
+    "addEducation": "أضف التعليم",
+    "editEducation":"تحرير التعليم",
+    "insLocReq":"موقع المؤسسة مطلوب",
+    "courseStart":"بداية الدورة شهر - سنة",
+    "courseStartReq":"بداية الدورة التدريبية مطلوبة",
+    "courseEnd":"نهاية الدورة الشهر - السنة",
+    "Course End Month-Year": "نهاية الدورة الشهر - السنة",
+    "Select course end month-year": "حدد نهاية الدورة بالشهر والسنة",
+    "I currently study here": "أنا حاليا أدرس هنا",
+    "Class/Degree/Course": "فئة / درجة / دورة",
+    "Select your academic degree or program": "حدد درجتك الأكاديمية أو البرنامج",
+    "Field of study": "مجال الدراسة",
+    "Select your area of study or major": "حدد مجال دراستك أو تخصصك",
+    "Student Registration Number": "رقم تسجيل الطالب",
+    "Enter the unique student ID assigned to you by your institution": "أدخل معرف الطالب الفريد الذي عينته لك مؤسستك",
+    "Aggregate Marks or GPA obtained": "تم الحصول على العلامات الإجمالية أو المعدل التراكمي",
+    "Description": "وصف",
+    "Upload Certification": "تحميل الشهادة",
+    "Aggregate Marks is required" : "العلامات الإجمالية مطلوبة"
   }

@@ -1201,5 +1201,24 @@
     "certificationNo":"Сертификат/лицензия/патент/номер публикации",
     "certificationNoReq":"Сертификация/лицензия/патент/номер публикации не требуется",
     "expiryDate":"Дата истечения срока действия (если применимо)",
-    "supportFormat":"формат поддержки: .pdf"
+    "supportFormat":"формат поддержки: .pdf",
+
+    "addEducation": "Добавить образование",
+    "editEducation":"Изменить образование",
+    "insLocReq":"Укажите местонахождение учреждения",
+    "courseStart":"Месяц-год начала курса",
+    "courseStartReq":"Требуется начало курса",
+    "courseEnd":"Окончание курса месяц-год",
+    "Select course end month-year": "Выберите месяц окончания курса",
+    "I currently study here": "сейчас я учусь здесь",
+    "Class/Degree/Course": "Класс/Степень/Курс",
+    "Select your academic degree or program": "Выберите ученую степень или программу",
+    "Field of study": "Область исследования",
+    " Select your area of study or major": "Выберите область обучения или специальность",
+    "Student Registration Number": "Регистрационный номер студента",
+    "Enter the unique student ID assigned to you by your institution": "Введите уникальный идентификатор студента, присвоенный вам вашим учебным заведением.",
+    "Aggregate Marks or GPA obtained": "Совокупный балл или средний балл получен",
+    "Aggregate Marks is required" : "Требуется сводная оценка",
+    "Description": "Описание курса и достижения",
+    "Upload Certificate":"Загрузить сертификат"
   }

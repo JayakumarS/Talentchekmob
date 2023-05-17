@@ -1201,5 +1201,26 @@
     "certificationNo":"प्रमाणन/लाइसेंस/पेटेंट/प्रकाशन संख्या",
     "certificationNoReq":"प्रमाणन/लाइसेंस/पेटेंट/प्रकाशन संख्या की आवश्यकता है",
     "expiryDate":"समाप्ति तिथि (यदि लागू हो)",
-    "supportFormat":"समर्थन प्रारूप: पीडीएफ"
+    "supportFormat":"समर्थन प्रारूप: पीडीएफ",
+
+    "addEducation": "शिक्षा जोड़ें",
+    "editEducation":"शिक्षा संपादित करें",
+    "insLocReq":"संस्थान स्थान की आवश्यकता है",
+    "courseStart":"कोर्स प्रारंभ माह-वर्ष",
+    "courseStartReq":"पाठ्यक्रम प्रारंभ आवश्यक है",
+    "courseEnd":"पाठ्यक्रम समाप्ति माह-वर्ष",
+    "Select course start month-year": "पाठ्यक्रम का चयन माह-वर्ष प्रारंभ करें",
+    "Course End Month-Year": "पाठ्यक्रम समाप्ति माह-वर्ष",
+    "Select course end month-year": "पाठ्यक्रम के अंत महीने-वर्ष का चयन करें",
+    "I currently study here": "यह मेरा वर्तमान अध्ययन स्थल है",
+    "Class/Degree/Course": "कक्षा/डिग्री/पाठ्यक्रम",
+    "Select your academic degree or program": "अपनी शैक्षणिक डिग्री या कार्यक्रम का चयन करें",
+    "Field of study": "अध्ययन क्षेत्र",
+    "Select your area of study or major": "अपने अध्ययन क्षेत्र या प्रमुख का चयन करें",
+    "Student Registration Number": "छात्र पंजीकरण संख्या",
+    "Enter the unique student ID assigned to you by your institution": "आपके संस्थान द्वारा आपको सौंपी गई अद्वितीय छात्र आईडी दर्ज करें",
+    "Aggregate Marks or GPA obtained": "Aकुल अंक या जीपीए प्राप्त किया",
+    "Aggregate Marks is required" : "समग्र अंक आवश्यक हैं",
+    "Description": "पाठ्यक्रम विवरण और उपलब्धियां",
+    "Upload Certification": "प्रमाणन अपलोड करें"
   }

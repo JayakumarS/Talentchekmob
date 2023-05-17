@@ -1202,5 +1202,24 @@
     "certificationNo":"گواهینامه / مجوز / ثبت اختراع / شماره انتشار",
     "certificationNoReq":"گواهی / مجوز / ثبت اختراع / شماره انتشار مورد نیاز است",
     "expiryDate":"تاریخ انقضا (در صورت وجود)",
-    "supportFormat":"فرمت پشتیبانی: pdf"
+    "supportFormat":"فرمت پشتیبانی: pdf",
+
+    "addEducation": "آموزش را اضافه کنید",
+    "editEducation":"ویرایش آموزش",
+    "insLocReq":"مکان موسسه الزامی است",
+    "courseStart":"ماه-سال شروع دوره",
+    "courseStartReq":"شروع دوره الزامی است",
+    "courseEnd":"پایان دوره ماه - سال",
+    "Select course end month-year": "سال پایان دوره را انتخاب کنید",
+    "I currently study here": "من در حال حاضر اینجا درس می خوانم",
+    "Class/Degree/Course": "کلاس / مدرک / دوره",
+    "Select your academic degree or program": "مدرک تحصیلی یا برنامه خود را انتخاب کنید",
+    "Field of study": "رشته تحصیلی",
+    " Select your area of study or major": "رشته تحصیلی یا رشته خود را انتخاب کنید",
+    "Student Registration Number": "شماره ثبت نام دانشجویی",
+    "Enter the unique student ID assigned to you by your institution": "شناسه دانشجویی منحصربفرد که توسط موسسه شما به شما اختصاص داده شده را وارد کنید",
+    "Aggregate Marks or GPA obtained": "مجموع علائم یا معدل به دست آمده",
+    "Aggregate Marks is required" : "علامت های جمع مورد نیاز است",
+    "Description": "شرح دوره و دستاوردها",
+    "Upload Certification": "آپلود گواهینامه"
   }

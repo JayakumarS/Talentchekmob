@@ -1214,5 +1214,25 @@
     "certificationNo":"ಪ್ರಮಾಣೀಕರಣ/ಪರವಾನಗಿ/ಪೇಟೆಂಟ್/ಪ್ರಕಟಣೆ ಸಂಖ್ಯೆ",
     "certificationNoReq":"ಪ್ರಮಾಣೀಕರಣ/ಪರವಾನಗಿ/ಪೇಟೆಂಟ್/ಪ್ರಕಟಣೆ ಸಂಖ್ಯೆ ಅಗತ್ಯವಿದೆ",
     "expiryDate":"ಮುಕ್ತಾಯ ದಿನಾಂಕ (ಅನ್ವಯಿಸಿದರೆ)",
-    "supportFormat":"ಬೆಂಬಲ ಸ್ವರೂಪ: .pdf"
+    "supportFormat":"ಬೆಂಬಲ ಸ್ವರೂಪ: .pdf",
+
+    "addEducation": "ಶಿಕ್ಷಣವನ್ನು ಸೇರಿಸಿ",
+    "editEducation":"ಶಿಕ್ಷಣವನ್ನು ಸಂಪಾದಿಸಿ",
+    "insLocReq":"ಸಂಸ್ಥೆಯ ಸ್ಥಳದ ಅಗತ್ಯವಿದೆ",
+    "courseStart":"ಕೋರ್ಸ್ ಆರಂಭ ತಿಂಗಳು-ವರ್ಷ",
+    "courseStartReq":"ಕೋರ್ಸ್ ಪ್ರಾರಂಭದ ಅಗತ್ಯವಿದೆ",
+    "courseEnd":"ಕೋರ್ಸ್ ಅಂತ್ಯದ ತಿಂಗಳು-ವರ್ಷ",
+    "Select course end month-year": "ಕೋರ್ಸ್ ಅಂತ್ಯದ ತಿಂಗಳು-ವರ್ಷವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "I currently study here": "ನಾನು ಪ್ರಸ್ತುತ ಇಲ್ಲಿ ಓದುತ್ತಿದ್ದೇನೆ",
+    "Class/Degree/Course": "ತರಗತಿ/ಪದವಿ/ಕೋರ್ಸ್",
+    "Select your academic degree or program": "ನಿಮ್ಮ ಶೈಕ್ಷಣಿಕ ಪದವಿ ಅಥವಾ ಕಾರ್ಯಕ್ರಮವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "Field of study": "ಅಧ್ಯಯನದ ಕ್ಷೇತ್ರ",
+    " Select your area of study or major": " ನಿಮ್ಮ ಅಧ್ಯಯನ ಅಥವಾ ಪ್ರಮುಖ ಕ್ಷೇತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "Student Registration Number": "ವಿದ್ಯಾರ್ಥಿ ನೋಂದಣಿ ಸಂಖ್ಯೆ",
+    "Enter the unique student ID assigned to you by your institution": "ನಿಮ್ಮ ಸಂಸ್ಥೆಯಿಂದ ನಿಮಗೆ ನಿಯೋಜಿಸಲಾದ ಅನನ್ಯ ವಿದ್ಯಾರ್ಥಿ ID ಅನ್ನು ನಮೂದಿಸಿ",
+    "Aggregate Marks or GPA obtained": "ಪಡೆದ ಒಟ್ಟು ಅಂಕಗಳು ಅಥವಾ GPA",
+    "Aggregate Marks is required" : "ಒಟ್ಟು ಅಂಕಗಳ ಅಗತ್ಯವಿದೆ",
+    "Description": "ಕೋರ್ಸ್ ವಿವರಣೆ ಮತ್ತು ಸಾಧನೆಗಳು",
+    "Upload Certificate":"ಪ್ರಮಾಣಪತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ"
+
   }

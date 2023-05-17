@@ -8,6 +8,7 @@ import { EducationsPageRoutingModule } from './educations-routing.module';
 
 import { EducationsPage } from './educations.page';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -17,7 +18,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     IonicModule,
     ReactiveFormsModule,
     CKEditorModule,
-    EducationsPageRoutingModule
+    EducationsPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [EducationsPage]
 })

@@ -1208,5 +1208,24 @@
     "certificationNo":"సర్టిఫికేషన్/లైసెన్స్/పేటెంట్/పబ్లికేషన్ నంబర్",
     "certificationNoReq":"సర్టిఫికేషన్/లైసెన్స్/పేటెంట్/పబ్లికేషన్ నంబర్ అవసరం",
     "expiryDate":"గడువు తేదీ (వర్తిస్తే)",
-    "supportFormat":"మద్దతు ఫార్మాట్: .pdf"
+    "supportFormat":"మద్దతు ఫార్మాట్: .pdf",
+
+    "addEducation": "విద్యను జోడించండి",
+    "editEducation":"విద్యను సవరించండి",
+    "insLocReq":"సంస్థ స్థానం అవసరం",
+    "courseStart":"కోర్సు ప్రారంభం నెల-సంవత్సరం",
+    "courseStartReq":"కోర్సు ప్రారంభం అవసరం",
+    "courseEnd":"కోర్సు ముగింపు నెల-సంవత్సరం",
+    "Select course end month-year": "ಕೋರ್ಸ್ ಅಂತ್ಯದ ತಿಂಗಳು-ವರ್ಷವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "I currently study here": "ನಾನು ಪ್ರಸ್ತುತ ಇಲ್ಲಿ ಓದುತ್ತಿದ್ದೇನೆ",
+    "Class/Degree/Course": "ತರಗತಿ/ಪದವಿ/ಕೋರ್ಸ್",
+    "Select your academic degree or program": "ನಿಮ್ಮ ಶೈಕ್ಷಣಿಕ ಪದವಿ ಅಥವಾ ಕಾರ್ಯಕ್ರಮವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "Field of study": "ಅಧ್ಯಯನದ ಕ್ಷೇತ್ರ",
+    " Select your area of study or major": " ನಿಮ್ಮ ಅಧ್ಯಯನ ಅಥವಾ ಪ್ರಮುಖ ಕ್ಷೇತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "Student Registration Number": "ವಿದ್ಯಾರ್ಥಿ ನೋಂದಣಿ ಸಂಖ್ಯೆ",
+    "Enter the unique student ID assigned to you by your institution": "ನಿಮ್ಮ ಸಂಸ್ಥೆಯಿಂದ ನಿಮಗೆ ನಿಯೋಜಿಸಲಾದ ಅನನ್ಯ ವಿದ್ಯಾರ್ಥಿ ID ಅನ್ನು ನಮೂದಿಸಿ",
+    "Aggregate Marks or GPA obtained": "ಪಡೆದ ಒಟ್ಟು ಅಂಕಗಳು ಅಥವಾ GPA",
+    "Aggregate Marks is required" : "మొత్తం మార్కులు అవసరం",
+    "Description": "కోర్సు వివరణ మరియు విజయాలు",
+    "Upload Certificate":"సర్టిఫికెట్‌ని అప్‌లోడ్ చేయండి"
   }
