@@ -1489,7 +1489,13 @@
 
     "Connection is a registered user":"Connection is a registered user",
     "This connection is my":"This connection is my",
-    "Ex Logwiz Institute for logistics":"Ex: Logwiz Institute for logistics"
+    "Ex Logwiz Institute for logistics":"Ex: Logwiz Institute for logistics",
+
+    "Edit Extracurricular":"Edit Extracurricular",
+    "Participated From is required":"Participated From is required",
+    "Title Held is required":"Title Held is required",
+    "Participated Till From is required":"Participated Till From is required"
+
 
 
 

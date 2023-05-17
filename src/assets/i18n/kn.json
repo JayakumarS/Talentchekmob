@@ -1373,6 +1373,11 @@
 
     "Connection is a registered user":"ಸಂಪರ್ಕವು ನೋಂದಾಯಿತ ಬಳಕೆದಾರ",
     "This connection is my":"ಈ ಸಂಪರ್ಕ ನನ್ನದು",
-    "Ex Logwiz Institute for logistics":"ಉದಾ: ಲಾಗ್ವಿಜ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಫಾರ್ ಲಾಜಿಸ್ಟಿಕ್ಸ್"
+    "Ex Logwiz Institute for logistics":"ಉದಾ: ಲಾಗ್ವಿಜ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಫಾರ್ ಲಾಜಿಸ್ಟಿಕ್ಸ್",
+
+    "Edit Extracurricular":"ಪಠ್ಯೇತರ ಸಂಪಾದಿಸಿ",
+    "Participated From is required":"ಭಾಗವಹಿಸಿದವರು ಅಗತ್ಯವಿದೆ",
+    "Title Held is required":"ಶೀರ್ಷಿಕೆ ಹಿಡಿದಿರಬೇಕು",
+    "Participated Till From is required":"ಇಲ್ಲಿಯವರೆಗೆ ಭಾಗವಹಿಸುವ ಅಗತ್ಯವಿದೆ"
 
   }

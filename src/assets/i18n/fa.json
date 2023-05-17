@@ -1371,5 +1371,10 @@
 
     "Connection is a registered user":"اتصال یک کاربر ثبت شده است",
     "This connection is my":"این ارتباط متعلق به من است",
-    "Ex Logwiz Institute for logistics":"مثال: موسسه Logwiz برای تدارکات"
+    "Ex Logwiz Institute for logistics":"مثال: موسسه Logwiz برای تدارکات",
+
+    "Edit Extracurricular":"ویرایش فوق برنامه",
+    "Participated From is required":"شرکت از طرف الزامی است",
+    "Title Held is required":"عنوان نگهداری الزامی است",
+    "Participated Till From is required":"شرکت Till From الزامی است"
   }

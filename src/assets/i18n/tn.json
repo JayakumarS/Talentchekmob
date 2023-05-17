@@ -1468,5 +1468,10 @@
 
     "Connection is a registered user":"இணைப்பு ஒரு பதிவு செய்யப்பட்ட பயனர்",
     "This connection is my":"இந்த இணைப்பு என்னுடையது",
-    "Ex Logwiz Institute for logistics":"எ.கா: Logwiz Institute for logistics"
+    "Ex Logwiz Institute for logistics":"எ.கா: Logwiz Institute for logistics",
+
+    "Edit Extracurricular":"பாடநெறியைத் திருத்தவும்",
+    "Participated From is required":"பங்கேற்பது அவசியம்",
+    "Title Held is required":"தலைப்பு வைத்திருக்க வேண்டும்",
+    "Participated Till From is required":"இருந்து வரை பங்கேற்பது அவசியம்"
   }

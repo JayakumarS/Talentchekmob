@@ -8,6 +8,7 @@ import { ClubPageRoutingModule } from './club-routing.module';
 
 import { ClubPage } from './club.page';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -17,7 +18,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     ReactiveFormsModule,
     IonicModule,
     CKEditorModule,
-    ClubPageRoutingModule
+    ClubPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ClubPage]
 })

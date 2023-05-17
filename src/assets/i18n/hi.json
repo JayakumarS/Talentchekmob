@@ -1371,5 +1371,10 @@
 
     "Connection is a registered user":"कनेक्शन एक पंजीकृत उपयोगकर्ता है",
     "This connection is my":"यह जुड़ाव मेरा है",
-    "Ex Logwiz Institute for logistics":"उदाहरण: लॉजविज इंस्टीट्यूट फॉर लॉजिस्टिक्स"
+    "Ex Logwiz Institute for logistics":"उदाहरण: लॉजविज इंस्टीट्यूट फॉर लॉजिस्टिक्स",
+
+    "Edit Extracurricular":"बहिर्वाहिक संपादित करें",
+    "Participated From is required":"से भाग लेना आवश्यक है",
+    "Title Held is required":"शीर्षक धारण करना आवश्यक है",
+    "Participated Till From is required":"से तक भाग लेना आवश्यक है"
   }

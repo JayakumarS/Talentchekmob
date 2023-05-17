@@ -1374,5 +1374,10 @@
 
     "Connection is a registered user":"కనెక్షన్ ఒక నమోదిత వినియోగదారు",
     "This connection is my":"ఈ కనెక్షన్ నాది",
-    "Ex Logwiz Institute for logistics":"ఉదా: లాజిస్టిక్స్ కోసం లాగ్విజ్ ఇన్స్టిట్యూట్"
+    "Ex Logwiz Institute for logistics":"ఉదా: లాజిస్టిక్స్ కోసం లాగ్విజ్ ఇన్స్టిట్యూట్",
+
+    "Edit Extracurricular":"ఎక్స్‌ట్రా కరిక్యులర్‌ని సవరించండి",
+    "Participated From is required":"నుండి పాల్గొనడం అవసరం",
+    "Title Held is required":"పట్టుకున్న శీర్షిక అవసరం",
+    "Participated Till From is required":"నుండి వరకు పాల్గొనడం అవసరం"
   }

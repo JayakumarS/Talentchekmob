@@ -1368,5 +1368,10 @@
 
     "Connection is a registered user":"الاتصال هو مستخدم مسجل",
     "This connection is my":"هذا الاتصال هو بلدي",
-    "Ex Logwiz Institute for logistics":"مثال: معهد Logwiz للخدمات اللوجستية"
+    "Ex Logwiz Institute for logistics":"مثال: معهد Logwiz للخدمات اللوجستية",
+
+    "Edit Extracurricular":"تحرير اللامنهجية",
+    "Participated From is required":"مطلوب مشارك من",
+    "Title Held is required":"العنوان مطلوب",
+    "Participated Till From is required":"المشاركة حتى من مطلوب"
   }

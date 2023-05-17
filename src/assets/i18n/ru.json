@@ -1370,5 +1370,10 @@
 
     "Connection is a registered user":"Подключение является зарегистрированным пользователем",
     "This connection is my":"Эта связь моя",
-    "Ex Logwiz Institute for logistics":"Пример: Институт логистики Logwiz."
+    "Ex Logwiz Institute for logistics":"Пример: Институт логистики Logwiz.",
+
+    "Edit Extracurricular":"Изменить",
+    "Participated From is required":"Участвовал от обязательно",
+    "Title Held is required":"Требуется наличие титула",
+    "Participated Till From is required":"Участвовал До От обязательно"
   }

@@ -1372,5 +1372,10 @@
 
     "Connection is a registered user":"കണക്ഷൻ ഒരു രജിസ്റ്റർ ചെയ്ത ഉപയോക്താവാണ്",
     "This connection is my":"ഈ ബന്ധം എന്റേതാണ്",
-    "Ex Logwiz Institute for logistics":"ഉദാ: ലോഗ്വിസ് ഇൻസ്റ്റിറ്റ്യൂട്ട് ഫോർ ലോജിസ്റ്റിക്സ്"
+    "Ex Logwiz Institute for logistics":"ഉദാ: ലോഗ്വിസ് ഇൻസ്റ്റിറ്റ്യൂട്ട് ഫോർ ലോജിസ്റ്റിക്സ്",
+
+    "Edit Extracurricular":"പാഠ്യേതര തിരുത്തുക",
+    "Participated From is required":"ഇതിൽ നിന്ന് പങ്കെടുത്തത് ആവശ്യമാണ്",
+    "Title Held is required":"തലക്കെട്ട് കൈവശം വയ്ക്കേണ്ടത് ആവശ്യമാണ്",
+    "Participated Till From is required":"മുതൽ വരെ പങ്കെടുത്തത് ആവശ്യമാണ്"
   }

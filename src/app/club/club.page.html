@@ -10,10 +10,10 @@
           </ion-col>
 
           <ion-col *ngIf="!edit">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Add Extracurricular</ion-title>
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'profilein.Add Extracurricular' | translate}}</ion-title>
           </ion-col>
           <ion-col *ngIf="edit">
-            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit Extracurricular</ion-title>
+            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'Edit Extracurricular' | translate}}</ion-title>
         </ion-col>
       </ion-row>
 
@@ -30,7 +30,7 @@
     <ion-row class="talentrow">
         <ion-col>
             <div class="button-content">
-                <ion-label class="labels">Name of the Club/Association <small style="color: #f70505;">*</small></ion-label>
+                <ion-label class="labels">{{'profilein.Name of Club or Association' | translate}} <small style="color: #f70505;">*</small></ion-label>
                 <ion-item fill="outline" class="input-field">
                   <div class="selected-skill"  >{{ selectedOrganisation }} 
                     
@@ -39,7 +39,7 @@
                 <ion-input  *ngIf="!disabled" (ionInput)="onSearchOrganisation($event.target.value) "(optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
             </ion-item>
             <div *ngIf="clubFrom.controls.clubName.hasError('required') && clubFrom.controls.clubName.touched">
-              <small style="color: #f70505;">Participated From is required</small>
+              <small style="color: #f70505;">{{'Participated From is required' | translate}}</small>
             </div>
             <ion-list *ngIf="IsorgListShow">
               <ion-item *ngFor="let result of searchOrganisationResults" (click)="selectOrganisation(result.text,result.id);getTitle(result.id)">
@@ -49,46 +49,46 @@
                     
                 </div>
                 <div class="button-content">
-                    <ion-label class="labels">District/Branch</ion-label>
+                    <ion-label class="labels">{{'profilein.District / Branch' | translate}}</ion-label>
                     <ion-item fill="outline" class="input-field">
                         <ion-input formControlName="clubBranch"></ion-input>
                     </ion-item>
                     </div>
                     <div class="button-content">
-                        <ion-label class="labels">Title Held<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'profilein.Title Held' | translate}}<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input type="text"   formControlName="titleHeld"(optionSelected)="orgLocation($event.option.value)"></ion-input>
                         </ion-item>
                         <div *ngIf="clubFrom.controls.titleHeld.hasError('required') && clubFrom.controls.titleHeld.touched">
-                          <small style="color: #f70505;">Title Held is required</small>
+                          <small style="color: #f70505;">{{'Title Held is required' | translate}}</small>
                         </div>
                         </div>
 
                         <div class="button-content">
-                          <ion-label class="labels">Role played / Achievement</ion-label>
+                          <ion-label class="labels">{{'profilein.Role played / Achievement' | translate}}</ion-label>
                           <ckeditor formControlName="rolePlayed" ></ckeditor>
                          </div>
 
                         <div class="button-content">
-                            <ion-label class="labels">Participated From <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'profilein.Participated From' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY"  (ionChange)="validateStartDate($event.target.value);" formControlName="participatedFrom" presentation="date"></ion-datetime>
                             </ion-item>
                             <div *ngIf="clubFrom.controls.participatedFrom.hasError('required') && clubFrom.controls.participatedFrom.touched">
-                              <small style="color: #f70505;">Participated From is required</small>
+                              <small style="color: #f70505;">{{'Participated From is required' | translate}}</small>
                             </div>
                             </div>
                             <div class="button-content">
-                                <ion-label *ngIf="!nonMandatory" class="labels">Participated Till<small style="color: #f70505;">*</small></ion-label>
-                                <ion-label *ngIf="nonMandatory" class="labels">Participated Till</ion-label>
+                                <ion-label *ngIf="!nonMandatory" class="labels">{{'profilein.Participated Till' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                                <ion-label *ngIf="nonMandatory" class="labels">{{'profilein.Participated Till' | translate}}</ion-label>
                                 <ion-item fill="outline" class="input-field">
                                     <ion-datetime displayFormat="DD.MM.YYYY" (ionChange)="validateEndDate($event.target.value);" formControlName="participatedTill" presentation="date" [max]="getMaxDate()"></ion-datetime>
                                 </ion-item>
                                 <div *ngIf="clubFrom.controls.participatedTill.hasError('required') && clubFrom.controls.participatedTill.touched">
-                                  <small style="color: #f70505;">Participated Till From is required</small>
+                                  <small style="color: #f70505;">{{'Participated Till From is required' | translate}}</small>
                                 </div>
                                 <div style="display:flex;">
-                                    <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurMember($event.detail.checked);" formControlName="currentMember"></ion-checkbox>&nbsp;&nbsp;Current member
+                                    <ion-checkbox [(ngModel)]="isChecked" (ionChange)="validationForCurMember($event.detail.checked);" formControlName="currentMember"></ion-checkbox>&nbsp;&nbsp;{{'profilein.Current Member' | translate}}
                                   </div>
                                
                                   
@@ -97,13 +97,13 @@
                                 <div *ngIf="!edit"class="button-content" style="width: 50%;
                                 margin: auto;">
                                 <div class="display-justify">
-                                  <ion-button class="custom-button" (click)="Save()">Save</ion-button>
+                                  <ion-button class="custom-button" (click)="Save()">{{'AddJobProfile.submit' | translate}}</ion-button>
                                </div>
                                  </div>
                                 <div *ngIf="edit" class="button-content" style="width: 50%;
                                 margin: auto;">
                                 <div class="display-justify">
-                                  <ion-button class="custom-button" (click)="Updateclub()">Update</ion-button>
+                                  <ion-button class="custom-button" (click)="Updateclub()">{{'AddJobProfile.update' | translate}}</ion-button>
                                </div>
                                  </div>
               
