@@ -1191,5 +1191,16 @@
     "addSkills":"أضف مهارات",
     "editSkills":"تحرير المهارات",
     "beginner":"مبتدئ",
-    "expert":"خبير"
+    "expert":"خبير",
+
+    "addCertifications":"أضف الشهادات",
+    "editCertifications":"تحرير الشهادات",
+    "certificationName":"الشهادة / الترخيص / براءة الاختراع / اسم المنشور",
+    "certificationNameReq":"الشهادة / الترخيص / براءة الاختراع / اسم المنشور مطلوب",
+    "issuingOrg":"جهة الإصدار",
+    "issuingOrgReq":"جهة الإصدار مطلوب",
+    "certificationNo":"الشهادة / الترخيص / براءة الاختراع / رقم المنشور",
+    "certificationNoReq":"الشهادة / الترخيص / براءة الاختراع / رقم المنشور مطلوب",
+    "expiryDate":"تاريخ انتهاء الصلاحية (إن وجد)",
+    "supportFormat":"تنسيق الدعم: .pdf"
   }

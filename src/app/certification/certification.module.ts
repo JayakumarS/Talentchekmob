@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CertificationPageRoutingModule } from './certification-routing.module';
 
 import { CertificationPage } from './certification.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { CertificationPage } from './certification.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    CertificationPageRoutingModule
+    CertificationPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [CertificationPage]
 })

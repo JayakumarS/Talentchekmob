@@ -1191,5 +1191,16 @@
     "addSkills":"مهارت ها را اضافه کنید",
     "editSkills":"مهارت های ویرایش",
     "beginner":"مبتدی",
-    "expert":"کارشناس"
+    "expert":"کارشناس",
+
+    "addCertifications":"اضافه کردن گواهینامه ها",
+    "editCertifications":"ویرایش گواهینامه ها",
+    "certificationName":"گواهینامه / مجوز / ثبت اختراع / نام انتشار",
+    "certificationNameReq":"گواهینامه / مجوز / ثبت اختراع / نام انتشار مورد نیاز است",
+    "issuingOrg":"سازمان صادر کننده",
+    "issuingOrgReq":"سازمان صادر کننده الزامی است",
+    "certificationNo":"گواهینامه / مجوز / ثبت اختراع / شماره انتشار",
+    "certificationNoReq":"گواهی / مجوز / ثبت اختراع / شماره انتشار مورد نیاز است",
+    "expiryDate":"تاریخ انقضا (در صورت وجود)",
+    "supportFormat":"فرمت پشتیبانی: pdf"
   }

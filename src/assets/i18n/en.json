@@ -1311,7 +1311,25 @@
     "addSkills":"Add Skills",
     "editSkills":"Edit Skills",
     "beginner":"Beginner",
-    "expert":"Expert"
+    "expert":"Expert",
+
+    "addCertifications":"Add Certifications",
+    "editCertifications":"Edit Certifications",
+    "certificationName":"Certification/License/Patent/Publication Name",
+    "certificationNameReq":"Certification/License/Patent/Publication Name is required",
+    "issuingOrg":"Issuing Organisation",
+    "issuingOrgReq":"Issuing Organisation is required",
+    "certificationNo":"Certification/License/Patent/Publication Number",
+    "certificationNoReq":"Certification/License/Patent/Publication No is required",
+    "expiryDate":"Expiry Date(if applicable)",
+    "supportFormat":"support format: .pdf"
+
+
+
+
+
+
+
 
 
 
