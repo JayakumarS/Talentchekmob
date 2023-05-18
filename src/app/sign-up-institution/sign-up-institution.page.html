@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
                                 <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" 
-                                        name="close-circle" (click)="removeCountry()"></ion-icon>
+                                        name="close-circle" (click)="removeCountry()"style="color: black;"></ion-icon>
                                 <ion-input  (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
                             </ion-item>
                 
@@ -188,7 +188,7 @@
                                     <div class="selected-skill">{{ selectedState }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedState != undefined && selectedState != ''" name="close-circle" (click)="removeState()"></ion-icon>
+                                <ion-icon *ngIf="selectedState != undefined && selectedState != ''" name="close-circle" (click)="removeState()" style="color: black;"></ion-icon>
                                 <ion-input (ionInput)="onStateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
                             </ion-item>
 
@@ -207,7 +207,7 @@
                                     <div class="selected-skill">{{ selectedCity }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedCity != undefined && selectedCity != ''" name="close-circle" (click)="removeCity()"></ion-icon>
+                                <ion-icon *ngIf="selectedCity != undefined && selectedCity != ''" name="close-circle" (click)="removeCity()" style="color: black;"></ion-icon>
                                 <ion-input (ionInput)="onCitySearch($event.target.value)" [formControl]="citySearchCtrl"></ion-input>
                             </ion-item>
 

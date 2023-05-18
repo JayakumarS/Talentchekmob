@@ -289,6 +289,7 @@ export class OniJobPostPage implements OnInit {
         this.locationId= result["jobAdvertisementList"][0].locationOfferId;
 
         this.jobProfileForm.patchValue({
+          'jobTitle1': this.editJobTitle,
           'industry': industry,
           'roles': result["jobAdvertisementList"][0].roles,
           'jobExperience':result["jobAdvertisementList"][0].jobExperience,
@@ -321,6 +322,8 @@ export class OniJobPostPage implements OnInit {
           // 'jobShiftNS':this.jobShiftArray[12],
           // 'jobShiftNSU':this.jobShiftArray[13],
         })
+
+
         console.log(this.jobProfileForm.value) 
       }    
     }    
