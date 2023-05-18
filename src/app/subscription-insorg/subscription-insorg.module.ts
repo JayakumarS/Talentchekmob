@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SubscriptionInsorgPageRoutingModule } from './subscription-insorg-routing.module';
 
 import { SubscriptionInsorgPage } from './subscription-insorg.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SubscriptionInsorgPageRoutingModule
+    SubscriptionInsorgPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [SubscriptionInsorgPage]
 })

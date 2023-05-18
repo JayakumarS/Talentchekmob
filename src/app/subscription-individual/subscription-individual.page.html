@@ -6,7 +6,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Subscription</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Subscription.subscription' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -23,13 +23,13 @@
 
 
             <ion-item fill="outline" class="input-field">
-                <ion-label>Currency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
+                <ion-label>{{'Subscription.cury' | translate}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
                 <ion-select [(value)]="currencyVal" (ionChange)="CurrencyChangeEvent($event)">
-                    <ion-select-option value="INR">INR</ion-select-option>
-                    <ion-select-option value="USD">USD</ion-select-option>
-                    <ion-select-option value="AED">AED</ion-select-option>
-                    <ion-select-option value="MYR">MYR</ion-select-option>
-                    <ion-select-option value="SGD">SGD</ion-select-option>
+                    <ion-select-option value="INR">{{'Subscription.inr' | translate}}</ion-select-option>
+                    <ion-select-option value="USD">{{'Subscription.usd' | translate}}</ion-select-option>
+                    <ion-select-option value="AED">{{'Subscription.aed' | translate}}</ion-select-option>
+                    <ion-select-option value="MYR">{{'Subscription.myr' | translate}}</ion-select-option>
+                    <ion-select-option value="SGD">{{'Subscription.sgd' | translate}}</ion-select-option>
                 </ion-select>
             </ion-item>
 
@@ -48,7 +48,7 @@
                         <!--HEAD START-->
                         <div class="head_bg"></div>
                         <div class="head">
-                            <span>Standard</span>
+                            <span>{{'Subscription.std' | translate}}</span>
                         </div>
                         <!--//HEAD END-->
 
@@ -70,19 +70,19 @@
                 <!--FEATURE LIST START-->
                 <div class="generic_feature_list">
                     <ul>
-                        <li>100 Talent Credits</li>
-                        <li>Profile Verification</li>
-                        <li>Job Search Module</li>
-                        <li>Alumni Connect</li>
-                        <li>Knowledge Bank Access</li>
-                        <li>One Year Subscription</li>
+                        <li>{{'Subscription.100 Talent credits' | translate}}</li>
+                        <li>{{'Subscription.Profile Verification' | translate}}</li>
+                        <li>{{'Subscription.Job Search Module' | translate}}</li>
+                        <li>{{'Subscription.Alumni Connect' | translate}}</li>
+                        <li>{{'Subscription.Knowledge Bank Access' | translate}}</li>
+                        <li>{{'Subscription.One Year Subscription' | translate}}</li>
                     </ul>
                 </div>
                 <!--//FEATURE LIST END-->
 
                 <!--BUTTON START-->
                 <div class="generic_price_btn clearfix">
-                    <a class="" (click)="payWithRazorStandard()">Get Started</a>
+                    <a class="" (click)="payWithRazorStandard()">{{'Subscription.getsta' | translate}}</a>
                 </div>
                 <!--//BUTTON END-->
 

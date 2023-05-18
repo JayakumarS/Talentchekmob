@@ -9,13 +9,15 @@ import { SubscriptionIndividualPageRoutingModule } from './subscription-individu
 import { SubscriptionIndividualPage } from './subscription-individual.page';
 import { TranslateModule } from '@ngx-translate/core';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     SubscriptionIndividualPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    TranslateModule.forChild(),
   ],
   declarations: [SubscriptionIndividualPage]
 })

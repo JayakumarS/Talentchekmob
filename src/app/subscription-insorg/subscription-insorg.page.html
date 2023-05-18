@@ -6,7 +6,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Subscription</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'Subscription.subscription'  | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -23,13 +23,13 @@
 
 
             <ion-item fill="outline" class="input-field">
-                <ion-label>Currency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
+                <ion-label>{{'Subscription.cury'  | translate}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
                 <ion-select [(value)]="currencyVal" (ionChange)="CurrencyChangeEvent($event)">
-                    <ion-select-option value="INR">INR</ion-select-option>
-                    <ion-select-option value="USD">USD</ion-select-option>
-                    <ion-select-option value="AED">AED</ion-select-option>
-                    <ion-select-option value="MYR">MYR</ion-select-option>
-                    <ion-select-option value="SGD">SGD</ion-select-option>
+                    <ion-select-option value="INR">{{'Subscription.inr'  | translate}}</ion-select-option>
+                    <ion-select-option value="USD">{{'Subscription.usd'  | translate}}</ion-select-option>
+                    <ion-select-option value="AED">{{'Subscription.aed'  | translate}}</ion-select-option>
+                    <ion-select-option value="MYR">{{'Subscription.myr'  | translate}}</ion-select-option>
+                    <ion-select-option value="SGD">{{'Subscription.sgd'  | translate}}</ion-select-option>
                 </ion-select>
             </ion-item>
 
@@ -49,7 +49,7 @@
                                     <!--HEAD START-->
                                     <div class="head_bg"></div>
                                     <div class="head">
-                                        <span>Professional</span>
+                                        <span>{{'Subscription.profess'  | translate}}</span>
                                     </div>
                                     <!--//HEAD END-->
 
@@ -71,20 +71,19 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>2700 Talent Credits</li>
-                                    <li>Student Placements</li>
-                                    <li>Student & Staff Alumni Network</li>
-                                    <li>Online Tests & Evaluation</li>
-                                    <li>Events Publishing and Funds Collection</li>
-                                    <li>500MB Document Storage
-                                        with Access Rights</li>
+                                    <li>{{'Subscription.Talent'  | translate}}</li>
+                                    <li>{{'Subscription.Student Placements'  | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network'  | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection'  | translate}}</li>
+                                    <li>{{'Subscription.500MB Document Storage with Access Rights'  | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
 
                             <!--BUTTON START-->
                             <div class="generic_price_btn clearfix">
-                                <a class="" (click)="payWithRazor('Professional')">Get Started</a>
+                                <a class="" (click)="payWithRazor('Professional')">{{'Subscription.getsta'  | translate}}</a>
                             </div>
                             <!--//BUTTON END-->
 
@@ -105,7 +104,7 @@
                                     <!--HEAD START-->
                                     <div class="head_bg"></div>
                                     <div class="head">
-                                        <span>Enterprise</span>
+                                        <span>{{'Subscription.entpri'  | translate}}</span>
                                     </div>
                                     <!--//HEAD END-->
 
@@ -127,20 +126,19 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>6000 Talent Credits</li>
-                                    <li>Student Placements</li>
-                                    <li>Student & Staff Alumni Network</li>
-                                    <li>Online Tests & Evaluation</li>
-                                    <li>Events Publishing and Funds Collection</li>
-                                    <li>1GB Document Storage
-                                        with Access Rights</li>
+                                    <li>{{'Subscription.6000 Talent Credits'  | translate}}</li>
+                                    <li>{{'Subscription.Student Placements'  | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network'  | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection'  | translate}}</li>
+                                    <li>{{'Subscription.1GB Document Storage with Access Rights'  | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
 
                             <!--BUTTON START-->
                             <div class="generic_price_btn clearfix">
-                                <a class="" (click)="payWithRazor('Enterprise')">Get Started</a>
+                                <a class="" (click)="payWithRazor('Enterprise')">{{'Subscription.getsta'  | translate}}</a>
                             </div>
                             <!--//BUTTON END-->
 
@@ -161,7 +159,7 @@
                                     <!--HEAD START-->
                                     <div class="head_bg"></div>
                                     <div class="head">
-                                        <span>Ultimate</span>
+                                        <span>{{'Subscription.ultimate'  | translate}}</span>
                                     </div>
                                     <!--//HEAD END-->
 
@@ -183,20 +181,19 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>Unlimited Talent Credits</li>
-                                    <li>Student Placements</li>
-                                    <li>Student & Staff Alumni Network</li>
-                                    <li>Online Tests & Evaluation</li>
-                                    <li>Events Publishing and Funds Collection</li>
-                                    <li>10GB Document Storage
-                                        with Access Rights</li>
+                                    <li>{{'Subscription.Unlimited Talent Credits'  | translate}}</li>
+                                    <li>{{'Subscription.Student Placements'  | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network'  | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection'  | translate}}</li>
+                                    <li>{{'Subscription.10GB Document Storage with Access Rights'  | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
 
                             <!--BUTTON START-->
                             <div class="generic_price_btn clearfix">
-                                <a class="" (click)="payWithRazor('Ultimate')">Get Started</a>
+                                <a class="" (click)="payWithRazor('Ultimate')">{{'Subscription.getsta'  | translate}}</a>
                             </div>
                             <!--//BUTTON END-->
 
@@ -220,7 +217,7 @@
                                     <!--HEAD START-->
                                     <div class="head_bg"></div>
                                     <div class="head">
-                                        <span>Professional</span>
+                                        <span>{{'Subscription.profess'  | translate}}</span>
                                     </div>
                                     <!--//HEAD END-->
 
@@ -242,20 +239,19 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>2700 Talent Credits</li>
-                                    <li>Profile Background Verification</li>
-                                    <li>Hiring Module</li>
-                                    <li>Online Tests & Evaluation</li>
-                                    <li>Corporate Alumni Network</li>
-                                    <li>500MB Document Storage
-                                        with Access Rights</li>
+                                    <li>{{'Subscription.Talent'  | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification'  | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module'  | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network'  | translate}}</li>
+                                    <li>{{'Subscription.500MB Document Storage with Access Rights'  | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
 
                             <!--BUTTON START-->
                             <div class="generic_price_btn clearfix">
-                                <a class="" (click)="payWithRazor('Professional')">Get Started</a>
+                                <a class="" (click)="payWithRazor('Professional')">{{'Subscription.getsta'  | translate}}</a>
                             </div>
                             <!--//BUTTON END-->
 
@@ -276,7 +272,7 @@
                                     <!--HEAD START-->
                                     <div class="head_bg"></div>
                                     <div class="head">
-                                        <span>Enterprise</span>
+                                        <span>{{'Subscription.entpri'  | translate}}</span>
                                     </div>
                                     <!--//HEAD END-->
 
@@ -298,20 +294,19 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>6000 Talent Credits</li>
-                                    <li>Profile Background Verification</li>
-                                    <li>Hiring Module</li>
-                                    <li>Online Tests & Evaluation</li>
-                                    <li>Corporate Alumni Network</li>
-                                    <li>1GB Document Storage
-                                        with Access Rights</li>
+                                    <li>{{'Subscription.6000 Talent Credits'  | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification'  | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module'  | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network'  | translate}}</li>
+                                    <li>{{'Subscription.1GB Document Storage with Access Rights'  | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
 
                             <!--BUTTON START-->
                             <div class="generic_price_btn clearfix">
-                                <a class="" (click)="payWithRazor('Enterprise')">Get Started</a>
+                                <a class="" (click)="payWithRazor('Enterprise')">{{'Subscription.getsta'  | translate}}</a>
                             </div>
                             <!--//BUTTON END-->
 
@@ -332,7 +327,7 @@
                                     <!--HEAD START-->
                                     <div class="head_bg"></div>
                                     <div class="head">
-                                        <span>Ultimate</span>
+                                        <span>{{'Subscription.ultimate'  | translate}}</span>
                                     </div>
                                     <!--//HEAD END-->
 
@@ -354,20 +349,19 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>Unlimited Talent Credits</li>
-                                    <li>Profile Background Verification</li>
-                                    <li>Hiring Module</li>
-                                    <li>Online Tests & Evaluation</li>
-                                    <li>Corporate Alumni Network</li>
-                                    <li>10GB Document Storage
-                                        with Access Rights</li>
+                                    <li>{{'Subscription.Unlimited Talent Credits'  | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification'  | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module'  | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network'  | translate}}</li>
+                                    <li>{{'Subscription.10GB Document Storage with Access Rights'  | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
 
                             <!--BUTTON START-->
                             <div class="generic_price_btn clearfix">
-                                <a class="" (click)="payWithRazor('Ultimate')">Get Started</a>
+                                <a class="" (click)="payWithRazor('Ultimate')">{{'Subscription.getsta'  | translate}}</a>
                             </div>
                             <!--//BUTTON END-->
 
