@@ -548,6 +548,7 @@
     },
     "AddJobProfile": {
       "curate": "نظِّم وظيفتك المثالية",
+      "prefLoc": "اختر موقع العمل المفضل",
       "jobPref": "تفضيلات الوظيفة",
       "industry": "صناعة",
       "jobTitle": "المسمى الوظيفي",
@@ -1277,9 +1278,18 @@
       "jobPostBy": "تم نشر الوظيفة بواسطة",
       "plsEntJobPost": "الرجاء إدخال الوظيفة المنشورة بواسطة.",
       "industry": "صناعة",
+      "indReq":"الصناعة مطلوبة",
       "jobTitle": "المسمى الوظيفي",
+      "jobTitleReq": "المسمى الوظيفي مطلوب",
       "jobType": "نوع الوظيفة",
+      "jobTypeReq": "نوع الوظيفة مطلوب",
       "jobDes": "المسمى الوظيفي",
+      "year":"سنين)",
+      "month":"شهور)",
+      "week":"أسبوع (أسابيع)",
+      "day":"أيام)",
+      "hour":"ساعات)",
+      "workReq":"الرجاء إدخال خبرة العمل",
       "roleRes": "الأدوار والمسؤوليات",
       "plsEntRoleRES": "الرجاء إدخال الأدوار والمسؤوليات.",
       "reqSkillQuali": "المهارات والمؤهلات المطلوبة",
@@ -1514,5 +1524,14 @@
     "Anyone on talent chek can see your email ID":"يمكن لأي شخص في مكتب المواهب رؤية معرف البريد الإلكتروني الخاص بك",
 
     "Choose who can view your number":"اختر من يمكنه عرض رقمك",
-    "Anyone on talent chek can see your phone number":"يمكن لأي شخص في مكتب المواهب رؤية رقم هاتفك"
+    "Anyone on talent chek can see your phone number":"يمكن لأي شخص في مكتب المواهب رؤية رقم هاتفك",
+
+    "Jobs":"وظائف",
+    "addJobPref":"أضف الوظيفة المفضلة",
+    "editJobPref":"تحرير تفضيلات الوظيفة",
+    "No Results to Display":"لا توجد نتائج لعرضها",
+    "Matched Jobs": "الوظائف المتطابقة",
+
+    "delete":"يمسح",
+    "verifiedNetwork":"شبكة تم التحقق منها"
   }

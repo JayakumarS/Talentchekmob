@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title style="text-align: center;
         font-family: 'Mr-eaves';
-        font-size: 28px;">Jobs</ion-title>
+        font-size: 28px;">{{'Jobs' | translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,7 @@
 
                 <div class="display-justify-button">
                     <ion-button class="custom-button-job" (click)="goto_addJob()">
-                        <ion-icon name="add-circle-outline"></ion-icon> &nbsp; Add Job Preference</ion-button>
+                        <ion-icon name="add-circle-outline"></ion-icon> &nbsp; {{'addJobPref' | translate}}</ion-button>
                 </div>
 
             </ion-col>
@@ -40,7 +40,7 @@
                         </ion-col>
                         <ion-col size="8">
                             <ion-button class="custom-button-job-edit" (click)="goto_editJob()">
-                                Edit Job Preference &nbsp;
+                                {{'editJobPref' | translate}} &nbsp;
                                 <ion-icon name="add-circle-outline"></ion-icon>
                             </ion-button>
                         </ion-col>
@@ -56,9 +56,9 @@
             </ion-col>
 
         </ion-row>
-        <div style="display: flex;justify-content: center;" *ngIf="!showflag">No Results to Display</div>
+        <div style="display: flex;justify-content: center;" *ngIf="!showflag">{{'No Results to Display' | translate}}</div>
        <div *ngIf="showflag && matchedJobList">
-        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;" >&nbsp;&nbsp;&nbsp; Matched Jobs</span>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;" >&nbsp;&nbsp;&nbsp; {{'Matched Jobs' | translate}}</span>
  
         <div class="display-justify" *ngFor="let cElement of matchedJobList" (click)="goto_jobdetails(cElement.jobId)">
             <ion-card class="adv-card">
@@ -91,7 +91,7 @@
                         <span class="c-pill c-pill--danger">{{cElement.jobTypeStr}}</span>
                     </ion-col>
                     <ion-col>
-                        <span style="width: 100px; text-align: center;" class="c-pill c-pill--warning" (click)="goto_jobdetails(cElement.jobId)">Apply</span>
+                        <span style="width: 100px; text-align: center;" class="c-pill c-pill--warning" (click)="goto_jobdetails(cElement.jobId)">{{'ViewJobProfile.apply' | translate}}</span>
                     </ion-col>
                 </ion-row>
 

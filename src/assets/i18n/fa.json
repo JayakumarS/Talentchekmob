@@ -549,6 +549,7 @@
     },
     "AddJobProfile": {
       "curate": "شغل ایده آل خود را انتخاب کنید",
+      "prefLoc": "محل کار ترجیحی را انتخاب کنید",
       "jobPref": "اولویت های شغلی",
       "industry": "صنعت",
       "jobTitle": "عنوان شغلی",
@@ -1284,9 +1285,18 @@
       "jobPostBy": "شغل ارسال شده توسط",
       "plsEntJobPost": "لطفا شغل ارسال شده توسط را وارد کنید",
       "industry": "صنعت",
+      "indReq":"صنعت مورد نیاز است",
       "jobTitle": "عنوان شغلی",
+      "workReq":"لطفا سابقه کار را وارد کنید",
+      "jobTitleReq":"عنوان شغلی الزامی است",
       "jobType": "نوع کار",
+      "jobTypeReq": "نوع شغل مورد نیاز است",
       "jobDes": "شرح شغل",
+      "year":"سال ها)",
+      "month":"ماه ها)",
+      "week":"هفته(های)",
+      "day":"روزها)",
+      "hour":"ساعت ها)",
       "roleRes": "قوانین و مسئولیتها",
       "plsEntRoleRES": "لطفا نقش ها و مسئولیت ها را وارد کنید.",
       "reqSkillQuali": "مهارت ها و صلاحیت های مورد نیاز",
@@ -1519,5 +1529,14 @@
     "Anyone on talent chek can see your email ID":"هر کسی که در جستجوی استعدادیابی است می‌تواند شناسه ایمیل شما را ببیند",
 
     "Choose who can view your number":"انتخاب کنید چه کسی می تواند شماره شما را مشاهده کند",
-    "Anyone on talent chek can see your phone number":"هر کسی که در استعدادیابی است می‌تواند شماره تلفن شما را ببیند"
+    "Anyone on talent chek can see your phone number":"هر کسی که در استعدادیابی است می‌تواند شماره تلفن شما را ببیند",
+
+    "Jobs":"شغل ها",
+    "addJobPref":"اولویت شغلی را اضافه کنید",
+    "editJobPref":"ویرایش اولویت شغلی",
+    "No Results to Display":"هیچ نتیجه ای برای نمایش وجود ندارد",
+    "Matched Jobs": "مشاغل همسان",
+
+    "delete":"حذف",
+    "verifiedNetwork":"شبکه تایید شده"
   }

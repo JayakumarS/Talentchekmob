@@ -914,8 +914,7 @@
     "Amount is required":"தொகை தேவைப்படுகிறது",
     "Currency is required":"நாணயம் தேவை",
 
-    "addJobPref":"வேலை முன்னுரிமையைச் சேர்க்கவும்",
-    "editJobPref":"வேலை விருப்பத்தைத் திருத்தவும்",
+    
 
     "ViewJobProfile": {
       "view": "சுயவிவரம் காண",
@@ -1365,6 +1364,7 @@
       "jobPostBy": "வேலை இடுகையிடப்பட்டது",
       "plsEntJobPost": "இடுகையிட்ட வேலையை உள்ளிடவும்.",
       "industry": "தொழில்",
+      "indReq":"தொழில் தேவை",
       "jobTitle": "வேலை தலைப்பு",
       "jobTitleReq": "வேலை தலைப்பு தேவை",
       "jobType": "வேலை வகை",
@@ -1615,5 +1615,13 @@
     "Anyone on talent chek can see your email ID":"திறமை சரிபார்ப்பில் உள்ள எவரும் உங்கள் மின்னஞ்சல் ஐடியைப் பார்க்கலாம்",
 
     "Choose who can view your number":"உங்கள் எண்ணை யார் பார்க்கலாம் என்பதைத் தேர்வு செய்யவும்",
-    "Anyone on talent chek can see your phone number":"திறமை சரிபார்ப்பில் உள்ள எவரும் உங்கள் ஃபோன் எண்ணைப் பார்க்கலாம்"
+    "Anyone on talent chek can see your phone number":"திறமை சரிபார்ப்பில் உள்ள எவரும் உங்கள் ஃபோன் எண்ணைப் பார்க்கலாம்",
+
+    "Jobs":"வேலைகள்",
+    "addJobPref":"வேலை முன்னுரிமையைச் சேர்க்கவும்",
+    "editJobPref":"வேலை விருப்பத்தைத் திருத்தவும்",
+    "No Results to Display":"காட்டுவதற்கு முடிவுகள் இல்லை",
+    "Matched Jobs": "பொருந்திய வேலைகள்",
+
+    "delete":"அழி"
   }

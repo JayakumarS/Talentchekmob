@@ -705,8 +705,7 @@
       "yesAuction":"Yes"
 
     },
-    "addJobPref":"Add Job Preference",
-    "editJobPref":"Edit Job Preference",
+    
     "profilein": {
       "First name": "First name",
       "Last name": "Last name",
@@ -1450,7 +1449,7 @@
       "sorryNoApp": "Sorry, No application received yet! Please try again later.",
       "name": "Name",
       "currLoc": "Current location",
-      "relExp": "Relevant experience",
+      "relExp": "of relevant experience",
       "cancel": "Cancel",
       "matchProLt": "Matched profile list",
       "jobSeekPro": "Job seeker profile that match with your requirements",
@@ -1637,7 +1636,15 @@
     "Anyone on talent chek can see your email ID":"Anyone on talent chek can see your email ID",
 
     "Choose who can view your number":"Choose who can view your number",
-    "Anyone on talent chek can see your phone number":"Anyone on talent chek can see your phone number"
+    "Anyone on talent chek can see your phone number":"Anyone on talent chek can see your phone number",
+
+    "Jobs":"Jobs",
+    "addJobPref":"Add Job Preference",
+    "editJobPref":"Edit Job Preference",
+    "No Results to Display":"No Results to Display",
+    "Matched Jobs":"Matched Jobs",
+
+    "delete":"Delete"
 
 
 

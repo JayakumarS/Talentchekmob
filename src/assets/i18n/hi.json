@@ -548,6 +548,7 @@
     },
     "AddJobProfile": {
       "curate": "अपनी आदर्श नौकरी को क्यूरेट करें",
+      "prefLoc": "पसंदीदा कार्य स्थान चुनें",
       "jobPref": "काम प्राथमिकताएं",
       "industry": "उद्योग",
       "jobTitle": "नौकरी का नाम",
@@ -1281,14 +1282,23 @@
       "jobPostBy": "नौकरी द्वारा पोस्ट किया गया",
       "plsEntJobPost": "कृपया द्वारा पोस्ट की गई नौकरी दर्ज करें।",
       "industry": "उद्योग",
+      "indReq":"उद्योग की आवश्यकता है",
       "jobTitle": "नौकरी का नाम",
+      "jobTitleReq": "कार्य शीर्षक आवश्यक है",
+      "workReq":"कृपया कार्य अनुभव दर्ज करें",
       "jobType": "कार्य का प्रकार",
+      "jobTypeReq": "कार्य प्रकार आवश्यक है",
       "jobDes": "नौकरी का विवरण",
       "roleRes": "भूमिकायें और उत्तरदायित्व",
       "plsEntRoleRES": "कृपया भूमिकाएं और जिम्मेदारियां दर्ज करें।",
       "reqSkillQuali": "आवश्यक कौशल और योग्यता",
       "plsReqSkillQual": "कृपया आवश्यक कौशल और योग्यता दर्ज करें।",
       "skills": "कौशल",
+      "year":"साल)",
+      "month":"महीने)",
+      "week":"सप्ताह",
+      "day":"दिन",
+      "hour":"घंटे)",
       "plsEntSkill": "कृपया कौशल दर्ज करें",
       "workExp": "कार्य अनुभव",
       "mandatory": "अनिवार्य",
@@ -1518,5 +1528,14 @@
     "Anyone on talent chek can see your email ID":"टैलेंट चेक पर कोई भी आपकी ईमेल आईडी देख सकता है",
 
     "Choose who can view your number":"चुनें कि आपका नंबर कौन देख सकता है",
-    "Anyone on talent chek can see your phone number":"टैलेंट चेक पर कोई भी आपका फोन नंबर देख सकता है"
+    "Anyone on talent chek can see your phone number":"टैलेंट चेक पर कोई भी आपका फोन नंबर देख सकता है",
+
+    "Jobs":"नौकरियां",
+    "addJobPref":"कार्य वरीयता जोड़ें",
+    "editJobPref":"नौकरी वरीयता संपादित करें",
+    "No Results to Display":"प्रदर्शित करने के लिए कोई परिणाम नहीं",
+    "Matched Jobs": "मेल खाने वाली नौकरियां",
+
+    "delete":"मिटाना",
+    "verifiedNetwork":"सत्यापित नेटवर्क"
   }
