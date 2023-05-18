@@ -1499,5 +1499,24 @@
     "Year of Establishment":"स्थापना वर्ष",
     "Year of Establishment is required":"स्थापना का वर्ष आवश्यक है",
     "Accreditation is required":"प्रत्यायन आवश्यक है",
-    "About the Institution":"संस्थान के बारे में"
+    "About the Institution":"संस्थान के बारे में",
+
+    "Visibility settings":"दृश्यता सेटिंग्स",
+    "Email Visibility":"ईमेल दृश्यता",
+    "Phone Visibility":"फोन दृश्यता",
+
+    "Choose who can view your profile":"चुनें कि आपकी प्रोफ़ाइल कौन देख सकता है",
+    "Anyone on Talent Chek can view your profile":"टैलेंट चेक पर कोई भी आपकी प्रोफ़ाइल देख सकता है",
+    "Users can request permission to view your profile":"उपयोगकर्ता आपकी प्रोफ़ाइल देखने की अनुमति का अनुरोध कर सकते हैं",
+    "Only visible to you":"केवल आपको दिखाई देता है",
+
+    "Choose who can view your email":"चुनें कि आपका ईमेल कौन देख सकता है",
+    "Network":"नेटवर्क",
+    "Connections verified by you & your university corporate alumni network can view":"आपके और आपके विश्वविद्यालय कॉर्पोरेट पूर्व छात्रों के नेटवर्क द्वारा सत्यापित कनेक्शन देख सकते हैं",
+    "Employers":"नियोक्ताओं",
+    "Visible to organisations & recruiters":"संगठनों और नियोक्ताओं के लिए दृश्यमान",
+    "Anyone on talent chek can see your email ID":"टैलेंट चेक पर कोई भी आपकी ईमेल आईडी देख सकता है",
+
+    "Choose who can view your number":"चुनें कि आपका नंबर कौन देख सकता है",
+    "Anyone on talent chek can see your phone number":"टैलेंट चेक पर कोई भी आपका फोन नंबर देख सकता है"
   }

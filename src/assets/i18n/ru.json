@@ -1496,5 +1496,24 @@
     "Year of Establishment":"Год основания",
     "Year of Establishment is required":"Укажите год основания",
     "Accreditation is required":"Требуется аккредитация",
-    "About the Institution":"Об учреждении"
+    "About the Institution":"Об учреждении",
+
+    "Visibility settings":"Настройки видимости",
+    "Email Visibility":"Видимость электронной почты",
+    "Phone Visibility":"Видимость телефона",
+
+    "Choose who can view your profile":"Выберите, кто может просматривать ваш профиль",
+    "Anyone on Talent Chek can view your profile":"Любой пользователь Talent Chek может просматривать ваш профиль",
+    "Users can request permission to view your profile":"Пользователи могут запрашивать разрешение на просмотр вашего профиля",
+    "Only visible to you":"Видно только вам",
+
+    "Choose who can view your email":"Выберите, кто может просматривать вашу электронную почту",
+    "Network":"Сеть",
+    "Connections verified by you & your university corporate alumni network can view":"Связи, проверенные вами и корпоративной сетью выпускников вашего университета, могут просматривать",
+    "Employers":"Работодатели",
+    "Visible to organisations & recruiters":"Видно организациям и рекрутерам",
+    "Anyone on talent chek can see your email ID":"Любой, кто участвует в проверке талантов, может видеть ваш адрес электронной почты.",
+
+    "Choose who can view your number":"Выберите, кто может просматривать ваш номер",
+    "Anyone on talent chek can see your phone number":"Любой, кто участвует в проверке талантов, может видеть ваш номер телефона."
   }

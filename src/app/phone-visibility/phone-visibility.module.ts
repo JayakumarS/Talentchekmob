@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PhoneVisibilityPageRoutingModule } from './phone-visibility-routing.module';
 
 import { PhoneVisibilityPage } from './phone-visibility.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { PhoneVisibilityPage } from './phone-visibility.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    PhoneVisibilityPageRoutingModule
+    PhoneVisibilityPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [PhoneVisibilityPage]
 })

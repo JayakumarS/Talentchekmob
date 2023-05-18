@@ -6,7 +6,7 @@
         </div>  
         <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 20px;display: flex;
         align-items: center;align-items: center;">
-          Choose who can view your profile
+         {{'Choose who can view your profile' | translate}}
         </div> 
         <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
         </div>
@@ -20,9 +20,9 @@
       <ion-radio-group formControlName="profileVisibility" (ionChange)="updateProfileVisibility()" [allowEmptySelection]="false" value="turtles">
         <ion-item class="ion-item">
           <div style="padding: 5px 0px 4px 8px;">
-            <div><b>Public</b></div>
+            <div><b>{{'public' | translate}}</b></div>
             <div style="color: gray;font-size: 12px;">
-              Anyone on Talent Chek can view your profile
+              {{'Anyone on Talent Chek can view your profile' | translate}}
            </div> 
           </div>
            <ion-radio slot="end" value="public"></ion-radio>
@@ -30,9 +30,9 @@
   
         <ion-item class="ion-item">
           <div style="padding: 5px 0px 4px 8px;">
-            <div><b>On Demand</b></div>
+            <div><b>{{'onDemand' | translate}}</b></div>
             <div style="color: gray;font-size: 12px;">
-              Users can request permission to view your profile
+            {{'Users can request permission to view your profile' | translate}}
            </div> 
           </div>
            <ion-radio slot="end" value="ondemand"></ion-radio>
@@ -40,9 +40,9 @@
   
         <ion-item class="ion-item">
           <div style="padding: 5px 0px 4px 8px;">
-            <div><b>Private</b></div>
+            <div><b>{{'private' | translate}}</b></div>
             <div style="color: gray;font-size: 12px;">
-              Only visible to you
+              {{'Only visible to you' | translate}}
            </div> 
           </div>
            <ion-radio slot="end" value="private"></ion-radio>

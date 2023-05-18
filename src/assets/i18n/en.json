@@ -1618,7 +1618,26 @@
     "Year of Establishment":"Year of Establishment",
     "Year of Establishment is required":"Year of Establishment is required",
     "Accreditation is required":"Accreditation is required",
-    "About the Institution":"About the Institution"
+    "About the Institution":"About the Institution",
+
+    "Visibility settings":"Visibility settings",
+    "Email Visibility":"Email Visibility",
+    "Phone Visibility":"Phone Visibility",
+
+    "Choose who can view your profile":"Choose who can view your profile",
+    "Anyone on Talent Chek can view your profile":"Anyone on Talent Chek can view your profile",
+    "Users can request permission to view your profile":"Users can request permission to view your profile",
+    "Only visible to you":"Only visible to you",
+
+    "Choose who can view your email":"Choose who can view your email",
+    "Network":"Network",
+    "Connections verified by you & your university corporate alumni network can view":"Connections verified by you & your university corporate alumni network can view",
+    "Employers":"Employers",
+    "Visible to organisations & recruiters":"Visible to organisations & recruiters",
+    "Anyone on talent chek can see your email ID":"Anyone on talent chek can see your email ID",
+
+    "Choose who can view your number":"Choose who can view your number",
+    "Anyone on talent chek can see your phone number":"Anyone on talent chek can see your phone number"
 
 
 

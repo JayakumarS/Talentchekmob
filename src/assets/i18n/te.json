@@ -1502,5 +1502,24 @@
     "Year of Establishment":"స్థాపన సంవత్సరం",
     "Year of Establishment is required":"స్థాపించబడిన సంవత్సరం అవసరం",
     "Accreditation is required":"అక్రిడిటేషన్ అవసరం",
-    "About the Institution":"సంస్థ గురించి"
+    "About the Institution":"సంస్థ గురించి",
+
+    "Visibility settings":"దృశ్యమానత సెట్టింగ్‌లు",
+    "Email Visibility":"ఇమెయిల్ విజిబిలిటీ",
+    "Phone Visibility":"ఫోన్ దృశ్యమానత",
+
+    "Choose who can view your profile":"మీ ప్రొఫైల్‌ను ఎవరు చూడవచ్చో ఎంచుకోండి",
+    "Anyone on Talent Chek can view your profile":"టాలెంట్ చెక్‌లో ఉన్న ఎవరైనా మీ ప్రొఫైల్‌ని వీక్షించగలరు",
+    "Users can request permission to view your profile":"వినియోగదారులు మీ ప్రొఫైల్‌ను వీక్షించడానికి అనుమతిని అభ్యర్థించవచ్చు",
+    "Only visible to you":"మీకు మాత్రమే కనిపిస్తుంది",
+
+    "Choose who can view your email":"మీ ఇమెయిల్‌ను ఎవరు చూడవచ్చో ఎంచుకోండి",
+    "Network":"నెట్‌వర్క్",
+    "Connections verified by you & your university corporate alumni network can view":"మీరు & మీ యూనివర్సిటీ కార్పొరేట్ పూర్వ విద్యార్థుల నెట్‌వర్క్ ద్వారా ధృవీకరించబడిన కనెక్షన్‌లను వీక్షించగలరు",
+    "Employers":"యజమానులు",
+    "Visible to organisations & recruiters":"సంస్థలు & రిక్రూటర్‌లకు కనిపిస్తుంది",
+    "Anyone on talent chek can see your email ID":"టాలెంట్ చెక్‌లో ఉన్న ఎవరైనా మీ ఇమెయిల్ IDని చూడగలరు",
+
+    "Choose who can view your number":"మీ నంబర్‌ను ఎవరు చూడవచ్చో ఎంచుకోండి",
+    "Anyone on talent chek can see your phone number":"టాలెంట్ చెక్‌లో ఉన్న ఎవరైనా మీ ఫోన్ నంబర్‌ను చూడగలరు"
   }

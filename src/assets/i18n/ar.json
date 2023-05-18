@@ -1495,5 +1495,24 @@
     "Year of Establishment":"سنة التأسيس",
     "Year of Establishment is required":"سنة التأسيس مطلوبة",
     "Accreditation is required":"الاعتماد مطلوب",
-    "About the Institution":"عن المؤسسة"
+    "About the Institution":"عن المؤسسة",
+
+    "Visibility settings":"إعدادات الرؤية",
+    "Email Visibility":"رؤية البريد الإلكتروني",
+    "Phone Visibility":"رؤية الهاتف",
+
+    "Choose who can view your profile":"اختر من يمكنه عرض ملفك الشخصي",
+    "Anyone on Talent Chek can view your profile":"يمكن لأي شخص في Talent Chek عرض ملف التعريف الخاص بك",
+    "Users can request permission to view your profile":"يمكن للمستخدمين طلب الإذن لعرض ملف التعريف الخاص بك",
+    "Only visible to you":"مرئي لك فقط",
+
+    "Choose who can view your email":"اختر من يمكنه عرض بريدك الإلكتروني",
+    "Network":"شبكة",
+    "Connections verified by you & your university corporate alumni network can view":"الاتصالات التي تم التحقق منها من قبلك ويمكن لشبكة خريجي الجامعة الخاصة بك عرضها",
+    "Employers":"أرباب العمل",
+    "Visible to organisations & recruiters":"مرئي للمنظمات والقائمين بالتجنيد",
+    "Anyone on talent chek can see your email ID":"يمكن لأي شخص في مكتب المواهب رؤية معرف البريد الإلكتروني الخاص بك",
+
+    "Choose who can view your number":"اختر من يمكنه عرض رقمك",
+    "Anyone on talent chek can see your phone number":"يمكن لأي شخص في مكتب المواهب رؤية رقم هاتفك"
   }

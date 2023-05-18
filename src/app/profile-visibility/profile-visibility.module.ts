@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileVisibilityPageRoutingModule } from './profile-visibility-routing.module';
 
 import { ProfileVisibilityPage } from './profile-visibility.page';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import { ProfileVisibilityPage } from './profile-visibility.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ProfileVisibilityPageRoutingModule
+    ProfileVisibilityPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ProfileVisibilityPage]
 })

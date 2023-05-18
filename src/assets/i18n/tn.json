@@ -1596,5 +1596,24 @@
     "Year of Establishment":"நிறுவப்பட்ட ஆண்டு",
     "Year of Establishment is required":"நிறுவப்பட்ட ஆண்டு தேவை",
     "Accreditation is required":"அங்கீகாரம் தேவை",
-    "About the Institution":"நிறுவனம் பற்றி"
+    "About the Institution":"நிறுவனம் பற்றி",
+
+    "Visibility settings":"தெரிவுநிலை அமைப்புகள்",
+    "Email Visibility":"மின்னஞ்சல் தெரிவுநிலை",
+    "Phone Visibility":"தொலைபேசி தெரிவுநிலை",
+
+    "Choose who can view your profile":"உங்கள் சுயவிவரத்தை யார் பார்க்கலாம் என்பதைத் தேர்வுசெய்யவும்",
+    "Anyone on Talent Chek can view your profile":"Talent Chek இல் உள்ள எவரும் உங்கள் சுயவிவரத்தைப் பார்க்கலாம்",
+    "Users can request permission to view your profile":"உங்கள் சுயவிவரத்தைப் பார்க்க பயனர்கள் அனுமதி கோரலாம்",
+    "Only visible to you":"உங்களுக்கு மட்டுமே தெரியும்",
+
+    "Choose who can view your email":"உங்கள் மின்னஞ்சலை யார் பார்க்கலாம் என்பதைத் தேர்வு செய்யவும்",
+    "Network":"வலைப்பின்னல்",
+    "Connections verified by you & your university corporate alumni network can view":"நீங்கள் மற்றும் உங்கள் பல்கலைக்கழக கார்ப்பரேட் முன்னாள் மாணவர் நெட்வொர்க்கால் சரிபார்க்கப்பட்ட இணைப்புகளைப் பார்க்கலாம்",
+    "Employers":"முதலாளிகள்",
+    "Visible to organisations & recruiters":"நிறுவனங்கள் மற்றும் பணியமர்த்துபவர்களுக்குத் தெரியும்",
+    "Anyone on talent chek can see your email ID":"திறமை சரிபார்ப்பில் உள்ள எவரும் உங்கள் மின்னஞ்சல் ஐடியைப் பார்க்கலாம்",
+
+    "Choose who can view your number":"உங்கள் எண்ணை யார் பார்க்கலாம் என்பதைத் தேர்வு செய்யவும்",
+    "Anyone on talent chek can see your phone number":"திறமை சரிபார்ப்பில் உள்ள எவரும் உங்கள் ஃபோன் எண்ணைப் பார்க்கலாம்"
   }

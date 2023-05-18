@@ -1500,5 +1500,24 @@
     "Year of Establishment":"സ്ഥാപിതമായ വർഷം",
     "Year of Establishment is required":"സ്ഥാപിതമായ വർഷം ആവശ്യമാണ്",
     "Accreditation is required":"അക്രഡിറ്റേഷൻ ആവശ്യമാണ്",
-    "About the Institution":"സ്ഥാപനത്തെക്കുറിച്ച്"
+    "About the Institution":"സ്ഥാപനത്തെക്കുറിച്ച്",
+
+    "Visibility settings":"ദൃശ്യപരത ക്രമീകരണങ്ങൾ",
+    "Email Visibility":"ഇമെയിൽ ദൃശ്യപരത",
+    "Phone Visibility":"ഫോൺ ദൃശ്യപരത",
+
+    "Choose who can view your profile":"നിങ്ങളുടെ പ്രൊഫൈൽ ആർക്കൊക്കെ കാണാനാകുമെന്ന് തിരഞ്ഞെടുക്കുക",
+    "Anyone on Talent Chek can view your profile":"ടാലന്റ് ചെക്കിലുള്ള ആർക്കും നിങ്ങളുടെ പ്രൊഫൈൽ കാണാനാകും",
+    "Users can request permission to view your profile":"നിങ്ങളുടെ പ്രൊഫൈൽ കാണുന്നതിന് ഉപയോക്താക്കൾക്ക് അനുമതി അഭ്യർത്ഥിക്കാം",
+    "Only visible to you":"നിങ്ങൾക്ക് മാത്രം ദൃശ്യമാണ്",
+
+    "Choose who can view your email":"നിങ്ങളുടെ ഇമെയിൽ ആർക്കൊക്കെ കാണാനാകുമെന്ന് തിരഞ്ഞെടുക്കുക",
+    "Network":"നെറ്റ്വർക്ക്",
+    "Connections verified by you & your university corporate alumni network can view":"നിങ്ങളും നിങ്ങളുടെ യൂണിവേഴ്സിറ്റി കോർപ്പറേറ്റ് പൂർവ്വ വിദ്യാർത്ഥി നെറ്റ്‌വർക്കും പരിശോധിച്ചുറപ്പിച്ച കണക്ഷനുകൾ കാണാനാകും",
+    "Employers":"തൊഴിലുടമകൾ",
+    "Visible to organisations & recruiters":"സ്ഥാപനങ്ങൾക്കും റിക്രൂട്ടർമാർക്കും ദൃശ്യമാണ്",
+    "Anyone on talent chek can see your email ID":"ടാലന്റ് ചെക്കിലുള്ള ആർക്കും നിങ്ങളുടെ ഇമെയിൽ ഐഡി കാണാനാകും",
+
+    "Choose who can view your number":"നിങ്ങളുടെ നമ്പർ ആർക്കൊക്കെ കാണാനാകുമെന്ന് തിരഞ്ഞെടുക്കുക",
+    "Anyone on talent chek can see your phone number":"ടാലന്റ് ചെക്കിലുള്ള ആർക്കും നിങ്ങളുടെ ഫോൺ നമ്പർ കാണാനാകും"
   }

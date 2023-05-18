@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EmailVisibilityPageRoutingModule } from './email-visibility-routing.module';
 
 import { EmailVisibilityPage } from './email-visibility.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { EmailVisibilityPage } from './email-visibility.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    EmailVisibilityPageRoutingModule
+    EmailVisibilityPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [EmailVisibilityPage]
 })

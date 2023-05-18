@@ -1500,5 +1500,24 @@
     "Year of Establishment":"سال تاسیس",
     "Year of Establishment is required":"سال تاسیس الزامی است",
     "Accreditation is required":"مجوز لازم است",
-    "About the Institution":"درباره موسسه"
+    "About the Institution":"درباره موسسه",
+
+    "Visibility settings":"تنظیمات دید",
+    "Email Visibility":"قابلیت مشاهده ایمیل",
+    "Phone Visibility":"قابلیت مشاهده تلفن",
+
+    "Choose who can view your profile":"انتخاب کنید چه کسی می تواند نمایه شما را ببیند",
+    "Anyone on Talent Chek can view your profile":"هر کسی در Talent Chek می تواند نمایه شما را مشاهده کند",
+    "Users can request permission to view your profile":"کاربران می توانند برای مشاهده نمایه شما اجازه درخواست کنند",
+    "Only visible to you":"فقط برای شما قابل مشاهده است",
+
+    "Choose who can view your email":"انتخاب کنید چه کسی می تواند ایمیل شما را مشاهده کند",
+    "Network":"شبکه",
+    "Connections verified by you & your university corporate alumni network can view":"اتصالات تأیید شده توسط شما و شبکه فارغ التحصیلان شرکتی دانشگاه شما می تواند مشاهده شود",
+    "Employers":"کارفرمایان",
+    "Visible to organisations & recruiters":"برای سازمان ها و استخدام کنندگان قابل مشاهده است",
+    "Anyone on talent chek can see your email ID":"هر کسی که در جستجوی استعدادیابی است می‌تواند شناسه ایمیل شما را ببیند",
+
+    "Choose who can view your number":"انتخاب کنید چه کسی می تواند شماره شما را مشاهده کند",
+    "Anyone on talent chek can see your phone number":"هر کسی که در استعدادیابی است می‌تواند شماره تلفن شما را ببیند"
   }

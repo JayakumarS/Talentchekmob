@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { VisibilityPageRoutingModule } from './visibility-routing.module';
 
 import { VisibilityPage } from './visibility.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VisibilityPageRoutingModule
+    VisibilityPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [VisibilityPage]
 })
