@@ -737,6 +737,10 @@
 
   },
 
+    "Amount":"كمية",
+    "Amount is required":"المبلغ مطلوب",
+    "Currency is required":"العملة مطلوبة",
+
   "profileorg": {
 
     "Organization Name": "اسم المنظمة",
@@ -794,15 +798,15 @@
     "Ask To Register": "اطلب التسجيل",
     "pay": "سيتم تحويل المدفوعات التي قام بها أعضاء شبكتك مقابل رسوم التحقق ومدفوعات الأحداث والرعاية وما إلى ذلك مباشرةً إلى هذا الحساب.",
     "Account Holder Name": "اسم صاحب الحساب",
-    "Enter account holder's name": "أدخل اسم صاحب الحساب",
+    "Enter account holder name": "أدخل اسم صاحب الحساب",
     "Bank A/C NO": "رقم البنك A / C",
     "Enter bank account number": "أدخل رقم الحساب المصرفي",
     "Invalid bank account number": "رقم الحساب المصرفي غير صحيح",
     "Account Holder Email Id": "معرف البريد الإلكتروني لصاحب الحساب",
-    "Enter account holder's email address": "أدخل عنوان البريد الإلكتروني لصاحب الحساب",
+    "Enter account holder email address": "أدخل عنوان البريد الإلكتروني لصاحب الحساب",
     "Invalid Email Id": "البريد الإلكتروني غير صالح",
     "IFSC Code": "كود IFSC",
-    "Enter your bank's IFSC code": "أدخل رمز IFSC الخاص بالبنك الذي تتعامل معه",
+    "Enter your bank IFSC code": "أدخل رمز IFSC الخاص بالبنك الذي تتعامل معه",
     "Invalid IFSC code": "رمز IFSC غير صالح",
     "Account Type": "نوع الحساب",
     "Savings": "مدخرات",
@@ -1464,5 +1468,12 @@
     "Edit Extracurricular":"تحرير اللامنهجية",
     "Participated From is required":"مطلوب مشارك من",
     "Title Held is required":"العنوان مطلوب",
-    "Participated Till From is required":"المشاركة حتى من مطلوب"
+    "Participated Till From is required":"المشاركة حتى من مطلوب",
+
+    "Edit Institution Details":"تحرير تفاصيل المؤسسة",
+    "Edit Institution Logo":"تحرير شعار المؤسسة",
+    "Year of Establishment":"سنة التأسيس",
+    "Year of Establishment is required":"سنة التأسيس مطلوبة",
+    "Accreditation is required":"الاعتماد مطلوب",
+    "About the Institution":"عن المؤسسة"
   }

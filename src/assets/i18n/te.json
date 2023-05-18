@@ -801,15 +801,15 @@
     "Ask To Register": "నమోదు చేయమని అడగండి",
     "pay": "ధృవీకరణ రుసుము, ఈవెంట్ చెల్లింపులు, స్పాన్సర్‌షిప్ మొదలైన వాటి కోసం మీ నెట్‌వర్క్ సభ్యులు చేసిన చెల్లింపు నేరుగా ఈ ఖాతాకు బదిలీ చేయబడుతుంది.",
     "Account Holder Name": "ఖాతాదారుని పేరు",
-    "Enter account holder's name": "ఖాతాదారుని పేరును నమోదు చేయండి",
+    "Enter account holder name": "ఖాతాదారుని పేరును నమోదు చేయండి",
     "Bank A/C NO": "బ్యాంక్ A/C నం",
     "Enter bank account number": "బ్యాంక్ ఖాతా నంబర్‌ను నమోదు చేయండి",
     "Invalid bank account number": "చెల్లని బ్యాంక్ ఖాతా నంబర్",
     "Account Holder Email Id": "ఖాతాదారు ఇమెయిల్ ఐడి",
-    "Enter account holder's email address": "ఖాతాదారు యొక్క ఇమెయిల్ చిరునామాను నమోదు చేయండి",
+    "Enter account holder email address": "ఖాతాదారు యొక్క ఇమెయిల్ చిరునామాను నమోదు చేయండి",
     "Invalid Email Id": "చెల్లని ఇమెయిల్ ఐడి",
     "IFSC Code": "IFSC కోడ్",
-    "Enter your bank's IFSC code": "మీ బ్యాంక్ IFSC కోడ్‌ని నమోదు చేయండి",
+    "Enter your bank IFSC code": "మీ బ్యాంక్ IFSC కోడ్‌ని నమోదు చేయండి",
     "Invalid IFSC code": "చెల్లని IFSC కోడ్",
     "Account Type": "ఖాతా రకం",
     "Savings": "పొదుపు",
@@ -834,6 +834,10 @@
 
 
 },
+    "Amount":"మొత్తం",
+    "Amount is required":"మొత్తం అవసరం",
+    "Currency is required":"కరెన్సీ అవసరం",
+
     "ViewJobProfile": {
       "view": "ప్రొఫైల్ చూడు",
       "jobtitle": "ఆసక్తి ఉన్న స్థానం",
@@ -1471,5 +1475,12 @@
     "Edit Extracurricular":"ఎక్స్‌ట్రా కరిక్యులర్‌ని సవరించండి",
     "Participated From is required":"నుండి పాల్గొనడం అవసరం",
     "Title Held is required":"పట్టుకున్న శీర్షిక అవసరం",
-    "Participated Till From is required":"నుండి వరకు పాల్గొనడం అవసరం"
+    "Participated Till From is required":"నుండి వరకు పాల్గొనడం అవసరం",
+
+    "Edit Institution Details":"సంస్థ వివరాలను సవరించండి",
+    "Edit Institution Logo":"సంస్థ లోగోను సవరించండి",
+    "Year of Establishment":"స్థాపన సంవత్సరం",
+    "Year of Establishment is required":"స్థాపించబడిన సంవత్సరం అవసరం",
+    "Accreditation is required":"అక్రిడిటేషన్ అవసరం",
+    "About the Institution":"సంస్థ గురించి"
   }

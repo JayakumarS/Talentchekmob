@@ -800,15 +800,15 @@
     "Ask To Register": "രജിസ്റ്റർ ചെയ്യാൻ ആവശ്യപ്പെടുക",
     "pay": "നിങ്ങളുടെ നെറ്റ്‌വർക്കിലെ അംഗങ്ങൾ പരിശോധിച്ചുറപ്പിക്കൽ ഫീസ്, ഇവന്റ് പേയ്‌മെന്റുകൾ, സ്‌പോൺസർഷിപ്പ് മുതലായവയ്‌ക്കായി നടത്തിയ പേയ്‌മെന്റ് ഈ അക്കൗണ്ടിലേക്ക് നേരിട്ട് കൈമാറും.",
     "Account Holder Name": "അക്കൗണ്ട് ഉടമയുടെ പേര്",
-    "Enter account holder's name": "അക്കൗണ്ട് ഉടമയുടെ പേര് നൽകുക",
+    "Enter account holder name": "അക്കൗണ്ട് ഉടമയുടെ പേര് നൽകുക",
     "Bank A/C NO": "ബാങ്ക് A/C നം",
     "Enter bank account number": "ബാങ്ക് അക്കൗണ്ട് നമ്പർ നൽകുക",
     "Invalid bank account number": "ബാങ്ക് അക്കൗണ്ട് നമ്പർ അസാധുവാണ്",
     "Account Holder Email Id": "അക്കൗണ്ട് ഉടമയുടെ ഇമെയിൽ ഐഡി",
-    "Enter account holder's email address": "അക്കൗണ്ട് ഉടമയുടെ ഇമെയിൽ വിലാസം നൽകുക",
+    "Enter account holder email address": "അക്കൗണ്ട് ഉടമയുടെ ഇമെയിൽ വിലാസം നൽകുക",
     "Invalid Email Id": "അസാധുവായ ഇമെയിൽ ഐഡി",
     "IFSC Code": "IFSC കോഡ്",
-    "Enter your bank's IFSC code": "നിങ്ങളുടെ ബാങ്കിന്റെ IFSC കോഡ് നൽകുക",
+    "Enter your bank IFSC code": "നിങ്ങളുടെ ബാങ്കിന്റെ IFSC കോഡ് നൽകുക",
     "Invalid IFSC code": "IFSC കോഡ് അസാധുവാണ്",
     "Account Type": "അക്കൗണ്ട് തരം",
     "Savings": "സേവിംഗ്സ്",
@@ -1261,6 +1261,10 @@
       "update": "അപ്ഡേറ്റ് ചെയ്യുക",
       "cancel": "റദ്ദാക്കുക"
     },
+    "Amount":"തുക",
+    "Amount is required":"തുക ആവശ്യമാണ്",
+    "Currency is required":"കറൻസി ആവശ്യമാണ്",
+
     "JobPostInsti": {
       "curateJob": "ക്യൂറേറ്റ് ജോലി പോസ്റ്റ്",
       "name": "പേര്",
@@ -1469,5 +1473,12 @@
     "Edit Extracurricular":"പാഠ്യേതര തിരുത്തുക",
     "Participated From is required":"ഇതിൽ നിന്ന് പങ്കെടുത്തത് ആവശ്യമാണ്",
     "Title Held is required":"തലക്കെട്ട് കൈവശം വയ്ക്കേണ്ടത് ആവശ്യമാണ്",
-    "Participated Till From is required":"മുതൽ വരെ പങ്കെടുത്തത് ആവശ്യമാണ്"
+    "Participated Till From is required":"മുതൽ വരെ പങ്കെടുത്തത് ആവശ്യമാണ്",
+
+    "Edit Institution Details":"സ്ഥാപനത്തിന്റെ വിശദാംശങ്ങൾ എഡിറ്റ് ചെയ്യുക",
+    "Edit Institution Logo":"സ്ഥാപന ലോഗോ എഡിറ്റ് ചെയ്യുക",
+    "Year of Establishment":"സ്ഥാപിതമായ വർഷം",
+    "Year of Establishment is required":"സ്ഥാപിതമായ വർഷം ആവശ്യമാണ്",
+    "Accreditation is required":"അക്രഡിറ്റേഷൻ ആവശ്യമാണ്",
+    "About the Institution":"സ്ഥാപനത്തെക്കുറിച്ച്"
   }

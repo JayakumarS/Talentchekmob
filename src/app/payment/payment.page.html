@@ -18,8 +18,7 @@
       </ion-col>
 
       <ion-col size="7">
-        <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Payment
-          Info</ion-title>
+        <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'profileorg.Payment Info' | translate}}</ion-title>
       </ion-col>
     </ion-row>
 
@@ -40,149 +39,149 @@
       <ion-row class="talentrow">
         <ion-col>
           <div class="button-content">
-            <ion-label class="labels">Account Holder Name<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Account Holder Name' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="accountHolderName"  onkeypress="return /[0-9a-zA-Z. ]/i.test(event.key)"></ion-input>
             </ion-item>
             <div
               *ngIf="docForm.controls.accountHolderName.hasError('required') && docForm.controls.accountHolderName.touched">
-              <small style="color: #f70505;">Account Holder Name is required</small>
+              <small style="color: #f70505;">{{'profileorg.Enter account holder name' | translate}}</small>
             </div>
           </div>
 
           <div class="button-content">
-            <ion-label class="labels">Bank A/C NO<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Bank A/C NO' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="bankAccountNo"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.bankAccountNo.hasError('required') && docForm.controls.bankAccountNo.touched">
-              <small style="color: #f70505;">Bank A/C NO is required</small>
+              <small style="color: #f70505;">{{'profileorg.Enter bank account number' | translate}}</small>
             </div>
           </div>
 
           <div class="button-content">
-            <ion-label class="labels">Account Holder Email Id<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Account Holder Email Id' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="holderEmailId"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.holderEmailId.hasError('required') && docForm.controls.holderEmailId.touched">
-              <small style="color: #f70505;">Account Holder Email Id is required</small>
+              <small style="color: #f70505;">{{'profileorg.Enter account holder email address' | translate}}</small>
             </div>
           </div>
 
           <div class="button-content">
-            <ion-label class="labels">IFSC Code<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.IFSC Code' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="ifscCode"onkeyup="this.value = this.value.toUpperCase();"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.ifscCode.hasError('required') && docForm.controls.ifscCode.touched">
-              <small style="color: #f70505;">IFSC Code is required</small>
+              <small style="color: #f70505;">{{'profileorg.Enter your bank IFSC code' | translate}}</small>
             </div>
           <div *ngIf="docForm.controls.ifscCode.hasError('pattern')">
-              <small style="color: #f70505;">Invalid IFSC code</small>
+              <small style="color: #f70505;">{{'profileorg.Invalid IFSC code' | translate}}</small>
           </div>
         
           
           </div>
 
           <div class="button-content">
-            <ion-label class="labels">Account Type<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Account Type' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-select placeholder="Select Account Type" formControlName="accType">
-                <ion-select-option value="Saving">Saving</ion-select-option>
-                <ion-select-option value="Current">Current</ion-select-option>
+                <ion-select-option value="Saving">{{'profileorg.Savings' | translate}}</ion-select-option>
+                <ion-select-option value="Current">{{'profileorg.Current' | translate}}</ion-select-option>
                 </ion-select>
               
             </ion-item>
             <div *ngIf="docForm.controls.accType.hasError('required') && docForm.controls.accType.touched">
-              <small style="color: #f70505;">Account Type is required</small>
+              <small style="color: #f70505;">{{'profileorg.Select the bank account type' | translate}}</small>
             </div>
           </div>
 
           <div class="button-content">
-            <ion-label class="labels">Business Name<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Business Name' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="businessName"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.businessName.hasError('required') && docForm.controls.businessName.touched">
-              <small style="color: #f70505;">Business Name is required</small>
+              <small style="color: #f70505;">{{'profileorg.Enter the name of your business' | translate}}</small>
             </div>
           </div>
 
           <div class="button-content">
-            <ion-label class="labels">Business Type<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Business Type' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
 
               <ion-select interface="popover" formControlName="businessType" placeholder="Business Type"
                 style="background:white">
-                <ion-select-option value="llp">Limited Liability Partnership</ion-select-option>
-                <ion-select-option value="ngo">Non-governmental organization</ion-select-option>
-                <ion-select-option value="individual">Individual</ion-select-option>
-                <ion-select-option value="partnership">Partnership</ion-select-option>
-                <ion-select-option value="proprietorship">Proprietorship</ion-select-option>
-                <ion-select-option value="public_limited">Public Limited</ion-select-option>
-                <ion-select-option value="private_limited">Private Limited</ion-select-option>
-                <ion-select-option value="not_yet_registered">Not Yet Registered</ion-select-option>
-                <ion-select-option value="educational_institutes">Educational Institutes</ion-select-option>
-                <ion-select-option value="trust,society">Trust,Society</ion-select-option>
+                <ion-select-option value="llp">{{'profileorg.Limited Liability Partnership' | translate}}</ion-select-option>
+                <ion-select-option value="ngo">{{'profileorg.Non-governmental organization' | translate}}</ion-select-option>
+                <ion-select-option value="individual">{{'profileorg.Individual' | translate}}</ion-select-option>
+                <ion-select-option value="partnership">{{'profileorg.Partnership' | translate}}</ion-select-option>
+                <ion-select-option value="proprietorship">{{'profileorg.Proprietorship' | translate}}</ion-select-option>
+                <ion-select-option value="public_limited">{{'profileorg.Public Limited' | translate}}</ion-select-option>
+                <ion-select-option value="private_limited">{{'profileorg.Private Limited' | translate}}</ion-select-option>
+                <ion-select-option value="not_yet_registered">{{'profileorg.Not Yet Registered' | translate}}</ion-select-option>
+                <ion-select-option value="educational_institutes">{{'profileorg.Educational Institutes' | translate}}</ion-select-option>
+                <ion-select-option value="trust,society">{{'profileorg.Trust,Society' | translate}}</ion-select-option>
 
               </ion-select>
             </ion-item>
             <div *ngIf="docForm.controls.businessType.hasError('required') && docForm.controls.businessType.touched">
-              <small style="color: #f70505;">Business Type is required</small>
+              <small style="color: #f70505;">{{'profileorg.Select the business type' | translate}}</small>
             </div>
           </div>
 
         
           <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify">
-               <ion-button class="custom-button" (click)="Update()">Save</ion-button>
+               <ion-button class="custom-button" (click)="Update()">{{'profilein.Save' | translate}}</ion-button>
             </div>
            </div>
            <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify" *ngIf="RoleID.includes('2')">
-               <ion-button class="custom-button" (click)="Update()">Update</ion-button>
+               <ion-button class="custom-button" (click)="Update()">{{'profilein.Update' | translate}}</ion-button>
             </div>
             <div class="display-justify" *ngIf="RoleID.includes('3')">
-              <ion-button class="custom-button" (click)="instiUpdate()">Update</ion-button>
+              <ion-button class="custom-button" (click)="instiUpdate()">{{'profilein.Update' | translate}}</ion-button>
            </div>
            </div> 
            <div class="button-content">
-            <ion-label class="labels">Amount<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'Amount' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="amount"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.amount.hasError('required') && docForm.controls.amount.touched">
-              <small style="color: #f70505;">Amount is required</small>
+              <small style="color: #f70505;">{{'Amount is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content">
-            <ion-label class="labels">Currency<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Currency' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-select interface="popover" formControlName="currency" placeholder="Currency"
+              <ion-select interface="popover" formControlName="currency" placeholder="{{'profileorg.Currency' | translate}}"
                 style="background:white">
-                <ion-select-option value="INR">INR</ion-select-option>
-                <ion-select-option value="USD">USD</ion-select-option>
-                <ion-select-option value="AED">AED</ion-select-option>
-                <ion-select-option value="MYR">MYR</ion-select-option>
-                <ion-select-option value="SGD">SGD</ion-select-option>
+                <ion-select-option value="INR">{{'Subscription.inr'}}</ion-select-option>
+                <ion-select-option value="USD">{{'Subscription.usd'}}</ion-select-option>
+                <ion-select-option value="AED">{{'Subscription.aed'}}</ion-select-option>
+                <ion-select-option value="MYR">{{'Subscription.myr'}}</ion-select-option>
+                <ion-select-option value="SGD">{{'Subscription.sgd'}}</ion-select-option>
               </ion-select>
             </ion-item>
             <div *ngIf="docForm.controls.currency.hasError('required') && docForm.controls.currency.touched">
-              <small style="color: #f70505;">Currency is required</small>
+              <small style="color: #f70505;">{{'Currency is required' | translate}}</small>
             </div>
           </div>
           <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify">
-               <ion-button class="custom-button" (click)="Update()">Save</ion-button>
+               <ion-button class="custom-button" (click)="Update()">{{'profilein.Save' | translate}}</ion-button>
             </div>
            </div>
            <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify" *ngIf="RoleID.includes('2')">
-               <ion-button class="custom-button" (click)="update2()">Update</ion-button>
+               <ion-button class="custom-button" (click)="update2()">{{'profilein.Update' | translate}}</ion-button>
             </div>
             <div class="display-justify" *ngIf="RoleID.includes('3')">
-              <ion-button class="custom-button" (click)="instiUpdate()">Update</ion-button>
+              <ion-button class="custom-button" (click)="instiUpdate()">{{'profilein.Update' | translate}}</ion-button>
            </div>
            </div> 
         </ion-col>

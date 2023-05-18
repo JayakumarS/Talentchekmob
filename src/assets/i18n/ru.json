@@ -798,15 +798,15 @@
     "Ask To Register": "Попросить зарегистрироваться",
     "pay": "ధృవీకరణ రుసుము, ఈవెంట్ చెల్లింపులు, స్పాన్సర్‌షిప్ మొదలైన వాటి కోసం మీ నెట్‌వర్క్ సభ్యులు చేసిన చెల్లింపు నేరుగా ఈ ఖాతాకు బదిలీ చేయబడుతుంది.",
     "Account Holder Name": "имя владельца счета",
-    "Enter account holder's name": "Введите имя владельца аккаунта",
+    "Enter account holder name": "Введите имя владельца аккаунта",
     "Bank A/C NO": "Банк Кондиционер НЕТ",
     "Enter bank account number": "Введите номер банковского счета",
     "Invalid bank account number": "Неверный номер банковского счета",
     "Account Holder Email Id": "Идентификатор электронной почты владельца учетной записи",
-    "Enter account holder's email address": "Введите адрес электронной почты владельца учетной записи",
+    "Enter account holder email address": "Введите адрес электронной почты владельца учетной записи",
     "Invalid Email Id": "Неверный идентификатор электронной почты",
     "IFSC Code": "Код IFSC",
-    "Enter your bank's IFSC code": "Введите код IFSC вашего банка",
+    "Enter your bank IFSC code": "Введите код IFSC вашего банка",
     "Invalid IFSC code": "Неверный код IFSC",
     "Account Type": "тип аккаунта",
     "Savings": "Экономия",
@@ -1257,6 +1257,10 @@
       "update": "Обновлять",
       "cancel": "Отмена"
     },
+    "Amount":"Количество",
+    "Amount is required":"Требуется сумма",
+    "Currency is required":"Требуется валюта",
+
     "JobPostInsti": {
       "curateJob": "Курировать объявление о вакансии",
       "name": "Имя",
@@ -1465,5 +1469,12 @@
     "Edit Extracurricular":"Изменить",
     "Participated From is required":"Участвовал от обязательно",
     "Title Held is required":"Требуется наличие титула",
-    "Participated Till From is required":"Участвовал До От обязательно"
+    "Participated Till From is required":"Участвовал До От обязательно",
+
+    "Edit Institution Details":"Изменить сведения об учреждении",
+    "Edit Institution Logo":"Редактировать логотип учреждения",
+    "Year of Establishment":"Год основания",
+    "Year of Establishment is required":"Укажите год основания",
+    "Accreditation is required":"Требуется аккредитация",
+    "About the Institution":"Об учреждении"
   }

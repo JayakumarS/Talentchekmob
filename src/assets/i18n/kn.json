@@ -800,15 +800,15 @@
     "Ask To Register": "ನೋಂದಾಯಿಸಲು ಕೇಳಿ",
     "pay": "ಪರಿಶೀಲನೆ ಶುಲ್ಕ, ಈವೆಂಟ್ ಪಾವತಿಗಳು, ಪ್ರಾಯೋಜಕತ್ವ ಇತ್ಯಾದಿಗಳಿಗಾಗಿ ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್‌ನ ಸದಸ್ಯರು ಮಾಡಿದ ಪಾವತಿಯನ್ನು ನೇರವಾಗಿ ಈ ಖಾತೆಗೆ ವರ್ಗಾಯಿಸಲಾಗುತ್ತದೆ.",
     "Account Holder Name": "ಖಾತೆದಾರನ ಹೆಸರು",
-    "Enter account holder's name": "ಖಾತೆದಾರರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+    "Enter account holder name": "ಖಾತೆದಾರರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
     "Bank A/C NO": "ಬ್ಯಾಂಕ್ A/C ನಂ",
     "Enter bank account number": "ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ",
     "Invalid bank account number": "ಅಮಾನ್ಯ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ",
     "Account Holder Email Id": "ಖಾತೆದಾರರ ಇಮೇಲ್ ಐಡಿ",
-    "Enter account holder's email address": "ಖಾತೆದಾರರ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
+    "Enter account holder email address": "ಖಾತೆದಾರರ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
     "Invalid Email Id": "ಅಮಾನ್ಯ ಇಮೇಲ್ ಐಡಿ",
     "IFSC Code": "IFSC ಕೋಡ್",
-    "Enter your bank's IFSC code": "ನಿಮ್ಮ ಬ್ಯಾಂಕಿನ IFSC ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ",
+    "Enter your bank IFSC code": "ನಿಮ್ಮ ಬ್ಯಾಂಕಿನ IFSC ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ",
     "Invalid IFSC code": "ಅಮಾನ್ಯವಾದ IFSC ಕೋಡ್",
     "Account Type": "ಖಾತೆಯ ಪ್ರಕಾರ",
     "Savings": "ಉಳಿತಾಯ",
@@ -1262,6 +1262,10 @@
       "update": "ನವೀಕರಿಸಿ",
       "cancel": "ರದ್ದುಮಾಡು"
     },
+    "Amount":"ಮೊತ್ತ",
+    "Amount is required":"ಮೊತ್ತದ ಅಗತ್ಯವಿದೆ",
+    "Currency is required":"ಕರೆನ್ಸಿ ಅಗತ್ಯವಿದೆ",
+
     "JobPostInsti": {
       "curateJob": "ಕ್ಯುರೇಟ್ ಉದ್ಯೋಗ ಪೋಸ್ಟ್",
       "name": "ಹೆಸರು",
@@ -1470,6 +1474,13 @@
     "Edit Extracurricular":"ಪಠ್ಯೇತರ ಸಂಪಾದಿಸಿ",
     "Participated From is required":"ಭಾಗವಹಿಸಿದವರು ಅಗತ್ಯವಿದೆ",
     "Title Held is required":"ಶೀರ್ಷಿಕೆ ಹಿಡಿದಿರಬೇಕು",
-    "Participated Till From is required":"ಇಲ್ಲಿಯವರೆಗೆ ಭಾಗವಹಿಸುವ ಅಗತ್ಯವಿದೆ"
+    "Participated Till From is required":"ಇಲ್ಲಿಯವರೆಗೆ ಭಾಗವಹಿಸುವ ಅಗತ್ಯವಿದೆ",
+
+    "Edit Institution Details":"ಸಂಸ್ಥೆಯ ವಿವರಗಳನ್ನು ಸಂಪಾದಿಸಿ",
+    "Edit Institution Logo":"ಸಂಸ್ಥೆಯ ಲೋಗೋ ಸಂಪಾದಿಸಿ",
+    "Year of Establishment":"ಸ್ಥಾಪನೆಯ ವರ್ಷ",
+    "Year of Establishment is required":"ಸ್ಥಾಪನೆಯ ವರ್ಷ ಅಗತ್ಯವಿದೆ",
+    "Accreditation is required":"ಮಾನ್ಯತೆ ಅಗತ್ಯವಿದೆ",
+    "About the Institution":"ಸಂಸ್ಥೆಯ ಬಗ್ಗೆ"
 
   }

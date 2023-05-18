@@ -826,15 +826,15 @@
     "Ask To Register": "रजिस्टर करने के लिए कहें",
     "pay": "सत्यापन शुल्क, घटना भुगतान, प्रायोजन आदि के लिए आपके नेटवर्क के सदस्यों द्वारा किया गया भुगतान सीधे इस खाते में स्थानांतरित कर दिया जाएगा।",
     "Account Holder Name": "खाता धारक का नाम",
-    "Enter account holder's name": "खाताधारक का नाम दर्ज करें",
+    "Enter account holder name": "खाताधारक का नाम दर्ज करें",
     "Bank A/C NO": "बैंक ए/सी नं",
     "Enter bank account number": "बैंक खाता संख्या दर्ज करें",
     "Invalid bank account number": "अमान्य बैंक खाता संख्या",
     "Account Holder Email Id": "खाता धारक ईमेल आईडी",
-    "Enter account holder's email address": "खाता धारक का ईमेल पता दर्ज करें",
+    "Enter account holder email address": "खाता धारक का ईमेल पता दर्ज करें",
     "Invalid Email Id": "अमान्य ईमेल आईडी",
     "IFSC Code": "आईएफएससी कोड",
-    "Enter your bank's IFSC code": "अपने बैंक का IFSC कोड डालें",
+    "Enter your bank IFSC code": "अपने बैंक का IFSC कोड डालें",
     "Invalid IFSC code": "अमान्य IFSC कोड",
     "Account Type": "खाते का प्रकार",
     "Savings": "जमा पूंजी",
@@ -1257,6 +1257,11 @@
       "update": "अद्यतन",
       "cancel": "रद्द करें"
     },
+
+    "Amount":"मात्रा",
+    "Amount is required":"राशि की आवश्यकता है",
+    "Currency is required":"मुद्रा आवश्यक है",
+
     "JobPostInsti": {
       "curateJob": "क्यूरेट जॉब पोस्ट",
       "name": "नाम",
@@ -1467,5 +1472,12 @@
     "Edit Extracurricular":"बहिर्वाहिक संपादित करें",
     "Participated From is required":"से भाग लेना आवश्यक है",
     "Title Held is required":"शीर्षक धारण करना आवश्यक है",
-    "Participated Till From is required":"से तक भाग लेना आवश्यक है"
+    "Participated Till From is required":"से तक भाग लेना आवश्यक है",
+
+    "Edit Institution Details":"संस्थान विवरण संपादित करें",
+    "Edit Institution Logo":"संस्थान का लोगो संपादित करें",
+    "Year of Establishment":"स्थापना वर्ष",
+    "Year of Establishment is required":"स्थापना का वर्ष आवश्यक है",
+    "Accreditation is required":"प्रत्यायन आवश्यक है",
+    "About the Institution":"संस्थान के बारे में"
   }

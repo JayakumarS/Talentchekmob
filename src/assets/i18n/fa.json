@@ -799,15 +799,15 @@
     "Ask To Register": "درخواست ثبت نام",
     "pay": "پرداختی که توسط اعضای شبکه شما برای هزینه تأیید، پرداخت رویداد، حمایت مالی و غیره انجام می شود مستقیماً به این حساب منتقل می شود.",
     "Account Holder Name": "نام صاحب حساب",
-    "Enter account holder's name": "نام دارنده حساب را وارد کنید",
+    "Enter account holder name": "نام دارنده حساب را وارد کنید",
     "Bank A/C NO": "شماره تهویه مطبوع بانک",
     "Enter bank account number": "شماره حساب بانکی را وارد کنید",
     "Invalid bank account number": "شماره حساب بانکی نامعتبر است",
     "Account Holder Email Id": "شناسه ایمیل دارنده حساب",
-    "Enter account holder's email address": "آدرس ایمیل صاحب حساب را وارد کنید",
+    "Enter account holder email address": "آدرس ایمیل صاحب حساب را وارد کنید",
     "Invalid Email Id": "شناسه ایمیل نامعتبر",
     "IFSC Code": "کد IFSC",
-    "Enter your bank's IFSC code": "کد IFSC بانک خود را وارد کنید",
+    "Enter your bank IFSC code": "کد IFSC بانک خود را وارد کنید",
     "Invalid IFSC code": "کد IFSC نامعتبر است",
     "Account Type": "نوع حساب",
     "Savings": "پس انداز",
@@ -1260,6 +1260,11 @@
       "update": "به روز رسانی",
       "cancel": "لغو کنید"
     },
+
+    "Amount":"میزان",
+    "Amount is required":"مبلغ مورد نیاز است",
+    "Currency is required":"ارز مورد نیاز است",
+
     "JobPostInsti": {
       "curateJob": "انتخاب پست شغلی",
       "name": "نام",
@@ -1468,5 +1473,12 @@
     "Edit Extracurricular":"ویرایش فوق برنامه",
     "Participated From is required":"شرکت از طرف الزامی است",
     "Title Held is required":"عنوان نگهداری الزامی است",
-    "Participated Till From is required":"شرکت Till From الزامی است"
+    "Participated Till From is required":"شرکت Till From الزامی است",
+
+    "Edit Institution Details":"ویرایش جزئیات موسسه",
+    "Edit Institution Logo":"ویرایش لوگوی موسسه",
+    "Year of Establishment":"سال تاسیس",
+    "Year of Establishment is required":"سال تاسیس الزامی است",
+    "Accreditation is required":"مجوز لازم است",
+    "About the Institution":"درباره موسسه"
   }

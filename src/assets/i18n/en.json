@@ -635,6 +635,11 @@
     "ifsc":"IFSC Code",
     "serviceFee":"Service Fee for Verification",
 
+    "Amount":"Amount",
+    "Amount is required":"Amount is required",
+    "Currency is required":"Currency is required",
+
+
 
 
     "AddJobProfile": {
@@ -895,15 +900,15 @@
     "Ask To Register": "Ask To Register",
     "pay": "Payment made by members of your network for verification fee, event payments,sponsorship etc. will be directly transferred to this account.",
     "Account Holder Name": "Account Holder Name",
-    "Enter account holder's name": "Enter account holder's name",
+    "Enter account holder name": "Enter account holder's name",
     "Bank A/C NO": "Bank A/C NO",
     "Enter bank account number": "Enter bank account number",
     "Invalid bank account number": "Invalid bank account number",
     "Account Holder Email Id": "Account Holder Email Id",
-    "Enter account holder's email address": "Enter account holder's email address",
+    "Enter account holder email address": "Enter account holder's email address",
     "Invalid Email Id": "Invalid Email Id",
     "IFSC Code": "IFSC Code",
-    "Enter your bank's IFSC code": "Enter your bank's IFSC code",
+    "Enter your bank IFSC code": "Enter your bank's IFSC code",
     "Invalid IFSC code": "Invalid IFSC code",
     "Account Type": "Account Type",
     "Savings": "Savings",
@@ -926,6 +931,7 @@
 
 },
     
+
 
     
     "ViewJobProfile": {
@@ -1583,7 +1589,14 @@
     "Edit Extracurricular":"Edit Extracurricular",
     "Participated From is required":"Participated From is required",
     "Title Held is required":"Title Held is required",
-    "Participated Till From is required":"Participated Till From is required"
+    "Participated Till From is required":"Participated Till From is required",
+     
+    "Edit Institution Details":"Edit Institution Details",
+    "Edit Institution Logo":"Edit Institution Logo",
+    "Year of Establishment":"Year of Establishment",
+    "Year of Establishment is required":"Year of Establishment is required",
+    "Accreditation is required":"Accreditation is required",
+    "About the Institution":"About the Institution"
 
 
 

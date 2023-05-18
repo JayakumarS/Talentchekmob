@@ -876,15 +876,15 @@
     "Ask To Register": "பதிவு செய்ய கேளுங்கள்",
     "pay": "சரிபார்ப்புக் கட்டணம், நிகழ்வுப் பணம், ஸ்பான்சர்ஷிப் போன்றவற்றிற்காக உங்கள் நெட்வொர்க்கில் உள்ள உறுப்பினர்கள் செலுத்தும் பணம் இந்தக் கணக்கிற்கு நேரடியாகப் பரிமாற்றப்படும்.",
     "Account Holder Name": "கணக்கு வைத்திருப்பவரின் பெயர்",
-    "Enter account holder's name": "கணக்கு வைத்திருப்பவரின் பெயரை உள்ளிடவும்",
+    "Enter account holder name": "கணக்கு வைத்திருப்பவரின் பெயரை உள்ளிடவும்",
     "Bank A/C NO": "வங்கி ஏ/சி எண்",
     "Enter bank account number": "வங்கி கணக்கு எண்ணை உள்ளிடவும்",
     "Invalid bank account number": "தவறான வங்கி கணக்கு எண்",
     "Account Holder Email Id": "கணக்கு வைத்திருப்பவரின் மின்னஞ்சல் ஐடி",
-    "Enter account holder's email address": "கணக்கு வைத்திருப்பவரின் மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+    "Enter account holder email address": "கணக்கு வைத்திருப்பவரின் மின்னஞ்சல் முகவரியை உள்ளிடவும்",
     "Invalid Email Id": "தவறான மின்னஞ்சல் ஐடி",
     "IFSC Code": "IFSC குறியீடு",
-    "Enter your bank's IFSC code": "உங்கள் வங்கியின் IFSC குறியீட்டை உள்ளிடவும்",
+    "Enter your bank IFSC code": "உங்கள் வங்கியின் IFSC குறியீட்டை உள்ளிடவும்",
     "Invalid IFSC code": "தவறான IFSC குறியீடு",
     "Account Type": "கணக்கு வகை",
     "Savings": "சேமிப்பு",
@@ -909,6 +909,11 @@
 
 
 },
+
+    "Amount":"தொகை",
+    "Amount is required":"தொகை தேவைப்படுகிறது",
+    "Currency is required":"நாணயம் தேவை",
+
     "addJobPref":"வேலை முன்னுரிமையைச் சேர்க்கவும்",
     "editJobPref":"வேலை விருப்பத்தைத் திருத்தவும்",
 
@@ -1564,5 +1569,12 @@
     "Edit Extracurricular":"பாடநெறியைத் திருத்தவும்",
     "Participated From is required":"பங்கேற்பது அவசியம்",
     "Title Held is required":"தலைப்பு வைத்திருக்க வேண்டும்",
-    "Participated Till From is required":"இருந்து வரை பங்கேற்பது அவசியம்"
+    "Participated Till From is required":"இருந்து வரை பங்கேற்பது அவசியம்",
+
+    "Edit Institution Details":"நிறுவன விவரங்களைத் திருத்தவும்",
+    "Edit Institution Logo":"நிறுவன லோகோவைத் திருத்தவும்",
+    "Year of Establishment":"நிறுவப்பட்ட ஆண்டு",
+    "Year of Establishment is required":"நிறுவப்பட்ட ஆண்டு தேவை",
+    "Accreditation is required":"அங்கீகாரம் தேவை",
+    "About the Institution":"நிறுவனம் பற்றி"
   }
