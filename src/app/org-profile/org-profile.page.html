@@ -11,8 +11,7 @@
       </ion-col>
 
       <ion-col >
-        <ion-title *ngIf="isProfile" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit General
-          Info</ion-title>
+        <ion-title *ngIf="isProfile" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'editGeneralInfo' | translate}}</ion-title>
           <ion-title *ngIf="isAbout" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit Organization Details
            </ion-title>
             <ion-title *ngIf="isLogo" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit Organization Logo
@@ -37,16 +36,16 @@
       <ion-row class="talentrow">
         <ion-col>
           <div class="button-content" *ngIf="isProfile">
-            <ion-label class="labels">Organization Name<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Organization Name' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="orgName"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.orgName.hasError('required') && docForm.controls.orgName.touched">
-              <small style="color: #f70505;">Organization Name is required</small>
+              <small style="color: #f70505;">{{'profileorg.Organization Name is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">Domain<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Domain' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-select placeholder="Select Domain"  formControlName="domain" style="background-color: white;">
               <ion-select-option *ngFor="let domain of industryList " [value]="domain.id">
@@ -55,29 +54,29 @@
             </ion-select>
             </ion-item>
             <div *ngIf="docForm.controls.domain.hasError('required') && docForm.controls.domain.touched">
-              <small style="color: #f70505;">Domain is required</small>
+              <small style="color: #f70505;">{{'KmPortal.plsEntDomain' | translate}}</small>
             </div>
           </div>
           <div class="button-content" *ngIf="isProfile">
-            <ion-label class="labels">Email<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Email' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="orgEmail"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.orgEmail.hasError('required') && docForm.controls.orgEmail.touched">
-              <small style="color: #f70505;">Email Id is required</small>
+              <small style="color: #f70505;">{{'profileorg.Please enter a valid email address' | translate}}</small>
             </div>
           </div>
           <div class="button-content" *ngIf="isProfile">
-            <ion-label class="labels">Mobile<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Mobile' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="orgMobile"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.orgMobile.hasError('required') && docForm.controls.orgMobile.touched">
-              <small style="color: #f70505;">Mobile No is required</small>
+              <small style="color: #f70505;">{{'profileorg.Mobile Number is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">Company Size<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Company Size' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-select formControlName="size" style="background:white">
                 <ion-select-option [value]="'1-50'">1-50</ion-select-option>
@@ -90,11 +89,11 @@
               </ion-select>
             </ion-item>
             <div *ngIf="docForm.controls.size.hasError('required') && docForm.controls.size.touched">
-              <small style="color: #f70505;">Company Size is required</small>
+              <small style="color: #f70505;">{{'Company Size is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">Organization Type<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Organization Type' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-select placeholder="Select Organization Type" formControlName="orgType" style="background-color: white;">
                 <ion-select-option *ngFor="let hobby of orgTypeList " [value]="hobby.id">
@@ -103,38 +102,38 @@
               </ion-select>
             </ion-item>
             <div *ngIf="docForm.controls.orgType.hasError('required') && docForm.controls.orgType.touched">
-              <small style="color: #f70505;">Organization Type is required</small>
+              <small style="color: #f70505;">{{'profileorg.Organization Type is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">CIN/Registration No<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.CIN/Registration No' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="cinReg"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.cinReg.hasError('required') && docForm.controls.cinReg.touched">
-              <small style="color: #f70505;">CIN/Registration No is required</small>
+              <small style="color: #f70505;">{{'profileorg.CIN/Registration No is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">Date Of Registration<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Date Of Registration' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-datetime displayFormat="DD.MM.YYYY" formControlName="dob" presentation="date"></ion-datetime>
             </ion-item>
             <div *ngIf="docForm.controls.dob.hasError('required') && docForm.controls.dob.touched">
-              <small style="color: #f70505;">Date Of Registration is required</small>
+              <small style="color: #f70505;">{{'profileorg.Please select date' | translate}}</small>
             </div>
           </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">Tax Id<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Tax Id' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="taxId"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.taxId.hasError('required') && docForm.controls.taxId.touched">
-              <small style="color: #f70505;">Tax Id is required</small>
+              <small style="color: #f70505;">{{'ProfileCoporate.plsEntPanNo' | translate}}</small>
             </div>
           </div>
           <div class="button-content" *ngIf="isLogo">
-            <ion-label slot="end">Upload Organization Logo *</ion-label>
+            <ion-label slot="end">{{'CorReg.uploadLogo' | translate}} *</ion-label>
             <ion-row>
               <ion-col size="6">
                   <ion-thumbnail *ngIf="base64img1">
@@ -159,7 +158,7 @@
           </div><br>
 
           <div class="button-content" *ngIf="isProfile">
-            <ion-label class="labels">Address <small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Address' | translate}} <small style="color: #f70505;">*</small></ion-label>
             
             <ion-item fill="outline" class="input-field">
                 <ion-textarea formControlName="permAddress"></ion-textarea>
@@ -170,7 +169,7 @@
             </div>
 
             <div class="button-content" *ngIf="isProfile">
-            <ion-label class="labels">Country <small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.Country' | translate}} <small style="color: #f70505;">*</small></ion-label>
 
             <ion-item fill="outline" class="input-field">
                 <div class="selected-skills-container">
@@ -189,7 +188,7 @@
             </ion-list>
 </div>
 <div class="button-content" *ngIf="isProfile">
-<ion-label class="labels">State/Province <small style="color: #f70505;">*</small></ion-label>
+<ion-label class="labels">{{'ProfileCoporate.staProv' | translate}} <small style="color: #f70505;">*</small></ion-label>
 <ion-item fill="outline" class="input-field">
 
 <ion-select (ionChange)="goTostateSelectedItem($event.target.value)" formControlName="permState">
@@ -200,7 +199,7 @@
 </ion-item>
 </div>
 <div class="button-content" *ngIf="isProfile">
-<ion-label class="labels">City <small style="color: #f70505;">*</small></ion-label>
+<ion-label class="labels">{{'profileorg.City' | translate}} <small style="color: #f70505;">*</small></ion-label>
 <ion-item fill="outline" class="input-field">
     <ion-select formControlName="permCity">
         <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
@@ -210,13 +209,13 @@
 </ion-item>
 </div>
 <div class="button-content"*ngIf="isProfile">
-<ion-label class="labels">Pin Code <small style="color: #f70505;">*</small></ion-label>
+<ion-label class="labels">{{'ProfileInsti.pinZip' | translate}} <small style="color: #f70505;">*</small></ion-label>
 <ion-item fill="outline" class="input-field">
     <ion-input formControlName="permPinCode"></ion-input>
 </ion-item>
 </div>
           <div class="button-content"*ngIf="isAbout">
-            <ion-label class="labels">About the Organization<small style="color: #f70505;">*</small></ion-label>
+            <ion-label class="labels">{{'profileorg.About the Organization' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-textarea formControlName="details" rows="10" maxlength="500"></ion-textarea>
             </ion-item>
@@ -228,7 +227,7 @@
           <div class="button-content" style="width: 50%;
           margin: auto;">
           <div class="display-justify">
-            <ion-button class="custom-button" (click)="Update()">Update</ion-button>
+            <ion-button class="custom-button" (click)="Update()">{{'profileorg.Update' | translate}}</ion-button>
          </div>
            </div>
         </ion-col>

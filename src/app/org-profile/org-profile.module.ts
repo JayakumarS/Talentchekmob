@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrgProfilePageRoutingModule } from './org-profile-routing.module';
 
 import { OrgProfilePage } from './org-profile.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { OrgProfilePage } from './org-profile.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    OrgProfilePageRoutingModule
+    OrgProfilePageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [OrgProfilePage]
 })
