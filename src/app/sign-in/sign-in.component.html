@@ -16,14 +16,14 @@
     </div>
 
     <div class="hello-dear">
-        <ion-buttons slot="end" style="padding-top:10px">
+        <ion-buttons slot="end" style="padding-top:10px; margin-left: 64% ;">
             <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
-                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px ; " slot="start" alt="flag">{{languageService.selectedLang.text}}
                 <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
             </ion-button>
         </ion-buttons>
 
-         <div style="font-size: 24px;font-family: Mr-eaves;">{{ 'Login.para1Header' | translate }}</div> 
+        <div style="font-size: 24px;font-family: Mr-eaves;">{{ 'Login.para1Header' | translate }}</div>
         <!-- <div style="font-size: 24px;font-family: Mr-eaves;">Welcome back!</div> -->
         <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061;">{{ 'Login.enter_crendentials' | translate }}</div>
     </div>
