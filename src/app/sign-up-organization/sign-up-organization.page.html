@@ -1,5 +1,6 @@
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <!-- BS Stepper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
@@ -18,7 +19,8 @@
             </ion-col>
 
             <ion-col size="8">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-left: 17%; margin-top: 5%;">Sign Up</ion-title>
+                <ion-title class="ion-text-wrap"
+                    style="font-family: Mr-eaves; color: black; margin-left: 17%; margin-top: 5%;">Sign Up</ion-title>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -61,8 +63,8 @@
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.organizationName.hasError('required') && talentorgform.controls.organizationName.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqOrgName' | translate }}</small>
-                            </div>
-                            <div *ngIf="talentorgform.controls.organizationName.hasError('pattern')">
+                              </div>
+                              <div *ngIf="talentorgform.controls.organizationName.hasError('pattern')">
                                 <small style="color: #f70505;">{{'CorReg.splCharNumAreNotAllowed' | translate }}</small>
                             </div>
                             <div *ngIf="talentorgform.controls.organizationName.hasError('minlength')">
@@ -71,8 +73,8 @@
 
                             <ion-label class="labels">{{'CorReg.OrganizationType' | translate}}<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-
-                                <ion-select placeholder="{{'type' | translate }}" formControlName="orgType">
+                                
+                                <ion-select placeholder="{{'type' | translate }}"  formControlName="orgType">
                                     <ion-select-option *ngFor="let Type of orgTypeList" [value]="Type.id">
                                         {{Type.text}}</ion-select-option>
 
@@ -80,18 +82,18 @@
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.orgType.hasError('required') && talentorgform.controls.orgType.touched">
                                 <small style="color: #f70505;">{{'CorReg.Organizationrequired' | translate}}</small>
-                            </div>
-                            <ion-label class="labels">{{'CorReg.domain' | translate}} <small style="color: #f70505;">*</small></ion-label>
-                            <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="{{'domain' | translate }}" formControlName="domainId">
-                                    <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
-                                        {{domain.text}}</ion-select-option>
-
-                                </ion-select>
-                            </ion-item>
-                            <div *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
-                                <small style="color: #f70505;">{{'CorReg.reqDomain' | translate}}</small>
-                            </div>
+                              </div>
+                              <ion-label class="labels">{{'CorReg.domain' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                  <ion-select placeholder="{{'domain' | translate }}" formControlName="domainId">
+                                      <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
+                                          {{domain.text}}</ion-select-option>
+  
+                                  </ion-select>
+                              </ion-item>
+                              <div *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
+                                  <small style="color: #f70505;">{{'CorReg.reqDomain' | translate}}</small>
+                                </div>
 
                             <ion-label class="labels">{{'CorReg.OrganisationRegiNo' | translate}}<small style="color: #f70505;">*</small>
                             </ion-label>
@@ -100,8 +102,8 @@
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.regNo.hasError('required') && talentorgform.controls.regNo.touched">
                                 <small style="color: #f70505;">{{'CorReg.RegistrationNorequired' | translate}}</small>
-                            </div>
-
+                              </div>
+                           
                             <ion-label class="labels">{{'CorReg.dor' | translate}}<small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -110,18 +112,19 @@
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.regDate.hasError('required') && talentorgform.controls.regDate.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqDor' | translate}}</small>
-                            </div>
+                              </div>
 
+                            
 
-
-                            <ion-label class="labels">{{'CorReg.uploadLogo' | translate}}</ion-label>
+                            <ion-label class="labels">{{'CorReg.uploadLogo' | translate}}<small style="color: #f70505;">*</small></ion-label>
                             <ion-row>
                                 <ion-col size="6">
                                     <ion-thumbnail *ngIf="base64img1">
                                         <img class="horizontal" [src]="base64img1" name="image" />
                                     </ion-thumbnail>
                                     <ion-thumbnail *ngIf="!base64img1">
-                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights"
+                                            style="width:100%" />
                                     </ion-thumbnail>
                                 </ion-col>
 
@@ -138,7 +141,7 @@
                             </ion-row>
                             <div *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
                                 <small style="color: #f70505;">{{'CorReg.uploadLogoRequired' | translate}}</small>
-                            </div>
+                              </div>
                         </div>
                         <div class="display-justify">
                             <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate}}
@@ -152,7 +155,8 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{'sign_in' | translate}}</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{'sign_in' | translate}}</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-2" class="content">
@@ -166,13 +170,14 @@
                             <ion-label class="labels">{{'country'| translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
-                                    <div class="selected-skill">{{ selectedCountry }}
+                                    <div class="selected-skill">{{ selectedCountry }} 
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" name="close-circle" (click)="removeCountry()" style="color: black;"></ion-icon>
-                                <ion-input (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                                <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" 
+                                        name="close-circle" (click)="removeCountry()" style="color: black;"></ion-icon>
+                                <ion-input  (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
                             </ion-item>
-
+                
                             <ion-list *ngIf="showcountyResults">
                                 <ion-item *ngFor="let result of searchResults" (click)="selectcountry(result.text,result.id)">
                                     {{ result.text }}
@@ -180,7 +185,7 @@
                             </ion-list>
                             <div *ngIf=" talentorgform.controls.country.hasError('required') && talentorgform.controls.country.touched">
                                 <small style="color: #f70505;">{{'CorReg.CountryRequired' | translate}}</small>
-                            </div>
+                              </div>
                             <ion-label class="labels">{{'CorReg.stateProvince' | translate}} <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -197,10 +202,10 @@
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-
-                            <div *ngIf=" talentorgform.controls.state.hasError('required') && talentorgform.controls.state.touched">
-                                <small style="color: #f70505;">{{'CorReg.State/ProvinceRrequired' | translate}}</small>
-                            </div>
+                          
+                                <div *ngIf=" talentorgform.controls.state.hasError('required') && talentorgform.controls.state.touched">
+                                    <small style="color: #f70505;">{{'CorReg.State/ProvinceRrequired' | translate}}</small>
+                                  </div>
                             <ion-label class="labels">{{'CorReg.areaName' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
@@ -218,14 +223,14 @@
                             </ion-list>
                             <div *ngIf=" talentorgform.controls.city.hasError('required') && talentorgform.controls.city.touched">
                                 <small style="color: #f70505;">{{'CorReg.CityRequired' | translate}} </small>
-                            </div>
+                              </div>
                             <ion-label class="labels">{{'CorReg.pinZipCode' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pincode"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.pincode.hasError('required') && talentorgform.controls.pincode.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqPinZipCode' | translate}}</small>
-                            </div>
+                              </div>
 
                         </div>
                         <div class="display-justify">
@@ -239,7 +244,8 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">{{'Already a Talentchek member?'| translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in'| translate}}</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?'| translate}} </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in'| translate}}</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-3" class="content text-center">
@@ -253,25 +259,25 @@
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.mobileNo.hasError('required') && talentorgform.controls.mobileNo.touched">
                                 <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' | translate}} </small>
-                            </div>
+                              </div>
 
-                            <ion-label class="labels">{{'CorReg.OrganizationEemail' | translate}}
+                            <ion-label class="labels">{{'CorReg.OrganizationEemail' | translate}}  <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="emailId"></ion-input>
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.emailId.hasError('required') && talentorgform.controls.emailId.touched">
                                 <small style="color: #f70505;">{{'CorReg.OrganizationEmailRequired' | translate}} </small>
-                            </div>
+                              </div>
 
-                            <ion-label class="labels">{{'InsReg.password' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'InsReg.password' | translate}}  <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
                                 <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
                             <div *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
                                 <small style="color: #f70505;">{{'reqPassword' | translate}}</small>
-                            </div>
+                              </div>
 
                             <ion-label class="labels">{{'referralCode' | translate}}</ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -301,7 +307,8 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in' | translate}}</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in' | translate}}</a></b></span>
                         </div>
                     </div>
                 </form>

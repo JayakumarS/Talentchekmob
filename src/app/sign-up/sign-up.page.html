@@ -199,7 +199,7 @@
 
 
                             <ion-label class="labels">{{'stateProvince' | translate }} <small style="color: #f70505;">*</small></ion-label>
-
+                            
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedState }}
@@ -214,7 +214,7 @@
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-
+                            
                             <!-- <ion-item fill="outline" class="input-field">
 
                                 <ion-select placeholder="Select State" (ionChange)="goTostateSelectedItem($event.target.value)" formControlName="stateName">
@@ -228,7 +228,7 @@
                             </div>
 
                             <ion-label class="labels">{{'areaName' | translate }} <small style="color: #f70505;">*</small></ion-label>
-
+                            
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedCity }}
@@ -243,8 +243,8 @@
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-
-
+                            
+                            
                             <!-- <ion-item fill="outline" class="input-field">
                                 <ion-select placeholder="Select city" formControlName="areaName">
                                     <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
@@ -289,7 +289,7 @@
                                 <small style="color: #f70505;">{{'contactValid' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">{{'email' | translate }} </ion-label>
+                            <ion-label class="labels">{{'email' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="email" formControlName="email" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>

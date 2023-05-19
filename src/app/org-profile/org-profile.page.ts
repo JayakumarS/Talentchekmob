@@ -89,7 +89,7 @@ export class OrgProfilePage implements OnInit {
     this.docForm = this.fb.group({
       orgName: ["", [Validators.required]],
       domain: [""],
-      orgEmail: ['', [ Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      orgEmail: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       orgMobile: ["", [Validators.required]],
       cinReg: ["", [Validators.required]],
       dob: ["", [Validators.required]],
@@ -101,7 +101,7 @@ export class OrgProfilePage implements OnInit {
       permState: [""],
       permCountry: [""],
       permPinCode: [""],
-       orgLogo: [""],
+       orgLogo: ["",[Validators.required]],
       details: ["", [Validators.required]],
       currentUserId: [""]
     })

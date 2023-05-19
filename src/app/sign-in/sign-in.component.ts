@@ -122,14 +122,14 @@ export class SignInComponent implements OnInit {
 
 
 
-                this.fcm.getToken().then(token => {
-                  console.log("FCM token123", token);
-                  this.nativeStorage.setItem('FCMToken', token)
-                  localStorage.setItem('FCMToken', token);
+                // this.fcm.getToken().then(token => {
+                //   console.log("FCM token123", token);
+                //   this.nativeStorage.setItem('FCMToken', token)
+                //   localStorage.setItem('FCMToken', token);
     
-                  this.SaveFCMTokenAndUUID(data["username"]);
-                  console.log("SaveFCMTokenAndUUID 2");
-                });
+                //   this.SaveFCMTokenAndUUID(data["username"]);
+                //   console.log("SaveFCMTokenAndUUID 2");
+                // });
 
   
                 if (data.roles[0].roleId.includes('1')) {

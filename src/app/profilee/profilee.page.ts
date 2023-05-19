@@ -108,7 +108,7 @@ countryIdVal:string;
       dob:["",[Validators.required]],
       dobObj:[""],
       mobile: ["", [Validators.required]],
-      email: ["", [ Validators.email, Validators.minLength(5)],],
+      email: ["", [Validators.required, Validators.email, Validators.minLength(5)],],
       nationalid: [""],
       category: ["",[Validators.required]],
       emergencyContact:["",[Validators.required]],
