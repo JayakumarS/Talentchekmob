@@ -1552,6 +1552,16 @@
     "Posted date":"تاريخ النشر",
     "Closes on":"يغلق في",
     "View Matches":"مشاهدة المباريات",
-    "Application":"طلب"
+    "Application":"طلب",
+
+    "Available":"متاح",
+    "Recharge Now":"اشحن الآن",
+    "Profile Views":"مشاهدات الملف",
+    "Your Rating":"تقييمك",
+    "Applications":"التطبيقات",
+    "Referrals":"الإحالات",
+    "Current Employees":"الموظفين الحاليين",
+    "Ex-Employees":"الموظفين السابقين",
+    "Pending Approval":"ما زال يحتاج بتصدير"
     
   }

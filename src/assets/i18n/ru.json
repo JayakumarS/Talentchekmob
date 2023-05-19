@@ -1553,5 +1553,15 @@
     "Posted date":"Дата публикации",
     "Closes on":"Закрывается",
     "View Matches":"Просмотр матчей",
-    "Application":"Приложение"
+    "Application":"Приложение",
+
+    "Available":"Доступный",
+    "Recharge Now":"Пополнить счет сейчас",
+    "Profile Views":"Просмотры профиля",
+    "Your Rating":"Ваш рейтинг",
+    "Applications":"Приложения",
+    "Referrals":"Рефералы",
+    "Current Employees":"Текущие сотрудники",
+    "Ex-Employees":"Бывшие сотрудники",
+    "Pending Approval":"В ожидании утверждения"
   }
