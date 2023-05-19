@@ -17,8 +17,8 @@
                 <ion-col size="6">
                     <ion-card class="recharge-card" (click)="goto_subscribe()">
                         <ion-card-content>
-                            <p style="text-align: center;font-size: 16px; color: #fff;"> Available</p>
-                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">Talent credits</p>
+                            <p style="text-align: center;font-size: 16px; color: #fff;"> {{'Available' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">{{'Subscription.talCrd' | translate}}</p>
 
                             <div class="card-content p-0 flex">
                                 <div class="spinningasset coin is-sm">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <br>
-                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>Recharge Now</b></p>
+                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>{{'Recharge Now' | translate}}</b></p>
 
                         </ion-card-content>
                     </ion-card>
@@ -41,13 +41,13 @@
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                Profile Views<b>: {{profileViewCount}}</b></div>
+                                {{'Profile Views' | translate}}<b>: {{profileViewCount}}</b></div>
                         </div>
                     </ion-col>
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                Your Rating:<b>&nbsp; {{oniRating }}</b><span class="fa fa-star checked"></span></div>
+                                {{'Your Rating' | translate}}:<b>&nbsp; {{oniRating }}</b><span class="fa fa-star checked"></span></div>
                         </div>
                     </ion-col>
                 </div>
@@ -75,7 +75,7 @@
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>Connections</b></div>
+                                <b>{{'profilein.Connections' | translate}}</b></div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -99,7 +99,7 @@
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>Referrals</b></div>
+                                <b>{{'Referrals' | translate}}</b></div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -111,8 +111,8 @@
                         <ion-col size="2" (click)="viewList('verifiedCurrentStu','Current Students - Verified')">
                             <div class="custom-buttryfly-left1">
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedCurrentStu}}</b></ion-row>
-                                <ion-row style="font-size: 15px;"><b>Verified</b></ion-row>
-                                <ion-row style="font-size: 14px; color:#24316B">Current Students</ion-row>
+                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' | translate}}</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#24316B">{{'Current Students' | translate}}</ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('verifiedExStu','Student Alumni - Verified')">
@@ -121,8 +121,8 @@
                             flex-direction: column;
                             justify-content: center;">
 
-                                <ion-row style="font-size: 14px; color:#24316B">Student Alumni</ion-row>
-                                <ion-row style="font-size: 15px;"><b>Verified</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#24316B">{{'Student Alumni' | translate}}</ion-row>
+                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' | translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedExStu}}</b></ion-row>
                             </div>
                         </ion-col>
@@ -134,11 +134,11 @@
                                 <ion-row style="    display: flex;
                                 font-size: 34px;
                                 justify-content: flex-end;"><b>&nbsp;&nbsp;{{count.pendingCurrentStu}}</b></ion-row>
-                                <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;Pending Approval</b></ion-row>
+                                <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;{{'Pending Approval' | translate}}</b></ion-row>
                                 <ion-row style="    font-size: 14px;
                                 color: #24316B;
                                 display: flex;
-                                justify-content: flex-end;">Current Students</ion-row>
+                                justify-content: flex-end;">{{'Current Students' | translate}}</ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('pendingExStu','Student Alumni - Pending Approval')">
@@ -148,8 +148,8 @@
                             align-items: flex-end;">
 
                                 <ion-row style="font-size: 14px; color:#24316B;    display: flex;
-                                justify-content: flex-end;">Student Alumni</ion-row>
-                                <ion-row style="font-size: 15px;"><b>&nbsp;Pending Approval</b></ion-row>
+                                justify-content: flex-end;">{{'Student Alumni' | translate}}</ion-row>
+                                <ion-row style="font-size: 15px;"><b>&nbsp;{{'Pending Approval' | translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;{{count.pendingExStu}}</b></ion-row>
                             </div>
                         </ion-col>
@@ -174,7 +174,7 @@
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>Applications</b></div>
+                                <b>{{'Applications' | translate}}</b></div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -198,7 +198,7 @@
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>Matched Profiles</b></div>
+                                <b>{{'JobPostInsti.matchedProf' | translate}}</b></div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -212,8 +212,8 @@
                         <ion-col size="2" (click)="viewList('verifiedCurrentEmp','Current Employees - Verified')">
                             <div class="custom-buttryfly-left1">
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedCurrentEmp}}</b></ion-row>
-                                <ion-row style="font-size: 15px;"><b>Verified</b></ion-row>
-                                <ion-row style="font-size: 14px; color:#FA7070">Current Employees</ion-row>
+                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' | translate}}</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#FA7070">{{'Current Employees' | translate}}</ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('verifiedExEmp','Ex-Employees - Verified')">
@@ -222,8 +222,8 @@
                             flex-direction: column;
                             justify-content: center;">
 
-                                <ion-row style="font-size: 14px; color:#FA7070">Ex-Employees</ion-row>
-                                <ion-row style="font-size: 15px;"><b>Verified</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#FA7070">{{'Ex-Employees' | translate}}</ion-row>
+                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' | translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedExEmp}}</b></ion-row>
                             </div>
                         </ion-col>
@@ -235,11 +235,11 @@
                                 <ion-row style="    display: flex;
                                 font-size: 34px;
                                 justify-content: flex-end;"><b>&nbsp;&nbsp;{{count.pendingCurrentEmp}}</b></ion-row>
-                                <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;Pending Approval</b></ion-row>
+                                <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;{{'Pending Approval' | translate}}</b></ion-row>
                                 <ion-row style="    font-size: 14px;
                                 color:#FA7070;
                                 display: flex;
-                                justify-content: flex-end;">Current Employees</ion-row>
+                                justify-content: flex-end;">{{'Current Employees' | translate}}</ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('pendingExEmp','Ex-Employees - Pending Approval')">
@@ -249,8 +249,8 @@
                             align-items: flex-end;">
 
                                 <ion-row style="font-size: 14px; color:#FA7070;    display: flex;
-                                justify-content: flex-end;">Ex-Employees</ion-row>
-                                <ion-row style="font-size: 15px;"><b>&nbsp;Pending Approval</b></ion-row>
+                                justify-content: flex-end;">{{'Ex-Employees' | translate}}</ion-row>
+                                <ion-row style="font-size: 15px;"><b>&nbsp;{{'Pending Approval' | translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;{{count.pendingExEmp}}</b></ion-row>
                             </div>
                         </ion-col>

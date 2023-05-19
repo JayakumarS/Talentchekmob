@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { InstitutionDashboardPageRoutingModule } from './institution-dashboard-routing.module';
 
 import { InstitutionDashboardPage } from './institution-dashboard.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InstitutionDashboardPageRoutingModule
+    InstitutionDashboardPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [InstitutionDashboardPage]
 })
