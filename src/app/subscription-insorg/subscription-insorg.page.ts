@@ -234,7 +234,7 @@ export class SubscriptionInsorgPage implements OnInit {
       image: 'https://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png',
       order_id: orderId,
       currency: this.currencyVal,
-      key: 'rzp_test_VTDYOGZm0Ivt3N',
+      key: 'rzp_live_ABLgrHfsy2Fhkb',
       amount: subscripamt,
       name: 'Talent Chek',
       theme: {
