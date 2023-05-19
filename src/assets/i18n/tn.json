@@ -1623,5 +1623,13 @@
     "No Results to Display":"காட்டுவதற்கு முடிவுகள் இல்லை",
     "Matched Jobs": "பொருந்திய வேலைகள்",
 
-    "delete":"அழி"
+    "delete":"அழி",
+
+    "Job Post List":"வேலை இடுகை பட்டியல்",
+    "Add Job vacancy":"வேலை காலியிடத்தைச் சேர்க்கவும்",
+    "Posted Jobs List":"இடுகையிடப்பட்ட வேலைகள் பட்டியல்",
+    "Posted date":"இடுகையிடப்பட்ட தேதி",
+    "Closes on":"மூடுகிறது",
+    "View Matches":"போட்டிகளைக் காண்க",
+    "Application":"விண்ணப்பம்"
   }

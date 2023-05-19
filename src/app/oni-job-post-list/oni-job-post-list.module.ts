@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { OniJobPostListPageRoutingModule } from './oni-job-post-list-routing.module';
 
 import { OniJobPostListPage } from './oni-job-post-list.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OniJobPostListPageRoutingModule
+    OniJobPostListPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [OniJobPostListPage]
 })
