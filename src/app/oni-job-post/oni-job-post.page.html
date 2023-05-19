@@ -76,7 +76,7 @@
 
 
                     <div *ngIf="buttonEnable" class="ion-stepper-buttons">
-                        <button [disabled]="disable" class="ion-stepper-next" (click)="nextStep('step1', 'step2');">{{'next' | translate}}</button>
+                        <button [disabled]="disable" class="ion-stepper-next" (click)="nextStep('step1', 'step2');">{{'profilein.Next' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         </div>
                       </ion-item>
                     <div *ngIf="jobProfileForm.controls.jobSkills.hasError('required') && jobProfileForm.controls.jobSkills.touched">
-                        <small style="color: #f70505;">{{'AddJobPost.skillReq' | translate}}</small>
+                        <small style="color: #f70505;">{{'AddJobProfile.skillReq' | translate}}</small>
                     </div>
 
                     <ion-list *ngIf="showSkillResults">
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div>
-                        {{'AddJobPost.relExp' | translate}}
+                        {{'JobAppliRec.relExp' | translate}}
                     </div>
 
                     <div *ngIf="jobProfileForm.controls.jobExperience.hasError('required') && jobProfileForm.controls.jobExperience.touched">
@@ -225,7 +225,7 @@
 
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step2', 'step1')">{{'KmPortal.back' | translate}}</button>
-                        <button class="ion-stepper-next" (click)="nextStep('step2', 'step3');">{{'next' | translate}}</button>
+                        <button class="ion-stepper-next" (click)="nextStep('step2', 'step3');">{{'profilein.Next' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -459,7 +459,7 @@
             <div class="ion-stepper-step" id="step3">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">3</div>
-                    <div class="ion-stepper-title">{{'AddJobProfile.addInfo' | translate}}</div>
+                    <div class="ion-stepper-title">{{'AddJobPost.addInfo' | translate}}</div>
                 </div>
                 <div class="ion-stepper-content">
 
@@ -542,7 +542,7 @@
 
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step3', 'step2')">{{'KmPortal.back' | translate}}</button>
-                        <button class="ion-stepper-next" (click)="nextStep('step3', 'step4');">{{'next' | translate}}</button>
+                        <button class="ion-stepper-next" (click)="nextStep('step3', 'step4');">{{'profilein.Next' | translate}}</button>
                     </div>
 
                 </div>
@@ -565,13 +565,13 @@
                     <p>{{'AddJobProfile.vacantPositions' | translate}}</p>
 
                     <div style="display: flex; justify-content: center;align-items: center;">
-                        {{'AddJobProfile.noAuction' | translate}}<ion-toggle formControlName="auctioned"></ion-toggle>{{'AddJobProfile.yesAuction' | translate}}
+                        {{'AddJobProfile.no' | translate}}<ion-toggle formControlName="auctioned"></ion-toggle>{{'AddJobProfile.yes' | translate}}
                     </div>
 
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;" (click)="prevStep('step4', 'step3')">{{'KmPortal.back' | translate}}</button>
-                        <button class="ion-stepper-submit" (click)="savejobadvertisement()">{{'AddJobProfile.save' | translate}}</button>
+                        <button class="ion-stepper-submit" (click)="savejobadvertisement()">{{'AddJobProfile.submit' | translate}}</button>
                     </div>
 
                     <div *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">

@@ -5,7 +5,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_orghome()" style="margin-top:21%"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Job Post List</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Job Post List' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -29,7 +29,7 @@
                         </ion-col>
                         <ion-col size="8">
                             <ion-button class="custom-button-job-edit" (click)="goto_addJobPost()">
-                                Add Job vacancy &nbsp;
+                                {{'Add Job vacancy' | translate}} &nbsp;
                                 <ion-icon name="add-circle-outline"></ion-icon>
                             </ion-button>
                         </ion-col>
@@ -39,7 +39,7 @@
         </div>
 
 
-        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;">&nbsp;&nbsp;&nbsp;Posted Jobs List</span>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;">&nbsp;&nbsp;&nbsp;{{'Posted Jobs List' | translate}}</span>
         <div class="display-justify" *ngFor="let cElement of jobPostList">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
@@ -51,7 +51,7 @@
                         </ion-row>
                         <div style="display: flex;justify-content: space-between;align-items: center;">
                             <div class="postedcards">
-                                <ion-label class="labels">Location :</ion-label>
+                                <ion-label class="labels">{{'JobSearch.location' | translate}} :</ion-label>
                             </div>
                             <div style="padding: 5px;" class="postedcards">
                                 {{cElement.offeredLocations}}
@@ -63,7 +63,7 @@
 
                         <div style="display: flex;justify-content: space-between;align-items: center;">
                             <div class="postedcards">
-                                <ion-label class="labels">Posted date :</ion-label>
+                                <ion-label class="labels">{{'Posted date' | translate}} :</ion-label>
                             </div>
                             <div class="postedcards">
                                 {{cElement.lastPostedDate}}
@@ -75,20 +75,20 @@
 
                         <div *ngIf="cElement.appDeadline != 'Closed'" style="display: flex;justify-content: space-between;align-items: center;margin-top: 3px;">
                             <div class="postedcards">
-                                <ion-label class="labels">Closes on :</ion-label>
+                                <ion-label class="labels">{{'Closes on' | translate}} :</ion-label>
                             </div>
                             <div class="postedcards">
                                 {{cElement.appDeadline}}
                             </div>
                             <div>
-                                <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">View Matches</span>
+                                <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">{{'View Matches' | translate}}</span>
                             </div>
                         </div>
 
                         <div *ngIf="cElement.appDeadline == 'Closed'" style="display: flex;justify-content: space-between;align-items: center;">
 
                             <div class="postedcards" style="color: maroon;margin-top: 3px;">
-                                Application {{cElement.appDeadline}}
+                                {{'Application' | translate}} {{cElement.appDeadline}}
                             </div>
                         </div>
                     </ion-col>

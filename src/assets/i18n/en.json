@@ -1644,8 +1644,17 @@
     "No Results to Display":"No Results to Display",
     "Matched Jobs":"Matched Jobs",
 
-    "delete":"Delete"
+    "delete":"Delete",
 
+    "Job Post List":"Job Post List",
+    "Add Job vacancy":"Add Job vacancy",
+    "Posted Jobs List":"Posted Jobs List",
+    "Posted date":"Posted date",
+    "Closes on":"Closes on",
+    "View Matches":"View Matches",
+    "Application":"Application"
+    
+ 
 
 
 
