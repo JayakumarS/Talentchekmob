@@ -1568,5 +1568,16 @@
     "Referrals":"ارجاعات",
     "Current Employees":"کارمندان فعلی",
     "Ex-Employees":"کارمندان سابق",
-    "Pending Approval":"در انتظار تایید"
+    "Pending Approval":"در انتظار تایید",
+
+    "Edit Organization Details":"ویرایش جزئیات سازمان",
+    "Edit Organization Logo":"ویرایش لوگوی سازمان",
+    "Company Size is required":"اندازه شرکت مورد نیاز است",
+    "aboutOrg":"درباره سازمان",
+    "about":"در باره",
+    "entity":"نوع موجودیت",
+    "founded":"تاسیس شد",
+    "regNo":"شماره ثبت نام",
+    "serviceFee":"هزینه خدمات برای تأیید"
+    
   }

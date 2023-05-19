@@ -1563,5 +1563,15 @@
     "Referrals":"Рефералы",
     "Current Employees":"Текущие сотрудники",
     "Ex-Employees":"Бывшие сотрудники",
-    "Pending Approval":"В ожидании утверждения"
+    "Pending Approval":"В ожидании утверждения",
+
+    "Edit Organization Details":"Изменить сведения об организации",
+    "Edit Organization Logo":"Редактировать логотип организации",
+    "Company Size is required":"Требуется размер компании",
+    "aboutOrg":"Об организации",
+    "about":"О",
+    "entity":"Тип объекта",
+    "founded":"Основан",
+    "regNo":"номер регистрации",
+    "serviceFee":"Плата за услугу верификации"
   }

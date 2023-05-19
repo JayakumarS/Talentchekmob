@@ -1641,5 +1641,10 @@
     "Referrals":"பரிந்துரைகள்",
     "Current Employees":"தற்போதைய ஊழியர்கள்",
     "Ex-Employees":"முன்னாள் ஊழியர்கள்",
-    "Pending Approval":"நிலுவையிலுள்ள ஒப்புதல்"
+    "Pending Approval":"நிலுவையிலுள்ள ஒப்புதல்",
+
+    "Edit Organization Details":"நிறுவன விவரங்களைத் திருத்தவும்",
+    "Edit Organization Logo":"அமைப்பின் லோகோவைத் திருத்து",
+    "Company Size is required":"நிறுவனத்தின் அளவு தேவை"
+    
   }

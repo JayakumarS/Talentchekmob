@@ -1566,5 +1566,15 @@
     "Referrals":"रेफरल",
     "Current Employees":"वर्तमान कर्मचारी",
     "Ex-Employees":"पूर्व कर्मचारी",
-    "Pending Approval":"लंबित अनुमोदन"
+    "Pending Approval":"लंबित अनुमोदन",
+
+    "Edit Organization Details":"संगठन विवरण संपादित करें",
+    "Edit Organization Logo":"संगठन का लोगो संपादित करें",
+    "Company Size is required":"कंपनी का आकार आवश्यक है",
+    "aboutOrg":"संगठन के बारे में",
+    "about":"के बारे में",
+    "entity":"इकाई प्रकार",
+    "founded":"स्थापित",
+    "regNo":"पंजीकरण संख्या",
+    "serviceFee":"सत्यापन के लिए सेवा शुल्क"
   }

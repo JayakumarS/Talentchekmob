@@ -1569,5 +1569,15 @@
     "Referrals":"రెఫరల్స్",
     "Current Employees":"ప్రస్తుత ఉద్యోగులు",
     "Ex-Employees":"మాజీ ఉద్యోగులు",
-    "Pending Approval":"ఆమోదం పెండింగ్‌లో ఉంది"
+    "Pending Approval":"ఆమోదం పెండింగ్‌లో ఉంది",
+
+    "Edit Organization Details":"సంస్థ వివరాలను సవరించండి",
+    "Edit Organization Logo":"సంస్థ లోగోను సవరించండి",
+    "Company Size is required":"కంపెనీ పరిమాణం అవసరం",
+    "aboutOrg":"సంస్థ గురించి",
+    "about":"గురించి",
+    "entity":"ఎంటిటీ రకం",
+    "founded":"స్థాపించబడింది",
+    "regNo":"నమోదు సంఖ్య",
+    "serviceFee":"ధృవీకరణ కోసం సేవా రుసుము"
   }

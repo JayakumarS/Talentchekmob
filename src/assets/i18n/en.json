@@ -1662,7 +1662,10 @@
     "Referrals":"Referrals",
     "Current Employees":"Current Employees",
     "Ex-Employees":"Ex-Employees",
-    "Pending Approval":"Pending Approval"
+    "Pending Approval":"Pending Approval",
+
+    "Edit Organization Details":"Edit Organization Details",
+    "Edit Organization Logo":"Edit Organization Logo"
     
  
 

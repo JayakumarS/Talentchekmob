@@ -12,9 +12,9 @@
 
       <ion-col >
         <ion-title *ngIf="isProfile" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'editGeneralInfo' | translate}}</ion-title>
-          <ion-title *ngIf="isAbout" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit Organization Details
+          <ion-title *ngIf="isAbout" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'Edit Organization Details' | translate}}
            </ion-title>
-            <ion-title *ngIf="isLogo" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">Edit Organization Logo
+            <ion-title *ngIf="isLogo" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'Edit Organization Logo' | translate}}
               </ion-title>
       </ion-col>
     </ion-row>
@@ -63,7 +63,7 @@
               <ion-input formControlName="orgEmail"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.orgEmail.hasError('required') && docForm.controls.orgEmail.touched">
-              <small style="color: #f70505;">{{'profileorg.Please enter a valid email address' | translate}}</small>
+              <small style="color: #f70505;">{{'profileorg.Please enter a valid email address is required' | translate}}</small>
             </div>
           </div>
           <div class="button-content" *ngIf="isProfile">

@@ -1562,6 +1562,16 @@
     "Referrals":"الإحالات",
     "Current Employees":"الموظفين الحاليين",
     "Ex-Employees":"الموظفين السابقين",
-    "Pending Approval":"ما زال يحتاج بتصدير"
+    "Pending Approval":"ما زال يحتاج بتصدير",
+
+    "Edit Organization Details":"تحرير تفاصيل المؤسسة",
+    "Edit Organization Logo":"تحرير شعار المؤسسة",
+    "Company Size is required":"حجم الشركة مطلوب",
+    "aboutOrg":"عن المنظمة",
+    "about":"عن",
+    "entity":"نوع الكيان",
+    "founded":"تأسست",
+    "regNo":"رقم التسجيل",
+    "serviceFee":"رسوم الخدمة للتحقق"
     
   }

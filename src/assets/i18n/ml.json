@@ -1567,5 +1567,15 @@
     "Referrals":"റഫറലുകൾ",
     "Current Employees":"നിലവിലെ ജീവനക്കാർ",
     "Ex-Employees":"മുൻ ജീവനക്കാർ",
-    "Pending Approval":"അനുമതി തീർച്ചപ്പെടുത്തിയിട്ടില്ല"
+    "Pending Approval":"അനുമതി തീർച്ചപ്പെടുത്തിയിട്ടില്ല",
+
+    "Edit Organization Details":"ഓർഗനൈസേഷൻ വിശദാംശങ്ങൾ എഡിറ്റ് ചെയ്യുക",
+    "Edit Organization Logo":"ഓർഗനൈസേഷൻ ലോഗോ എഡിറ്റ് ചെയ്യുക",
+    "Company Size is required":"കമ്പനി വലുപ്പം ആവശ്യമാണ്",
+    "aboutOrg":"സംഘടനയെക്കുറിച്ച്",
+    "about":"കുറിച്ച്",
+    "entity":"എന്റിറ്റി തരം",
+    "founded":"സ്ഥാപിച്ചത്",
+    "regNo":"രജിസ്ട്രേഷൻ നമ്പർ",
+    "serviceFee":"സ്ഥിരീകരണത്തിനുള്ള സേവന ഫീസ്"
   }
