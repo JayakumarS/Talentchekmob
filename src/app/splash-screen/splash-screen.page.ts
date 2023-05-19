@@ -60,7 +60,7 @@ this.storageservice.getrequest(getMobileAppVersionUrl).subscribe(resultVersion =
   let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
   console.log(latestMobileAppVersion);
 
-  if (latestMobileAppVersion != "4.4.7") {
+  if (latestMobileAppVersion != "4.4.9") {
     this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
       'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
       'Update now', 'Not now');
