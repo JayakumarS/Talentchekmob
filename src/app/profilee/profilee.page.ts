@@ -382,6 +382,12 @@ checkFormValidity(form: FormGroup): string[] {
           'emergencyContact': '',
         })
       }
+      if(this.profileList[0].details=='null')
+      {
+        this.profileForm.patchValue({
+          'details': '',
+        })
+      }
       
     }
     this.storageservice.dismissLoading();
