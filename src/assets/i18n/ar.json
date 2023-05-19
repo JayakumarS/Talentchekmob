@@ -301,7 +301,7 @@
       "link": "وصلة",
       "videoProfile": "ملف تعريف الفيديو",
       "genInfo": "معلومات عامة",
-  
+      "Connection Mobile Number":"رقم الاتصال المحمول",
       "typeOfEmployment": "نوع العمل",
       "jobDes": "المسمى الوظيفي",
       "RolesRes": "الأدوار والمسؤوليات",
@@ -629,6 +629,7 @@
       "Experience": "خبرة",
       "Skill & Certifications": "المهارة والشهادات",
       "Extracurricular": "لا صفية",
+      "Connection Email ID":"معرف البريد الإلكتروني للاتصال",
       "Connections": "روابط",
       "Additional": "إضافي",
       "Education": "تعليم",
@@ -1572,6 +1573,13 @@
     "entity":"نوع الكيان",
     "founded":"تأسست",
     "regNo":"رقم التسجيل",
-    "serviceFee":"رسوم الخدمة للتحقق"
+    "alumni": "الخريجين",
+    "serviceFee":"رسوم الخدمة للتحقق",
+    "Language":"لغة",
+    "Scan to Connect":"مسح للاتصال",
+    "Visibility":"الرؤية",
+    "About app":"حول التطبيق",
+    "Its easy":"من السهل",
+    "Go":"يذهب"
     
   }

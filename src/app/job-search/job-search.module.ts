@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { JobSearchPageRoutingModule } from './job-search-routing.module';
 
 import { JobSearchPage } from './job-search.page';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import { JobSearchPage } from './job-search.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    JobSearchPageRoutingModule
+    JobSearchPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [JobSearchPage]
 })

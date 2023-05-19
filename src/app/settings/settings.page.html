@@ -12,20 +12,20 @@
             <div style="display: flex; align-items: center;">
                 <ion-avatar slot="start">
                     <img src="../../assets/icon/profile_status.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Language</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'Language' | translate}}</span></div>
         </div>
         <div class="custom-button" *ngIf="roleId == 2 || roleId == 3 ">
             <div style="display: flex; align-items: center;" (click)="goto_alumni()">
                 <ion-avatar slot="start">
                     <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'alumni' | translate}}</span></div>
         </div>
 
         <div class="custom-button" *ngIf="roleId.includes('1')">
             <div style="display: flex; align-items: center;" (click)="goto_Indiv_alumni()">
                 <ion-avatar slot="start">
                     <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Alumni</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'alumni' | translate}}</span></div>
         </div>
     </div>
     <div class="line-with-text">
@@ -37,21 +37,21 @@
             <div style="display: flex; align-items: center;" (click)="goto_subscribe()">
                 <ion-avatar slot="start">
                     <img style="padding: 15px;" src="../../assets/img/recharge.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Subscription</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'Menu.subscription' | translate}}</span></div>
         </div>
 
         <div class="custom-button" *ngIf="roleId == 2 || roleId == 3">
             <div style="display: flex; align-items: center;" (click)="goto_oniSubscription()">
                 <ion-avatar slot="start">
                     <img style="padding: 15px;" src="../../assets/img/recharge.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Subscription</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'Menu.subscription' | translate}}</span></div>
         </div>
 
         <div class="custom-button">
             <div style="display: flex; align-items: center;" (click)="goto_scantoconnect()">
                 <ion-avatar slot="start">
                     <img style="padding: 6px;" src="../../assets/img/scan-to-connect.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Scan to Connect</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'Scan to Connect' | translate}}</span></div>
         </div>
 
 
@@ -65,14 +65,14 @@
             <div style="display: flex; align-items: center;" (click)="goto_policy()">
                 <ion-avatar slot="start">
                     <img style="padding: 6px;" src="../../assets/img/consent.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Consent Form</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'consentForm' | translate}}</span></div>
         </div>
 
         <div class="custom-button">
             <div style="display: flex; align-items: center;" (click)="goto_Terms()">
                 <ion-avatar slot="start">
                     <img src="../../assets/icon/terms and conditions.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Terms & Conditions</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'tAndC' | translate}}</span></div>
         </div>
     </div>
     <div class="display-justify">
@@ -80,14 +80,14 @@
             <div style="display: flex; align-items: center;">
                 <ion-avatar slot="start">
                     <img src="../../assets/icon/push message.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">Visibility</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'Visibility' | translate}}</span></div>
         </div>
 
         <div class="custom-button">
             <div style="display: flex; align-items: center;" (click)="goto_AboutApp()">
                 <ion-avatar slot="start">
                     <img src="../../assets/icon/about.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;">About app</span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;">{{'About app' | translate}}</span></div>
         </div>
     </div>
 
@@ -98,7 +98,7 @@
 
                 <ion-avatar slot="start">
                     <img style="padding: 5px;" src="../../assets/img/phone.png" />
-                </ion-avatar><span style="font-family: Mr-eaves;"><a href="tel:9345896371">Help</a></span></div>
+                </ion-avatar><span style="font-family: Mr-eaves;"><a href="tel:9345896371">{{'Menu.helpDesk' | translate}}</a></span></div>
         </div>
     </div>
 
@@ -106,7 +106,7 @@
         <div class="display-justify" style="width: 50%;">
             <div class="custom-button" style="background:#2C73E5;">
                 <div style="display: flex; align-items: center;font-size: 14px; color: white;justify-content: space-evenly;" (click)="logOut()">
-                    <span style="font-family: Mr-eaves;">Log Out</span>
+                    <span style="font-family: Mr-eaves;">{{'Menu.logout' | translate}}</span>
                     <ion-avatar slot="start" style="transform: rotate(180deg);">
                         <img src="../../assets/icon/logout.png" />
                     </ion-avatar>

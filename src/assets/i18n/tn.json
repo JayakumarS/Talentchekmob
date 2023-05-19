@@ -1645,6 +1645,13 @@
 
     "Edit Organization Details":"நிறுவன விவரங்களைத் திருத்தவும்",
     "Edit Organization Logo":"அமைப்பின் லோகோவைத் திருத்து",
-    "Company Size is required":"நிறுவனத்தின் அளவு தேவை"
+    "alumni": "முன்னாள் மாணவர்கள்",
+    "Company Size is required":"நிறுவனத்தின் அளவு தேவை",
+    "Language":"மொழி",
+    "Scan to Connect":"இணைக்க ஸ்கேன் செய்யவும்",
+    "Visibility":"தெரிவுநிலை",
+    "About app":"பயன்பாட்டைப் பற்றி",
+    "Its easy":"அது எளிது",
+    "Go":"போ"
     
   }
