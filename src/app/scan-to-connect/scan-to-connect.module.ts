@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ScanToConnectPageRoutingModule } from './scan-to-connect-routing.module';
 
 import { ScanToConnectPage } from './scan-to-connect.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ScanToConnectPage } from './scan-to-connect.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ScanToConnectPageRoutingModule
+    ScanToConnectPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ScanToConnectPage]
 })
