@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title style="text-align: center;
         font-family: 'Mr-eaves';
-        font-size: 28px;">Home</ion-title>
+        font-size: 28px;">{{'KmPortal.home' | translate}}</ion-title>
     </ion-toolbar>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </ion-header>
@@ -17,8 +17,8 @@
                 <ion-col size="6">
                     <ion-card class="recharge-card" (click)="goto_subscribe()">
                         <ion-card-content>
-                            <p style="text-align: center;font-size: 16px; color: #fff;">Available</p>
-                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">Talent credits</p>
+                            <p style="text-align: center;font-size: 16px; color: #fff;">{{'Available' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">{{'Subscription.talCrd'| translate}}</p>
 
                             <div class="card-content p-0 flex">
                                 <div class="spinningasset coin is-sm">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <br>
-                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>Recharge Now</b></p>
+                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>{{'Recharge Now' | translate}}</b></p>
 
                         </ion-card-content>
                     </ion-card>
@@ -41,13 +41,13 @@
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                Profile Views<b>: {{profileViewCount}}</b></div>
+                                {{'Profile Views' | translate}}<b>: {{profileViewCount}}</b></div>
                         </div>
                     </ion-col>
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                Your Rating:<b>&nbsp; {{avgrating}}</b><span class="fa fa-star checked"></span></div>
+                                {{'Your Rating' | translate}}:<b>&nbsp; {{avgrating}}</b><span class="fa fa-star checked"></span></div>
                         </div>
                     </ion-col>
                 </div>
@@ -113,9 +113,9 @@
 
 
         <ion-col>
-            <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">STAY CALM</h1>
-            <P style="text-align: center ;">and get your profile permanently endorsed</P>
-            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">Go to Profile</a></p>
+            <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1>
+            <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P>
+            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
             <img class="imageCss" src=".\assets\img\Illustration.png" />
         </ion-col>
 

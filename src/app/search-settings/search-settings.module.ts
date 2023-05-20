@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SearchSettingsPageRoutingModule } from './search-settings-routing.module';
 
 import { SearchSettingsPage } from './search-settings.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -15,7 +16,8 @@ import { SearchSettingsPage } from './search-settings.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    SearchSettingsPageRoutingModule
+    SearchSettingsPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [SearchSettingsPage]
 })
