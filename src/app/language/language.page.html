@@ -6,7 +6,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'editGeneralInfo' | translate}}</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Languagesettings' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -21,6 +21,7 @@
         <ion-label>
             {{ lng.text }}
         </ion-label>
+       
         <ion-icon slot="end" name="checkmark" *ngIf="lng.value === selected"></ion-icon>
     </ion-item>
 

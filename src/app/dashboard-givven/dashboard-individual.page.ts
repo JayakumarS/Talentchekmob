@@ -38,6 +38,7 @@ export class DashboardIndividualPage implements OnInit {
   }
 
   ngOnInit() {
+    this.translate.setDefaultLang('en');
   }
 
 

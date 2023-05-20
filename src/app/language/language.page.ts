@@ -27,6 +27,7 @@ export class LanguagePage implements OnInit {
 
   select(lng) {
     this.languageService.setLanguage(lng);
+    this.router.navigate(['/settings']);
   }
 
   goto_settings(){
