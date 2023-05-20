@@ -10,7 +10,7 @@
             </ion-col>
 
             <ion-col size="8">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 5%;">{{title}} List</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 5%;">{{title}} {{'List' | translate}}</ion-title>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -41,8 +41,8 @@
                         </ion-row>
                         <ion-row>
 
-                            <span class="c-pill c-pill--green" style="color:#198754" *ngIf="!cElement.currentEmployee">Ex-Employee</span>
-                            <span class="c-pill c-pill--purple" style="color:#6f42c1" *ngIf="cElement.currentEmployee">Currently working</span>
+                            <span class="c-pill c-pill--green" style="color:#198754" *ngIf="!cElement.currentEmployee">{{'Ex-Employees' | translate}}</span>
+                            <span class="c-pill c-pill--purple" style="color:#6f42c1" *ngIf="cElement.currentEmployee">{{'Currently working' | translate}}</span>
 
                         </ion-row>
 
