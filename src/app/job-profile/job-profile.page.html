@@ -40,7 +40,7 @@
                 <div class="ion-stepper-content">
                     <ion-label class="labels">{{'AddJobProfile.industry' | translate}}<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field" required>
-                        <ion-select (ionChange)="jobtitleList($event.target.value)" formControlName="industry" placeholder="Industry">
+                        <ion-select (ionChange)="jobtitleList($event.target.value)" formControlName="industry" placeholder="{{'AddJobProfile.industry' | translate}}">
                             <ion-select-option *ngFor="let tittle of industryList" value="{{tittle.id1}}">{{tittle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -51,7 +51,7 @@
 
                     <ion-label class="labels">{{'AddJobPost.jobTitle' | translate}}<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select placeholder="Job title" multiple="true" formControlName="jobTitle" (ionChange)="Driver($event.target.value)" cancelText="Cancel" okText="Okay">
+                        <ion-select placeholder="{{'AddJobPost.jobTitle' | translate}}" multiple="true" formControlName="jobTitle" (ionChange)="Driver($event.target.value)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let jobtitle of jobTitleList" value="{{jobtitle.id}}">{{jobtitle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -62,7 +62,7 @@
 
                     <ion-label class="labels">{{'AddJobPost.jobType' | translate}}<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select placeholder="Job type" formControlName="jobType" multiple="true" (ionChange)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                        <ion-select placeholder="{{'AddJobPost.jobType' | translate}}" formControlName="jobType" multiple="true" (ionChange)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let tittle of jobTypeList" value="{{tittle.id}}">{{tittle.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
