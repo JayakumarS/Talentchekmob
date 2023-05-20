@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { OniAlumniPageRoutingModule } from './oni-alumni-routing.module';
 
 import { OniAlumniPage } from './oni-alumni.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OniAlumniPageRoutingModule
+    OniAlumniPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [OniAlumniPage]
 })

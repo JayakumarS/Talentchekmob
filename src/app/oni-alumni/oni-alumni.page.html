@@ -6,7 +6,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_Settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> Alumni</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'alumni' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -22,8 +22,8 @@
                 <ion-col size="6" *ngIf="RoleID.includes('3')">
                     <ion-card class="recharge-card" (click)="goto_AlumniList('Student')">
                         <ion-card-content>
-                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">Student</p>
-                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">Network</p>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">{{'Category.student' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">{{'Network' | translate}}</p>
 
                             <div class="card-content p-0 flex">
 
@@ -41,8 +41,8 @@
                 <ion-col size="6">
                     <ion-card class="recharge-card" (click)="goto_AlumniList('Corporate')">
                         <ion-card-content>
-                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000 ">Corporate</p>
-                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">Network</p>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000 ">{{'Register.cor_quote' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">{{'Network' | translate}}</p>
 
                             <div class="card-content p-0 flex">
 
@@ -68,7 +68,7 @@
         </div>
 
 
-        <P style="margin-left: 15px; ;font-size: 22px;" *ngIf="constCount != 0"><b>Constant Highlights</b></P>
+        <P style="margin-left: 15px; ;font-size: 22px;" *ngIf="constCount != 0"><b>{{'Constant Highlights' | translate}}</b></P>
 
 
         <ion-slides pager="false" [options]="slideOpts" *ngIf="constCount != 0">
@@ -94,7 +94,7 @@
 
 
 
-        <P style="margin-left: 15px;font-size: 22px;" *ngIf="recntCount != 0"><b>Recent Highlights</b></P>
+        <P style="margin-left: 15px;font-size: 22px;" *ngIf="recntCount != 0"><b>{{'Recent Highlights' | translate}}</b></P>
 
 
         <ion-slides pager="false" [options]="slideOpts" *ngIf="recntCount != 0">
