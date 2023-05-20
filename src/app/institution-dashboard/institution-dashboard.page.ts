@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-institution-dashboard',
@@ -20,10 +21,10 @@ export class InstitutionDashboardPage implements OnInit {
   profileViewCount:any;
   oniRating:any;
   instCountlist:[];
-  constructor(public router:Router,public storageservice: StorageService) { }
+  constructor(public router:Router,public storageservice: StorageService,private translate: TranslateService,) { }
 
   ngOnInit() {
-
+    this.translate.setDefaultLang('en');
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/institution-dashboard') {
         this.setSelectedTab('apps');
