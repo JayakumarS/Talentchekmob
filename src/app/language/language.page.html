@@ -6,7 +6,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Language settings</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'editGeneralInfo' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-item class="checkbox-item" *ngFor="let lng of languages">
+    <ion-item class="checkbox-item" *ngFor="let lng of languages"  (click)="select(lng.value)">
         <ion-avatar slot="start">
             <img [src]="lng.img" />
         </ion-avatar>
