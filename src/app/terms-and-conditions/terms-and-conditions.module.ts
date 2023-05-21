@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TermsAndConditionsPageRoutingModule } from './terms-and-conditions-routing.module';
 
 import { TermsAndConditionsPage } from './terms-and-conditions.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TermsAndConditionsPageRoutingModule
+    TermsAndConditionsPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [TermsAndConditionsPage]
 })
