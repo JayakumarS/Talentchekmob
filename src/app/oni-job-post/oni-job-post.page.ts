@@ -810,12 +810,6 @@ export class OniJobPostPage implements OnInit {
   goto_more(){
     this.router.navigate(['/settings']);
   }
-  async openLanguagePopOver($event) {
-    const popover = await this.popoverController.create({
-      component: LanguagePopoverPage,
-      event: $event
-    });
-    await popover.present();
-  }
+  
  
 }

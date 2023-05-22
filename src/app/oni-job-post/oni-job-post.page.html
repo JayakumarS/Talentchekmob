@@ -15,12 +15,6 @@
 
 <ion-content>
 
-    <ion-buttons style="padding-top:10px">
-        <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
-            <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
-            <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
-        </ion-button>
-    </ion-buttons>
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
