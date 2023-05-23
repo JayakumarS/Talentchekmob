@@ -5,7 +5,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_matches_list()" style="margin-top:21%"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">View Matches</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'View Matches' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -27,7 +27,7 @@
                             <img alt="" src="\assets\img\match.png" />
                         </ion-col>
                         <ion-col size="6">
-                            <p class="title-match">Matched Profile</p>
+                            <p class="title-match">{{'JobPostInsti.matchedProf' | translate}}</p>
                         </ion-col>
                         <ion-col size="3">
                             <p class="title-count">{{matchedCount}}</p>
@@ -46,7 +46,7 @@
                             <img alt="" src="\assets\img\applications.png" />
                         </ion-col>
                         <ion-col size="6">
-                            <p class="title-match">Received Applications</p>
+                            <p class="title-match">{{'Received Applications' | translate}}</p>
                         </ion-col>
                         <ion-col size="3">
                             <p class="title-count">{{applicationsReceivedCount}}</p>
@@ -67,7 +67,7 @@
                             <img alt="" src="\assets\img\auctioneer.png" />
                         </ion-col>
                         <ion-col size="6">
-                            <p class="title-match">Bids Received</p>
+                            <p class="title-match">{{'Bids Received' | translate}}</p>
                         </ion-col>
                         <ion-col size="3">
                             <p class="title-count">{{orgBidCount}}</p>
@@ -85,7 +85,7 @@
         <br>
         <br>
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
-        justify-content: space-around;">&nbsp;&nbsp;&nbsp;Matched Profiles </span>
+        justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'JobPostInsti.matchedProf' | translate}} </span>
 
         <ion-card class="profilesearchcard" *ngFor="let match of matchedList" (click)="profileView(match.userid,match.accounttype,match.jobseekername)">
             <ion-card-content style="padding-bottom: 0px;">
@@ -109,7 +109,7 @@
                     </ion-col>
                     <ion-col size="10" style="    margin-top: -13%;">
                         <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
-                            {{match.jobseekerexperienceno}} of relevant experience</ion-title>
+                            {{match.jobseekerexperienceno}} {{'JobAppliRec.relExp' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -123,7 +123,7 @@
         <br>
         <br>
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
-        justify-content: space-around;">&nbsp;&nbsp;&nbsp;Application Received </span>
+        justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Received Applications' | translate}} </span>
 
         <ion-card class="profilesearchcard" *ngFor="let profile of applicationsReceivedList" (click)="viewRecivedAppProfiles(profile.userid,profile.jspid)">
             <ion-card-content style="padding-bottom: 0px;">
@@ -160,7 +160,7 @@
     <div *ngIf="!heagerListFlag && bidsRecvFlag">
         <br>
         <br>
-        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;display: flex;justify-content: space-around;">&nbsp;&nbsp;&nbsp;Bids Recived </span>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;display: flex;justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Bids Received' | translate}} </span>
 
         <ion-card class="profilesearchcard" *ngFor="let bid of orgBidList" (click)="viewBidsRecvProfiles(bid.bidder,bid.bidid)">
             <ion-card-content style="padding-bottom: 0px;">
@@ -184,7 +184,7 @@
                     </ion-col>
                     <ion-col size="10" style="    margin-top: -13%;">
                         <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
-                            Expecting{{bid.salaryBudgetFrom}}-{{bid.salaryBudgetTo}} {{bid.salaryBudgetCurrency}} {{bid.salaryBudgetFrequency}}</ion-title>
+                            {{'Expecting' | translate}}{{bid.salaryBudgetFrom}}-{{bid.salaryBudgetTo}} {{bid.salaryBudgetCurrency}} {{bid.salaryBudgetFrequency}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>

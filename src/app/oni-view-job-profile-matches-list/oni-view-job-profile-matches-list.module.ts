@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { OniViewJobProfileMatchesListPageRoutingModule } from './oni-view-job-profile-matches-list-routing.module';
 
 import { OniViewJobProfileMatchesListPage } from './oni-view-job-profile-matches-list.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OniViewJobProfileMatchesListPageRoutingModule
+    OniViewJobProfileMatchesListPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [OniViewJobProfileMatchesListPage]
 })
