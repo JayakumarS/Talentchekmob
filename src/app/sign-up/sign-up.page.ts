@@ -74,7 +74,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
          password: ['', Validators.required],
         gender: ['', Validators.required],
         phoneNo: ['', Validators.compose([Validators.required])],
-        email: ['', Validators.compose([Validators.maxLength(70),Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+        email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
         dob: ['', Validators.required],    //Only for Android  
         address: [''],
         areaName: ['' ,Validators.required],

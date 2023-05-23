@@ -20,7 +20,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
 
     <form [formGroup]="profileForm">
 
@@ -87,13 +87,13 @@
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'email' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'email' | translate}}</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="email"></ion-input>
                         </ion-item>
-                        <div *ngIf="profileForm.controls.email.hasError('required') && profileForm.controls.email.touched">
+                        <!-- <div *ngIf="profileForm.controls.email.hasError('required') && profileForm.controls.email.touched">
                             <small style="color: #f70505;">{{'invalidEmail' | translate}}</small>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">{{'phoneNo' | translate}}<small style="color: #f70505;">*</small></ion-label>

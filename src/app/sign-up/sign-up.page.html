@@ -199,13 +199,13 @@
 
 
                             <ion-label class="labels">{{'stateProvince' | translate }} <small style="color: #f70505;">*</small></ion-label>
-                            
+
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedState }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedState != undefined && selectedState != ''" name="close-circle" (click)="removeState()"style="color: black;"></ion-icon>
+                                <ion-icon *ngIf="selectedState != undefined && selectedState != ''" name="close-circle" (click)="removeState()" style="color: black;"></ion-icon>
                                 <ion-input (ionInput)="onStateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
                             </ion-item>
 
@@ -214,7 +214,7 @@
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-                            
+
                             <!-- <ion-item fill="outline" class="input-field">
 
                                 <ion-select placeholder="Select State" (ionChange)="goTostateSelectedItem($event.target.value)" formControlName="stateName">
@@ -228,13 +228,13 @@
                             </div>
 
                             <ion-label class="labels">{{'areaName' | translate }} <small style="color: #f70505;">*</small></ion-label>
-                            
+
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedCity }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedCity != undefined && selectedCity != ''" name="close-circle" (click)="removeCity()"style="color: black;"></ion-icon>
+                                <ion-icon *ngIf="selectedCity != undefined && selectedCity != ''" name="close-circle" (click)="removeCity()" style="color: black;"></ion-icon>
                                 <ion-input (ionInput)="onCitySearch($event.target.value)" [formControl]="citySearchCtrl"></ion-input>
                             </ion-item>
 
@@ -243,8 +243,8 @@
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-                            
-                            
+
+
                             <!-- <ion-item fill="outline" class="input-field">
                                 <ion-select placeholder="Select city" formControlName="areaName">
                                     <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
@@ -289,13 +289,13 @@
                                 <small style="color: #f70505;">{{'contactValid' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">{{'email' | translate }} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'email' | translate }} </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="email" formControlName="email" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>
-                            <div *ngIf=" talentform.controls.email.hasError('required') && talentform.controls.email.touched">
+                            <!-- <div *ngIf=" talentform.controls.email.hasError('required') && talentform.controls.email.touched">
                                 <small style="color: #f70505;">{{'emailId_Req' | translate }}</small>
-                            </div>
+                            </div> -->
                             <div *ngIf="talentform.controls.email.hasError('pattern')">
                                 <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
                             </div>

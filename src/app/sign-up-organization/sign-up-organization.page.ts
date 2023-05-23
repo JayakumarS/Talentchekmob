@@ -83,7 +83,7 @@ base64img1: string = '';
       mobileNo:['',Validators.required],
       state: ['',Validators.required],
       pincode: ['',Validators.required],
-      uploadImg: ['',Validators.required],
+      uploadImg: ['',],
       referralCode: [''],
       profileVisibility: ['', ''],
      countryId:[''],

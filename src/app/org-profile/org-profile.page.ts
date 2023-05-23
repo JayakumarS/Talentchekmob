@@ -101,7 +101,7 @@ export class OrgProfilePage implements OnInit {
       permState: [""],
       permCountry: [""],
       permPinCode: [""],
-       orgLogo: ["",[Validators.required]],
+       orgLogo: ["",],
       details: ["", [Validators.required]],
       currentUserId: [""]
     })
