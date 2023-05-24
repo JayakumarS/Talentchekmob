@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CategoryPopupPageRoutingModule } from './category-popup-routing.module';
 
 import { CategoryPopupPage } from './category-popup.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CategoryPopupPageRoutingModule
+    CategoryPopupPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [CategoryPopupPage]
 })
