@@ -119,7 +119,7 @@
       "subscription": "சந்தா"
     },
 
-    "hello":"ஹலோ அன்பே!",
+    "hello":"ஹலோ!",
     "createAccount":"கணக்கை உருவாக்குவோம். இது மிகவும் எளிமையானது!",
 
     "registrationHeader":"பதிவு",
@@ -181,9 +181,9 @@
       "uploadImagereq":"பதிவேற்ற படத்தை உள்ளிடவும்",
       "next":"அடுத்தது",
       "Already a Talentchek member?":"ஏற்கனவே Talentchek உறுப்பினரா?",
-      "ProfileInfo":"சுயவிவரத் தகவல்",
-      "AddressInfo":"முகவரி தகவல்",
-      "RegistrationInfo":"பதிவு தகவல்",
+      "ProfileInfo":"சுயவிவரம்",
+      "AddressInfo":"முகவரி",
+      "RegistrationInfo":"பதிவு",
       "contactNo": "தொடர்பு தொலைபேசி எண்",
       "contactValid": "செல்லுபடியாகும் மொபைல் எண்ணை உள்ளிடவும்.",
       "emailId_Req": "மின்னஞ்சலை உள்ளிடவும்",
