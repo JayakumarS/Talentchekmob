@@ -215,7 +215,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
                       'longitude':0
   
                     }
-  
+                    localStorage.setItem('emailId', postData.emailId);
                     console.log(`Posting Data: ${JSON.stringify(postData)}`);
   
                     var signUpServiceUrl = "api/auth/app/registration/IndividualRegister";
