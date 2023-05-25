@@ -12,6 +12,7 @@
 </ion-header>
 
 <ion-content>
+    <form>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -39,8 +40,18 @@
         </div>
 
 
+       
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;">&nbsp;&nbsp;&nbsp;{{'Posted Jobs List' | translate}}</span>
+        <ion-row *ngIf="jobPostList == ''">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="Silhouette of a person's head" src="\assets\img\jobs empty.png" />
+                </ion-avatar>
+                <div style="display: flex;justify-content: center;" >{{'No Results to Display' | translate}}</div>
+            </ion-col>
+        </ion-row>
         <div class="display-justify" *ngFor="let cElement of jobPostList">
+            
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
                 <ion-row>
@@ -123,4 +134,5 @@
   
 </button>
     </div>
+</form>
 </ion-content>
