@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     ReactiveFormsModule,
     ProfileSearchPageRoutingModule,
-    TranslateModule
+    TranslateModule.forChild(),
   ],
   declarations: [ProfileSearchPage]
 })

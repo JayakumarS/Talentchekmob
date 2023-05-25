@@ -9,7 +9,7 @@
     </ion-col>
 </ion-row>
 <div class="button-content">
-<ion-label style=" font-size: 20px;   margin-left: 4%;">Rate the Organisation  </ion-label>
+<ion-label style=" font-size: 20px;   margin-left: 4%;">{{'ProfessionalExp.orgRating' | translate}}  </ion-label>
 <div style="  margin-left: 9%;">
     <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
         <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
@@ -19,7 +19,7 @@
 </div>
 </div>
 <div class="button-content" style="margin-top: -7%;">
-<ion-label class="labels" style=" font-size: 20px;   margin-left: 4%;">Short Feedback about Organisation</ion-label>
+<ion-label class="labels" style=" font-size: 20px;   margin-left: 4%;">{{'ProfessionalExp.orgFeedBack' | translate}}</ion-label>
 
 <ion-item style=" margin-top: 12px;width: 90%;margin-left: 4%;"fill="outline" class="input-field">
     <ion-textarea style="height: 171px;" placeholder="Give us your thoughts..." formControlName="remarks"></ion-textarea>
@@ -27,10 +27,10 @@
 </div>
 
 <div class="display-justify" style="padding-top: 10%;">
-    <button class="but1" (click)="updateRatingExt()">Submit</button>
+    <button class="but1" (click)="updateRatingExt()">{{'ProfessionalExp.submit' | translate}}</button>
 </div>
 <div class="display-justify">
-  <button class="but2" (click)="move()">Skip </button>
+  <button class="but2" (click)="move()">{{'Skip' | translate}} </button>
 </div>
 </form>
 </ion-content>

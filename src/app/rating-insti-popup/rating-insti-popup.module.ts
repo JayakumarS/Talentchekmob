@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RatingInstiPopupPageRoutingModule } from './rating-insti-popup-routing.module';
 
 import { RatingInstiPopupPage } from './rating-insti-popup.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { RatingInstiPopupPage } from './rating-insti-popup.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    RatingInstiPopupPageRoutingModule
+    RatingInstiPopupPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [RatingInstiPopupPage]
 })
