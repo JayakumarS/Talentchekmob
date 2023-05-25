@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ApplyForJobPageRoutingModule } from './apply-for-job-routing.module';
 
 import { ApplyForJobPage } from './apply-for-job.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ApplyForJobPageRoutingModule
+    ApplyForJobPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ApplyForJobPage]
 })

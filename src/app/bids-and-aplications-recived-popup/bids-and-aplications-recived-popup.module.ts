@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BidsAndAplicationsRecivedPopupPageRoutingModule } from './bids-and-aplications-recived-popup-routing.module';
 
 import { BidsAndAplicationsRecivedPopupPage } from './bids-and-aplications-recived-popup.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BidsAndAplicationsRecivedPopupPageRoutingModule
+    BidsAndAplicationsRecivedPopupPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [BidsAndAplicationsRecivedPopupPage]
 })
