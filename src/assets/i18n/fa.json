@@ -1689,7 +1689,15 @@
     "Verifier name is required":"نام تأیید کننده الزامی است",
     "In special character":"فقط در کاراکتر خاص مجاز است",
     "Verifier name must be atleast 3 characters long":"نام تأیید کننده باید حداقل 3 نویسه داشته باشد",
-    "help":"کمک"
+    "help":"کمک",
+    "Activity added!":"فعالیت اضافه شد!",
+    "activityValidation":"آیا مایلید این فعالیت توسط سازمان معتبر تأیید شود؟",
+    "Pro Tip":"نکته حرفه ای",
+    "actContent":"تأیید تجربیات خود به طور دائم به شما کمک می کند تا به استخدام کنندگان، مشتریان و مشتریان ثابت کنید که همان چیزی هستید که می گویید.",
+    "Yes Request Verification":"بله، درخواست تأیید",
+    "Skip Verification for Now":"فعلاً از تأیید صحت رد شوید",
+    "Registration Successful!":"ثبتنام موفقیتآمیز!",
+    "Confirm mail":"لطفاً صندوق ورودی خود را برای تأیید آدرس ایمیل خود بررسی کنید.",
 
 
 

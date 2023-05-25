@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AwesomePageRoutingModule } from './awesome-routing.module';
 
 import { AwesomePage } from './awesome.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AwesomePageRoutingModule
+    AwesomePageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [AwesomePage]
 })

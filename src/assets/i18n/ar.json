@@ -1684,7 +1684,18 @@
     "Verifier name is required":"اسم المدقق مطلوب",
     "In special character":"في الأحرف الخاصة فقط. غير مسموح به",
     "Verifier name must be atleast 3 characters long":"يجب ألا يقل اسم المدقق عن 3 أحرف",
-    "help":"يساعد"
+    "help":"يساعد",
+    "Activity added!":"تمت إضافة النشاط!",
+    "activityValidation":"هل ترغب في الحصول على هذا النشاط المصادق عليه من قبل المنظمة المعتمدة؟",
+    "Pro Tip":"نصيحة محترف",
+    "actContent":"سيساعدك التحقق من خبراتك بشكل دائم في أن تثبت لموظفي التوظيف والعملاء والعملاء أنك شخصيتك.",
+    "Yes Request Verification":"نعم ، طلب التحقق",
+    "Skip Verification for Now":"تخطي التحقق الآن",
+    "Registration Successful!":"تم التسجيل بنجاح!",
+    "Confirm mail":"يرجى التحقق من صندوق الوارد الخاص بك لتأكيد عنوان بريدك الإلكتروني.",
+
+
+
 
 
 

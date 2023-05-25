@@ -8,12 +8,15 @@ import { ActivityVerificationPageRoutingModule } from './activity-verification-r
 
 import { ActivityVerificationPage } from './activity-verification.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ActivityVerificationPageRoutingModule
+    ActivityVerificationPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ActivityVerificationPage]
 })

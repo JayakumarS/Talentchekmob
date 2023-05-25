@@ -1778,7 +1778,19 @@
     "Verifier name is required":"Verifier name is required",
     "In special character":"In special character only .is allowed",
     "Verifier name must be atleast 3 characters long":"Verifier name must be atleast 3 characters long",
-    "help":"Help"
+    "help":"Help",
+    "Activity added!":"Activity added!",
+    "activityValidation":"Would you like to get this activity validated by the accredited organization?",
+    "Pro Tip":"Pro Tip",
+    "actContent":"Having your experiences permanently verified will help you prove to recruiters, clients,and customers that you are who you say you are.",
+    "Yes Request Verification":"Yes, Request Verification",
+    "Skip Verification for Now":"Skip Verification for Now",
+    "Registration Successful!":"Registration Successful!",
+    "Confirm mail":"Please check your inbox to confirm your email address.",
+    
+
+
+
 
 
 
