@@ -7,7 +7,7 @@
         </div>  
         <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 20px;display: flex;
         align-items: center;align-items: center;">
-          Profile view
+          {{'AddJobPost.profileVw' | translate}}
         </div> 
         <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
         </div>
@@ -74,15 +74,15 @@
     <div class="custom-button-details" *ngFor ="let title of basicProfileDetails">
       <div style="display: flex;flex-direction: column;align-items: flex-start;" >
         <div style="display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-          <div style="font-size: 16px; font-weight: 800;color: #3F51B5">Location</div>
+          <div style="font-size: 16px; font-weight: 800;color: #3F51B5">{{'JobSearch.location' | translate}}</div>
           <div style="color:gray;font-size: 14px;">
            {{title.userlocation}}
           </div>
-          <div style="font-size: 16px; font-weight: 800;color: #3F51B5">Phone no</div>
+          <div style="font-size: 16px; font-weight: 800;color: #3F51B5">{{'phoneNo' | translate}}</div>
           <div style="color:gray;font-size: 14px;">
             {{title.phone}}
           </div>
-          <div style="font-size: 16px; font-weight: 800;color: #3F51B5">Email</div>
+          <div style="font-size: 16px; font-weight: 800;color: #3F51B5">{{'email' | translate}}</div>
           <div style="color:gray;font-size: 14px;">
             {{title.email}}
           </div>
@@ -96,7 +96,7 @@
   <div  class="custom-button-details" *ngFor ="let title of basicProfileDetails"> 
     <div *ngIf="title.languages != '' ">
       <div style="font-size: 16px; font-weight: 800;color: #3F51B5">
-        Languages 
+        {{'Languages' | translate}} 
       </div>
       <div style="font-size: 13px;">
         {{title.languages}}
@@ -104,7 +104,7 @@
     </div>
     <div *ngIf="title.hobbies != ''">
       <div style="font-size: 16px;font-weight: 800; color: #3F51B5">
-        Hobbies & Interests
+        {{'Hobbies & Interests' | translate}}
       </div>
       <div style="font-size: 13px;">
         {{title.hobbies}}
@@ -118,7 +118,7 @@
 <div class="display-justify" *ngIf="experienceList.length != 0">
   <div class="custom-button-details">
    <div style="display: flex; justify-content: flex-start;align-items: center;    padding-bottom: 15px;">   
-    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">WORK EXPERIENCE</p> 
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">{{'ProfileIndividual.wrkExp' | translate}}</p> 
 </div>
 <div>
   <div class="contact-details" style="padding-bottom: 6px;"    *ngFor ="let exp of experienceList">
@@ -154,7 +154,7 @@
 <div class="display-justify"  *ngIf="educationList.length != 0">
   <div class="custom-button-details">
   <div style="display: flex; justify-content: flex-start;align-items: center;  padding-bottom: 15px;">  
-    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">EDUCATION</p> 
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">{{'profilein.Education' | translate}}</p> 
 </div>
 <div class="contact-details" style="padding-bottom: 6px;"   *ngFor ="let edu of educationList"> 
   <div style="display: flex;">
@@ -195,7 +195,7 @@
 <div class="display-justify" *ngIf="certificationsList.length != 0">
   <div class="custom-button-details">
   <div style="display: flex; justify-content: flex-start;align-items: center;">   
-    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">PATENTS, PUBLICATIONS & CERTIFICATIONS</p> 
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">{{'Patents,publications,certifications' | translate}}</p> 
 </div>
 <div style="margin-bottom: 15px;" *ngFor ="let ppc of certificationsList">  
   <div style="color:rgb(0, 0, 0);font-size: 15px;font-weight: bold;"> {{ppc.certificationName}}</div> 
@@ -208,7 +208,7 @@
 <div class="display-justify" *ngIf="clubsList.length != 0">
   <div class="custom-button-details">
   <div style="display: flex; justify-content: flex-start;align-items: center;">   
-    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">CLUBS & VOLUNTEER WORK</p> 
+    <p style="font-size: 16px;font-weight: bold;color: #3F51B5;">{{'clubs & volunteer' | translate}}</p> 
 </div>
 <div style="margin-bottom: 15px;" *ngFor ="let club of clubsList"> 
   <div style="display:flex">
