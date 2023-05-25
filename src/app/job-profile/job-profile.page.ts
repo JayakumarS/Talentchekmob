@@ -411,12 +411,13 @@ nextStep(currentStep: string, nextStep: string) {
     this.storageservice.getrequest(getIndustryListUrl).subscribe(result => {
      if (result["success"] == true) {
       this.industryList = result["industryList"]; 
+
       if(this.catagoaryType.includes('IC10')){
         this.jobProfileForm.patchValue({
-          'industry': [this.industryList[46].id1.toString()]
+          'industry': '25'
 
           });
-          this.jobtitleList(this.industryList[46].id1);
+          this.jobtitleList('25');
 
       }else{
         this.industryList = result["industryList"];

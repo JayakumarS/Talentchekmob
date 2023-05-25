@@ -502,7 +502,7 @@
 
                     <ion-label class="labels">{{'AddJobPost.langReq' | translate}}<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field">
-                        <ion-select formControlName="reqLanguages" placeholder="{{'AddJobProfile.lang' | translate}}" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
+                        <ion-select formControlName="reqLanguages" placeholder="{{'AddJobPost.lang' | translate}}" multiple="true" (click)="onSelectionChange($event)" cancelText="Cancel" okText="Okay">
                             <ion-select-option *ngFor="let title of languageList" value="{{title.id}}">{{title.text}}</ion-select-option>
                         </ion-select>
                     </ion-item>
