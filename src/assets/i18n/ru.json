@@ -1683,7 +1683,8 @@
     "Save & Continue":"Сохранить и продолжить",
     "Verifier name is required":"Укажите имя верификатора.",
     "In special character":"Только в специальном символе разрешено.",
-    "Verifier name must be atleast 3 characters long":"Имя верификатора должно содержать не менее 3 символов."
+    "Verifier name must be atleast 3 characters long":"Имя верификатора должно содержать не менее 3 символов.",
+    "help":"помощь"
 
 
     

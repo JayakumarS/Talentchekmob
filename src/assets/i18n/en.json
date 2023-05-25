@@ -1777,7 +1777,8 @@
     "Save & Continue": "Save & Continue",
     "Verifier name is required":"Verifier name is required",
     "In special character":"In special character only .is allowed",
-    "Verifier name must be atleast 3 characters long":"Verifier name must be atleast 3 characters long"
+    "Verifier name must be atleast 3 characters long":"Verifier name must be atleast 3 characters long",
+    "help":"Help"
 
 
 

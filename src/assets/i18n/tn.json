@@ -1755,7 +1755,8 @@
     "Save & Continue":"சேமித்து தொடரவும்",
     "Verifier name is required":"சரிபார்ப்பவரின் பெயர் தேவை",
     "In special character":"சிறப்புத் தன்மையில் மட்டுமே .அனுமதிக்கப்படுகிறது",
-    "Verifier name must be atleast 3 characters long":"சரிபார்ப்பானின் பெயர் குறைந்தது 3 எழுத்துகள் நீளமாக இருக்க வேண்டும்"
+    "Verifier name must be atleast 3 characters long":"சரிபார்ப்பானின் பெயர் குறைந்தது 3 எழுத்துகள் நீளமாக இருக்க வேண்டும்",
+    "help":"உதவி"
 
 
   }

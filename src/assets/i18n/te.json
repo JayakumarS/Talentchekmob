@@ -1689,7 +1689,8 @@
     "Save & Continue":"సేవ్ & కొనసాగించు",
     "Verifier name is required":"వెరిఫైయర్ పేరు అవసరం",
     "In special character":"ప్రత్యేక పాత్రలో మాత్రమే అనుమతించబడుతుంది",
-    "Verifier name must be atleast 3 characters long":"వెరిఫైయర్ పేరు తప్పనిసరిగా కనీసం 3 అక్షరాల పొడవు ఉండాలి"
+    "Verifier name must be atleast 3 characters long":"వెరిఫైయర్ పేరు తప్పనిసరిగా కనీసం 3 అక్షరాల పొడవు ఉండాలి",
+    "help":"సహాయం"
 
 
 
