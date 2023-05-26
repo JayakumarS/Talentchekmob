@@ -166,6 +166,8 @@
       "register": "ثبت نام",
 
     "CorReg": {
+      "OrganizationType":"نوع سازمان",
+      "OrganisationRegiNo":"شماره ثبت سازمان (CIN، ACRA و غیره)",
       "organization": "سازمان",
       "headerQuote": "شناسه حرفه ای جهانی منحصر به فرد خود را دریافت کنید",
       "orgName": "نام سازمان",
@@ -1723,7 +1725,10 @@
     "orgRegistration": "ثبت سازمان",
     "orgDesc": "برای استارت آپ ها، شرکت ها، باشگاه ها و انجمن ها",
     "institutionRegistration":"ثبت موسسه",
-    "instiDesc": "برای مدارس، کالج ها، دانشگاه ها و موسسات آموزشی"
+    "instiDesc": "برای مدارس، کالج ها، دانشگاه ها و موسسات آموزشی",
+    "ProfileInfo":"اطلاعات نمایه",
+    "AddressInfo":"اطلاعات آدرس",
+    "RegistrationInfo":"اطلاعات ثبت نام"
 
     
     

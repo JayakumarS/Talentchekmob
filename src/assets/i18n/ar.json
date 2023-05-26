@@ -167,6 +167,7 @@
   
     "CorReg": {
       "organization": "منظمة",
+      "OrganisationRegiNo":"رقم تسجيل المؤسسة (CIN ، ACRA ، إلخ.)",
       "headerQuote": "احصل على معرّف UNIQUE Global Professional ID الخاص بك",
       "orgName": "اسم المنظمة",
       "reqOrgName": "الرجاء إدخال اسم المنظمة",
@@ -205,7 +206,8 @@
       "tAndC": "الأحكام والشروط",
       "register": "يسجل",
       "domain": "اختصاص",
-      "reqDomain": "الرجاء تحديد المجال"
+      "reqDomain": "الرجاء تحديد المجال",
+      "OrganizationType":"نوع المنظمة"
     },
     "Consent": {
       "header": "نموذج الموافقة",
@@ -1718,7 +1720,10 @@
     "orgRegistration": "تسجيل المنظمة",
     "orgDesc": "للشركات الناشئة والنوادي والجمعيات",
     "institutionRegistration":"تسجيل المؤسسة",
-    "instiDesc": "للمدارس والكليات والجامعات ومعاهد التدريب"
+    "instiDesc": "للمدارس والكليات والجامعات ومعاهد التدريب",
+    "ProfileInfo":"معلومات الشخصي",
+    "AddressInfo":"معلومات العنوان",
+    "RegistrationInfo":"معلومات التسجيل"
 
     
 

@@ -155,7 +155,7 @@
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate }}</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'profilein.Next' | translate }}</ion-button>
                         </div>
 
                         <div class="line-with-text">
@@ -170,7 +170,7 @@
                     </div>
                     <div id="test-l-2" class="content">
                         <div class="button-content">
-                            <ion-label class="labels">{{'Address' | translate }}</ion-label>
+                            <ion-label class="labels">{{'profileorg.Address' | translate }}</ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-textarea formControlName="address" placeholder="{{'Enter' | translate}}"></ion-textarea>
                             </ion-item>
@@ -224,7 +224,7 @@
                                 </ion-select>
                             </ion-item> -->
                             <div *ngIf=" talentform.controls.stateName.hasError('required') && talentform.controls.stateName.touched">
-                                <small style="color: #f70505;">State/Province is required</small>
+                                <small style="color: #f70505;">{{'profileorg.State name is required' | translate}}</small>
                             </div>
 
                             <ion-label class="labels">{{'areaName' | translate }} <small style="color: #f70505;">*</small></ion-label>
@@ -253,7 +253,7 @@
                                 </ion-select>
                             </ion-item> -->
                             <div *ngIf=" talentform.controls.areaName.hasError('required') && talentform.controls.areaName.touched">
-                                <small style="color: #f70505;">City is required</small>
+                                <small style="color: #f70505;">{{'profileorg.City name is required' | translate}}</small>
                             </div>
                             <ion-label class="labels">{{'pinZipCode' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -265,7 +265,7 @@
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate }}</ion-button>
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'profilein.Next' | translate }}</ion-button>
                         </div>
 
                         <div class="line-with-text">

@@ -72,7 +72,7 @@
                             <ion-label class="labels">{{'CorReg.OrganizationType' | translate}}<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
 
-                                <ion-select placeholder="{{'type' | translate }}" formControlName="orgType">
+                                <ion-select placeholder="{{'CorReg.OrganizationType' | translate}}" formControlName="orgType">
                                     <ion-select-option *ngFor="let Type of orgTypeList" [value]="Type.id">
                                         {{Type.text}}</ion-select-option>
 
@@ -83,7 +83,7 @@
                             </div>
                             <ion-label class="labels">{{'CorReg.domain' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-select placeholder="{{'domain' | translate }}" formControlName="domainId">
+                                <ion-select placeholder="{{'CorReg.domain' | translate}}" formControlName="domainId">
                                     <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
                                         {{domain.text}}</ion-select-option>
 
@@ -141,7 +141,7 @@
                               </div> -->
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -157,7 +157,7 @@
                     </div>
                     <div id="test-l-2" class="content">
                         <div class="button-content">
-                            <ion-label class="labels">{{'CorReg.address' | translate}}</ion-label>
+                            <ion-label class="labels">{{'profileorg.Address' | translate}}</ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-textarea placeholder="{{'Enter' | translate}}" formControlName="address"></ion-textarea>
                             </ion-item>
@@ -229,7 +229,7 @@
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -255,7 +255,7 @@
                                 <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' | translate}} </small>
                             </div>
 
-                            <ion-label class="labels">{{'CorReg.OrganizationEemail' | translate}} <small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'CorReg.orgEmail' | translate}} <small style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="emailId"></ion-input>
