@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -8,6 +8,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './language.service';
 import { timer } from 'rxjs/internal/observable/timer';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 //import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 @Component({
@@ -37,10 +38,12 @@ loading = false;
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private zone: NgZone,
     public router: Router,
     public storageservice: StorageService,
     public nativeStorage: NativeStorage,
     private translate: TranslateService,
+    private deeplinks: Deeplinks,
     private languageService: LanguageService
     //private push: Push
   ) {
@@ -207,6 +210,7 @@ loading = false;
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.watchLoading();
+      this.setupDeepLinks();
 
 
       // subscribe to a topic
@@ -333,6 +337,33 @@ loading = false;
        }
     });
 
+}
+
+setupDeepLinks() {
+  this.deeplinks.route({
+    '/:param1': 'profile-vcard',
+  }).subscribe(match => {
+    // match.$route - the route we matched, which is the matched entry from the arguments to route()
+    // match.$args - the args passed in the link
+    // match.$link - the full link data  
+   // this.router.navigate(['/profile-vcard/:param1']);
+    console.log('Successfully matched route', match.$args);
+    console.log('Successfully matched route', match.$link);
+    console.log('Successfully matched route', match.$route);
+
+    const internalPath = `/${match.$route}/${match.$args['param1']}`;
+
+
+     // Run the navigation in the Angular zone
+     this.zone.run(() => {
+      this.router.navigateByUrl(internalPath);
+    });
+    
+    // You can then navigate to the desired page based on the matched route and arguments
+  }, nomatch => {
+    // nomatch.$link - the full link data
+    console.error('Got a deeplink that didn\'t match', nomatch.$link);
+  });
 }
 
 

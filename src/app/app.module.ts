@@ -20,6 +20,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 
 //import { FCM } from '@ionic-native/fcm/ngx';
 
@@ -84,6 +85,7 @@ export function createTranslateLoader(http: HttpClient) {
     DocumentViewer,
     SMS,
     FCM,
+    Deeplinks,
     SocialSharing,
     NativeStorage,
     LocalNotifications,
