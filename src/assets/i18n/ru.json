@@ -1708,7 +1708,17 @@
     "Short Feedback about Institution":"Краткий отзыв об учреждении",
     "Reset Password":"Сброс пароля",
     "Using Email Address":"Использование адреса электронной почты",
-    "Using Phone Number":"Использование номера телефона"
+    "Using Phone Number":"Использование номера телефона",
+    "hello":"Привет, дорогой!",
+    "createAccount":"Давайте создадим аккаунт. Это очень просто!",
+    "Already a Talentchek member?":"Уже член Talentchek",
+    "registrationHeader":"Постановка на учет",
+    "individualRegistration":"Индивидуальная регистрация",
+    "indDesc":"Для всех и каждого, кто хотел бы поддерживать проверенное портфолио",
+    "orgRegistration": "Регистрация организации",
+    "orgDesc": "Для стартапов, корпораций, клубов и ассоциаций",
+    "institutionRegistration":"Регистрация учреждения",
+    "instiDesc": "Для школ, колледжей, университетов и учебных заведений"
 
     
 

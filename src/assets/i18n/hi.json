@@ -1711,7 +1711,17 @@
     "Short Feedback about Institution":"संस्थान के बारे में संक्षिप्त प्रतिक्रिया",
     "Reset Password":"पासवर्ड रीसेट",
     "Using Email Address":"ईमेल पते का उपयोग करना",
-    "Using Phone Number":"फ़ोन नंबर का उपयोग करना"
+    "Using Phone Number":"फ़ोन नंबर का उपयोग करना",
+    "hello":"हैलो दोस्त!",
+    "createAccount":"चलिए एक अकाउंट बनाते हैं। यह बहुत सरल है!",
+    "Already a Talentchek member?":"पहले से ही टैलेंचेक सदस्य हैं",
+    "registrationHeader":"पंजीकरण",
+    "individualRegistration":"व्यक्तिगत पंजीकरण",
+    "indDesc":"किसी के लिए और हर किसी के लिए जो एक सत्यापित पोर्टफोलियो बनाए रखना चाहते हैं",
+    "orgRegistration": "संगठन पंजीकरण",
+    "orgDesc": "स्टार्टअप्स, कॉरपोरेट्स, क्लब और एसोसिएशन के लिए",
+    "institutionRegistration":"संस्थान पंजीकरण",
+    "instiDesc": "स्कूलों, कॉलेजों, विश्वविद्यालयों और प्रशिक्षण संस्थानों के लिए"
 
     
     

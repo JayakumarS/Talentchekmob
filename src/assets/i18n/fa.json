@@ -1713,7 +1713,17 @@
     "Short Feedback about Institution":"بازخورد کوتاه در مورد موسسه",
     "Reset Password":"بازنشانی رمز عبور",
     "Using Email Address":"با استفاده از آدرس ایمیل",
-    "Using Phone Number":"با استفاده از شماره تلفن"
+    "Using Phone Number":"با استفاده از شماره تلفن",
+    "hello":"سلام عزیزم!",
+    "createAccount":"بیایید یک حساب کاربری ایجاد کنیم. خیلی ساده است",
+    "Already a Talentchek member?":"در حال حاضر عضو Talentchek",
+    "registrationHeader":"ثبت",
+    "individualRegistration":"ثبت نام انفرادی",
+    "indDesc":"برای هر کسی و هر کسی که مایل به حفظ یک نمونه کار تایید شده است",
+    "orgRegistration": "ثبت سازمان",
+    "orgDesc": "برای استارت آپ ها، شرکت ها، باشگاه ها و انجمن ها",
+    "institutionRegistration":"ثبت موسسه",
+    "instiDesc": "برای مدارس، کالج ها، دانشگاه ها و موسسات آموزشی"
 
     
     

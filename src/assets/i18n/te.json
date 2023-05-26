@@ -1714,7 +1714,17 @@
     "Short Feedback about Institution":"సంస్థ గురించి చిన్న అభిప్రాయం",
     "Reset Password":"రహస్యపదాన్ని మార్చుకోండి",
     "Using Email Address":"ఇమెయిల్ చిరునామాను ఉపయోగించడం",
-    "Using Phone Number":"ఫోన్ నంబర్‌ని ఉపయోగించడం"
+    "Using Phone Number":"ఫోన్ నంబర్‌ని ఉపయోగించడం",
+    "hello":"హలో డియర్!",
+    "createAccount":"ఒక ఖాతాను క్రియేట్ చేద్దాం. ఇది చాలా సులభం!",
+    "Already a Talentchek member?":"ఇప్పటికే టాలెంట్‌చెక్ సభ్యుడు",
+    "registrationHeader":"నమోదు",
+    "individualRegistration":"వ్యక్తిగత నమోదు",
+    "indDesc":"ధృవీకరించబడిన పోర్ట్‌ఫోలియోను నిర్వహించాలనుకునే ఎవరికైనా మరియు ప్రతి ఒక్కరికీ",
+    "orgRegistration": "సంస్థ నమోదు",
+    "orgDesc": "స్టార్టప్‌లు, కార్పొరేట్‌లు, క్లబ్‌లు మరియు అసోసియేషన్‌ల కోసం",
+    "institutionRegistration":"సంస్థ నమోదు",
+    "instiDesc": "పాఠశాలలు, కళాశాలలు, విశ్వవిద్యాలయాలు మరియు శిక్షణా సంస్థల కోసం"
 
     
     

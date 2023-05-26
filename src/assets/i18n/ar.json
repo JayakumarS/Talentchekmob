@@ -1708,7 +1708,17 @@
     "Short Feedback about Institution":"ملاحظات قصيرة حول المؤسسة",
     "Reset Password":"إعادة تعيين كلمة المرور",
     "Using Email Address":"باستخدام عنوان البريد الإلكتروني",
-    "Using Phone Number":"باستخدام رقم الهاتف"
+    "Using Phone Number":"باستخدام رقم الهاتف",
+    "hello":"مرحباً عزيزي!",
+    "createAccount":"لنقم بإنشاء حساب. انه بسيط جدا",
+    "Already a Talentchek member?":"بالفعل عضو في Talentchek",
+    "registrationHeader":"تسجيل",
+    "individualRegistration":"التسجيل الفردي",
+    "indDesc":"لأي شخص وكل من يرغب في الاحتفاظ بمحفظة تم التحقق منها",
+    "orgRegistration": "تسجيل المنظمة",
+    "orgDesc": "للشركات الناشئة والنوادي والجمعيات",
+    "institutionRegistration":"تسجيل المؤسسة",
+    "instiDesc": "للمدارس والكليات والجامعات ومعاهد التدريب"
 
     
 

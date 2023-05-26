@@ -1713,8 +1713,17 @@
     "Short Feedback about Institution":"ಸಂಸ್ಥೆಯ ಬಗ್ಗೆ ಕಿರು ಪ್ರತಿಕ್ರಿಯೆ",
     "Reset Password":"ಪಾಸ್ವರ್ಡ್ ಮರುಹೊಂದಿಸಿ",
     "Using Email Address":"ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ಬಳಸುವುದು",
-    "Using Phone Number":"ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ಬಳಸುವುದು"
-
+    "Using Phone Number":"ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ಬಳಸುವುದು",
+    "hello":"ಹಲೋ, ಪ್ರಿಯ!",
+    "createAccount":"ಖಾತೆಯನ್ನು ರಚಿಸೋಣ. ಇದು ತುಂಬಾ ಸರಳವಾಗಿದೆ!",
+    "Already a Talentchek member?":"ಈಗಾಗಲೇ ಟ್ಯಾಲೆಂಟ್ಚೆಕ್ ಸದಸ್ಯ",
+    "registrationHeader":"ನೋಂದಣಿ",
+    "individualRegistration":"ವೈಯಕ್ತಿಕ ನೋಂದಣಿ",
+    "indDesc":"ಪರಿಶೀಲಿಸಿದ ಪೋರ್ಟ್‌ಫೋಲಿಯೊವನ್ನು ನಿರ್ವಹಿಸಲು ಬಯಸುವ ಯಾರಿಗಾದರೂ ಮತ್ತು ಪ್ರತಿಯೊಬ್ಬರಿಗೂ",
+    "orgRegistration": "ಸಂಸ್ಥೆಯ ನೋಂದಣಿ",
+    "orgDesc": "ಸ್ಟಾರ್ಟ್‌ಅಪ್‌ಗಳು, ಕಾರ್ಪೊರೇಟ್‌ಗಳು, ಕ್ಲಬ್‌ಗಳು ಮತ್ತು ಸಂಘಗಳಿಗೆ",
+    "institutionRegistration":"ಸಂಸ್ಥೆಯ ನೋಂದಣಿ",
+    "instiDesc": "ಶಾಲೆಗಳು, ಕಾಲೇಜುಗಳು, ವಿಶ್ವವಿದ್ಯಾಲಯಗಳು ಮತ್ತು ತರಬೇತಿ ಸಂಸ್ಥೆಗಳಿಗೆ"
     
     
 
