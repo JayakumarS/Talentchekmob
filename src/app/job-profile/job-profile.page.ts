@@ -19,6 +19,7 @@ import { LanguageService } from '../language.service';
 })
 export class JobProfilePage implements OnInit {
 
+
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -46,7 +47,7 @@ export class JobProfilePage implements OnInit {
   userId:string
 
   
-
+  jobsForm: FormGroup;
   jobProfileForm: FormGroup;
   industryList =[];
   jobTitleList = [];
@@ -105,34 +106,19 @@ export class JobProfilePage implements OnInit {
         jobSkills: [""],
         jobExperience:["",Validators.required],
         jobExperienceFormat: ["Year(s)"],
-      //   jobShiftDM: false,
-      //   jobShiftDT: false,
-      //   jobShiftDW: false,
-      //   jobShiftDTH: false,
-      //   jobShiftDF: false,
-      //   jobShiftDS: false,
-      //   jobShiftDSU: false,
-      //   jobShiftNM: false,
-      //   jobShiftNT: false,
-      //   jobShiftNW: false,
-      //   jobShiftNTH: false,
-      //   jobShiftNF: false,
-      //   jobShiftNS: false,
-      //   jobShiftNSU: false,
-      // jobExpWorkHrs: ["",Validators.required],
-      // jobStartDateFrom:["",Validators.required],
-      //  jobStartDateTo:["",Validators.required],
+
+       })
+        this.jobsForm = this.fb.group({
        location: [""],
       reqLanguages: ["",Validators.required],
-      // relocatewill: ["false"],
-      // travelwill: ["No"],
+      
       jobSalaryFrom: ["",Validators.required],
       jobSalaryTo: ["",Validators.required],
       jobSalaryCurrency: ["INR"],
       jobSalaryFrequency: ["Per Year"],
       currentUserId:[""]
-      }),
-
+    }),
+   
 
       this.getIndustry();
       this.getJobType();
@@ -178,6 +164,9 @@ export class JobProfilePage implements OnInit {
           for(let i=0;i<str.length;i++){
             var skill = str[i]
             this.selectedSkills.push(skill);
+            this.jobProfileForm.patchValue({
+              'jobSkills': this.selectedSkills,
+            })
           }
 
           //city
@@ -249,6 +238,13 @@ export class JobProfilePage implements OnInit {
             // 'jobShiftNSU':this.jobShiftArray[13],
 
           })
+          this.jobsForm.patchValue({
+            'jobSalaryFrom': result["jobSeekList"][0].jobSalaryFrom,
+            'jobSalaryTo': result["jobSeekList"][0].jobSalaryTo,
+            'jobSalaryCurrency': result["jobSeekList"][0].jobSalaryCurrency,
+            'jobSalaryFrequency': result["jobSeekList"][0].jobSalaryFrequency,
+            'reqLanguages':result["jobSeekList"][0].reqLanguages,
+          })
           console.log(this.jobProfileForm.value) 
         }    
       }    
@@ -278,6 +274,10 @@ export class JobProfilePage implements OnInit {
     // }
 
     validateInformation(value){
+      this.jobProfileForm = this.fb.group(
+        Object.assign({},this.jobProfileForm.controls,this.jobsForm.controls)
+      );
+     
       if(this.jobProfileForm.value.jobSalaryFrom !="" && this.jobProfileForm.value.jobSalaryFrom !=null
        && this.jobProfileForm.value.jobSalaryTo !=""  && this.jobProfileForm.value.jobSalaryTo !=null
       && this.selectedCities.length !=0 && this.jobProfileForm.value.reqLanguages != 0){
@@ -381,11 +381,27 @@ export class JobProfilePage implements OnInit {
     }
  
 
-nextStep(currentStep: string, nextStep: string) {
+  async nextStep(currentStep: string, nextStep: string , jobProfileForm) {
+ 
+  if( jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length !=0){
     const current = document.getElementById(currentStep);
     const next = document.getElementById(nextStep);
     current.style.display = 'none';
     next.style.display = 'block';
+  
+  }else{
+  
+    const toast = await this.toastController.create({
+      message: 'Please select Skills',
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+
+  await toast.present();
+
+
+}
+
   }
 
   prevStep(currentStep: string, prevStep: string) {
@@ -583,10 +599,15 @@ skills(){
       this.showSkillResults = false;
       this.searchSkillResults = [];
       this.searchCtrl.setValue('');
+      this.jobProfileForm.patchValue({
+        'jobSkills': this.selectedSkills,
+      })
     }
   
     removeSkill(skill: string) {
       this.selectedSkills.splice(this.selectedSkills.indexOf(skill), 1);
+      //this.jobProfileForm.value.jobSkills.splice(this.selectedSkills.indexOf(skill), 1) 
+     
     }   
      
 
@@ -771,6 +792,11 @@ await toast.present();
     return errors;
   }
 
+
+  valid(ee){
+
+
+  }
 
    // footer nav
 
