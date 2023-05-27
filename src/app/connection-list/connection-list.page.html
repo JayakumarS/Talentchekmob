@@ -14,7 +14,7 @@
           </ion-col>
           </div>
           <div style="text-align: center;display: contents;">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Connection-List</ion-title>
+              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Connection-List' | translate}}</ion-title>
           </div>
       </div>
   </ion-toolbar>
@@ -29,7 +29,7 @@
     <!-- <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
     justify-content: space-around;">&nbsp;&nbsp;&nbsp;Matched Profiles </span> -->
 
-    <ion-card class="profilesearchcard" (click)="profileView(x.connectionid,x.accounttype,x.connectionName)" *ngFor="let x of connectionList" >
+    <ion-card class="profilesearchcard" (click)="profileView(x.connectionid,x.accounttype,x.connectionName)" *ngFor="let x of mySlicedArray" >
         <ion-card-content style="padding-bottom: 0px;"  >
 
             <ion-row>
@@ -61,5 +61,8 @@
         </ion-card-content>
     </ion-card>
 </div>
+<!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll> -->
 
 </ion-content>
