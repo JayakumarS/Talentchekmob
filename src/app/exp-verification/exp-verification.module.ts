@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ExpVerificationPageRoutingModule } from './exp-verification-routing.module';
 
 import { ExpVerificationPage } from './exp-verification.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ExpVerificationPageRoutingModule
+    ExpVerificationPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ExpVerificationPage]
 })

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ExpVerifierDetailsPageRoutingModule } from './exp-verifier-details-routing.module';
 
 import { ExpVerifierDetailsPage } from './exp-verifier-details.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ExpVerifierDetailsPage } from './exp-verifier-details.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ExpVerifierDetailsPageRoutingModule
+    ExpVerifierDetailsPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [ExpVerifierDetailsPage]
 })

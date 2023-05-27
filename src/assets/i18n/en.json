@@ -1806,7 +1806,13 @@
     "Qualification added!":"Qualification added!",
     "qcontent":"Would you like to get this academic credential validated by the accredited institution?",
     "q1content":"Having your credentials permanently verified will help you prove to recruiters, clients, and customers that you are who you say you are.",
-    "provideEmail":"Please provide the official email address and contact number of office-bearer who has the authority to verify your experience."
+    "provideEmail":"Please provide the official email address and contact number of office-bearer who has the authority to verify your experience.",
+    "Experience added!":"Experience added!",
+    "accOrg":"Would you like to get this experience validated by the accredited organization?",
+    "veriExp":"Having your experiences permanently verified will help you prove to recruiters, clients,and customers that you are who you say you are.",
+    "expContent":"Please provide the official email address and contact number of HR/ reporting manager who has the authority to verify your professional experience."
+    
+
 
 
 

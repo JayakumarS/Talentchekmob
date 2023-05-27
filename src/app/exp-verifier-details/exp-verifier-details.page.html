@@ -10,9 +10,7 @@
 
   <div class="hello-dear">
     <div style="    padding: 13px;font-size: 19px;
-      color: #000000;font-family: alina-sans; text-align: center;margin-top: -14%;">Please provide the official email
-      address
-      and contact number of HR/ reporting manager who has the authority to verify your professional experience.</div>
+      color: #000000;font-family: alina-sans; text-align: center;margin-top: -14%;">{{'expContent' | translate}}</div>
 
   </div>
 
@@ -22,35 +20,35 @@
   <ion-card-content>
     <div id="test-l-1" class="content">
       <div class="button-content">
-        <ion-label class="labels">Verifier Name <small style="color: #f70505;">*</small></ion-label>
+        <ion-label class="labels">{{'VerifiedDet.verName' | translate}} <small style="color: #f70505;">*</small></ion-label>
         <ion-item fill="outline" class="input-field">
           <ion-input type="text" formControlName="verifierName"></ion-input>
         </ion-item>
         <div *ngIf=" ExperienceForm.controls.verifierName.hasError('required') && ExperienceForm.controls.verifierName.touched">
-          <small style="color: #f70505;">Verifier name is required</small>
+          <small style="color: #f70505;">{{'Verifier name is required' | translate}}</small>
       </div>
       <div *ngIf="ExperienceForm.controls.verifierName.hasError('pattern')">
-          <small style="color: #f70505;">In special character only .is allowed</small>
+          <small style="color: #f70505;">{{'In special character' | translate}}</small>
       </div>
       <div *ngIf="ExperienceForm.controls.verifierName.hasError('minlength')">
-          <small style="color: #f70505;">Verifier name must be atleast 3 characters long</small>
+          <small style="color: #f70505;">{{'Verifier name must be atleast 3 characters long' | translate}}</small>
       </div>
       </div>
     </div>
     <div class="button-content">
-      <ion-label class="labels">Verifier Designation <small style="color: #f70505;">*</small></ion-label>
+      <ion-label class="labels">{{'VerifiedDet.designation' | translate}} <small style="color: #f70505;">*</small></ion-label>
       <ion-item fill="outline" class="input-field">
         <ion-input type="text" formControlName="verifierDesignation"></ion-input>
       </ion-item>
     </div>
     <div class="button-content">
-      <ion-label class="labels">Verifier Email ID<small style="color: #f70505;">*</small></ion-label>
+      <ion-label class="labels">{{'VerifiedDet.emailId' | translate}}<small style="color: #f70505;">*</small></ion-label>
       <ion-item fill="outline" class="input-field">
         <ion-input type="text" formControlName="verifierEmail"></ion-input>
       </ion-item>
     </div>
     <div class="button-content">
-      <ion-label class="labels">Verifier Mobile Number</ion-label>
+      <ion-label class="labels">{{'VerifiedDet.mobNo' | translate}}</ion-label>
       <ion-item fill="outline" class="input-field">
         <ion-input type="number" formControlName="verifierMobile"></ion-input>
       </ion-item>
@@ -58,10 +56,10 @@
 
 
     <div class="display-justify">
-      <button class="but1" (click)="addVerifier()">Save & Continue</button>
+      <button class="but1" (click)="addVerifier()">{{'Save & Continue' | translate}}</button>
     </div>
     <div class="display-justify">
-      <button class="but2" (click)="move(expId)">Skip for Now</button>
+      <button class="but2" (click)="move(expId)">{{'Skip for Now' | translate}}</button>
     </div>
 
   </ion-card-content>
