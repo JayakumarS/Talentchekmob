@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EduVerificationPageRoutingModule } from './edu-verification-routing.module';
 
 import { EduVerificationPage } from './edu-verification.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EduVerificationPageRoutingModule
+    EduVerificationPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [EduVerificationPage]
 })

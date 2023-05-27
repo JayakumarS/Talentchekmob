@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EduVerifierDetailsPageRoutingModule } from './edu-verifier-details-routing.module';
 
 import { EduVerifierDetailsPage } from './edu-verifier-details.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { EduVerifierDetailsPage } from './edu-verifier-details.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    EduVerifierDetailsPageRoutingModule
+    EduVerifierDetailsPageRoutingModule,
+    TranslateModule.forChild(),
   ],
   declarations: [EduVerifierDetailsPage]
 })
