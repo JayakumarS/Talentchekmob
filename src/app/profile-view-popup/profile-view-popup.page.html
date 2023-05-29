@@ -94,6 +94,14 @@
 
 <div class="display-justify">
   <div  class="custom-button-details" *ngFor ="let title of basicProfileDetails"> 
+    <div *ngIf="title.about != '' ">
+      <div style="font-size: 16px; font-weight: 800;color: #3F51B5">
+        {{'about' | translate}} 
+      </div>
+      <div style="font-size: 13px;">
+        {{title.about}}
+      </div>
+    </div>
     <div *ngIf="title.languages != '' ">
       <div style="font-size: 16px; font-weight: 800;color: #3F51B5">
         {{'Languages' | translate}} 
