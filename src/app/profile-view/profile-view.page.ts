@@ -25,6 +25,7 @@ export class ProfileViewPage implements OnInit {
   username: any;
   category: any;
   hobbies: any;
+  about:any;
   location: any;
   mobile: any;
   email: any;
@@ -151,6 +152,7 @@ export class ProfileViewPage implements OnInit {
      this.username = result['profileViewList'][0]['username'];
      this.category =result['profileViewList'][0]['category'];
      this.hobbies =result['profileViewList'][0]['hobbies'];
+     this.about =result['profileViewList'][0]['about'];
      this.mobile = result['profileViewList'][0]['phone'];
      this.email = result['profileViewList'][0]['email'];
      this.language = result['profileViewList'][0]['languages'];
