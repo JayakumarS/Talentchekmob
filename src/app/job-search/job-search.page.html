@@ -2,16 +2,17 @@
     <ion-toolbar>
         <form style="padding: inherit;" [formGroup]="jobSearchHeadForm">
             <ion-row>
-                <ion-col size="10">
+                <ion-col>
                     <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 3%;font-weight: 600;
               font-size: 30px;">{{'ProfileSearch.profileSearch' | translate}}</ion-title>
                 </ion-col>
                 <ion-col size="2">
-                    <img (click)="goto_advanceSearch()" src="./assets/icon/settings.png" style="width: 70%; height: 45px; padding-bottom: 0px;">
+                    <img (click)="goto_advanceSearch()" src="./assets/icon/settings.png"
+                        style="width: 70%; height: 45px; padding-bottom: 0px;">
                 </ion-col>
             </ion-row>
 
-            <ion-row style="margin: -15px 0px 0px 0px;">
+            <ion-row style="margin: 0px 0px 0px 0px;">
                 <ion-col size="10">
                     <ion-title class="ion-text-wrap" style="font-size: 15px;">{{'Its easy' | translate}}.</ion-title>
                 </ion-col>
@@ -19,15 +20,19 @@
 
             <ion-row style="display: flex;
       align-items: center;">
-                <ion-col size="12">
+                <ion-col>
                     <div class="search-container">
-                        <ion-select formControlName="searchType" class="search-dropdown" (ionChange)="ChangeOptionEvent($event)">
-                            <ion-select-option value="talentid">{{'ForgotPassword.talentId' | translate}}</ion-select-option>
+                        <ion-select formControlName="searchType" class="search-dropdown"
+                            (ionChange)="ChangeOptionEvent($event)">
+                            <ion-select-option value="talentid">{{'ForgotPassword.talentId' |
+                                translate}}</ion-select-option>
                             <ion-select-option value="name">{{'ForgotPassword.name' | translate}}</ion-select-option>
-                            <ion-select-option value="email">{{'ForgotPassword.emailId' | translate}}</ion-select-option>
+                            <ion-select-option value="email">{{'ForgotPassword.emailId' |
+                                translate}}</ion-select-option>
                             <ion-select-option value="phone">{{'profileorg.Mobile No' | translate}}</ion-select-option>
                         </ion-select>
-                        <input type="text" formControlName="searchValue" class="search-input" placeholder="{{'Alumni.search' | translate}}..." />
+                        <input type="text" formControlName="searchValue" class="search-input"
+                            placeholder="{{'Alumni.search' | translate}}..." />
                         <ion-button (click)="search()" class="search-button">{{'Go' | translate}}</ion-button>
                     </div>
                 </ion-col>
@@ -53,9 +58,11 @@
             </ion-col>
 
         </ion-row>
-        <div style="display: flex;justify-content: center;" *ngIf="mySlicedArray.length == 0">{{'No Results to Display' | translate}}</div>
+        <div style="display: flex;justify-content: center;" *ngIf="mySlicedArray.length == 0">{{'No Results to Display'
+            | translate}}</div>
         <div *ngIf="mySlicedArray.length != 0">
-            <ion-card class="profilesearchcard" *ngFor="let profile of mySlicedArray" (click)="profileView(profile.talentid,profile.accounttype,profile.username)">
+            <ion-card class="profilesearchcard" *ngFor="let profile of mySlicedArray"
+                (click)="profileView(profile.talentid,profile.accounttype,profile.username)">
                 <ion-card-content style="padding-bottom: 0px;">
 
                     <ion-row>
@@ -72,9 +79,15 @@
 
                         </ion-col>
                         <ion-col size="2">
-                            <div *ngIf="profile.accounttype == 'public'" class="badge badge-solid-green" style="border-radius: 11px; text-transform: capitalize;   margin-left: -10%;">{{profile.accounttype}}</div>
-                            <div *ngIf="profile.accounttype == 'private'" class="badge badge-solid-orange" style="border-radius: 11px; text-transform: capitalize;   margin-left: -10%;">{{profile.accounttype}}</div>
-                            <div *ngIf="profile.accounttype == 'on demand'" class="badge badge-solid-blue" style="border-radius: 11px; text-transform: capitalize;   margin-left: -64%;">{{profile.accounttype}}</div>
+                            <div *ngIf="profile.accounttype == 'public'" class="badge badge-solid-green"
+                                style="border-radius: 11px; text-transform: capitalize;   margin-left: -10%;">
+                                {{profile.accounttype}}</div>
+                            <div *ngIf="profile.accounttype == 'private'" class="badge badge-solid-orange"
+                                style="border-radius: 11px; text-transform: capitalize;   margin-left: -10%;">
+                                {{profile.accounttype}}</div>
+                            <div *ngIf="profile.accounttype == 'on demand'" class="badge badge-solid-blue"
+                                style="border-radius: 11px; text-transform: capitalize;   margin-left: -64%;">
+                                {{profile.accounttype}}</div>
                         </ion-col>
                     </ion-row>
 
@@ -104,44 +117,54 @@
     </form>
 
     <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-      <ion-icon size="large" name="search-circle"></ion-icon>
-    </button>
-        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-      <ion-icon size="large" name="earth-sharp"></ion-icon>
-    </button>
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_orgjobs();">
-        <ion-icon size="large" name="earth-sharp"></ion-icon>
-      </button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_instijobs();">
-        <ion-icon size="large" name="earth-sharp"></ion-icon>
-      </button>
-        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-       <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')"> 
-    </button>
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
-        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')"> 
-     </button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
-        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')"> 
-     </button>
+        <button [ngClass]="{'selected': selectedTab === 'search'}"
+            (click)="setSelectedTab('search');goto_profileSearch();">
+            <ion-icon size="large" name="search-circle"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'earth'}"
+            (click)="setSelectedTab('earth');goto_jobs();">
+            <ion-icon size="large" name="earth-sharp"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'earth'}"
+            (click)="setSelectedTab('earth');goto_orgjobs();">
+            <ion-icon size="large" name="earth-sharp"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'earth'}"
+            (click)="setSelectedTab('earth');goto_instijobs();">
+            <ion-icon size="large" name="earth-sharp"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'apps'}"
+            (click)="setSelectedTab('apps');goto_home();">
+            <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+        </button>
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}"
+            (click)="setSelectedTab('apps');goto_orghome();">
+            <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+        </button>
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}"
+            (click)="setSelectedTab('apps');goto_instihome();">
+            <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+        </button>
 
-        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-    </button>
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
-        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-      </button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">
-        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-      </button>
+        <button *ngIf="RoleID.includes('1')" [ngClass]="{'selected': selectedTab === 'profile'}"
+            (click)="setSelectedTab('profile');goto_profile();">
+            <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}"
+            (click)="setSelectedTab('profile');goto_orgprofile();">
+            <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+        </button>
+        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}"
+            (click)="setSelectedTab('profile');goto_instiprofile();">
+            <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+        </button>
         <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-      
-    </button>
+            <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+        </button>
     </div>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-    
+
 </ion-content>

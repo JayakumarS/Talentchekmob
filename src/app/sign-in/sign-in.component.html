@@ -1,5 +1,6 @@
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!-- BS Stepper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
 
@@ -10,7 +11,8 @@
 
     <div style="width: 100%;" class="line-with-text">
         <br>
-        <img style="max-width: 57%;padding-top: 40px;" src="../../assets/img/tc_logo_with_text.png" (click)="setSelectedTab('apps')">
+        <img style="max-width: 57%;padding-top: 40px;" src="../../assets/img/tc_logo_with_text.png"
+            (click)="setSelectedTab('apps')">
         <br>
 
     </div>
@@ -18,14 +20,16 @@
     <div class="hello-dear">
         <ion-buttons slot="end" style="padding-top:10px">
             <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
-                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start"
+                    alt="flag">{{languageService.selectedLang.text}}
                 <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
             </ion-button>
         </ion-buttons>
 
-         <div style="font-size: 24px;font-family: Mr-eaves;">{{ 'Login.para1Header' | translate }}</div> 
+        <div style="font-size: 24px;font-family: Mr-eaves;">{{ 'Login.para1Header' | translate }}</div>
         <!-- <div style="font-size: 24px;font-family: Mr-eaves;">Welcome back!</div> -->
-        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061;">{{ 'Login.enter_crendentials' | translate }}</div>
+        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061;">{{ 'Login.enter_crendentials' | translate }}
+        </div>
     </div>
 
 
@@ -36,7 +40,8 @@
             <form [formGroup]="loginform" style="padding-bottom: 30px;">
                 <div id="test-l-1" class="content">
                     <div class="button-content">
-                        <ion-label class="labels">{{ 'Login.talentId' | translate }} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{ 'Login.talentId' | translate }} <small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input type="text" formControlName="userName"></ion-input>
                         </ion-item>
@@ -48,10 +53,13 @@
                         </ion-item> -->
 
 
-                        <ion-label class="labels">{{ 'Login.password' | translate }} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{ 'Login.password' | translate }}1 <small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="password"></ion-input>
-                            <ion-icon style="color: black;" name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
+                            <ion-input type="{{passwordType}}" clearOnEdit="false"
+                                formControlName="password"></ion-input>
+                            <ion-icon style="color: black;" name="{{passwordIcon}}" slot="end"
+                                (click)="passwordToggle()"></ion-icon>
                         </ion-item>
 
 
@@ -61,7 +69,8 @@
                 </div>
                 <div class="sign-in">
                     <h4 (click)="reset()" style="background: #edf1fc;    background: #edf1fc;
-                    border: aliceblue;font-size: 18px; font-family: Mr-eaves;color: #007bff;">{{ 'Login.frg_pass' | translate }}</h4>
+                    border: aliceblue;font-size: 18px; font-family: Mr-eaves;color: #007bff;">{{ 'Login.frg_pass' |
+                        translate }}</h4>
                 </div>
 
 
@@ -69,7 +78,7 @@
             <ion-button class="custom-button test" style="font-family:  Mr-eaves;" (click)="goto_signup()">Sign-in</ion-button>
         </div> -->
                 <div class="display-justify">
-                    
+
                     <button class="custom-button test" (click)="goto_signup()">{{ 'sign_in' | translate }}</button>
                 </div>
             </form>
@@ -82,7 +91,8 @@
 
         <div class="sign-in">
             <div style="font-size: 16px;">{{ 'Login.new_member' | translate }} </div>
-            &nbsp;<a (click)="register()" style="font-size: 18px; font-family: Mr-eaves;color: #007bff;">{{ 'Login.sign-up' | translate }}</a>
+            &nbsp;<a (click)="register()" style="font-size: 18px; font-family: Mr-eaves;color: #007bff;">{{
+                'Login.sign-up' | translate }}</a>
         </div>
 
 
