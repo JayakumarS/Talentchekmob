@@ -1,24 +1,19 @@
 <ion-header>
     <ion-toolbar class="new-background-color">
-        <br>
-
         <ion-row>
             <ion-title class="ion-text-wrap"
                 style="font-family: Mr-eaves; color: black; text-align: center; font-size: 24px;">{{'DashboardIndividual.myProfile'
                 | translate}}</ion-title>
         </ion-row>
         <br>
-
         <ion-row>
             <ion-col>
                 <ion-title class="ion-text-wrap" style="text-align: -webkit-left;">{{username}}</ion-title>
             </ion-col>
-
             <ion-col size="2">
                 <ion-avatar size="small" *ngIf="prof">
                     <img style=" height: 60%;width: 60%;" (click)="profile2(2)" src={{img}} />
                 </ion-avatar>
-
                 <ion-avatar size="small" *ngIf="!prof">
                     <img style=" height: 60%;width: 60%;" (click)="profile2(2)"
                         src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -340,8 +335,7 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="experiences(x.expId)" class="edit-button">
-                                        <ion-icon name="create-outline"></ion-icon>{{'editCertifications' |
-                                        translate}}</button>
+                                        <ion-icon name="create-outline"></ion-icon>Edit Experience</button>
                                     <button style="color: black;" (click)="expIdverifierCall(x.expId,x.orgId)"
                                         *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="\assets\img\verifier.png"
