@@ -1,12 +1,13 @@
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <!-- BS Stepper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
 
 
 <ion-header>
-    <ion-toolbar class="new-background-color">
+    <ion-toolbar class="new-background-color headers">
         <ion-row>
 
             <ion-col size="0.5">
@@ -18,7 +19,8 @@
             </ion-col>
 
             <ion-col size="8">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-left: 17%; margin-top: 5%;">{{'Login.sign-up' | translate}}</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Login.sign-up' |
+                    translate}}</ion-title>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -54,12 +56,14 @@
                 <form [formGroup]="talentorgform">
                     <div id="test-l-1" class="content">
                         <div class="button-content">
-                            <ion-label class="labels">{{'CorReg.orgName' | translate }} <small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'CorReg.orgName' | translate }} <small
+                                    style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="organizationName"></ion-input>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.organizationName.hasError('required') && talentorgform.controls.organizationName.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.organizationName.hasError('required') && talentorgform.controls.organizationName.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqOrgName' | translate }}</small>
                             </div>
                             <div *ngIf="talentorgform.controls.organizationName.hasError('pattern')">
@@ -69,19 +73,23 @@
                                 <small style="color: #f70505;">{{'CorReg.firstNameMinLength' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">{{'CorReg.OrganizationType' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'CorReg.OrganizationType' | translate}}<small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
 
-                                <ion-select placeholder="{{'CorReg.OrganizationType' | translate}}" formControlName="orgType">
+                                <ion-select placeholder="{{'CorReg.OrganizationType' | translate}}"
+                                    formControlName="orgType">
                                     <ion-select-option *ngFor="let Type of orgTypeList" [value]="Type.id">
                                         {{Type.text}}</ion-select-option>
 
                                 </ion-select>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.orgType.hasError('required') && talentorgform.controls.orgType.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.orgType.hasError('required') && talentorgform.controls.orgType.touched">
                                 <small style="color: #f70505;">{{'CorReg.Organizationrequired' | translate}}</small>
                             </div>
-                            <ion-label class="labels">{{'CorReg.domain' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'CorReg.domain' | translate}} <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-select placeholder="{{'CorReg.domain' | translate}}" formControlName="domainId">
                                     <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
@@ -89,26 +97,32 @@
 
                                 </ion-select>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.domainId.hasError('required') && talentorgform.controls.domainId.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqDomain' | translate}}</small>
                             </div>
 
-                            <ion-label class="labels">{{'CorReg.OrganisationRegiNo' | translate}}<small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'CorReg.OrganisationRegiNo' | translate}}<small
+                                    style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="regNo" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
+                                <ion-input formControlName="regNo"
+                                    onkeyup="this.value = this.value.toUpperCase();"></ion-input>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.regNo.hasError('required') && talentorgform.controls.regNo.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.regNo.hasError('required') && talentorgform.controls.regNo.touched">
                                 <small style="color: #f70505;">{{'CorReg.RegistrationNorequired' | translate}}</small>
                             </div>
 
-                            <ion-label class="labels">{{'CorReg.dor' | translate}}<small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'CorReg.dor' | translate}}<small
+                                    style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-datetime displayFormat="DD.MM.YYYY" formControlName="regDate" presentation="date">
                                 </ion-datetime>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.regDate.hasError('required') && talentorgform.controls.regDate.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.regDate.hasError('required') && talentorgform.controls.regDate.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqDor' | translate}}</small>
                             </div>
 
@@ -121,7 +135,8 @@
                                         <img class="horizontal" [src]="base64img1" name="image" />
                                     </ion-thumbnail>
                                     <ion-thumbnail *ngIf="!base64img1">
-                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights"
+                                            style="width:100%" />
                                     </ion-thumbnail>
                                 </ion-col>
 
@@ -141,7 +156,8 @@
                               </div> -->
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'profilein.Next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"
+                                (click)="next()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -152,84 +168,105 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{'sign_in' | translate}}</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{'sign_in' |
+                                        translate}}</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-2" class="content">
                         <div class="button-content">
                             <ion-label class="labels">{{'profileorg.Address' | translate}}</ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-textarea placeholder="{{'Enter' | translate}}" formControlName="address"></ion-textarea>
+                                <ion-textarea placeholder="{{'Enter' | translate}}"
+                                    formControlName="address"></ion-textarea>
                             </ion-item>
 
 
-                            <ion-label class="labels">{{'country'| translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'country'| translate}} <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedCountry }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" name="close-circle" (click)="removeCountry()" style="color: black;"></ion-icon>
-                                <ion-input (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                                <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''"
+                                    name="close-circle" (click)="removeCountry()" style="color: black;"></ion-icon>
+                                <ion-input (ionInput)="onCountrySearch($event.target.value)"
+                                    [formControl]="countrysearchCtrl"></ion-input>
                             </ion-item>
 
                             <ion-list *ngIf="showcountyResults">
-                                <ion-item *ngFor="let result of searchResults" (click)="selectcountry(result.text,result.id)">
+                                <ion-item *ngFor="let result of searchResults"
+                                    (click)="selectcountry(result.text,result.id)">
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-                            <div *ngIf=" talentorgform.controls.country.hasError('required') && talentorgform.controls.country.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.country.hasError('required') && talentorgform.controls.country.touched">
                                 <small style="color: #f70505;">{{'CorReg.CountryRequired' | translate}}</small>
                             </div>
-                            <ion-label class="labels">{{'CorReg.stateProvince' | translate}} <small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'CorReg.stateProvince' | translate}} <small
+                                    style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedState }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedState != undefined && selectedState != ''" name="close-circle" (click)="removeState()" style="color: black;"></ion-icon>
-                                <ion-input (ionInput)="onStateSearch($event.target.value)" [formControl]="statesearchCtrl"></ion-input>
+                                <ion-icon *ngIf="selectedState != undefined && selectedState != ''" name="close-circle"
+                                    (click)="removeState()" style="color: black;"></ion-icon>
+                                <ion-input (ionInput)="onStateSearch($event.target.value)"
+                                    [formControl]="statesearchCtrl"></ion-input>
                             </ion-item>
 
                             <ion-list *ngIf="showStateResults">
-                                <ion-item *ngFor="let result of searchStateResults" (click)="selectState(result.text,result.id)">
+                                <ion-item *ngFor="let result of searchStateResults"
+                                    (click)="selectState(result.text,result.id)">
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
 
-                            <div *ngIf=" talentorgform.controls.state.hasError('required') && talentorgform.controls.state.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.state.hasError('required') && talentorgform.controls.state.touched">
                                 <small style="color: #f70505;">{{'CorReg.State/ProvinceRrequired' | translate}}</small>
                             </div>
-                            <ion-label class="labels">{{'CorReg.areaName' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'CorReg.areaName' | translate}} <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <div class="selected-skills-container">
                                     <div class="selected-skill">{{ selectedCity }}
                                     </div>
                                 </div>
-                                <ion-icon *ngIf="selectedCity != undefined && selectedCity != ''" name="close-circle" (click)="removeCity()" style="color: black;"></ion-icon>
-                                <ion-input (ionInput)="onCitySearch($event.target.value)" [formControl]="citySearchCtrl"></ion-input>
+                                <ion-icon *ngIf="selectedCity != undefined && selectedCity != ''" name="close-circle"
+                                    (click)="removeCity()" style="color: black;"></ion-icon>
+                                <ion-input (ionInput)="onCitySearch($event.target.value)"
+                                    [formControl]="citySearchCtrl"></ion-input>
                             </ion-item>
 
                             <ion-list *ngIf="showCityResults">
-                                <ion-item *ngFor="let result of searchCityResults" (click)="selectCity(result.text,result.id)">
+                                <ion-item *ngFor="let result of searchCityResults"
+                                    (click)="selectCity(result.text,result.id)">
                                     {{ result.text }}
                                 </ion-item>
                             </ion-list>
-                            <div *ngIf=" talentorgform.controls.city.hasError('required') && talentorgform.controls.city.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.city.hasError('required') && talentorgform.controls.city.touched">
                                 <small style="color: #f70505;">{{'CorReg.CityRequired' | translate}} </small>
                             </div>
-                            <ion-label class="labels">{{'CorReg.pinZipCode' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'CorReg.pinZipCode' | translate}} <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pincode"></ion-input>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.pincode.hasError('required') && talentorgform.controls.pincode.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.pincode.hasError('required') && talentorgform.controls.pincode.touched">
                                 <small style="color: #f70505;">{{'CorReg.reqPinZipCode' | translate}}</small>
                             </div>
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="next()">{{'profilein.Next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"
+                                (click)="next()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -239,37 +276,49 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">{{'Already a Talentchek member?'| translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in'| translate}}</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?'| translate}} </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in'|
+                                        translate}}</a></b></span>
                         </div>
                     </div>
                     <div id="test-l-3" class="content text-center">
                         <div class="button-content">
 
 
-                            <ion-label class="labels">{{'AddFamilyInfo.contactNo' | translate}} <small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'AddFamilyInfo.contactNo' | translate}} <small
+                                    style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input type="number" formControlName="mobileNo" (keypress)="limitInputLength($event)"></ion-input>
+                                <ion-input type="number" formControlName="mobileNo"
+                                    (keypress)="limitInputLength($event)"></ion-input>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.mobileNo.hasError('required') && talentorgform.controls.mobileNo.touched">
-                                <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' | translate}} </small>
+                            <div
+                                *ngIf=" talentorgform.controls.mobileNo.hasError('required') && talentorgform.controls.mobileNo.touched">
+                                <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' |
+                                    translate}} </small>
                             </div>
 
-                            <ion-label class="labels">{{'CorReg.orgEmail' | translate}} <small style="color: #f70505;">*</small>
+                            <ion-label class="labels">{{'CorReg.orgEmail' | translate}} <small
+                                    style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="emailId"></ion-input>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.emailId.hasError('required') && talentorgform.controls.emailId.touched">
-                                <small style="color: #f70505;">{{'CorReg.OrganizationEmailRequired' | translate}} </small>
+                            <div
+                                *ngIf=" talentorgform.controls.emailId.hasError('required') && talentorgform.controls.emailId.touched">
+                                <small style="color: #f70505;">{{'CorReg.OrganizationEmailRequired' | translate}}
+                                </small>
                             </div>
 
-                            <ion-label class="labels">{{'InsReg.password' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{'InsReg.password' | translate}} <small
+                                    style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
+                                <ion-input type="{{passwordType}}" clearOnEdit="false"
+                                    formControlName="pwd"></ion-input>
                                 <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
-                            <div *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
+                            <div
+                                *ngIf=" talentorgform.controls.pwd.hasError('required') && talentorgform.controls.pwd.touched">
                                 <small style="color: #f70505;">{{'reqPassword' | translate}}</small>
                             </div>
 
@@ -280,17 +329,24 @@
 
                             <ion-item lines="none">
                                 <ion-checkbox formControlName="cBoxIAgree" [(ngModel)]="cBoxIAgreeVal"></ion-checkbox>
-                                <ion-label>&emsp;{{'iAccept' | translate}} <a (click)="openTCForm()" style="color: rgb(119, 191, 194);">  {{'tAndC' | translate}}</a><span style="color:red">*</span></ion-label>
+                                <ion-label>&emsp;{{'iAccept' | translate}} <a (click)="openTCForm()"
+                                        style="color: rgb(119, 191, 194);"> {{'tAndC' | translate}}</a><span
+                                        style="color:red">*</span></ion-label>
                             </ion-item><br>
 
                             <ion-item lines="none">
-                                <ion-checkbox formControlName="cBoxIAgreeConsent" [(ngModel)]="cBoxIAgreeConsentVal"></ion-checkbox>
-                                <ion-label>&emsp;{{'iAccept' | translate}} <a (click)="openConsentForm()" style="color: rgb(119, 191, 194);">{{'consentForm' | translate}}</a><span style="color:red">*</span></ion-label>
+                                <ion-checkbox formControlName="cBoxIAgreeConsent"
+                                    [(ngModel)]="cBoxIAgreeConsentVal"></ion-checkbox>
+                                <ion-label>&emsp;{{'iAccept' | translate}} <a (click)="openConsentForm()"
+                                        style="color: rgb(119, 191, 194);">{{'consentForm' | translate}}</a><span
+                                        style="color:red">*</span></ion-label>
                             </ion-item>
 
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" [disabled]="!talentorgform.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false " style="font-family:  Mr-eaves;" (click)="onSubmit()">
+                            <ion-button class="custom-button"
+                                [disabled]="!talentorgform.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false "
+                                style="font-family:  Mr-eaves;" (click)="onSubmit()">
                                 {{'register' | translate}}</ion-button>
                         </div>
 
@@ -301,7 +357,9 @@
                         </div>
 
                         <div class="sign-in">
-                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in' | translate}}</a></b></span>
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in' |
+                                        translate}}</a></b></span>
                         </div>
                     </div>
                 </form>

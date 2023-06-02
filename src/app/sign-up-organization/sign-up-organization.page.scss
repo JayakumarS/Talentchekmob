@@ -221,3 +221,10 @@ ion-checkbox {
   ion-select::part(icon) {
     display: none;
   }
+
+  .headers {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
