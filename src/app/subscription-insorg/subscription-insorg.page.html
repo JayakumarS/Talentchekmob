@@ -6,7 +6,7 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'Subscription.subscription'  | translate}}</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'Subscription.subscription' | translate}}</ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -16,25 +16,25 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <div class="display-justify">
 
         <ion-card-content>
 
 
             <ion-item fill="outline" class="input-field">
-                <ion-label>{{'Subscription.cury'  | translate}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
+                <ion-label>{{'Subscription.cury' | translate}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</ion-label>
                 <ion-select [(value)]="currencyVal" (ionChange)="CurrencyChangeEvent($event)">
-                    <ion-select-option value="INR">{{'Subscription.inr'  | translate}}</ion-select-option>
-                    <ion-select-option value="USD">{{'Subscription.usd'  | translate}}</ion-select-option>
-                    <ion-select-option value="AED">{{'Subscription.aed'  | translate}}</ion-select-option>
-                    <ion-select-option value="MYR">{{'Subscription.myr'  | translate}}</ion-select-option>
-                    <ion-select-option value="SGD">{{'Subscription.sgd'  | translate}}</ion-select-option>
+                    <ion-select-option value="INR">{{'Subscription.inr' | translate}}</ion-select-option>
+                    <ion-select-option value="USD">{{'Subscription.usd' | translate}}</ion-select-option>
+                    <ion-select-option value="AED">{{'Subscription.aed' | translate}}</ion-select-option>
+                    <ion-select-option value="MYR">{{'Subscription.myr' | translate}}</ion-select-option>
+                    <ion-select-option value="SGD">{{'Subscription.sgd' | translate}}</ion-select-option>
                 </ion-select>
             </ion-item>
 
 
-            <ion-slides pager="true" style="height: 75%;"  *ngIf="RoleID.includes('3')">
+            <ion-slides pager="true" style="height: 75%;" *ngIf="RoleID.includes('3') && isdiscount == false">
                 <ion-slide>
                     <ion-card id="cardProfessional">
                         <!--PRICE CONTENT START-->
@@ -71,12 +71,12 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>{{'Subscription.Talent'  | translate}}</li>
-                                    <li>{{'Subscription.Student Placements'  | translate}}</li>
-                                    <li>{{'Subscription.Student & Staff Alumni Network'  | translate}}</li>
-                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
-                                    <li>{{'Subscription.Events Publishing and Funds Collection'  | translate}}</li>
-                                    <li>{{'Subscription.500MB Document Storage with Access Rights'  | translate}}</li>
+                                    <li>{{'Subscription.Talent' | translate}}</li>
+                                    <li>{{'Subscription.Student Placements' | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection' | translate}}</li>
+                                    <li>{{'Subscription.500MB Document Storage with Access Rights' | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -126,12 +126,12 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>{{'Subscription.6000 Talent Credits'  | translate}}</li>
-                                    <li>{{'Subscription.Student Placements'  | translate}}</li>
-                                    <li>{{'Subscription.Student & Staff Alumni Network'  | translate}}</li>
-                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
-                                    <li>{{'Subscription.Events Publishing and Funds Collection'  | translate}}</li>
-                                    <li>{{'Subscription.1GB Document Storage with Access Rights'  | translate}}</li>
+                                    <li>{{'Subscription.6000 Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Student Placements' | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection' | translate}}</li>
+                                    <li>{{'Subscription.1GB Document Storage with Access Rights' | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -181,12 +181,12 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>{{'Subscription.Unlimited Talent Credits'  | translate}}</li>
-                                    <li>{{'Subscription.Student Placements'  | translate}}</li>
-                                    <li>{{'Subscription.Student & Staff Alumni Network'  | translate}}</li>
-                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
-                                    <li>{{'Subscription.Events Publishing and Funds Collection'  | translate}}</li>
-                                    <li>{{'Subscription.10GB Document Storage with Access Rights'  | translate}}</li>
+                                    <li>{{'Subscription.Unlimited Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Student Placements' | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection' | translate}}</li>
+                                    <li>{{'Subscription.10GB Document Storage with Access Rights' | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -202,7 +202,231 @@
                 </ion-slide>
             </ion-slides>
 
-            <ion-slides pager="true" style="height: 75%;"  *ngIf="RoleID.includes('2')">
+
+            <!-- Discount organization-->
+
+
+            <ion-slides pager="true" style="height: 75%;" *ngIf="RoleID.includes('3') && isdiscount == true">
+                <ion-slide>
+                    <ion-card id="cardProfessional">
+                        <!--PRICE CONTENT START-->
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+                                <div class="discount-label red" *ngIf="ProfessionalDiscount == true "><span>{{ProfessionalDiscPer}}% Discount</span></div>
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>{{'Subscription.profess'  | translate}}</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix" *ngIf="ProfessionalDiscount == true ">
+                                    <span class="price">
+                                              <span class="sign" style="text-decoration: line-through; font-size: 32px;">{{currencySymbolVal}}</span>
+                                    <span class="currency" style="text-decoration: line-through; font-size: 32px;">{{amtProfessionalVal}}</span>
+                                    </span>
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{ProfessionalcountAmt}}</span>
+                                    </span>
+                                </div>
+
+
+                                <div class="generic_price_tag clearfix" *ngIf="ProfessionalDiscount == false ">
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtProfessionalVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>{{'Subscription.Talent' | translate}}</li>
+                                    <li>{{'Subscription.Student Placements' | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection' | translate}}</li>
+                                    <li>{{'Subscription.500MB Document Storage with Access Rights' | translate}}</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Professional')">{{'Subscription.getsta'  | translate}}</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-card id="cardEnterprises">
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+                                <div class="discount-label red" *ngIf="EnterpriceDiscount == true "><span>{{EnterpriceDiscPer}}% Discount</span></div>
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>{{'Subscription.entpri'  | translate}}</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix" *ngIf="EnterpriceDiscount == true ">
+                                    <span class="price">
+                                          <span class="sign" style="text-decoration: line-through; font-size: 32px;">{{currencySymbolVal}}</span>
+                                    <span class="currency" style="text-decoration: line-through; font-size: 32px;">{{amtEnterpriseVal}}</span>
+                                    </span>
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{EnterpricecountAmt}}</span>
+                                    </span>
+
+
+                                </div>
+
+
+                                <div class="generic_price_tag clearfix" *ngIf="EnterpriceDiscount == false ">
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtEnterpriseVal}}</span>
+                                    </span>
+
+
+                                </div>
+
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>{{'Subscription.6000 Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Student Placements' | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection' | translate}}</li>
+                                    <li>{{'Subscription.1GB Document Storage with Access Rights' | translate}}</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Enterprise')">{{'Subscription.getsta'  | translate}}</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-card id="cardUltimate">
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+                                <div class="discount-label red" *ngIf="UltimateDiscount == true "><span>{{UltimateDiscPer}}% Discount</span></div>
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>{{'Subscription.ultimate'  | translate}}</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix" *ngIf="UltimateDiscount == true ">
+                                    <span class="price">
+                                          <span class="sign" style="text-decoration: line-through; font-size: 32px;">{{currencySymbolVal}}</span>
+                                    <span class="currency" style="text-decoration: line-through; font-size: 32px;">{{amtUltimateVal}}</span>
+                                    </span>
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{UltimatecountAmt}}</span>
+                                    </span>
+
+
+                                </div>
+                                <div class="generic_price_tag clearfix" *ngIf="UltimateDiscount == false ">
+                                    <span class="price">
+                                      <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtUltimateVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>{{'Subscription.Unlimited Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Student Placements' | translate}}</li>
+                                    <li>{{'Subscription.Student & Staff Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Events Publishing and Funds Collection' | translate}}</li>
+                                    <li>{{'Subscription.10GB Document Storage with Access Rights' | translate}}</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Ultimate')">{{'Subscription.getsta'  | translate}}</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+            </ion-slides>
+
+
+            <!-- Discount organization  End-->
+
+
+
+
+            <ion-slides pager="true" style="height: 75%;" *ngIf="RoleID.includes('2') && isdiscount == false">
                 <ion-slide>
                     <ion-card id="cardProfessional">
                         <!--PRICE CONTENT START-->
@@ -239,12 +463,12 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>{{'Subscription.Talent'  | translate}}</li>
-                                    <li>{{'Subscription.Profile Background Verification'  | translate}}</li>
-                                    <li>{{'Subscription.Hiring Module'  | translate}}</li>
-                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
-                                    <li>{{'Subscription.Corporate Alumni Network'  | translate}}</li>
-                                    <li>{{'Subscription.500MB Document Storage with Access Rights'  | translate}}</li>
+                                    <li>{{'Subscription.Talent' | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification' | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.500MB Document Storage with Access Rights' | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -294,12 +518,12 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>{{'Subscription.6000 Talent Credits'  | translate}}</li>
-                                    <li>{{'Subscription.Profile Background Verification'  | translate}}</li>
-                                    <li>{{'Subscription.Hiring Module'  | translate}}</li>
-                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
-                                    <li>{{'Subscription.Corporate Alumni Network'  | translate}}</li>
-                                    <li>{{'Subscription.1GB Document Storage with Access Rights'  | translate}}</li>
+                                    <li>{{'Subscription.6000 Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification' | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.1GB Document Storage with Access Rights' | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->
@@ -349,12 +573,232 @@
                             <!--FEATURE LIST START-->
                             <div class="generic_feature_list">
                                 <ul>
-                                    <li>{{'Subscription.Unlimited Talent Credits'  | translate}}</li>
-                                    <li>{{'Subscription.Profile Background Verification'  | translate}}</li>
-                                    <li>{{'Subscription.Hiring Module'  | translate}}</li>
-                                    <li>{{'Subscription.Online Tests & Evaluation'  | translate}}</li>
-                                    <li>{{'Subscription.Corporate Alumni Network'  | translate}}</li>
-                                    <li>{{'Subscription.10GB Document Storage with Access Rights'  | translate}}</li>
+                                    <li>{{'Subscription.Unlimited Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification' | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.10GB Document Storage with Access Rights' | translate}}</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Ultimate')">{{'Subscription.getsta'  | translate}}</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+            </ion-slides>
+
+
+            <!-- Discount for institution -->
+
+            <ion-slides pager="true" style="height: 75%;" *ngIf="RoleID.includes('2') && isdiscount == true">
+                <ion-slide>
+                    <ion-card id="cardProfessional">
+                        <!--PRICE CONTENT START-->
+                        <div class="generic_content">
+                            <div class="discount-label red" *ngIf="ProfessionalDiscount == true "><span>{{ProfessionalDiscPer}}% Discount</span></div>
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>{{'Subscription.profess'  | translate}}</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix" *ngIf="ProfessionalDiscount == true ">
+                                    <span class="price">
+                                              <span class="sign" style="text-decoration: line-through; font-size: 32px;">{{currencySymbolVal}}</span>
+                                    <span class="currency" style="text-decoration: line-through; font-size: 32px;">{{amtProfessionalVal}}</span>
+                                    </span>
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{ProfessionalcountAmt}}</span>
+                                    </span>
+                                </div>
+
+
+                                <div class="generic_price_tag clearfix" *ngIf="ProfessionalDiscount == false ">
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtProfessionalVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>{{'Subscription.Talent' | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification' | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.500MB Document Storage with Access Rights' | translate}}</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Professional')">{{'Subscription.getsta'  | translate}}</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-card id="cardEnterprises">
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+                                    <div class="discount-label red" *ngIf="EnterpriceDiscount == true "><span>{{EnterpriceDiscPer}}% Discount</span></div>
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>{{'Subscription.entpri'  | translate}}</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+                                <div class="generic_price_tag clearfix" *ngIf="EnterpriceDiscount == true ">
+                                    <span class="price">
+                                          <span class="sign" style="text-decoration: line-through; font-size: 32px;">{{currencySymbolVal}}</span>
+                                    <span class="currency" style="text-decoration: line-through; font-size: 32px;">{{amtEnterpriseVal}}</span>
+                                    </span>
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{EnterpricecountAmt}}</span>
+                                    </span>
+
+
+                                </div>
+
+
+                                <div class="generic_price_tag clearfix" *ngIf="EnterpriceDiscount == false ">
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtEnterpriseVal}}</span>
+                                    </span>
+
+
+                                </div>
+
+
+
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>{{'Subscription.6000 Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification' | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.1GB Document Storage with Access Rights' | translate}}</li>
+                                </ul>
+                            </div>
+                            <!--//FEATURE LIST END-->
+
+                            <!--BUTTON START-->
+                            <div class="generic_price_btn clearfix">
+                                <a class="" (click)="payWithRazor('Enterprise')">{{'Subscription.getsta'  | translate}}</a>
+                            </div>
+                            <!--//BUTTON END-->
+
+                        </div>
+                    </ion-card>
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-card id="cardUltimate">
+                        <div class="generic_content">
+
+                            <!--HEAD PRICE DETAIL START-->
+                            <div class="generic_head_price">
+
+                                <!--HEAD CONTENT START-->
+                                <div class="generic_head_content">
+                                    <div class="discount-label red" *ngIf="UltimateDiscount == true "><span>{{UltimateDiscPer}}% Discount</span></div>
+                                    <!--HEAD START-->
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>{{'Subscription.ultimate'  | translate}}</span>
+                                    </div>
+                                    <!--//HEAD END-->
+
+                                </div>
+                                <!--//HEAD CONTENT END-->
+
+                                <!--PRICE START-->
+
+                                <div class="generic_price_tag clearfix" *ngIf="UltimateDiscount == true ">
+                                    <span class="price">
+                                          <span class="sign" style="text-decoration: line-through; font-size: 32px;">{{currencySymbolVal}}</span>
+                                    <span class="currency" style="text-decoration: line-through; font-size: 32px;">{{amtUltimateVal}}</span>
+                                    </span>
+
+                                    <span class="price">
+                                        <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{UltimatecountAmt}}</span>
+                                    </span>
+
+
+                                </div>
+                                <div class="generic_price_tag clearfix" *ngIf="UltimateDiscount == false ">
+                                    <span class="price">
+                                      <span class="sign">{{currencySymbolVal}}</span>
+                                    <span class="currency">{{amtUltimateVal}}</span>
+                                    </span>
+                                </div>
+                                <!--//PRICE END-->
+
+                            </div>
+                            <!--//HEAD PRICE DETAIL END-->
+
+                            <!--FEATURE LIST START-->
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>{{'Subscription.Unlimited Talent Credits' | translate}}</li>
+                                    <li>{{'Subscription.Profile Background Verification' | translate}}</li>
+                                    <li>{{'Subscription.Hiring Module' | translate}}</li>
+                                    <li>{{'Subscription.Online Tests & Evaluation' | translate}}</li>
+                                    <li>{{'Subscription.Corporate Alumni Network' | translate}}</li>
+                                    <li>{{'Subscription.10GB Document Storage with Access Rights' | translate}}</li>
                                 </ul>
                             </div>
                             <!--//FEATURE LIST END-->

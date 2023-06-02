@@ -102,6 +102,7 @@ export class SettingsPage implements OnInit {
     localStorage.removeItem("TC_Pwd");
     localStorage.removeItem("FCMToken");
     localStorage.removeItem("IsFloatingScript");
+    localStorage.removeItem('selectedLang');
 
     this.storageservice.publishSomeData({
       status_get: false

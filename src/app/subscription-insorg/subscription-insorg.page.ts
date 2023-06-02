@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
+import { LanguageService } from '../language.service';
 
 //For using Razorpay
 declare var RazorpayCheckout: any;
@@ -44,11 +45,39 @@ export class SubscriptionInsorgPage implements OnInit {
   amtUltimateVal: number;
   exchangeAmount:any;
   usercountry: string;
+  selectedLang: string;
+
+
+  isdiscount: boolean = false;
+
+disCountstandardAmount :any;
+disCountProfessionalAmount :any;
+disCountEnterpriceAmount :any;
+disCountUltimateAmount :any;
+
+UltimatecountAmt :any;  
+UltimateDiscPer :any; 
+UltimateDiscount :boolean = false; 
+EnterpricecountAmt :any;  
+EnterpriceDiscPer :any; 
+EnterpriceDiscount :boolean =false; 
+ProfessionalcountAmt :any;  
+ProfessionalDiscPer :any; 
+ProfessionalDiscount :boolean = false; 
+standardcountAmt :any;  
+standardDiscPer :any; 
+standardDiscount :boolean = false;
+
+UltimatecountAmt1 :any;  
+EnterpricecountAmt1 :any;  
+ProfessionalcountAmt1 :any; 
+standardcountAmt1 :any; 
 
   roleId: any;
   RoleID: any;
 
-  constructor(private http: HttpClient,private location: Location,public router:Router, public storageservice: StorageService,private translate: TranslateService) {
+  constructor(private http: HttpClient,private location: Location,public router:Router,private languageService: LanguageService,
+     public storageservice: StorageService,private translate: TranslateService) {
 
     this.userId = localStorage.getItem("userId");
 
@@ -68,6 +97,8 @@ export class SubscriptionInsorgPage implements OnInit {
     this.RoleID =  this.roleId.split(",", 3);
 
     this.previousUrl = this.location.path();
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
 
   BindDefaultCurrencyAsPerCurrentUser() {
@@ -126,6 +157,8 @@ export class SubscriptionInsorgPage implements OnInit {
         this.amtUltimateVal = 1000;
         this.currencySymbolVal = "$";
       }
+
+      this.checkDiscount();
     });
   }
 
@@ -171,20 +204,280 @@ export class SubscriptionInsorgPage implements OnInit {
       this.currencySymbolVal = "₹";
     }
 
+    this.checkDiscount();
+
+  }
+
+
+  checkDiscount(){
+
+
+    var getCurrencyURL = "api/auth/app/PaymentInfo/getDiscount?talentId=" + this.userId;
+    this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
+
+      console.log(result);
+
+
+      let discount = {
+        packagetype:'',
+        discountPercentage:0,
+        referalCode:'',
+        amount:0,
+          receipt:'TALENTCHEK',
+          standardexAmount: 0,
+          ProfessionalexAmount:0,
+          UltimateexAmount:0,
+          EnterpriceexAmount:0,
+          standardAmount:'',
+          ProfessionalAmount:'',  
+          UltimateAmount:'',
+          EnterpriceAmount:''
+       }
+
+      if(result['success'] == true){
+
+        this.isdiscount = true ;
+
+for( var i=0 ; i < result['discountList'].length ; i++){
+
+  discount.packagetype = result['discountList'][i].packageType ;
+	discount.discountPercentage = result['discountList'][i].discountPercentage ;
+	discount.referalCode = result['discountList'].referalCode ;
+
+
+  if( this.currencyVal  == 'INR'){
+		  						
+  if(discount.packagetype =='Professional'){
+       this.disCountProfessionalAmount = 499900;
+     }
+     else if(discount.packagetype =='Enterprise'){
+       this.disCountEnterpriceAmount = 999900;
+     }
+     else if(discount.packagetype =='Ultimate'){
+       this.disCountUltimateAmount = 7499900;
+     }
+   
+ }
+ else if (this.currencyVal  == 'USD'){
+   
+   if(discount.packagetype =='Professional'){
+         this.disCountProfessionalAmount = 10000;
+       }
+       else if(discount.packagetype =='Enterprise'){
+         this.disCountEnterpriceAmount = 20000;
+       }
+       else if(discount.packagetype =='Ultimate'){
+         this.disCountUltimateAmount = 100000;
+       }		  						
+ }
+ 
+ else if(this.currencyVal  == 'AED'){
+   
+if(discount.packagetype =='Professional'){
+       this.disCountProfessionalAmount = 40000;
+     }
+     else if(discount.packagetype =='Enterprise'){
+       this.disCountEnterpriceAmount = 80000;
+     }
+     else if(discount.packagetype =='Ultimate'){
+       this.disCountUltimateAmount = 380000;
+     }	
+   
+ }
+ 
+ else if (this.currencyVal  == 'MYR' ){
+  if(discount.packagetype =='Professional'){
+       this.disCountProfessionalAmount = 40000;
+     }
+     else if(discount.packagetype =='Enterprise'){
+      this.disCountEnterpriceAmount = 80000;
+     }
+     else if(discount.packagetype =='Ultimate'){
+       this.disCountUltimateAmount = 380000;
+     }
+ }
+ 
+ 
+ if(discount.packagetype =='Professional'){
+    if(this.currencyVal =='INR'){
+    this.disCountProfessionalAmount = 4999*100;
+    discount.ProfessionalexAmount=  4999;
+   }else if (this.currencyVal =='USD'){
+     this.disCountProfessionalAmount = 100*100;
+      discount.ProfessionalexAmount=  100;
+   }else if (this.currencyVal == 'AED'){
+     this.disCountProfessionalAmount = 40000;
+     discount.ProfessionalexAmount=  400;
+   }else if (this.currencyVal == 'MYR'){
+     this.disCountProfessionalAmount = 40000;
+    discount.ProfessionalexAmount=  400;
+   }else if (this.currencyVal == 'SGD'){
+     this.disCountProfessionalAmount = 12000;
+     discount.ProfessionalexAmount=  120;
+   }
+  }
+  else if(discount.packagetype =='Enterprise'){
+    if(this.currencyVal =='INR'){
+    this.disCountEnterpriceAmount = 9999*100;
+    discount.EnterpriceexAmount=9999;
+   }else if (this.currencyVal =='USD'){
+     this.disCountEnterpriceAmount = 20000;
+     discount.EnterpriceexAmount= 200;
+   }else if (this.currencyVal == 'AED'){
+     this.disCountEnterpriceAmount = 80000;
+     discount.EnterpriceexAmount=  800;
+   }else if (this.currencyVal == 'MYR'){
+     this.disCountEnterpriceAmount = 80000;
+      discount.EnterpriceexAmount= 800;
+   }else if (this.currencyVal == 'SGD'){
+     this.disCountEnterpriceAmount =  24000;
+     discount.EnterpriceexAmount= 240;
+   }
+  }
+  else if(discount.packagetype =='Ultimate'){
+    if(this.currencyVal =='INR'){
+    this.disCountUltimateAmount = 74999*100;
+    discount.UltimateexAmount= 74999;
+   }else if (this.currencyVal =='USD'){
+     this.disCountUltimateAmount =  100000;
+     discount.UltimateexAmount= 1000;
+   }else if (this.currencyVal == 'AED'){
+     this.disCountUltimateAmount = 380000;
+     discount.UltimateexAmount= 3800;
+   }else if (this.currencyVal == 'MYR'){
+     this.disCountUltimateAmount = 380000;
+     discount.UltimateexAmount=3800;
+   }else if (this.currencyVal == 'SGD'){
+     this.disCountUltimateAmount = 120000;
+     discount.UltimateexAmount= 1200;
+   }
+  }
+  
+  if(discount.packagetype == 'Ultimate'){
+    
+   this.UltimatecountAmt =  Math.floor(discount.UltimateexAmount - ( discount.UltimateexAmount * discount.discountPercentage/100 ));
+   this.UltimateDiscPer = discount.discountPercentage;
+   this.UltimateDiscount = true;
+   this.UltimatecountAmt1 = this.UltimatecountAmt;
+
+   if(this.currencyVal =='INR'){
+    this.UltimatecountAmt ;
+    this.currencySymbolVal = '₹';
+    }else if (this.currencyVal =='USD'){
+      this.UltimatecountAmt ;
+      this.currencySymbolVal = '$';
+    }else if (this.currencyVal == 'AED'){
+      this.UltimatecountAmt ;
+      this.currencySymbolVal ='د.إ';
+    }else if (this.currencyVal == 'MYR'){
+      this.UltimatecountAmt ;
+      this.currencySymbolVal = 'RM';
+    }else if (this.currencyVal == 'SGD'){
+      this.UltimatecountAmt ;
+      this.currencySymbolVal = 'S$';
+   }
+   
+  }
+  else if (discount.packagetype == 'Enterprise'){
+    
+    this.EnterpricecountAmt =  Math.floor(discount.EnterpriceexAmount - ( discount.EnterpriceexAmount *discount.discountPercentage/100 ));
+    this.EnterpriceDiscPer = discount.discountPercentage;
+    this.EnterpriceDiscount = true;
+
+    this.EnterpricecountAmt1 = this.EnterpricecountAmt;
+
+    if(this.currencyVal =='INR'){
+      this.EnterpricecountAmt ;
+      this.currencySymbolVal = '₹';
+      }else if (this.currencyVal =='USD'){
+        this.EnterpricecountAmt ;
+        this.currencySymbolVal = '$';
+      }else if (this.currencyVal == 'AED'){
+        this.EnterpricecountAmt ;
+        this.currencySymbolVal ='د.إ';
+      }else if (this.currencyVal == 'MYR'){
+        this.EnterpricecountAmt ;
+        this.currencySymbolVal = 'RM';
+      }else if (this.currencyVal == 'SGD'){
+        this.EnterpricecountAmt ;
+        this.currencySymbolVal = 'S$';
+     }
+  }
+  else if (discount.packagetype == 'Professional'){
+ 
+  this.ProfessionalcountAmt =  Math.floor(discount.ProfessionalexAmount - ( discount.ProfessionalexAmount *discount.discountPercentage/100 )); 
+  this.ProfessionalDiscPer = discount.discountPercentage;
+  this.ProfessionalDiscount = true;
+  this.ProfessionalcountAmt1 =  this.ProfessionalcountAmt;
+
+  if(this.currencyVal =='INR'){
+    this.ProfessionalcountAmt ;
+    this.currencySymbolVal = '₹';
+    }else if (this.currencyVal =='USD'){
+      this.ProfessionalcountAmt ;
+      this.currencySymbolVal = '$';
+    }else if (this.currencyVal == 'AED'){
+      this.ProfessionalcountAmt ;
+      this.currencySymbolVal ='د.إ';
+    }else if (this.currencyVal == 'MYR'){
+      this.ProfessionalcountAmt ;
+      this.currencySymbolVal ='RM';
+    }else if (this.currencyVal == 'SGD'){
+      this.ProfessionalcountAmt ;
+      this.currencySymbolVal = 'S$';
+   }
+
+    
+  }
+           
+
+
+}
+
+      }
+    });
+
   }
 
   payWithRazor(subscriptionType: string) {
     var amountVal = 0;
     var subscriptype = subscriptionType;
-    if (subscriptype == "Professional") {
-      amountVal = this.amtProfessionalVal;
-    }
-    else if (subscriptype == "Enterprise") {
-      amountVal = this.amtEnterpriseVal;
-    }
-    else if (subscriptype == "Ultimate") {
-      amountVal = this.amtUltimateVal;
-    }
+
+if(this.isdiscount == true){
+  if (subscriptype == "Professional" && this.ProfessionalDiscount == true) {
+    amountVal = this.ProfessionalcountAmt;
+  }
+  else if(subscriptype == "Professional" && this.ProfessionalDiscount == false){
+    amountVal = this.amtProfessionalVal;
+  }
+  else if (subscriptype == "Enterprise" && this.EnterpriceDiscount == true) {
+    amountVal = this.EnterpricecountAmt;
+  }
+  else if(subscriptype == "Enterprise" && this.EnterpriceDiscount == false){
+    amountVal = this.amtEnterpriseVal;
+  }
+  else if (subscriptype == "Ultimate" && this.UltimateDiscount == true) {
+    amountVal = this.UltimatecountAmt;
+  }
+  else if(subscriptype == "Ultimate" && this.UltimateDiscount == false){
+    amountVal = this.amtUltimateVal;
+  }
+
+}
+else{
+
+  if (subscriptype == "Professional") {
+    amountVal = this.amtProfessionalVal;
+  }
+  else if (subscriptype == "Enterprise") {
+    amountVal = this.amtEnterpriseVal;
+  }
+  else if (subscriptype == "Ultimate") {
+    amountVal = this.amtUltimateVal;
+  }
+
+}
+
 
     var subscripamt = (amountVal * 100); //To conver to paisa/units
     this.exchangeAmount = amountVal ; // without paisa coversion to in to the table insertions
