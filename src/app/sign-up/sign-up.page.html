@@ -6,23 +6,38 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
 
 
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar class="new-background-color headers">
         <ion-row>
 
-            <ion-col size="0.5">
 
-            </ion-col>
             <ion-col size="2">
                 <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%"
                     (click)="goto_welcome()"></ion-icon>
             </ion-col>
 
-            <ion-col size="8">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Login.sign-up' |
+            <ion-col size="10">
+                <ion-title class="ion-text-wrap"
+                    style="font-family: Mr-eaves; color: black;text-align: center;">{{'Login.sign-up' |
                     translate}}</ion-title>
             </ion-col>
         </ion-row>
+    </ion-toolbar>
+</ion-header> -->
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="goto_welcome()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title style="text-align: center;font-family: Mr-eaves; color: black;">{{'Login.sign-up' |
+            translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
