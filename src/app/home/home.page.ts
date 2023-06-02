@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomePage implements OnInit {
   langSelected: string;
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -27,15 +29,19 @@ export class HomePage implements OnInit {
   avgrating:any;
   categoryType: string;
 
-  constructor(public router:Router,public storageservice: StorageService, private translate: TranslateService,) {
+  constructor(public router:Router,public storageservice: StorageService, 
+    private languageService: LanguageService,private translate: TranslateService,) {
     
 
    }
 
   ngOnInit() {
 
-    this.langSelected=localStorage.getItem("selLanguage") ;
-    this.translate.setDefaultLang(this.langSelected);
+   // this.langSelected=localStorage.getItem("selLanguage") ;
+   // this.translate.setDefaultLang(this.langSelected);
+
+   this.selectedLang  = localStorage.getItem('selectedLang');
+   this.languageService.setLanguage(this.selectedLang);
     
 
     this.router.events.subscribe(event => {
