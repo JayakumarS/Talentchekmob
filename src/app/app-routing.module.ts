@@ -401,9 +401,10 @@ const routes: Routes = [
   {
     path: 'language-popover',
     loadChildren: () => import('./language-popover/language-popover.module').then( m => m.LanguagePopoverPageModule)
-  },  {
-    path: 'profile-vcard',
-    loadChildren: () => import('./profile-vcard/profile-vcard.module').then( m => m.ProfileVcardPageModule)
+  },
+  {
+    path: 'profile-vcard/:param1',
+    loadChildren: () => import('./profile-vcard/profile-vcard.module').then(m => m.ProfileVcardPageModule)
   }
 
 

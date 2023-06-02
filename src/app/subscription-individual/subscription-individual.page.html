@@ -16,7 +16,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <div class="display-justify">
 
         <ion-card-content>
@@ -37,7 +37,7 @@
 
 
             <!--PRICE CONTENT START-->
-            <div class="generic_content">
+            <div class="generic_content" *ngIf="isdiscount == false">
 
                 <!--HEAD PRICE DETAIL START-->
                 <div class="generic_head_price">
@@ -88,6 +88,65 @@
 
             </div>
             <!--//PRICE CONTENT END-->
+
+
+
+            <!--   Standerd Discount Flow-->
+
+            <!--PRICE CONTENT START-->
+            <div class="generic_content" *ngIf="isdiscount == true">
+
+                <!--HEAD PRICE DETAIL START-->
+                <div class="generic_head_price">
+                    <div class="discount-label red" *ngIf="standardDiscount == true "><span>{{standardDiscPer}}% Discount</span></div>
+                    <!--HEAD CONTENT START-->
+                    <div class="generic_head_content">
+
+                        <!--HEAD START-->
+                        <div class="head_bg"></div>
+                        <div class="head">
+                            <span>{{'Subscription.std' | translate}}</span>
+                        </div>
+                        <!--//HEAD END-->
+
+                    </div>
+                    <!--//HEAD CONTENT END-->
+
+                    <!--PRICE START-->
+                    <div class="generic_price_tag clearfix">
+                        <span class="price">
+                      <span class="sign">{{currencySymbolVal}}</span>
+                        <span class="currency">{{standardcountAmt}}</span>
+                        </span>
+                    </div>
+                    <!--//PRICE END-->
+
+                </div>
+                <!--//HEAD PRICE DETAIL END-->
+
+                <!--FEATURE LIST START-->
+                <div class="generic_feature_list">
+                    <ul>
+                        <li>{{'Subscription.100 Talent credits' | translate}}</li>
+                        <li>{{'Subscription.Profile Verification' | translate}}</li>
+                        <li>{{'Subscription.Job Search Module' | translate}}</li>
+                        <li>{{'Subscription.Alumni Connect' | translate}}</li>
+                        <li>{{'Subscription.Knowledge Bank Access' | translate}}</li>
+                        <li>{{'Subscription.One Year Subscription' | translate}}</li>
+                    </ul>
+                </div>
+                <!--//FEATURE LIST END-->
+
+                <!--BUTTON START-->
+                <div class="generic_price_btn clearfix">
+                    <a class="" (click)="payWithRazorStandard()">{{'Subscription.getsta' | translate}}</a>
+                </div>
+                <!--//BUTTON END-->
+
+            </div>
+            <!--//PRICE CONTENT END-->
+
+
 
 
         </ion-card-content>

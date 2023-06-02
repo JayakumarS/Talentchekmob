@@ -4,6 +4,7 @@ import { StorageService } from '../storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { LanguageService } from '../language.service';
 
 //For using Razorpay
 declare var RazorpayCheckout: any;
@@ -41,7 +42,16 @@ export class SubscriptionIndividualPage implements OnInit {
   empId: string;
   usercountry: string;
 
-  constructor(private http: HttpClient,private location: Location,public router:Router, public storageservice: StorageService, private translate: TranslateService) {
+  isdiscount: boolean = false;
+  disCountstandardAmount :any;
+  standardcountAmt :any;  
+  standardDiscPer :any; 
+  standardDiscount :boolean = false; 
+  standardcountAmt1 :any; 
+  selectedLang: string;
+
+  constructor(private http: HttpClient,private location: Location,private languageService: LanguageService,
+    public router:Router, public storageservice: StorageService, private translate: TranslateService) {
 
     this.userId = localStorage.getItem("userId");
     this.currencyVal = "USD";
@@ -53,7 +63,162 @@ export class SubscriptionIndividualPage implements OnInit {
 
   ngOnInit() {
     this.previousUrl = this.location.path();
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
+
+
+ 
+
+  CurrencyChangeEvent(event) {
+
+    console.log("SelectedValue: " + event.target.value);
+
+    this.currencyVal = event.target.value;
+    if (this.currencyVal == 'INR') {
+      this.amountVal = 100;
+      this.currencySymbolVal = "₹";
+    }
+    else if (this.currencyVal == 'USD') {
+      this.amountVal = 10;
+      this.currencySymbolVal = "$";
+    }
+    else if (this.currencyVal == 'AED') {
+      this.amountVal = 10;
+      this.currencySymbolVal = "د.إ";
+    }
+    else if (this.currencyVal == 'MYR') {
+      this.amountVal = 10;
+      this.currencySymbolVal = "RM";
+    }
+    else if (this.currencyVal == 'SGD') {
+      this.amountVal = 10;
+      this.currencySymbolVal = "S$";
+    }
+    else {
+      this.amountVal = 100;
+      this.currencyVal = "INR";
+      this.currencySymbolVal = "₹";
+    }
+
+    this.checkDiscount();
+
+  }
+
+  //discount code
+
+  checkDiscount() {
+
+    var getCurrencyURL = "api/auth/app/PaymentInfo/getDiscount?talentId=" + this.userId;
+    this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
+    console.log(result);
+    let discount = {
+      packagetype:'',
+      discountPercentage:0,
+      referalCode:'',
+      amount:0,
+        receipt:'TALENTCHEK',
+        standardexAmount: 0,
+        ProfessionalexAmount:0,
+        UltimateexAmount:0,
+        EnterpriceexAmount:0,
+        standardAmount:'',
+        ProfessionalAmount:'',  
+        UltimateAmount:'',
+        EnterpriceAmount:''
+     }
+
+     if(result['success'] == true){
+
+      this.isdiscount = true ;
+
+      for( var i=0 ; i < result['discountList'].length ; i++){
+
+        discount.packagetype = result['discountList'][i].packageType ;
+        discount.discountPercentage = result['discountList'][i].discountPercentage ;
+        discount.referalCode = result['discountList'].referalCode ;
+      
+
+        if( this.currencyVal  == 'INR'){
+
+          if(discount.packagetype =='Standard'){
+            this.disCountstandardAmount = 10000;
+           }
+         }
+         else if (this.currencyVal  == 'USD'){
+          if(discount.packagetype =='Standard'){
+            this.disCountstandardAmount = 1000;
+            }
+         }
+        else if(this.currencyVal  == 'AED'){
+        if(discount.packagetype  =='Standard'){
+        this.disCountstandardAmount = 1000;
+        }
+
+        
+      }
+      else if (this.currencyVal  == 'MYR' ){
+   
+        if(discount.packagetype  =='Standard'){
+          this.disCountstandardAmount = 1000;
+        }
+
+      }
+
+
+      
+  if(discount.packagetype =='Standard'){
+    if(this.currencyVal =='INR'){
+      this.disCountstandardAmount = 100 *100;
+       discount.standardexAmount = 100;
+     }else if (this.currencyVal =='USD'){
+      this.disCountstandardAmount = 1000;
+       discount.standardexAmount =10;
+     }else if (this.currencyVal == 'AED'){
+      this.disCountstandardAmount = 1000;
+       discount.standardexAmount = 10;
+     }else if (this.currencyVal == 'MYR'){
+      this.disCountstandardAmount = 1000;
+      discount.standardexAmount = 10;
+     }else if (this.currencyVal == 'SGD'){
+      this.disCountstandardAmount = 1000;
+         discount.standardexAmount = 10;
+     }
+  }
+
+  if (discount.packagetype == 'Standard'){
+   
+    this.standardcountAmt =  Math.floor(discount.standardexAmount - ( discount.standardexAmount * discount.discountPercentage/100 )); 
+    this.standardDiscPer = discount.discountPercentage;
+    this.standardDiscount = true;
+    this.standardcountAmt1 = this.standardcountAmt;
+  
+    if(this.currencyVal =='INR'){
+      this.standardcountAmt 
+      this.currencySymbolVal = "₹"; 
+      }else if (this.currencyVal =='USD'){
+        this.standardcountAmt ;
+        this.currencySymbolVal = "$";
+      }else if (this.currencyVal == 'AED'){
+        this.standardcountAmt ;
+        this.currencySymbolVal ='د.إ';
+      }else if (this.currencyVal == 'MYR'){
+        this.standardcountAmt ;
+        this.currencySymbolVal ='RM';
+      }else if (this.currencyVal == 'SGD'){
+        this.standardcountAmt ;
+        this.currencySymbolVal = 'S$';
+     }
+      
+    } }
+    }
+
+
+    }); 
+  }
+
+
 
 
   BindDefaultCurrencyAsPerCurrentUser() {
@@ -98,43 +263,17 @@ export class SubscriptionIndividualPage implements OnInit {
         this.amountVal = 10;
         this.currencySymbolVal = "$";
       }
+
+      this.checkDiscount();
     });
   }
 
-  CurrencyChangeEvent(event) {
-
-    console.log("SelectedValue: " + event.target.value);
-
-    this.currencyVal = event.target.value;
-    if (this.currencyVal == 'INR') {
-      this.amountVal = 100;
-      this.currencySymbolVal = "₹";
-    }
-    else if (this.currencyVal == 'USD') {
-      this.amountVal = 10;
-      this.currencySymbolVal = "$";
-    }
-    else if (this.currencyVal == 'AED') {
-      this.amountVal = 10;
-      this.currencySymbolVal = "د.إ";
-    }
-    else if (this.currencyVal == 'MYR') {
-      this.amountVal = 10;
-      this.currencySymbolVal = "RM";
-    }
-    else if (this.currencyVal == 'SGD') {
-      this.amountVal = 10;
-      this.currencySymbolVal = "S$";
-    }
-    else {
-      this.amountVal = 100;
-      this.currencyVal = "INR";
-      this.currencySymbolVal = "₹";
-    }
-
-  }
-
   payWithRazorStandard() {
+
+    if(this.isdiscount == true){
+      this.amountVal = this.standardcountAmt;
+    }
+
     var subscripamt = (this.amountVal * 100); //To conver to paisa/units
     let orderURL = "api/auth/app/subscription/payments/Subscriptionpayment";
     var options = {

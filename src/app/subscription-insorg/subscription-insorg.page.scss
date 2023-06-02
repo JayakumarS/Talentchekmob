@@ -284,3 +284,56 @@ ion-content {
     bottom: 0px;
     padding-bottom: 3px;
 }
+
+.discount-label {
+    -webkit-border-radius: 0 4px 0 4px;
+    -moz-border-radius: 0 4px 0 4px;
+    border-radius: 0 4px 4px 0
+}
+
+.discount-label:after {
+    right: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(136, 183, 213, 0);
+    border-width: 20px;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.discount-label:before {
+    content: '';
+    z-index: 2;
+    position: absolute;
+    top: 42%;
+    right: 100%;
+    width: 7px;
+    height: 7px;
+    opacity: .95;
+    background: #ffffff;
+    border-radius: 7px;
+    -webkit-box-shadow: inset .5px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: inset .5px 0 rgba(0, 0, 0, 0.6);
+}
+
+.discount-label span {
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    font-family: "Raleway", Helvetica;
+}
+
+.red {
+    background-color: #E80707;
+}
+
+.red:after {
+    border-right-color: #E80707;
+}
+
+.blue {
+    background-color: #1883DB;
+}

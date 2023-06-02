@@ -51,9 +51,15 @@ export class IndivAlumniListPage implements OnInit {
           console.log(params);
 
           if(params['oniType'] == 'exp'){
+
+            this.title = 'Corporate Alumni';
+
             this.getCorporate(params.onitalentId);
           }
           else if(params['oniType'] == 'edu'){
+
+            this.title = 'Student Alumni';
+
             this.getStudentNetwork(params.onitalentId);
           }
           

@@ -53,10 +53,11 @@ export class LanguageService {
     this.translate.use(lng);
     this.selected = lng;
     this.storage.set('LNG_KEY', lng);
+    localStorage.setItem('selectedLang', lng);
+    console.log(localStorage.getItem('selectedLang'));
     for (let i = 0; i < this.languages.length; i++) {
       if (this.languages[i].value === this.selected) {
         this.selectedLang = this.languages[i];
-
         console.log("selectedLang frm service: " + this.selectedLang["value"])
         this.storageservice.publishSomeData({ selectedLang: this.selectedLang["value"] });
         console.log(`Posting Data this.selectedLang: ${JSON.stringify(this.selectedLang)}`);

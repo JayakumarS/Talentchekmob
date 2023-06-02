@@ -17,10 +17,12 @@
 
     <div class="display-justify" *ngFor="let cElement of alumniList">
         <div class="custom-button" (click)="studentnetwork(cElement.oniname,cElement.networktype)">
-            <div style="display: flex; align-items: center; font-family: Mr-eaves ;white-space: nowrap;">
+            <div style="display: flex; align-items: center; font-family: Mr-eaves ;">
                 <ion-avatar slot="start">
                     <img style="padding: 7px;" src="{{cElement.logo}}" />
-                </ion-avatar>{{cElement.userName}}</div>
+                </ion-avatar>
+                <div class="orgtitle">{{cElement.userName}}</div>
+            </div>
         </div>
     </div>
 
