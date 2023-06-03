@@ -71,10 +71,6 @@ const routes: Routes = [
     path: 'forget-password-reset-success',
     loadChildren: () => import('./forget-password-reset-success/forget-password-reset-success.module').then( m => m.ForgetPasswordResetSuccessPageModule)
   },
-  {
-    path: 'dashboard-individual',
-    loadChildren: () => import('./dashboard-givven/dashboard-individual.module').then( m => m.DashboardIndividualPageModule)
-  },
   
   {
     path: 'folder-password-modal',
@@ -85,10 +81,6 @@ const routes: Routes = [
   {
     path: 'delete-my-account',
     loadChildren: () => import('./delete-my-account/delete-my-account.module').then( m => m.DeleteMyAccountPageModule)
-  },
-  {
-    path: 'call-entry',
-    loadChildren: () => import('./call-entry/call-entry.module').then( m => m.CallEntryPageModule)
   },
   {
     path: 'g-track',
