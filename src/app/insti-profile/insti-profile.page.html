@@ -1,14 +1,11 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar class="new-background-color">
         <ion-row>
-
             <ion-col size="0.5">
-
             </ion-col>
             <ion-col size="2">
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
             </ion-col>
-
             <ion-col>
                 <ion-title *ngIf="isProfile" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'editGeneralInfo' | translate}}</ion-title>
                 <ion-title *ngIf="isAbout" class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'Edit Institution Details' | translate}}
@@ -17,7 +14,27 @@
                 </ion-title>
             </ion-col>
         </ion-row>
+    </ion-toolbar>
+</ion-header> -->
 
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="profileView()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title *ngIf="isProfile" style="text-align: center;font-family: Mr-eaves; color: black;">{{'editGeneralInfo'
+            | translate}}</ion-title>
+        <ion-title *ngIf="isAbout" style="text-align: center;font-family: Mr-eaves; color: black;">{{'Edit Institution
+            Details' | translate}}</ion-title>
+        <ion-title *ngIf="isLogo" style="text-align: center;font-family: Mr-eaves; color: black;">{{'Edit Institution
+            Logo' | translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -35,47 +52,57 @@
             <ion-row class="talentrow">
                 <ion-col>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.instiName' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.instiName' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="instName"></ion-input>
                         </ion-item>
-                        <div *ngIf="docForm.controls.instName.hasError('required') && docForm.controls.instName.touched">
+                        <div
+                            *ngIf="docForm.controls.instName.hasError('required') && docForm.controls.instName.touched">
                             <small style="color: #f70505;">{{'InsReg.reqInsName' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isAbout">
-                        <ion-label class="labels">{{'ProfileInsti.instiType' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.instiType' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-select placeholder="Select Institution Type" formControlName="instType" style="background-color: white;">
+                            <ion-select placeholder="Select Institution Type" formControlName="instType"
+                                style="background-color: white;">
                                 <ion-select-option *ngFor="let instType of InstitypeList " [value]="instType.id">
                                     {{instType.text}}
                                 </ion-select-option>
                             </ion-select>
                         </ion-item>
-                        <div *ngIf="docForm.controls.instType.hasError('required') && docForm.controls.instType.touched">
+                        <div
+                            *ngIf="docForm.controls.instType.hasError('required') && docForm.controls.instType.touched">
                             <small style="color: #f70505;">{{'ProfileInsti.plsSelInstiType' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.email' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.email' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="instEmail"></ion-input>
                         </ion-item>
-                        <div *ngIf="docForm.controls.instEmail.hasError('required') && docForm.controls.instEmail.touched">
+                        <div
+                            *ngIf="docForm.controls.instEmail.hasError('required') && docForm.controls.instEmail.touched">
                             <small style="color: #f70505;">{{'ProfileInsti.plsEntEmail' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.mobNo' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.mobNo' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="instMobile"></ion-input>
                         </ion-item>
-                        <div *ngIf="docForm.controls.instMobile.hasError('required') && docForm.controls.instMobile.touched">
+                        <div
+                            *ngIf="docForm.controls.instMobile.hasError('required') && docForm.controls.instMobile.touched">
                             <small style="color: #f70505;">{{'ProfileInsti.plsEntValMbNo' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isAbout">
-                        <ion-label class="labels">{{'ProfileInsti.panTxId' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.panTxId' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="taxId"></ion-input>
                         </ion-item>
@@ -84,7 +111,8 @@
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ContactInfo.address' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ContactInfo.address' | translate}} <small
+                                style="color: #f70505;">*</small></ion-label>
 
                         <ion-item fill="outline" class="input-field">
                             <ion-textarea formControlName="permAddress"></ion-textarea>
@@ -94,28 +122,34 @@
             </div> -->
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.country' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.country' | translate}} <small
+                                style="color: #f70505;">*</small></ion-label>
 
                         <ion-item fill="outline" class="input-field">
                             <div class="selected-skills-container">
                                 <div class="selected-skill">{{ selectedCountry }}
                                 </div>
                             </div>
-                            <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" name="close-circle" (click)="removeCountry()"></ion-icon>
-                            <ion-input (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                            <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" name="close-circle"
+                                (click)="removeCountry()"></ion-icon>
+                            <ion-input (ionInput)="onCountrySearch($event.target.value)"
+                                [formControl]="countrysearchCtrl"></ion-input>
                         </ion-item>
 
                         <ion-list *ngIf="showcountyResults">
-                            <ion-item *ngFor="let result of searchResults" (click)="selectcountry(result.text,result.id)">
+                            <ion-item *ngFor="let result of searchResults"
+                                (click)="selectcountry(result.text,result.id)">
                                 {{ result.text }}
                             </ion-item>
                         </ion-list>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.staProv' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.staProv' | translate}} <small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
 
-                            <ion-select (ionChange)="goTostateSelectedItem($event.target.value)" formControlName="permState">
+                            <ion-select (ionChange)="goTostateSelectedItem($event.target.value)"
+                                formControlName="permState">
                                 <ion-select-option *ngFor="let sElement of stateResponse" [value]="sElement.id">
                                     {{sElement.text}}</ion-select-option>
 
@@ -123,7 +157,8 @@
                         </ion-item>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.areaName' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.areaName' | translate}} <small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-select formControlName="permCity">
                                 <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
@@ -133,13 +168,15 @@
                         </ion-item>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'ProfileInsti.pinZip' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'ProfileInsti.pinZip' | translate}} <small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="permPinCode"></ion-input>
                         </ion-item>
                     </div>
                     <div class="button-content" *ngIf="isAbout">
-                        <ion-label class="labels">{{'Year of Establishment' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'Year of Establishment' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="dob"></ion-input>
                         </ion-item>
@@ -155,7 +192,8 @@
                                     <img class="horizontal" [src]="base64img1" name="image" />
                                 </ion-thumbnail>
                                 <ion-thumbnail *ngIf="!base64img1">
-                                    <img class="horizontal" src="../../assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                    <img class="horizontal" src="../../assets/img/avatar1.png" alt="Lights"
+                                        style="width:100%" />
                                 </ion-thumbnail>
                             </ion-col>
 
@@ -172,18 +210,22 @@
                         </ion-row>
                     </div><br>
                     <div class="button-content" *ngIf="isAbout">
-                        <ion-label class="labels">{{'InsReg.accreditation' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'InsReg.accreditation' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="accreditation"></ion-input>
                         </ion-item>
-                        <div *ngIf="docForm.controls.accreditation.hasError('required') && docForm.controls.accreditation.touched">
+                        <div
+                            *ngIf="docForm.controls.accreditation.hasError('required') && docForm.controls.accreditation.touched">
                             <small style="color: #f70505;">{{'Accreditation is required' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isAbout">
-                        <ion-label class="labels">{{'About the Institution' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'About the Institution' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-textarea formControlName="details" placeholder="About You" rows="10" maxlength="500"></ion-textarea>
+                            <ion-textarea formControlName="details" placeholder="About You" rows="10"
+                                maxlength="500"></ion-textarea>
                         </ion-item>
                         <!-- <div *ngIf="docForm.controls.instName.hasError('required') && docForm.controls.instName.touched">
               <small style="color: #f70505;">Institution Name is required</small>
@@ -192,7 +234,8 @@
 
                     <div class="button-content" style="width: 50%;   margin: auto;">
                         <div class="display-justify">
-                            <ion-button class="custom-button" (click)="Update()">{{'EditProfileIndividual.update' | translate}}</ion-button>
+                            <ion-button class="custom-button" (click)="Update()">{{'EditProfileIndividual.update' |
+                                translate}}</ion-button>
                         </div>
                     </div>
                 </ion-col>
