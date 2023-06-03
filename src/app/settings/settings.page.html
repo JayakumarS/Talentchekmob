@@ -18,14 +18,14 @@
             <div class="custom-button" *ngIf="roleId == 2 || roleId == 3 ">
                 <div style="display: flex; align-items: center;" (click)="goto_alumni()">
                     <ion-avatar slot="start">
-                        <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
+                        <img style="padding: 6px;" src="../../assets/img/alumni.png" />
                     </ion-avatar><span style="font-family: Mr-eaves;">{{'alumni' | translate}}</span></div>
             </div>
 
             <div class="custom-button" *ngIf="roleId.includes('1')">
                 <div style="display: flex; align-items: center;" (click)="goto_Indiv_alumni()">
                     <ion-avatar slot="start">
-                        <img style="padding: 6px;margin-left: -23px;" src="../../assets/img/alumni.png" />
+                        <img style="padding: 6px;" src="../../assets/img/alumni.png" />
                     </ion-avatar><span style="font-family: Mr-eaves;">{{'alumni' | translate}}</span></div>
             </div>
         </div>
