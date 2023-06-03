@@ -43,28 +43,7 @@ export class HomePage implements OnInit {
    // this.translate.setDefaultLang(this.langSelected);
 
 
-   this.driver.defineSteps([
-     {
-       element: '#step1',
-       popover: {
-        className: 'first-step-popover-class',
-         title: 'Step 1',
-         description: 'This is the first step.',
-         position: 'top',
-       },
-     },
-     {
-       element: '#step2',
-       popover: {
-         title: 'Step 2',
-         description: 'This is the second step.',
-         position: 'top',
-       },
-     },
-     // Add more steps as needed
-   ]);
- 
-   this.driver.start();
+   
 
    this.selectedLang  = localStorage.getItem('selectedLang');
    this.languageService.setLanguage(this.selectedLang);
@@ -100,7 +79,33 @@ export class HomePage implements OnInit {
     this.selectedTab = tabName;
   }
 
-  test(){
+  startTour(){
+
+    this.driver = new Driver({
+      stageBackground: "rgba(255, 255, 255, 0.1)", // Background color for the staged behind highlighted element
+    });
+
+    this.driver.defineSteps([
+      {
+        element: '#step1',
+        popover: {
+         className: 'first-step-popover-class',
+          title: 'Step 1',
+          description: 'This is the first step.',
+          position: 'top',
+        },
+      },
+      {
+        element: '#step2',
+        popover: {
+          title: 'Step 2',
+          description: 'This is the second step.',
+          position: 'top',
+        },
+      },
+      // Add more steps as needed
+    ]);
+  
     this.driver.start();
   }
 

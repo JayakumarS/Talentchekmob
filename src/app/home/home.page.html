@@ -115,7 +115,7 @@
         <ion-col>
             <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1>
             <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P>
-            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
+            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="startTour()">{{'Go to Profile' | translate}}</a></p>
             <img class="imageCss" src="../../assets/img/Illustration.png" />
         </ion-col>
 
@@ -129,7 +129,7 @@
 </ion-content>
 
 <div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();" id="step1" class="transparent-element">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();" id="step1">
 <ion-icon size="large" name="search-circle"></ion-icon>
 </button>
     <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
