@@ -15,7 +15,7 @@
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <div *ngIf="heagerListFlag">
 
         <div class="display-justify">
@@ -24,7 +24,7 @@
                     <ion-row>
 
                         <ion-col size="3">
-                            <img alt="" src="\assets\img\match.png" />
+                            <img alt="" src="../../assets/img/match.png" />
                         </ion-col>
                         <ion-col size="6">
                             <p class="title-match">{{'JobPostInsti.matchedProf' | translate}}</p>
@@ -43,7 +43,7 @@
                     <ion-row>
 
                         <ion-col size="3">
-                            <img alt="" src="\assets\img\applications.png" />
+                            <img alt="" src="../../assets/img/applications.png" />
                         </ion-col>
                         <ion-col size="6">
                             <p class="title-match">{{'Received Applications' | translate}}</p>
@@ -64,7 +64,7 @@
                     <ion-row>
 
                         <ion-col size="3">
-                            <img alt="" src="\assets\img\auctioneer.png" />
+                            <img alt="" src="../../assets/img/auctioneer.png" />
                         </ion-col>
                         <ion-col size="6">
                             <p class="title-match">{{'Bids Received' | translate}}</p>
@@ -109,7 +109,7 @@
                     </ion-col>
                     <ion-col size="10" style="    margin-top: -13%;">
                         <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
-                            {{match.jobseekerexperienceno}}  {{match.jobseekerexperienceformat}} {{'JobAppliRec.relExp' | translate}}</ion-title>
+                            {{match.jobseekerexperienceno}} {{match.jobseekerexperienceformat}} {{'JobAppliRec.relExp' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>

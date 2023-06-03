@@ -13,126 +13,130 @@
 
 <ion-content>
     <form>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    <form>
+        <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+        <form>
 
-        <div class="display-justify">
-            <ion-card class="adv-card">
-                <ion-card-content>
+            <div class="display-justify">
+                <ion-card class="adv-card">
+                    <ion-card-content>
+                        <ion-row>
+
+                            <ion-col size="4">
+                                <ion-avatar size="large">
+                                    <img alt="Silhouette of a person's head" src="../../assets/img/briefcase.png" />
+                                </ion-avatar>
+                            </ion-col>
+                            <ion-col size="8">
+                                <ion-button class="custom-button-job-edit" (click)="goto_addJobPost()">
+                                    {{'Add Job vacancy' | translate}} &nbsp;
+                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+
+
+
+            <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;">&nbsp;&nbsp;&nbsp;{{'Posted Jobs List' | translate}}</span>
+            <ion-row *ngIf="jobPostList == ''">
+                <ion-col size="12">
+                    <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                        <img alt="Silhouette of a person's head" src="../../assets/img/jobs empty.png" />
+                    </ion-avatar>
+                    <div style="display: flex;justify-content: center;">{{'No Results to Display' | translate}}</div>
+                </ion-col>
+            </ion-row>
+            <div class="display-justify" *ngFor="let cElement of jobPostList">
+
+                <ion-card class="adv-card">
+                    <ion-row>&nbsp;</ion-row>
                     <ion-row>
+                        <ion-col size="12">
+                            <ion-row>
+                                <div class="postedcardtitle">{{cElement.jobTitleName}}</div>
+                                <br>
+                            </ion-row>
+                            <div style="display: flex;justify-content: space-between;align-items: center;">
+                                <div class="postedcards">
+                                    <ion-label class="labels">{{'JobSearch.location' | translate}} :</ion-label>
+                                </div>
+                                <div style="padding: 5px;" class="postedcards">
+                                    {{cElement.offeredLocations}}
+                                </div>
+                                <div>
+                                    <ion-icon size="medium" style="color:forestgreen;" name="create" (click)="editCall(cElement.jobId)"></ion-icon>
+                                </div>
+                            </div>
 
-                        <ion-col size="4">
-                            <ion-avatar size="large">
-                                <img alt="Silhouette of a person's head" src="\assets\img\briefcase.png" />
-                            </ion-avatar>
-                        </ion-col>
-                        <ion-col size="8">
-                            <ion-button class="custom-button-job-edit" (click)="goto_addJobPost()">
-                                {{'Add Job vacancy' | translate}} &nbsp;
-                                <ion-icon name="add-circle-outline"></ion-icon>
-                            </ion-button>
+                            <div style="display: flex;justify-content: space-between;align-items: center;">
+                                <div class="postedcards">
+                                    <ion-label class="labels">{{'Posted date' | translate}} :</ion-label>
+                                </div>
+                                <div class="postedcards">
+                                    {{cElement.lastPostedDate}}
+                                </div>
+                                <div>
+                                    <ion-icon size="medium" style="color:red;" name="trash" (click)="deletejob(cElement.jobId)"></ion-icon>
+                                </div>
+                            </div>
+
+                            <div *ngIf="cElement.appDeadline != 'Closed'" style="display: flex;justify-content: space-between;align-items: center;margin-top: 3px;">
+                                <div class="postedcards">
+                                    <ion-label class="labels">{{'Closes on' | translate}} :</ion-label>
+                                </div>
+                                <div class="postedcards">
+                                    {{cElement.appDeadline}}
+                                </div>
+                                <div>
+                                    <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">{{'View Matches' | translate}}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="cElement.appDeadline == 'Closed'" style="display: flex;justify-content: space-between;align-items: center;">
+
+                                <div class="postedcards" style="color: maroon;margin-top: 3px;">
+                                    {{'Application' | translate}} {{cElement.appDeadline}}
+                                </div>
+                            </div>
                         </ion-col>
                     </ion-row>
-                </ion-card-content>
-            </ion-card>
-        </div>
 
+                    <ion-row>&nbsp;</ion-row>
+                </ion-card>
+            </div>
+        </form>
 
-       
-        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;">&nbsp;&nbsp;&nbsp;{{'Posted Jobs List' | translate}}</span>
-        <ion-row *ngIf="jobPostList == ''">
-            <ion-col size="12">
-                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
-                    <img alt="Silhouette of a person's head" src="\assets\img\jobs empty.png" />
-                </ion-avatar>
-                <div style="display: flex;justify-content: center;" >{{'No Results to Display' | translate}}</div>
-            </ion-col>
-        </ion-row>
-        <div class="display-justify" *ngFor="let cElement of jobPostList">
-            
-            <ion-card class="adv-card">
-                <ion-row>&nbsp;</ion-row>
-                <ion-row>
-                    <ion-col size="12">
-                        <ion-row>
-                            <div class="postedcardtitle">{{cElement.jobTitleName}}</div>
-                            <br>
-                        </ion-row>
-                        <div style="display: flex;justify-content: space-between;align-items: center;">
-                            <div class="postedcards">
-                                <ion-label class="labels">{{'JobSearch.location' | translate}} :</ion-label>
-                            </div>
-                            <div style="padding: 5px;" class="postedcards">
-                                {{cElement.offeredLocations}}
-                            </div>
-                            <div>
-                                <ion-icon size="medium" style="color:forestgreen;" name="create" (click)="editCall(cElement.jobId)"></ion-icon>
-                            </div>
-                        </div>
-
-                        <div style="display: flex;justify-content: space-between;align-items: center;">
-                            <div class="postedcards">
-                                <ion-label class="labels">{{'Posted date' | translate}} :</ion-label>
-                            </div>
-                            <div class="postedcards">
-                                {{cElement.lastPostedDate}}
-                            </div>
-                            <div>
-                                <ion-icon size="medium" style="color:red;" name="trash" (click)="deletejob(cElement.jobId)"></ion-icon>
-                            </div>
-                        </div>
-
-                        <div *ngIf="cElement.appDeadline != 'Closed'" style="display: flex;justify-content: space-between;align-items: center;margin-top: 3px;">
-                            <div class="postedcards">
-                                <ion-label class="labels">{{'Closes on' | translate}} :</ion-label>
-                            </div>
-                            <div class="postedcards">
-                                {{cElement.appDeadline}}
-                            </div>
-                            <div>
-                                <span class="c-pill c-pill--warning" (click)="viewMatches(cElement.jobId)">{{'View Matches' | translate}}</span>
-                            </div>
-                        </div>
-
-                        <div *ngIf="cElement.appDeadline == 'Closed'" style="display: flex;justify-content: space-between;align-items: center;">
-
-                            <div class="postedcards" style="color: maroon;margin-top: 3px;">
-                                {{'Application' | translate}} {{cElement.appDeadline}}
-                            </div>
-                        </div>
-                    </ion-col>
-                </ion-row>
-
-                <ion-row>&nbsp;</ion-row>
-            </ion-card>
-        </div>
     </form>
-    <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-  <ion-icon size="large" name="search-circle"></ion-icon>
-</button>
-        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-  <ion-icon size="large" name="earth-sharp"></ion-icon>
-</button>
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
-   <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-</button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
-    <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
- </button>
-
-        <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
-    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-  </button>
-        <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">
-  <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-</button>
-        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-  <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-  
-</button>
-    </div>
-</form>
 </ion-content>
+
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_orghome();">
+<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+</button>
+    <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_instihome();">
+<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+</button>
+
+    <button *ngIf="RoleID.includes('2')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_orgprofile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button *ngIf="RoleID.includes('3')" [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_instiprofile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>

@@ -11,10 +11,10 @@
             <div *ngIf="edit" style="text-align: center;display: contents;">
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;font-size:18px">{{'editJobPref' | translate}}</ion-title>
             </div><br>
-          
+
         </div>
         <br>
-        
+
     </ion-toolbar>
 
 </ion-header>
@@ -25,16 +25,16 @@
     </ion-refresher>
 
     <!-- [formGroup]="jobProfileForm"> -->
-    
-        <div class="ion-stepper">
-            
-            <div class="ion-stepper-step" id="step1">
-                <form [formGroup]="jobProfileForm">
+
+    <div class="ion-stepper">
+
+        <div class="ion-stepper-step" id="step1">
+            <form [formGroup]="jobProfileForm">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">1</div>
                     <div class="ion-stepper-title" style="font-family: Mr-eaves;">{{'AddJobProfile.jobPref' | translate}}</div>
                 </div>
-              
+
                 <div class="ion-stepper-content">
                     <ion-label class="labels">{{'AddJobProfile.industry' | translate}}<small style="color: #f70505;">*</small></ion-label>
                     <ion-item fill="outline" class="input-field" required>
@@ -119,15 +119,15 @@
                     <div *ngIf="jobProfileForm.controls.jobExperience.hasError('required') && jobProfileForm.controls.jobExperience.touched">
                         <small style="color: #f70505;"> {{'AddJobPost.workReq' | translate}}</small>
                     </div>
-             
+
                     <div class="ion-stepper-buttons">
-                        <button  class="ion-stepper-next" [disabled]="!jobProfileForm.valid"  (click)="nextStep('step1', 'step2',jobProfileForm.controls);">{{'profilein.Next' | translate}}</button>
+                        <button class="ion-stepper-next" [disabled]="!jobProfileForm.valid" (click)="nextStep('step1', 'step2',jobProfileForm.controls);">{{'profilein.Next' | translate}}</button>
                     </div>
                 </div>
             </form>
-            </div>
-      
-            <!-- <div class="ion-stepper-step" id="step2">
+        </div>
+
+        <!-- <div class="ion-stepper-step" id="step2">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">2</div>
                     <div class="ion-stepper-title">Availability</div>
@@ -277,10 +277,10 @@
                     </div>
                 </div>
             </div> -->
-           
-               
-            <div class="ion-stepper-step" id="step2">
-                <form  [formGroup]="jobsForm">
+
+
+        <div class="ion-stepper-step" id="step2">
+            <form [formGroup]="jobsForm">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">2</div>
                     <div class="ion-stepper-title">{{'AddJobProfile.addInfo' | translate}}</div>
@@ -419,30 +419,30 @@
                     </div>
                 </div>
             </form>
-            </div>
-       
         </div>
-   
 
-
-    <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-    <ion-icon size="large" name="search-circle"></ion-icon>
-  </button>
-        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-    <ion-icon size="large" name="earth-sharp"></ion-icon>
-  </button>
-        <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-     <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-    
-  </button>
-        <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-  </button>
-        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-    <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-    
-  </button>
     </div>
 
+
 </ion-content>
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+ <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>

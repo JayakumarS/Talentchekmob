@@ -61,7 +61,7 @@
                 <ion-item style="--ion-item-background: transparent;" *ngFor='let element of searchListResponse' (click)="openDetailsWithService(element.userId,element.empId,element.userAcctType)">
                     <ion-avatar slot="start">
                         <img *ngIf="element.uploadPhoto != null" [src]="baseURL + element.uploadPhoto">
-                        <img *ngIf="element.uploadPhoto == null" src="./assets/img/avatar1.png">
+                        <img *ngIf="element.uploadPhoto == null" src="../../assets/img/avatar1.png">
                     </ion-avatar>
                     <ion-label>
                         <h2>{{element.firstName}} {{element.lastName}}</h2>
