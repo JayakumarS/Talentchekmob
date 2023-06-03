@@ -10,7 +10,7 @@
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+    </ion-refresher>
     <form>
         <div class="display-justify">
             <ion-row class="container">
@@ -116,7 +116,7 @@
             <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1>
             <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P>
             <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
-            <img class="imageCss" src=".\assets\img\Illustration.png" />
+            <img class="imageCss" src="../../assets/img/Illustration.png" />
         </ion-col>
 
 
@@ -124,24 +124,26 @@
     </form>
 
 
-    <div class="footer-nav">
-        <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-    <ion-icon size="large" name="search-circle"></ion-icon>
-    </button>
-        <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-    <ion-icon size="large" name="earth-sharp"></ion-icon>
-    </button>
-        <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-     <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
-    
-    </button>
-        <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-    <ion-icon size="large" name="person-circle-sharp"></ion-icon>
-    </button>
-        <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-    <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
-    
-    </button>
-    </div>
+
 
 </ion-content>
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();" id="step1" class="transparent-element">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();" id="step2">
+ <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>

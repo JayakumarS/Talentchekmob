@@ -21,7 +21,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
-
 //import { FCM } from '@ionic-native/fcm/ngx';
 
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
@@ -31,6 +30,8 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { DatePipe } from '@angular/common';
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -58,7 +59,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,  
     BrowserModule,
     TranslateModule.forChild(),
-    
+
     IonicModule.forRoot(), AppRoutingModule, CKEditorModule,
     Ng2GoogleChartsModule,
     IonicStorageModule.forRoot(),

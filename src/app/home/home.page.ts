@@ -4,6 +4,8 @@ import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../language.service';
+import Driver from 'driver.js';
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ import { LanguageService } from '../language.service';
 export class HomePage implements OnInit {
   langSelected: string;
   selectedLang: string;
-
+  driver:any = new Driver();
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -29,7 +31,7 @@ export class HomePage implements OnInit {
   avgrating:any;
   categoryType: string;
 
-  constructor(public router:Router,public storageservice: StorageService, 
+  constructor(public router:Router,public storageservice: StorageService,
     private languageService: LanguageService,private translate: TranslateService,) {
     
 
@@ -39,6 +41,30 @@ export class HomePage implements OnInit {
 
    // this.langSelected=localStorage.getItem("selLanguage") ;
    // this.translate.setDefaultLang(this.langSelected);
+
+
+   this.driver.defineSteps([
+     {
+       element: '#step1',
+       popover: {
+        className: 'first-step-popover-class',
+         title: 'Step 1',
+         description: 'This is the first step.',
+         position: 'top',
+       },
+     },
+     {
+       element: '#step2',
+       popover: {
+         title: 'Step 2',
+         description: 'This is the second step.',
+         position: 'top',
+       },
+     },
+     // Add more steps as needed
+   ]);
+ 
+   this.driver.start();
 
    this.selectedLang  = localStorage.getItem('selectedLang');
    this.languageService.setLanguage(this.selectedLang);
@@ -72,6 +98,10 @@ export class HomePage implements OnInit {
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
+  }
+
+  test(){
+    this.driver.start();
   }
 
 
