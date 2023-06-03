@@ -1,10 +1,13 @@
 <ion-header>
     <ion-toolbar class="new-background-color">
         <ion-row>
-            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; text-align: center; font-size: 24px;">{{'DashboardIndividual.myProfile' | translate}}</ion-title>
+            <ion-title class="ion-text-wrap"
+                style="font-family: Mr-eaves; color: black; text-align: center; font-size: 24px;">{{'DashboardIndividual.myProfile'
+                | translate}}</ion-title>
         </ion-row>
         <br>
-
+    </ion-toolbar>
+    <ion-toolbar>
         <ion-row>
             <ion-col>
                 <ion-title class="ion-text-wrap" style="text-align: -webkit-left;">{{username}}</ion-title>
@@ -14,7 +17,8 @@
                     <img style=" height: 60%;width: 60%;" (click)="profile2(2)" src={{img}} />
                 </ion-avatar>
                 <ion-avatar size="small" *ngIf="!prof">
-                    <img style=" height: 60%;width: 60%;" (click)="profile2(2)" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                    <img style=" height: 60%;width: 60%;" (click)="profile2(2)"
+                        src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </ion-avatar>
             </ion-col>
         </ion-row>
@@ -30,7 +34,7 @@
     <form>
         <ion-card class="talentcard1">
             <ion-card-content>
-                <ion-row>
+                <ion-row style="display: flex; flex-wrap: nowrap;">
                     <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">{{'Menu.profile' | translate}}</ion-title>
                     </ion-col>
@@ -76,14 +80,15 @@
         <ion-card class="talentcard1" *ngIf="skillscard">
             <ion-card-content>
                 <ion-row>
-                    <ion-col size="6">
+                    <ion-col size="10">
                         <ion-title style="color:black; margin-left: -9%;">{{'skill.skill' | translate}}
 
                         </ion-title>
                     </ion-col>
                     <ion-col style="    text-align: end;">
 
-                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Skill()"></ion-icon>
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
+                            (click)="Skill()"></ion-icon>
 
                     </ion-col>
                 </ion-row>
@@ -96,7 +101,8 @@
                     </ion-col>
                     <ion-col size="2" style="margin-top: 7%;display: flex;">
                         <img src="../../assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill(x.skillId)">
-                        <ion-icon name="trash-outline" style="padding-left: 24%;" (click)="deleteSkills(x.skillId)"></ion-icon>
+                        <ion-icon name="trash-outline" style="padding-left: 24%;"
+                            (click)="deleteSkills(x.skillId)"></ion-icon>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -108,7 +114,8 @@
                 <ion-row>
 
                     <ion-col size="5">
-                        <img src="../../assets/img/addskillicon.png" id="prfoileimg1" (click)="Skill()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                        <img src="../../assets/img/addskillicon.png" id="prfoileimg1" (click)="Skill()"
+                            style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -123,14 +130,17 @@
         <!-------  Certifications card------ -->
         <ion-card class="talentcard1" *ngIf="certificationcard">
             <ion-card-content>
-                <ion-row style="    padding-bottom: 10px;">
-                    <ion-col size="7">
-                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> {{'Certification.certificate' | translate}}
+                <ion-row style=" display: flex; align-content: center;
+                flex-wrap: nowrap;    padding-bottom: 10px;">
+                    <ion-col>
+                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> {{'Certification.certificate'
+                            | translate}}
 
                         </ion-title>
                     </ion-col>
                     <ion-col style="    text-align: end;">
-                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="certification()"></ion-icon>
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
+                            (click)="certification()"></ion-icon>
                     </ion-col>
                 </ion-row>
                 <ion-card class="talentcard2" *ngFor="let x of certifications">
@@ -144,7 +154,7 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="certification(x.certId)" class="edit-button">
-                                        <ion-icon name="create-outline"></ion-icon>{{'editCertifications' |
+                                        <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' |
                                         translate}}</button>
                                     <button (click)="deleteCertificateCard(x.certId)" class="delete-button">
                                         <ion-icon name="trash-outline"></ion-icon>{{'delete' | translate}}</button>
@@ -152,11 +162,13 @@
                             </div>
                         </div>
                         <ion-row>
-                            <ion-col size="12">
-                                <ion-label style="font-size: 16px; font-weight: bolder;">{{x.certificationName}}</ion-label>
+                            <ion-col size="11">
+                                <ion-label
+                                    style="font-size: 16px; font-weight: bolder;">{{x.certificationName}}</ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.issuedBy}}</ion-label>
+                                <ion-label
+                                    style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.issuedBy}}</ion-label>
                             </ion-col>
                         </ion-row>
 
@@ -172,13 +184,14 @@
                 <ion-row>
 
                     <ion-col size="5">
-                        <img src="../../assets/img/addcertificationicon.png" id="prfoileimg1" (click)="certification()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                        <img src="../../assets/img/addcertificationicon.png" id="prfoileimg1" (click)="certification()"
+                            style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
                     </ion-col>
                 </ion-row>
                 <ion-row style="    text-align: center;">
                     <ion-col>
                         <ion-title style="color:black;margin-top: 5%;
-                    text-align: center;width: 112%;">{{'Certification.addCert' | translate}}</ion-title>
+                    text-align: center;width: 115%;">{{'Certification.addCert' | translate}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -186,15 +199,17 @@
         <!------- Academics card------ -->
         <ion-card class="talentcard1" *ngIf="educationcard">
             <ion-card-content>
-                <ion-row style="    padding-bottom: 10px;">
-                    <ion-col>
-                        <ion-title style="color:black; margin-left: -9%;">{{'profilein.Academics' | translate}}
+                <ion-row style=" display: flex; align-content: center;
+                flex-wrap: nowrap;    padding-bottom: 10px;">
+                    <ion-col size="11">
+                        <ion-title style="color:black; ">{{'profilein.Academics' | translate}}
 
                         </ion-title>
                     </ion-col>
 
-                    <ion-col style="    text-align: end;">
-                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="educations()"></ion-icon>
+                    <ion-col style=" text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
+                            (click)="educations()"></ion-icon>
                     </ion-col>
                 </ion-row>
 
@@ -209,11 +224,12 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="educations(x.eduId)" class="edit-button">
-                                        <ion-icon name="create-outline"></ion-icon>&nbsp;{{'editEducation' |
+                                        <ion-icon name="create-outline"></ion-icon>&nbsp;{{'Certification.edit' |
                                         translate}}</button>
 
 
-                                    <button style="color: black;" (click)="eduIdverifierCall(x.eduId,x.institutionId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                    <button style="color: black;" (click)="eduIdverifierCall(x.eduId,x.institutionId)"
+                                        *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="../../assets/img/verifier.png"
                                             style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' |
                                         translate}}</button>
@@ -229,21 +245,26 @@
 
                                 <ion-col size="2">
                                     <ion-avatar size="medium">
-                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;" src="{{x.instLogo}}" />
+                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;"
+                                            src="{{x.instLogo}}" />
                                     </ion-avatar>
                                 </ion-col>
                                 <ion-col size="10">
-                                    <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.institutionName}}</ion-label>
+                                    <ion-label
+                                        style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.institutionName}}</ion-label>
                                 </ion-col>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.institutionLocation}}</ion-label>
+                                <ion-label
+                                    style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.institutionLocation}}</ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.courseStart}}</ion-label>
+                                <ion-label
+                                    style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.courseStart}}</ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.fieldofStudy}}</ion-label>
+                                <ion-label
+                                    style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.fieldofStudy}}</ion-label>
                             </ion-col>
                             <ion-col size="12" *ngIf="x.status=='Verified Qualification'">
                                 <ion-label> <span class="badge col-green">
@@ -253,7 +274,8 @@
                                 <ion-label> <span class="badge col-orange">
                                         {{x.status}}</span></ion-label>
                             </ion-col>
-                            <ion-col size="12" *ngIf="x.status=='Fake Qualification' || x.status=='Discontinued' ||x.status=='Debarred' || x.status=='Information Mismatch' ||x.status=='Unverified'">
+                            <ion-col size="12"
+                                *ngIf="x.status=='Fake Qualification' || x.status=='Discontinued' ||x.status=='Debarred' || x.status=='Information Mismatch' ||x.status=='Unverified'">
                                 <ion-label> <span class="badge col-red">
                                         {{x.status}}</span></ion-label>
                             </ion-col>
@@ -272,7 +294,8 @@
                 <ion-row>
 
                     <ion-col size="5">
-                        <img src="../../assets/img/addeduicon.png" id="prfoileimg1" (click)="educations()" style="  width: 50%;  height: 137%; margin-left: 100%;">
+                        <img src="../../assets/img/addeduicon.png" id="prfoileimg1" (click)="educations()"
+                            style="  width: 50%;  height: 137%; margin-left: 100%;">
                     </ion-col>
                 </ion-row>
                 <ion-row style="    text-align: center;">
@@ -290,14 +313,16 @@
 
         <ion-card class="talentcard1" *ngIf="experiencecard">
             <ion-card-content>
-                <ion-row style="    padding-bottom: 10px;">
-                    <ion-col size="10">
+                <ion-row style=" display: flex; align-content: center;
+                flex-wrap: nowrap;   padding-bottom: 10px;">
+                    <ion-col size="11">
                         <ion-title style="color:black; margin-left: -9%;">{{'skill.experience' | translate}}
 
                         </ion-title>
                     </ion-col>
                     <ion-col style="    text-align: end;">
-                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="experiences()"></ion-icon>
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
+                            (click)="experiences()"></ion-icon>
                     </ion-col>
                 </ion-row>
 
@@ -313,8 +338,10 @@
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
                                     <button style="color: black;" (click)="experiences(x.expId)" class="edit-button">
-                                        <ion-icon name="create-outline"></ion-icon>Edit Experience</button>
-                                    <button style="color: black;" (click)="expIdverifierCall(x.expId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' |
+                                        translate}} </button>
+                                    <button style="color: black;" (click)="expIdverifierCall(x.expId,x.orgId)"
+                                        *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="../../assets\img\verifier.png"
                                             style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' |
                                         translate}}</button>
@@ -331,11 +358,14 @@
 
                                 <ion-col size="2">
                                     <ion-avatar size="medium">
-                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;" src="{{x.orgLogo}}" />
+                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;"
+                                            src="{{x.orgLogo}}" />
                                     </ion-avatar>
                                 </ion-col>
-                                <ion-col size="10">
-                                    <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.organisationName }}
+                                <ion-col size="11">
+                                    <ion-label
+                                        style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.organisationName
+                                        }}
                                     </ion-label>
                                 </ion-col>
                             </ion-col>
@@ -350,7 +380,8 @@
                             <ion-col size="12">
                                 <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.orgLocation}}</ion-label>
                             </ion-col>
-                            <ion-col size="12" *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
+                            <ion-col size="12"
+                                *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
                                 <ion-label class="badge col-red">{{x.status}}</ion-label>
                             </ion-col>
                             <ion-col size="12" *ngIf="x.status=='Verification Pending'">
@@ -373,7 +404,8 @@
                 <ion-row>
 
                     <ion-col size="5">
-                        <img src="../../assets\img\briefcase (1).png" id="prfoileimg1" (click)="experiences()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                        <img src="../../assets\img\briefcase (1).png" id="prfoileimg1" (click)="experiences()"
+                            style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
                     </ion-col>
                 </ion-row>
                 <ion-row style="    text-align: center;">
@@ -387,15 +419,18 @@
         <!------- Connections card------ -->
         <ion-card class="talentcard1" *ngIf="connectioncard">
             <ion-card-content>
-                <ion-row>
-                    <ion-col>
-                        <ion-title style="color:black; margin-left: -9%;"> {{'verifiedNetwork' | translate}}
+                <ion-row style="display: flex; align-content: center;
+                flex-wrap: nowrap;">
+                    <ion-col size="11">
+                        <ion-title style="color:black; margin-left: -9%;font-size:15px;"> {{'verifiedNetwork' |
+                            translate}}
 
 
                         </ion-title>
                     </ion-col>
                     <ion-col style="    text-align: end;">
-                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Connections()"></ion-icon>
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
+                            (click)="Connections()"></ion-icon>
                     </ion-col>
                 </ion-row>
 
@@ -403,11 +438,12 @@
                     <ion-card-content style="margin-top: 21px;">
 
 
-
                         <ion-row class="talentrow">
                             <ion-col size="12">
-                                <ion-label style=" color: #8b8b8b;font-size: 16px;"><b>{{x.connectionCount}}</b></ion-label>
-                                <ion-label style=" color: #8b8b8b;font-size: 16px;"><b>&nbsp;{{x.relationship}}</b></ion-label>
+                                <ion-label
+                                    style=" color: #8b8b8b;font-size: 16px;"><b>{{x.connectionCount}}</b></ion-label>
+                                <ion-label
+                                    style=" color: #8b8b8b;font-size: 16px;"><b>&nbsp;{{x.relationship}}</b></ion-label>
                             </ion-col>
                         </ion-row>
                     </ion-card-content>
@@ -423,12 +459,14 @@
 
                     <ion-col size="5">
 
-                        <img src="../../assets/img/addconnectionicon.png" id="prfoileimg1" (click)="Connections()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                        <img src="../../assets/img/addconnectionicon.png" id="prfoileimg1" (click)="Connections()"
+                            style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> {{'profilein.Add Connection' | translate}}
+                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> {{'profilein.Add
+                            Connection' | translate}}
                         </ion-title>
                     </ion-col>
                 </ion-row>
@@ -439,14 +477,16 @@
         <!-- Extracurricular card------ -->
         <ion-card class="talentcard1" *ngIf="clubscard">
             <ion-card-content>
-                <ion-row style="    padding-bottom: 10px;">
-                    <ion-col size="10">
+                <ion-row style="  display: flex; align-content: center;
+                flex-wrap: nowrap;  padding-bottom: 10px;">
+                    <ion-col size="11">
                         <ion-title style="color:black; margin-left: -9%;">{{'profilein.Extracurricular' | translate}}
 
                         </ion-title>
                     </ion-col>
                     <ion-col style="    text-align: end;">
-                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Extracurricular()"></ion-icon>
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
+                            (click)="Extracurricular()"></ion-icon>
                     </ion-col>
                 </ion-row>
                 <ion-card class="talentcard2" *ngFor="let x of club">
@@ -459,10 +499,12 @@
                             <div class="popup">
                                 <div class="popup-triangle"></div>
                                 <div class="popup-content">
-                                    <button style="color: black;" (click)="Extracurricular(x.clubId)" class="edit-button">
-                                        <ion-icon name="create-outline"></ion-icon>{{'Edit Extracurricular' |
+                                    <button style="color: black;" (click)="Extracurricular(x.clubId)"
+                                        class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' |
                                         translate}}</button>
-                                    <button style="color: black;" (click)="clubIdverifierCall(x.clubId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                    <button style="color: black;" (click)="clubIdverifierCall(x.clubId,x.orgId)"
+                                        *ngIf="x.status == 'Unverified'" class="edit-button">
                                         <img src="../../assets/img/verifier.png"
                                             style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' |
                                         translate}}</button>
@@ -476,24 +518,28 @@
                             <ion-col size="12" style="display: flex;">
                                 <ion-col size="2">
                                     <ion-avatar size="medium">
-                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;" src="{{x.orgLogo}}" />
+                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;"
+                                            src="{{x.orgLogo}}" />
                                     </ion-avatar>
                                 </ion-col>
 
                                 <ion-col size="10">
-                                    <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.clubName}}</ion-label>
+                                    <ion-label
+                                        style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.clubName}}</ion-label>
                                 </ion-col>
                             </ion-col>
                             <ion-col size="12">
                                 <ion-label style="    font-size: 17px; color: #8b8b8b;">{{x.titleHeld}}</ion-label>
                             </ion-col>
                             <ion-col size="12">
-                                <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.participatedFrom}}</ion-label>
+                                <ion-label
+                                    style="    font-size: 13px; color: #8b8b8b;">{{x.participatedFrom}}</ion-label>
                             </ion-col>
                             <ion-col size="12">
                                 <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.clubBranch }}</ion-label>
                             </ion-col>
-                            <ion-col size="12" *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
+                            <ion-col size="12"
+                                *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
                                 <ion-label class="badge col-red">{{x.status}}</ion-label>
                             </ion-col>
                             <ion-col size="12" *ngIf="x.status=='Verification Pending'">
@@ -517,7 +563,8 @@
                 <ion-row>
 
                     <ion-col size="5">
-                        <img src="../../assets/img/addclubicon.png" id="prfoileimg1" (click)="Extracurricular()" style="   width: 57%;height: 77%; margin-left: 100%;  margin-top: 14%;">
+                        <img src="../../assets/img/addclubicon.png" id="prfoileimg1" (click)="Extracurricular()"
+                            style="   width: 57%;height: 77%; margin-left: 100%;  margin-top: 14%;">
                     </ion-col>
                 </ion-row>
                 <ion-row>
