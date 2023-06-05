@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar class="new-background-color">
         <ion-row>
 
@@ -14,15 +14,32 @@
             </ion-col>
         </ion-row>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="goto_orgHome()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title style="text-align: center;font-family: Mr-eaves; color: black;">{{title}} {{'List' |
+            translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <form>
 
-        <div class="display-justify" *ngFor="let cElement of commonList" (click)="profileView(cElement.userTalentId,cElement.profileVisibility,cElement.userName)">
+        <div class="display-justify" *ngFor="let cElement of commonList"
+            (click)="profileView(cElement.userTalentId,cElement.profileVisibility,cElement.userName)">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
                 <ion-row>
@@ -41,8 +58,10 @@
                         </ion-row>
                         <ion-row>
 
-                            <span class="c-pill c-pill--green" style="color:#198754" *ngIf="!cElement.currentEmployee">{{'Ex-Employees' | translate}}</span>
-                            <span class="c-pill c-pill--purple" style="color:#6f42c1" *ngIf="cElement.currentEmployee">{{'Currently working' | translate}}</span>
+                            <span class="c-pill c-pill--green" style="color:#198754"
+                                *ngIf="!cElement.currentEmployee">{{'Ex-Employees' | translate}}</span>
+                            <span class="c-pill c-pill--purple" style="color:#6f42c1"
+                                *ngIf="cElement.currentEmployee">{{'Currently working' | translate}}</span>
 
                         </ion-row>
 

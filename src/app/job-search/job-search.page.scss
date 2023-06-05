@@ -80,7 +80,8 @@ ion-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin: 10px;
+    margin-bottom: 0px;
 }
 
 .search-dropdown {
@@ -135,6 +136,7 @@ ion-content {
 // bar
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+
 :root {
     --accent-color: #1fa8f5;
     --accent-color-fg: #fefefe;
@@ -178,6 +180,7 @@ body {
     &.active {
         color: var(--accent-color);
     }
+
     &-style {
         --app-content-background-color: #c0d8ec00;
     }
@@ -192,6 +195,7 @@ body {
         --clay-fg-color: #f1f2f3;
         color: #690c0c;
     }
+
     &-style {
         --app-content-background-color: #d36e5a00;
     }
@@ -206,6 +210,7 @@ body {
         --clay-fg-color: #f1f2f3;
         color: #cf5c0f;
     }
+
     &-style {
         --app-content-background-color: #ed932600;
     }
@@ -220,6 +225,7 @@ body {
         --clay-fg-color: #f1f2f3;
         color: #4dd146;
     }
+
     &-style {
         --app-content-background-color: #4dd14600;
     }
@@ -234,6 +240,7 @@ body {
         --clay-fg-color: #f1f2f3;
         color: #783896;
     }
+
     &-style {
         --app-content-background-color: #a3a3a300;
     }
@@ -251,12 +258,14 @@ body {
     position: relative;
     overflow: hidden;
     transition: background-color 0.4s;
+
     ul,
     li {
         list-style-type: none;
         margin: 0;
         padding: 0;
     }
+
     ul {
         position: absolute;
         bottom: 0;
@@ -266,6 +275,7 @@ body {
         justify-content: center;
         height: 60px;
     }
+
     li {
         display: flex;
         justify-content: center;
@@ -279,6 +289,7 @@ body {
         position: relative;
         color: #888;
         cursor: pointer;
+
         &:last-child {
             margin-right: 0;
         }
@@ -289,6 +300,7 @@ body {
     ul {
         justify-content: center;
     }
+
     li {
         display: flex;
         justify-content: center;
@@ -298,6 +310,7 @@ body {
         width: 60px;
         height: 50px;
         transition: top 0.2s ease-out, width 0.4s, border-radius 0.4s, box-shadow 0.4s;
+
         &.follow {
             position: absolute;
             border-radius: 100%;
@@ -308,6 +321,7 @@ body {
             background-color: var(--app-content-background-color);
             top: -3rem;
             transition: left 0.4s ease-in, background-color 0.4s, border-color 0.4s;
+
             &:before,
             &:after {
                 content: " ";
@@ -321,11 +335,13 @@ body {
                 box-sizing: border-box;
                 transition: border-color 0.4s;
             }
+
             &::after {
                 border-top-left-radius: 100%;
                 // left: 67px;
                 // top: 29px;
             }
+
             &:before {
                 left: -29px;
                 right: unset;
@@ -333,27 +349,33 @@ body {
                 border-top-right-radius: 100%;
             }
         }
+
         &:nth-child(1).active~.follow {
             left: 29px;
             top: 5em;
         }
+
         &:nth-child(2).active~.follow {
             left: 94px;
             top: 5em;
         }
+
         &:nth-child(3).active~.follow {
             left: 159px;
             top: 5em;
         }
+
         &:nth-child(4).active~.follow {
             left: 224px;
             top: 5em;
         }
+
         &:nth-child(5).active~.follow {
             left: 289px;
             top: 5em;
         }
     }
+
     .active {
         z-index: 100;
         width: 60px;
@@ -456,7 +478,18 @@ body {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
+}
+
+div.c {
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Poppins';
+    font-size: 13px;
+    font-weight: 600;
 }

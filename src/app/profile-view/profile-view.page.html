@@ -131,22 +131,24 @@
         <!-------  Certifications card------ -->
         <ion-card class="talentcard1" *ngIf="certificationcard">
             <ion-card-content>
+
                 <ion-row style=" display: flex; align-content: center;
                 flex-wrap: nowrap;    padding-bottom: 10px;">
-                    <ion-col>
-                        <ion-title style="color:black;    width: 105%; margin-left: -9%;"> {{'Certification.certificate'
+                    <ion-col size="11">
+                        <ion-title style="color:black; ">{{'Certification.certificate'
                             | translate}}
 
                         </ion-title>
                     </ion-col>
-                    <ion-col style="    text-align: end;">
+
+                    <ion-col style=" text-align: end;">
                         <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle"
                             (click)="certification()"></ion-icon>
                     </ion-col>
                 </ion-row>
+
                 <ion-card class="talentcard2" *ngFor="let x of certifications">
                     <ion-card-content>
-
                         <div class="container">
                             <div class="three-dots-button">
                                 <span></span> <span></span><span></span>
@@ -172,10 +174,8 @@
                                     style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.issuedBy}}</ion-label>
                             </ion-col>
                         </ion-row>
-
                     </ion-card-content>
                 </ion-card>
-
             </ion-card-content>
         </ion-card>
 
