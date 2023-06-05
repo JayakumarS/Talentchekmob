@@ -107,9 +107,9 @@ export class ProfileViewPage implements OnInit {
       console.log(result);
       this.storageservice.showLoading();
 
-      if (result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null) {
-        this.educationcard = true;
-      }
+      // if (result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null) {
+      //   this.educationcard = true;
+      // }
       if (result['profileViewList'][0].clubsList.length != 0 && result['profileViewList'] != null) {
         this.clubscard = true;
       }
@@ -188,9 +188,9 @@ export class ProfileViewPage implements OnInit {
       console.log(result);
 
 
-      if (result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null) {
-        this.educationcard = true;
-      }
+      // if (result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null) {
+      //   this.educationcard = true;
+      // }
       if (result['profileViewList'][0].clubsList.length != 0 && result['profileViewList'] != null) {
         this.clubscard = true;
       }

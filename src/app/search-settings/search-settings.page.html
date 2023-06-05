@@ -3,13 +3,17 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
-                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileSearch()" style="margin-top:21%"></ion-icon>
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileSearch()"
+                    style="margin-top:21%"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Advanced search' | translate}}</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Advanced search' |
+                    translate}}</ion-title>
             </div>
             <div style="text-align: left;">
-                <ion-title style="font-family: Mr-eaves; color: black; margin-top: 7%;" (click)="searchresults()">{{'Done' | translate}}</ion-title>
+                <ion-title style="font-family: Mr-eaves; color: black;    text-align: end;
+                margin-left: 12%;" (click)="searchresults()">{{'Done' |
+                    translate}}</ion-title>
             </div>
         </div>
         <!-- <ion-row>
@@ -44,7 +48,8 @@
                         <ion-icon name="close-circle" (click)="removeSkill(skill)"></ion-icon>
                     </div>
                 </div>
-                <ion-input warp="soft" (ionInput)="onSearchSkill($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                <ion-input warp="soft" (ionInput)="onSearchSkill($event.target.value)"
+                    [formControl]="searchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showSkillResults">
@@ -60,7 +65,8 @@
                         <ion-icon name="close-circle" (click)="removeCountry(country)"></ion-icon>
                     </div>
                 </div>
-                <ion-input (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                <ion-input (ionInput)="onCountrySearch($event.target.value)"
+                    [formControl]="countrysearchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="showcountyResults">
@@ -132,12 +138,15 @@
             <ion-label class="labels">{{'AcademicInfo.qualification' | translate}}</ion-label>
             <ion-item fill="outline" class="input-field">
                 <div>{{ selectDegreeSet }}
-                    <ion-icon *ngIf="selectDegreeSet != undefined && selectDegreeSet != ''" name="close-circle" (click)="removeDegree(selectDegreeSet)"></ion-icon>
+                    <ion-icon *ngIf="selectDegreeSet != undefined && selectDegreeSet != ''" name="close-circle"
+                        (click)="removeDegree(selectDegreeSet)"></ion-icon>
                 </div>
-                <ion-input warp="soft" (ionInput)="onSearchDegree($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                <ion-input warp="soft" (ionInput)="onSearchDegree($event.target.value)"
+                    [formControl]="searchCtrl"></ion-input>
             </ion-item>
             <ion-list *ngIf="IsDegreeListShow">
-                <ion-item *ngFor="let result of searchDegreeResults" (click)="selectDegree(result.text,result.id);disableFiledOfStudy(result.text)">
+                <ion-item *ngFor="let result of searchDegreeResults"
+                    (click)="selectDegree(result.text,result.id);disableFiledOfStudy(result.text)">
                     {{ result.text }}
                 </ion-item>
             </ion-list>
@@ -147,9 +156,11 @@
             <ion-item fill="outline" class="input-field">
 
                 <div (click)="remove()">{{selectStudySet}}
-                    <ion-icon *ngIf="selectStudySet != undefined && selectStudySet != ''" name="close-circle"></ion-icon>
+                    <ion-icon *ngIf="selectStudySet != undefined && selectStudySet != ''"
+                        name="close-circle"></ion-icon>
                 </div>
-                <ion-input warp="soft" (ionInput)="onSearchStudy($event.target.value)" [formControl]="searchCtrl"></ion-input>
+                <ion-input warp="soft" (ionInput)="onSearchStudy($event.target.value)"
+                    [formControl]="searchCtrl"></ion-input>
             </ion-item>
             <ion-list *ngIf="IsstudyListShow">
                 <ion-item *ngFor="let result of searchStudyResults" (click)="selectStudy(result.text,result.id)">
@@ -166,13 +177,16 @@
             <ion-item fill="outline" class="input-field">
                 <div class="selected-skill">{{ selectedOrganisation }}
 
-                    <ion-icon *ngIf="selectedOrganisation != undefined && selectedOrganisation != '' && !disabled==true" name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
+                    <ion-icon *ngIf="selectedOrganisation != undefined && selectedOrganisation != '' && !disabled==true"
+                        name="close-circle" (click)="removeOrganisation(selectedOrganisation)"></ion-icon>
                 </div>
-                <ion-input (ionInput)="onSearchOrganisation($event.target.value) " (optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
+                <ion-input (ionInput)="onSearchOrganisation($event.target.value) "
+                    (optionSelected)="orgLocation($event.option.value)" [formControl]="searchCtrl"></ion-input>
             </ion-item>
 
             <ion-list *ngIf="IsorgListShow">
-                <ion-item *ngFor="let result of searchOrganisationResults" (click)="selectOrganisation(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
+                <ion-item *ngFor="let result of searchOrganisationResults"
+                    (click)="selectOrganisation(result.text,result.id);getTitle(result.id);orgLocation(result.id)">
                     {{ result.text }}
                 </ion-item>
             </ion-list>
