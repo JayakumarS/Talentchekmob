@@ -6,6 +6,7 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 import moment from 'moment';
 import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-club',
@@ -15,6 +16,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 export class ClubPage implements OnInit {
   name: string;
   clubBranch: any;
+  selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
      setTimeout(() => {
@@ -47,11 +49,13 @@ export class ClubPage implements OnInit {
   disabled: boolean =false;
   desiredItem: any;
   nonMandatory: boolean= false; 
-  constructor(public router: Router, public fb: FormBuilder,private route: ActivatedRoute,public modalController: ModalController,
+  constructor(public router: Router, public fb: FormBuilder,public languageService:LanguageService,private route: ActivatedRoute,public modalController: ModalController,
      public storageservice: StorageService, private toastController: ToastController
      ,public alertController: AlertController,) { }
     
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.clubFrom = this.fb.group({
       clubName: [""],
      clubBranch: [""],

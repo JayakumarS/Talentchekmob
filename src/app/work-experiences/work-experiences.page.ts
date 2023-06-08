@@ -5,6 +5,7 @@ import { StorageService } from '../storage.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-work-experiences',
@@ -17,6 +18,7 @@ export class WorkExperiencesPage implements OnInit {
   selectedOrg: any;
   selectedOrganisation: string;
   locationname: any;
+  selectedLang: string;
 
   //refresh function
   doRefresh(event) {
@@ -57,12 +59,14 @@ export class WorkExperiencesPage implements OnInit {
   searchCtrl = new FormControl('');
   constructor(public router: Router, private fb: FormBuilder, private route: ActivatedRoute,
     public storageservice: StorageService, public toastController: ToastController, private elementRef: ElementRef,
-    public modalController: ModalController, public alertController: AlertController,) { }
+    public modalController: ModalController, public alertController: AlertController,public languageService:LanguageService) { }
   Exp = {
     orgName: '',
   }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.userId = localStorage.getItem("userId");
     this.isunregOrg = false;
     this.ExperienceForm = this.fb.group({

@@ -4,6 +4,7 @@ import { StorageService } from '../storage.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { LanguageService } from '../language.service';
 @Component({
   selector: 'app-rating-extra-popup',
   templateUrl: './rating-extra-popup.page.html',
@@ -19,12 +20,16 @@ export class RatingExtraPopupPage implements OnInit {
   extId: any;
   Extracurricular: any;
   currendUserId: string;
+  selectedLang: any;
 
   constructor(public router:Router, public storageservice:StorageService,public toastController:ToastController,
     public fb: FormBuilder,private route: ActivatedRoute,  public modalController: ModalController,private elementRef: ElementRef,
-    public alertController: AlertController, private ngZone: NgZone) { }
+    public alertController: AlertController, private ngZone: NgZone,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.ExtracurricularFrom= this.fb.group({
     
@@ -63,7 +68,7 @@ export class RatingExtraPopupPage implements OnInit {
         this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
           if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
              profilePage.updateData();
             }, 800);
             this.presentToast() 
@@ -78,7 +83,7 @@ export class RatingExtraPopupPage implements OnInit {
             this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
               if (result["success"] == true) {
                 setTimeout(() => {
-                  const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+                  const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
                  profilePage.updateData();
                 }, 800);
                 this.presentToast() 
@@ -102,7 +107,7 @@ export class RatingExtraPopupPage implements OnInit {
         if (result["success"] == true) {
           this.presentToast() 
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
            profilePage.updateData();
           }, 800);
        
@@ -110,7 +115,7 @@ export class RatingExtraPopupPage implements OnInit {
 
       this.router.navigate(['/profile-view']); 
       setTimeout(() => {
-        const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+        const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
        profilePage.updateData();
       }, 800);
     }
@@ -126,7 +131,7 @@ export class RatingExtraPopupPage implements OnInit {
     setTimeout(() => {
     
     this.router.navigate(['/profile-view']);
-    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
     profilePage.updateData();
    }, 800);
   await toast.present();
@@ -135,7 +140,7 @@ move(){
 
   this.router.navigate(['/profile-view']); 
   setTimeout(() => {
-    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
    profilePage.updateData();
   }, 800);
 }

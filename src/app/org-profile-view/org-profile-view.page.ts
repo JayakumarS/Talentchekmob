@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
 import { NavigationEnd } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-org-profile-view',
@@ -11,6 +12,7 @@ import { NavigationEnd } from '@angular/router';
 })
 export class OrgProfileViewPage implements OnInit {
   relationship: any;
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -41,7 +43,7 @@ export class OrgProfileViewPage implements OnInit {
   orgLogo: string;
 
 
-  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController) { 
+  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) { 
 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
@@ -60,6 +62,8 @@ export class OrgProfileViewPage implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/org-profile-view') {

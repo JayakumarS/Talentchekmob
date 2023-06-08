@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-apply-for-job',
@@ -7,10 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./apply-for-job.page.scss'],
 })
 export class ApplyForJobPage implements OnInit {
+  selectedLang: string;
 
-  constructor(public router: Router,) { }
+  constructor(public router: Router,public languageService:LanguageService) { }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
   selectedTab: string = 'search';
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-edu-verifier-details',
@@ -16,11 +17,13 @@ export class EduVerifierDetailsPage implements OnInit {
   Education: any;
   userId: string;
   splCharRegex: string = "^[^<>{}\"/|;:,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  selectedLang: string;
   constructor(private route: ActivatedRoute, public router:Router,public storageservice:StorageService,
-     private fb: FormBuilder,public toastController:ToastController,) { }
+     private fb: FormBuilder,public toastController:ToastController,public languageService:LanguageService) { }
 
   ngOnInit() {
-
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.route.queryParams.subscribe(params => {
       this.instiId=params.instiId;

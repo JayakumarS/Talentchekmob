@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalController } from '@ionic/angular';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { TcFormPage } from '../tc-form/tc-form.page';
+import { LanguageService } from '../language.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +26,7 @@ export class SignUpPage implements OnInit {
   selectedState: any;
   showCityResults: boolean= false;
   selectedCity: string;
+  selectedLang: string;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -66,7 +68,7 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
 
   constructor(public formbuilder: FormBuilder,public router: Router,private camera: Camera,
     public storageservice:StorageService, private transfer: FileTransfer,public modalController: ModalController,
-     private translate: TranslateService, private loadingCtrl: LoadingController) {
+     private translate: TranslateService, private loadingCtrl: LoadingController,public languageService:LanguageService) {
 
       this.talentform = formbuilder.group({
         firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
@@ -298,6 +300,8 @@ splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°�
     
 
   async ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
    this.getCountryList(); 
 

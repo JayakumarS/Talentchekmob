@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-profile-visibility',
@@ -20,7 +21,8 @@ export class ProfileVisibilityPage implements OnInit {
   response:any;
   type: string;
   currentUserId:any;
-  constructor(private fb: FormBuilder,
+  selectedLang: string;
+  constructor(private fb: FormBuilder,public languageService:LanguageService,
     public router:Router,
     private http: HttpClient,
     public storageservice:StorageService,
@@ -31,7 +33,9 @@ export class ProfileVisibilityPage implements OnInit {
       });
     }
 
-  ngOnInit() {  
+  ngOnInit() { 
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang); 
       this.currentUserId = localStorage.getItem("userId"); 
        var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId="
         + this.currentUserId; 

@@ -3,6 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-bids-and-aplications-recived-popup',
@@ -24,11 +25,14 @@ export class BidsAndAplicationsRecivedPopupPage implements OnInit {
   bidId : any;
   appRecvFlag : boolean = false;
   bidsRecvFlag : boolean = false;
+  selectedLang: string;
 
   constructor(public modalController: ModalController,private navParams: NavParams,public formbuilder: FormBuilder,
-    public storageservice: StorageService,public router: Router, ) { }
+    public storageservice: StorageService,public router: Router,public languageService:LanguageService ) { }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.talentId = this.navParams.data.talentId;
     this.jspid = this.navParams.data.jspid;
     this.bidId = this.navParams.data.bidId;

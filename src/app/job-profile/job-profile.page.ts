@@ -18,6 +18,7 @@ import { LanguageService } from '../language.service';
   styleUrls: ['./job-profile.page.scss'],
 })
 export class JobProfilePage implements OnInit {
+  selectedLang: any;
 
 
   doRefresh(event) {
@@ -97,6 +98,8 @@ export class JobProfilePage implements OnInit {
   }
 
     ngOnInit() {
+      this.selectedLang  = localStorage.getItem('selectedLang');
+      this.languageService.setLanguage(this.selectedLang);
       this.userId = localStorage.getItem("userId"); 
       this.catagoaryType= localStorage.getItem("categoryType");
        this.jobProfileForm = this.fb.group({
@@ -650,7 +653,7 @@ skills(){
      if (result["success"] == true) {
       this.storageservice.dismissLoading();
       this.jobProfileForm.reset();
-       const jobpage = new JobPage(this.router, this.storageservice);
+       const jobpage = new JobPage(this.router, this.storageservice,this.languageService);
       jobpage.reload();
        this.router.navigate(['/job']);
       this.presentToast()
@@ -705,7 +708,7 @@ skills(){
       console.log("Image upload response: " + result)
      if (result["success"] == true) {
       this.storageservice.dismissLoading();
-      const jobpage = new JobPage(this.router, this.storageservice);
+      const jobpage = new JobPage(this.router, this.storageservice,this.languageService);
       jobpage.reload();
       this.jobProfileForm.reset();
       this.router.navigate(['/job']); 

@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-skill-popup',
@@ -26,12 +27,15 @@ export class SkillPopupPage implements OnInit {
   userId: string;
   edit: boolean = false;
   skillform: any;
+  selectedLang: string;
   constructor(public modalController: ModalController,public alertController: AlertController,
     private fb: FormBuilder,private toastController: ToastController,
     public storageservice:StorageService,private elementRef: ElementRef,
-    public router :Router,private route: ActivatedRoute, private ngZone: NgZone) { } 
+    public router :Router,private route: ActivatedRoute, private ngZone: NgZone,public languageService:LanguageService) { } 
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.userId = localStorage.getItem("userId");
     this.skillForm = this.fb.group({
       keySkill:[""],
@@ -124,7 +128,7 @@ export class SkillPopupPage implements OnInit {
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
              profilePage.updateData();
             }, 800);
             this.presentToast()
@@ -149,7 +153,7 @@ export class SkillPopupPage implements OnInit {
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
              profilePage.updateData();
             }, 800);
           this.updateToast()

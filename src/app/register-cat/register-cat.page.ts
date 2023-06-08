@@ -10,6 +10,7 @@ import { LanguageService } from '../language.service';
   styleUrls: ['./register-cat.page.scss'],
 })
 export class RegisterCatPage implements OnInit {
+  selectedLang: string;
 
   constructor(public router:Router,private popoverController: PopoverController,private languageService: LanguageService,) {
     if (!this.languageService.selectedLang) {
@@ -18,6 +19,8 @@ export class RegisterCatPage implements OnInit {
    }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
 
   individualRegister(){

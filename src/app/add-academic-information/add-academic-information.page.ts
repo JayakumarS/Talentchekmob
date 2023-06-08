@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { exit } from 'process';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-add-academic-information',
@@ -71,12 +72,13 @@ export class AddAcademicInformationPage implements OnInit {
 
   base64img1: string = '';
   imgFileNameWithPath: string;
+  selectedLang: string;
   //#endregion
 
   //#region Constructor
   constructor(public storageservice: StorageService, public alertController: AlertController, public formbuilder: FormBuilder,
     public router: Router, private loadingCtrl: LoadingController, private http: HttpClient, private route: ActivatedRoute,
-    public modalController: ModalController, private camera: Camera) {
+    public modalController: ModalController, private camera: Camera,public languageService:LanguageService) {
     this.userId = localStorage.getItem("userId");
     this.userName = localStorage.getItem("userName");
     this.creditPoints = localStorage.getItem("creditPoints");
@@ -164,6 +166,8 @@ export class AddAcademicInformationPage implements OnInit {
   //#region OnInit
   async ngOnInit() {
     var listConstant = await this.initializeItems();
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
   //#endregion
 

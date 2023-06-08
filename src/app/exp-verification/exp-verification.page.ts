@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-exp-verification',
@@ -15,10 +16,13 @@ export class ExpVerificationPage implements OnInit {
   ExperienceForm:FormGroup;
   Experience: any;
   expId: any;
+  selectedLang: string;
   constructor(public router:Router,private route: ActivatedRoute,public toastController:ToastController,
-    private fb: FormBuilder, public storageservice:StorageService) { }
+    private fb: FormBuilder, public storageservice:StorageService,public languageService:LanguageService) { }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
 
     this.route.queryParams.subscribe(params => {

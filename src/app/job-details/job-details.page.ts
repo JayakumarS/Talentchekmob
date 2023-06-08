@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-job-details',
@@ -9,6 +10,7 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./job-details.page.scss'],
 })
 export class JobDetailsPage implements OnInit {
+  selectedLang: any;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -26,7 +28,7 @@ export class JobDetailsPage implements OnInit {
   userName: string;
 
   constructor(public router:Router,private route: ActivatedRoute,public storageservice: StorageService,
-    private toastController: ToastController) { 
+    private toastController: ToastController,private languageService: LanguageService) { 
 
     
     this.route.queryParams.subscribe(params => {
@@ -42,6 +44,9 @@ export class JobDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.userId = localStorage.getItem("userId");
     this.userName = localStorage.getItem("userName");

@@ -15,7 +15,8 @@ import { PopoverController } from '@ionic/angular';
   templateUrl: './oni-job-post.page.html',
   styleUrls: ['./oni-job-post.page.scss'],
 })
-export class OniJobPostPage implements OnInit {  
+export class OniJobPostPage implements OnInit {
+  selectedLang: string;  
 
   //refresh function
   doRefresh(event) {
@@ -105,6 +106,8 @@ export class OniJobPostPage implements OnInit {
 
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.buttonEnable = false;
     this.currentUserName = localStorage.getItem("userName");
     this.userId = localStorage.getItem("userId")  ; 
@@ -737,7 +740,7 @@ export class OniJobPostPage implements OnInit {
         cssClass: 'custom-toast'
       });
       this.router.navigate(['/oni-job-post-list']);
-         const profilePage = new listpage(this.router,this.ngZone,this.route ,this.storageservice, this.alertController);
+         const profilePage = new listpage(this.router,this.ngZone,this.route ,this.storageservice, this.alertController,this.languageService);
          profilePage.reload();
      await toast.present();
   }
@@ -750,7 +753,7 @@ export class OniJobPostPage implements OnInit {
       cssClass: 'custom-toast'
     });
     this.router.navigate(['/oni-job-post-list']);
-      const profilePage = new listpage(this.router,this.ngZone,this.route, this.storageservice, this.alertController);
+      const profilePage = new listpage(this.router,this.ngZone,this.route, this.storageservice, this.alertController,this.languageService);
       profilePage.reload();
   await toast.present();
   }

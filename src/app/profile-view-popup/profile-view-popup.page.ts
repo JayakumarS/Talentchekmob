@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ModalController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./profile-view-popup.page.scss'],
 })
 export class ProfileViewPopupPage implements OnInit {
+  selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -24,10 +26,13 @@ export class ProfileViewPopupPage implements OnInit {
   certificationsList =[];
   clubsList = [];
   experienceList =[];
-  constructor( public modalController: ModalController,private navParams: NavParams,public storageservice: StorageService) { }
+  constructor( public modalController: ModalController,public languageService:LanguageService,private navParams: NavParams,public storageservice: StorageService) { }
 
   ngOnInit() {
 
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.talentId = this.navParams.data.talentId;
     console.log(this.talentId);
     this.currendUserId = localStorage.getItem("userId")  ; 

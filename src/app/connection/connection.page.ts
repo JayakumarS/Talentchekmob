@@ -8,6 +8,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 import { formatDate } from '@angular/common';
 import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
 import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-connection',
@@ -15,6 +16,7 @@ import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.p
   styleUrls: ['./connection.page.scss'],
 })
 export class ConnectionPage implements OnInit {
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -43,7 +45,7 @@ export class ConnectionPage implements OnInit {
   roleId: any;
   RoleID: any;
   nonMandatory: boolean = false;
-  constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,
+  constructor(public router:Router,public fb: FormBuilder, public storageservice: StorageService,public languageService:LanguageService,
     private toastController: ToastController,public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,public route:ActivatedRoute ) { 
 
@@ -52,6 +54,9 @@ export class ConnectionPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.userId = localStorage.getItem("userId");
     this.username = localStorage.getItem("userName");
@@ -287,7 +292,7 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
     profilePage.updateData();
     this.router.navigate(['/profile-view']);
 
@@ -382,7 +387,7 @@ async presentToast2() {
     duration: 3000,
     cssClass: 'custom-toast'
   });
-  const profilePage = new OrgProfileViewPage(this.router, this.storageservice,this.alertController);
+  const profilePage = new OrgProfileViewPage(this.router, this.storageservice,this.alertController,this.languageService);
    profilePage.reload();
   this.router.navigate(['/org-profile-view']);
 
@@ -485,7 +490,7 @@ instisave(){
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
     insprofileview.reload(); 
     this.router.navigate(['/insti-profile-view']);
 

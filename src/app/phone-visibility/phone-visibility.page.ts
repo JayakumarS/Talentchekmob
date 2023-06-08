@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-phone-visibility',
@@ -13,10 +14,11 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 export class PhoneVisibilityPage implements OnInit {
   currentUserId: string;
   phoneVisForm: FormGroup; 
+  selectedLang: string;
   constructor(private fb: FormBuilder,
     public router:Router,
     private http: HttpClient,
-    public storageservice:StorageService,public toastController :ToastController) {  
+    public storageservice:StorageService,public toastController :ToastController,public languageService:LanguageService) {  
       this.phoneVisForm = this.fb.group({
         phoneVisibility: [""], 
         currentUserId: [""]
@@ -24,6 +26,8 @@ export class PhoneVisibilityPage implements OnInit {
     }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.currentUserId = localStorage.getItem("userId"); 
       var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId=" + this.currentUserId;
       this.storageservice.getrequest(geteditVisibilityUrl).subscribe(result => {

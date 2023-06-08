@@ -4,12 +4,14 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { NavigationEnd } from '@angular/router';
+import { LanguageService } from '../language.service';
 @Component({
   selector: 'app-organization-dashboard-list',
   templateUrl: './organization-dashboard-list.page.html',
   styleUrls: ['./organization-dashboard-list.page.scss'],
 })
 export class OrganizationDashboardListPage implements OnInit {
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -28,7 +30,7 @@ export class OrganizationDashboardListPage implements OnInit {
   currentUserName:any;
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
-    public storageservice: StorageService,public alertController: AlertController) {
+    public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) {
 
         
     this.userId = localStorage.getItem("userId")  ; 
@@ -62,6 +64,8 @@ export class OrganizationDashboardListPage implements OnInit {
    }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url.split('?')[0] === '/organization-dashboard-list') {
         this.setSelectedTab('apps');

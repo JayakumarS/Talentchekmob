@@ -8,6 +8,7 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
+import { LanguageService } from '../language.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.p
 export class InstiProfilePage implements OnInit {
   editCity: any;
   editstate: any;
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -54,9 +56,12 @@ export class InstiProfilePage implements OnInit {
   isLogo: boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,
     private camera: Camera, public router: Router,private toastController: ToastController,private elementRef: ElementRef
-    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone) { }
+    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.currentUserId = localStorage.getItem("userId");
 
@@ -286,7 +291,7 @@ export class InstiProfilePage implements OnInit {
       this.storageservice.postrequest(updateprofile, this.Instidetails).subscribe(result => {
         // console.log("Image upload response: " + result)
         if (result["success"] == true) { 
-          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
         Instprofileview.reload();
           this.presentToast()
         }
@@ -304,7 +309,7 @@ export class InstiProfilePage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice);
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
     insprofileview.reload(); 
     this.router.navigate(['/insti-profile-view']);
     await toast.present();

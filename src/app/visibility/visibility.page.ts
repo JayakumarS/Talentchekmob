@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-visibility',
@@ -8,9 +9,13 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 })
 export class VisibilityPage implements OnInit {
   uls:any =[];
-  constructor(public router:Router) { }
+  selectedLang: string;
+  constructor(public router:Router,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.uls = document.querySelectorAll("ul");
 

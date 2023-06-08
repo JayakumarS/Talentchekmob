@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ProfilePage } from '../profile/profile.page';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-exp-verifier-details',
@@ -17,11 +18,15 @@ export class ExpVerifierDetailsPage implements OnInit {
   userId: string;
   Experience: any;
   splCharRegex: string = "^[^<>{}\"/|;:,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  selectedLang: string;
   constructor(public router:Router,private fb: FormBuilder,public toastController:ToastController,
-     public storageservice:StorageService,private route: ActivatedRoute,) { }
+     public storageservice:StorageService,private route: ActivatedRoute,public languageService:LanguageService) { }
 
   ngOnInit() {
 
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.route.queryParams.subscribe(params => {
   this.orgId= params.org;
    this.expId= params.expId;

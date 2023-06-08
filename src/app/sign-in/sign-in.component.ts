@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthLoginInfo } from '../auth/login-Info';
 import { StorageService } from '../storage.service';
-import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { PopoverController } from '@ionic/angular';
 import { LanguageService } from '../language.service';
@@ -25,8 +25,9 @@ export class SignInComponent implements OnInit {
 
   passwordType: string = 'password';
   passwordIcon: string = 'eye'; 
+  selectedLang: string;
  
-  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,private fcm: FCM,
+  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,
     public storageservice: StorageService,private nativeStorage: NativeStorage,private popoverController: PopoverController) { 
 
       if (!this.languageService.selectedLang) {
@@ -44,7 +45,10 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
+  }
 
 
   get f() {

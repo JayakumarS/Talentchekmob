@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-job',
@@ -9,6 +10,7 @@ import { NavigationEnd } from '@angular/router';
   styleUrls: ['./job.page.scss'],
 })
 export class JobPage implements OnInit {
+  selectedLang: string;
 
   // refresh screen 
   doRefresh(event) {
@@ -22,7 +24,7 @@ export class JobPage implements OnInit {
   userId:string; 
   showflag:any; 
 
-  constructor(public router:Router,public storageservices: StorageService) { 
+  constructor(public router:Router,public storageservices: StorageService,private languageService: LanguageService) { 
    this.userId = localStorage.getItem("userId") ;
    interface MyCustomEventInit extends CustomEventInit {
     target?: HTMLElement;
@@ -41,6 +43,8 @@ export class JobPage implements OnInit {
    }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/job') {
         this.setSelectedTab('earth');

@@ -10,6 +10,7 @@ import { File } from '@ionic-native/file/ngx';
 import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-profile-search',
@@ -49,12 +50,13 @@ export class ProfileSearchPage implements OnInit {
 
   baseURL: string = "";
   searchListCount: number = 0;
+  selectedLang: string;
   //#endregion
 
   //#region Constructor
   constructor(public formbuilder: FormBuilder, public router: Router, public storageservice: StorageService,
     private http: HttpClient, private loadingCtrl: LoadingController, private transfer: FileTransfer, private file: File, private platform: Platform,
-    public alertController: AlertController, private translate: TranslateService) {
+    public alertController: AlertController, private translate: TranslateService,public languageService:LanguageService) {
 
     this.userId = localStorage.getItem("userId");
     this.userName = localStorage.getItem("userName");
@@ -70,6 +72,8 @@ export class ProfileSearchPage implements OnInit {
 
   //#region OnInit
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
   //#endregion
 

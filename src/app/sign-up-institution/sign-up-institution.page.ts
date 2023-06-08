@@ -10,6 +10,7 @@ import { StorageService } from '../storage.service';
 import { ModalController } from '@ionic/angular';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { TcFormPage } from '../tc-form/tc-form.page';
+import { LanguageService } from '../language.service';
 @Component({
   selector: 'app-sign-up-institution',
   templateUrl: './sign-up-institution.page.html',
@@ -53,8 +54,9 @@ base64img1: string = '';
   selectedState: string;
   selectedCity: string;
   showCityResults: boolean= false;
+  selectedLang: string;
   constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder, public storageservice:StorageService, private transfer: FileTransfer,
-    private translate: TranslateService, private loadingCtrl: LoadingController,public modalController: ModalController,) {
+    private translate: TranslateService, private loadingCtrl: LoadingController,public modalController: ModalController,public languageService:LanguageService) {
 
     this.talentinstform = formbuilder.group({
       instituteName: ['',Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.required])],
@@ -90,6 +92,8 @@ base64img1: string = '';
   // }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.step = 1;
     this.stepper = new Stepper(document.querySelector('#stepper2'), {
       linear: false,

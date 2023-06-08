@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-terms-and-conditions',
@@ -7,10 +8,13 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
   styleUrls: ['./terms-and-conditions.page.scss'],
 })
 export class TermsAndConditionsPage implements OnInit {
+  selectedLang: string;
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,public languageService:LanguageService) { }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
 
   selectedTab: string = 'menu';

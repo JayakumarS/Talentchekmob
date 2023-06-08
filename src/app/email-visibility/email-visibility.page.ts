@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-email-visibility',
@@ -13,7 +14,8 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 export class EmailVisibilityPage implements OnInit {
   currentUserId: string;
   emailVisForm: FormGroup;
-  constructor(private fb: FormBuilder,
+  selectedLang: any;
+  constructor(private fb: FormBuilder,public languageService:LanguageService,
     public router:Router,
     private http: HttpClient,
     public storageservice:StorageService,
@@ -25,6 +27,9 @@ export class EmailVisibilityPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.currentUserId = localStorage.getItem("userId");
       var geteditVisibilityUrl = "api/auth/app/setting/editAccountDetails?currentUserId=" + this.currentUserId;
        

@@ -3,6 +3,7 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../storage.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-scan-to-connect',
@@ -10,6 +11,7 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./scan-to-connect.page.scss'],
 })
 export class ScanToConnectPage implements OnInit {
+  selectedLang: any;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -40,7 +42,7 @@ export class ScanToConnectPage implements OnInit {
   iconsArray: any = [1, 2, 3, 4, 5];
   rateOrgVal: number;
 
-  constructor(public router:Router,private barcodeScanner: BarcodeScanner,public storageservice: StorageService,
+  constructor(public router:Router,public languageService:LanguageService,private barcodeScanner: BarcodeScanner,public storageservice: StorageService,
      public formbuilder: FormBuilder) {
 
     this.profileImageURL = "assets/img/avatar1.png";
@@ -56,6 +58,8 @@ export class ScanToConnectPage implements OnInit {
    }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.Bind_Relationship_DD();
     this.BindProfileImage("test");

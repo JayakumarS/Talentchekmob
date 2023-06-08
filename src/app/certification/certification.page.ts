@@ -8,6 +8,7 @@ import { SkillPopupPage } from '../skill-popup/skill-popup.page';
 import { formatDate } from '@angular/common';
 import moment from 'moment';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-certification',
@@ -16,6 +17,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 })
 export class CertificationPage implements OnInit {
   uploadedFile: any;
+  selectedLang: any;
   doRefresh(event) {
     this.ngOnInit();
   setTimeout(() => {
@@ -39,12 +41,15 @@ export class CertificationPage implements OnInit {
   uploadedFileSize: string;
   uploadedFileExtension: string;
   
-  constructor(public router:Router,public modalController: ModalController,
+  constructor(public router:Router,public modalController: ModalController,public languageService:LanguageService,
     public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,
     public storageservice: StorageService,private toastController: ToastController,) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
       this.userId = localStorage.getItem("userId");
       this.certificationForm = this.fb.group({
       certificationName:['', Validators.required],
@@ -223,7 +228,7 @@ export class CertificationPage implements OnInit {
             console.log("Image upload response: " + result)
             if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
             profilePage.updateData();
             }, 800);
               this.presentToast()
@@ -268,7 +273,7 @@ export class CertificationPage implements OnInit {
       console.log("Image upload response: " + result)
       if (result["success"] == true) {
       setTimeout(() => {
-         const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+         const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
         profilePage.updateData();
       }, 800);
        this.updateToast()

@@ -9,6 +9,7 @@ import { TcFormPage } from '../tc-form/tc-form.page';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import moment from 'moment';
 import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-org-profile',
@@ -18,6 +19,7 @@ import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
 export class OrgProfilePage implements OnInit {
   editstate: any;
   editCity: any;
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -55,10 +57,11 @@ export class OrgProfilePage implements OnInit {
   isAbout: boolean = false;
   isLogo:boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,public alertController: AlertController,
-    private camera: Camera, public router: Router, private ngZone: NgZone,private toastController: ToastController, private route: ActivatedRoute) { }
+    private camera: Camera, public router: Router, private ngZone: NgZone,private toastController: ToastController, private route: ActivatedRoute,private languageService: LanguageService) { }
 
   ngOnInit() {
-
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   
     this.currentUserId = localStorage.getItem("userId");
     this.getCountryList();
@@ -306,7 +309,7 @@ export class OrgProfilePage implements OnInit {
       this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {
         console.log("Image upload response: " + result)
         if (result["success"] == true) { 
-           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController);
+           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController,this.languageService);
            orgprofileview.reload(); 
           this.presentToast()
         }

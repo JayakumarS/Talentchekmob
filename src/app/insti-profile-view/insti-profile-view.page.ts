@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-insti-profile-view',
@@ -9,6 +10,7 @@ import { NavigationEnd } from '@angular/router';
   styleUrls: ['./insti-profile-view.page.scss'],
 })
 export class InstiProfileViewPage implements OnInit {
+  selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -38,7 +40,7 @@ export class InstiProfileViewPage implements OnInit {
   ifscCode: any;
   connectionList: any;
   connectioncard:boolean = false;
-  constructor(public router: Router,public storageservice: StorageService) { 
+  constructor(public router: Router,public storageservice: StorageService,public languageService:LanguageService) { 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
     }
@@ -56,6 +58,9 @@ export class InstiProfileViewPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/insti-profile-view') {

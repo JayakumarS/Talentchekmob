@@ -3,6 +3,7 @@ import { StorageService } from '../storage.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-category-popup',
@@ -17,7 +18,8 @@ export class CategoryPopupPage implements OnInit {
   categoryupdate: any;
   checkedList: any[];
   userId: string;
-  constructor(public storageservice:StorageService,private fb: FormBuilder,public router:Router,private toastController: ToastController,) {
+  selectedLang: any;
+  constructor(public storageservice:StorageService,private fb: FormBuilder,public router:Router,private toastController: ToastController,public languageService:LanguageService) {
 
     this.CategoryForm = this.fb.group({
       category: [""],
@@ -27,6 +29,8 @@ export class CategoryPopupPage implements OnInit {
 checked = false;
   ngOnInit() {
 
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.userId = localStorage.getItem("userId");
     this.getIndustry();
 

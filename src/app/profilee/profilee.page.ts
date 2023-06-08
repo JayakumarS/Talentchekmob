@@ -9,6 +9,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { LanguageService } from '../language.service';
 
 
 
@@ -23,6 +24,7 @@ export class ProfileePage implements OnInit {
   city: any;
   editstate: any;
   editCity: any;
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -71,9 +73,12 @@ countryIdVal:string;
   splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(public router:Router,public storageservice:StorageService,private fb: FormBuilder,public modalController: ModalController,
     private camera: Camera,private toastController: ToastController,private elementRef: ElementRef
-    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone) { }
+    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.currentUserId = localStorage.getItem("userId");
     this.getCountryList()
@@ -288,7 +293,7 @@ goTostateSelectedItem( stateId) {
           console.log("Image upload response: " + result)
          if (result["success"] == true) {
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController);
+            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
            profilePage.updateData();
           }, 800);
           this.presentToast()

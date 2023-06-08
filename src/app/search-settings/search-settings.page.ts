@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ModalController, NavController, ToastController } from "@ionic/angular";
 import { JobSearchPage } from '../job-search/job-search.page';
+import { LanguageService } from '../language.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { JobSearchPage } from '../job-search/job-search.page';
   styleUrls: ['./search-settings.page.scss'],
 })
 export class SearchSettingsPage implements OnInit {
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -79,7 +81,7 @@ formValues: any = {};
 
 
   constructor(public router:Router,public storageservice: StorageService,private toastController: ToastController,private fb: FormBuilder,
-    private navCtrl: NavController,public modalController: ModalController) {
+    private navCtrl: NavController,public modalController: ModalController,public languageService:LanguageService) {
 
     this.advsearchForm = this.fb.group({
       skillsearch:[""],
@@ -100,6 +102,9 @@ formValues: any = {};
    
 
   async ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.getSkillList();
     this.workLocationList();

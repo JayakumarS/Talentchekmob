@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-about-device',
@@ -7,10 +8,14 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
   styleUrls: ['./about-device.page.scss'],
 })
 export class AboutDevicePage implements OnInit {
+  selectedLang: string;
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,public languageService:LanguageService) { }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
+    
   }
 
   //nav bar

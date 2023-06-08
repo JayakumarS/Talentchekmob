@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-academic-verifier-details',
@@ -17,10 +18,14 @@ export class AcademicVerifierDetailsPage implements OnInit {
   userId: string;
   inputValue: string = '';
   splCharRegex: string = "^[^<>{}\"/|;:,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
+  selectedLang: string;
   constructor(private fb: FormBuilder,private route: ActivatedRoute, public router:Router,public toastController:ToastController,
-    public storageservice:StorageService) { }
+    public storageservice:StorageService,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.storageservice.dismissLoading();
     this.route.queryParams.subscribe(params => {
       this.clubId=params.clubId;

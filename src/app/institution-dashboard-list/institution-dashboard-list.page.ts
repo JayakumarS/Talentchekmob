@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-institution-dashboard-list',
@@ -10,6 +11,7 @@ import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.p
   styleUrls: ['./institution-dashboard-list.page.scss'],
 })
 export class InstitutionDashboardListPage implements OnInit {
+  selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -30,7 +32,7 @@ export class InstitutionDashboardListPage implements OnInit {
   
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
-    public storageservice: StorageService,public alertController: AlertController) { 
+    public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) { 
 
             
     this.userId = localStorage.getItem("userId")  ; 
@@ -46,6 +48,8 @@ export class InstitutionDashboardListPage implements OnInit {
 
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.route.queryParams.subscribe(params => {
       if (params) {
   

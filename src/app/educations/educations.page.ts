@@ -7,6 +7,7 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 import moment from 'moment';
 import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
+import { LanguageService } from '../language.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page
 })
 export class EducationsPage implements OnInit {
   uploadedFile: any;
+  selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -72,7 +74,7 @@ export class EducationsPage implements OnInit {
   nonMandatory: boolean = false;
   fieldOfStudyDisable: boolean = false;
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder,
-    private toastController: ToastController,private route: ActivatedRoute,
+    private toastController: ToastController,private route: ActivatedRoute,public languageService:LanguageService,
     public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController) {
 
@@ -84,6 +86,9 @@ export class EducationsPage implements OnInit {
 
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     //this.getstudyList();
     this.EducationForm = this.fb.group({
       institutionName: [""],

@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-institution-dashboard',
@@ -10,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./institution-dashboard.page.scss'],
 })
 export class InstitutionDashboardPage implements OnInit {
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit(); 
@@ -21,9 +23,11 @@ export class InstitutionDashboardPage implements OnInit {
   profileViewCount:any;
   oniRating:any;
   instCountlist:[];
-  constructor(public router:Router,public storageservice: StorageService,private translate: TranslateService,) { }
+  constructor(private languageService: LanguageService,public router:Router,public storageservice: StorageService,private translate: TranslateService,) { }
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.translate.setDefaultLang('en');
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/institution-dashboard') {

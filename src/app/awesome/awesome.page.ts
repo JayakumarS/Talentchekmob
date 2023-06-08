@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-awesome',
@@ -9,10 +10,14 @@ import { Router } from '@angular/router';
 export class AwesomePage implements OnInit {
   emailId: any;
   emailContentFlag:boolean=false;
+  selectedLang: string;
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang); 
 
     this.emailId=localStorage.getItem("emailId") ;
     console.log(this.emailId)

@@ -10,6 +10,7 @@ import { LanguageService } from '../language.service';
   styleUrls: ['./hello-dear.page.scss'],
 })
 export class HelloDearPage implements OnInit {
+  selectedLang: string;
 
 
   constructor(public router:Router,private popoverController: PopoverController,private languageService: LanguageService) {
@@ -19,7 +20,8 @@ export class HelloDearPage implements OnInit {
    }
 
   ngOnInit() {
-
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
   }
 
   goto_signup(){

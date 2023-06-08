@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
 import { NavigationEnd } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -44,7 +45,7 @@ export class ProfileViewPage implements OnInit {
   fromAddPage: any;
   expertiseFull: boolean = false;
   constructor(public router: Router, private ngZone: NgZone, public route: ActivatedRoute, public storageservice: StorageService, private elementRef: ElementRef,
-    public modalController: ModalController, public alertController: AlertController,) {
+    public modalController: ModalController, public alertController: AlertController,public languageService:LanguageService) {
 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;

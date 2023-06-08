@@ -4,6 +4,7 @@ import { StorageService } from '../storage.service';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { BidsAndAplicationsRecivedPopupPage } from '../bids-and-aplications-recived-popup/bids-and-aplications-recived-popup.page';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-oni-view-job-profile-matches-list',
@@ -11,6 +12,7 @@ import { BidsAndAplicationsRecivedPopupPage } from '../bids-and-aplications-reci
   styleUrls: ['./oni-view-job-profile-matches-list.page.scss'],
 })
 export class OniViewJobProfileMatchesListPage implements OnInit {
+  selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -37,7 +39,7 @@ export class OniViewJobProfileMatchesListPage implements OnInit {
 
 
   constructor(public router:Router,private route: ActivatedRoute,public storageservice: StorageService,public modalController: ModalController,
-  private loadingCtrl: LoadingController,public alertController: AlertController) { 
+  private loadingCtrl: LoadingController,public alertController: AlertController,private languageService: LanguageService) { 
 
     this.creditPoints = localStorage.getItem("creditPoints") ;
     this.roleId = localStorage.getItem("roleId");
@@ -57,6 +59,9 @@ export class OniViewJobProfileMatchesListPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.getMatchesData();
   }

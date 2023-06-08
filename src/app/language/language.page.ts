@@ -11,10 +11,14 @@ export class LanguagePage implements OnInit {
 
   languages = [];
   selected = '';
+  selectedLang: any;
 
   constructor(public router:Router, private languageService: LanguageService ) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.languages = this.languageService.getLanguages();
     this.selected = this.languageService.selected;

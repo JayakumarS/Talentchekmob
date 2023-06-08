@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-activity-verification',
@@ -14,10 +15,14 @@ export class ActivityVerificationPage implements OnInit {
   clubId: any;
   ExtracurricularFrom:FormGroup;
   Extracurricular: any;
+  selectedLang: string;
   constructor(private fb: FormBuilder,private route: ActivatedRoute, public router:Router,public toastController:ToastController,
-    public storageservice:StorageService) { }
+    public storageservice:StorageService,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.route.queryParams.subscribe(params => {
       this.clubId=params.clubId;

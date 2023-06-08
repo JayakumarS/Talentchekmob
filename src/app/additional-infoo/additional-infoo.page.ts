@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-additional-infoo',
@@ -35,12 +36,16 @@ base64img1: string = '';
   selecteCountry: string;
   CtryId: string;
   countryId: any;
-  constructor(public router: Router, public formbuilder: FormBuilder, public storageservice: StorageService,   private toastController: ToastController) {
+  selectedLang: string;
+  constructor(public router: Router,public languageService:LanguageService, public formbuilder: FormBuilder, public storageservice: StorageService,   private toastController: ToastController) {
 
 
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.additionalform = this.formbuilder.group({
       bloodgroup: ["", Validators.required],
       mothertongue: ["", Validators.required],

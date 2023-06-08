@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-edu-verification',
@@ -14,11 +15,15 @@ export class EduVerificationPage implements OnInit {
   eduId: any;
   EducationForm:FormGroup;
   Education: any;
+  selectedLang: string;
 
   constructor(private route: ActivatedRoute, public router:Router,public toastController:ToastController,
-    private fb: FormBuilder, public storageservice:StorageService) { }
+    private fb: FormBuilder, public storageservice:StorageService,public languageService:LanguageService) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
 
     this.route.queryParams.subscribe(params => {
       this.instiId=params.instiId;

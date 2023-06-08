@@ -13,6 +13,7 @@ export class LanguagePopoverPage implements OnInit {
  languages = [];
  selected = '';
   langSelected: string;
+  selectedLang: any;
  //#endregion
 
  //#region Constructor
@@ -22,6 +23,10 @@ export class LanguagePopoverPage implements OnInit {
 
  //#region OnInit
  ngOnInit() {
+
+  this.selectedLang  = localStorage.getItem('selectedLang');
+  this.languageService.setLanguage(this.selectedLang);
+  
    this.languages = this.languageService.getLanguages();
    this.selected = this.languageService.selected;
    console.log(this.languages),
