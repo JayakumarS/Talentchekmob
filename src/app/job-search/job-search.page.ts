@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { NavigationEnd } from '@angular/router';
 import { ScrollDetail } from '@ionic/core';
+import { LanguageService } from '../language.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class JobSearchPage implements OnInit {
   mySlicedArray2 = [];
   btn: any;
   advanceFlag: boolean = false;
+  selectedLang: string;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -51,7 +53,7 @@ export class JobSearchPage implements OnInit {
 
   
   
-  constructor(private fb: FormBuilder,
+  constructor(private fb: FormBuilder,private languageService: LanguageService,
     private route: ActivatedRoute,public storageservice: StorageService,private toastController: ToastController, public modalController: ModalController,
     public router:Router,private loadingCtrl: LoadingController,public alertController: AlertController) {
 
@@ -67,7 +69,7 @@ export class JobSearchPage implements OnInit {
         this.btn = "advancebtn";
         this.advanceFlag= true;
       this.storageservice.showLoading(); 
-        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList"; 
+        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob"; 
         this.storageservice.postrequest(BasicSearcUrl, this.formValues).subscribe(result => {
           this.basicprofilesearchList = result['basicprofilesearchList'];
           if(this.basicprofilesearchList.length>=1){ 
@@ -100,6 +102,8 @@ export class JobSearchPage implements OnInit {
 
 
   ngOnInit() {
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.mySlicedArray = [];
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/job-search') {
@@ -185,10 +189,10 @@ export class JobSearchPage implements OnInit {
     this.storageservice.showLoading();
    console.log(this.jobSearchHeadForm.value); 
 
-       var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
+       var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob";
 
       let offset = 0;
-    var postData = {
+      var postData = {
       "searchby":this.jobSearchHeadForm.value.searchType,
       "searchvalue":this.jobSearchHeadForm.value.searchValue,
       "btn":this.btn,
@@ -228,7 +232,7 @@ export class JobSearchPage implements OnInit {
       let length = this.mySlicedArray.length;
       length2 = length
       console.log(length2)
-    var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchList";
+    var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob";
 
     if(this.advanceFlag == false){
       var postData = {
