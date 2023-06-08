@@ -28,8 +28,8 @@ export class LanguagePage implements OnInit {
 
 
 
-    // this.languages = this.languageService.getLanguages();
-    // this.selected = this.languageService.selected;
+    this.languages = this.languageService.getLanguages();
+    this.selected = this.languageService.selected;
   }
   selectedTab: string = 'menu';
 
