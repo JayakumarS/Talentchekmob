@@ -19,25 +19,25 @@ import { LanguageService } from '../language.service';
 })
 export class SignUpOrganizationPage implements OnInit {
   response: Object;
-  Four:string;
+  Four: string;
   isSubmitted: boolean;
   splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©_+]*$";
-talentorgform: FormGroup;
-step:any
-stateVal: string;
-countryVal: string;
-countryIdVal:string;
-countryResponseBackup: any;
-countryResponse: any;
-countryList: [];
-domainList: [];
-cityList: [];
-orgTypeList:[];
-cityOptions:any;
-IsSearchListShow: boolean = false;
-SearchStateShow: boolean = false;
-private stepper: Stepper;
-base64img1: string = '';
+  talentorgform: FormGroup;
+  step: any
+  stateVal: string;
+  countryVal: string;
+  countryIdVal: string;
+  countryResponseBackup: any;
+  countryResponse: any;
+  countryList: [];
+  domainList: [];
+  cityList: [];
+  orgTypeList: [];
+  cityOptions: any;
+  IsSearchListShow: boolean = false;
+  SearchStateShow: boolean = false;
+  private stepper: Stepper;
+  base64img1: string = '';
   filteredOptions: any;
   addressForm: any;
   stateList: [];
@@ -47,9 +47,9 @@ base64img1: string = '';
   stateResponseBackup: any;
   stateId: any;
   cityId: any;
-  showcountyResults : boolean = false;
+  showcountyResults: boolean = false;
   selectedCountry: any;
-  showResults: boolean = false; 
+  showResults: boolean = false;
   searchResults: string[] = [];
   countrysearchCtrl = new FormControl('');
   countryId: string;
@@ -57,40 +57,40 @@ base64img1: string = '';
   cBoxIAgreeConsentVal: boolean = true;
 
   passwordType: string = 'password';
-  passwordIcon: string = 'eye'; 
-  showStateResults : boolean = false;
+  passwordIcon: string = 'eye';
+  showStateResults: boolean = false;
   searchStateResults: string[] = [];
   searchCityResults: string[] = [];
   citySearchCtrl = new FormControl('');
   selectedState: string;
   selectedCity: string;
   statesearchCtrl = new FormControl('');
-  showCityResults: boolean= false;
+  showCityResults: boolean = false;
   selectedLang: string;
-  constructor(public router: Router,private camera: Camera,public formbuilder: FormBuilder,public storageservice:StorageService, private transfer: FileTransfer,
-    private translate: TranslateService,public modalController: ModalController,public languageService:LanguageService ) { 
+  constructor(public router: Router, private camera: Camera, public formbuilder: FormBuilder, public storageservice: StorageService, private transfer: FileTransfer,
+    private translate: TranslateService, public modalController: ModalController, public languageService: LanguageService) {
 
 
     this.talentorgform = formbuilder.group({
-      organizationName: ['',Validators.compose([Validators.maxLength(50), Validators.minLength(3), Validators.required])],
-      regNo: ['',Validators.required],
-      orgType: ['',Validators.required],
-      regDate: ['',Validators.required],
-      domainId: ['',Validators.required],
+      organizationName: ['', Validators.compose([Validators.maxLength(50), Validators.minLength(3), Validators.required])],
+      regNo: ['', Validators.required],
+      orgType: ['', Validators.required],
+      regDate: ['', Validators.required],
+      domainId: ['', Validators.required],
       emailId: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
       address: [''],
-      country: ['',Validators.required],
-      city:['',Validators.required],
-      pwd:['',Validators.required],
-      mobileNo:['',Validators.required],
-      state: ['',Validators.required],
-      pincode: ['',Validators.required],
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      pwd: ['', Validators.required],
+      mobileNo: ['', Validators.required],
+      state: ['', Validators.required],
+      pincode: ['', Validators.required],
       uploadImg: ['',],
       referralCode: [''],
       profileVisibility: ['', ''],
-     countryId:[''],
-     cBoxIAgree:[''],
-     cBoxIAgreeConsent:['']
+      countryId: [''],
+      cBoxIAgree: [''],
+      cBoxIAgreeConsent: ['']
     });
 
 
@@ -98,12 +98,12 @@ base64img1: string = '';
 
   }
 
-  limitInputLength($event, maxLength=25) {
-    if($event.target.value.length>=maxLength) {
-        $event.preventDefault();
-        return;
+  limitInputLength($event, maxLength = 25) {
+    if ($event.target.value.length >= maxLength) {
+      $event.preventDefault();
+      return;
     }
-}
+  }
 
   next() {
     this.stepper.next();
@@ -114,7 +114,7 @@ base64img1: string = '';
   // }
 
   async ngOnInit() {
-    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.step = 1;
     this.stepper = new Stepper(document.querySelector('#stepper3'), {
@@ -122,33 +122,33 @@ base64img1: string = '';
       animation: true
     })
 
-    this.getCountryList(); 
+    this.getCountryList();
     this.BindDomain();
-   // var stateListConstant = await this.getstatelist(); 
-  this.BindorgType();
-   
- 
+    // var stateListConstant = await this.getstatelist(); 
+    this.BindorgType();
+
+
   }
 
 
-  
-goToSearchSelectedItem( CtryName,CtryId) {
-  console.log("InsName: " + CtryName)
-  console.log("InsId: " + CtryId)
 
-  this.countryVal = CtryName;
-  this.talentorgform.value.countryId = CtryId;
-  this.IsSearchListShow = false;
-  this.getstatelist(CtryId);
-}
-  goto_welcome(){
+  goToSearchSelectedItem(CtryName, CtryId) {
+    console.log("InsName: " + CtryName)
+    console.log("InsId: " + CtryId)
 
-      this.router.navigate(['/hello-dear']) 
+    this.countryVal = CtryName;
+    this.talentorgform.value.countryId = CtryId;
+    this.IsSearchListShow = false;
+    this.getstatelist(CtryId);
+  }
+  goto_welcome() {
+
+    this.router.navigate(['/hello-dear'])
   }
 
-  goto_signin(){
+  goto_signin() {
 
-    this.router.navigate(['/sign-in']) 
+    this.router.navigate(['/sign-in'])
   }
 
 
@@ -189,29 +189,29 @@ goToSearchSelectedItem( CtryName,CtryId) {
       console.log(error);
     })
   }
-// Domain List
-BindDomain() {
-  var industryURL = "api/auth/app/CommonUtility/industryList";
-  this.storageservice.getrequest(industryURL).subscribe(result => {
-   this.domainList = result['industryList'];
-  });
-}
-//orgtypelist
-BindorgType(){
-var industryURL = "api/auth/app/CommonUtility/orgTypeList";
-this.storageservice.getrequest(industryURL).subscribe(result => {
-  this.orgTypeList = result['orgTypeList'];
- });
-}
+  // Domain List
+  BindDomain() {
+    var industryURL = "api/auth/app/CommonUtility/industryList";
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+      this.domainList = result['industryList'];
+    });
+  }
+  //orgtypelist
+  BindorgType() {
+    var industryURL = "api/auth/app/CommonUtility/orgTypeList";
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+      this.orgTypeList = result['orgTypeList'];
+    });
+  }
 
-//CountryList
-unCheckFocus() {
-  // this.ionSearchListShow = false;
-}
+  //CountryList
+  unCheckFocus() {
+    // this.ionSearchListShow = false;
+  }
 
   //country list
 
-  getCountryList(){
+  getCountryList() {
 
     var countryURL = "api/auth/app/CommonUtility/countryList";
     const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
@@ -219,9 +219,9 @@ unCheckFocus() {
       console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
   }
-  
-  
-  
+
+
+
   onCountrySearch(value: string) {
     if (value.length > 2) {
       this.showcountyResults = true;
@@ -231,309 +231,310 @@ unCheckFocus() {
       this.searchResults = [];
     }
   }
-  
-  selectcountry(contry: string,id:string) {
-    this.selectedCountry = contry; 
+
+  selectcountry(contry: string, id: string) {
+    this.selectedCountry = contry;
     this.talentorgform.patchValue({
-      'country' : id
+      'country': id
     })
-     this.showcountyResults = false;
-    this.searchResults = []; 
+    this.showcountyResults = false;
+    this.searchResults = [];
     this.getstatelist(id);
     this.countrysearchCtrl.setValue('');
   }
-  
-  
+
+
   removeCountry() {
     this.selectedCountry = undefined;
   }
 
-// State List
-async getstatelist(CtryId): Promise<any> {
+  // State List
+  async getstatelist(CtryId): Promise<any> {
 
-  console.log(CtryId)
-  var industryURL = "api/auth/app/CommonUtility/stateList?countryId="+CtryId;
-  this.storageservice.getrequest(industryURL).subscribe(result => {
-    this.stateResponseBackup = result["stateList"];
-    this.stateResponse = result["stateList"];
-   
-   // console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
-  });
+    console.log(CtryId)
+    var industryURL = "api/auth/app/CommonUtility/stateList?countryId=" + CtryId;
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+      this.stateResponseBackup = result["stateList"];
+      this.stateResponse = result["stateList"];
 
-  return industryURL;
-}
-goTostateSelectedItem( stateId) {
-  //var CtryId =this.talentorgform.value.countryId; 
-  var CtryId=this.talentorgform.value.country;
-  this.getcitylist(stateId,CtryId);
-}
-// City List
-onSelectedCity(cityId:any) {
+      // console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
+    });
 
-  this.cityId = cityId ;
+    return industryURL;
+  }
+  goTostateSelectedItem(stateId) {
+    //var CtryId =this.talentorgform.value.countryId; 
+    var CtryId = this.talentorgform.value.country;
+    this.getcitylist(stateId, CtryId);
+  }
+  // City List
+  onSelectedCity(cityId: any) {
+
+    this.cityId = cityId;
 
 
-}
-getcitylist(stateId,countryId){
-  this.stateId=this.talentorgform.value.state
-  this.talentorgform.patchValue({
-    'country': countryId
-  })
-  console.log(stateId)
-  var industryURL = "api/auth/app/CommonUtility/cityList?countryId="+countryId +"&stateId="+stateId;
-  this.storageservice.getrequest(industryURL).subscribe(result => {
-   this.cityList = result['cityList'];
-   this.cityOptions = result['cityList'];
-  console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
-   
-});
-}
-//save
-onSubmit(){
-  this.storageservice.showLoading();
-   this.isSubmitted = true;
-  if (!this.talentorgform.valid) {
-    this.storageservice.dismissLoading();
-    console.log('Please provide all the required values!');
-    this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
-    return false;
-  } else {
+  }
+  getcitylist(stateId, countryId) {
+    this.stateId = this.talentorgform.value.state
+    this.talentorgform.patchValue({
+      'country': countryId
+    })
+    console.log(stateId)
+    var industryURL = "api/auth/app/CommonUtility/cityList?countryId=" + countryId + "&stateId=" + stateId;
+    this.storageservice.getrequest(industryURL).subscribe(result => {
+      this.cityList = result['cityList'];
+      this.cityOptions = result['cityList'];
+      console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
+
+    });
+  }
+  //save
+  onSubmit() {
     this.storageservice.showLoading();
-    console.log(this.talentorgform.value);
-  try {
-    var organizationName = this.talentorgform.controls['organizationName'].value;
-    var regNo = this.talentorgform.controls['regNo'].value;
-    var orgType = this.talentorgform.controls['orgType'].value;
-    var regDate = this.talentorgform.controls['regDate'].value;
-    var domainId = this.talentorgform.controls['domainId'].value;
-    var emailId = this.talentorgform.controls['emailId'].value;
-    var address = this.talentorgform.controls['address'].value;
-    var country = this.talentorgform.controls['country'].value;
-    var city = this.talentorgform.controls['city'].value;
-    var pwd = this.talentorgform.controls['pwd'].value; 
-    var mobileNo = this.talentorgform.controls['mobileNo'].value;
-    var pincode = this.talentorgform.controls['pincode'].value; 
-    var state = this.talentorgform.controls['state'].value;
-    var referralCode = this.talentorgform.controls['referralCode'].value; 
-    var profileVisibility = this.talentorgform.controls['profileVisibility'].value;
-    console.log("regDate: " + regDate); 
-    var regDate1 = this.transformDate(regDate);
-    console.log("regDate: " + regDate1);
-    //var countryID=country.slice(0,2);
+    this.isSubmitted = true;
+    if (!this.talentorgform.valid) {
+      this.storageservice.dismissLoading();
+      console.log('Please provide all the required values!');
+      this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsProvReqVals'));
+      return false;
+    } else {
+      this.storageservice.showLoading();
+      console.log(this.talentorgform.value);
+      try {
+        var organizationName = this.talentorgform.controls['organizationName'].value;
+        var regNo = this.talentorgform.controls['regNo'].value;
+        var orgType = this.talentorgform.controls['orgType'].value;
+        var regDate = this.talentorgform.controls['regDate'].value;
+        var domainId = this.talentorgform.controls['domainId'].value;
+        var emailId = this.talentorgform.controls['emailId'].value;
+        var address = this.talentorgform.controls['address'].value;
+        var country = this.talentorgform.controls['country'].value;
+        var city = this.talentorgform.controls['city'].value;
+        var pwd = this.talentorgform.controls['pwd'].value;
+        var mobileNo = this.talentorgform.controls['mobileNo'].value;
+        var pincode = this.talentorgform.controls['pincode'].value;
+        var state = this.talentorgform.controls['state'].value;
+        var referralCode = this.talentorgform.controls['referralCode'].value;
+        var profileVisibility = this.talentorgform.controls['profileVisibility'].value;
+        console.log("regDate: " + regDate);
+        var regDate1 = this.transformDate(regDate);
+        console.log("regDate: " + regDate1);
+        //var countryID=country.slice(0,2);
 
-    //let myString = regDate1;
-    // this.Four = myString.substring(0, myString.length - 6);
-    // console.log(this.Four)
-    
-    // if (firstName != lastName) { //Validation.
+        //let myString = regDate1;
+        // this.Four = myString.substring(0, myString.length - 6);
+        // console.log(this.Four)
 
-      // var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
-      // console.log("currentDate: " + currentDate);
-      // console.log("dateOfBirthAlt: " + dateOfBirth);
-      // var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
-      // if (frm <= currentDate) {
-   
-    var postData = {
+        // if (firstName != lastName) { //Validation.
 
-      'organizationName': organizationName,
-      'regNo': regNo,
-      'orgType': orgType,
-      'regDate': regDate1,
-      'domainId': domainId,
-      'address': address,
-      'emailId': emailId,
-      'country': country,
-      'city': city,
-      'pwd': pwd,
-      'mobileNo': mobileNo,
-      'pincode': pincode,
-      'state': state,
-      'referralCode': referralCode,
-      'profileVisibility': profileVisibility,
-      'uploadImg': this.base64img1,
+        // var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
+        // console.log("currentDate: " + currentDate);
+        // console.log("dateOfBirthAlt: " + dateOfBirth);
+        // var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
+        // if (frm <= currentDate) {
 
+        var postData = {
+
+          'organizationName': organizationName,
+          'regNo': regNo,
+          'orgType': orgType,
+          'regDate': regDate1,
+          'domainId': domainId,
+          'address': address,
+          'emailId': emailId,
+          'country': country,
+          'city': city,
+          'pwd': pwd,
+          'mobileNo': mobileNo,
+          'pincode': pincode,
+          'state': state,
+          'referralCode': referralCode,
+          'profileVisibility': profileVisibility,
+          'uploadImg': this.base64img1,
+          'registrationmode': 'Mobile',
+
+        }
+        console.log(`Posting Data: ${JSON.stringify(postData)}`);
+
+        var signUpServiceUrl = "api/auth/app/registration/OrganizationRegister";
+        this.storageservice.postrequest(signUpServiceUrl, postData).subscribe(result => {
+          this.response = result;
+          console.log(this.response);
+          if (result["success"] == true) {
+            this.storageservice.dismissLoading();
+            //this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('Registration Successful.  '));
+
+            var empid = result["empUserId"];
+            var points = result["creditPoints"];
+            let navigationExtras: NavigationExtras = {
+              queryParams: {
+                empId: empid,
+                points: points
+              }
+            };
+            this.router.navigate(['/awesome'], navigationExtras);
+            //this.hideLoadingIndicator(); //Hide loading indicator
+          }
+          else if (result["success"] == false) {
+            var msg = result["msg"];
+            if (msg == null) {
+              "msg"
+            }
+            this.storageservice.dismissLoading();
+            this.storageservice.warningToast(msg);
+            //this.hideLoadingIndicator(); //Hide loading indicator
+          }
+          else {
+            this.storageservice.dismissLoading();
+            // this.storageservice.warningToast("Connection unavailable!");
+            this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
+            //this.hideLoadingIndicator(); //Hide loading indicator
+          }
+        });
+
+        // }
+        // else {
+        //   this.storageservice.warningToast('User must have minimum one year old to register. Future date is not applicable, Please change.');
+        //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.userMinOldReg'));
+        // }
+        // }
+        // else {
+        //   this.storageservice.warningToast("First name & last name should not be equal");
+        //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.firNmLtNmEql'));
+        // }
+
+      }
+      catch (Exception) {
+        this.storageservice.dismissLoading();
+        //this.storageservice.warningToast('Connection unavailable!');
+        this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
+        // this.hideLoadingIndicator(); //Hide loading indicator
+      }
+      this.storageservice.dismissLoading();
     }
-    console.log(`Posting Data: ${JSON.stringify(postData)}`);
-
-    var signUpServiceUrl = "api/auth/app/registration/OrganizationRegister"; 
-    this.storageservice.postrequest(signUpServiceUrl, postData).subscribe(result => { 
-      this.response = result;
-      console.log(this.response);
-        if (result["success"] == true) {
-          this.storageservice.dismissLoading();
-                   //this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('Registration Successful.  '));
-
-                  var empid = result["empUserId"];
-                  var points = result["creditPoints"];
-                  let navigationExtras: NavigationExtras = {
-                    queryParams: {
-                      empId: empid,
-                      points: points
-                    }
-                  };
-                  this.router.navigate(['/awesome'], navigationExtras);
-                  //this.hideLoadingIndicator(); //Hide loading indicator
-                }
-                else if (result["success"] == false) {
-                  var msg = result["msg"];
-                  if (msg == null) {
-                    "msg" 
-                  }
-                  this.storageservice.dismissLoading();
-                  this.storageservice.warningToast(msg);
-                  //this.hideLoadingIndicator(); //Hide loading indicator
-                }
-                else {
-                  this.storageservice.dismissLoading();
-                 // this.storageservice.warningToast("Connection unavailable!");
-                  this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
-                  //this.hideLoadingIndicator(); //Hide loading indicator
-                }
-              });
-            
-      // }
-      // else {
-      //   this.storageservice.warningToast('User must have minimum one year old to register. Future date is not applicable, Please change.');
-      //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.userMinOldReg'));
-      // }
-    // }
-    // else {
-    //   this.storageservice.warningToast("First name & last name should not be equal");
-    //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.firNmLtNmEql'));
-    // }
-
   }
-  catch (Exception) {
-    this.storageservice.dismissLoading();
-    //this.storageservice.warningToast('Connection unavailable!');
-    this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.conUnavail'));
-    // this.hideLoadingIndicator(); //Hide loading indicator
+  transformDate(date) {
+    return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
   }
-  this.storageservice.dismissLoading();
+
+  openTCForm() {
+    this.goto_TCFormModal();
   }
-}
-transformDate(date) {
-  return date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10); //YYY-MM-DD
-}
+  async goto_TCFormModal() {
 
-openTCForm() {
-  this.goto_TCFormModal();
-}
-async goto_TCFormModal() {
-
-  const modal = await this.modalController.create({
-    component: TcFormPage,
-    cssClass: 'my-custom-class'
-  });
+    const modal = await this.modalController.create({
+      component: TcFormPage,
+      cssClass: 'my-custom-class'
+    });
 
 
-  modal.onDidDismiss().then((dataReturned) => {
-    if (dataReturned !== null) {
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
 
-      //#region Getting values from popup
-      console.table("One: " + dataReturned);
-      var IsAgree = dataReturned.data["IsAgree"];
-      console.log("IsAgree: " + IsAgree);
-      //#endregion
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        var IsAgree = dataReturned.data["IsAgree"];
+        console.log("IsAgree: " + IsAgree);
+        //#endregion
 
-      if (IsAgree == "Yes") {
-        this.cBoxIAgreeVal = true;
+        if (IsAgree == "Yes") {
+          this.cBoxIAgreeVal = true;
+        }
+        else if (IsAgree == "No") {
+          this.cBoxIAgreeVal = false;
+        }
       }
-      else if (IsAgree == "No") {
-        this.cBoxIAgreeVal = false;
+    });
+
+    return await modal.present();
+  }
+
+  openConsentForm() {
+    this.goto_ConsentFormModal();
+  }
+
+  async goto_ConsentFormModal() {
+
+    const modal = await this.modalController.create({
+      component: ConsentFormPage,
+      cssClass: 'my-custom-class'
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+
+        //#region Getting values from popup
+        console.table("One: " + dataReturned);
+        var IsAgree = dataReturned.data["IsAgree"];
+        console.log("IsAgree: " + IsAgree);
+        //this.storageservice.warningToast('Modal Sent Data :' + dataReturned);
+        //#endregion
+
+        if (IsAgree == "Yes") {
+          this.cBoxIAgreeConsentVal = true;
+        }
+        else if (IsAgree == "No") {
+          this.cBoxIAgreeConsentVal = false;
+        }
       }
+    });
+
+    return await modal.present();
+  }
+
+
+  onStateSearch(value: string) {
+    if (value.length > 1) {
+      this.showStateResults = true;
+      this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showStateResults = false;
+      this.searchStateResults = [];
     }
-  });
-
-  return await modal.present();
-}
-
-openConsentForm() {
-  this.goto_ConsentFormModal();
-}
-
-async goto_ConsentFormModal() {
-
-  const modal = await this.modalController.create({
-    component: ConsentFormPage,
-    cssClass: 'my-custom-class'
-  });
-
-  modal.onDidDismiss().then((dataReturned) => {
-    if (dataReturned !== null) {
-
-      //#region Getting values from popup
-      console.table("One: " + dataReturned);
-      var IsAgree = dataReturned.data["IsAgree"];
-      console.log("IsAgree: " + IsAgree);
-      //this.storageservice.warningToast('Modal Sent Data :' + dataReturned);
-      //#endregion
-
-      if (IsAgree == "Yes") {
-        this.cBoxIAgreeConsentVal = true;
-      }
-      else if (IsAgree == "No") {
-        this.cBoxIAgreeConsentVal = false;
-      }
-    }
-  });
-
-  return await modal.present();
-}
-
-
-onStateSearch(value: string) {
-  if (value.length > 1) {
-    this.showStateResults = true;
-    this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-  } else {
+  }
+  selectState(state: string, id: string) {
+    this.selectedState = state;
+    this.talentorgform.patchValue({
+      'state': id
+    })
     this.showStateResults = false;
     this.searchStateResults = [];
+    var CtryId = this.talentorgform.value.country;
+    this.getcitylist(id, CtryId);
+    this.statesearchCtrl.setValue('');
   }
-}
-selectState(state: string,id:string) {
-  this.selectedState = state; 
-  this.talentorgform.patchValue({
-    'state' : id
-  })
-   this.showStateResults = false;
-  this.searchStateResults = []; 
-  var CtryId=this.talentorgform.value.country;
-  this.getcitylist(id,CtryId);
-  this.statesearchCtrl.setValue('');
-}
-onCitySearch(value: string) {
-  if (value.length > 1) {
-    this.showCityResults = true;
-    this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-  } else {
+  onCitySearch(value: string) {
+    if (value.length > 1) {
+      this.showCityResults = true;
+      this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    } else {
+      this.showCityResults = false;
+      this.searchCityResults = [];
+    }
+  }
+
+  selectCity(state: string, id: string) {
+    this.selectedCity = state;
+    this.talentorgform.patchValue({
+      'city': id
+    })
     this.showCityResults = false;
     this.searchCityResults = [];
+    this.citySearchCtrl.setValue('');
   }
-}
-
-selectCity(state: string,id:string) {
-  this.selectedCity = state; 
-  this.talentorgform.patchValue({
-    'city' : id
-  })
-   this.showCityResults = false;
-  this.searchCityResults = [];  
-  this.citySearchCtrl.setValue('');
-}
-removeState() {
-  this.selectedState = undefined;
-}
-removeCity() {
-  this.selectedCity = undefined;
-}
-passwordToggle() {
-  if (this.passwordType === 'password') {
-    this.passwordType = 'text';
-    this.passwordIcon = 'eye-off';
-  } else {
-    this.passwordType = 'password';
-    this.passwordIcon = 'eye';
+  removeState() {
+    this.selectedState = undefined;
   }
-}
+  removeCity() {
+    this.selectedCity = undefined;
+  }
+  passwordToggle() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.passwordIcon = 'eye-off';
+    } else {
+      this.passwordType = 'password';
+      this.passwordIcon = 'eye';
+    }
+  }
 }
