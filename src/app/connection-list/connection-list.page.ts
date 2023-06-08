@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-connection-list',
@@ -14,20 +15,27 @@ export class ConnectionListPage implements OnInit {
   RoleID: any;
   userId: string;
   connectionList: any;
+  mySlicedArray = [];
+  
   @ViewChild('popover') popover;
   
   isOpen:boolean = false;
   creditPoints: any;
   currentUserId: any;
   currentUserName: any;
+  relationship: any;
+  selectedLang: string;
   presentPopover(e: Event) {
     this.popover.event = e;
     this.isOpen = true;
   }
-  constructor(public router:Router,public alertController: AlertController,
+  constructor(public router:Router,public alertController: AlertController,public languageService:LanguageService,
     public modalController: ModalController,public storageservice: StorageService,private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.creditPoints = localStorage.getItem("creditPoints") ;
     this.currentUserId = localStorage.getItem("userId")  ;
     this.route.queryParams.subscribe(params => {
@@ -35,7 +43,8 @@ export class ConnectionListPage implements OnInit {
         if (params != null || params != undefined ) {
           const relationship = params.p.slice(0, -3)   
             this.getconnection(this.currentUserId,relationship); 
-          console.log(relationship);
+          
+          
         }
       }
     });
@@ -56,20 +65,29 @@ export class ConnectionListPage implements OnInit {
   }
 
   getconnection(userid,relationship){
+    this.storageservice.showLoading();
+
+    let offset = 0;
 
     var connectionListsURL = "api/auth/app/mobile/ConnectionList";
+    console.log(relationship)
 
-    this.storageservice.showLoading();
-    
-     
-
-  this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + userid +"&relationship=" + relationship).subscribe(result => {
+    this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + userid +"&relationship=" + relationship + "&offset=" + offset).subscribe(result => {
     
      // this.jobPostList = result['JobAdvertisementList'];
 
      if(result['success']== true){
-      this.storageservice.dismissLoading()
-       this.connectionList = result['connectionlist']; 
+
+
+      this.storageservice.dismissLoading(); 
+      this.connectionList = result['connectionlist'];
+      console.log(this.connectionList); 
+      this.mySlicedArray = this.connectionList;
+       console.log(this.mySlicedArray);
+     
+      this.storageservice.dismissLoading();
+
+
       // this.matchedCount = result['matchedList'].length ;
       // this.orgBidCount = result['orgBidList'].length ;
 
@@ -80,6 +98,45 @@ export class ConnectionListPage implements OnInit {
       console.log(this.connectionList);
     });
   }
+  loadMore(event){
+    let length2 = 0;
+    this.route.queryParams.subscribe(params => {
+      if (params) { 
+        if (params != null || params != undefined ) {
+          const relationship = params.p.slice(0, -3)   
+          console.log(relationship);
+          this.relationship=relationship;
+          
+        }
+      }
+    });
+   
+    console.log(this.relationship)
+    if(this.mySlicedArray.length != 0){
+      let length = this.mySlicedArray.length;
+      length2 = length
+      console.log(length2)
+      var connectionListsURL = "api/auth/app/mobile/ConnectionList";
+
+      this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + this.currentUserId +"&relationship=" +  this.relationship + "&offset=" + length2).subscribe(result => {
+       
+        this.connectionList = result['connectionlist'];
+        if(this.connectionList.length>=1){
+          this.mySlicedArray=this.mySlicedArray.concat(this.connectionList);
+         
+         
+         this.storageservice.dismissLoading();
+         }
+         else{
+          
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    
+      event.target.complete();
+    }
+  }
+
   async profileView(talentId,accounttype,username) {
 
 
