@@ -13,15 +13,23 @@ export class LanguagePage implements OnInit {
   selected = '';
   selectedLang: any;
 
-  constructor(public router:Router, private languageService: LanguageService ) { }
+  constructor(public router: Router, private languageService: LanguageService) { }
 
   ngOnInit() {
 
-    this.selectedLang  = localStorage.getItem('selectedLang');
-    this.languageService.setLanguage(this.selectedLang);
+    this.selectedLang = localStorage.getItem('selectedLang');
+    if (this.selectedLang == "null") {
+      this.languageService.setLanguage('en')
+    }
+    else {
+      this.languageService.setLanguage(this.selectedLang);
+    }
 
-    this.languages = this.languageService.getLanguages();
-    this.selected = this.languageService.selected;
+
+
+
+    // this.languages = this.languageService.getLanguages();
+    // this.selected = this.languageService.selected;
   }
   selectedTab: string = 'menu';
 
@@ -34,24 +42,24 @@ export class LanguagePage implements OnInit {
     this.router.navigate(['/settings']);
   }
 
-  goto_settings(){
-    this.router.navigate(['/settings']) 
+  goto_settings() {
+    this.router.navigate(['/settings'])
   }
 
   // footer
-goto_profileSearch(){
-  this.router.navigate(['/job-search']);
-}
-goto_jobs(){
-  this.router.navigate(['/job']);
-}
-goto_home(){
-  this.router.navigate(['/home']);
-}
-goto_profile(){
-  this.router.navigate(['/profile-view']);
-}
-goto_more(){
-  this.router.navigate(['/settings']);
-}
+  goto_profileSearch() {
+    this.router.navigate(['/job-search']);
+  }
+  goto_jobs() {
+    this.router.navigate(['/job']);
+  }
+  goto_home() {
+    this.router.navigate(['/home']);
+  }
+  goto_profile() {
+    this.router.navigate(['/profile-view']);
+  }
+  goto_more() {
+    this.router.navigate(['/settings']);
+  }
 }
