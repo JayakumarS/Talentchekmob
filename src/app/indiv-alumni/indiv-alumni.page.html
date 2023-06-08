@@ -38,7 +38,7 @@
 
 
 
-    <ion-card class="profilesearchcard" *ngFor="let cElement of alumniList">
+    <ion-card class="profilesearchcard" *ngFor="let cElement of mySlicedArray">
         <ion-card-content style="padding-bottom: 0px;">
             <ion-row (click)="studentnetwork(cElement.oniname,cElement.networktype)">
                 <ion-col size="3.5">
@@ -77,8 +77,7 @@
         </ion-card-content>
 
     </ion-card>
-
-
-
-
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
