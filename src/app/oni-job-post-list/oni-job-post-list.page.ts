@@ -4,6 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
  import { AlertController } from '@ionic/angular';
  import { NavigationEnd } from '@angular/router';
  import { ActivatedRoute } from '@angular/router';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-oni-job-post-list',
@@ -14,15 +15,18 @@ export class OniJobPostListPage implements OnInit {
  
 
   jobPostList:[];
-  userId:string;
+  currentUserId:string;
   roleId: string;
   RoleID: string[];
   fromAddPage: any;
   queryParams: any;
+  mySlicedArray = [];
+  flagChange:boolean=false;
+  selectedLang: string;
 
-  constructor(public router:Router, private ngZone: NgZone,public route:ActivatedRoute,public storageservice: StorageService,public alertController: AlertController) {
+  constructor(public router:Router, private ngZone: NgZone,public route:ActivatedRoute,public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) {
 
-    this.userId = localStorage.getItem("userId") ;
+    this.currentUserId = localStorage.getItem("userId") ;
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
     }
@@ -65,6 +69,9 @@ export class OniJobPostListPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.languageService.setLanguage(this.selectedLang);
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/oni-job-post-list') {
         this.setSelectedTab('earth');
@@ -77,13 +84,25 @@ export class OniJobPostListPage implements OnInit {
 
 // list function
 bindJobAdvertiseMentList(){
-   this.storageservice.showLoading();
-  var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementList?currentUserId="+this.userId; 
-    const JobPostList = this.storageservice.getrequest(JobPostListsURL).subscribe(result => { 
+  this.storageservice.showLoading();
+   //offset based list
+   let offset = 0;
+  //  var postData = {
+  //   "userId":this.userId,
+  //    "offset":offset
+  // }
+  var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementListMob"; 
+
+     const JobPostList = this.storageservice.getrequest(JobPostListsURL+ "?currentUserId=" + this.currentUserId +"&offset=" + offset).subscribe(result => { 
+      // const JobPostList = this.storageservice.postrequest(JobPostListsURL,postData).subscribe(result => { 
       if(result['success'] == true) {
         this.storageservice.dismissLoading(); 
         this.jobPostList = result['JobAdvertisementList']; 
         console.log(this.jobPostList); 
+        this.mySlicedArray = this.jobPostList;
+         console.log(this.mySlicedArray);
+        this.flagChange =true;
+        this.storageservice.dismissLoading();
       }
     },error =>{
       this.storageservice.dismissLoading(); 
@@ -96,6 +115,33 @@ bindJobAdvertiseMentList(){
   );
 
   
+}
+
+loadMore(event){
+  let length2 = 0;
+  if(this.mySlicedArray.length != 0){
+    let length = this.mySlicedArray.length;
+    length2 = length
+    console.log(length2)
+    var JobPostListsURL = "api/auth/app/jobportal/JobAdvertisementListMob";
+
+    const JobPostList = this.storageservice.getrequest(JobPostListsURL+ "?currentUserId=" + this.currentUserId +"&offset=" + length2).subscribe(result => { 
+     
+      this.jobPostList = result['JobAdvertisementList'];
+      if(this.jobPostList.length>=1){
+        this.mySlicedArray=this.mySlicedArray.concat(this.jobPostList);
+       
+       this.flagChange =true;
+       this.storageservice.dismissLoading();
+       }
+       else{
+         this.flagChange=false;
+         this.storageservice.dismissLoading();
+       } 
+   }); 
+  
+    event.target.complete();
+  }
 }
 
   //back button
