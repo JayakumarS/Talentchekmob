@@ -21,6 +21,11 @@ export class IndivAlumniListPage implements OnInit {
   currentUserId:any;
   currentUserName:any;
   title:string;
+  mySlicedArray = [];
+  talentId: string;
+  flagChange:boolean=false;
+  onitalentIdCorporate: any;
+  onitalentIdStudent: any;
 
   constructor(private route: ActivatedRoute,private fb: FormBuilder,public storageservice: StorageService,
     public alertController: AlertController,public modalController: ModalController,public router:Router) {
@@ -30,7 +35,8 @@ export class IndivAlumniListPage implements OnInit {
       fos: [""],
       locationValue : [""],
       graduationYear: [""],
-      talentId:[""]
+      talentId:[""],
+      offset:[""],
     });
 
 
@@ -39,7 +45,8 @@ export class IndivAlumniListPage implements OnInit {
       department: [""],
       locationValue : [""],
       graduationYear: [""],
-      talentId:[""]
+      talentId:[""],
+      offset:[""],
     });
 
 
@@ -55,12 +62,14 @@ export class IndivAlumniListPage implements OnInit {
             this.title = 'Corporate Alumni';
 
             this.getCorporate(params.onitalentId);
+            this.onitalentIdCorporate=params.onitalentId;
           }
           else if(params['oniType'] == 'edu'){
 
             this.title = 'Student Alumni';
 
             this.getStudentNetwork(params.onitalentId);
+            this.onitalentIdStudent=params.onitalentId;
           }
           
         }
@@ -72,36 +81,110 @@ export class IndivAlumniListPage implements OnInit {
   }
 
   getCorporate(onitalentId){
+    let offset = 0;
     this.storageservice.showLoading();
     this.corporateNetwork.patchValue({
       'talentId' : onitalentId,
+      'offset':offset,
 
     })
 
-    var corporateAlumniListURL = "api/auth/app/Network/getCorporateNetworkList";
+    var corporateAlumniListURL = "api/auth/app/Network/getCorporateNetworkListMob";
     this.storageservice.get(corporateAlumniListURL,this.corporateNetwork.value).subscribe(data => {
     console.log(data);
      if(data['success'] == true){
       this.commonList = data['corporateNetworkList'];
+      this.mySlicedArray = this.commonList;
+         console.log(this.mySlicedArray);
+         this.flagChange =true;
       this.storageservice.dismissLoading();
      }
     });
+  }
+//offset
+  loadMore(event){
+    let length2 = 0;
+    if(this.mySlicedArray.length != 0){
+      let length = this.mySlicedArray.length;
+      length2 = length
+      console.log(length2)
+
+    if(this.title=='Corporate Alumni')
+    {
+      this.corporateNetwork.patchValue({
+        'talentId' : this.onitalentIdCorporate,
+        'offset':length2,
+  
+      })
+      var corporateAlumniListURL = "api/auth/app/Network/getCorporateNetworkListMob";
+      this.storageservice.get(corporateAlumniListURL,this.corporateNetwork.value).subscribe(data => {
+        this.commonList = data['corporateNetworkList'];
+        if(this.commonList.length>=1){
+          this.mySlicedArray=this.mySlicedArray.concat(this.commonList);
+         
+         this.flagChange =true;
+         this.storageservice.dismissLoading();
+         }
+         else{
+           this.flagChange=false;
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    }
+
+    else if(this.title=='Student Alumni')
+    {
+      this.studentNetwork.patchValue({
+        'talentId' : this.onitalentIdStudent,
+        'offset':length2,
+  
+      })
+
+      var studentAlumniListURL = "api/auth/app/Network/getStudentNetworkListMob";
+      this.storageservice.get(studentAlumniListURL,this.studentNetwork.value).subscribe(data => {
+      console.log(data);
+      this.commonList = data['studentNetworkList'];
+        if(this.commonList.length>=1){
+          this.mySlicedArray=this.mySlicedArray.concat(this.commonList);
+         
+         this.flagChange =true;
+         this.storageservice.dismissLoading();
+         }
+         else{
+           this.flagChange=false;
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    }
+
+    
+      
+      
+      
+    
+      event.target.complete();
+    }
   }
 
   
 
   getStudentNetwork(onitalentId){
+    let offset = 0;
     this.storageservice.showLoading();
     this.studentNetwork.patchValue({
       'talentId' : onitalentId,
+      'offset': offset,
 
     });
 
-    var studentAlumniListURL = "api/auth/app/Network/getStudentNetworkList";
+    var studentAlumniListURL = "api/auth/app/Network/getStudentNetworkListMob";
     this.storageservice.get(studentAlumniListURL,this.studentNetwork.value).subscribe(data => {
     console.log(data);
      if(data['success'] == true){
       this.commonList = data['studentNetworkList'];
+      this.mySlicedArray = this.commonList;
+         console.log(this.mySlicedArray);
+         this.flagChange =true;
       this.storageservice.dismissLoading();
      }
     });
