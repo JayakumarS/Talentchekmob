@@ -43,10 +43,17 @@ export class HomePage implements OnInit {
    // this.translate.setDefaultLang(this.langSelected);
 
 
-   
-
    this.selectedLang  = localStorage.getItem('selectedLang');
-   this.languageService.setLanguage(this.selectedLang);
+   if(this.selectedLang=="null")
+   {
+     this.languageService.setLanguage('en');
+   }
+   else{
+     this.languageService.setLanguage(this.selectedLang);
+   }
+
+  //  this.selectedLang  = localStorage.getItem('selectedLang');
+  //  this.languageService.setLanguage(this.selectedLang);
     
 
     this.router.events.subscribe(event => {

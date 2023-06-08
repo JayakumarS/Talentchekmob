@@ -26,8 +26,17 @@ export class InstitutionDashboardPage implements OnInit {
   constructor(private languageService: LanguageService,public router:Router,public storageservice: StorageService,private translate: TranslateService,) { }
 
   ngOnInit() {
+
+    // this.selectedLang  = localStorage.getItem('selectedLang');
+    // this.languageService.setLanguage(this.selectedLang);
     this.selectedLang  = localStorage.getItem('selectedLang');
-    this.languageService.setLanguage(this.selectedLang);
+    if(this.selectedLang=="null")
+    {
+      this.languageService.setLanguage('en');
+    }
+    else{
+      this.languageService.setLanguage(this.selectedLang);
+    }
     this.translate.setDefaultLang('en');
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/institution-dashboard') {
