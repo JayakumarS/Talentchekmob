@@ -43,9 +43,11 @@ export class ProfileViewPage implements OnInit {
   profAvatar: boolean = false;
   connectionList: any;
   fromAddPage: any;
+  talentId: any;
+  public myValue: string;
   expertiseFull: boolean = false;
   constructor(public router: Router, private ngZone: NgZone, public route: ActivatedRoute, public storageservice: StorageService, private elementRef: ElementRef,
-    public modalController: ModalController, public alertController: AlertController,public languageService:LanguageService) {
+    public modalController: ModalController, public alertController: AlertController, public languageService: LanguageService) {
 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
@@ -108,9 +110,9 @@ export class ProfileViewPage implements OnInit {
       console.log(result);
       this.storageservice.showLoading();
 
-      // if (result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null) {
-      //   this.educationcard = true;
-      // }
+      if (result['profileViewList'][0].educationList.length != 0 && result['profileViewList'] != null) {
+        this.educationcard = true;
+      }
       if (result['profileViewList'][0].clubsList.length != 0 && result['profileViewList'] != null) {
         this.clubscard = true;
       }
@@ -157,7 +159,10 @@ export class ProfileViewPage implements OnInit {
       this.mobile = result['profileViewList'][0]['phone'];
       this.email = result['profileViewList'][0]['email'];
       this.language = result['profileViewList'][0]['languages'];
-
+      this.talentId = result['profileViewList'][0]['talentId'];
+      console.log(this.talentId)
+      this.myValue = this.talentId;
+      console.log(this.myValue)
 
       //skills
       this.skillList = result['profileViewList'][0].skillList;
@@ -236,6 +241,8 @@ export class ProfileViewPage implements OnInit {
       this.mobile = result['profileViewList'][0]['phone'];
       this.email = result['profileViewList'][0]['email'];
       this.language = result['profileViewList'][0]['languages'];
+
+
 
 
       //skills
@@ -770,6 +777,22 @@ export class ProfileViewPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+
+
+  ViewPdf(value: string): void {
+
+    const obj = {
+      currentUserId: value
+    }
+    var viewExportPDFUrl = "api/auth/app/mobile/viewExportPdf";
+    this.storageservice.postrequest(viewExportPDFUrl, obj).subscribe(async result => {
+      if (result == true) {
+        this.storageservice.successToast('Deleted successfully');
+      }
+
+    });
   }
 
   // footer
