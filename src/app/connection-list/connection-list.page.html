@@ -1,68 +1,83 @@
-
 <ion-header>
-  <ion-toolbar>
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="text-align: right;margin: 0px 0px 0px 5px;">
-            <ion-col size="2" *ngIf="RoleID.includes('1')">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
-          <ion-col size="2" *ngIf="RoleID.includes('2')">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="newOrgprofileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
-          <ion-col size="2" *ngIf="RoleID.includes('3')">
-              <ion-icon size="large" name="arrow-back-circle-outline" (click)="newInstiprofileView()" style="margin-top:21%"></ion-icon>
-          </ion-col>
-          </div>
-          <div style="text-align: center;display: contents;">
-              <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Connection-List' | translate}}</ion-title>
-          </div>
-      </div>
-  </ion-toolbar>
+    <ion-toolbar>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-col size="2" *ngIf="RoleID.includes('1')">
+                    <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()"
+                        style="margin-top:21%"></ion-icon>
+                </ion-col>
+                <ion-col size="2" *ngIf="RoleID.includes('2')">
+                    <ion-icon size="large" name="arrow-back-circle-outline" (click)="newOrgprofileView()"
+                        style="margin-top:21%"></ion-icon>
+                </ion-col>
+                <ion-col size="2" *ngIf="RoleID.includes('3')">
+                    <ion-icon size="large" name="arrow-back-circle-outline" (click)="newInstiprofileView()"
+                        style="margin-top:21%"></ion-icon>
+                </ion-col>
+            </div>
+            <div style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Connection-List' |
+                    translate}}</ion-title>
+            </div>
+        </div>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
 
 
-  <div >
+    <div>
 
-    <br>
-   
-    <!-- <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
+        <br>
+
+        <!-- <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
     justify-content: space-around;">&nbsp;&nbsp;&nbsp;Matched Profiles </span> -->
 
-    <ion-card class="profilesearchcard" (click)="profileView(x.connectionid,x.accounttype,x.connectionName)" *ngFor="let x of mySlicedArray" >
-        <ion-card-content style="padding-bottom: 0px;"  >
+        <ion-card class="profilesearchcard" (click)="profileView(x.connectionid,x.accounttype,x.connectionName)"
+            *ngFor="let x of mySlicedArray">
+            <ion-card-content style="padding-bottom: 0px;">
 
-            <ion-row>
-                <ion-col size="2">
-                    <ion-avatar size="medium"  >
-                     
-                        <img alt="" style=" height: 80%;width: 80%;" src="{{x.profilepic}}" />
-                    </ion-avatar>
-                    <!-- <ion-avatar size="medium" *ngIf="x.connectionImg == null">
+                <ion-row>
+                    <ion-col size="3">
+                        <ion-avatar size="medium">
+
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{x.profilepic}}" />
+                        </ion-avatar>
+                        <!-- <ion-avatar size="medium" *ngIf="x.connectionImg == null">
                         <img style=" height: 60%;width: 60%;"  src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                     </ion-avatar> -->
-                </ion-col>
+                    </ion-col>
 
-                <ion-col size="10">
+                    <!-- <ion-col size="10">
                     <ion-title style="font-family:  Mr-eaves; font-size: 18px;">{{x.connectionName}} </ion-title>
-                </ion-col>
+                </ion-col> -->
 
+                    <ion-col size="9">
+                        <ion-title style="text-align: start;padding:0px;align-items: baseline;">
+                            <div class="ion-text-wrap"
+                                style="font-family:  Mr-eaves; font-size: 18px; text-align: start;">
+                                {{x.connectionName}}</div>
+                        </ion-title>
+                        <div style="padding-top: 20px;">
+                            <p class="ion-text-wrap" style="word-wrap: normal; width: 140%;padding-top: 10px;">
+                                {{x.relationship}}</p>
 
-            </ion-row>
+                        </div>
+                    </ion-col>
+                </ion-row>
 
-            <ion-row>
+                <!-- <ion-row>
                 <ion-col size="2">
                 </ion-col>
                 <ion-col size="10" style="    margin-top: -13%;">
                     <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
                         {{x.relationship}}</ion-title>
                 </ion-col>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-</div>
- <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-</ion-infinite-scroll> 
+            </ion-row> -->
+            </ion-card-content>
+        </ion-card>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>
