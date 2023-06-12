@@ -38,7 +38,7 @@ export class ConnectionPage implements OnInit {
 
   stars: number[] = [1, 2, 3, 4, 5];
   selectedValue: number;
-  receiverRegistered: boolean;
+  receiverRegistered: any;
   Message: any;
   connectionBean: any;
   username: string;
@@ -164,12 +164,14 @@ export class ConnectionPage implements OnInit {
           'receiverTalentId': result["connectionBean"].receiverTalentId,
           'receiverName': result["connectionBean"].receiverName,
           'receiverEmailId': result["connectionBean"].receiverEmailId,
+          'receiverRegistered': 'true'
 
         })
       } else if (result["success"] == false) {
         this.ConnectionsForm.patchValue({
           'receiverName': null,
           'receiverEmailId': null,
+          'receiverRegistered': 'false'
         })
         this.receiverRegistered = false;
         this.Message = result["message"]
@@ -330,55 +332,54 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    } if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
+      this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+
+      this.ConnectionsForm.value.currentUserId = this.userId;
+      this.ConnectionsForm.value.currentUserName = this.username
+      this.Connection = this.ConnectionsForm.value;
+      console.log(` data: ${JSON.stringify(this.Connection)}`);
+      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
+
+        if (result["isSuccess"] == true) {
+          this.presentToast2()
+        }
+        else if (result["isSuccess"] == false) {
+          var message = result["message"];
+
+          "message"
+
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+      });
+
+    } else {
+      this.ConnectionsForm.value.currentUserId = this.userId;
+      this.ConnectionsForm.value.currentUserName = this.username
+      this.Connection = this.ConnectionsForm.value;
+      console.log(` data: ${JSON.stringify(this.Connection)}`);
+      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
+
+        if (result["isSuccess"] == true) {
+          this.presentToast2()
+        }
+        else if (result["isSuccess"] == false) {
+          var message = result["message"];
+
+          "message"
+
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+      });
     }
-    //    if(this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != ""){
-    //   this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
-
-    //   this.ConnectionsForm.value.currentUserId=this.userId;
-    //   this.ConnectionsForm.value.currentUserName = this.username
-    //   this.Connection = this.ConnectionsForm.value;
-    //   console.log(` data: ${JSON.stringify(this.Connection)}`);
-    //   var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
-
-    //    this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
-
-    //      if (result["isSuccess"] == true) { 
-    //       this.presentToast2()
-    //       }
-    //       else if (result["isSuccess"] == false) {
-    //         var message = result["message"];
-
-    //           "message" 
-
-    //         // this.showNotification('snackbar-danger',result['msg'],'top','Right');
-    //         this.storageservice.warningToast(message);
-    //         //this.hideLoadingIndicator(); //Hide loading indicator
-    //       }
-    //    });
-
-    // }else{
-    // this.ConnectionsForm.value.currentUserId=this.userId;
-    // this.ConnectionsForm.value.currentUserName = this.username
-    // this.Connection = this.ConnectionsForm.value;
-    // console.log(` data: ${JSON.stringify(this.Connection)}`);
-    // var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
-
-    //  this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {  
-
-    //    if (result["isSuccess"] == true) { 
-    //     this.presentToast2()
-    //     }
-    //     else if (result["isSuccess"] == false) {
-    //       var message = result["message"];
-
-    //         "message" 
-
-    //       // this.showNotification('snackbar-danger',result['msg'],'top','Right');
-    //       this.storageservice.warningToast(message);
-    //       //this.hideLoadingIndicator(); //Hide loading indicator
-    //     }
-    //  });
-    // }
   }
   async presentToast2() {
     const toast = await this.toastController.create({
@@ -425,64 +426,63 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    } if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
+      this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+      this.ConnectionsForm.value.currentUserId = this.userId;
+      this.ConnectionsForm.value.currentUserName = this.username
+      this.Connection = this.ConnectionsForm.value;
+      console.log(` data: ${JSON.stringify(this.Connection)}`);
+      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
+
+        if (result["isSuccess"] == true) {
+          // setTimeout(() => {
+          //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+          //  profilePage.updateData();
+          // }, 800);
+          this.presentToast3()
+        }
+        else if (result["isSuccess"] == false) {
+          var message = result["message"];
+
+          "message"
+
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+      });
+
+    } else {
+
+
+      this.ConnectionsForm.value.currentUserId = this.userId;
+      this.ConnectionsForm.value.currentUserName = this.username
+      this.Connection = this.ConnectionsForm.value;
+      console.log(` data: ${JSON.stringify(this.Connection)}`);
+      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
+
+        if (result["isSuccess"] == true) {
+          // setTimeout(() => {
+          //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+          //  profilePage.updateData();
+          // }, 800);
+          this.presentToast3()
+        }
+        else if (result["isSuccess"] == false) {
+          var message = result["message"];
+
+          "message"
+
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+      });
     }
-    //  if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
-    //   this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
-    //   this.ConnectionsForm.value.currentUserId = this.userId;
-    //   this.ConnectionsForm.value.currentUserName = this.username
-    //   this.Connection = this.ConnectionsForm.value;
-    //   console.log(` data: ${JSON.stringify(this.Connection)}`);
-    //   var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
-
-    //   this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
-    //     if (result["isSuccess"] == true) {
-    //       // setTimeout(() => {
-    //       //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-    //       //  profilePage.updateData();
-    //       // }, 800);
-    //       this.presentToast3()
-    //     }
-    //     else if (result["isSuccess"] == false) {
-    //       var message = result["message"];
-
-    //       "message"
-
-    //       // this.showNotification('snackbar-danger',result['msg'],'top','Right');
-    //       this.storageservice.warningToast(message);
-    //       //this.hideLoadingIndicator(); //Hide loading indicator
-    //     }
-    //   });
-
-    // } else {
-
-
-    //   this.ConnectionsForm.value.currentUserId = this.userId;
-    //   this.ConnectionsForm.value.currentUserName = this.username
-    //   this.Connection = this.ConnectionsForm.value;
-    //   console.log(` data: ${JSON.stringify(this.Connection)}`);
-    //   var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
-
-    //   this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
-    //     if (result["isSuccess"] == true) {
-    //       // setTimeout(() => {
-    //       //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-    //       //  profilePage.updateData();
-    //       // }, 800);
-    //       this.presentToast3()
-    //     }
-    //     else if (result["isSuccess"] == false) {
-    //       var message = result["message"];
-
-    //       "message"
-
-    //       // this.showNotification('snackbar-danger',result['msg'],'top','Right');
-    //       this.storageservice.warningToast(message);
-    //       //this.hideLoadingIndicator(); //Hide loading indicator
-    //     }
-    //   });
-    // }
   }
   async presentToast3() {
     const toast = await this.toastController.create({
