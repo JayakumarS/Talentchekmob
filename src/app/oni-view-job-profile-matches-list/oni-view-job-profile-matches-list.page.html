@@ -134,27 +134,38 @@
             <ion-card-content style="padding-bottom: 0px;">
 
                 <ion-row>
-                    <ion-col size="2">
+                    <ion-col size="3">
                         <ion-avatar size="medium">
                             <img alt="" style=" height: 80%;width: 80%;" src="{{profile.profileimg}}" />
                         </ion-avatar>
                     </ion-col>
 
-                    <ion-col size="10">
+                    <!-- <ion-col size="10">
                         <ion-title style="font-family: Mr-eaves; font-size: 18px;">{{profile.jobseekername}}</ion-title>
+                    </ion-col> -->
+
+                    <ion-col size="9">
+                        <ion-title style="text-align: start;padding:0px;align-items: baseline;">
+                            <div class="ion-text-wrap"
+                                style="font-family:  Mr-eaves; font-size: 18px; text-align: start;">
+                                {{profile.jobseekername}}</div>
+                        </ion-title>
+                        <div style="padding-top: 20px;">
+                            <p class="ion-text-wrap" style="word-wrap: normal; width: 140%;padding-top: 10px;">
+                                {{profile.receivedformat}}</p>
+
+                        </div>
                     </ion-col>
-
-
                 </ion-row>
 
-                <ion-row>
+                <!-- <ion-row>
                     <ion-col size="2">
                     </ion-col>
                     <ion-col size="10" style="    margin-top: -13%;">
                         <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
                             {{profile.receivedformat}}</ion-title>
                     </ion-col>
-                </ion-row>
+                </ion-row> -->
             </ion-card-content>
         </ion-card>
     </div>
