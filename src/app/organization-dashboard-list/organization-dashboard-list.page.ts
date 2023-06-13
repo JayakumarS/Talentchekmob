@@ -30,6 +30,7 @@ export class OrganizationDashboardListPage implements OnInit {
   currentUserName:any;
   // mySlicedArray:[];
   mySlicedArray: string[] = [];
+  mySlicedArray1: string[] = [];
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
     public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) {
@@ -156,8 +157,8 @@ loadMore(event){
     if (params) {
   if(params.btntype == "applicants")
   {
-    if(this.mySlicedArray.length != 0){
-      let length = this.mySlicedArray.length;
+    if(this.mySlicedArray1.length != 0){
+      let length = this.mySlicedArray1.length;
       length2 = length
       console.log(length2)
       var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + length2;
@@ -165,7 +166,7 @@ loadMore(event){
    
         this.applicantsList = result['jobsDashboardList'];
         if(this.applicantsList.length>=1){
-          this.mySlicedArray=this.mySlicedArray.concat(this.applicantsList);
+          this.mySlicedArray1=this.mySlicedArray1.concat(this.applicantsList);
          
          
          this.storageservice.dismissLoading();
@@ -224,7 +225,7 @@ loadMore(event){
     if(result['success'] == true){
     this.storageservice.dismissLoading();
     this.applicantsList = result['jobsDashboardList'];
-    this.mySlicedArray = this.applicantsList;
+    this.mySlicedArray1 = this.applicantsList;
     this.oniList=[];
     this.storageservice.dismissLoading();
     
