@@ -16,27 +16,27 @@ export class OrganizationDashboardListPage implements OnInit {
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
-     event.target.complete();
+      event.target.complete();
     }, 2000);
- }
+  }
 
-  public title : string ;
+  public title: string;
   userId: string;
   creditPoints: any;
-  oniList:[];
-  applicantsList:[];
+  oniList: [];
+  applicantsList: [];
   roleId: any;
-  currentUserId:any;
-  currentUserName:any;
+  currentUserId: any;
+  currentUserName: any;
   // mySlicedArray:[];
   mySlicedArray: string[] = [];
 
-  constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
-    public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) {
+  constructor(public router: Router, private route: ActivatedRoute, public modalController: ModalController,
+    public storageservice: StorageService, public alertController: AlertController, private languageService: LanguageService) {
 
-        
-    this.userId = localStorage.getItem("userId")  ; 
-    this.creditPoints = localStorage.getItem("creditPoints") ;
+
+    this.userId = localStorage.getItem("userId");
+    this.creditPoints = localStorage.getItem("creditPoints");
     this.roleId = localStorage.getItem("roleId");
     this.currentUserId = localStorage.getItem("userId");
     this.currentUserName = localStorage.getItem("userName");
@@ -44,14 +44,13 @@ export class OrganizationDashboardListPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       if (params) {
-  
+
         if (params != null) {
 
           console.log(params);
           this.title = params.title;
 
-          if(params.btntype == "applicants")
-          {
+          if (params.btntype == "applicants") {
             console.log(params)
             this.getAllApplicantList();
           }
@@ -60,18 +59,18 @@ export class OrganizationDashboardListPage implements OnInit {
           //   console.log(params)
           //   this.getReferralList();
           // }
-          else{            
+          else {
             this.getAllList(params.btntype);
           }
 
-          
+
         }
       }
     });
-   }
+  }
 
   ngOnInit() {
-    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url.split('?')[0] === '/organization-dashboard-list') {
@@ -87,170 +86,167 @@ export class OrganizationDashboardListPage implements OnInit {
     this.selectedTab = tabName;
   }
 
-  getAllList(btntype){
+  getAllList(btntype) {
     this.storageservice.showLoading();
     let offset = 0;
-    if(btntype=="referrals")
-    {
-      var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId="+this.userId+"&offset="+offset;
+    if (btntype == "referrals") {
+      var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId=" + this.userId + "&offset=" + offset;
       this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
-  
-        if(result['success'] == true) {
-          this.storageservice.dismissLoading();  
-        this.oniList = result['referralsDashboardList'];
-        this.mySlicedArray = this.oniList;
-        this.storageservice.dismissLoading();
-        this.applicantsList=[];
-        console.log(result); 
-  
-  }
-  
-          });
+
+        if (result['success'] == true) {
+          this.storageservice.dismissLoading();
+          this.oniList = result['referralsDashboardList'];
+          this.mySlicedArray = this.oniList;
+          this.storageservice.dismissLoading();
+          this.applicantsList = [];
+          console.log(result);
+
+        }
+
+      });
 
     }
-    else
-    {
-      var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId="+this.userId+"&selectedType="+btntype+"&offset="+offset;
+    else {
+      var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId=" + this.userId + "&selectedType=" + btntype + "&offset=" + offset;
       this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
-  
-        if(result['success'] == true) {
-          this.storageservice.dismissLoading();  
-        this.oniList = result['oniDashboardList'];
-        this.mySlicedArray = this.oniList;
-        this.storageservice.dismissLoading();
-        this.applicantsList=[];
-        console.log(result); 
-  
-  }
-  
-          });
-    }
-   
-}
 
-// getReferralList()
-// {
+        if (result['success'] == true) {
+          this.storageservice.dismissLoading();
+          this.oniList = result['oniDashboardList'];
+          this.mySlicedArray = this.oniList;
+          this.storageservice.dismissLoading();
+          this.applicantsList = [];
+          console.log(result);
 
-//   this.storageservice.showLoading();
-//   let offset = 0;
-//   var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId="+this.userId+"&offset="+offset;
-//   this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+        }
 
-//     if(result['success'] == true) {
-//       this.storageservice.dismissLoading();  
-//     this.oniList = result['oniDashboardList'];
-//     this.mySlicedArray = this.oniList;
-//     this.storageservice.dismissLoading();
-//     this.applicantsList=[];
-//     console.log(result); 
-
-// }
-
-//       });
-
-// }
-
-loadMore(event){
-  let length2 = 0;
-  this.route.queryParams.subscribe(params => {
-    if (params) {
-  if(params.btntype == "applicants")
-  {
-    if(this.mySlicedArray.length != 0){
-      let length = this.mySlicedArray.length;
-      length2 = length
-      console.log(length2)
-      var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + length2;
-      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
-   
-        this.applicantsList = result['jobsDashboardList'];
-        if(this.applicantsList.length>=1){
-          this.mySlicedArray=this.mySlicedArray.concat(this.applicantsList);
-         
-         
-         this.storageservice.dismissLoading();
-         }
-         else{
-          
-           this.storageservice.dismissLoading();
-         } 
-     }); 
-    
-      event.target.complete();
-    }
-  }
-  else{
-   
-    if(this.mySlicedArray.length != 0){
-      let length = this.mySlicedArray.length;
-      length2 = length
-      console.log(length2)
-      var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId="+this.userId+"&selectedType="+params.btntype+ "&offset=" + length2;
-   
-      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
- 
-        this.oniList = result['oniDashboardList'];
-        if(this.oniList.length>=1){
-          this.mySlicedArray=this.mySlicedArray.concat(this.oniList);
-         
-         
-         this.storageservice.dismissLoading();
-         }
-         else{
-          
-           this.storageservice.dismissLoading();
-         } 
-     }); 
-    
-      event.target.complete();
+      });
     }
 
   }
-}
-});
-  
-  
-}
- 
+
+  // getReferralList()
+  // {
+
+  //   this.storageservice.showLoading();
+  //   let offset = 0;
+  //   var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId="+this.userId+"&offset="+offset;
+  //   this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+
+  //     if(result['success'] == true) {
+  //       this.storageservice.dismissLoading();  
+  //     this.oniList = result['oniDashboardList'];
+  //     this.mySlicedArray = this.oniList;
+  //     this.storageservice.dismissLoading();
+  //     this.applicantsList=[];
+  //     console.log(result); 
+
+  // }
+
+  //       });
+
+  // }
+
+  loadMore(event) {
+    let length2 = 0;
+    this.route.queryParams.subscribe(params => {
+      if (params) {
+        if (params.btntype == "applicants") {
+          if (this.mySlicedArray.length != 0) {
+            let length = this.mySlicedArray.length;
+            length2 = length
+            console.log(length2)
+            var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId=" + this.userId + "&offset=" + length2;
+            this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+
+              this.applicantsList = result['jobsDashboardList'];
+              if (this.applicantsList.length >= 1) {
+                this.mySlicedArray = this.mySlicedArray.concat(this.applicantsList);
 
 
-  getAllApplicantList(){
+                this.storageservice.dismissLoading();
+              }
+              else {
+
+                this.storageservice.dismissLoading();
+              }
+            });
+
+            event.target.complete();
+          }
+        }
+        else {
+
+          if (this.mySlicedArray.length != 0) {
+            let length = this.mySlicedArray.length;
+            length2 = length
+            console.log(length2)
+            var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId=" + this.userId + "&selectedType=" + params.btntype + "&offset=" + length2;
+
+            this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+
+              this.oniList = result['oniDashboardList'];
+              if (this.oniList.length >= 1) {
+                this.mySlicedArray = this.mySlicedArray.concat(this.oniList);
+
+
+                this.storageservice.dismissLoading();
+              }
+              else {
+
+                this.storageservice.dismissLoading();
+              }
+            });
+
+            event.target.complete();
+          }
+
+        }
+      }
+    });
+
+
+  }
+
+
+
+  getAllApplicantList() {
 
     //api/auth/app/dashboard/jobsDashboardList
     this.storageservice.showLoading();
     let offset = 0;
-    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + offset;
+    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId=" + this.userId + "&offset=" + offset;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
-    if(result['success'] == true){
-    this.storageservice.dismissLoading();
-    this.applicantsList = result['jobsDashboardList'];
-    this.mySlicedArray = this.applicantsList;
-    this.oniList=[];
-    this.storageservice.dismissLoading();
-    
-    console.log(result); 
-}
-     
-        });
+      if (result['success'] == true) {
+        this.storageservice.dismissLoading();
+        this.applicantsList = result['jobsDashboardList'];
+        this.mySlicedArray = this.applicantsList;
+        this.oniList = [];
+        this.storageservice.dismissLoading();
+
+        console.log(result);
+      }
+
+    });
   }
 
 
-  async applicantProfileView(talentId){
+  async applicantProfileView(talentId) {
 
     const modal = await this.modalController.create({
       component: ProfileViewPopupPage,
       cssClass: 'my-custom-class',
       componentProps: {
         "talentId": talentId,
-     }
-  });
-}
+      }
+    });
+  }
 
 
-  async profileView(talentId,accounttype,username) {
+  async profileView(talentId, accounttype, username) {
 
 
-    if(this.creditPoints >=2 ){
+    if (this.creditPoints < 2) {
 
       {
         let alert = await this.alertController.create({
@@ -262,7 +258,7 @@ loadMore(event){
               text: '',
               role: 'cancel',
               handler: () => {
-               console.log('Confirm Cancel');
+                console.log('Confirm Cancel');
               }
             },
             {
@@ -274,10 +270,10 @@ loadMore(event){
                   this.router.navigate(['/subscription-individual']);
                 } else if (this.roleId.includes('2')) {
                   this.router.navigate(['/subscription-insorg']);
-                } else if (this.roleId.includes( '3')) {
+                } else if (this.roleId.includes('3')) {
                   this.router.navigate(['/subscription-insorg']);
                 }
-             //   console.log('Confirm Cancel');
+                //   console.log('Confirm Cancel');
               }
             }
           ]
@@ -285,85 +281,85 @@ loadMore(event){
         await alert.present();
       }
     }
-    else if(accounttype == "private"){
-     this.PrivateUserAccTypeAlert();
+    else if (accounttype == "private") {
+      this.PrivateUserAccTypeAlert();
     }
-    else if (accounttype == "on demand"){
-    
-    // this.OnDemandUserAccTypeAlert(talentId);
-    this.checkOnDemandUserProp(talentId,username);
+    else if (accounttype == "on demand") {
+
+      // this.OnDemandUserAccTypeAlert(talentId);
+      this.checkOnDemandUserProp(talentId, username);
     }
-    else{
+    else {
 
-     const modal = await this.modalController.create({
-       component: ProfileViewPopupPage,
-       cssClass: 'my-custom-class',
-       componentProps: {
-         "talentId": talentId,
-      }
-     });
+      const modal = await this.modalController.create({
+        component: ProfileViewPopupPage,
+        cssClass: 'my-custom-class',
+        componentProps: {
+          "talentId": talentId,
+        }
+      });
 
-     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
+      modal.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null) {
 
-         //#region Getting values from popup
-         console.table("One: " + dataReturned);
-         //#endregion
+          //#region Getting values from popup
+          console.table("One: " + dataReturned);
+          //#endregion
 
-      }
-     });
+        }
+      });
 
-    return await modal.present();
+      return await modal.present();
     }
   }
 
 
-  checkOnDemandUserProp(action1,username){
+  checkOnDemandUserProp(action1, username) {
 
-    let onDemandUrl =  "api/auth/app/profileLookUp/onDemandRequest?currentUserId="+this.currentUserId+"&approvedId="+action1;
+    let onDemandUrl = "api/auth/app/profileLookUp/onDemandRequest?currentUserId=" + this.currentUserId + "&approvedId=" + action1;
 
     this.storageservice.getrequest(onDemandUrl).subscribe(async result => {
-      
+
       console.log(result);
 
 
-      if(result["success"] == true){
+      if (result["success"] == true) {
 
-        if(result["onDemandStatus"] == "showrequestpopup"){
+        if (result["onDemandStatus"] == "showrequestpopup") {
 
-          this.OnDemandUserAccTypeAlert(action1,username);
+          this.OnDemandUserAccTypeAlert(action1, username);
         }
-        else if(result["onDemandStatus"] == "requested"){
+        else if (result["onDemandStatus"] == "requested") {
 
-         let message = "Awaiting access permission from user.";
-         this.OndemandAccTypeAlert(message);
+          let message = "Awaiting access permission from user.";
+          this.OndemandAccTypeAlert(message);
 
         }
 
-        else if(result["onDemandStatus"] == "true"){
+        else if (result["onDemandStatus"] == "true") {
 
           const modal = await this.modalController.create({
             component: ProfileViewPopupPage,
             cssClass: 'my-custom-class',
             componentProps: {
               "talentId": action1,
-           }
+            }
           });
-     
+
           modal.onDidDismiss().then((dataReturned) => {
-           if (dataReturned !== null) {
-     
+            if (dataReturned !== null) {
+
               //#region Getting values from popup
               console.table("One: " + dataReturned);
               //#endregion
-     
-           }
+
+            }
           });
-     
-         return await modal.present();
+
+          return await modal.present();
         }
 
-        else if(result["onDemandStatus"] == "false"){
+        else if (result["onDemandStatus"] == "false") {
 
           let message = "Access to view profile denied by user."
 
@@ -372,7 +368,7 @@ loadMore(event){
         }
       }
 
-   });
+    });
 
   }
 
@@ -398,7 +394,7 @@ loadMore(event){
   }
 
 
-  async OnDemandUserAccTypeAlert(talentId,userName) {
+  async OnDemandUserAccTypeAlert(talentId, userName) {
     let alert = await this.alertController.create({
       header: 'Alert!',
       message: 'Please send a request to view full profile.',
@@ -422,28 +418,28 @@ loadMore(event){
             console.log("Id: " + talentId);
 
             var postData = {
-              "talentid":talentId,
-              "username":userName,
-              "currentUserId":this.currentUserId,
-              "currentUserName":this.currentUserName
+              "talentid": talentId,
+              "username": userName,
+              "currentUserId": this.currentUserId,
+              "currentUserName": this.currentUserName
             }
 
 
-            let onDemandUrl =  "api/auth/app/profileLookUp/saveOnDemand";
+            let onDemandUrl = "api/auth/app/profileLookUp/saveOnDemand";
 
-             this.storageservice.postrequest(onDemandUrl,postData).subscribe(async result => {
-      
-             console.log(result);
+            this.storageservice.postrequest(onDemandUrl, postData).subscribe(async result => {
 
-             if (result['success']== true){
+              console.log(result);
 
-              this.storageservice.generalAlertToast("View Access Requested!");
-             }
-             else if (result['success']== false){
+              if (result['success'] == true) {
 
-              this.storageservice.generalAlertToast("Access Request Failed!");
-             }
-             });
+                this.storageservice.generalAlertToast("View Access Requested!");
+              }
+              else if (result['success'] == false) {
+
+                this.storageservice.generalAlertToast("Access Request Failed!");
+              }
+            });
 
           }
         }
@@ -475,26 +471,26 @@ loadMore(event){
     await alert.present();
   }
 
-  goto_orgHome(){
+  goto_orgHome() {
 
     this.router.navigate(['/organization-dashboard']);
   }
 
   // footer nav
 
-  goto_profileSearch(){
+  goto_profileSearch() {
     this.router.navigate(['/job-search']);
   }
-  goto_jobs(){
+  goto_jobs() {
     this.router.navigate(['/oni-job-post-list']);
   }
-  goto_home(){
+  goto_home() {
     this.router.navigate(['/organization-dashboard']);
   }
-  goto_profile(){
+  goto_profile() {
     this.router.navigate(['/org-profile-view']);
   }
-  goto_more(){
+  goto_more() {
     this.router.navigate(['/settings']);
   }
 
