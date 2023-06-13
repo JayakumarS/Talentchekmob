@@ -34,7 +34,7 @@
     </ion-refresher>
 
     <form>
-        <div class="display-justify" *ngFor="let cElement of oniList" (click)="profileView(cElement.talentid)">
+        <div class="display-justify" *ngFor="let cElement of mySlicedArray1" (click)="profileView(cElement.talentid)">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
                 <ion-row>
@@ -66,7 +66,7 @@
             </ion-card>
         </div>
 
-        <div class="display-justify" *ngFor="let cElement of applicantsList" (click)="profileView(cElement.talentid)">
+        <div class="display-justify" *ngFor="let cElement of mySlicedArray" (click)="profileView(cElement.talentid)">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
                 <ion-row>
@@ -107,8 +107,11 @@
 
         </ion-row>
         <div style="display: flex;justify-content: center;" *ngIf="oniListCount == 0">No Results to Display</div>
+        
 
 
     </form>
-
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

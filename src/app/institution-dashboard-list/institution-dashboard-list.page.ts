@@ -29,7 +29,8 @@ export class InstitutionDashboardListPage implements OnInit {
   roleId: any;
   currentUserId:any;
   currentUserName:any;
-  
+  mySlicedArray: string[] = [];
+  mySlicedArray1: string[] = [];
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
     public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) { 
@@ -80,27 +81,121 @@ export class InstitutionDashboardListPage implements OnInit {
 
     //api/auth/app/dashboard/jobsDashboardList
     this.storageservice.showLoading();
-    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardList?currentUserId="+this.userId;
+    let offset = 0;
+    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + offset;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
-if(result['success'] == true){
+    if(result['success'] == true){
   this.storageservice.dismissLoading();
   this.applicantsList = result['jobsDashboardList'];
-  console.log(result); 
+  this.mySlicedArray = this.applicantsList;
+    this.oniList=[];
+    this.storageservice.dismissLoading();
+    
+    console.log(result); 
 }
      
         });
   }
 
+//load more//
+loadMore(event){
+  let length2 = 0;
+  this.route.queryParams.subscribe(params => {
+    if (params) {
+  if(params.btntype == "applicants")
+  {
+    if(this.mySlicedArray.length != 0){
+      let length = this.mySlicedArray.length;
+      length2 = length
+      console.log(length2)
+      var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + length2;
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+    
+        this.applicantsList = result['jobsDashboardList'];
+        if(this.applicantsList.length>=1){
+          this.mySlicedArray=this.mySlicedArray.concat(this.applicantsList);
+         
+         
+         this.storageservice.dismissLoading();
+         }
+         else{
+          
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    
+      event.target.complete();
+    }
+  }
+  else{
+   
+    if(this.mySlicedArray1.length != 0){
+      let length = this.mySlicedArray1.length;
+      length2 = length
+      console.log(length2)
+      var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId="+this.userId+"&selectedType="+params.btntype+ "&offset=" + length2;
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+  
+        this.oniList = result['oniDashboardList'];
+        if(this.oniList.length>=1){
+          this.mySlicedArray1=this.mySlicedArray1.concat(this.oniList);
+         
+         
+         this.storageservice.dismissLoading();
+         }
+         else{
+          
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    
+      event.target.complete();
+    }
+
+  }
+}
+});
+  
+  
+}
+//load more//
+
 
   getAllList(btntype): void {
- 
-    var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardList?currentUserId="+this.userId+"&selectedType="+btntype;
+    this.storageservice.showLoading();
+    let offset = 0;
+    if(btntype=="referrals")
+    {
+      var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId="+this.userId+"&offset="+offset;
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+  
+        if(result['success'] == true) {
+          this.storageservice.dismissLoading();  
+        this.oniList = result['referralsDashboardList'];
+        this.mySlicedArray1 = this.oniList;
+        this.storageservice.dismissLoading();
+        this.applicantsList=[];
+        console.log(result); 
+  
+  }
+  
+          });
+
+    }
+    else{
+
+    
+    var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId="+this.userId+"&selectedType="+btntype+ "&offset=" + offset;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
 
       this.oniList = result['oniDashboardList'];
+      this.mySlicedArray1 = this.oniList;
+      this.applicantsList=[];
+      this.storageservice.dismissLoading();
       this.oniListCount = result['oniDashboardList'].length;
            console.log(result); 
         });
+      }
 
   }
 

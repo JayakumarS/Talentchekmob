@@ -20,7 +20,7 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <form>
-        <div class="display-justify" *ngFor="let cElement of oniList" (click)="profileView(cElement.userid)">
+        <div class="display-justify" *ngFor="let cElement of mySlicedArray" (click)="profileView(cElement.userid)">
             <ion-card class="adv-card">
                 <ion-row>&nbsp;</ion-row>
                 <ion-row>
@@ -94,7 +94,9 @@
 
 
     </form>
-
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll> 
 </ion-content>
 
 

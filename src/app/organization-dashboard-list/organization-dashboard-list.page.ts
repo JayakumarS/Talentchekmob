@@ -28,6 +28,8 @@ export class OrganizationDashboardListPage implements OnInit {
   roleId: any;
   currentUserId:any;
   currentUserName:any;
+  // mySlicedArray:[];
+  mySlicedArray: string[] = [];
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
     public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) {
@@ -53,6 +55,11 @@ export class OrganizationDashboardListPage implements OnInit {
             console.log(params)
             this.getAllApplicantList();
           }
+          // else if(params.btntype == "referrals")
+          // {
+          //   console.log(params)
+          //   this.getReferralList();
+          // }
           else{            
             this.getAllList(params.btntype);
           }
@@ -82,22 +89,128 @@ export class OrganizationDashboardListPage implements OnInit {
 
   getAllList(btntype){
     this.storageservice.showLoading();
-    var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardList?currentUserId="+this.userId+"&selectedType="+btntype;
-    this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+    let offset = 0;
+    if(btntype=="referrals")
+    {
+      var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId="+this.userId+"&offset="+offset;
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+  
+        if(result['success'] == true) {
+          this.storageservice.dismissLoading();  
+        this.oniList = result['referralsDashboardList'];
+        this.mySlicedArray = this.oniList;
+        this.storageservice.dismissLoading();
+        this.applicantsList=[];
+        console.log(result); 
+  
+  }
+  
+          });
 
-      if(result['success'] == true) {
-        this.storageservice.dismissLoading();  
-      this.oniList = result['oniDashboardList'];
-      this.applicantsList=[];
-      console.log(result); 
-
+    }
+    else
+    {
+      var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId="+this.userId+"&selectedType="+btntype+"&offset="+offset;
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+  
+        if(result['success'] == true) {
+          this.storageservice.dismissLoading();  
+        this.oniList = result['oniDashboardList'];
+        this.mySlicedArray = this.oniList;
+        this.storageservice.dismissLoading();
+        this.applicantsList=[];
+        console.log(result); 
+  
+  }
+  
+          });
+    }
+   
 }
 
-        });
+// getReferralList()
+// {
 
+//   this.storageservice.showLoading();
+//   let offset = 0;
+//   var oniDashboardListURL = "api/auth/app/dashboard/referralsDashboardListMob?currentUserId="+this.userId+"&offset="+offset;
+//   this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+
+//     if(result['success'] == true) {
+//       this.storageservice.dismissLoading();  
+//     this.oniList = result['oniDashboardList'];
+//     this.mySlicedArray = this.oniList;
+//     this.storageservice.dismissLoading();
+//     this.applicantsList=[];
+//     console.log(result); 
+
+// }
+
+//       });
+
+// }
+
+loadMore(event){
+  let length2 = 0;
+  this.route.queryParams.subscribe(params => {
+    if (params) {
+  if(params.btntype == "applicants")
+  {
+    if(this.mySlicedArray.length != 0){
+      let length = this.mySlicedArray.length;
+      length2 = length
+      console.log(length2)
+      var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + length2;
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+   
+        this.applicantsList = result['jobsDashboardList'];
+        if(this.applicantsList.length>=1){
+          this.mySlicedArray=this.mySlicedArray.concat(this.applicantsList);
+         
+         
+         this.storageservice.dismissLoading();
+         }
+         else{
+          
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    
+      event.target.complete();
+    }
+  }
+  else{
+   
+    if(this.mySlicedArray.length != 0){
+      let length = this.mySlicedArray.length;
+      length2 = length
+      console.log(length2)
+      var oniDashboardListURL = "api/auth/app/dashboard/oniDashboardListMob?currentUserId="+this.userId+"&selectedType="+params.btntype+ "&offset=" + length2;
+   
+      this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
+ 
+        this.oniList = result['oniDashboardList'];
+        if(this.oniList.length>=1){
+          this.mySlicedArray=this.mySlicedArray.concat(this.oniList);
+         
+         
+         this.storageservice.dismissLoading();
+         }
+         else{
+          
+           this.storageservice.dismissLoading();
+         } 
+     }); 
+    
+      event.target.complete();
+    }
 
   }
-
+}
+});
+  
+  
+}
  
 
 
@@ -105,13 +218,17 @@ export class OrganizationDashboardListPage implements OnInit {
 
     //api/auth/app/dashboard/jobsDashboardList
     this.storageservice.showLoading();
-    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardList?currentUserId="+this.userId;
+    let offset = 0;
+    var oniDashboardListURL = "api/auth/app/dashboard/jobsDashboardListMob?currentUserId="+this.userId+ "&offset=" + offset;
     this.storageservice.getrequest(oniDashboardListURL).subscribe(result => {
-if(result['success'] == true){
-  this.storageservice.dismissLoading();
-  this.applicantsList = result['jobsDashboardList'];
-  this.oniList=[];
-  console.log(result); 
+    if(result['success'] == true){
+    this.storageservice.dismissLoading();
+    this.applicantsList = result['jobsDashboardList'];
+    this.mySlicedArray = this.applicantsList;
+    this.oniList=[];
+    this.storageservice.dismissLoading();
+    
+    console.log(result); 
 }
      
         });
