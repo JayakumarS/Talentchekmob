@@ -174,6 +174,7 @@ loadMore(event){
         this.oniList = result['referralsDashboardList'];
         this.mySlicedArray1 = this.oniList;
         this.storageservice.dismissLoading();
+        this.oniListCount = result['referralsDashboardList'].length;
         this.applicantsList=[];
         console.log(result); 
   
