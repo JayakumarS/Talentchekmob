@@ -291,7 +291,7 @@ export class InstiProfilePage implements OnInit {
       this.storageservice.postrequest(updateprofile, this.Instidetails).subscribe(result => {
         // console.log("Image upload response: " + result)
         if (result["success"] == true) { 
-          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
+          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
         Instprofileview.reload();
           this.presentToast()
         }
@@ -309,7 +309,7 @@ export class InstiProfilePage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
     insprofileview.reload(); 
     this.router.navigate(['/insti-profile-view']);
     await toast.present();

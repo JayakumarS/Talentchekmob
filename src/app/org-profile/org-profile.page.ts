@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { ViewportScroller, formatDate } from '@angular/common';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -57,7 +57,7 @@ export class OrgProfilePage implements OnInit {
   isAbout: boolean = false;
   isLogo:boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,public alertController: AlertController,
-    private camera: Camera, public router: Router, private ngZone: NgZone,private toastController: ToastController, private route: ActivatedRoute,private languageService: LanguageService) { }
+    private camera: Camera, public router: Router, private ngZone: NgZone,private toastController: ToastController, private route: ActivatedRoute,private languageService: LanguageService,private scroller: ViewportScroller) { }
 
   ngOnInit() {
     this.selectedLang  = localStorage.getItem('selectedLang');
@@ -309,7 +309,7 @@ export class OrgProfilePage implements OnInit {
       this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {
         console.log("Image upload response: " + result)
         if (result["success"] == true) { 
-           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController,this.languageService);
+           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController,this.languageService,this.route);
            orgprofileview.reload(); 
           this.presentToast()
         }

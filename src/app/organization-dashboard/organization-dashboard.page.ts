@@ -100,7 +100,9 @@ export class OrganizationDashboardPage implements OnInit {
     };
     this.router.navigate(['/organization-dashboard-list'], navigationExtras);
   }
-
+  redirectToSection() {
+    this.router.navigate(['/org-profile-view','section']);
+  }
   viewmatchesList(){
 
     this.router.navigate(['/oni-job-post-list']);

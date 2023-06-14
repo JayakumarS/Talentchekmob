@@ -5,7 +5,7 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
 import moment from 'moment';
 import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.page';
-import { formatDate } from '@angular/common';
+import { ViewportScroller, formatDate } from '@angular/common';
 import { OrgProfileViewPage } from '../org-profile-view/org-profile-view.page';
 import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
 import { LanguageService } from '../language.service';
@@ -387,7 +387,7 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const profilePage = new OrgProfileViewPage(this.router, this.storageservice, this.alertController, this.languageService);
+    const profilePage = new OrgProfileViewPage(this.router, this.storageservice, this.alertController, this.languageService,this.route);
     profilePage.reload();
     this.router.navigate(['/org-profile-view']);
 
@@ -490,7 +490,7 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice, this.languageService);
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice, this.languageService,this.route);
     insprofileview.reload();
     this.router.navigate(['/insti-profile-view']);
 

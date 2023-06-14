@@ -98,7 +98,9 @@ export class InstitutionDashboardPage implements OnInit {
     };
     this.router.navigate(['/institution-dashboard-list'], navigationExtras);
   }
-
+  redirectToSection() {
+    this.router.navigate(['/insti-profile-view','section']);
+  }
 
   getCreditpoints(){
 

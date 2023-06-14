@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit,ElementRef,ViewChild,AfterViewInit  } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { LanguageService } from '../language.service';
@@ -9,7 +9,8 @@ import { LanguageService } from '../language.service';
   templateUrl: './insti-profile-view.page.html',
   styleUrls: ['./insti-profile-view.page.scss'],
 })
-export class InstiProfileViewPage implements OnInit {
+export class InstiProfileViewPage implements OnInit,AfterViewInit  {
+  @ViewChild('section') sectionElement!: ElementRef;
   selectedLang: string;
   doRefresh(event) {
     this.ngOnInit();
@@ -40,7 +41,7 @@ export class InstiProfileViewPage implements OnInit {
   ifscCode: any;
   connectionList: any;
   connectioncard:boolean = false;
-  constructor(public router: Router,public storageservice: StorageService,public languageService:LanguageService) { 
+  constructor(public router: Router,public storageservice: StorageService,public languageService:LanguageService,private route: ActivatedRoute) { 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
     }
@@ -113,6 +114,34 @@ export class InstiProfileViewPage implements OnInit {
      this.connectionList = result['profileViewList'][0]['connectionList'] 
 
   })
+}
+ngAfterViewInit()
+  {
+    this.route.params.subscribe(param => {
+      // alert(param.pageSec)
+
+      const id = param['id'];
+      if(id){
+        // const section = this.container.nativeElement.querySelector(`#${param.pageSec}`)
+        // console.log(section)
+
+        // section?.scrollIntoView()
+        this.scrollToSection(id);
+      }
+    })
+  }
+
+  scrollToSection(id: string) {
+    setTimeout(() => {
+    const element = this.sectionElement.nativeElement;
+    //const element = document.getElementById(id);
+    console.log(element);
+
+    
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } 
+  },500);
 }
 
 reload(){

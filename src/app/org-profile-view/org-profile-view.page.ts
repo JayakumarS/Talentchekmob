@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit,ElementRef,ViewChild,AfterViewInit  } from '@angular/core';
+// import { ViewportScroller } from "@angular/common";
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
 import { NavigationEnd } from '@angular/router';
@@ -10,7 +11,9 @@ import { LanguageService } from '../language.service';
   templateUrl: './org-profile-view.page.html',
   styleUrls: ['./org-profile-view.page.scss'],
 })
-export class OrgProfileViewPage implements OnInit {
+export class OrgProfileViewPage implements OnInit,AfterViewInit  {
+  @ViewChild('section') sectionElement!: ElementRef;
+  // @ViewChild('container') container: ElementRef<HTMLElement>;
   relationship: any;
   selectedLang: string;
 
@@ -43,7 +46,7 @@ export class OrgProfileViewPage implements OnInit {
   orgLogo: string;
 
 
-  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) { 
+  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService,private route: ActivatedRoute) { 
 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
@@ -62,6 +65,8 @@ export class OrgProfileViewPage implements OnInit {
   }
 
   ngOnInit() {
+
+    
     this.selectedLang  = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
 
@@ -128,6 +133,34 @@ export class OrgProfileViewPage implements OnInit {
     })
   }
 
+  ngAfterViewInit()
+  {
+    this.route.params.subscribe(param => {
+      // alert(param.pageSec)
+
+      const id = param['id'];
+      if(id){
+        // const section = this.container.nativeElement.querySelector(`#${param.pageSec}`)
+        // console.log(section)
+
+        // section?.scrollIntoView()
+        this.scrollToSection(id);
+      }
+    })
+  }
+  scrollToSection(id: string) {
+    setTimeout(() => {
+    const element = this.sectionElement.nativeElement;
+    //const element = document.getElementById(id);
+    console.log(element);
+
+    
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } 
+  },500);
+}
+  
   reload(){
     this.storageservice.refreshData();
   }

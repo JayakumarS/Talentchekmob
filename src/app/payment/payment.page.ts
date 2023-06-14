@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { StorageService } from '../storage.service';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
 import { LanguageService } from '../language.service';
 @Component({
@@ -26,7 +26,7 @@ export class PaymentPage implements OnInit {
   roleId: any;
   RoleID: any;
   edit: boolean = false;
-  constructor(private fb: FormBuilder,public storageservice:StorageService,public alertController: AlertController,private toastController: ToastController, public router:Router,public languageService:LanguageService) { }
+  constructor(private fb: FormBuilder,public storageservice:StorageService,public alertController: AlertController,private toastController: ToastController, public router:Router,public languageService:LanguageService,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.selectedLang  = localStorage.getItem('selectedLang');
@@ -184,7 +184,7 @@ update2(){
    this.storageservice.post(updatepayment, this.paymentDetails).subscribe(result => {  
       //console.log("Image upload response: " + result)
      if (result["success"] == true) {
-      const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
+      const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
       Instprofileview.reload(); 
       this.presentToast1()
       }
@@ -252,7 +252,7 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
      this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
         //console.log("Image upload response: " + result)
        if (result["success"] == true) {
-        const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService);
+        const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
         Instprofileview.reload();
         this.presentToast2()
         }
