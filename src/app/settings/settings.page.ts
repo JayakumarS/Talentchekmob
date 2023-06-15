@@ -160,8 +160,8 @@ export class SettingsPage implements OnInit {
     this.router.navigate(['/settings']);
   }
 
-
-
-
-
+goto_DeleteAccount(){
+  this.router.navigate(['/delete-my-account'])
+}
+ 
 }

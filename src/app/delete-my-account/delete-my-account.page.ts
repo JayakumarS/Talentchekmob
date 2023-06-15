@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-delete-my-account',
@@ -15,13 +16,15 @@ export class DeleteMyAccountPage implements OnInit {
   //#region Declaration
   userId: string;
   empId: string;
+  selectedLang:string;
   //#endregion
 
   constructor(public storageservice: StorageService, public alertController: AlertController, private translate: TranslateService,
-    public router: Router, public nativeStorage: NativeStorage) {
+    public router: Router, public nativeStorage: NativeStorage,public languageService: LanguageService) {
 
     this.userId = localStorage.getItem("userId");
-    this.empId = localStorage.getItem("empId");
+    this.selectedLang  = localStorage.getItem("selectedLang");
+    this.languageService.setLanguage(this.selectedLang);
 
   }
 
@@ -51,13 +54,12 @@ export class DeleteMyAccountPage implements OnInit {
             //Main concept. 
             try {
               var postData = {
-                'empId': this.empId,
-                'userId': this.userId                
+                'talentId': this.userId                
               }
 
               console.log(`Delete my account posting data: ${JSON.stringify(postData)}`);
 
-              var deleteServiceUrl = "/hrms/master/employeeAdminMaster/DeleteUserAccountMob";
+              var deleteServiceUrl = "api/auth/app/mobile/DeleteUserAccountMob";
 
               this.storageservice.postrequest(deleteServiceUrl, postData).subscribe(result => {
                 var response = result;
@@ -109,5 +111,13 @@ export class DeleteMyAccountPage implements OnInit {
 
     await alert.present();
   }
+
+
+goto_settings(){
+
+  this.router.navigate(['/settings']);
+  
+}
+
 
 }
