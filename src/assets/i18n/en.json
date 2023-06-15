@@ -170,7 +170,7 @@
   "iAccept": "I accept the",
   "Address": "Address",
   "tAndC": "Terms and Conditions",
-  "consentForm": "Consent form",
+  "consentForm": "Consent Form",
   "register": "Register",
   "uploadImagereq": "Please upload upload Image",
   "next": "NEXT",
@@ -1754,5 +1754,6 @@
   "veriExp": "Having your experiences permanently verified will help you prove to recruiters, clients,and customers that you are who you say you are.",
   "expContent": "Please provide the official email address and contact number of HR/ reporting manager who has the authority to verify your professional experience.",
   "Connection-List": "Connection-List",
-  "Applicants":"Applicants"
+  "Applicants": "Applicants",
+  "DeleteAccount": "Delete Account"
 }
