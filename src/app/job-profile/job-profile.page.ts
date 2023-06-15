@@ -19,6 +19,7 @@ import { LanguageService } from '../language.service';
 })
 export class JobProfilePage implements OnInit {
   selectedLang: any;
+  toast: any;
 
 
   doRefresh(event) {
@@ -384,7 +385,7 @@ export class JobProfilePage implements OnInit {
   }
 
 
-  async nextStep(currentStep: string, nextStep: string, jobProfileForm) {
+  nextStep(currentStep: string, nextStep: string, jobProfileForm) {
 
     if (jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length != 0) {
       const current = document.getElementById(currentStep);
@@ -394,26 +395,28 @@ export class JobProfilePage implements OnInit {
     }
     else {
 
-      const toast = await this.toastController.create({
-        message: 'Please select Skills',
-        duration: 3000,
-        cssClass: 'custom-toast'
-      });
-      await toast.present();
+
+      // var msg = result["msg"];
+      // if (msg == null) {
+      //   "msg"
+      // }
+      var msg = ["Please select Skills"]
+
+      this.storageservice.warningToast(msg);
     }
-    //   if( jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length !=0){
-    //     const current = document.getElementById(currentStep);
-    //     const next = document.getElementById(nextStep);
-    //     current.style.display = 'none';
-    //     next.style.display = 'block';
+    // if (jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length != 0) {
+    //   const current = document.getElementById(currentStep);
+    //   const next = document.getElementById(nextStep);
+    //   current.style.display = 'none';
+    //   next.style.display = 'block';
 
-    //   }else{
+    // } else {
 
-    //     const toast = await this.toastController.create({
-    //       message: 'Please select Skills',
-    //       duration: 3000,
-    //       cssClass: 'custom-toast'
-    //     });
+    //   const toast = await this.toastController.create({
+    //     message: 'Please select Skills',
+    //     duration: 3000,
+    //     cssClass: 'custom-toast'
+    //   });
 
     //   await toast.present();
 
