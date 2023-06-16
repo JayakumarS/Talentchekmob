@@ -9,18 +9,19 @@
     </ion-toolbar>
     <ion-toolbar>
         <ion-row>
-            <ion-col>
-                <ion-title class="ion-text-wrap" style="    align-items: center;
-                display: contents;">{{username}}</ion-title>
-            </ion-col>
-            <ion-col size="2">
+           
+            <ion-col size="3" style="margin-left: 25px;">
                 <ion-avatar size="small" *ngIf="prof">
-                    <img style=" height: 60%;width: 60%;" (click)="profile2(2)" src={{img}} />
+                    <img style=" height: 70%;width: 70%;" (click)="profile2(2)" src={{img}} />
                 </ion-avatar>
                 <ion-avatar size="small" *ngIf="!prof">
-                    <img style=" height: 60%;width: 60%;" (click)="profile2(2)"
+                    <img style=" height: 70%;width: 70%;" (click)="profile2(2)"
                         src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </ion-avatar>
+            </ion-col>
+            <ion-col style="margin-left: -20px;margin-top: 10px;">
+                <ion-title class="ion-text-wrap" style="align-items: center;
+                display: contents;">{{username}}</ion-title>
             </ion-col>
         </ion-row>
     </ion-toolbar>
@@ -134,8 +135,8 @@
 
                 <ion-row style=" display: flex; align-content: center;
                 flex-wrap: nowrap;    padding-bottom: 10px;">
-                    <ion-col size="11">
-                        <ion-title style="color:black; ">{{'Certification.certificate'
+                    <ion-col size="10">
+                        <ion-title style="color:black; margin-left: -9%;">{{'Certification.certificate'
                             | translate}}
 
                         </ion-title>
@@ -203,7 +204,7 @@
                 <ion-row style=" display: flex; align-content: center;
                 flex-wrap: nowrap;    padding-bottom: 10px;">
                     <ion-col size="11">
-                        <ion-title style="color:black; ">{{'profilein.Academics' | translate}}
+                        <ion-title style="color:black;margin-left: -9%; ">{{'profilein.Academics' | translate}}
 
                         </ion-title>
                     </ion-col>

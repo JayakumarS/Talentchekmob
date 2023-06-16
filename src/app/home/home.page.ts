@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
    this.selectedLang  = localStorage.getItem('selectedLang');
    if(this.selectedLang=="null")
    {
-     this.languageService.setLanguage('en');
+     this.languageService.setLanguage('ur');
    }
    else{
      this.languageService.setLanguage(this.selectedLang);

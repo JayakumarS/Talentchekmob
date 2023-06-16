@@ -34,12 +34,12 @@ export class OrganizationDashboardPage implements OnInit {
     this.selectedLang  = localStorage.getItem('selectedLang');
     if(this.selectedLang=="null")
     {
-      this.languageService.setLanguage('en');
+      this.languageService.setLanguage('ur');
     }
     else{
       this.languageService.setLanguage(this.selectedLang);
     }
-    this.translate.setDefaultLang('en');
+    // this.translate.setDefaultLang('en');
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/organization-dashboard') {
         this.setSelectedTab('apps');
