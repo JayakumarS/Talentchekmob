@@ -99,6 +99,12 @@ export class JobProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    if (!localStorage.getItem('foo')) {
+      localStorage.setItem('foo', 'no reload')
+      location.replace(location.href);
+    } else {
+      localStorage.removeItem('foo')
+    }
     this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.userId = localStorage.getItem("userId");
@@ -395,11 +401,6 @@ export class JobProfilePage implements OnInit {
     }
     else {
 
-
-      // var msg = result["msg"];
-      // if (msg == null) {
-      //   "msg"
-      // }
       var msg = ["Please select Skills"]
 
       this.storageservice.warningToast(msg);

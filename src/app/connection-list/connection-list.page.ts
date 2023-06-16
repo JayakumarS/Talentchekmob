@@ -16,10 +16,10 @@ export class ConnectionListPage implements OnInit {
   userId: string;
   connectionList: any;
   mySlicedArray = [];
-  
+
   @ViewChild('popover') popover;
-  
-  isOpen:boolean = false;
+
+  isOpen: boolean = false;
   creditPoints: any;
   currentUserId: any;
   currentUserName: any;
@@ -29,32 +29,32 @@ export class ConnectionListPage implements OnInit {
     this.popover.event = e;
     this.isOpen = true;
   }
-  constructor(public router:Router,public alertController: AlertController,public languageService:LanguageService,
-    public modalController: ModalController,public storageservice: StorageService,private route: ActivatedRoute) { }
+  constructor(public router: Router, public alertController: AlertController, public languageService: LanguageService,
+    public modalController: ModalController, public storageservice: StorageService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
-    this.creditPoints = localStorage.getItem("creditPoints") ;
-    this.currentUserId = localStorage.getItem("userId")  ;
+    this.creditPoints = localStorage.getItem("creditPoints");
+    this.currentUserId = localStorage.getItem("userId");
     this.route.queryParams.subscribe(params => {
-      if (params) { 
-        if (params != null || params != undefined ) {
-          const relationship = params.p.slice(0, -3)   
-            this.getconnection(this.currentUserId,relationship); 
-          
-          
+      if (params) {
+        if (params != null || params != undefined) {
+          const relationship = params.p.slice(0, -3)
+          this.getconnection(this.currentUserId, relationship);
+
+
         }
       }
     });
     this.currentUserName = localStorage.getItem("userName");
     ///this.userId = localStorage.getItem("userId")  ; 
     this.roleId = localStorage.getItem("roleId");
-    this.RoleID =  this.roleId.split(",", 3);
+    this.RoleID = this.roleId.split(",", 3);
     // this.getconnection();
   }
-  goto_profileView(){
+  goto_profileView() {
     this.router.navigate(['/profile-view']);
   }
   newOrgprofileView() {
@@ -64,7 +64,7 @@ export class ConnectionListPage implements OnInit {
     this.router.navigate(['/insti-profile-view']);
   }
 
-  getconnection(userid,relationship){
+  getconnection(userid, relationship) {
     this.storageservice.showLoading();
 
     let offset = 0;
@@ -72,75 +72,75 @@ export class ConnectionListPage implements OnInit {
     var connectionListsURL = "api/auth/app/mobile/ConnectionList";
     console.log(relationship)
 
-    this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + userid +"&relationship=" + relationship + "&offset=" + offset).subscribe(result => {
-    
-     // this.jobPostList = result['JobAdvertisementList'];
+    this.storageservice.getrequest(connectionListsURL + "?currentUserId=" + userid + "&relationship=" + relationship + "&offset=" + offset).subscribe(result => {
 
-     if(result['success']== true){
+      // this.jobPostList = result['JobAdvertisementList'];
 
-
-      this.storageservice.dismissLoading(); 
-      this.connectionList = result['connectionlist'];
-      console.log(this.connectionList); 
-      this.mySlicedArray = this.connectionList;
-       console.log(this.mySlicedArray);
-     
-      this.storageservice.dismissLoading();
+      if (result['success'] == true) {
 
 
-      // this.matchedCount = result['matchedList'].length ;
-      // this.orgBidCount = result['orgBidList'].length ;
+        this.storageservice.dismissLoading();
+        this.connectionList = result['connectionlist'];
+        console.log(this.connectionList);
+        this.mySlicedArray = this.connectionList;
+        console.log(this.mySlicedArray);
 
-      // this.applicationsReceivedList = result['applicationsReceivedList'];
-      // this.matchedList = result['matchedList'];
-      // this.orgBidList = result['orgBidList'];
-     }
+        this.storageservice.dismissLoading();
+
+
+        // this.matchedCount = result['matchedList'].length ;
+        // this.orgBidCount = result['orgBidList'].length ;
+
+        // this.applicationsReceivedList = result['applicationsReceivedList'];
+        // this.matchedList = result['matchedList'];
+        // this.orgBidList = result['orgBidList'];
+      }
       console.log(this.connectionList);
     });
   }
-  loadMore(event){
+  loadMore(event) {
     let length2 = 0;
     this.route.queryParams.subscribe(params => {
-      if (params) { 
-        if (params != null || params != undefined ) {
-          const relationship = params.p.slice(0, -3)   
+      if (params) {
+        if (params != null || params != undefined) {
+          const relationship = params.p.slice(0, -3)
           console.log(relationship);
-          this.relationship=relationship;
-          
+          this.relationship = relationship;
+
         }
       }
     });
-   
+
     console.log(this.relationship)
-    if(this.mySlicedArray.length != 0){
+    if (this.mySlicedArray.length != 0) {
       let length = this.mySlicedArray.length;
       length2 = length
       console.log(length2)
       var connectionListsURL = "api/auth/app/mobile/ConnectionList";
 
-      this.storageservice.getrequest(connectionListsURL +"?currentUserId=" + this.currentUserId +"&relationship=" +  this.relationship + "&offset=" + length2).subscribe(result => {
-       
+      this.storageservice.getrequest(connectionListsURL + "?currentUserId=" + this.currentUserId + "&relationship=" + this.relationship + "&offset=" + length2).subscribe(result => {
+
         this.connectionList = result['connectionlist'];
-        if(this.connectionList.length>=1){
-          this.mySlicedArray=this.mySlicedArray.concat(this.connectionList);
-         
-         
-         this.storageservice.dismissLoading();
-         }
-         else{
-          
-           this.storageservice.dismissLoading();
-         } 
-     }); 
-    
+        if (this.connectionList.length >= 1) {
+          this.mySlicedArray = this.mySlicedArray.concat(this.connectionList);
+
+
+          this.storageservice.dismissLoading();
+        }
+        else {
+
+          this.storageservice.dismissLoading();
+        }
+      });
+
       event.target.complete();
     }
   }
 
-  async profileView(talentId,accounttype,username) {
+  async profileView(talentId, accounttype, username) {
 
 
-    if(this.creditPoints < 2 ){
+    if (this.creditPoints < 2) {
 
       {
         let alert = await this.alertController.create({
@@ -152,7 +152,7 @@ export class ConnectionListPage implements OnInit {
               text: '',
               role: 'cancel',
               handler: () => {
-               console.log('Confirm Cancel');
+                console.log('Confirm Cancel');
               }
             },
             {
@@ -164,10 +164,10 @@ export class ConnectionListPage implements OnInit {
                   this.router.navigate(['/subscription-individual']);
                 } else if (this.roleId.includes('2')) {
                   this.router.navigate(['/subscription-insorg']);
-                } else if (this.roleId.includes( '3')) {
+                } else if (this.roleId.includes('3')) {
                   this.router.navigate(['/subscription-insorg']);
                 }
-             //   console.log('Confirm Cancel');
+                //   console.log('Confirm Cancel');
               }
             }
           ]
@@ -175,83 +175,83 @@ export class ConnectionListPage implements OnInit {
         await alert.present();
       }
     }
-    else if(accounttype == "private"){
-     this.PrivateUserAccTypeAlert();
+    else if (accounttype == "private") {
+      this.PrivateUserAccTypeAlert();
     }
-    else if (accounttype == "on demand"){
-    
-    // this.OnDemandUserAccTypeAlert(talentId);
-    this.checkOnDemandUserProp(talentId,username);
+    else if (accounttype == "on demand") {
+
+      // this.OnDemandUserAccTypeAlert(talentId);
+      this.checkOnDemandUserProp(talentId, username);
     }
-    else{
+    else {
 
-     const modal = await this.modalController.create({
-       component: ProfileViewPopupPage,
-       cssClass: 'my-custom-class',
-       componentProps: {
-         "talentId": talentId,
-      }
-     });
+      const modal = await this.modalController.create({
+        component: ProfileViewPopupPage,
+        cssClass: 'my-custom-class',
+        componentProps: {
+          "talentId": talentId,
+        }
+      });
 
-     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
+      modal.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null) {
 
-         //#region Getting values from popup
-         console.table("One: " + dataReturned);
-         //#endregion
+          //#region Getting values from popup
+          console.table("One: " + dataReturned);
+          //#endregion
 
-      }
-     });
+        }
+      });
 
-    return await modal.present();
+      return await modal.present();
     }
   }
-  checkOnDemandUserProp(action1,username){
+  checkOnDemandUserProp(action1, username) {
 
-    let onDemandUrl =  "api/auth/app/profileLookUp/onDemandRequest?currentUserId="+this.currentUserId+"&approvedId="+action1;
+    let onDemandUrl = "api/auth/app/profileLookUp/onDemandRequest?currentUserId=" + this.currentUserId + "&approvedId=" + action1;
 
     this.storageservice.getrequest(onDemandUrl).subscribe(async result => {
-      
+
       console.log(result);
 
 
-      if(result["success"] == true){
+      if (result["success"] == true) {
 
-        if(result["onDemandStatus"] == "showrequestpopup"){
+        if (result["onDemandStatus"] == "showrequestpopup") {
 
-          this.OnDemandUserAccTypeAlert(action1,username);
+          this.OnDemandUserAccTypeAlert(action1, username);
         }
-        else if(result["onDemandStatus"] == "requested"){
+        else if (result["onDemandStatus"] == "requested") {
 
-         let message = "Awaiting access permission from user.";
-         this.OndemandAccTypeAlert(message);
+          let message = "Awaiting access permission from user.";
+          this.OndemandAccTypeAlert(message);
 
         }
 
-        else if(result["onDemandStatus"] == "true"){
+        else if (result["onDemandStatus"] == "true") {
 
           const modal = await this.modalController.create({
             component: ProfileViewPopupPage,
             cssClass: 'my-custom-class',
             componentProps: {
               "talentId": action1,
-           }
+            }
           });
-     
+
           modal.onDidDismiss().then((dataReturned) => {
-           if (dataReturned !== null) {
-     
+            if (dataReturned !== null) {
+
               //#region Getting values from popup
               console.table("One: " + dataReturned);
               //#endregion
-     
-           }
+
+            }
           });
-     
-         return await modal.present();
+
+          return await modal.present();
         }
 
-        else if(result["onDemandStatus"] == "false"){
+        else if (result["onDemandStatus"] == "false") {
 
           let message = "Access to view profile denied by user."
 
@@ -260,7 +260,7 @@ export class ConnectionListPage implements OnInit {
         }
       }
 
-   });
+    });
 
   }
   async OndemandAccTypeAlert(Message) {
@@ -282,7 +282,7 @@ export class ConnectionListPage implements OnInit {
     await alert.present();
 
   }
-  async OnDemandUserAccTypeAlert(talentId,userName) {
+  async OnDemandUserAccTypeAlert(talentId, userName) {
     let alert = await this.alertController.create({
       header: 'Alert!',
       message: 'Please send a request to view full profile.',
@@ -306,28 +306,28 @@ export class ConnectionListPage implements OnInit {
             console.log("Id: " + talentId);
 
             var postData = {
-              "talentid":talentId,
-              "username":userName,
-              "currentUserId":this.currentUserId,
-              "currentUserName":this.currentUserName
+              "talentid": talentId,
+              "username": userName,
+              "currentUserId": this.currentUserId,
+              "currentUserName": this.currentUserName
             }
 
 
-            let onDemandUrl =  "api/auth/app/profileLookUp/saveOnDemand";
+            let onDemandUrl = "api/auth/app/profileLookUp/saveOnDemand";
 
-             this.storageservice.postrequest(onDemandUrl,postData).subscribe(async result => {
-      
-             console.log(result);
+            this.storageservice.postrequest(onDemandUrl, postData).subscribe(async result => {
 
-             if (result['success']== true){
+              console.log(result);
 
-              this.storageservice.generalAlertToast("View Access Requested!");
-             }
-             else if (result['success']== false){
+              if (result['success'] == true) {
 
-              this.storageservice.generalAlertToast("Access Request Failed!");
-             }
-             });
+                this.storageservice.generalAlertToast("View Access Requested!");
+              }
+              else if (result['success'] == false) {
+
+                this.storageservice.generalAlertToast("Access Request Failed!");
+              }
+            });
 
           }
         }

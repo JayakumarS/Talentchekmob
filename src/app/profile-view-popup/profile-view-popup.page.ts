@@ -15,49 +15,49 @@ export class ProfileViewPopupPage implements OnInit {
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
-     event.target.complete();
+      event.target.complete();
     }, 2000);
- }
+  }
 
-  talentId : string;
+  talentId: string;
   currendUserId: string;
   basicProfileDetails = [];
   educationList = [];
-  certificationsList =[];
+  certificationsList = [];
   clubsList = [];
-  experienceList =[];
-  constructor( public modalController: ModalController,public languageService:LanguageService,private navParams: NavParams,public storageservice: StorageService) { }
+  experienceList = [];
+  constructor(public modalController: ModalController, public languageService: LanguageService, private navParams: NavParams, public storageservice: StorageService) { }
 
   ngOnInit() {
 
 
-    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.talentId = this.navParams.data.talentId;
     console.log(this.talentId);
-    this.currendUserId = localStorage.getItem("userId")  ; 
+    this.currendUserId = localStorage.getItem("userId");
     this.lessCredit();
-    var profileViewUrl = "api/auth/app/IndividualProfileDetails/viewmatchesprofile"+"?talentId=" +this.talentId;
+    var profileViewUrl = "api/auth/app/IndividualProfileDetails/viewmatchesprofile" + "?talentId=" + this.talentId;
 
     this.storageservice.getrequest(profileViewUrl).subscribe(result => {
-    this.basicProfileDetails = result['profileViewList'];
-    this.experienceList = result['profileViewList'][0]["experienceList"];
-    this.educationList = result['profileViewList'][0]["educationList"];
-    this.certificationsList = result['profileViewList'][0]["certificationsList"];
-    this.clubsList = result['profileViewList'][0]["clubsList"];
-      console.log(result["profileViewList"]); 
-       
-   });
+      this.basicProfileDetails = result['profileViewList'];
+      this.experienceList = result['profileViewList'][0]["experienceList"];
+      this.educationList = result['profileViewList'][0]["educationList"];
+      this.certificationsList = result['profileViewList'][0]["certificationsList"];
+      this.clubsList = result['profileViewList'][0]["clubsList"];
+      console.log(result["profileViewList"]);
+
+    });
   }
 
-  lessCredit(){
+  lessCredit() {
 
-    var lessCreditURL = "api/auth/app/CommonUtility/creditPointdebit?talentId="+this.currendUserId+"&id="+this.talentId; 
+    var lessCreditURL = "api/auth/app/CommonUtility/creditPointdebit?talentId=" + this.currendUserId + "&id=" + this.talentId;
     this.storageservice.getrequest(lessCreditURL).subscribe(result => {
-     if (result["success"] == true) {
-     console.log(result);
+      if (result["success"] == true) {
+        console.log(result);
       }
-   });
+    });
   }
 
   dismiss() {

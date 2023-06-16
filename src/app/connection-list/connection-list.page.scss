@@ -100,7 +100,7 @@ div.c {
 }
 
 .adv-card {
-    width: 360px;
+    width: 100%;
     border-radius: 30px;
     font-size: 18px;
     background-color: antiquewhite;
@@ -232,6 +232,7 @@ div.c {
     word-break: break-word;
     margin-left: 10%;
     margin-top: -4%;
+
     &:before {
         border-radius: 50%;
         content: '';
@@ -331,4 +332,11 @@ ion-icon {
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
+}
+
+@media only screen and (min-width: 768px) and (min-height: 768px) {
+    ::ng-deep.sc-ion-modal-ios-h {
+        --width: 100%;
+        --height: 100%;
+    }
 }

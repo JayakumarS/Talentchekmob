@@ -493,3 +493,10 @@ div.c {
     font-size: 13px;
     font-weight: 600;
 }
+
+@media only screen and (min-width: 768px) and (min-height: 768px) {
+    ::ng-deep.sc-ion-modal-ios-h {
+        --width: 100%;
+        --height: 100%;
+    }
+}

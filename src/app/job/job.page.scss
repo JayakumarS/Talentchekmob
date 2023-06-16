@@ -100,7 +100,7 @@ div.c {
 }
 
 .adv-card {
-    width: 360px;
+    width: 100%;
     border-radius: 30px;
     font-size: 18px;
     background-color: antiquewhite;
@@ -230,7 +230,7 @@ div.c {
     line-height: 1.25rem;
     color: #000;
     word-break: break-word;
-    
+
     &:before {
         border-radius: 50%;
         content: "";
@@ -263,7 +263,7 @@ div.c {
     background: #eceef1;
 }
 
-.postedcards{
+.postedcards {
     font-family: 'Poppins';
     font-size: 13px;
     font-weight: 600;

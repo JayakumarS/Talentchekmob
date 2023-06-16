@@ -97,7 +97,7 @@ div.c {
 }
 
 .adv-card {
-    width: 360px;
+    width: 100%;
     border-radius: 30px;
     font-size: 18px;
     background-color: antiquewhite;
@@ -226,6 +226,7 @@ div.c {
     text-overflow: ellipsis;
     line-height: 1.25rem;
     color: #000;
+
     /* word-break: break-word; */
     /* margin-left: 10%; */
     /* margin-top: 0%;*/
@@ -265,13 +266,13 @@ ion-icon {
     font-size: 26px;
 }
 
-.postedcards{
+.postedcards {
     font-family: 'Poppins';
     font-size: 13px;
     font-weight: 600;
 }
 
-.postedcardtitle{
+.postedcardtitle {
     width: 250px;
     font-family: 'Poppins';
     font-size: 15px;

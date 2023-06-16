@@ -32,7 +32,7 @@ div.c {
 }
 
 .adv-card {
-    width: 360px;
+    width: 100%;
     border-radius: 30px;
     font-size: 18px;
     background-color: antiquewhite;
@@ -161,6 +161,7 @@ div.c {
     text-overflow: ellipsis;
     line-height: 1.25rem;
     word-break: break-word;
+
     &:before {
         border-radius: 50%;
         content: '';
@@ -195,4 +196,11 @@ div.c {
 
 .c-pill--red {
     background: #f1154126;
+}
+
+@media only screen and (min-width: 768px) and (min-height: 768px) {
+    ::ng-deep.sc-ion-modal-ios-h {
+        --width: 100%;
+        --height: 100%;
+    }
 }
