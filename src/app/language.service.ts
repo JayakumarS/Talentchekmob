@@ -36,7 +36,8 @@ export class LanguageService {
   getLanguages() {
     this.languages = [
 
-      { text: 'English', value: 'en', img: 'assets/img/en.png' },
+      // { text: 'English', value: 'en', img: 'assets/img/en.png' },
+      { text: 'English', value: 'ur', img: 'assets/img/en.png' },
       { text: 'русский', value: 'ru', img: 'assets/img/ru.png' },
       { text: 'فارسی', value: 'fa', img: 'assets/img/fa.png' },
       { text: 'عربي', value: 'ar', img: 'assets/img/ar.png' },
@@ -44,7 +45,8 @@ export class LanguageService {
       { text: 'தமிழ்', value: 'tn', img: 'assets/img/tn.png' },
       { text: 'ಕನ್ನಡ', value: 'kn', img: 'assets/img/kn.png' },
       { text: 'తెలుగు', value: 'te', img: 'assets/img/te.png' },
-      { text: 'മലയാളം', value: 'ml', img: 'assets/img/ml.png' }      
+      { text: 'മലയാളം', value: 'ml', img: 'assets/img/ml.png' },
+          
     ];
     return this.languages
   }
