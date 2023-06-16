@@ -42,6 +42,9 @@ export class OniJobPostPage implements OnInit {
   language: any;
   jobtype: any;
   jobProfileForm: FormGroup;
+  jobProfileForm1: FormGroup;
+  jobProfileForm2: FormGroup;
+  jobProfileForm3: FormGroup;
   industryList = [];
   jobTitleList = [];
   jobTypeList = [];
@@ -86,6 +89,7 @@ export class OniJobPostPage implements OnInit {
   lastPosted: Date;
   skillsList: any;
   id: any;
+  showStepper: boolean = false;
   locationId = [];
   location = [];
   constructor(private fb: FormBuilder,
@@ -106,6 +110,13 @@ export class OniJobPostPage implements OnInit {
 
 
   ngOnInit() {
+    if (!localStorage.getItem('foo')) {
+      localStorage.setItem('foo', 'no reload')
+      this.doRefresh(event)
+    } else {
+      localStorage.removeItem('foo')
+    }
+
     this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.buttonEnable = false;
@@ -118,46 +129,31 @@ export class OniJobPostPage implements OnInit {
       jobTitle1: ["", Validators.required],
       jobType: ["", Validators.required],
       openings: ["", Validators.required],
-      roles: ["", Validators.required],
-      jobSkills: [""],
-      jobExperience: ["", Validators.required],
-      jobExperienceFormat: ["Year(s)"],
-      jobExperienceMandatory: ["false"],
-      jobSalaryFrom: ["", Validators.required],
-      jobSalaryTo: ["", Validators.required],
-      jobSalaryCurrency: ["INR"],
-      jobSalaryFrequency: ["Per Year"],
-      // additionalpay: ["",Validators.required], 
-      //  jobShiftDM: false,
-      // jobShiftDT: false,
-      // jobShiftDW: false,
-      // jobShiftDTH: false,
-      // jobShiftDF: false,
-      // jobShiftDS: false,
-      // jobShiftDSU: false,
-      // jobShiftNM: false,
-      // jobShiftNT: false,
-      // jobShiftNW: false,
-      // jobShiftNTH: false,
-      // jobShiftNF: false,
-      // jobShiftNS: false,
-      // jobShiftNSU: false,
-      // jobExpWorkHrs: [""],
-      // jobStartDateFrom:[""],  
-      appDeadlineObj: [""],
-      appDeadline: [""],
-      locationOffer: [""],
-      // locationAdvertise: [""],
-      // gender:["NP"],
-      reqLanguages: [""],
-      // phoneNo:[""],
-      currentUserName: [""],
-      currentUserId: [""],
-      // relocatewill: ["false"],
-      // travelwill: ["No"], 
-      auctioned: ["true"],
-      jobId: [""],
+
     }),
+      this.jobProfileForm1 = this.fb.group({
+        roles: ["", Validators.required],
+        jobSkills: [""],
+        jobExperience: ["", Validators.required],
+        jobExperienceFormat: ["Year(s)"],
+        jobExperienceMandatory: ["false"],
+        jobSalaryFrom: ["", Validators.required],
+        jobSalaryTo: ["", Validators.required],
+        jobSalaryCurrency: ["INR"],
+        jobSalaryFrequency: ["Per Year"],
+      }),
+      this.jobProfileForm2 = this.fb.group({
+        appDeadlineObj: [""],
+        appDeadline: ["", Validators.required],
+        locationOffer: [""],
+        reqLanguages: ["", Validators.required],
+        currentUserName: [""],
+        currentUserId: [""],
+      }),
+      this.jobProfileForm3 = this.fb.group({
+        auctioned: ["true"],
+        jobId: [""],
+      }),
       this.getIndustry();
     this.getJobType();
     this.workLocationList();
@@ -230,6 +226,9 @@ export class OniJobPostPage implements OnInit {
           for (let i = 0; i < str.length; i++) {
             var skill = str[i]
             this.selectedSkills.push(skill);
+            this.jobProfileForm1.patchValue({
+              'jobSkills': this.selectedSkills,
+            })
           }
 
           //cities
@@ -257,7 +256,7 @@ export class OniJobPostPage implements OnInit {
 
             const jobStartDateFrom = this.startdate;
             this.start = moment(jobStartDateFrom, 'MM/yyyy').toDate();
-            this.jobProfileForm.patchValue({
+            this.jobProfileForm2.patchValue({
               'jobStartDateFrom': this.start.toISOString(),
             })
           }
@@ -265,7 +264,7 @@ export class OniJobPostPage implements OnInit {
           if (result["jobAdvertisementList"][0].appDeadline != null && result["jobAdvertisementList"][0].appDeadline != "") {
             const appDeadline = result["jobAdvertisementList"][0].appDeadline;
             this.lastPosted = moment(appDeadline, 'DD/MM/YYYY').toDate();
-            this.jobProfileForm.patchValue({
+            this.jobProfileForm2.patchValue({
               'appDeadline': this.lastPosted.toISOString(),
             })
           }
@@ -325,6 +324,22 @@ export class OniJobPostPage implements OnInit {
             // 'jobShiftNS':this.jobShiftArray[12],
             // 'jobShiftNSU':this.jobShiftArray[13],
           })
+          this.jobProfileForm1.patchValue({
+            'roles': result["jobAdvertisementList"][0].roles,
+            'jobExperience': result["jobAdvertisementList"][0].jobExperience,
+            'jobExperienceFormat': result["jobAdvertisementList"][0].jobExperienceFormat,
+            'jobExpWorkHrs': result["jobAdvertisementList"][0].jobExpWorkHrs,
+            'jobExperienceMandatory': result["jobAdvertisementList"][0].jobExperienceMandatory.toString(),
+            'jobSalaryFrom': result["jobAdvertisementList"][0].jobSalaryFrom,
+            'jobSalaryTo': result["jobAdvertisementList"][0].jobSalaryTo,
+            'jobSalaryCurrency': result["jobAdvertisementList"][0].jobSalaryCurrency,
+            'jobSalaryFrequency': result["jobAdvertisementList"][0].jobSalaryFrequency,
+          })
+          this.jobProfileForm3.patchValue({
+            'auctioned': result["jobAdvertisementList"][0].isauctioned,
+            'jobId': result["jobAdvertisementList"][0].jobId,
+          })
+
 
 
           console.log(this.jobProfileForm.value)
@@ -431,13 +446,43 @@ export class OniJobPostPage implements OnInit {
       await alert.present();
     }
   }
+  //next step skills validate
+  nextStep1(currentStep: string, nextStep: string, jobProfile) {
+    jobProfile.jobSkills.value = this.selectedSkills;
+    if (jobProfile.jobSkills.value != null && jobProfile.jobSkills.value.length != 0) {
+      const current = document.getElementById(currentStep);
+      const next = document.getElementById(nextStep);
+      current.style.display = 'none';
+      next.style.display = 'block';
 
+    }
+    else {
+      var msg = ["Please select Skills"]
+      this.storageservice.warningToast(msg);
+    }
+  }
+  //next step city  validate
+  nextStep2(currentStep: string, nextStep: string, jobProfile2) {
+    jobProfile2.locationOffer.value = this.locationId;
+    //this.jobProfileForm.value.locationOffer = this.locationId;
+    if (jobProfile2.locationOffer.value != null && jobProfile2.locationOffer.value.length != 0) {
+      const current = document.getElementById(currentStep);
+      const next = document.getElementById(nextStep);
+      current.style.display = 'none';
+      next.style.display = 'block';
+    }
+    else {
+      var msg = ["Please Select offered locations"]
+      this.storageservice.warningToast(msg);
+    }
+  }
   // next step function
   nextStep(currentStep: string, nextStep: string) {
     const current = document.getElementById(currentStep);
     const next = document.getElementById(nextStep);
     current.style.display = 'none';
     next.style.display = 'block';
+
   }
   // next step function
   prevStep(currentStep: string, prevStep: string) {
@@ -543,6 +588,9 @@ export class OniJobPostPage implements OnInit {
     this.showResultsForLocation = false;
     this.searchResultsOffLocation = [];
     this.searchCtrl.setValue('');
+    this.jobProfileForm.patchValue({
+      'locationOffer': this.id,
+    })
   }
 
   removeCityForLocation(city: string) {
@@ -584,7 +632,7 @@ export class OniJobPostPage implements OnInit {
       if (result["success"] == true) {
         this.languageList = result["languageList"];
         if (this.edit == true) {
-          this.jobProfileForm.patchValue({
+          this.jobProfileForm2.patchValue({
             'reqLanguages': this.language,
           })
         }
@@ -634,6 +682,9 @@ export class OniJobPostPage implements OnInit {
     this.showSkillResults = false;
     this.searchSkillResults = [];
     this.searchCtrl.setValue('');
+    this.jobProfileForm.patchValue({
+      'jobSkills': this.selectedSkills,
+    })
   }
 
   removeSkill(skill: string) {
@@ -644,8 +695,21 @@ export class OniJobPostPage implements OnInit {
 
   //save
   async savejobadvertisement() {
-    this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.locationOffer = this.locationId;
+
+    this.jobProfileForm = this.fb.group(
+      Object.assign({}, this.jobProfileForm.controls, this.jobProfileForm1.controls)
+    );
+    this.jobProfileForm = this.fb.group(
+      Object.assign({}, this.jobProfileForm.controls, this.jobProfileForm2.controls)
+    );
+    this.jobProfileForm = this.fb.group(
+      Object.assign({}, this.jobProfileForm.controls, this.jobProfileForm3.controls)
+    );
+    // this.jobProfileForm.value.jobSkills = this.selectedSkills
+    // this.jobProfileForm.value.locationOffer = this.locationId;
+
+
+
     const errors = this.checkFormValidity(this.jobProfileForm);
     if (errors.length > 0) {
       // Display errors in a popup
@@ -681,8 +745,17 @@ export class OniJobPostPage implements OnInit {
 
   //Update
   async updatejobseek() {
-    this.jobProfileForm.value.jobSkills = this.selectedSkills
-    this.jobProfileForm.value.locationOffer = this.locationId;
+    // this.jobProfileForm1.value.jobSkills = this.selectedSkills
+    // this.jobProfileForm.value.locationOffer = this.locationId;
+    this.jobProfileForm = this.fb.group(
+      Object.assign({}, this.jobProfileForm.controls, this.jobProfileForm1.controls)
+    );
+    this.jobProfileForm = this.fb.group(
+      Object.assign({}, this.jobProfileForm.controls, this.jobProfileForm2.controls)
+    );
+    this.jobProfileForm = this.fb.group(
+      Object.assign({}, this.jobProfileForm.controls, this.jobProfileForm3.controls)
+    );
     const errors = this.checkFormValidity(this.jobProfileForm);
     if (errors.length > 0) {
       // Display errors in a popup
