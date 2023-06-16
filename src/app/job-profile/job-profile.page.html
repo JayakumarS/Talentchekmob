@@ -30,7 +30,7 @@
 
     <div class="ion-stepper">
 
-        <div class="ion-stepper-step" id="step1">
+        <div class="ion-stepper-step" id="step1" *ngIf="showStepper">
             <form [formGroup]="jobProfileForm">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">1</div>
@@ -150,7 +150,7 @@
 
                     <div class="ion-stepper-buttons">
                         <button class="ion-stepper-next" [disabled]="!jobProfileForm.valid"
-                            (click)="nextStep('step1','step2',jobProfileForm.controls);">{{'profilein.Next' |
+                            (click)="nextStep(jobProfileForm.controls);">{{'profilein.Next' |
                             translate}}</button>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
             </div> -->
 
 
-        <div class="ion-stepper-step" id="step2">
+        <div class="ion-stepper-step" id="step2" *ngIf="!showStepper">
             <form [formGroup]="jobsForm">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">2</div>
@@ -462,14 +462,14 @@
 
                     <div *ngIf="!edit" class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;"
-                            (click)="prevStep('step2', 'step1')">{{'KmPortal.back' | translate}}</button>
+                            (click)="prevStep()">{{'KmPortal.back' | translate}}</button>
                         <button class="ion-stepper-submit" (click)="validateInformation('save')">{{'profilein.Save' |
                             translate}}</button>
                     </div>
 
                     <div *ngIf="edit" class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;"
-                            (click)="prevStep('step2', 'step1')">{{'KmPortal.back' | translate}}</button>
+                            (click)="prevStep()">{{'KmPortal.back' | translate}}</button>
                         <button class="ion-stepper-submit" (click)="validateInformation('update')">{{'profilein.Update'
                             | translate}}</button>
                     </div>

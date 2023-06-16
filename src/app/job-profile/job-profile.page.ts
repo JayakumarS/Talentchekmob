@@ -70,7 +70,8 @@ export class JobProfilePage implements OnInit {
   searchResults: string[] = [];
   selectedCities: string[] = [];
   showResults: boolean = false;
-
+  step1: boolean = true;
+  step2: boolean = false;
   searchSkillResults: string[] = [];
   selectedSkills: string[] = [];
   showSkillResults: boolean = false;
@@ -82,6 +83,7 @@ export class JobProfilePage implements OnInit {
   edit: boolean = false;
   catagoaryType: any;
   jobShiftArray = [];
+  showStepper: boolean = true;
   constructor(private fb: FormBuilder,
     public router: Router,
     private http: HttpClient,
@@ -99,12 +101,12 @@ export class JobProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    if (!localStorage.getItem('foo')) {
-      localStorage.setItem('foo', 'no reload')
-      location.replace(location.href);
-    } else {
-      localStorage.removeItem('foo')
-    }
+    // if (!localStorage.getItem('foo')) {
+    //   localStorage.setItem('foo', 'no reload')
+    //   location.replace(location.href);
+    // } else {
+    //   localStorage.removeItem('foo')
+    // }
     this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.userId = localStorage.getItem("userId");
@@ -391,20 +393,25 @@ export class JobProfilePage implements OnInit {
   }
 
 
-  nextStep(currentStep: string, nextStep: string, jobProfileForm) {
+  nextStep(jobProfileForm) {
 
     if (jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length != 0) {
-      const current = document.getElementById(currentStep);
-      const next = document.getElementById(nextStep);
-      current.style.display = 'none';
-      next.style.display = 'block';
-    }
-    else {
-
+      this.showStepper = false;
+    } else {
       var msg = ["Please select Skills"]
-
       this.storageservice.warningToast(msg);
     }
+    // if (jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length != 0) {
+    //   // const current = document.getElementById(currentStep);
+    //   // const next = document.getElementById(nextStep);
+    //   // current.style.display = 'none';
+    //   // next.style.display = 'block';
+    //   this.step2 == true;
+    // }
+    // else {
+    //   var msg = ["Please select Skills"]
+    //   this.storageservice.warningToast(msg);
+    // }
     // if (jobProfileForm.jobSkills.value != null && jobProfileForm.jobSkills.value.length != 0) {
     //   const current = document.getElementById(currentStep);
     //   const next = document.getElementById(nextStep);
@@ -426,11 +433,13 @@ export class JobProfilePage implements OnInit {
 
   }
 
-  prevStep(currentStep: string, prevStep: string) {
-    const current = document.getElementById(currentStep);
-    const prev = document.getElementById(prevStep);
-    current.style.display = 'none';
-    prev.style.display = 'block';
+  prevStep() {
+    // const current = document.getElementById(currentStep);
+    // const prev = document.getElementById(prevStep);
+    // current.style.display = 'none';
+    // prev.style.display = 'block';
+    // this.step1 == true;
+    this.showStepper = true;
   }
 
 
