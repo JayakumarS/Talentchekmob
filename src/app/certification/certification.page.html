@@ -21,10 +21,10 @@
                 <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title *ngIf="!edit" style="text-align: center;font-family: Mr-eaves; color: black;">{{'addCertifications' |
-            translate}}</ion-title>
-        <ion-title *ngIf="edit" style="text-align: center;font-family: Mr-eaves; color: black;">{{'editCertifications' |
-            translate}}</ion-title>
+        <ion-title *ngIf="!edit" style="text-align: center;font-family: Mr-eaves; color: black;">{{'addCertifications' | translate}}
+        </ion-title>
+        <ion-title *ngIf="edit" style="text-align: center;font-family: Mr-eaves; color: black;">{{'editCertifications' | translate}}
+        </ion-title>
         <ion-buttons slot="end">
             <ion-button>
                 <ion-icon></ion-icon>
@@ -43,67 +43,58 @@
             <ion-row class="talentrow">
                 <ion-col>
                     <div class="button-content">
-                        <ion-label class="labels">{{'certificationName' | translate}} <small
-                                style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'certificationName' | translate}} <small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="certificationName"></ion-input>
                         </ion-item>
-                        <div
-                            *ngIf=" certificationForm.controls.certificationName.hasError('required') && certificationForm.controls.certificationName.touched">
+                        <div *ngIf=" certificationForm.controls.certificationName.hasError('required') && certificationForm.controls.certificationName.touched">
                             <small style="color: #f70505;">{{'certificationNameReq' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content">
-                        <ion-label class="labels">{{'issuingOrg' | translate}}<small
-                                style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'issuingOrg' | translate}}<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="issuedBy"></ion-input>
                         </ion-item>
-                        <div
-                            *ngIf=" certificationForm.controls.issuedBy.hasError('required') && certificationForm.controls.issuedBy.touched">
+                        <div *ngIf=" certificationForm.controls.issuedBy.hasError('required') && certificationForm.controls.issuedBy.touched">
                             <small style="color: #f70505;">{{'issuingOrgReq' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content">
-                        <ion-label class="labels">{{'certificationNo' | translate}}<small
-                                style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'certificationNo' | translate}}<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="certificationId"></ion-input>
                         </ion-item>
-                        <div
-                            *ngIf=" certificationForm.controls.certificationId.hasError('required') && certificationForm.controls.certificationId.touched">
+                        <div *ngIf=" certificationForm.controls.certificationId.hasError('required') && certificationForm.controls.certificationId.touched">
                             <small style="color: #f70505;">{{'certificationNoReq' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content">
-                        <ion-label class="labels">{{'AddCertification.issueDate' | translate}}<small
-                                style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'AddCertification.issueDate' | translate}}<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-datetime (ionChange)="validateStartDate($event.target.value)"
-                                displayFormat="DD.MM.YYYY" formControlName="issuedDateObj"
-                                presentation="date"></ion-datetime>
+                            <ion-datetime (ionChange)="validateStartDate($event.target.value)" displayFormat="DD.MM.YYYY" formControlName="issuedDateObj" presentation="date"></ion-datetime>
                         </ion-item>
-                        <div
-                            *ngIf=" certificationForm.controls.issuedDateObj.hasError('required') && certificationForm.controls.issuedDateObj.touched">
+                        <div *ngIf=" certificationForm.controls.issuedDateObj.hasError('required') && certificationForm.controls.issuedDateObj.touched">
                             <small style="color: #f70505;">{{'AddCertification.issueDateAlert' | translate}}</small>
                         </div>
                     </div>
                     <div class="button-content">
                         <ion-label class="labels">{{'expiryDate' | translate}} </ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY"
-                                formControlName="expiryDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                            <ion-datetime (ionChange)="validateEndDate($event.target.value)" displayFormat="DD.MM.YYYY" formControlName="expiryDateObj" presentation="date" [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
                     </div>
                     <ion-row class="talentrow">
                         <ion-col>
                             <ion-item class="formitem itemborder" lines="none">
-                                <ion-label class="blackTheme">{{'KmPortal.uploadFile' | translate}}<span
-                                        style="color:red">*</span></ion-label>
+                                <ion-label class="blackTheme">{{'KmPortal.uploadFile' | translate}}<span style="color:red">*</span></ion-label>
 
-                                <ion-input type="file" style="color: transparent;"
-                                    accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                    formControlName="uploadCertification" (change)="upload($event)"></ion-input>
+                                <ion-input type="file" style="color: transparent;" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" formControlName="uploadCertification" (change)="upload($event)"></ion-input>
+
+
+                                <ion-button fill="clear" (click)="opencamera()">
+                                    <ion-icon name="camera-outline"></ion-icon>
+                                </ion-button>
 
                             </ion-item>
                             <div>{{'supportFormat' | translate}}</div>
@@ -113,16 +104,23 @@
                         </ion-col>
                     </ion-row>
 
+
+                    <!--  Added by kesavan-->
+
+
+
+
+
                     <div *ngIf="!edit" class="button-content" style="width: 50%; margin: auto;">
                         <div class="display-justify">
-                            <ion-button class="custom-button" (click)="saveCertification()">{{'AddJobProfile.submit' |
-                                translate}}</ion-button>
+                            <ion-button class="custom-button" (click)="saveCertification()">{{'AddJobProfile.submit' | translate}}
+                            </ion-button>
                         </div>
                     </div>
                     <div *ngIf="edit" class="button-content" style="width: 50%; margin: auto;">
                         <div class="display-justify">
-                            <ion-button class="custom-button" (click)="UpdateCertification()">{{'AddJobProfile.update' |
-                                translate}}</ion-button>
+                            <ion-button class="custom-button" (click)="UpdateCertification()">{{'AddJobProfile.update' | translate}}
+                            </ion-button>
                         </div>
                     </div>
                 </ion-col>

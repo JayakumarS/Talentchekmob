@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 import moment from 'moment';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-certification',
@@ -40,10 +41,11 @@ export class CertificationPage implements OnInit {
   uploadedFilenameWithoutExt: string;
   uploadedFileSize: string;
   uploadedFileExtension: string;
+  base64img1: string = '';
   
   constructor(public router:Router,public modalController: ModalController,public languageService:LanguageService,
     public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
-    ,public alertController: AlertController, private ngZone: NgZone,
+    ,public alertController: AlertController, private ngZone: NgZone,private camera: Camera,
     public storageservice: StorageService,private toastController: ToastController,) { }
 
   ngOnInit() {
@@ -375,6 +377,41 @@ export class CertificationPage implements OnInit {
          await alert.present();
       }
     } 
+  }
+
+
+  opencamera() {
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((ImageData => {
+      this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      var imageupload = "api/auth/app/IndividualProfileDetails/updateCertification";
+
+      var frmData1: FormData = new FormData();
+      frmData1.append("file", this.base64img1);
+
+      this.storageservice.postrequest(imageupload, frmData1).subscribe(async result => {  
+        console.log("Image upload response: " + result)
+        if (result["success"] == true) {
+        
+          this.certificationForm.patchValue({
+             'uploadCertification':result["uploadPhotoPath"],
+           })
+       
+        }
+   });
+
+      this.certificationForm.patchValue({
+       // 'uploadCertification':data.filePath,
+      })
+      console.log(this.base64img1);
+    }), error => {
+      console.log(error);
+    })
   }
 
 
