@@ -18,7 +18,8 @@
     <div class="hello-dear">
         <ion-buttons style="padding-top:10px">
             <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
-                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
+                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start"
+                    alt="flag">{{languageService.selectedLang.text}}
                 <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
             </ion-button>
         </ion-buttons>
@@ -26,7 +27,8 @@
 
     <div class="hello-dear">
         <div style="font-size: 24px;font-family: Mr-eaves;">{{'hello' | translate}}</div>
-        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061; font-family: alina-sans;text-align: center;">{{'createAccount' | translate}}</div>
+        <div style="padding-bottom: 30px;font-size: 16px;color: #5E6061; font-family: alina-sans;text-align: center;">
+            {{'createAccount' | translate}}</div>
     </div>
     <div class="display-justify">
         <ion-button class="custom-button" (click)="goto_signup()">{{'Login.sign-up' | translate}}</ion-button>
@@ -46,6 +48,6 @@
         <div style="font-size: 16px; font-family: alina-sans;
         padding-left: 25px;">{{'Already a Talentchek member?' | translate}} </div>
         &nbsp;<a (click)="goto_login()" style="font-size: 18px; font-family: Mr-eaves;
-        padding-right: 25px; ">{{'sign_in' | translate}}</a>
+        padding-right: 25px;color: #007bff; ">{{'sign_in' | translate}}</a>
     </div>
 </ion-content>

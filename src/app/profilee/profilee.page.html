@@ -109,7 +109,8 @@
                     <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">{{'email' | translate}}</ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input formControlName="email"></ion-input>
+                            <ion-input formControlName="email"
+                                onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                         </ion-item>
                         <!-- <div *ngIf="profileForm.controls.email.hasError('required') && profileForm.controls.email.touched">
                             <small style="color: #f70505;">{{'invalidEmail' | translate}}</small>

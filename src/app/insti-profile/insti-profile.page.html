@@ -82,7 +82,8 @@
                         <ion-label class="labels">{{'ProfileInsti.email' | translate}}<small
                                 style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input formControlName="instEmail"></ion-input>
+                            <ion-input formControlName="instEmail"
+                                onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                         </ion-item>
                         <div
                             *ngIf="docForm.controls.instEmail.hasError('required') && docForm.controls.instEmail.touched">

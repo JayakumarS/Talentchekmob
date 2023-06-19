@@ -175,7 +175,8 @@
 
                         <div class="sign-in">
                             <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span
-                                style="font-size: 18px;"><b> <a (click)="goto_signin()"> {{'sign_in' |
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()" style="color: #007bff;">
+                                        {{'sign_in' |
                                         translate}}</a></b></span>
                         </div>
                     </div>
@@ -284,7 +285,8 @@
 
                         <div class="sign-in">
                             <div style="font-size: 16px;">{{'Already a Talentchek member?'| translate}} </div><span
-                                style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in'|
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"
+                                        style="color: #007bff;">{{'sign_in'|
                                         translate}}</a></b></span>
                         </div>
                     </div>
@@ -309,7 +311,8 @@
                                     style="color: #f70505;">*</small>
                             </ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input formControlName="emailId"></ion-input>
+                                <ion-input formControlName="emailId"
+                                    onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>
                             <div
                                 *ngIf=" talentinstform.controls.emailId.hasError('required') && talentinstform.controls.emailId.touched">
@@ -364,7 +367,8 @@
 
                         <div class="sign-in">
                             <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span
-                                style="font-size: 18px;"><b> <a (click)="goto_signin()">{{'sign_in' |
+                                style="font-size: 18px;"><b> <a (click)="goto_signin()"
+                                        style="color: #007bff;">{{'sign_in' |
                                         translate}}</a></b></span>
                         </div>
                     </div>

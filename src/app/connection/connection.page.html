@@ -109,7 +109,8 @@
                         <ion-label class="labels">{{'profilein.Connection Email ID' | translate}}<small
                                 style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input formControlName="receiverEmailId"></ion-input>
+                            <ion-input formControlName="receiverEmailId"
+                                onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                         </ion-item>
                     </div>
                     <div class="button-content">
