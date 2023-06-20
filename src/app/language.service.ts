@@ -23,8 +23,8 @@ export class LanguageService {
   //#region Functions
   setInitialAppLanguage() {
     const language = this.translate.getBrowserLang();
-    this.translate.setDefaultLang('en');
-    this.setLanguage('en');
+    this.translate.setDefaultLang('ur');
+    this.setLanguage('ur');
     this.storage.get('LNG_KEY').then(val => {
       if (val) {
         this.setLanguage(val);
