@@ -77,12 +77,14 @@ export class OniAlumniPage implements OnInit {
       department: [""]
     });
 
-    this.storageservice.showLoading();
+    this.get_CorporateNetwork();
+
+    // this.storageservice.showLoading();
     this.get_studentNetwork();
 
-   this.storageservice.showLoading();
+  //  this.storageservice.showLoading();
 
-   this.get_CorporateNetwork();
+  
 
   }
 
@@ -110,7 +112,7 @@ this.studCount = result['studentNetworkList'].length;
 
 
 get_CorporateNetwork(){
-
+  this.studentNetwork.value['talentId'] =this.currentUserId;
   var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
 

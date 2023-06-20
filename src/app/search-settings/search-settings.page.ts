@@ -159,13 +159,19 @@ this.advsearchForm.value.qualificationsearch == "" && this.advsearchForm.value.s
 this.advsearchForm.value.statesearch == ""){
 
   const alert = await this.toastController.create({
-    header: '',
-    message: 'No Filter Selected',
-    cssClass: 'yourClass',
-    position: 'middle',
-    duration: 3000,
+    // header: '',
+    // message: 'No Filter Selected',
+    // cssClass: 'yourClass',
+    // position: 'middle',
+      header: 'No Filter Selected!',
+      color: 'warning',
+      cssClass: "toast-success",
+      duration: 100,
 
   });
+
+
+  
   await alert.present();
 }
 
