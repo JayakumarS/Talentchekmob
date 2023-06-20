@@ -45,14 +45,14 @@
 </ion-header>
 
 <ion-content>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+    <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
         <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+    </ion-refresher> -->
 
     <br>
     <form>
 
-        <ion-row *ngIf="mySlicedArray.length == 0">
+        <ion-row *ngIf="!flagChange && mySlicedArray.length == 0">
             <ion-col size="12">
                 <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
                     <img alt="" src="../../assets/img/search.png" />
@@ -60,7 +60,7 @@
             </ion-col>
 
         </ion-row>
-        <div style="display: flex;justify-content: center;" *ngIf="mySlicedArray.length == 0">{{'No Results to Display'
+        <div style="display: flex;justify-content: center;" *ngIf="!flagChange && mySlicedArray.length == 0">{{'No Results to Display'
             | translate}}</div>
         <div *ngIf="mySlicedArray.length != 0">
             <ion-card class="profilesearchcard" *ngFor="let profile of mySlicedArray"
@@ -128,7 +128,7 @@
     </form>
 
 
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="flagChange">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 

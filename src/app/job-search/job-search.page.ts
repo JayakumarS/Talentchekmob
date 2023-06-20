@@ -87,12 +87,14 @@ export class JobSearchPage implements OnInit {
            else{
              this.flagChange=false;
              this.storageservice.dismissLoading(); 
+             this.mySlicedArray=[];
            }
           console.log(result); 
        });
       }else{
         this.advanceFlag = false;
         this.btn = "basicbtn";
+        this.mySlicedArray=[];
       }
   }); 
 
@@ -102,9 +104,10 @@ export class JobSearchPage implements OnInit {
 
 
   ngOnInit() {
+    this.mySlicedArray = [];
     this.selectedLang  = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
-    this.mySlicedArray = [];
+    
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/job-search') {
         this.setSelectedTab('search');
@@ -186,8 +189,8 @@ export class JobSearchPage implements OnInit {
 
     else{
 
-    this.storageservice.showLoading();
-   console.log(this.jobSearchHeadForm.value); 
+      this.storageservice.showLoading();
+      console.log(this.jobSearchHeadForm.value); 
 
        var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob";
 
@@ -214,8 +217,9 @@ export class JobSearchPage implements OnInit {
         this.storageservice.dismissLoading();
         }
         else{
-          this.flagChange=false;
           this.storageservice.dismissLoading();
+          this.flagChange=false;
+          this.mySlicedArray=[];
         }
        console.log(result);
 
@@ -232,7 +236,7 @@ export class JobSearchPage implements OnInit {
       let length = this.mySlicedArray.length;
       length2 = length
       console.log(length2)
-    var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob";
+   
 
     if(this.advanceFlag == false){
       var postData = {
@@ -241,7 +245,7 @@ export class JobSearchPage implements OnInit {
         "btn":this.btn,
         "offset":length2
       }
-
+      var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob";
       this.storageservice.postrequest(BasicSearcUrl, postData).subscribe(result => {
         this.basicprofilesearchList = result['basicprofilesearchList'];
         if(this.basicprofilesearchList.length>=1){
@@ -260,6 +264,7 @@ export class JobSearchPage implements OnInit {
          } 
      }); 
     }else{
+      var BasicSearcUrl = "api/auth/app/profileLookUp/basicProfileSearchListMob";
       this.formValues = { ...this.formValues, offset: length }; 
       this.storageservice.postrequest(BasicSearcUrl, this.formValues).subscribe(result => {
         this.basicprofilesearchList = result['basicprofilesearchList'];
@@ -270,12 +275,13 @@ export class JobSearchPage implements OnInit {
              element.profilepic = "https://ionicframework.com/docs/img/demos/avatar.svg";
             } 
            });
-          this.flagChange =true;
+          this.flagChange=false;
          this.storageservice.dismissLoading(); 
          }
          else{
-           this.flagChange=false;
            this.storageservice.dismissLoading(); 
+           this.flagChange=true;
+           
          } 
      });
     } 
