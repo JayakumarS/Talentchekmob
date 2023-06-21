@@ -18,21 +18,24 @@
                     <ion-card class="recharge-card" (click)="goto_subscribe()">
                         <ion-card-content>
                             <p style="text-align: center;font-size: 16px; color: #fff;"> {{'Available' | translate}}</p>
-                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">{{'Subscription.talCrd' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">
+                                {{'Subscription.talCrd' | translate}}</p>
 
-                            <div class="card-content p-0 flex">
+                            <div class="card-content p-0 flex" style="display: flex;justify-content: center;">
                                 <div class="spinningasset coin is-sm">
                                     <div>
                                         <em></em>
                                         <em></em>
                                     </div>
                                 </div>
-                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
+                                <div class="ml-2"
+                                    style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
                                     {{creditPoints}}
                                 </div>
                             </div>
                             <br>
-                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>{{'Recharge Now' | translate}}</b></p>
+                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>{{'Recharge Now' |
+                                    translate}}</b></p>
 
                         </ion-card-content>
                     </ion-card>
@@ -47,7 +50,8 @@
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                {{'Your Rating' | translate}}:<b>&nbsp; {{oniRating }}</b><span class="fa fa-star checked"></span></div>
+                                {{'Your Rating' | translate}}:<b>&nbsp; {{oniRating }}</b><span
+                                    class="fa fa-star checked"></span></div>
                         </div>
                     </ion-col>
                 </div>
@@ -73,11 +77,13 @@
                         <ion-col size="3">
                             <div style="font-size: 35px;
                       text-align: center;">
-                                <b>{{count.applicants}}</b></div>
+                                <b>{{count.applicants}}</b>
+                            </div>
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>{{'Applicants' | translate}}</b></div>
+                                <b>{{'Applicants' | translate}}</b>
+                            </div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -97,11 +103,13 @@
                         <ion-col size="3">
                             <div style="font-size: 35px;
                     text-align: center;">
-                                <b>{{count.matchedProfiles}}</b></div>
+                                <b>{{count.matchedProfiles}}</b>
+                            </div>
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>{{'JobPostInsti.matchedProf' | translate}}</b></div>
+                                <b>{{'JobPostInsti.matchedProf' | translate}}</b>
+                            </div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -119,11 +127,13 @@
                         <ion-col size="3">
                             <div style="font-size: 35px;
                         text-align: center;">
-                                <b>{{count.connections}}</b></div>
+                                <b>{{count.connections}}</b>
+                            </div>
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>{{'profileorg.Connections' | translate}}</b></div>
+                                <b>{{'profileorg.Connections' | translate}}</b>
+                            </div>
                         </ion-col>
                     </ion-row>
                 </a>
@@ -143,12 +153,14 @@
                         <ion-col size="3">
                             <div style="font-size: 35px;
                       text-align: center;">
-                                <b>{{count.referrals}}</b></div>
+                                <b>{{count.referrals}}</b>
+                            </div>
                         </ion-col>
                         <ion-col size="6">
                             <div style="text-align: end;font-size: 21px;">
-                                <b>{{'Referrals' | translate}}</b></div>
-                        </ion-col> 
+                                <b>{{'Referrals' | translate}}</b>
+                            </div>
+                        </ion-col>
                     </ion-row>
                 </a>
             </div>
@@ -159,8 +171,10 @@
                         <ion-col size="2" (click)="viewList('verifiedCurrentEmp','Current Employees - Verified')">
                             <div class="custom-buttryfly-left1">
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedCurrentEmp}}</b></ion-row>
-                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' | translate}}</b></ion-row>
-                                <ion-row style="font-size: 14px; color:#FA7070">{{'Current Employees' | translate}}</ion-row>
+                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' |
+                                        translate}}</b></ion-row>
+                                <ion-row style="font-size: 14px; color:#FA7070">{{'Current Employees' |
+                                    translate}}</ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('verifiedExEmp','Ex-Employees - Verified')">
@@ -170,19 +184,22 @@
                             justify-content: center;">
 
                                 <ion-row style="font-size: 14px; color:#FA7070">{{'Ex-Employees' | translate}}</ion-row>
-                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' | translate}}</b></ion-row>
+                                <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' |
+                                        translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedExEmp}}</b></ion-row>
                             </div>
                         </ion-col>
                     </div>
                     <img width="15%" src="../../assets/img/students.png">
                     <div>
-                        <ion-col size="2" (click)="viewList('pendingCurrentEmp','Current Employees - Pending Approval')">
+                        <ion-col size="2"
+                            (click)="viewList('pendingCurrentEmp','Current Employees - Pending Approval')">
                             <div class="custom-buttryfly-right1">
                                 <ion-row style="    display: flex;
                                 font-size: 34px;
                                 justify-content: flex-end;"><b>&nbsp;&nbsp;{{count.pendingCurrentEmp}}</b></ion-row>
-                                <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;{{'Pending Approval' | translate}}</b></ion-row>
+                                <ion-row style="font-size: 15px;justify-content: flex-end;"><b>&nbsp;{{'Pending
+                                        Approval' | translate}}</b></ion-row>
                                 <ion-row style="    font-size: 14px;
                                 color:#FA7070;
                                 display: flex;
@@ -197,7 +214,8 @@
 
                                 <ion-row style="font-size: 14px; color:#FA7070;    display: flex;
                                 justify-content: flex-end;">{{'Ex-Employees' | translate}}</ion-row>
-                                <ion-row style="font-size: 15px;"><b>&nbsp;{{'Pending Approval' | translate}}</b></ion-row>
+                                <ion-row style="font-size: 15px;"><b>&nbsp;{{'Pending Approval' |
+                                        translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>&nbsp;&nbsp;{{count.pendingExEmp}}</b></ion-row>
                             </div>
                         </ion-col>
@@ -218,20 +236,20 @@
 
 <div class="footer-nav">
     <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
-<ion-icon size="large" name="search-circle"></ion-icon>
-</button>
+        <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
     <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
-<ion-icon size="large" name="earth-sharp"></ion-icon>
-</button>
+        <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
     <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
-<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
 
-</button>
+    </button>
     <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
-<ion-icon size="large" name="person-circle-sharp"></ion-icon>
-</button>
+        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
     <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
-<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+        <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
 
-</button>
+    </button>
 </div>
