@@ -330,8 +330,12 @@
 
                     <div class="button-content" style="width: 50%;
                                         margin: auto;">
-                        <div class="display-justify">
+                        <div class="display-justify" *ngIf="isProfile">
                             <ion-button class="custom-button" (click)="Update()">{{'AddPersonalInfo.update' |
+                                translate}}</ion-button>
+                        </div>
+                        <div class="display-justify" *ngIf="isLogo">
+                            <ion-button class="custom-button" (click)="imgUpdate()">{{'AddPersonalInfo.update' |
                                 translate}}</ion-button>
                         </div>
                     </div>
