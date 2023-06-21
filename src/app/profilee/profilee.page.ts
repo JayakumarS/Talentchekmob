@@ -260,13 +260,14 @@ export class ProfileePage implements OnInit {
   }
 
   async Update() {
+    this.storageservice.showLoading();
     this.profileForm.value.uploadImg = this.base64img1;
     if (this.profileForm.value.hobbies != "" && this.profileForm.value.hobbies != null) {
       // this.profileForm.value.hobbies = this.profileForm.value.hobbies.toString();
-
+      this.storageservice.dismissLoading();
     } else {
       this.profileForm.patchValue({ hobbies: null });
-
+      this.storageservice.dismissLoading();
     }
     const errors = this.checkFormValidity(this.profileForm);
 
@@ -285,6 +286,7 @@ export class ProfileePage implements OnInit {
 
         this.profileForm.value.dob = formatDate(this.profileForm.value.dob, 'dd/MM/yyyy', 'en-IN');
       }
+      this.storageservice.showLoading();
       this.profileForm.value.currentUserId = this.currentUserId;
 
 
@@ -300,6 +302,7 @@ export class ProfileePage implements OnInit {
             const profilePage = new ProfilePage(this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
             profilePage.updateData();
           }, 800);
+          this.storageservice.dismissLoading();
           this.presentToast()
         }
       });
@@ -343,7 +346,7 @@ export class ProfileePage implements OnInit {
     //   Object.assign({}, this.profiledetails.controls, this.currentUserId)
     // );
 
-
+    this.storageservice.showLoading();
     const obj = {
 
       currentUserId: this.currentUserId,
@@ -358,6 +361,7 @@ export class ProfileePage implements OnInit {
           const profilePage = new ProfilePage(this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
           profilePage.updateData();
         }, 800);
+        this.storageservice.dismissLoading();
         this.presentToast()
       }
     });
