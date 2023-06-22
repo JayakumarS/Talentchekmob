@@ -63,7 +63,12 @@ export class OniAlumniPage implements OnInit {
 
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
+    console.log(this.RoleID)
+    //ins
+    if(this.RoleID[0]=='3')
+    {
 
+    }
     this.studentNetwork = this.fb.group({
       degree: [""],
       fos: [""],
@@ -77,22 +82,38 @@ export class OniAlumniPage implements OnInit {
       department: [""]
     });
 
-    this.get_CorporateNetwork();
-
-    // this.storageservice.showLoading();
-    this.get_studentNetwork();
-
-  //  this.storageservice.showLoading();
-
-  
-
+     //ins
+     if(this.RoleID[0]=='3')
+     {
+       this.get_CorporateNetwork();
+       this.get_studentNetwork();
+       this.get_studentCount()
+     }
+     //org
+     else{
+       this.get_CorporateNetwork();
+     }
   }
+
+get_studentCount(){
+  
+  this.studentNetwork.value['talentId'] =this.currentUserId;
+  var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkList";
+this.storageservice.get(indiRatingsCountURL,this.studentNetwork.value).subscribe(result => {
+
+if(result['success'] == true && result['studentCount']>0) {
+ this.studCount = result['studentCount'];
+}
+ console.log(result); 
+
+});
+}
 
 get_studentNetwork(){
 
   
   this.studentNetwork.value['talentId'] =this.currentUserId;
-  var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkList";
+  var indiRatingsCountURL = "api/auth/app/Network/getStudentNetworkListMob";
 this.storageservice.get(indiRatingsCountURL,this.studentNetwork.value).subscribe(result => {
 
 if(result['success'] == true) {
@@ -101,7 +122,7 @@ this.constantHighlights =result['constantHighlightsStudentNetworkList'];
 this.recentHighlights = result['recentHighlightsStudentNetworkList'];
 this.constCount = result['constantHighlightsStudentNetworkList'].length;
 this.recntCount = result['recentHighlightsStudentNetworkList'].length;
-this.studCount = result['studentNetworkList'].length;
+
 }
  console.log(result); 
 
@@ -113,11 +134,11 @@ this.studCount = result['studentNetworkList'].length;
 
 get_CorporateNetwork(){
   this.studentNetwork.value['talentId'] =this.currentUserId;
-  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
+  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkListMob";
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
 
     console.log(res);
-    this.corporateCount = res['corporateNetworkList'].length;
+    this.corporateCount = res['corporateCount'];
     this.storageservice.dismissLoading();
   });
   

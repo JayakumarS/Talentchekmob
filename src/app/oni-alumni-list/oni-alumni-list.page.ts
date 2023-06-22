@@ -123,7 +123,7 @@ get_CorporateNetwork(){
 
   })
 
-  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkListMob";
+  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
 
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
   
@@ -141,7 +141,7 @@ get_CorporateNetwork(){
 
 loadMore(event){
   let length2 = 0;
-  
+  this.storageservice.showLoading(); 
 
 
   this.route.queryParams.subscribe(params => {
@@ -169,7 +169,7 @@ loadMore(event){
         'offset' : length2,
   
       })
-      var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkListMob";
+      var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
 
       this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
          this.commonList = res['corporateNetworkList'];
