@@ -67,7 +67,7 @@ export class ConnectionPage implements OnInit {
       receiverMobileNo: ["", Validators.required],
       receiverTalentId: [""],
       receiverName: [""],
-      receiverEmailId: [""],
+      receiverEmailId: ["", Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
       relationshipId: [""],
       acquaintedFromObj: [""],
       acquaintedToObj: [""],
@@ -387,7 +387,7 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const profilePage = new OrgProfileViewPage(this.router, this.storageservice, this.alertController, this.languageService,this.route);
+    const profilePage = new OrgProfileViewPage(this.router, this.storageservice, this.alertController, this.languageService, this.route);
     profilePage.reload();
     this.router.navigate(['/org-profile-view']);
 
@@ -490,7 +490,7 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice, this.languageService,this.route);
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice, this.languageService, this.route);
     insprofileview.reload();
     this.router.navigate(['/insti-profile-view']);
 
@@ -552,4 +552,16 @@ export class ConnectionPage implements OnInit {
   // goto_more(){
   //   this.router.navigate(['/settings']);
   // }
+
+  keyPressAlphaNumeric(event) {
+
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z\s]*$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
 }

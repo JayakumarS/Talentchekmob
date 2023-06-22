@@ -101,7 +101,8 @@
                         <ion-label class="labels">{{'profilein.Connection Name' | translate}} <small
                                 style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-input formControlName="receiverName"></ion-input>
+                            <ion-input formControlName="receiverName"
+                                (keypress)="keyPressAlphaNumeric($event)"></ion-input>
                         </ion-item>
                     </div>
 
@@ -112,6 +113,9 @@
                             <ion-input formControlName="receiverEmailId"
                                 onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                         </ion-item>
+                        <div *ngIf="ConnectionsForm.controls.receiverEmailId.hasError('pattern')">
+                            <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
+                        </div>
                     </div>
                     <div class="button-content">
                         <!-- <ion-label class="labels">This connection is my <small style="color: #f70505;">*</small></ion-label> -->
