@@ -23,10 +23,10 @@ export class InstiProfilePage implements OnInit {
 
   doRefresh(event) {
     this.ngOnInit();
-     setTimeout(() => {
-     event.target.complete();
+    setTimeout(() => {
+      event.target.complete();
     }, 2000);
- }
+  }
 
   docForm: FormGroup;
   currentUserId: string;
@@ -55,12 +55,12 @@ export class InstiProfilePage implements OnInit {
   isAbout: boolean = false;
   isLogo: boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,
-    private camera: Camera, public router: Router,private toastController: ToastController,private elementRef: ElementRef
-    ,public alertController: AlertController,private route: ActivatedRoute, private ngZone: NgZone,public languageService:LanguageService) { }
+    private camera: Camera, public router: Router, private toastController: ToastController, private elementRef: ElementRef
+    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService) { }
 
   ngOnInit() {
 
-    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
 
     this.currentUserId = localStorage.getItem("userId");
@@ -182,7 +182,7 @@ export class InstiProfilePage implements OnInit {
       this.stateResponseBackup = result["stateList"];
       this.stateResponse = result["stateList"];
       this.docForm.patchValue({
-        'permState':this.editstate
+        'permState': this.editstate
       })
       console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
@@ -198,7 +198,7 @@ export class InstiProfilePage implements OnInit {
       this.cityList = result['cityList'];
       this.cityOptions = result['cityList'];
       this.docForm.patchValue({
-        'permCity':this.editCity
+        'permCity': this.editCity
       })
       console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
 
@@ -228,15 +228,15 @@ export class InstiProfilePage implements OnInit {
     this.storageservice.getrequest(EditinstiprofileDetails).subscribe(result => {
 
       if (result["success"] == true) {
-       
+
         this.getCountryList();
         this.profileList = result["profileList"];
-        this.searchForId(result["profileList"][0].permCountry); 
+        this.searchForId(result["profileList"][0].permCountry);
         // this.selectedCountry = this.desiredItem.text;
-        this.editstate = result["profileList"][0].permState; 
+        this.editstate = result["profileList"][0].permState;
         this.getstatelist(result["profileList"][0].permCountry);
         this.editCity = result["profileList"][0].permCity
-        this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
+        this.getcitylist(result["profileList"][0].permState, result["profileList"][0].permCountry)
         this.profileList = result["profileList"];
 
         this.docForm.patchValue({
@@ -260,16 +260,16 @@ export class InstiProfilePage implements OnInit {
         this.base64img1 = this.profileList[0].instLogo;
         this.storageservice.dismissLoading();
 
-      }else{
+      } else {
         this.storageservice.dismissLoading();
       }
-      
+
     })
   }
 
   ///profileDetails  Update
   async Update() {
-    this.profileList[0].instLogo= this.base64img1 ;
+    this.profileList[0].instLogo = this.base64img1;
     const errors = this.checkFormValidity(this.docForm);
 
     if (errors.length > 0) {
@@ -290,9 +290,9 @@ export class InstiProfilePage implements OnInit {
 
       this.storageservice.postrequest(updateprofile, this.Instidetails).subscribe(result => {
         // console.log("Image upload response: " + result)
-        if (result["success"] == true) { 
-          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
-        Instprofileview.reload();
+        if (result["success"] == true) {
+          const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice, this.languageService, this.route);
+          Instprofileview.reload();
           this.presentToast()
         }
       });
@@ -309,8 +309,8 @@ export class InstiProfilePage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
-    insprofileview.reload(); 
+    const insprofileview = new InstiProfileViewPage(this.router, this.storageservice, this.languageService, this.route);
+    insprofileview.reload();
     this.router.navigate(['/insti-profile-view']);
     await toast.present();
   }
@@ -384,6 +384,9 @@ export class InstiProfilePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.docForm.patchValue({
+        'instLogo': this.base64img1,
+      })
     }), error => {
       console.log(error);
     })
@@ -399,6 +402,9 @@ export class InstiProfilePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.docForm.patchValue({
+        'instLogo': this.base64img1,
+      })
     }), error => {
       console.log(error);
     })
@@ -449,12 +455,12 @@ export class InstiProfilePage implements OnInit {
 
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
-        
+
         //#region Getting values from popup
         console.table("One: " + dataReturned);
         var IsAgree = dataReturned.data["IsAgree"];
         console.log("IsAgree: " + IsAgree);
-      
+
         if (IsAgree == "Yes") {
           this.cBoxIAgreeConsentVal = true;
         }

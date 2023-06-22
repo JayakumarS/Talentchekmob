@@ -402,7 +402,7 @@ export class OrgProfilePage implements OnInit {
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
       this.docForm.patchValue({
-        'uploadImg': this.base64img1,
+        'orgLogo': this.base64img1,
       })
     }), error => {
       console.log(error);
@@ -420,7 +420,7 @@ export class OrgProfilePage implements OnInit {
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
       this.docForm.patchValue({
-        'uploadImg': this.base64img1,
+        'orgLogo': this.base64img1,
       })
     }), error => {
       console.log(error);
