@@ -49,11 +49,13 @@ export class ForgotpasswordPage {
   }
   //#region Button click
   pass_click() {
+    // this.showLoadingIndicator()
+    this.storageservice.showLoading();
   this.forgotform.value.email;
     var EditprofileDetails = "api/auth/forgotpasswordemail";
     this.storageservice.postrequest(EditprofileDetails ,this.forgotform.value).subscribe(result => {
       if (result["success"] == true) {
-    
+        this.storageservice.dismissLoading();
         this.router.navigate(['/forget-password-reset-success'])
 
       }  else if (result["success"] == false) {
@@ -61,7 +63,7 @@ export class ForgotpasswordPage {
            
         this.presentToast()
     
-     this.hideLoadingIndicator(); //Hide loading indicator
+    //  this.hideLoadingIndicator(); //Hide loading indicator
    }
       
   });
@@ -94,11 +96,13 @@ showLoadingIndicator() {
     this.router.navigate(['/reset-password'])
   }
   pass_click1() {
+    // this.showLoadingIndicator()
+    this.storageservice.showLoading();
     this.forgotform.value;
       var EditprofileDetails = "api/auth/forgotpasswordphone";
       this.storageservice.postrequest(EditprofileDetails ,this.forgotform.value).subscribe(result => {
         if (result["success"] == true) {
-      
+          this.storageservice.dismissLoading();
           this.router.navigate(['/forget-password-reset-success'])
           
         }  else if (result["success"] == false) {
@@ -107,7 +111,7 @@ showLoadingIndicator() {
              "msg"
            }
        this.storageservice.warningToast(msg);
-       this.hideLoadingIndicator(); //Hide loading indicator
+       
      }
         
     });
