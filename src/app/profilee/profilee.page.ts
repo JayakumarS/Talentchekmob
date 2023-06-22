@@ -489,6 +489,9 @@ export class ProfileePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.profileForm.patchValue({
+        'uploadImg': this.base64img1,
+      })
     }), error => {
       console.log(error);
     })
@@ -504,6 +507,9 @@ export class ProfileePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.profileForm.patchValue({
+        'uploadImg': this.base64img1,
+      })
     }), error => {
       console.log(error);
     })

@@ -8,7 +8,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import moment from 'moment';
-import { OrgProfileViewPage} from '../org-profile-view/org-profile-view.page';
+import { OrgProfileViewPage } from '../org-profile-view/org-profile-view.page';
 import { LanguageService } from '../language.service';
 
 @Component({
@@ -23,10 +23,10 @@ export class OrgProfilePage implements OnInit {
 
   doRefresh(event) {
     this.ngOnInit();
-     setTimeout(() => {
-     event.target.complete();
+    setTimeout(() => {
+      event.target.complete();
     }, 2000);
- }
+  }
 
   docForm: FormGroup;
   industryList: any;
@@ -55,14 +55,14 @@ export class OrgProfilePage implements OnInit {
   desiredstateItem: any;
   isProfile: boolean = false;
   isAbout: boolean = false;
-  isLogo:boolean = false;
-  constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,public alertController: AlertController,
-    private camera: Camera, public router: Router, private ngZone: NgZone,private toastController: ToastController, private route: ActivatedRoute,private languageService: LanguageService,private scroller: ViewportScroller) { }
+  isLogo: boolean = false;
+  constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController, public alertController: AlertController,
+    private camera: Camera, public router: Router, private ngZone: NgZone, private toastController: ToastController, private route: ActivatedRoute, private languageService: LanguageService, private scroller: ViewportScroller) { }
 
   ngOnInit() {
-    this.selectedLang  = localStorage.getItem('selectedLang');
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
-  
+
     this.currentUserId = localStorage.getItem("userId");
     this.getCountryList();
 
@@ -71,7 +71,7 @@ export class OrgProfilePage implements OnInit {
 
         if (params != null) {
           console.log(params);
-        
+
           if (params.id == 1) {
 
             this.isProfile = true;
@@ -81,7 +81,7 @@ export class OrgProfilePage implements OnInit {
             this.editprofile();
 
           }
-          if(params.id == 3){
+          if (params.id == 3) {
             this.isLogo = true;
             this.editprofile();
 
@@ -104,7 +104,7 @@ export class OrgProfilePage implements OnInit {
       permState: [""],
       permCountry: [""],
       permPinCode: [""],
-       orgLogo: ["",],
+      orgLogo: ["",],
       details: ["", [Validators.required]],
       currentUserId: [""]
     })
@@ -112,8 +112,8 @@ export class OrgProfilePage implements OnInit {
     this.domainList();
 
 
-   
-    
+
+
   }
 
   profileView() {
@@ -129,7 +129,7 @@ export class OrgProfilePage implements OnInit {
   getCountryList() {
 
 
-    
+
     var countryURL = "api/auth/app/CommonUtility/countryList";
     const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
       this.countryResponse = result["countryList"];
@@ -174,7 +174,7 @@ export class OrgProfilePage implements OnInit {
       this.stateResponseBackup = result["stateList"];
       this.stateResponse = result["stateList"];
       this.docForm.patchValue({
-        'permState':this.editstate
+        'permState': this.editstate
       })
       console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
@@ -190,7 +190,7 @@ export class OrgProfilePage implements OnInit {
       this.cityList = result['cityList'];
       this.cityOptions = result['cityList'];
       this.docForm.patchValue({
-        'permCity':this.editCity
+        'permCity': this.editCity
       })
       console.log(`cityList: ${JSON.stringify(this.cityOptions)}`);
 
@@ -243,50 +243,50 @@ export class OrgProfilePage implements OnInit {
       if (result["success"] == true) {
         this.getCountryList();
 
-        this.searchForId(result["profileList"][0].permCountry); 
+        this.searchForId(result["profileList"][0].permCountry);
         // this.selectedCountry = this.desiredItem.text;
-        this.editstate = result["profileList"][0].permState; 
+        this.editstate = result["profileList"][0].permState;
         this.getstatelist(result["profileList"][0].permCountry);
         this.editCity = result["profileList"][0].permCity
-        this.getcitylist(result["profileList"][0].permState,result["profileList"][0].permCountry)
-        
+        this.getcitylist(result["profileList"][0].permState, result["profileList"][0].permCountry)
+
         this.profileList = result["profileList"];
-     
-      const dob = this.profileList[0].dob;
-      const startdate = moment(dob, 'DD/MM/YYYY').toDate();
-      //this.docForm.value.dob =formatDate(this.profileList[0].dob, 'dd/MM/yyyy','en-IN');
-      this.docForm.patchValue({
 
-        'orgName': this.profileList[0].orgName,
-        'domain': this.profileList[0].domain,
-        'orgEmail': this.profileList[0].orgEmail,
-        'orgMobile': this.profileList[0].orgMobile,
-        'cinReg': this.profileList[0].cinReg,
+        const dob = this.profileList[0].dob;
+        const startdate = moment(dob, 'DD/MM/YYYY').toDate();
+        //this.docForm.value.dob =formatDate(this.profileList[0].dob, 'dd/MM/yyyy','en-IN');
+        this.docForm.patchValue({
+
+          'orgName': this.profileList[0].orgName,
+          'domain': this.profileList[0].domain,
+          'orgEmail': this.profileList[0].orgEmail,
+          'orgMobile': this.profileList[0].orgMobile,
+          'cinReg': this.profileList[0].cinReg,
 
 
-        'dob': startdate.toISOString(),
-        'size': this.profileList[0].size,
-        'orgType': this.profileList[0].orgType,
-        'taxId': this.profileList[0].taxId,
-        'details': this.profileList[0].details,
-        'permAddress': this.profileList[0].permAddress,
-        // 'permCity': this.profileList[0].permCity,
-        // 'permState': this.profileList[0].permState,
-         'permCountry':this.profileList[0].permCountry,
-        'permPinCode': this.profileList[0].permPinCode,
-        'orgLogo': this.profileList[0].orgLogo,
-        'languagesknown': this.profileList[0].languagesknown,
-      })
-      this.base64img1 = this.profileList[0].orgLogo;
-     
-    }
-    this.storageservice.dismissLoading();
+          'dob': startdate.toISOString(),
+          'size': this.profileList[0].size,
+          'orgType': this.profileList[0].orgType,
+          'taxId': this.profileList[0].taxId,
+          'details': this.profileList[0].details,
+          'permAddress': this.profileList[0].permAddress,
+          // 'permCity': this.profileList[0].permCity,
+          // 'permState': this.profileList[0].permState,
+          'permCountry': this.profileList[0].permCountry,
+          'permPinCode': this.profileList[0].permPinCode,
+          'orgLogo': this.profileList[0].orgLogo,
+          'languagesknown': this.profileList[0].languagesknown,
+        })
+        this.base64img1 = this.profileList[0].orgLogo;
+
+      }
+      this.storageservice.dismissLoading();
     })
   }
 
   ///profileDetails  Update
   async Update() {
-    this.profileList[0].orgLogo= this.base64img1;
+    this.profileList[0].orgLogo = this.base64img1;
     // this.docForm.value.permCountry = this.desiredItem.id
     const errors = this.checkFormValidity(this.docForm);
 
@@ -308,9 +308,9 @@ export class OrgProfilePage implements OnInit {
 
       this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {
         console.log("Image upload response: " + result)
-        if (result["success"] == true) { 
-           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController,this.languageService,this.route);
-           orgprofileview.reload(); 
+        if (result["success"] == true) {
+          const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController, this.languageService, this.route);
+          orgprofileview.reload();
           this.presentToast()
         }
       });
@@ -401,6 +401,9 @@ export class OrgProfilePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.docForm.patchValue({
+        'uploadImg': this.base64img1,
+      })
     }), error => {
       console.log(error);
     })
@@ -416,6 +419,9 @@ export class OrgProfilePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+      this.docForm.patchValue({
+        'uploadImg': this.base64img1,
+      })
     }), error => {
       console.log(error);
     })
