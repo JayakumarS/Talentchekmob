@@ -96,7 +96,7 @@ export class ProfileViewPage implements OnInit {
     });
 
     this.userId = localStorage.getItem("userId");
-    this.img = localStorage.getItem("profilePic");
+    //this.img = localStorage.getItem("profilePic");
 
     if (this.img != "null" && this.img != "") {
       this.prof = true
@@ -160,6 +160,7 @@ export class ProfileViewPage implements OnInit {
       this.email = result['profileViewList'][0]['email'];
       this.language = result['profileViewList'][0]['languages'];
       this.talentId = result['profileViewList'][0]['talentId'];
+      this.img = result['profileViewList'][0]['profilepic'];
       console.log(this.talentId)
       this.myValue = this.talentId;
       console.log(this.myValue)

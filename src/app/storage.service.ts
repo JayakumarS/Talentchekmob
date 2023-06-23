@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { AuthLoginInfo } from './auth/login-Info';
-import {JwtResponse} from './auth/jwt-Response';
+import { JwtResponse } from './auth/jwt-Response';
 import { map } from "rxjs/operators";
 import { User } from "./auth/user";
 import { BehaviorSubject } from 'rxjs';
@@ -30,41 +30,40 @@ export class StorageService {
 
   baseurl: any;
   serverurl: any;
+  // // //testing Server
+  mobileserverurl: string = "http://localhost:8085/";
+  baseURL: string = "http://localhost:8085/";
 
-//testing Server
-// mobileserverurl:string ="http://192.168.5.25:8080/talentchek/";
-// baseURL:string ="http://192.168.5.25:8080/talentchek/";
+  // //Live server
+  // mobileserverurl: string = "https://portal.talentchek.com:5447/talentchek/";
 
-//Local server
-mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
-
-baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
+  // baseURL: string = "https://portal.talentchek.com:5447/talentchek/";
 
   mobileserverserive: any;
-  
+
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {
 
 
   }
-  
 
 
-  showLoading(){
+
+  showLoading() {
     this.loading.next(true);
   }
 
-  dismissLoading(){
+  dismissLoading() {
     this.loading.next(false);
   }
 
-  watchLoading(){
+  watchLoading() {
     return this.loading.asObservable();
   }
 
   loginUrl = `${this.mobileserverurl}api/auth/signin`;
 
   getbaseusrl() {
-  
+
 
     return this.mobileserverurl;
   }
@@ -83,13 +82,13 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
 
 
   public post<T>(url: string, model: T): Observable<T> {
-    return this.http.post<T>(this.mobileserverurl+url, (model));
+    return this.http.post<T>(this.mobileserverurl + url, (model));
 
   }
 
 
   public get<T>(url: string, params?: any): Observable<T> {
-    return this.http.get<T>(this.mobileserverurl+url, { params });
+    return this.http.get<T>(this.mobileserverurl + url, { params });
   }
 
   postrequest_WithBaseURL(url, data) {
@@ -123,7 +122,7 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
       "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
       "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
       'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',      
+      'Content-Type': 'application/json',
       'Authorization': 'Basic ' + 'rzp_test_eqSEPuyDod17Tm:cUf2GhGSxta1Jmnh4IwvMwof'
     });
 
@@ -178,7 +177,7 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
 
   public async warningToast(msg) {
     const toast = await this.toastController.create({
-     // header: 'Oops!',
+      // header: 'Oops!',
       color: 'warning',
       cssClass: "toast-success",
       message: msg,
@@ -325,7 +324,7 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
   private userObj = new User();
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return  this.http
+    return this.http
       .post<JwtResponse>(this.loginUrl, credentials)
       .pipe(
         map((user) => {
@@ -333,18 +332,18 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
           console.log(user)
           localStorage.setItem("currentUser", JSON.stringify(user));
 
-         // let response ={};
+          // let response ={};
           this.userObj['userId'] = user.empId;
           this.userObj['token'] = user.accessToken;
           this.userObj['roles'] = user.roles;
-          this.userObj["img"] =  user.imgurl;
+          this.userObj["img"] = user.imgurl;
           this.userObj["defaultRoleId"] = user.defaultRoleId;
           this.userObj["companyCode"] = user.companyCode;
           this.userObj['firstNameLastName'] = user.firstNameLastName;
           this.userObj['categoryType'] = user.categoryType;
-          
+
           console.log(this.userObj);
-        // this.currentUserSubject.next(this.userObj);
+          // this.currentUserSubject.next(this.userObj);
           return user;
         })
       );

@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef,ViewChild,AfterViewInit  } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 // import { ViewportScroller } from "@angular/common";
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
@@ -11,7 +11,7 @@ import { LanguageService } from '../language.service';
   templateUrl: './org-profile-view.page.html',
   styleUrls: ['./org-profile-view.page.scss'],
 })
-export class OrgProfileViewPage implements OnInit,AfterViewInit  {
+export class OrgProfileViewPage implements OnInit, AfterViewInit {
   @ViewChild('section') sectionElement!: ElementRef;
   // @ViewChild('container') container: ElementRef<HTMLElement>;
   relationship: any;
@@ -19,7 +19,7 @@ export class OrgProfileViewPage implements OnInit,AfterViewInit  {
 
   doRefresh(event) {
     this.ngOnInit();
-      event.target.complete();
+    event.target.complete();
   }
   userId: string;
   img: string;
@@ -34,19 +34,19 @@ export class OrgProfileViewPage implements OnInit,AfterViewInit  {
   foundedin: any;
   registrationno: any;
   aboutdesc: any;
-  prof: boolean=false;
+  prof: boolean = false;
   accountHolderName: any;
   accountNumber: any;
   feeCurrency: any;
   feeAmount: any;
   ifscCode: any;
-  connectioncard:boolean = false;
+  connectioncard: boolean = false;
   showDropdownFlag: any;
   connectionList: any;
   orgLogo: string;
 
 
-  constructor(public router: Router,public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService,private route: ActivatedRoute) { 
+  constructor(public router: Router, public storageservice: StorageService, public alertController: AlertController, private languageService: LanguageService, private route: ActivatedRoute) {
 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
@@ -60,14 +60,14 @@ export class OrgProfileViewPage implements OnInit,AfterViewInit  {
         cancelable: true,
         target: contentElement
       };
-       this.doRefresh(eventInit);
+      this.doRefresh(eventInit);
     });
   }
 
   ngOnInit() {
 
-    
-    this.selectedLang  = localStorage.getItem('selectedLang');
+
+    this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
 
     this.router.events.subscribe(event => {
@@ -76,70 +76,69 @@ export class OrgProfileViewPage implements OnInit,AfterViewInit  {
       }
     });
 
-    this.userId = localStorage.getItem("userId")  ; 
-    this.orgLogo = localStorage.getItem("profilePic")  ;
+    this.userId = localStorage.getItem("userId");
+    // this.orgLogo = localStorage.getItem("profilePic")  ;
 
 
-  
 
-    if(this.orgLogo!="null" && this.orgLogo!=""){
+
+    if (this.orgLogo != "null" && this.orgLogo != "") {
       this.prof = true
       // this.profAvatar = false
-    }else{
+    } else {
 
       // this.profAvatar = true
       this.prof = false
-      
+
     }
 
 
-    
-    var profileOrgView = "api/auth/app/IndividualProfileDetails/orgviewprofiledetails?currentUserId="+this.userId;
+
+    var profileOrgView = "api/auth/app/IndividualProfileDetails/orgviewprofiledetails?currentUserId=" + this.userId;
     this.storageservice.getrequest(profileOrgView).subscribe(result => {
-     console.log(result); 
-      if(result["success"] != false){
- 
-     if(result['profileViewList'] != null && result['profileViewList'].length != 0){
-     
-      
-                   //profileview ORG
-                   this.orglocation = result['profileViewList'][0]['orglocation'];
-                   this.orgname = result['profileViewList'][0]['orgname'];
-                   this.mobile = result['profileViewList'][0]['phone'];
-                   this.email = result['profileViewList'][0]['email'];
-                   this.mobile = result['profileViewList'][0]['phone'];
-                   this.industrydomain = result['profileViewList'][0]['industrydomain'];
-                   this.entitytype = result['profileViewList'][0]['entitytype'];
-                   this.logo = result['profileViewList'][0]['logo'];
-                   this.companysize = result['profileViewList'][0]['companysize'];
-                   this.foundedin = result['profileViewList'][0]['foundedin'];
-                   this.registrationno = result['profileViewList'][0]['registrationno'];
-                   this.aboutdesc = result['profileViewList'][0]['aboutdesc'];
+      console.log(result);
+      if (result["success"] != false) {
 
-                   this.accountHolderName = result['profileViewList'][0]['accountHolderName'];
-                   this.accountNumber = result['profileViewList'][0]['accountNumber'];
-                   this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
-                   this.feeAmount = result['profileViewList'][0]['feeAmount'];
-                   this.ifscCode = result['profileViewList'][0]['ifscCode'];
-                 
+        if (result['profileViewList'] != null && result['profileViewList'].length != 0) {
 
-                  if(result['profileViewList'][0].connectionList.length != 0){
-                    this.connectioncard = true;
-                    this.connectionList = result['profileViewList'][0]['connectionList'];
-                  }
 
-                }
-              }
+          //profileview ORG
+          this.orglocation = result['profileViewList'][0]['orglocation'];
+          this.orgname = result['profileViewList'][0]['orgname'];
+          this.mobile = result['profileViewList'][0]['phone'];
+          this.email = result['profileViewList'][0]['email'];
+          this.mobile = result['profileViewList'][0]['phone'];
+          this.industrydomain = result['profileViewList'][0]['industrydomain'];
+          this.entitytype = result['profileViewList'][0]['entitytype'];
+          this.logo = result['profileViewList'][0]['logo'];
+          this.companysize = result['profileViewList'][0]['companysize'];
+          this.foundedin = result['profileViewList'][0]['foundedin'];
+          this.registrationno = result['profileViewList'][0]['registrationno'];
+          this.aboutdesc = result['profileViewList'][0]['aboutdesc'];
+
+          this.accountHolderName = result['profileViewList'][0]['accountHolderName'];
+          this.accountNumber = result['profileViewList'][0]['accountNumber'];
+          this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
+          this.feeAmount = result['profileViewList'][0]['feeAmount'];
+          this.ifscCode = result['profileViewList'][0]['ifscCode'];
+
+
+          if (result['profileViewList'][0].connectionList.length != 0) {
+            this.connectioncard = true;
+            this.connectionList = result['profileViewList'][0]['connectionList'];
+          }
+
+        }
+      }
     })
   }
 
-  ngAfterViewInit()
-  {
+  ngAfterViewInit() {
     this.route.params.subscribe(param => {
       // alert(param.pageSec)
 
       const id = param['id'];
-      if(id){
+      if (id) {
         // const section = this.container.nativeElement.querySelector(`#${param.pageSec}`)
         // console.log(section)
 
@@ -150,22 +149,22 @@ export class OrgProfileViewPage implements OnInit,AfterViewInit  {
   }
   scrollToSection(id: string) {
     setTimeout(() => {
-    const element = this.sectionElement.nativeElement;
-    //const element = document.getElementById(id);
-    console.log(element);
+      const element = this.sectionElement.nativeElement;
+      //const element = document.getElementById(id);
+      console.log(element);
 
-    
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } 
-  },500);
-}
-  
-  reload(){
+
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500);
+  }
+
+  reload() {
     this.storageservice.refreshData();
   }
 
-  showDropdown(userId :string) {
+  showDropdown(userId: string) {
     this.showDropdownFlag = userId;
   }
 
@@ -178,80 +177,78 @@ export class OrgProfileViewPage implements OnInit,AfterViewInit  {
     this.selectedTab = tabName;
   }
 
-  profileorg1(one){
+  profileorg1(one) {
     let edit = {
-    id:one
-   }
-   let navigationExtras: NavigationExtras = {
-     queryParams: edit
-   };
-    this.router.navigate(['/org-profile'],navigationExtras);
+      id: one
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/org-profile'], navigationExtras);
 
   }
-  profileorg2(two){
+  profileorg2(two) {
     let edit = {
-    id:two
-   }
-   let navigationExtras: NavigationExtras = {
-     queryParams: edit
-   };
-    this.router.navigate(['/org-profile'],navigationExtras);
+      id: two
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/org-profile'], navigationExtras);
 
   }
-  profileimg(id){
+  profileimg(id) {
     let edit = {
       id
-   }
-   let navigationExtras: NavigationExtras = {
-     queryParams: edit
-   };
-  
-    this.router.navigate(['/org-profile'],navigationExtras);
-  
-  
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+
+    this.router.navigate(['/org-profile'], navigationExtras);
+
+
   }
 
-  Connections()
-  {
-    this.router.navigate(['/connection']) 
+  Connections() {
+    this.router.navigate(['/connection'])
   }
 
-  payment(userId)
-  {
+  payment(userId) {
     let edit = {
       userId
-   }
-   let navigationExtras: NavigationExtras = {
-     queryParams: edit
-   };
-    this.router.navigate(['/payment'],navigationExtras) 
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/payment'], navigationExtras)
   }
 
- go_to_list(p){
-  let edit = {
-    p
- }
- let navigationExtras: NavigationExtras = {
-   queryParams: edit
- };
-  this.router.navigate(['/connection-list'],navigationExtras);
+  go_to_list(p) {
+    let edit = {
+      p
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: edit
+    };
+    this.router.navigate(['/connection-list'], navigationExtras);
 
- }
+  }
 
   // footer
-  goto_profileSearch(){
+  goto_profileSearch() {
     this.router.navigate(['/job-search']);
   }
-  goto_jobs(){
+  goto_jobs() {
     this.router.navigate(['/oni-job-post-list']);
   }
-  goto_home(){
+  goto_home() {
     this.router.navigate(['/organization-dashboard']);
   }
-  goto_profile(){
+  goto_profile() {
     this.router.navigate(['/org-profile-view']);
   }
-  goto_more(){
+  goto_more() {
     this.router.navigate(['/settings']);
-  } 
+  }
 }
