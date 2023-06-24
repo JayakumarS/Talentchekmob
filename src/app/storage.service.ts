@@ -31,13 +31,13 @@ export class StorageService {
   baseurl: any;
   serverurl: any;
   // // //testing Server
-  mobileserverurl: string = "http://localhost:8085/";
-  baseURL: string = "http://localhost:8085/";
+  // mobileserverurl: string = "http://localhost:8085/";
+  // baseURL: string = "http://localhost:8085/";
 
   // //Live server
-  // mobileserverurl: string = "https://portal.talentchek.com:5447/talentchek/";
+  mobileserverurl: string = "https://portal.talentchek.com:5447/talentchek/";
 
-  // baseURL: string = "https://portal.talentchek.com:5447/talentchek/";
+  baseURL: string = "https://portal.talentchek.com:5447/talentchek/";
 
   mobileserverserive: any;
 

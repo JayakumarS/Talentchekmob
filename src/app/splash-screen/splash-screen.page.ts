@@ -9,11 +9,11 @@ import { StorageService } from '../storage.service';
 })
 export class SplashScreenPage implements OnInit {
 
- roleId :any;
+  roleId: any;
 
-  constructor(private router: Router, public storageservice: StorageService) { 
+  constructor(private router: Router, public storageservice: StorageService) {
 
- 
+
 
     var idobj = localStorage.getItem("userId");
     var pwdObj = localStorage.getItem("access");
@@ -22,7 +22,7 @@ export class SplashScreenPage implements OnInit {
       console.log('Pwd s-c: ', pwdObj);
       this.roleId = localStorage.getItem("roleId");
       //#region Check latest application version and give alert to user
-      this.checkLatestMobileAppVersionAndGiveAlert();
+
       //#endregion
 
 
@@ -33,7 +33,7 @@ export class SplashScreenPage implements OnInit {
         this.router.navigate(['/home']);
       } else if (this.roleId.includes('2')) {
         this.router.navigate(['/organization-dashboard']);
-      } else if (this.roleId.includes( '3')) {
+      } else if (this.roleId.includes('3')) {
         this.router.navigate(['/institution-dashboard']);
       }
       else if (this.roleId.includes('5')) {
@@ -46,41 +46,44 @@ export class SplashScreenPage implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.checkLatestMobileAppVersionAndGiveAlert();
   }
 
 
 
-  checkLatestMobileAppVersionAndGiveAlert(){
-//#region Check latest application version and give alert to user
-var getMobileAppVersionUrl = "api/auth/app/mobile/getLatestMobileAppVersionMob";
-this.storageservice.getrequest(getMobileAppVersionUrl).subscribe(resultVersion => {
-  var responseVersion = resultVersion;
-  console.log("responseVersion: " + responseVersion);
+  checkLatestMobileAppVersionAndGiveAlert() {
+    //#region Check latest application version and give alert to user
+    var getMobileAppVersionUrl = "api/auth/app/mobile/getLatestMobileAppVersionMob";
+    this.storageservice.getrequest(getMobileAppVersionUrl).subscribe(resultVersion => {
+      var responseVersion = resultVersion;
+      console.log("responseVersion: " + responseVersion);
 
-  let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
-  console.log(latestMobileAppVersion);
+      let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
+      console.log(latestMobileAppVersion);
 
-  if (latestMobileAppVersion != "4.4.9") {
-    this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
-      'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
-      'Update now', 'Not now');
+      if (latestMobileAppVersion != "4.4.9") {
+        this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
+          'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
+          'Update now', 'Not now');
+      }
+    },
+      error => {
+        console.log(`Error data: ${JSON.stringify(error)}`);
+        if (error.name == "HttpErrorResponse") {
+          this.storageservice.warningToast('Internet connection problem, Pls check your internet.');
+          this.storageservice.GeneralAlert('HttpErrorResponse', 'Internet connection problem, Pls check your internet.');
+        }
+        else {
+          this.storageservice.warningToast('Error: ' + error.message);
+        }
+      },
+      () => {
+
+      });
+
   }
-},
-  error => {
-    console.log(`Error data: ${JSON.stringify(error)}`);
-    if (error.name == "HttpErrorResponse") {
-      this.storageservice.warningToast('Internet connection problem, Pls check your internet.');
-      this.storageservice.GeneralAlert('HttpErrorResponse', 'Internet connection problem, Pls check your internet.');
-    }
-    else {
-      this.storageservice.warningToast('Error: ' + error.message);
-    }
-  },
-  () => {
 
-  });
-
-  }
-    
 
 }
