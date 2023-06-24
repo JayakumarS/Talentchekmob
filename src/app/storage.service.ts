@@ -203,7 +203,7 @@ export class StorageService {
       color: 'warning',
       cssClass: "toast-success",
       message: msg,
-      duration: 300000
+      duration: 3000
     });
     toast.present();
   }
