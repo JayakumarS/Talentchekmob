@@ -64,6 +64,7 @@ export class HomePage implements OnInit {
         this.getProfileViewCount();
         this.getmatchedJobCount();
         this.getnetworkCount();
+        this.getTour();
       }
     });
 
@@ -74,10 +75,12 @@ export class HomePage implements OnInit {
     this.getProfileViewCount();
     this.getmatchedJobCount();
     this.getnetworkCount();
+    this.getTour();
     this.categoryType = localStorage.getItem("categoryType")  ; 
     this.getcategoryreg();
    this.creditPoints = localStorage.getItem("creditPoints") ;
 //Profile View Count
+
 
   }
   selectedTab: string = 'apps';
@@ -97,23 +100,42 @@ export class HomePage implements OnInit {
         element: '#step1',
         popover: {
          className: 'first-step-popover-class',
-          title: 'Step 1',
-          description: 'This is the first step.',
+          title: 'Profile Lookup',
+          description: 'You can search and view profiles here.',
           position: 'top',
         },
       },
       {
         element: '#step2',
         popover: {
-          title: 'Step 2',
-          description: 'This is the second step.',
+          title: 'Job Search',
+          description: 'Add your preferences here to get matched with right opportunities.',
           position: 'top',
         },
       },
+
+      {
+        element: '#step3',
+        popover: {
+          title: 'Profile',
+          description: 'Update your professional portfolio over here and get your claims verified.',
+          position: 'top-center',
+        },
+      },
+      {
+        element: '#step4',
+        popover: {
+          title: 'More',
+          description: 'Discover Alumni profiles, manage subscriptions and other settings over here.',
+          position: 'left-bottom',
+        },
+      }
       // Add more steps as needed
     ]);
   
     this.driver.start();
+
+    this.getTourFlagUpdate();
   }
 
 
@@ -133,6 +155,18 @@ export class HomePage implements OnInit {
      console.log(result); 
      this.networkCount = result['networkcount']; 
         });
+
+      }
+
+      getTour(){
+
+        var getCurrencyURL = "api/auth/app/mobile/getfirstTimeLoginUser?currentUserId=" + this.userId;
+        this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
+        console.log(result);
+        if(result[0].fistTimeloginValue == true){
+          this.startTour();
+        }
+         });
 
       }
 
@@ -171,6 +205,22 @@ export class HomePage implements OnInit {
               localStorage.setItem('categoryType', data["categoryType"]);
               this.creditPoints = localStorage.getItem("creditPoints") ;
             }
+            });
+          }
+
+
+          getTourFlagUpdate(){
+            var data = {
+              "currentUserId":this.userId,
+              "fistTimeloginValue":false
+ 
+             }  
+            var updateTourFlag = "api/auth/app/mobile/updateFirstTimeLoginMoblie"; 
+            this.storageservice.postrequest(updateTourFlag, data).subscribe(result => {  
+               console.log("Image upload response: " + result)
+              if (result["success"] == true) {
+              // this.presentToast()
+               }
             });
           }
  

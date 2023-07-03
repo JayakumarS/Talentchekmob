@@ -4,6 +4,7 @@ import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../language.service';
+import Driver from 'driver.js';
 
 @Component({
   selector: 'app-organization-dashboard',
@@ -12,7 +13,7 @@ import { LanguageService } from '../language.service';
 })
 export class OrganizationDashboardPage implements OnInit {
   selectedLang: string;
-
+  driver:any = new Driver();
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -44,11 +45,13 @@ export class OrganizationDashboardPage implements OnInit {
       if (event instanceof NavigationEnd && event.url === '/organization-dashboard') {
         this.setSelectedTab('apps');
         this.getCreditpoints();
+        this.getTour();
       }
     });
 
     this.userId = localStorage.getItem("userId")  ; 
     this.getCreditpoints();
+    this.getTour();
     this.creditPoints = localStorage.getItem("creditPoints") ;
  
     var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
@@ -84,6 +87,83 @@ export class OrganizationDashboardPage implements OnInit {
       localStorage.setItem('categoryType', data["categoryType"]);
       this.creditPoints = localStorage.getItem("creditPoints") ;
     }
+    });
+  }
+
+  getTour(){
+
+    var getCurrencyURL = "api/auth/app/mobile/getfirstTimeLoginUser?currentUserId=" + this.userId;
+    this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
+    console.log(result);
+    if(result[0].fistTimeloginValue == true){
+      this.startTour();
+    }
+     });
+
+  }
+
+  startTour(){
+
+    this.driver = new Driver({
+      stageBackground: "rgba(255, 255, 255, 0.1)", // Background color for the staged behind highlighted element
+    });
+
+    this.driver.defineSteps([
+      {
+        element: '#step1',
+        popover: {
+         className: 'first-step-popover-class',
+          title: 'Profile Lookup',
+          description: 'You can search and view profiles here.',
+          position: 'top',
+        },
+      },
+      {
+        element: '#step2',
+        popover: {
+          title: 'Hiring',
+          description: 'Add your job vacancies here to get matched with job seeker profiles.',
+          position: 'top',
+        },
+      },
+
+      {
+        element: '#step3',
+        popover: {
+          title: 'Profile',
+          description: 'Tailor your profile here to impress candidates and  clients with your brand.',
+          position: 'top-center',
+        },
+      },
+      {
+        element: '#step4',
+        popover: {
+          title: 'More',
+          description: 'Discover Alumni profiles, manage subscriptions and other settings over here.',
+          position: 'left-bottom',
+        },
+      }
+      // Add more steps as needed
+    ]);
+  
+    this.driver.start();
+
+    this.getTourFlagUpdate();
+  }
+
+
+  getTourFlagUpdate(){
+    var data = {
+      "currentUserId":this.userId,
+      "fistTimeloginValue":false
+
+     }  
+    var updateTourFlag = "api/auth/app/mobile/updateFirstTimeLoginMoblie"; 
+    this.storageservice.postrequest(updateTourFlag, data).subscribe(result => {  
+       console.log("Image upload response: " + result)
+      if (result["success"] == true) {
+      // this.presentToast()
+       }
     });
   }
 

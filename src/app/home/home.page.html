@@ -28,8 +28,7 @@
                                         <em></em>
                                     </div>
                                 </div>
-                                <div class="ml-2"
-                                    style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
                                     {{creditPoints}}
                                 </div>
                             </div>
@@ -50,8 +49,7 @@
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                {{'Your Rating' | translate}}:<b>&nbsp; {{avgrating}}</b><span
-                                    class="fa fa-star checked"></span></div>
+                                {{'Your Rating' | translate}}:<b>&nbsp; {{avgrating}}</b><span class="fa fa-star checked"></span></div>
                         </div>
                     </ion-col>
                 </div>
@@ -119,8 +117,7 @@
         <ion-col>
             <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1>
             <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P>
-            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a
-                    (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
+            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
             <img class="imageCss" src="../../assets/img/Illustration.png" />
         </ion-col>
 
@@ -134,21 +131,20 @@
 </ion-content>
 
 <div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();"
-        id="step1">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();" id="step1">
         <ion-icon size="large" name="search-circle"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();" id="step2">
         <ion-icon size="large" name="earth-sharp"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();" id="step2">
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
         <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
 
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();" id="step3">
         <ion-icon size="large" name="person-circle-sharp"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();" id="step4">
         <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
 
     </button>
