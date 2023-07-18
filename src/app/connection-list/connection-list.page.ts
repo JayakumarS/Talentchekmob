@@ -16,6 +16,7 @@ export class ConnectionListPage implements OnInit {
   userId: string;
   connectionList: any;
   mySlicedArray = [];
+  imagePath:string;
 
   @ViewChild('popover') popover;
 
@@ -30,7 +31,10 @@ export class ConnectionListPage implements OnInit {
     this.isOpen = true;
   }
   constructor(public router: Router, public alertController: AlertController, public languageService: LanguageService,
-    public modalController: ModalController, public storageservice: StorageService, private route: ActivatedRoute) { }
+    public modalController: ModalController, public storageservice: StorageService, private route: ActivatedRoute) { 
+
+      this.imagePath = this.storageservice.mobileserverurl;
+    }
 
   ngOnInit() {
 

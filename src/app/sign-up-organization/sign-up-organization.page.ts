@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { LanguageService } from '../language.service';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Component({
   selector: 'app-sign-up-organization',
@@ -23,6 +24,9 @@ export class SignUpOrganizationPage implements OnInit {
   isSubmitted: boolean;
   splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©_+]*$";
   talentorgform: FormGroup;
+  profileForm: FormGroup;
+  addressForm: FormGroup;
+  regInfoForm: FormGroup;
   step: any
   stateVal: string;
   countryVal: string;
@@ -39,7 +43,6 @@ export class SignUpOrganizationPage implements OnInit {
   private stepper: Stepper;
   base64img1: string = '';
   filteredOptions: any;
-  addressForm: any;
   stateList: [];
   CtryId: any;
   stateOptions: any;
@@ -55,6 +58,7 @@ export class SignUpOrganizationPage implements OnInit {
   countryId: string;
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
+  
 
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
@@ -72,28 +76,43 @@ export class SignUpOrganizationPage implements OnInit {
 
 
     this.talentorgform = formbuilder.group({
+     
+  
+
+      countryId: [''],
+
+    });
+
+    this.profileForm = this.formbuilder.group({
       organizationName: ['', Validators.compose([Validators.maxLength(50), Validators.minLength(3), Validators.required])],
       regNo: ['', Validators.required],
       orgType: ['', Validators.required],
       regDate: ['', Validators.required],
       domainId: ['', Validators.required],
-      emailId: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-      address: [''],
-      country: ['', Validators.required],
-      city: ['', Validators.required],
-      pwd: ['', Validators.required],
-      mobileNo: ['', Validators.required],
-      state: ['', Validators.required],
-      pincode: ['', Validators.required],
-      uploadImg: ['',],
-      referralCode: [''],
-      profileVisibility: ['', ''],
-      countryId: [''],
-      cBoxIAgree: [''],
-      cBoxIAgreeConsent: ['']
-    });
+      uploadImg: ['',]
+});
 
 
+this.addressForm = this.formbuilder.group({
+  address: [''],
+  country: ['', Validators.required],
+  city: ['', Validators.required],
+  state: ['', Validators.required],
+  pincode: ['', Validators.required],
+  registrationmode: [''],
+});
+
+
+this.regInfoForm = this.formbuilder.group({
+  pwd: ['', Validators.required],
+  mobileNo: ['', Validators.required],
+  referralCode: [''],
+  profileVisibility: ['', ''],
+  emailId: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+  cBoxIAgree: [''],
+  cBoxIAgreeConsent: ['']
+
+});
 
 
   }
@@ -109,9 +128,10 @@ export class SignUpOrganizationPage implements OnInit {
     this.stepper.next();
   }
 
-  // onSubmit() {
-  //   return false;
-  // }
+  profileInfonext() {
+    this.stepper.next();
+  }
+
 
   async ngOnInit() {
     this.selectedLang = localStorage.getItem('selectedLang');
@@ -131,19 +151,50 @@ export class SignUpOrganizationPage implements OnInit {
   }
 
 
+  portChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('country:', event.value);
 
-  goToSearchSelectedItem(CtryName, CtryId) {
-    console.log("InsName: " + CtryName)
-    console.log("InsId: " + CtryId)
+    this.getstatelist(event.value.id);
 
-    this.countryVal = CtryName;
-    this.talentorgform.value.countryId = CtryId;
-    this.IsSearchListShow = false;
-    this.getstatelist(CtryId);
+    this.addressForm.patchValue({
+      'state': "",
+    });
+
+    this.addressForm.patchValue({
+      'city': "",
+    });
   }
+
+
+  stateChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    var CtryId = this.addressForm.value.country['id'];
+
+    this.getcitylist(event.value.id,CtryId);
+
+    this.addressForm.patchValue({
+      'city': "",
+    });
+  }
+
+  cityChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('city:', event.value);
+
+  }
+
+
+
   goto_welcome() {
 
-    this.router.navigate(['/hello-dear'])
+    this.router.navigate(['/register-cat']);
   }
 
   goto_signin() {
@@ -162,10 +213,24 @@ export class SignUpOrganizationPage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
-      this.talentorgform.patchValue({
-        'uploadImg': this.base64img1,
-      })
+
       console.log(this.base64img1);
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.profileForm.value.uploadImg = result['uploadPhotoPath'] ;
+
+          console.log(this.profileForm.value.uploadImg)
+
+        }
+
+      });  
     }), error => {
       console.log(error);
     })
@@ -185,6 +250,26 @@ export class SignUpOrganizationPage implements OnInit {
         'uploadImg': this.base64img1,
       })
       console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.profileForm.value.uploadImg = result['uploadPhotoPath'] ;
+
+
+
+          console.log(this.profileForm.value.uploadImg)
+
+        }
+
+      });  
+
     }), error => {
       console.log(error);
     })
@@ -222,32 +307,6 @@ export class SignUpOrganizationPage implements OnInit {
 
 
 
-  onCountrySearch(value: string) {
-    if (value.length > 2) {
-      this.showcountyResults = true;
-      this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-    } else {
-      this.showcountyResults = false;
-      this.searchResults = [];
-    }
-  }
-
-  selectcountry(contry: string, id: string) {
-    this.selectedCountry = contry;
-    this.talentorgform.patchValue({
-      'country': id
-    })
-    this.showcountyResults = false;
-    this.searchResults = [];
-    this.getstatelist(id);
-    this.countrysearchCtrl.setValue('');
-  }
-
-
-  removeCountry() {
-    this.selectedCountry = undefined;
-  }
-
   // State List
   async getstatelist(CtryId): Promise<any> {
 
@@ -262,18 +321,9 @@ export class SignUpOrganizationPage implements OnInit {
 
     return industryURL;
   }
-  goTostateSelectedItem(stateId) {
-    //var CtryId =this.talentorgform.value.countryId; 
-    var CtryId = this.talentorgform.value.country;
-    this.getcitylist(stateId, CtryId);
-  }
+
   // City List
-  onSelectedCity(cityId: any) {
 
-    this.cityId = cityId;
-
-
-  }
   getcitylist(stateId, countryId) {
     this.stateId = this.talentorgform.value.state
     this.talentorgform.patchValue({
@@ -301,21 +351,21 @@ export class SignUpOrganizationPage implements OnInit {
       this.storageservice.showLoading();
       console.log(this.talentorgform.value);
       try {
-        var organizationName = this.talentorgform.controls['organizationName'].value;
-        var regNo = this.talentorgform.controls['regNo'].value;
-        var orgType = this.talentorgform.controls['orgType'].value;
-        var regDate = this.talentorgform.controls['regDate'].value;
-        var domainId = this.talentorgform.controls['domainId'].value;
-        var emailId = this.talentorgform.controls['emailId'].value;
-        var address = this.talentorgform.controls['address'].value;
-        var country = this.talentorgform.controls['country'].value;
-        var city = this.talentorgform.controls['city'].value;
-        var pwd = this.talentorgform.controls['pwd'].value;
-        var mobileNo = this.talentorgform.controls['mobileNo'].value;
-        var pincode = this.talentorgform.controls['pincode'].value;
-        var state = this.talentorgform.controls['state'].value;
-        var referralCode = this.talentorgform.controls['referralCode'].value;
-        var profileVisibility = this.talentorgform.controls['profileVisibility'].value;
+        var organizationName = this.profileForm.controls['organizationName'].value;
+        var regNo = this.profileForm.controls['regNo'].value;
+        var orgType = this.profileForm.controls['orgType'].value;
+        var regDate = this.profileForm.controls['regDate'].value;
+        var domainId = this.profileForm.controls['domainId'].value;
+        var emailId = this.regInfoForm.controls['emailId'].value;
+        var address = this.addressForm.controls['address'].value;
+        var country = this.addressForm.value.country['id'];
+        var city = this.addressForm.value.city['id'];
+        var pwd = this.regInfoForm.controls['pwd'].value;
+        var mobileNo = this.regInfoForm.controls['mobileNo'].value;
+        var pincode = this.addressForm.controls['pincode'].value;
+        var state = this.addressForm.value.state['id'];
+        var referralCode = this.regInfoForm.controls['referralCode'].value;
+        var profileVisibility = this.regInfoForm.controls['profileVisibility'].value;
         console.log("regDate: " + regDate);
         var regDate1 = this.transformDate(regDate);
         console.log("regDate: " + regDate1);
@@ -350,7 +400,7 @@ export class SignUpOrganizationPage implements OnInit {
           'state': state,
           'referralCode': referralCode,
           'profileVisibility': profileVisibility,
-          'uploadImg': this.base64img1,
+          'uploadImg': this.profileForm.controls['uploadImg'].value,
           'registrationmode': 'Mobile',
 
         }
@@ -482,52 +532,6 @@ export class SignUpOrganizationPage implements OnInit {
     return await modal.present();
   }
 
-
-  onStateSearch(value: string) {
-    if (value.length > 1) {
-      this.showStateResults = true;
-      this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-    } else {
-      this.showStateResults = false;
-      this.searchStateResults = [];
-    }
-  }
-  selectState(state: string, id: string) {
-    this.selectedState = state;
-    this.talentorgform.patchValue({
-      'state': id
-    })
-    this.showStateResults = false;
-    this.searchStateResults = [];
-    var CtryId = this.talentorgform.value.country;
-    this.getcitylist(id, CtryId);
-    this.statesearchCtrl.setValue('');
-  }
-  onCitySearch(value: string) {
-    if (value.length > 1) {
-      this.showCityResults = true;
-      this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-    } else {
-      this.showCityResults = false;
-      this.searchCityResults = [];
-    }
-  }
-
-  selectCity(state: string, id: string) {
-    this.selectedCity = state;
-    this.talentorgform.patchValue({
-      'city': id
-    })
-    this.showCityResults = false;
-    this.searchCityResults = [];
-    this.citySearchCtrl.setValue('');
-  }
-  removeState() {
-    this.selectedState = undefined;
-  }
-  removeCity() {
-    this.selectedCity = undefined;
-  }
   passwordToggle() {
     if (this.passwordType === 'password') {
       this.passwordType = 'text';

@@ -31,6 +31,7 @@ export class InstitutionDashboardListPage implements OnInit {
   currentUserName:any;
   mySlicedArray: string[] = [];
   mySlicedArray1: string[] = [];
+  imagePath:string;
 
   constructor(public router:Router,private route: ActivatedRoute,public modalController: ModalController,
     public storageservice: StorageService,public alertController: AlertController,private languageService: LanguageService) { 
@@ -41,6 +42,7 @@ export class InstitutionDashboardListPage implements OnInit {
     this.currentUserId = localStorage.getItem("userId");
     this.currentUserName = localStorage.getItem("userName");
     this.roleId = localStorage.getItem("roleId");
+    this.imagePath = this.storageservice.mobileserverurl;
 
     
   }

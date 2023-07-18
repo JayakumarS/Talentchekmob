@@ -44,6 +44,7 @@ export class OrgProfileViewPage implements OnInit, AfterViewInit {
   showDropdownFlag: any;
   connectionList: any;
   orgLogo: string;
+  imagePath: string;
 
 
   constructor(public router: Router, public storageservice: StorageService, public alertController: AlertController, private languageService: LanguageService, private route: ActivatedRoute) {
@@ -62,6 +63,8 @@ export class OrgProfileViewPage implements OnInit, AfterViewInit {
       };
       this.doRefresh(eventInit);
     });
+
+    this.imagePath = this.storageservice.mobileserverurl;
   }
 
   ngOnInit() {

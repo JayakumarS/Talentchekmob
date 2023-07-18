@@ -44,7 +44,7 @@ loading = false;
     public nativeStorage: NativeStorage,
     private translate: TranslateService,
     private deeplinks: Deeplinks,
-    private languageService: LanguageService
+    private languageService: LanguageService,
     //private push: Push
   ) {
     this.initializeApp();
@@ -57,6 +57,8 @@ loading = false;
       this.IsIndividual = true;
     }
     //End
+
+
 
     //#region Get the user type from local storage
     var userRefFlagObj = localStorage.getItem("userRefFlag");
@@ -155,6 +157,8 @@ loading = false;
     );
 
   }
+
+
 
   //#region OnInit
   ngOnInit() {

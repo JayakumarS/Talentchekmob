@@ -10,7 +10,6 @@
 
 .my-custom-class1 {
     width: auto;
-
     height: auto;
 }
 
@@ -1051,7 +1050,7 @@ ion-segment-button {
 /* Search bar styles */
 
 .searchbar-input.sc-ion-searchbar-md {
-    padding-left: 0px;
+    /* padding-left: 0px; */
     padding-right: 0px;
     padding-top: 0 !important;
     padding-bottom: 0 !important;

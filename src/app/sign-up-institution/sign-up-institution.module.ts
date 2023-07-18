@@ -5,7 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SignUpInstitutionPageRoutingModule } from './sign-up-institution-routing.module';
-
+import { IonicSelectableModule } from 'ionic-selectable';
 import { SignUpInstitutionPage } from './sign-up-institution.page';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
+    IonicSelectableModule,
     ReactiveFormsModule,
     SignUpInstitutionPageRoutingModule,
     TranslateModule.forChild(),

@@ -44,6 +44,7 @@ export class ProfileViewPage implements OnInit {
   connectionList: any;
   fromAddPage: any;
   talentId: any;
+  imagePath:string;
   public myValue: string;
   expertiseFull: boolean = false;
   constructor(public router: Router, private ngZone: NgZone, public route: ActivatedRoute, public storageservice: StorageService, private elementRef: ElementRef,
@@ -94,6 +95,8 @@ export class ProfileViewPage implements OnInit {
         this.setSelectedTab('profile');
       }
     });
+
+    this.imagePath = this.storageservice.mobileserverurl;
 
     this.userId = localStorage.getItem("userId");
     //this.img = localStorage.getItem("profilePic");
@@ -160,7 +163,7 @@ export class ProfileViewPage implements OnInit {
       this.email = result['profileViewList'][0]['email'];
       this.language = result['profileViewList'][0]['languages'];
       this.talentId = result['profileViewList'][0]['talentId'];
-      this.img = result['profileViewList'][0]['profilepic'];
+      this.img = this.imagePath+result['profileViewList'][0]['profilepic'];
       console.log(this.talentId)
       this.myValue = this.talentId;
       console.log(this.myValue)

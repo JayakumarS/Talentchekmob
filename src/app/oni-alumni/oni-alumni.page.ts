@@ -46,6 +46,7 @@ export class OniAlumniPage implements OnInit {
   roleId:any;
   currentUserId:any;
   currentUserName:any;
+  imagePath:string;
 
   constructor(public router:Router, private storageservice: StorageService,private fb: FormBuilder,public modalController: ModalController,
  private loadingCtrl: LoadingController,public alertController: AlertController,private languageService: LanguageService) {
@@ -54,6 +55,7 @@ export class OniAlumniPage implements OnInit {
     this.roleId = localStorage.getItem("roleId");
     this.currentUserId = localStorage.getItem("userId");
     this.currentUserName = localStorage.getItem("userName");
+    this.imagePath = this.storageservice.mobileserverurl;
    }
 
   ngOnInit() {

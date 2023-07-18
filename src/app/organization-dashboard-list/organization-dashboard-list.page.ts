@@ -31,6 +31,7 @@ export class OrganizationDashboardListPage implements OnInit {
   // mySlicedArray:[];
   mySlicedArray: string[] = [];
   mySlicedArray1: string[] = [];
+  imagePath:string;
 
   constructor(public router: Router, private route: ActivatedRoute, public modalController: ModalController,
     public storageservice: StorageService, public alertController: AlertController, private languageService: LanguageService) {
@@ -41,7 +42,7 @@ export class OrganizationDashboardListPage implements OnInit {
     this.roleId = localStorage.getItem("roleId");
     this.currentUserId = localStorage.getItem("userId");
     this.currentUserName = localStorage.getItem("userName");
-
+    this.imagePath = this.storageservice.mobileserverurl;
 
     this.route.queryParams.subscribe(params => {
       if (params) {

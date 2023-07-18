@@ -36,6 +36,7 @@ export class OniViewJobProfileMatchesListPage implements OnInit {
   currentUserId:any;
   currentUserName:any;
   creditPoints:any;
+  imagePath:string;
 
 
   constructor(public router:Router,private route: ActivatedRoute,public storageservice: StorageService,public modalController: ModalController,
@@ -45,6 +46,7 @@ export class OniViewJobProfileMatchesListPage implements OnInit {
     this.roleId = localStorage.getItem("roleId");
     this.currentUserId = localStorage.getItem("userId");
     this.currentUserName = localStorage.getItem("userName");
+    this.imagePath = this.storageservice.mobileserverurl;
 
     this.route.queryParams.subscribe(params => {
       if (params) {

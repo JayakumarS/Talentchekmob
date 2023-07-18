@@ -40,6 +40,7 @@ export class InstiProfileViewPage implements OnInit,AfterViewInit  {
   feeAmount: any;
   ifscCode: any;
   connectionList: any;
+  imagePath:string;
   connectioncard:boolean = false;
   constructor(public router: Router,public storageservice: StorageService,public languageService:LanguageService,private route: ActivatedRoute) { 
     interface MyCustomEventInit extends CustomEventInit {
@@ -56,6 +57,7 @@ export class InstiProfileViewPage implements OnInit,AfterViewInit  {
       };
        this.doRefresh(eventInit);
     });
+    this.imagePath = this.storageservice.mobileserverurl;
   }
 
   ngOnInit() {

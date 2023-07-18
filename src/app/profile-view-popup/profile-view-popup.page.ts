@@ -26,12 +26,14 @@ export class ProfileViewPopupPage implements OnInit {
   certificationsList = [];
   clubsList = [];
   experienceList = [];
+  imagePath:string;
   constructor(public modalController: ModalController, public languageService: LanguageService, private navParams: NavParams, public storageservice: StorageService) { }
 
   ngOnInit() {
 
 
     this.selectedLang = localStorage.getItem('selectedLang');
+    this.imagePath = this.storageservice.mobileserverurl;
     this.languageService.setLanguage(this.selectedLang);
     this.talentId = this.navParams.data.talentId;
     console.log(this.talentId);

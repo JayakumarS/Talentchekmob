@@ -6,8 +6,8 @@
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'Alumni list' |
-                    translate}}</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'Alumni list' | translate}}
+                </ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -43,7 +43,7 @@
             <ion-row (click)="studentnetwork(cElement.oniname,cElement.networktype)">
                 <ion-col size="3.5">
                     <ion-avatar size="medium">
-                        <img alt="" style="height: 55%; width: 100%;" src="{{cElement.logo}}" />
+                        <img alt="" style="height: 55%; width: 100%;" src="{{this.imagePath}}{{cElement.logo}}" />
                     </ion-avatar>
                 </ion-col>
 

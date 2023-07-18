@@ -81,6 +81,7 @@ hr {
     --border-radius: 50px;
     height: 56px;
     font-size: 18px;
+    color: white;
 }
 
 .progress-steps {
@@ -165,7 +166,7 @@ hr {
 }
 
 .active .bs-stepper-circle {
-    background-color: #FA7070;
+    background-color: #007bff;
 }
 
 .bs-stepper-label {
@@ -215,7 +216,6 @@ ion-select::part(icon) {
 }
 
 .head {
-
     font-family: Mr-eaves;
     color: black;
     margin-left: 17%;
@@ -228,12 +228,14 @@ ion-select::part(icon) {
         font-family: Mr-eaves;
         color: black;
     }
-
 }
 
 .headers {
-
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+    padding-left: 0px !important;
 }

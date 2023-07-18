@@ -25,13 +25,13 @@ ion-content {
 .imageCss {
     display: flex;
     justify-content: center;
-    padding-top: 45px;
+    padding-top: 23px;
 }
 
 .display-justify {
     display: flex;
     justify-content: center;
-    padding-bottom: 35px;
+    // padding-bottom: 35px;
 }
 
 .line-with-text {
@@ -70,7 +70,7 @@ ion-content {
 .sign-in {
     display: flex;
     justify-content: center;
-    padding-top: 33px;
+    // padding-top: 26px;
 }
 
 :host(.icon-large) {
@@ -96,7 +96,7 @@ hr {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 40px;
+    padding-top: 15px;
 }
 
 .button-native {

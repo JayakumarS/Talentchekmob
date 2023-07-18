@@ -2,12 +2,11 @@
     <ion-toolbar>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
-                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_matches_list()"
-                    style="margin-top:21%"></ion-icon>
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_matches_list()" style="margin-top:21%"></ion-icon>
             </div>
             <div style="text-align: center;display: contents;">
-                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'View Matches' |
-                    translate}}</ion-title>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'View Matches' | translate}}
+                </ion-title>
             </div>
         </div>
     </ion-toolbar>
@@ -89,14 +88,13 @@
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
         justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'JobPostInsti.matchedProf' | translate}} </span>
 
-        <ion-card class="profilesearchcard" *ngFor="let match of matchedList"
-            (click)="profileView(match.userid,match.accounttype,match.jobseekername)">
+        <ion-card class="profilesearchcard" *ngFor="let match of matchedList" (click)="profileView(match.userid,match.accounttype,match.jobseekername)">
             <ion-card-content style="padding-bottom: 0px;">
 
                 <ion-row>
                     <ion-col size="2">
                         <ion-avatar size="medium">
-                            <img alt="" style=" height: 80%;width: 80%;" src="{{match.profileimg}}" />
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{imagePath}}{{match.profileimg}}" />
                         </ion-avatar>
                     </ion-col>
 
@@ -112,8 +110,8 @@
                     </ion-col>
                     <ion-col size="10" style="    margin-top: -13%;">
                         <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
-                            {{match.jobseekerexperienceno}} {{match.jobseekerexperienceformat}} {{'JobAppliRec.relExp' |
-                            translate}}</ion-title>
+                            {{match.jobseekerexperienceno}} {{match.jobseekerexperienceformat}} {{'JobAppliRec.relExp' | translate}}
+                        </ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>
@@ -129,14 +127,13 @@
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
         justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Received Applications' | translate}} </span>
 
-        <ion-card class="profilesearchcard" *ngFor="let profile of applicationsReceivedList"
-            (click)="viewRecivedAppProfiles(profile.userid,profile.jspid)">
+        <ion-card class="profilesearchcard" *ngFor="let profile of applicationsReceivedList" (click)="viewRecivedAppProfiles(profile.userid,profile.jspid)">
             <ion-card-content style="padding-bottom: 0px;">
 
                 <ion-row>
                     <ion-col size="3">
                         <ion-avatar size="medium">
-                            <img alt="" style=" height: 80%;width: 80%;" src="{{profile.profileimg}}" />
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{imagePath}}{{profile.profileimg}}" />
                         </ion-avatar>
                     </ion-col>
 
@@ -146,8 +143,7 @@
 
                     <ion-col size="9">
                         <ion-title style="text-align: start;padding:0px;align-items: baseline;">
-                            <div class="ion-text-wrap"
-                                style="font-family:  Mr-eaves; font-size: 18px; text-align: start;">
+                            <div class="ion-text-wrap" style="font-family:  Mr-eaves; font-size: 18px; text-align: start;">
                                 {{profile.jobseekername}}</div>
                         </ion-title>
                         <div style="padding-top: 20px;">
@@ -176,18 +172,16 @@
     <div *ngIf="!heagerListFlag && bidsRecvFlag">
         <br>
         <br>
-        <span
-            style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;display: flex;justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Bids
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;display: flex;justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Bids
             Received' | translate}} </span>
 
-        <ion-card class="profilesearchcard" *ngFor="let bid of orgBidList"
-            (click)="viewBidsRecvProfiles(bid.bidder,bid.bidid)">
+        <ion-card class="profilesearchcard" *ngFor="let bid of orgBidList" (click)="viewBidsRecvProfiles(bid.bidder,bid.bidid)">
             <ion-card-content style="padding-bottom: 0px;">
 
                 <ion-row>
                     <ion-col size="2">
                         <ion-avatar size="medium">
-                            <img alt="" style=" height: 80%;width: 80%;" src="{{bid.profileimg}}" />
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{imagePath}}{{bid.profileimg}}" />
                         </ion-avatar>
                     </ion-col>
 
@@ -203,8 +197,7 @@
                     </ion-col>
                     <ion-col size="10" style="    margin-top: -13%;">
                         <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
-                            {{'Expecting' | translate}}{{bid.salaryBudgetFrom}}-{{bid.salaryBudgetTo}}
-                            {{bid.salaryBudgetCurrency}} {{bid.salaryBudgetFrequency}}</ion-title>
+                            {{'Expecting' | translate}}{{bid.salaryBudgetFrom}}-{{bid.salaryBudgetTo}} {{bid.salaryBudgetCurrency}} {{bid.salaryBudgetFrequency}}</ion-title>
                     </ion-col>
                 </ion-row>
             </ion-card-content>

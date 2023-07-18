@@ -28,8 +28,7 @@
                                         <em></em>
                                     </div>
                                 </div>
-                                <div class="ml-2"
-                                    style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
                                     {{creditPoints}}
                                 </div>
                             </div>
@@ -50,8 +49,7 @@
                     <ion-col size="3">
                         <div class="custom-button">
                             <div style="display: flex; align-items: center;">
-                                {{'Your Rating' | translate}}:<b>&nbsp; {{oniRating }}</b><span
-                                    class="fa fa-star checked"></span></div>
+                                {{'Your Rating' | translate}}:<b>&nbsp; {{oniRating }}</b><span class="fa fa-star checked"></span></div>
                         </div>
                     </ion-col>
                 </div>
@@ -121,8 +119,8 @@
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedCurrentStu}}</b></ion-row>
                                 <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' |
                                         translate}}</b></ion-row>
-                                <ion-row style="font-size: 14px; color:#24316B">{{'Current Students' |
-                                    translate}}</ion-row>
+                                <ion-row style="font-size: 14px; color:#24316B">{{'Current Students' | translate}}
+                                </ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('verifiedExStu','Student Alumni - Verified')">
@@ -131,8 +129,8 @@
                             flex-direction: column;
                             justify-content: center;">
 
-                                <ion-row style="font-size: 14px; color:#24316B">{{'Student Alumni' |
-                                    translate}}</ion-row>
+                                <ion-row style="font-size: 14px; color:#24316B">{{'Student Alumni' | translate}}
+                                </ion-row>
                                 <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' |
                                         translate}}</b></ion-row>
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedExStu}}</b></ion-row>
@@ -232,8 +230,8 @@
                                 <ion-row style="font-size: 34px;"><b>{{count.verifiedCurrentEmp}}</b></ion-row>
                                 <ion-row style="font-size: 15px;"><b>{{'ProfileIndividual.verified' |
                                         translate}}</b></ion-row>
-                                <ion-row style="font-size: 14px; color:#FA7070">{{'Current Employees' |
-                                    translate}}</ion-row>
+                                <ion-row style="font-size: 14px; color:#FA7070">{{'Current Employees' | translate}}
+                                </ion-row>
                             </div>
                         </ion-col>
                         <ion-col size="2" (click)="viewList('verifiedExEmp','Ex-Employees - Verified')">
@@ -251,8 +249,7 @@
                     </div>
                     <img width="15%" src="../../assets/img/students.png">
                     <div>
-                        <ion-col size="2"
-                            (click)="viewList('pendingCurrentEmp','Current Employees - Pending Approval')">
+                        <ion-col size="2" (click)="viewList('pendingCurrentEmp','Current Employees - Pending Approval')">
                             <div class="custom-buttryfly-right1">
                                 <ion-row style="    display: flex;
                                 font-size: 34px;
@@ -294,20 +291,20 @@
 
 
 <div class="footer-nav">
-    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();" id="step1">
         <ion-icon size="large" name="search-circle"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();" id="step2">
         <ion-icon size="large" name="earth-sharp"></ion-icon>
     </button>
     <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
         <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
 
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();" id="step3"> 
         <ion-icon size="large" name="person-circle-sharp"></ion-icon>
     </button>
-    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();" id="step4">
         <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
 
     </button>

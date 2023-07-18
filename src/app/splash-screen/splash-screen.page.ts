@@ -63,7 +63,7 @@ export class SplashScreenPage implements OnInit {
       let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
       console.log(latestMobileAppVersion);
 
-      if (latestMobileAppVersion != "4.4.9") {
+      if (latestMobileAppVersion != "5.0.1") {
         this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
           'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
           'Update now', 'Not now');

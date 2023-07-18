@@ -16,7 +16,10 @@ export class IndivAlumniPage implements OnInit {
   mySlicedArray = [];
   flagChange:boolean=false;
   selectedLang: string;
-  constructor(public router:Router,public storageservice: StorageService,public languageService:LanguageService) { }
+  imagePath:string;
+  constructor(public router:Router,public storageservice: StorageService,public languageService:LanguageService) {
+    this.imagePath = this.storageservice.mobileserverurl;
+   }
 
   ngOnInit() {
     this.getAlumniList();

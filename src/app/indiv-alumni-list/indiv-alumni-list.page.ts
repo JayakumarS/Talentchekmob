@@ -26,6 +26,7 @@ export class IndivAlumniListPage implements OnInit {
   flagChange:boolean=false;
   onitalentIdCorporate: any;
   onitalentIdStudent: any;
+  imagePath:string;
 
   constructor(private route: ActivatedRoute,private fb: FormBuilder,public storageservice: StorageService,
     public alertController: AlertController,public modalController: ModalController,public router:Router) {
@@ -75,6 +76,9 @@ export class IndivAlumniListPage implements OnInit {
         }
       }
     });
+
+    this.imagePath = this.storageservice.mobileserverurl;
+
    }
 
   ngOnInit() {

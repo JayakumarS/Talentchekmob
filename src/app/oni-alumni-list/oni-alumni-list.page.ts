@@ -30,6 +30,7 @@ export class OniAlumniListPage implements OnInit {
   currentUserName:any;
   title:string;
   mySlicedArray = [];
+  imagePath:string;
 
   constructor(private route: ActivatedRoute, private storageservice: StorageService,private fb: FormBuilder, public modalController: ModalController,
     public router:Router,private loadingCtrl: LoadingController,public alertController: AlertController,private languageService: LanguageService) {
@@ -40,6 +41,7 @@ export class OniAlumniListPage implements OnInit {
     this.currentUserId = localStorage.getItem("userId");
     console.log(this.currentUserId)
     this.currentUserName = localStorage.getItem("userName");
+    this.imagePath = this.storageservice.mobileserverurl;
 
     this.studentNetwork = this.fb.group({
       degree: [""],

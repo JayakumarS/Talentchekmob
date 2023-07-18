@@ -14,6 +14,7 @@ import { ModalController } from '@ionic/angular';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { TcFormPage } from '../tc-form/tc-form.page';
 import { LanguageService } from '../language.service';
+import { IonicSelectableComponent } from 'ionic-selectable';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +34,10 @@ export class SignUpPage implements OnInit {
     maxDate.setFullYear(maxDate.getFullYear() - 10);
     return maxDate.toISOString().split('T')[0];
   }
-  talentform: FormGroup;
+  profileForm: FormGroup;
+  addressForm: FormGroup;
+  regInfoForm: FormGroup;
+
   step: any
   private stepper: Stepper;
   IsSearchListShow: boolean = false;
@@ -70,30 +74,47 @@ export class SignUpPage implements OnInit {
     public storageservice: StorageService, private transfer: FileTransfer, public modalController: ModalController,
     private translate: TranslateService, private loadingCtrl: LoadingController, public languageService: LanguageService) {
 
-    this.talentform = formbuilder.group({
-      firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
-      lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
-      password: ['', Validators.required],
-      gender: ['', Validators.required],
-      phoneNo: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
-      dob: ['', Validators.required],    //Only for Android  
-      address: [''],
-      areaName: ['', Validators.required],
-      country: ['', Validators.required],
-      stateName: ['', Validators.required],
-      pinCode: ['', Validators.required],
-      referalCode: [''],
-      // profileVisibility: ['', Validators.required],
-      uploadImg: ['', Validators.required],
-      cBoxIAgree: [''],
-      cBoxIAgreeConsent: ['']
 
-    });
+      this.profileForm = this.formbuilder.group({
+        firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
+        lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
+        dob: ['', Validators.required], 
+        gender: ['', Validators.required],
+        uploadImg: ['',Validators.required],
+  });
+
+
+  this.addressForm = this.formbuilder.group({
+
+    address: [''],
+    areaName: ['', Validators.required],
+    country: ['', Validators.required],
+    stateName: ['', Validators.required],
+    pinCode: ['', Validators.required],
+    registrationmode: [''],
+  });
+
+
+  this.regInfoForm = this.formbuilder.group({
+    password: ['', Validators.required],
+    phoneNo: ['', Validators.compose([Validators.required])],
+    referalCode: [''],
+    email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+    agreeVal:[true, Validators.requiredTrue],
+    cBoxIAgree: [''],
+    cBoxIAgreeConsent: ['']
+
+  });
+  
+
 
   }
 
   next() {
+    this.stepper.next();
+  }
+
+  profileInfonext() {
     this.stepper.next();
   }
 
@@ -114,10 +135,31 @@ export class SignUpPage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
-      this.talentform.patchValue({
+      this.profileForm.patchValue({
         'uploadImg': this.base64img1,
       })
       console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.profileForm.value.uploadImg = result['uploadPhotoPath'] ;
+
+          this.profileForm.patchValue({
+            'uploadImg': result['uploadPhotoPath'],
+          });
+
+          console.log(this.profileForm.value.uploadImg);
+
+        }
+
+      });   
     }), error => {
       console.log(error);
     })
@@ -133,20 +175,84 @@ export class SignUpPage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
-      this.talentform.patchValue({
+      this.profileForm.patchValue({
         'uploadImg': this.base64img1,
       })
       console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.profileForm.value.uploadImg = result['uploadPhotoPath'] ;
+
+          this.profileForm.patchValue({
+            'uploadImg': result['uploadPhotoPath'],
+          });
+
+          console.log(this.profileForm.value.uploadImg);
+
+        }
+
+      });   
+
+
     }), error => {
       console.log(error);
     })
   }
 
+  portChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('country:', event.value);
+
+    this.getstatelist(event.value.id);
+
+    this.addressForm.patchValue({
+      'stateName': "",
+    });
+
+    this.addressForm.patchValue({
+      'areaName': "",
+    });
+  }
+
+
+  stateChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    var CtryId = this.addressForm.value.country['id'];
+
+    this.getcitylist(event.value.id,CtryId);
+
+    this.addressForm.patchValue({
+      'areaName': "",
+    });
+  }
+
+  cityChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('city:', event.value);
+
+  }
+
+ 
+
 
   onSubmit() {
     this.storageservice.showLoading();
     this.isSubmitted = true;
-    if (!this.talentform.valid) {
+    if (!this.regInfoForm.valid) {
       this.storageservice.dismissLoading();
       console.log('Please provide all the required values!');
       //this.storageservice.warningToast('Please provide all the required values!');
@@ -155,22 +261,23 @@ export class SignUpPage implements OnInit {
     }
     else {
       this.storageservice.showLoading();
-      console.log(this.talentform.value);
+      console.log(this.addressForm.value);
       try {
-        var firstName = this.talentform.controls['firstName'].value;
-        var lastName = this.talentform.controls['lastName'].value;
-        var pwd = this.talentform.controls['password'].value;
-        var genderVal = this.talentform.controls['gender'].value;
-        var phoneNo = this.talentform.controls['phoneNo'].value;
-        var emailId = this.talentform.controls['email'].value;
-        var dob = this.talentform.controls['dob'].value;
-        var refCode = this.talentform.controls['referalCode'].value;
+        var firstName = this.profileForm.controls['firstName'].value;
+        var lastName = this.profileForm.controls['lastName'].value;
+        var pwd = this.regInfoForm.controls['password'].value;
+        var genderVal = this.profileForm.controls['gender'].value;
+        var profilePath = this.profileForm.controls['uploadImg'].value;
+        var phoneNo = this.regInfoForm.controls['phoneNo'].value;
+        var emailId = this.regInfoForm.controls['email'].value;
+        var dob = this.profileForm.controls['dob'].value;
+        var refCode = this.regInfoForm.controls['referalCode'].value;
         // var profileVisibility = this.talentform.controls['profileVisibility'].value; 
-        var address = this.talentform.controls['address'].value;
-        var areaName = this.talentform.controls['areaName'].value;
-        var country = this.talentform.controls['country'].value;
-        var stateName = this.talentform.controls['stateName'].value;
-        var pinCode = this.talentform.controls['pinCode'].value;
+        var address = this.addressForm.controls['address'].value;
+        var areaName = this.addressForm.value.areaName['id'] ;
+        var country =  this.addressForm.value.country['id'] ;
+        var stateName = this.addressForm.value.stateName['id'];
+        var pinCode = this.addressForm.controls['pinCode'].value;
         console.log("dob: " + dob);
         var dateOfBirth = this.transformDate(dob);
         console.log("dateOfBirth: " + dateOfBirth);
@@ -204,7 +311,7 @@ export class SignUpPage implements OnInit {
                 'companyCode': '',
                 'isIndv': 'S',
                 // 'profileVisibility': profileVisibility,
-                'uploadImg': this.base64img1,
+                'uploadImg': profilePath,
 
                 'address': address,
                 'city': areaName,
@@ -343,33 +450,6 @@ export class SignUpPage implements OnInit {
   }
 
 
-  onCountrySearch(value: string) {
-    if (value.length > 2) {
-      this.showcountyResults = true;
-      this.searchResults = this.countryResponse.filter(country => country.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-    } else {
-      this.showcountyResults = false;
-      this.searchResults = [];
-    }
-  }
-
-  selectcountry(contry: string, id: string) {
-    this.selectedCountry = contry;
-    this.talentform.patchValue({
-      'country': id
-    })
-    this.showcountyResults = false;
-    this.searchResults = [];
-    this.getstatelist(id);
-    this.countrysearchCtrl.setValue('');
-  }
-
-
-  removeCountry() {
-    this.selectedCountry = undefined;
-  }
-
-
 
   //state list
   async getstatelist(CtryId): Promise<any> {
@@ -386,36 +466,6 @@ export class SignUpPage implements OnInit {
   }
 
 
-  onStateSearch(value: string) {
-    if (value.length > 1) {
-      this.showStateResults = true;
-      this.searchStateResults = this.stateResponse.filter(state => state.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-    } else {
-      this.showStateResults = false;
-      this.searchStateResults = [];
-    }
-  }
-
-  selectState(state: string, id: string) {
-    this.selectedState = state;
-    this.talentform.patchValue({
-      'stateName': id
-    })
-    this.showStateResults = false;
-    this.searchStateResults = [];
-    var CtryId = this.talentform.value.country;
-    this.getcitylist(id, CtryId);
-    this.statesearchCtrl.setValue('');
-  }
-
-
-  removeState() {
-    this.selectedState = undefined;
-  }
-
-
-
-
   getcitylist(stateId, countryId) {
 
     console.log(stateId)
@@ -427,56 +477,14 @@ export class SignUpPage implements OnInit {
     });
   }
 
-
-  onCitySearch(value: string) {
-    if (value.length > 1) {
-      this.showCityResults = true;
-      this.searchCityResults = this.cityOptions.filter(City => City.text.toLowerCase().indexOf(value.toLowerCase()) > -1);
-    } else {
-      this.showCityResults = false;
-      this.searchCityResults = [];
-    }
-  }
-
-  selectCity(state: string, id: string) {
-    this.selectedCity = state;
-    this.talentform.patchValue({
-      'areaName': id
-    })
-    this.showCityResults = false;
-    this.searchCityResults = [];
-    this.citySearchCtrl.setValue('');
-  }
-
-
-  removeCity() {
-    this.selectedCity = undefined;
-  }
-
-  goToSearchSelectedItem(CtryName, CtryId) {
-    this.countryVal = CtryName;
-    this.countryIdVal = CtryId;
-    this.IsSearchListShow = false;
-    this.getstatelist(CtryId);
-  }
-
-  goTostateSelectedItem(stateId) {
-    //var CtryId =this.talentorgform.value.countryId; 
-    var CtryId = this.talentform.value.country;
-    this.getcitylist(stateId, CtryId);
-  }
-
-  unCheckFocus() {
-    // this.ionSearchListShow = false;
-  }
   goto_welcome() {
 
-    this.router.navigate(['/hello-dear'])
+    this.router.navigate(['/register-cat']);
   }
 
   goto_signin() {
 
-    this.router.navigate(['/sign-in'])
+    this.router.navigate(['/sign-in']);
   }
 
   openTCForm() {

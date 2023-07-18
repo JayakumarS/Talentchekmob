@@ -5,7 +5,7 @@
 
     <div style="width: 100%;" class="line-with-text">
         <br>
-        <img style="max-width: 57%;padding-top: 40px;" src="../../assets/img/tc_logo_with_text.png">
+        <img style="max-width: 57%;padding-top: 17px;" src="../../assets/img/tc_logo_with_text.png">
         <br>
 
     </div>
@@ -16,10 +16,9 @@
         </ion-col>
     </ion-row>
     <div class="hello-dear">
-        <ion-buttons style="padding-top:10px">
+        <ion-buttons>
             <ion-button (click)="openLanguagePopOver($event)" style="color: black;">
-                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start"
-                    alt="flag">{{languageService.selectedLang.text}}
+                <img [src]="languageService.selectedLang.img" height="30px" style="padding-right:5px" slot="start" alt="flag">{{languageService.selectedLang.text}}
                 <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
             </ion-button>
         </ion-buttons>

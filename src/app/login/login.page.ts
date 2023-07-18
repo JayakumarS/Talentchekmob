@@ -75,7 +75,7 @@ export class LoginPage {
       let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
       console.log(latestMobileAppVersion);
 
-      if (latestMobileAppVersion != "2.9.6") {
+      if (latestMobileAppVersion != "5.0.1") {
         this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion, 
         'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
         'Update now', 'Not now');

@@ -48,6 +48,7 @@ export class JobSearchPage implements OnInit {
   flagChange:boolean=false;
   flag: boolean =false;
   creditPoints: any;
+  imagePath:string;
 
 
 
@@ -61,6 +62,8 @@ export class JobSearchPage implements OnInit {
    this.roleId = localStorage.getItem("roleId");
    this.currentUserId = localStorage.getItem("userId");
    this.currentUserName = localStorage.getItem("userName");
+
+   this.imagePath = this.storageservice.mobileserverurl;
 
 
    this.route.queryParams.subscribe(params => {

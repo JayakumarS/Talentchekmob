@@ -261,7 +261,7 @@ export class ProfileePage implements OnInit {
 
   async Update() {
     this.storageservice.showLoading();
-    this.profileForm.value.uploadImg = this.base64img1;
+  //  this.profileForm.value.uploadImg = this.base64img1;
     if (this.profileForm.value.hobbies != "" && this.profileForm.value.hobbies != null) {
       // this.profileForm.value.hobbies = this.profileForm.value.hobbies.toString();
       this.storageservice.dismissLoading();
@@ -415,7 +415,7 @@ export class ProfileePage implements OnInit {
           'emergencyContact': this.profileList[0].emergencyContact,
           'bloodgroup': this.profileList[0].bloodgroup,
         })
-        this.base64img1 = this.profileList[0].uploadImg;
+        this.base64img1 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg;
         if (this.profileList[0].emergencyContact == 'null') {
           this.profileForm.patchValue({
             'emergencyContact': '',
@@ -492,12 +492,32 @@ export class ProfileePage implements OnInit {
       this.profileForm.patchValue({
         'uploadImg': this.base64img1,
       })
+      console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.profileForm.value.uploadImg = result['uploadPhotoPath'] ;
+
+          this.profileForm.patchValue({
+            'uploadImg': result['uploadPhotoPath'],
+          });
+
+          console.log(this.profileForm.value.uploadImg);
+
+        }
+
+      });   
     }), error => {
       console.log(error);
     })
-
   }
-
   opencamera() {
     const options: CameraOptions = {
       quality: 70,
@@ -510,6 +530,30 @@ export class ProfileePage implements OnInit {
       this.profileForm.patchValue({
         'uploadImg': this.base64img1,
       })
+      console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.profileForm.value.uploadImg = result['uploadPhotoPath'] ;
+
+          this.profileForm.patchValue({
+            'uploadImg': result['uploadPhotoPath'],
+          });
+
+          console.log(this.profileForm.value.uploadImg);
+
+        }
+
+      });   
+
+
     }), error => {
       console.log(error);
     })

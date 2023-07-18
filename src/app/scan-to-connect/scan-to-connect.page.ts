@@ -38,6 +38,7 @@ export class ScanToConnectPage implements OnInit {
   fromLocationVal: string;
   relationShipVal: string;
   favouriteVal: string;
+  imagePath:string;
 
   iconsArray: any = [1, 2, 3, 4, 5];
   rateOrgVal: number;
@@ -47,6 +48,7 @@ export class ScanToConnectPage implements OnInit {
 
     this.profileImageURL = "assets/img/avatar1.png";
     this.userId = localStorage.getItem("userId")  ; 
+    this.imagePath = this.storageservice.mobileserverurl;
     this.favouriteVal = 'No';
     this.rateOrgVal = 0;
 
@@ -116,8 +118,8 @@ export class ScanToConnectPage implements OnInit {
           console.log(`dtTicks Response : ${JSON.stringify(strTicks)}`);
 
           var photoPath = data["uploadImg"];
-          this.profileImageURL = data["uploadImg"];
-          console.log("ProfileImageURL: " + this.profileImageURL);
+          this.profileImageURL = this.imagePath+data["uploadImg"];
+          console.log("ProfileImageURL: " + this.imagePath+this.profileImageURL);
         }
 
         this.scanned_UserId = scan_tfId;

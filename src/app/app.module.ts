@@ -30,8 +30,7 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { DatePipe } from '@angular/common';
-import Driver from 'driver.js';
-import 'driver.js/dist/driver.min.css';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -59,7 +58,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,  
     BrowserModule,
     TranslateModule.forChild(),
-
+    IonicSelectableModule,
     IonicModule.forRoot(), AppRoutingModule, CKEditorModule,
     Ng2GoogleChartsModule,
     IonicStorageModule.forRoot(),

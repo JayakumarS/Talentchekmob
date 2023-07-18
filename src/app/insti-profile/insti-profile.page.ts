@@ -54,9 +54,13 @@ export class InstiProfilePage implements OnInit {
   isProfile: boolean = false;
   isAbout: boolean = false;
   isLogo: boolean = false;
+  imagePath:string;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController,
     private camera: Camera, public router: Router, private toastController: ToastController, private elementRef: ElementRef
-    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService) { }
+    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService) { 
+
+      this.imagePath = this.storageservice.mobileserverurl;
+    }
 
   ngOnInit() {
 
@@ -257,7 +261,7 @@ export class InstiProfilePage implements OnInit {
           'permPinCode': this.profileList[0].permPinCode,
           'languagesknown': this.profileList[0].languagesknown,
         })
-        this.base64img1 = this.profileList[0].instLogo;
+        this.base64img1 = this.imagePath+this.profileList[0].instLogo;
         this.storageservice.dismissLoading();
 
       } else {
@@ -375,6 +379,8 @@ export class InstiProfilePage implements OnInit {
   }
 
   ////image
+
+
   opengallery() {
     const options: CameraOptions = {
       quality: 70,
@@ -387,10 +393,31 @@ export class InstiProfilePage implements OnInit {
       this.docForm.patchValue({
         'instLogo': this.base64img1,
       })
+      console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.docForm.value.instLogo = result['uploadPhotoPath'] ;
+
+          this.docForm.patchValue({
+            'instLogo': result['uploadPhotoPath'],
+          });
+
+          console.log(this.docForm.value.instLogo);
+
+        }
+
+      });   
     }), error => {
       console.log(error);
     })
-
   }
 
   opencamera() {
@@ -405,6 +432,30 @@ export class InstiProfilePage implements OnInit {
       this.docForm.patchValue({
         'instLogo': this.base64img1,
       })
+      console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.docForm.value.instLogo = result['uploadPhotoPath'] ;
+
+          this.docForm.patchValue({
+            'instLogo': result['uploadPhotoPath'],
+          });
+
+          console.log(this.docForm.value.instLogo);
+
+        }
+
+      });   
+
+
     }), error => {
       console.log(error);
     })

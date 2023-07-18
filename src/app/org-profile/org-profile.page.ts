@@ -47,6 +47,7 @@ export class OrgProfilePage implements OnInit {
   IsSearchListShow: boolean = false;
   stateResponseBackup: any;
   desiredItem: any;
+  imagePath:string;
   //image
   base64img1: string = '';
   cBoxIAgreeVal: boolean = true;
@@ -57,7 +58,10 @@ export class OrgProfilePage implements OnInit {
   isAbout: boolean = false;
   isLogo: boolean = false;
   constructor(private fb: FormBuilder, public storageservice: StorageService, public modalController: ModalController, public alertController: AlertController,
-    private camera: Camera, public router: Router, private ngZone: NgZone, private toastController: ToastController, private route: ActivatedRoute, private languageService: LanguageService, private scroller: ViewportScroller) { }
+    private camera: Camera, public router: Router, private ngZone: NgZone, private toastController: ToastController, private route: ActivatedRoute, private languageService: LanguageService, private scroller: ViewportScroller) {
+
+      this.imagePath = this.storageservice.mobileserverurl;
+     }
 
   ngOnInit() {
     this.selectedLang = localStorage.getItem('selectedLang');
@@ -277,7 +281,7 @@ export class OrgProfilePage implements OnInit {
           'orgLogo': this.profileList[0].orgLogo,
           'languagesknown': this.profileList[0].languagesknown,
         })
-        this.base64img1 = this.profileList[0].orgLogo;
+        this.base64img1 = this.imagePath+this.profileList[0].orgLogo;
 
       }
       this.storageservice.dismissLoading();
@@ -392,6 +396,8 @@ export class OrgProfilePage implements OnInit {
   ////img 
 
   ////image
+
+
   opengallery() {
     const options: CameraOptions = {
       quality: 70,
@@ -404,11 +410,34 @@ export class OrgProfilePage implements OnInit {
       this.docForm.patchValue({
         'orgLogo': this.base64img1,
       })
+      console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.docForm.value.orgLogo = result['uploadPhotoPath'] ;
+
+          this.docForm.patchValue({
+            'orgLogo': result['uploadPhotoPath'],
+          });
+
+          console.log(this.docForm.value.orgLogo);
+
+        }
+
+      });   
     }), error => {
       console.log(error);
     })
-
   }
+
+
 
   opencamera() {
     const options: CameraOptions = {
@@ -422,6 +451,30 @@ export class OrgProfilePage implements OnInit {
       this.docForm.patchValue({
         'orgLogo': this.base64img1,
       })
+      console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/CommonUtility/uploadImagePath";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.docForm.value.orgLogo = result['uploadPhotoPath'] ;
+
+          this.docForm.patchValue({
+            'orgLogo': result['uploadPhotoPath'],
+          });
+
+          console.log(this.docForm.value.orgLogo);
+
+        }
+
+      });   
+
+
     }), error => {
       console.log(error);
     })
