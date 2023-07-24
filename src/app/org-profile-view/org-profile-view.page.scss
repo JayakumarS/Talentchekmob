@@ -32,7 +32,7 @@ ion-label {
 
 .talentcard2 {
     margin: 3% 0% 0% 0%;
-    --background:#EDF1FC no-repeat padding-box;
+    --background: #EDF1FC no-repeat padding-box;
     border-radius: 24px;
 }
 
@@ -172,6 +172,7 @@ ion-progress-bar {
 .footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
+    color: white;
 }
 
 .footer-nav button.selected {
@@ -189,28 +190,26 @@ ion-content {
 
 #prfoileimg1 {
     height: 15px;
-   
 }
 
 .container {
     position: relative;
     display: inline-block;
-  }
-  
-  .image {
+}
+
+.image {
     width: 200px;
     height: 200px;
-  }
-  
-  .label {
+}
+
+.label {
     display: none;
     position: absolute;
     bottom: -30px;
     left: 50%;
     transform: translateX(-50%);
-  }
-  
-  .action-btn {
+}
+
+.action-btn {
     margin: 0 10px;
-  }
-  
+}

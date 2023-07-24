@@ -290,7 +290,7 @@ export class OrgProfilePage implements OnInit {
 
   ///profileDetails  Update
   async Update() {
-    this.profileList[0].orgLogo = this.base64img1;
+   //this.profileList[0].orgLogo = this.base64img1;
     // this.docForm.value.permCountry = this.desiredItem.id
     const errors = this.checkFormValidity(this.docForm);
 

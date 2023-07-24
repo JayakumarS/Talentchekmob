@@ -57,6 +57,7 @@ ion-card-header.ios {
 .footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
+    color: white;
 }
 
 .footer-nav button.selected {
@@ -232,7 +233,6 @@ div.c {
     word-break: break-word;
     margin-left: 10%;
     margin-top: -4%;
-
     &:before {
         border-radius: 50%;
         content: '';
@@ -335,7 +335,7 @@ ion-icon {
 }
 
 @media only screen and (min-width: 768px) and (min-height: 768px) {
-    ::ng-deep.sc-ion-modal-ios-h {
+     ::ng-deep.sc-ion-modal-ios-h {
         --width: 100%;
         --height: 100%;
     }

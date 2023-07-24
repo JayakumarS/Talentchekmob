@@ -273,7 +273,7 @@ export class InstiProfilePage implements OnInit {
 
   ///profileDetails  Update
   async Update() {
-    this.profileList[0].instLogo = this.base64img1;
+  //  this.profileList[0].instLogo = this.base64img1;
     const errors = this.checkFormValidity(this.docForm);
 
     if (errors.length > 0) {

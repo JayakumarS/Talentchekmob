@@ -76,7 +76,7 @@ export class SignUpInstitutionPage implements OnInit {
       taxId: ['', Validators.required],
       regDate: ['', Validators.required],
       instType: ['', Validators.required],
-      uploadImg: ['', Validators.required],
+      uploadImg: ['', ],
 });
 
 
@@ -108,6 +108,11 @@ this.regInfoForm = this.formbuilder.group({
 
   next() {
     this.stepper.next();
+  }
+
+
+  prev(){
+    this.stepper.previous();
   }
 
   profileInfonext() {
@@ -369,7 +374,7 @@ this.regInfoForm = this.formbuilder.group({
           'referralCode': referralCode,
           'registrationmode': 'Mobile',
           'profileVisibility': profileVisibility,
-          'uploadImg': this.profileForm.controls['uploadImg'].value,
+          'uploadImg': this.profileForm.value.uploadImg,
 
         }
         console.log(`Posting Data: ${JSON.stringify(postData)}`);

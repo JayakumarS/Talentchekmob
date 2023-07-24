@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthLoginInfo } from '../auth/login-Info';
 import { StorageService } from '../storage.service';
-// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { PopoverController } from '@ionic/angular';
 import { LanguageService } from '../language.service';
@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
   passwordIcon: string = 'eye'; 
   selectedLang: string;
  
-  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,
+  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,private fcm : FCM,
     public storageservice: StorageService,private nativeStorage: NativeStorage,private popoverController: PopoverController) { 
 
       if (!this.languageService.selectedLang) {
@@ -126,14 +126,14 @@ export class SignInComponent implements OnInit {
 
 
 
-                // this.fcm.getToken().then(token => {
-                //   console.log("FCM token123", token);
-                //   this.nativeStorage.setItem('FCMToken', token)
-                //   localStorage.setItem('FCMToken', token);
+                this.fcm.getToken().then(token => {
+                  console.log("FCM token123", token);
+                  this.nativeStorage.setItem('FCMToken', token)
+                  localStorage.setItem('FCMToken', token);
     
-                //   this.SaveFCMTokenAndUUID(data["username"]);
-                //   console.log("SaveFCMTokenAndUUID 2");
-                // });
+                  this.SaveFCMTokenAndUUID(data["username"]);
+                  console.log("SaveFCMTokenAndUUID 2");
+                });
 
   
                 if (data.roles[0].roleId.includes('1')) {

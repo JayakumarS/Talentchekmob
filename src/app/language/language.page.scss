@@ -1,11 +1,13 @@
 ion-avatar img {
     width: 36px;
     height: 36px;
-  }
-  ion-checkbox {
+}
+
+ion-checkbox {
     margin-left: auto;
-  }
-  .footer-nav {
+}
+
+.footer-nav {
     position: fixed;
     bottom: 0;
     z-index: 10;
@@ -39,26 +41,30 @@ ion-avatar img {
 .footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
+    color: white;
 }
 
 .footer-nav button.selected {
     color: #FF9E3F;
     border-radius: 50%;
 }
+
 ion-content {
     --background: #EDF1FC;
-    --ion-safe-area-bottom: 8vh; /* set the safe area bottom to 8% of the viewport height */
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
 }
-.checkbox-item{
-  margin: 15px;
-  --min-height: 69px !important;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0px 8px 24px #00000026;
-  border-radius: 24px;
+
+.checkbox-item {
+    margin: 15px;
+    --min-height: 69px !important;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
 }
 
 .round-checkbox {
-  --size: 30px;
+    --size: 30px;
     --border-width: 0px;
     --border-radius: 30px;
 }
