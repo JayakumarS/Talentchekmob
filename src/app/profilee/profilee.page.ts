@@ -10,6 +10,7 @@ import { TcFormPage } from '../tc-form/tc-form.page';
 import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
+import { unescape } from 'querystring';
 
 
 
@@ -63,6 +64,10 @@ export class ProfileePage implements OnInit {
   stateResponseBackup: any;
   //image
   base64img1: string = '';
+  base64img2:any;
+  base64img3:any;
+  base64img2Flag:boolean=false;
+  base64img3Flag:boolean=false;
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
   desiredItem: any;
@@ -416,6 +421,23 @@ export class ProfileePage implements OnInit {
           'bloodgroup': this.profileList[0].bloodgroup,
         })
         this.base64img1 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg;
+        if(this.storageservice.mobileserverurl+this.profileList[0].uploadImg1!=undefined && 
+          this.storageservice.mobileserverurl+this.profileList[0].uploadImg1!=null &&
+          this.storageservice.mobileserverurl+this.profileList[0].uploadImg1!=''){
+          this.base64img2 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg1;
+          this.base64img2Flag=true;
+        } else {
+          this.base64img2Flag=false;
+        }
+        if(this.storageservice.mobileserverurl+this.profileList[0].uploadImg2!=undefined && 
+          this.storageservice.mobileserverurl+this.profileList[0].uploadImg2!=null &&
+          this.storageservice.mobileserverurl+this.profileList[0].uploadImg2!=''){
+          this.base64img3 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg2;
+          this.base64img3Flag=true;
+        } else {
+          this.base64img3Flag=false;
+        }
+     
         if (this.profileList[0].emergencyContact == 'null') {
           this.profileForm.patchValue({
             'emergencyContact': '',

@@ -108,7 +108,7 @@ standardcountAmt1 :any;
       this.usercountry = result[0]['country'];
       console.log("currencyResponse: " + currencyResponse);
       if (currencyResponse != null) {
-        var currency = "INR";
+        var currency = this.usercountry;
         console.log("In currency: " + currency);
 
         this.currencyVal = currency;

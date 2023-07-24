@@ -252,18 +252,49 @@
 
                     <div class="button-content" *ngIf="isLogo">
                         <ion-label slot="end">{{'AddFamilyInfo.image' | translate}}<small style="color: #f70505;">*</small></ion-label>
-                        <ion-row>
+                        <!-- <ion-row size="12">
                             <ion-col size="6">
-                                <ion-thumbnail *ngIf="base64img1">
-                                    <img class="horizontal" [src]="base64img1" name="image" />
+                           
+                                <ion-thumbnail *ngIf="base64img1" >
+                                    <div >
+                                    <img size="2" [src]="base64img1" name="image" /> &nbsp;
+                                    <img size="2" [src]="base64img2" name="image" style="opacity: 0.5;"/> &nbsp;
+                                    <img size="2" [src]="base64img3" name="image" style="opacity: 0.5;" />
+                                    </div>
                                 </ion-thumbnail>
                                 <ion-thumbnail *ngIf="!base64img1">
                                     <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
                                 </ion-thumbnail>
+                            
                             </ion-col>
-
+                        </ion-row> -->
+                        <ion-grid>
+                            <ion-row>
+                              <ion-col size="4"> <!-- Each image will occupy 4 columns (1/3 of the row) -->
+                                <ion-thumbnail *ngIf="base64img1">
+                                  <img class="horizontal" [src]="base64img1" name="image" />
+                                </ion-thumbnail>
+                                <ion-thumbnail *ngIf="!base64img1">
+                                  <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                </ion-thumbnail>
+                              </ion-col>
+                              <ion-col size="4">
+                                <ion-thumbnail *ngIf="base64img2">
+                                  <img class="horizontal" [src]="base64img2" name="image" style="opacity: 0.5;"/>
+                                </ion-thumbnail>
+                                
+                              </ion-col>
+                              <ion-col size="4">
+                                <ion-thumbnail *ngIf="base64img3">
+                                  <img class="horizontal" [src]="base64img3" name="image" style="opacity: 0.5;"/>
+                                </ion-thumbnail>
+                              </ion-col>
+                            </ion-row>
+                          </ion-grid>
+                      
+                            <ion-row>
                             <ion-col size="6">
-                                <div class="ion-float-rigth">
+                                <div class="ion-float-left">
                                     <ion-button fill="clear" (click)="opengallery()">
                                         <ion-icon name="image-outline"></ion-icon>
                                     </ion-button>
