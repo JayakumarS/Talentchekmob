@@ -29,6 +29,7 @@ export class InstiProfileViewPage implements OnInit,AfterViewInit  {
   instname: any;
   mobile: any;
   industrydomain: any;
+  talentId:String;
   logo: any;
   aboutdesc: any;
   registrationno: any;
@@ -114,6 +115,7 @@ export class InstiProfileViewPage implements OnInit,AfterViewInit  {
      this.feeAmount = result['profileViewList'][0]['feeAmount'];
      this.ifscCode = result['profileViewList'][0]['ifscCode'];
      this.connectionList = result['profileViewList'][0]['connectionList'] 
+     this.talentId = result['profileViewList'][0]['talentId'];
 
   })
 }

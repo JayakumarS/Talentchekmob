@@ -131,7 +131,7 @@
                 <div class="contact-details" style="padding-bottom: 6px;" *ngFor="let exp of experienceList">
                     <div style="display: flex;">
                         <ion-avatar size="medium">
-                            <img alt="" style=" height: 60%;width: 60%;" src="{{exp.orgLogo}}" />
+                            <img alt="" style=" height: 60%;width: 60%;" src="{{imagePath}}{{exp.orgLogo}}" />
                         </ion-avatar>
                         <div style="color: black;font-weight: bold;  margin-left: -4%; font-size: 15px;">{{exp.organisationName}}</div>
                     </div>
@@ -167,7 +167,7 @@
             <div class="contact-details" style="padding-bottom: 6px;" *ngFor="let edu of educationList">
                 <div style="display: flex;">
                     <ion-avatar size="medium">
-                        <img alt="" style=" height: 60%;width: 60%;" src="{{edu.instLogo}}" />
+                        <img alt="" style=" height: 60%;width: 60%;" src="{{imagePath}}{{edu.instLogo}}" />
                     </ion-avatar>
                     <div style="color: black;font-weight: bold;margin-left: -4%;">
                         {{edu.institutionName}}
@@ -222,7 +222,7 @@
             <div style="margin-bottom: 15px;" *ngFor="let club of clubsList">
                 <div style="display:flex">
                     <ion-avatar size="medium">
-                        <img alt="" style="  height: 60%;width: 60%;" src="{{club.orgLogo}}" />
+                        <img alt="" style="  height: 60%;width: 60%;" src="{{imagePath}}{{club.orgLogo}}" />
                     </ion-avatar>
                     <div style="
 margin-left: -4%;color:rgb(0, 0, 0);font-size: 15px;font-weight: bold;">

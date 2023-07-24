@@ -89,7 +89,7 @@ export class SignUpOrganizationPage implements OnInit {
       orgType: ['', Validators.required],
       regDate: ['', Validators.required],
       domainId: ['', Validators.required],
-      uploadImg: ['',]
+      uploadImg: ['', ]
 });
 
 
@@ -126,6 +126,11 @@ this.regInfoForm = this.formbuilder.group({
 
   next() {
     this.stepper.next();
+  }
+
+  prev(){
+
+    this.stepper.previous();
   }
 
   profileInfonext() {
@@ -400,7 +405,7 @@ this.regInfoForm = this.formbuilder.group({
           'state': state,
           'referralCode': referralCode,
           'profileVisibility': profileVisibility,
-          'uploadImg': this.profileForm.controls['uploadImg'].value,
+          'uploadImg': this.profileForm.value.uploadImg,
           'registrationmode': 'Mobile',
 
         }

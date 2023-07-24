@@ -1,5 +1,5 @@
 ion-content {
-    --background: url('../../assets/img/06_Welcome screen.png')  ;
+    --background: url('../../assets/img/06_Welcome screen.png');
     background-size: cover;
 }
 
@@ -120,16 +120,15 @@ hr {
     --padding-top: 10px;
     --padding-bottom: 10px;
 }
-.container{
+
+.container {
     background: #D5E5FF;
     border-radius: 10px;
     width: 90%;
     margin-left: 20px;
-
 }
 
-.but1{
-
+.but1 {
     background: #3880ff;
     padding: 20px;
     width: 88%;
@@ -137,7 +136,8 @@ hr {
     color: white;
     font-size: 22px;
 }
-.but2{
+
+.but2 {
     background: #ffffff;
     padding: 20px;
     width: 88%;
@@ -145,8 +145,8 @@ hr {
     color: black;
     font-size: 22px;
     border: 1px solid;
-
 }
+
 ion-label {
     font: normal normal bold 16px/22px Mr-eaves;
     text-align: left;
@@ -311,6 +311,7 @@ ion-progress-bar {
 .footer-nav button ion-icon {
     font-size: 20px;
     margin-bottom: 5px;
+    color: white;
 }
 
 .footer-nav button.selected {

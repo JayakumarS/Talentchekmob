@@ -80,7 +80,7 @@ export class SignUpPage implements OnInit {
         lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
         dob: ['', Validators.required], 
         gender: ['', Validators.required],
-        uploadImg: ['',Validators.required],
+        uploadImg: ['',],
   });
 
 
@@ -112,6 +112,10 @@ export class SignUpPage implements OnInit {
 
   next() {
     this.stepper.next();
+  }
+
+  prev(){
+    this.stepper.previous();
   }
 
   profileInfonext() {

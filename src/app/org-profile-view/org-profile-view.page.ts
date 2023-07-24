@@ -45,6 +45,7 @@ export class OrgProfileViewPage implements OnInit, AfterViewInit {
   connectionList: any;
   orgLogo: string;
   imagePath: string;
+  talentId: string;
 
 
   constructor(public router: Router, public storageservice: StorageService, public alertController: AlertController, private languageService: LanguageService, private route: ActivatedRoute) {
@@ -124,6 +125,7 @@ export class OrgProfileViewPage implements OnInit, AfterViewInit {
           this.feeCurrency = result['profileViewList'][0]['feeCurrency'];
           this.feeAmount = result['profileViewList'][0]['feeAmount'];
           this.ifscCode = result['profileViewList'][0]['ifscCode'];
+          this.talentId = result['profileViewList'][0]['talentId'];
 
 
           if (result['profileViewList'][0].connectionList.length != 0) {

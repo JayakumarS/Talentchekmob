@@ -248,7 +248,11 @@
 
                         </div>
                         <div class="display-justify">
+
+
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="prev()">{{'profilein.Back' | translate }}</ion-button>
                             <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!addressForm.valid" (click)="next()">{{'profilein.Next' | translate }}</ion-button>
+
                         </div>
 
                         <div class="line-with-text">
@@ -351,6 +355,7 @@
 
                         </div>
                         <div class="display-justify">
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="prev()">{{'profilein.Back' | translate }}</ion-button>
                             <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!regInfoForm.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false " (click)="onSubmit()">{{'register' | translate }}</ion-button>
                         </div>
 
