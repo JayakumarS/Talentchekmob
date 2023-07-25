@@ -163,7 +163,13 @@ export class ProfileViewPage implements OnInit {
       this.email = result['profileViewList'][0]['email'];
       this.language = result['profileViewList'][0]['languages'];
       this.talentId = result['profileViewList'][0]['talentId'];
-      this.img = this.imagePath+result['profileViewList'][0]['profilepic'];
+      if(result['profileViewList'][0]['profilepic'].includes('data:image')){
+        this.img = result['profileViewList'][0]['profilepic'];
+      } else {
+        this.img = this.imagePath+result['profileViewList'][0]['profilepic'];
+      }
+      
+      
       console.log(this.talentId)
       this.myValue = this.talentId;
       console.log(this.myValue)

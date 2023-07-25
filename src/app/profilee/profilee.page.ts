@@ -420,11 +420,24 @@ export class ProfileePage implements OnInit {
           'emergencyContact': this.profileList[0].emergencyContact,
           'bloodgroup': this.profileList[0].bloodgroup,
         })
-        this.base64img1 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg;
+
+        
+        if(this.profileList[0].uploadImg.includes('data:image')){
+          this.base64img1 = this.profileList[0].uploadImg;
+        } else {
+          this.base64img1 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg;
+        }
+        
+        
         if(this.storageservice.mobileserverurl+this.profileList[0].uploadImg1!=undefined && 
           this.storageservice.mobileserverurl+this.profileList[0].uploadImg1!=null &&
           this.storageservice.mobileserverurl+this.profileList[0].uploadImg1!=''){
-          this.base64img2 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg1;
+
+            if(this.profileList[0].uploadImg1.includes('data:image')){
+              this.base64img2 = this.profileList[0].uploadImg1;
+            } else {
+              this.base64img2 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg1;
+            }
           this.base64img2Flag=true;
         } else {
           this.base64img2Flag=false;
@@ -432,7 +445,12 @@ export class ProfileePage implements OnInit {
         if(this.storageservice.mobileserverurl+this.profileList[0].uploadImg2!=undefined && 
           this.storageservice.mobileserverurl+this.profileList[0].uploadImg2!=null &&
           this.storageservice.mobileserverurl+this.profileList[0].uploadImg2!=''){
-          this.base64img3 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg2;
+
+            if(this.profileList[0].uploadImg2.includes('data:image')){
+              this.base64img3 = this.profileList[0].uploadImg2;
+            } else {
+              this.base64img3 = this.storageservice.mobileserverurl+this.profileList[0].uploadImg2;
+            }
           this.base64img3Flag=true;
         } else {
           this.base64img3Flag=false;

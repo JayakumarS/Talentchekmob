@@ -263,8 +263,8 @@
                                 <ion-label> <span class="badge col-red">
                                         {{x.status}}</span></ion-label>
                             </ion-col>
-                            <ion-col size="12">
-                                <!-- <ion-label>{{x.}}</ion-label> -->
+                            <ion-col size="12" *ngIf="x.eduDescription!=null && x.eduDescription!=''">
+                                <ion-label [innerHTML]="x.eduDescription"></ion-label>
                             </ion-col>
                         </ion-row>
 
@@ -367,6 +367,9 @@
                             </ion-col>
                             <ion-col size="12" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
                                 <ion-label class="badge col-green">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.expDescription!=null && x.expDescription!=''">
+                                <ion-label [innerHTML]="x.expDescription"></ion-label>
                             </ion-col>
                         </ion-row>
 
@@ -511,6 +514,9 @@
                             </ion-col>
                             <ion-col size="12" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
                                 <ion-label class="badge col-green">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.rolePlayed!=null && x.rolePlayed!=''">
+                                <ion-label class="badge col-green" [innerHTML]="x.rolePlayed"></ion-label>
                             </ion-col>
                         </ion-row>
 
