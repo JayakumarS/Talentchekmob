@@ -23,7 +23,7 @@
 
     <div class="ion-stepper">
 
-        <div class="ion-stepper-step" id="step1">
+        <div class="ion-stepper-step" id="step1" *ngIf="step1Flag">
             <form [formGroup]="jobProfileForm">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">1</div>
@@ -82,7 +82,7 @@
                             style="color: #f70505;">*</small></ion-label>
                     <div style="margin: 0px 15px 0px 0px;">
                         <ion-item fill="outline" class="input-field">
-                            <ion-input type="number" formControlName="openings"
+                            <ion-input type="number" formControlName="openings" (click)="testFun()"
                                 placeholder="{{'AddJobPost.NoOfOpenings' | translate}}"></ion-input>
                         </ion-item>
                     </div>
@@ -97,7 +97,7 @@
         </div>
 
 
-        <div class="ion-stepper-step" id="step2">
+        <div class="ion-stepper-step" id="step2" *ngIf="step2Flag">
             <form [formGroup]="jobProfileForm1">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">2</div>
@@ -504,7 +504,7 @@
             </div> -->
 
 
-        <div class="ion-stepper-step" id="step3">
+        <div class="ion-stepper-step" id="step3" *ngIf="step3Flag">
             <form [formGroup]="jobProfileForm2">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">3</div>
@@ -611,7 +611,7 @@
 
 
 
-        <div class="ion-stepper-step" id="step4">
+        <div class="ion-stepper-step" id="step4" *ngIf="step4Flag">
             <form [formGroup]="jobProfileForm3">
                 <div class="ion-stepper-header">
                     <div class="ion-stepper-circle">4</div>

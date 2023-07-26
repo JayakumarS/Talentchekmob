@@ -87,7 +87,8 @@ export class OrgProfilePage implements OnInit {
           }
           if (params.id == 3) {
             this.isLogo = true;
-            this.editprofile();
+           // this.editprofile();
+           this.editprofileImg();
 
           }
         }
@@ -281,8 +282,50 @@ export class OrgProfilePage implements OnInit {
           'orgLogo': this.profileList[0].orgLogo,
           'languagesknown': this.profileList[0].languagesknown,
         })
-        this.base64img1 = this.imagePath+this.profileList[0].orgLogo;
+       // this.base64img1 = this.imagePath+this.profileList[0].orgLogo;
+       if(this.profileList[0].orgLogo!=null && this.profileList[0].orgLogo!=undefined){
+        if(this.profileList[0].orgLogo.includes('data:image')){
+          this.base64img1 = this.profileList[0].orgLogo;
+        } else {
+          this.base64img1 = this.imagePath+this.profileList[0].orgLogo;
+        }
+       }
+        
 
+      }
+      this.storageservice.dismissLoading();
+    })
+  }
+
+
+  //editprofileDetails Img
+  editprofileImg() {
+
+    var EditprofileDetails = "api/auth/app/OrganizationProfileDetails/orgeditprofiledetails?currentUserId=" + this.currentUserId;
+    this.storageservice.getrequest(EditprofileDetails).subscribe(result => {
+
+      if (result["success"] == true) {
+        this.getCountryList();
+        this.searchForId(result["profileList"][0].permCountry);
+        // this.selectedCountry = this.desiredItem.text;
+        this.editstate = result["profileList"][0].permState;
+        this.getstatelist(result["profileList"][0].permCountry);
+        this.editCity = result["profileList"][0].permCity
+        this.getcitylist(result["profileList"][0].permState, result["profileList"][0].permCountry)
+        this.profileList = result["profileList"];
+        const dob = this.profileList[0].dob;
+        const startdate = moment(dob, 'DD/MM/YYYY').toDate();
+        this.docForm.patchValue({
+          'orgLogo': this.profileList[0].orgLogo,
+        })
+       // this.base64img1 = this.imagePath+this.profileList[0].orgLogo;
+       if(this.profileList[0].orgLogo!=null && this.profileList[0].orgLogo!=undefined){
+        if(this.profileList[0].orgLogo.includes('data:image')){
+          this.base64img1 = this.profileList[0].orgLogo;
+        } else {
+          this.base64img1 = this.imagePath+this.profileList[0].orgLogo;
+        }
+       }
       }
       this.storageservice.dismissLoading();
     })
@@ -321,6 +364,28 @@ export class OrgProfilePage implements OnInit {
     }
 
   }
+
+  ///profile Image  Update
+  async UpdateImg() {
+    // const errors = this.checkFormValidity(this.docForm);
+ 
+    // this.docForm.value.dob = formatDate(this.docForm.value.dob, 'yyyy/MM/dd', 'en-IN');
+       this.docForm.value.currentUserId = this.currentUserId;
+       this.Orgdetails = this.docForm.value;
+       console.log(` data: ${JSON.stringify(this.Orgdetails)}`);
+       var updateprofile = "api/auth/app/mobile/orgupdateProfile";
+ 
+       this.storageservice.postrequest(updateprofile, this.Orgdetails).subscribe(result => {
+         console.log("Image upload response: " + result)
+         if (result["success"] == true) {
+           const orgprofileview = new OrgProfileViewPage(this.router, this.storageservice, this.alertController, this.languageService, this.route);
+           orgprofileview.reload();
+           this.presentToast()
+         }
+       });
+ 
+ 
+   }
 
   async presentToast() {
     const toast = await this.toastController.create({

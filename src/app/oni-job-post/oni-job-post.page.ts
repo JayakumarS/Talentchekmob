@@ -17,6 +17,10 @@ import { PopoverController } from '@ionic/angular';
 })
 export class OniJobPostPage implements OnInit {
   selectedLang: string;
+  step1Flag:boolean=true;
+  step2Flag:boolean=false;
+  step3Flag:boolean=false;
+  step4Flag:boolean=false;
 
   //refresh function
   doRefresh(event) {
@@ -170,6 +174,10 @@ export class OniJobPostPage implements OnInit {
         }
       }
     });
+  }
+
+  testFun(){
+    this.jobProfileForm.controls;
   }
 
   // timeout function for first button
@@ -452,8 +460,12 @@ export class OniJobPostPage implements OnInit {
     if (jobProfile.jobSkills.value != null && jobProfile.jobSkills.value.length != 0) {
       const current = document.getElementById(currentStep);
       const next = document.getElementById(nextStep);
-      current.style.display = 'none';
-      next.style.display = 'block';
+      // current.style.display = 'none';
+      // next.style.display = 'block';
+      this.step1Flag=false;
+      this.step2Flag=false;
+      this.step3Flag=true;
+      this.step4Flag=false;
 
     }
     else {
@@ -468,8 +480,13 @@ export class OniJobPostPage implements OnInit {
     if (jobProfile2.locationOffer.value != null && jobProfile2.locationOffer.value.length != 0) {
       const current = document.getElementById(currentStep);
       const next = document.getElementById(nextStep);
-      current.style.display = 'none';
-      next.style.display = 'block';
+      // current.style.display = 'none';
+      // next.style.display = 'block';
+
+      this.step1Flag=false;
+      this.step2Flag=false;
+      this.step3Flag=false;
+      this.step4Flag=true;
     }
     else {
       var msg = ["Please Select offered locations"]
@@ -480,16 +497,35 @@ export class OniJobPostPage implements OnInit {
   nextStep(currentStep: string, nextStep: string) {
     const current = document.getElementById(currentStep);
     const next = document.getElementById(nextStep);
-    current.style.display = 'none';
-    next.style.display = 'block';
-
+    // current.style.display = 'none';
+    // next.style.display = 'block';
+    this.step1Flag=false;
+    this.step2Flag=true;
+    this.step3Flag=false;
+    this.step4Flag=false;
   }
   // next step function
   prevStep(currentStep: string, prevStep: string) {
     const current = document.getElementById(currentStep);
     const prev = document.getElementById(prevStep);
-    current.style.display = 'none';
-    prev.style.display = 'block';
+    // current.style.display = 'none';
+    // prev.style.display = 'block';
+    if(prevStep=='step1'){
+      this.step1Flag=true;
+      this.step2Flag=false;
+      this.step3Flag=false;
+      this.step4Flag=false;
+    } else if(prevStep=='step2'){
+      this.step1Flag=false;
+      this.step2Flag=true;
+      this.step3Flag=false;
+      this.step4Flag=false;
+    } else if(prevStep=='step3' ){
+      this.step1Flag=false;
+      this.step2Flag=false;
+      this.step3Flag=true;
+      this.step4Flag=false;
+    }
   }
 
   // ethuku irukune therila
