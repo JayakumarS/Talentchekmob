@@ -15,7 +15,7 @@ export class RatingExtraPopupPage implements OnInit {
   ExtracurricularFrom: FormGroup;
 
   stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue: number;
+  selectedValue: number[]=[];
 
   extId: any;
   Extracurricular: any;
@@ -46,18 +46,20 @@ export class RatingExtraPopupPage implements OnInit {
   }
 
 
-
-
-
-
-    ///rating  star
-    countStar(star) {
-      this.selectedValue = star;
-      this.ExtracurricularFrom.patchValue({
-        'rating': this.selectedValue,
-        }),
-      console.log('Value of star', this.selectedValue);
+  countStar(star: number) {
+      
+    const index = this.selectedValue.indexOf(star);
+    if (index !== -1) {
+      this.selectedValue.splice(index, 1); // If star is already selected, remove it from the array
+    } else {
+      this.selectedValue.push(star); // If star is not selected, add it to the array
     }
+
+    this.ExtracurricularFrom.patchValue({
+      'rating': this.selectedValue.length,
+      })
+  }
+
     updateRatingExt(){
       if(this.ExtracurricularFrom.value.remarks && !this.ExtracurricularFrom.value.rating){
         this.ExtracurricularFrom.value.extId = this.extId;

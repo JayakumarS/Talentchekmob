@@ -16,7 +16,7 @@ export class RatingInstiPopupPage implements OnInit {
   EducationForm: FormGroup;
 
   stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue: number;
+  selectedValue: number[]=[];
   eduId: any;
   Education: any;
   currendUserId: string;
@@ -46,12 +46,26 @@ export class RatingInstiPopupPage implements OnInit {
 
 
     ///rating  star
-    countStar(star) {
-      this.selectedValue = star;
+    // countStar(star) {
+    //   this.selectedValue = star;
+    //   this.EducationForm.patchValue({
+    //     'rating': this.selectedValue,
+    //     }),
+    //   console.log('Value of star', this.selectedValue);
+    // }
+
+    countStar(star: number) {
+      
+      const index = this.selectedValue.indexOf(star);
+      if (index !== -1) {
+        this.selectedValue.splice(index, 1); // If star is already selected, remove it from the array
+      } else {
+        this.selectedValue.push(star); // If star is not selected, add it to the array
+      }
+
       this.EducationForm.patchValue({
-        'rating': this.selectedValue,
-        }),
-      console.log('Value of star', this.selectedValue);
+        'rating': this.selectedValue.length,
+        })
     }
 
     updateRatingOrg(){

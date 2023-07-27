@@ -10,8 +10,8 @@
             <ion-label style=" font-size: 20px;   margin-left: 4%;">{{'ProfessionalExp.orgRating' | translate}} </ion-label>
             <div style="    margin-left: 14%;">
                 <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
-                    <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
-                        <ion-icon name="star"></ion-icon>
+                    <li (click)="countStar(star)">
+                        <ion-icon name="star" [ngStyle]="selectedValue.includes(star) ? {'color': '#FFD700'} : {}"></ion-icon>
                     </li>
                 </ul>
             </div>
