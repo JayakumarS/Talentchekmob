@@ -87,7 +87,7 @@
                         <ion-col>
                             <span class="c-pill c-pill--danger">{{cElement.jobTitleName}}</span>
                         </ion-col>
-                        <ion-col>
+                        <ion-col *ngIf="cElement.jobTypeStr!=null && cElement.jobTypeStr!=''&& cElement.jobTypeStr!=undefined">
                             <span class="c-pill c-pill--danger">{{cElement.jobTypeStr}}</span>
                         </ion-col>
                         <ion-col>

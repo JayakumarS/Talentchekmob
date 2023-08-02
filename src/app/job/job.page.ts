@@ -82,7 +82,13 @@ export class JobPage implements OnInit {
       if(result["success"]== true){
         if(this.matchedJobList.length !=0){
           this.showflag = true;
+          
           this.matchedJobList.forEach(element=>{
+            if(element.onilogo.includes('data:image')){
+              // Do nothing
+            } else {
+              element.onilogo = this.storageservices.mobileserverurl+element.onilogo;
+            }
             let jobType = "";
             for(let jb=0;jb<element.jobType.length;jb++){
               jobType += element.jobType[jb]+", ";
