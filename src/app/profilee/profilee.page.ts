@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
@@ -78,7 +78,7 @@ export class ProfileePage implements OnInit {
   splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder, public modalController: ModalController,
     private camera: Camera, private toastController: ToastController, private elementRef: ElementRef
-    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService) { }
+    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService,private renderer: Renderer2) { }
 
   ngOnInit() {
 
@@ -304,7 +304,7 @@ export class ProfileePage implements OnInit {
         console.log("Image upload response: " + result)
         if (result["success"] == true) {
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
+            const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
             profilePage.updateData();
           }, 800);
           this.storageservice.dismissLoading();
@@ -363,7 +363,7 @@ export class ProfileePage implements OnInit {
       console.log("Image upload response: " + result)
       if (result["success"] == true) {
         setTimeout(() => {
-          const profilePage = new ProfilePage(this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
+          const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
           profilePage.updateData();
         }, 800);
         this.storageservice.dismissLoading();

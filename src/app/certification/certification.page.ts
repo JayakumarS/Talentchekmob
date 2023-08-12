@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -46,7 +46,7 @@ export class CertificationPage implements OnInit {
   constructor(public router:Router,public modalController: ModalController,public languageService:LanguageService,
     public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,private camera: Camera,
-    public storageservice: StorageService,private toastController: ToastController,) { }
+    public storageservice: StorageService,private toastController: ToastController,private renderer: Renderer2) { }
 
   ngOnInit() {
 
@@ -230,7 +230,7 @@ export class CertificationPage implements OnInit {
             console.log("Image upload response: " + result)
             if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
             profilePage.updateData();
             }, 800);
               this.presentToast()
@@ -275,7 +275,8 @@ export class CertificationPage implements OnInit {
       console.log("Image upload response: " + result)
       if (result["success"] == true) {
       setTimeout(() => {
-         const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+        
+         const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
         profilePage.updateData();
       }, 800);
        this.updateToast()

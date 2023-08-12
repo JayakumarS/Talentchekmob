@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, ViewChild, NgZone, Renderer2 } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
@@ -13,7 +13,7 @@ import { LanguageService } from '../language.service';
 })
 export class ProfileViewPage implements OnInit {
 
-  @ViewChild('popover') popover;
+ // @ViewChild('popover') popover;
   showDropdownFlag: number;
   isOpen = false;
   userId: string;
@@ -47,7 +47,11 @@ export class ProfileViewPage implements OnInit {
   imagePath:string;
   public myValue: string;
   expertiseFull: boolean = false;
-  constructor(public router: Router, private ngZone: NgZone, public route: ActivatedRoute, public storageservice: StorageService, private elementRef: ElementRef,
+  isTooltipVisible = false;
+  opp: boolean;
+  isPopupOpen: boolean = false;
+  currentIndex: any;
+  constructor(private renderer: Renderer2,public router: Router, private ngZone: NgZone, public route: ActivatedRoute, public storageservice: StorageService, private elementRef: ElementRef,
     public modalController: ModalController, public alertController: AlertController, public languageService: LanguageService) {
 
     interface MyCustomEventInit extends CustomEventInit {
@@ -83,6 +87,15 @@ export class ProfileViewPage implements OnInit {
   doRefresh(event) {
     this.ngOnInit();
     event.target.complete();
+  }
+
+  @ViewChild('popover') popover;
+
+  //isOpen = false;
+
+  presentPopover(e: Event) {
+    this.popover.event = e;
+    this.isOpen = true;
   }
 
   @ViewChild('picker', { static: false })
@@ -195,6 +208,24 @@ export class ProfileViewPage implements OnInit {
     });
     this.storageservice.dismissLoading()
   }
+
+  toggleTooltip() {
+    this.opp=true;
+  }
+
+  togglePopup(index) {
+    this.isPopupOpen = !this.isPopupOpen;
+    this.currentIndex=index;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+    if (!this.elementRef.nativeElement.contains(targetElement)) {
+      this.isPopupOpen = false;
+    }
+  }
+  
 
   //list function
   listFunction() {

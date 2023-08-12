@@ -9,6 +9,8 @@ import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
 
+//For using Razorpay
+declare var RazorpayCheckout: any;
 
 @Component({
   selector: 'app-educations',
@@ -30,6 +32,24 @@ export class EducationsPage implements OnInit {
     maxDate.setFullYear(maxDate.getFullYear() + 10);
     return maxDate.toISOString().split('T')[0];
   }
+
+  currencyVal: any;
+  amountVal: any;
+  currencySymbolVal: any;
+  paymentDetails: any;
+
+  pay ={
+    amount:0,
+    currency:'INR',
+    receipt:'TalentChek',
+    exAmount:0,
+  };
+  inrExAmt: any;
+  amt: any;
+  usdExAmt: any;
+  aedExAmt: any;
+  myrExAmt: any;
+  sgdExAmt: any;
 
   industryList = [];
   EducationForm: FormGroup;
@@ -176,6 +196,15 @@ export class EducationsPage implements OnInit {
         })
         this.EducationForm.get("institutionLocation").disable();
       }
+    });
+
+    // Payment Info
+    var getPaymentInfo = "api/auth/app/PaymentInfo/getBankDetails";
+    this.storageservice.getrequest(getPaymentInfo + "?currentUserId=" + orgid).subscribe((resultValue:any) => {
+      if(resultValue.success==true){
+        this.paymentDetails=resultValue.bankDetails;
+      } 
+      
     });
   }
   //  institutionList auto complete 
@@ -414,8 +443,10 @@ export class EducationsPage implements OnInit {
       } else {
 
         if(this.dateValidation == true || this.dateValidation == undefined){
-          this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
-          if(this.EducationForm.value.courseEnd != undefined){
+          if(this.EducationForm.value.courseStart.includes("T")){
+            this.EducationForm.value.courseStart = formatDate(this.EducationForm.value.courseStart, 'MM/yyyy', 'en-IN');
+          }
+          if(this.EducationForm.value.courseEnd != undefined && this.EducationForm.value.courseEnd.includes("T")){
             this.EducationForm.value.courseEnd = formatDate(this.EducationForm.value.courseEnd, 'MM/yyyy', 'en-IN');
           }
           if (this.unregistered == "") {
@@ -434,24 +465,104 @@ export class EducationsPage implements OnInit {
   
           console.log(` data: ${JSON.stringify(this.Education)}`);
           var saveEducation = "api/auth/app/IndividualProfileDetails/saveEducation";
-  
-          this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
-            console.log("Image upload response: " + result)
-            if (result["success"] == true) { 
-              
-              this.presentToast()
 
-              let edit = {
-                instiId:result["educationBean"].institutionId,
-                edu:result["educationBean"].eduId,
-             }
-             let navigationExtras: NavigationExtras = {
-               queryParams: edit
-             };
-              this.router.navigate(['/edu-verification'],navigationExtras)
-      
+          if(this.paymentDetails!=undefined && this.paymentDetails!=null && this.paymentDetails.length>0){
+            if (this.paymentDetails[0].currency == 'INR') {
+              this.amountVal = this.paymentDetails[0].amount;
+              this.currencySymbolVal = "₹";
             }
-          });
+            else if (this.paymentDetails[0].currency == 'USD') {
+              this.amountVal = this.paymentDetails[0].amount;
+              this.currencySymbolVal = "$";
+            }
+            else if (this.paymentDetails[0].currency == 'AED') {
+              this.amountVal = this.paymentDetails[0].amount;
+              this.currencySymbolVal = "د.إ";
+            }
+            else if (this.paymentDetails[0].currency == 'MYR') {
+              this.amountVal = this.paymentDetails[0].amount;
+              this.currencySymbolVal = "RM";
+            }
+            else if (this.paymentDetails[0].currency == 'SGD') {
+              this.amountVal = this.paymentDetails[0].amount;
+              this.currencySymbolVal = "S$";
+            }
+          }
+
+          if(this.amountVal!=undefined && this.amountVal!=null && this.amountVal!=0 && this.amountVal!='0'
+      && this.EducationForm.controls.currentlyStudy.value !=true){
+                // Fee popup
+                let alert = await this.alertController.create({
+
+                  //message: 'Are you sure that you want to permanently delete the selected item?',
+                  message:'<div class="generic_content"> <div class="generic_head_price"><div class="generic_head_content"> <div class="head_bg"></div> <div class="head"><span>Verification</span> </div></div> <div class="generic_price_tag clearfix"> <span class="price"> <span class="sign">'+this.currencySymbolVal+'</span> <span class="currency">'+this.amountVal+'</span></span></div></div></div>',
+                  cssClass: 'alertclass',
+                  buttons: [
+                    {
+                      text: 'PAY',
+                      cssClass: 'btncss',
+                      handler: () => {
+                        console.log('Confirm Okay');
+                      // console.log("Id: " + certId);
+                        try {
+                          this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
+                            console.log("Image upload response: " + result)
+                            if (result["success"] == true) { 
+                              
+                              this.presentToast()
+                
+                              let edit = {
+                                instiId:result["educationBean"].institutionId,
+                                edu:result["educationBean"].eduId,
+                             }
+                             let navigationExtras: NavigationExtras = {
+                               queryParams: edit
+                             };
+                             this.payWithRazorStandard();
+                              this.router.navigate(['/edu-verification'],navigationExtras)
+                      
+                            }
+                          });
+                        
+                        }
+                        catch (Exception) {
+                          this.storageservice.warningToast('Connection unavailable!');
+                        }
+                      }
+                    },
+                    {
+                      text: 'CANCEL',
+                      role: 'cancel',
+                      handler: () => {
+                        console.log('Confirm Cancel');
+                      }
+                    }
+                  ]
+                });
+                await alert.present();
+
+                //
+      } else {
+        this.storageservice.postrequest(saveEducation, this.Education).subscribe(result => {
+          console.log("Image upload response: " + result)
+          if (result["success"] == true) { 
+            
+            this.presentToast()
+
+            let edit = {
+              instiId:result["educationBean"].institutionId,
+              edu:result["educationBean"].eduId,
+           }
+           let navigationExtras: NavigationExtras = {
+             queryParams: edit
+           };
+            this.router.navigate(['/edu-verification'],navigationExtras)
+    
+          }
+        });
+      }
+  
+          
         }else{
           const alert = await this.toastController.create({
             header: '',
@@ -809,6 +920,162 @@ export class EducationsPage implements OnInit {
       this.nonMandatory = false
     this.EducationForm.get("uploadUrl").enable();
     }
+  }
+
+  payWithRazorStandard() {
+
+
+    if(this.currencySymbolVal == 'INR'){
+
+      this.inrExAmt=parseInt(this.amountVal)
+      this.amt = this.inrExAmt * 100;
+      this.pay.exAmount =this.amt;
+      this.pay.amount =this.amt;
+
+    }
+    if(this.currencySymbolVal == 'USD'){
+
+      this.usdExAmt=parseInt(this.amountVal)
+      this.amt = this.usdExAmt * 100;
+      this.pay.exAmount =this.amt;
+      this.pay.amount =this.amt;
+
+    }
+    if(this.currencySymbolVal == 'AED'){
+
+      this.aedExAmt=parseInt(this.amountVal)
+      this.amt = this.aedExAmt * 100;
+      this.pay.exAmount =this.amt;
+      this.pay.amount =this.amt;
+    }
+    if(this.currencySymbolVal == 'MYR'){
+
+      this.myrExAmt=parseInt(this.amountVal)
+      this.amt = this.myrExAmt * 100;
+      this.pay.exAmount =this.amt;
+      this.pay.amount =this.amt;
+    }
+    if(this.currencySymbolVal == 'SGD'){
+
+      this.sgdExAmt=parseInt(this.amountVal)
+      this.amt = this.sgdExAmt * 100;
+      this.pay.exAmount =this.amt;
+      this.pay.amount =this.amt;
+    }
+
+    // if(this.isdiscount == true){
+    //   this.amountVal = this.standardcountAmt;
+    // }
+
+    //var subscripamt = (this.amountVal * 100); //To conver to paisa/units
+    // var subscripamt = this.amountVal; //To conver to paisa/units
+    let orderURL = "api/auth/app/subscription/payments/Subscriptionpayment";
+    var options = {
+      "amount": this.pay.amount,
+      "currency": this.currencyVal,
+      "receipt": "TALENTCHEK",
+      "exAmount": this.pay.exAmount
+    }
+    console.log("Order URL: " + orderURL);
+    console.log(`Options: ${JSON.stringify(options)}`);
+
+    var orderId: string;
+    this.storageservice.postrequest(orderURL, options).subscribe(result => {
+
+      let orId = result['orderid'];
+      console.log("OrderId: " + orId);
+      orderId = orId;
+    },
+      error => {
+        console.log(`Error data: ${JSON.stringify(error)}`);
+        if (error.name == "HttpErrorResponse") {
+          this.storageservice.warningToast('Internet connection problem, Pls check your internet.');
+          this.storageservice.GeneralAlert('HttpErrorResponse', 'Internet connection problem, Pls check your internet.');
+        }
+        else {
+          this.storageservice.warningToast('Error: ' + error.message);
+        }
+      },
+      () => {
+        // 'onCompleted' callback.
+        if (orderId != null && orderId != '') {
+          var paymentStoreURL = this.storageservice.mobileserverurl +"api/auth/app/subscription/payments/paymentHistory";
+          var subscriptype = "Service Fee";
+          this.payWithRazorOne(paymentStoreURL, orderId, this.userId, subscriptype, this.pay.amount);
+        }
+        else {
+          this.storageservice.generalAlertToast("Order Id is empty. Please contact support.");
+        }
+      }
+
+    );
+  }
+
+  payWithRazorOne(paymentStoreURL: string, orderId: string, userId: string, subscriptype: string, subscripamt: number) {
+    var options = {
+      description: 'Talent Chek Payment Transaction',
+      image: 'https://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png',
+      order_id: orderId,
+      currency: this.currencyVal,
+      key: 'rzp_live_ABLgrHfsy2Fhkb', //For Test
+      // key: 'rzp_live_ABLgrHfsy2Fhkb', //For Live
+      amount: subscripamt,
+      name: 'Talent Chek',
+      theme: {
+        color: '#fcc33e'
+      },
+      modal: {
+        ondismiss: function () {
+          console.log('dismissed');
+        }
+      }
+    };
+    localStorage.setItem('currency', this.currencyVal);
+    console.log(localStorage.getItem("currency"));
+    console.log("paymentStore URL: " + paymentStoreURL);
+    console.log(`Main Options: ${JSON.stringify(options)}`);
+
+    var successCallback = function (success) {
+      alert('Payment success');
+      console.log(`Payment success Storing data: ${JSON.stringify(success)}`);
+      console.log('payment_id: ' + success.razorpay_payment_id);
+      console.log('order_id: ' + success.razorpay_order_id);
+      console.log('signature: ' + success.razorpay_signature);
+
+      var payhistory = {
+        "orderid":success.razorpay_order_id,
+        "paymentid":success.razorpay_payment_id,
+        "signature":success.razorpay_signature,
+        "subscriptype":subscriptype,
+        "subscripamt":subscripamt,
+        "userId":localStorage.getItem("userId"),
+        "country":localStorage.getItem("countryCode"),
+        "currency":localStorage.getItem("currency"),
+        "userName":localStorage.getItem("userName"),
+        "email":localStorage.getItem("email")
+      }
+      console.log(`myJSONObject payment data: ${JSON.stringify(payhistory)}`);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", paymentStoreURL, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(payhistory));
+      xhr.onload = function () {
+        var data = JSON.parse(this.responseText);
+        console.log(`Completed payment response data: ${JSON.stringify(data)}`);
+      };
+
+    };
+    this.router.navigate(['/home']);
+    var cancelCallback = function (error) {
+      //alert(error.description + ' (Error ' + error.code + ')');
+      console.log(error.description + ' (Error ' + error.code + ')');
+    };
+
+    RazorpayCheckout.on('payment.success', successCallback);
+    RazorpayCheckout.on('payment.cancel', cancelCallback);
+    RazorpayCheckout.open(options);
+
   }
 //   // footer
 // goto_profileSearch(){

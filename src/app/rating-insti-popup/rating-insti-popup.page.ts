@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
@@ -24,7 +24,7 @@ export class RatingInstiPopupPage implements OnInit {
   
   constructor(public fb: FormBuilder,private route: ActivatedRoute,   public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,public languageService:LanguageService,
-    public toastController:ToastController,public router:Router,public storageservice:StorageService,) { }
+    public toastController:ToastController,public router:Router,public storageservice:StorageService,private renderer: Renderer2) { }
 
   ngOnInit() {
     this.selectedLang  = localStorage.getItem('selectedLang');
@@ -80,7 +80,7 @@ export class RatingInstiPopupPage implements OnInit {
            
             this.presentToast()
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
              profilePage.updateData();
             }, 800); 
           }
@@ -97,7 +97,7 @@ export class RatingInstiPopupPage implements OnInit {
            
             this.presentToast()
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
              profilePage.updateData();
             }, 800); 
           }
@@ -116,14 +116,14 @@ export class RatingInstiPopupPage implements OnInit {
          
           this.presentToast()
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+            const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
            profilePage.updateData();
           }, 800); 
     }else{
 
       this.router.navigate(['/profile-view']);
       setTimeout(() => {
-        const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+        const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
        profilePage.updateData();
       }, 800); 
     }
@@ -145,7 +145,7 @@ move(){
 
   this.router.navigate(['/profile-view']); 
   setTimeout(() => {
-    const profilePage = new ProfilePage(this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
    profilePage.updateData();
   }, 800);
 }

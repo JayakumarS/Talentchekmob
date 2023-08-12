@@ -251,6 +251,42 @@ ion-content {
     border-radius: 5px;
 }
 
+.popupNew {
+    position: absolute;
+    top: calc(100% + -13px);
+    box-sizing: content-box;
+    right:-10px;
+
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    padding: 5px;
+    display: none;
+    z-index: 1;
+    border-radius: 5px;
+    width: 278px;
+
+    
+  }
+
+  
+
+  .popupNew2 {
+    position: absolute;
+    top: calc(100% + -151px);
+    box-sizing: content-box;
+    right:-10px;
+
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    padding: 5px;
+    display: none;
+    z-index: 1;
+    border-radius: 5px;
+    width: 278px;
+
+   
+  }
+
 .popup-triangle {
     position: absolute;
     top: -6px;
@@ -265,6 +301,13 @@ ion-content {
 .popup-content {
     display: flex;
     flex-direction: column;
+}
+
+.popup-content1 {
+    display: flex;
+    flex-direction: column;
+    width: 278px;
+   
 }
 
 .edit-button,
@@ -392,3 +435,22 @@ ion-content {
     white-space: nowrap;
     vertical-align: baseline;
 }
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 1000;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+  }
+
+  .show-popup {
+    display: block;
+    min-width: 278px;
+  }
