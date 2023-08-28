@@ -191,10 +191,15 @@
                                              </div> -->
                     <ion-label style="    margin-left: 4%;">{{'profilein.Rate the Connection' | translate}}</ion-label>
                     <div>
-                        <ul class="list-inline rating-list" *ngFor="let star of stars"
+                        <!-- <ul class="list-inline rating-list" *ngFor="let star of stars"
                             style="display: inline-block;padding-inline-start: 0px;">
                             <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
                                 <ion-icon name="star"></ion-icon>
+                            </li>
+                        </ul> -->
+                        <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding-inline-start: 0px;">
+                            <li (click)="countStar(star)">
+                                <ion-icon name="star" [ngStyle]="selectedValue.includes(star) ? {'color': '#FFD700'} : {}"></ion-icon>
                             </li>
                         </ul>
                     </div>

@@ -37,7 +37,8 @@ export class ConnectionPage implements OnInit {
   Connection: any;
 
   stars: number[] = [1, 2, 3, 4, 5];
-  selectedValue: number;
+  //selectedValue: number;
+  selectedValue: number[]=[];
   receiverRegistered: any;
   Message: any;
   connectionBean: any;
@@ -99,6 +100,20 @@ export class ConnectionPage implements OnInit {
     this.RoleID = this.roleId.split(",", 3);
   }
 
+  countStar(star: number) {
+      
+    const index = this.selectedValue.indexOf(star);
+    if (index !== -1) {
+      this.selectedValue.splice(index, 1); // If star is already selected, remove it from the array
+    } else {
+      this.selectedValue.push(star); // If star is not selected, add it to the array
+    }
+    
+    this.ConnectionsForm.patchValue({
+        'ratingInitiator': this.selectedValue,
+    })
+  }
+
   keyPressmobileNo(event: any) {
     const pattern = /[0-9()+-]/;
     const inputChar = String.fromCharCode(event.charCode);
@@ -134,13 +149,13 @@ export class ConnectionPage implements OnInit {
     this.router.navigate(['/profile/addCertifications'])
   }
   ///rating  star
-  countStar(star) {
-    this.selectedValue = star;
-    this.ConnectionsForm.patchValue({
-      'ratingInitiator': this.selectedValue,
-    }),
-      console.log('Value of star', this.selectedValue);
-  }
+  // countStar(star) {
+  //   this.selectedValue = star;
+  //   this.ConnectionsForm.patchValue({
+  //     'ratingInitiator': this.selectedValue,
+  //   }),
+  //     console.log('Value of star', this.selectedValue);
+  // }
   //relationshipList
   getrelationshipList() {
     var getrelationshipListUrl = "api/auth/app/IndividualProfileDetails/relationshipList";

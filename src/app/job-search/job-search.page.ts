@@ -329,72 +329,82 @@ export class JobSearchPage implements OnInit {
 
   async profileView(talentId,accounttype,username) {
 
+            var creditpointsURL = "api/auth/app/fileUpload/getImgfile?talentId="+this.currentUserId;
+            this.storageservice.getrequest(creditpointsURL).subscribe(async data => {
+            console.log(data);
+            if(data['success'] == true){
+              localStorage.setItem('creditPoints', data["creditpoints"]);;
+              this.creditPoints = localStorage.getItem("creditPoints") ;
 
-    if(this.creditPoints < 2 ){
+              if(this.creditPoints < 2 ){
 
-      {
-        let alert = await this.alertController.create({
-          header: 'Credit Points Alert!',
-          message: "You're low on credits. Go to Pricing & Credits to recharge.",
-          cssClass: 'alertclass',
-          buttons: [
-            {
-              text: '',
-              role: 'cancel',
-              handler: () => {
-               console.log('Confirm Cancel');
-              }
-            },
-            {
-              text: 'Recharge Now',
-              role: 'btn',
-              handler: () => {
-
-                if (this.roleId.includes('1')) {
-                  this.router.navigate(['/subscription-individual']);
-                } else if (this.roleId.includes('2')) {
-                  this.router.navigate(['/subscription-insorg']);
-                } else if (this.roleId.includes( '3')) {
-                  this.router.navigate(['/subscription-insorg']);
+                {
+                  let alert = await this.alertController.create({
+                    header: 'Credit Points Alert!',
+                    message: "You're low on credits. Go to Pricing & Credits to recharge.",
+                    cssClass: 'alertclass',
+                    buttons: [
+                      {
+                        text: '',
+                        role: 'cancel',
+                        handler: () => {
+                         console.log('Confirm Cancel');
+                        }
+                      },
+                      {
+                        text: 'Recharge Now',
+                        role: 'btn',
+                        handler: () => {
+          
+                          if (this.roleId.includes('1')) {
+                            this.router.navigate(['/subscription-individual']);
+                          } else if (this.roleId.includes('2')) {
+                            this.router.navigate(['/subscription-insorg']);
+                          } else if (this.roleId.includes( '3')) {
+                            this.router.navigate(['/subscription-insorg']);
+                          }
+                       //   console.log('Confirm Cancel');
+                        }
+                      }
+                    ]
+                  });
+                  await alert.present();
                 }
-             //   console.log('Confirm Cancel');
               }
+              else if(accounttype == "private"){
+               this.PrivateUserAccTypeAlert();
+              }
+              else if (accounttype == "on demand"){
+              
+              // this.OnDemandUserAccTypeAlert(talentId);
+              this.checkOnDemandUserProp(talentId,username);
+              }
+              else{
+          
+               const modal = await this.modalController.create({
+                 component: ProfileViewPopupPage,
+                 cssClass: 'my-custom-class',
+                 componentProps: {
+                   "talentId": talentId,
+                }
+               });
+          
+               modal.onDidDismiss().then((dataReturned) => {
+                if (dataReturned !== null) {
+          
+                   //#region Getting values from popup
+                   console.table("One: " + dataReturned);
+                   //#endregion
+          
+                }
+               });
+          
+              return await modal.present();
+              }
+
+
             }
-          ]
-        });
-        await alert.present();
-      }
-    }
-    else if(accounttype == "private"){
-     this.PrivateUserAccTypeAlert();
-    }
-    else if (accounttype == "on demand"){
-    
-    // this.OnDemandUserAccTypeAlert(talentId);
-    this.checkOnDemandUserProp(talentId,username);
-    }
-    else{
-
-     const modal = await this.modalController.create({
-       component: ProfileViewPopupPage,
-       cssClass: 'my-custom-class',
-       componentProps: {
-         "talentId": talentId,
-      }
-     });
-
-     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-
-         //#region Getting values from popup
-         console.table("One: " + dataReturned);
-         //#endregion
-
-      }
-     });
-
-    return await modal.present();
-    }
+            });
   }
 
 

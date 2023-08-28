@@ -139,8 +139,8 @@ export class EducationsPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       if (params) { 
-        if (params != null || params != undefined ) {  
-            this.editEducation(params.id); 
+        if (params != null || params != undefined ) { 
+          this.getinstitutionListEdit(params.id);  
           console.log(params);
         }
       }
@@ -217,6 +217,17 @@ export class EducationsPage implements OnInit {
       }
     });
   }
+
+  getinstitutionListEdit(param:any) {
+    var institutionListUrl = "api/auth/app/IndividualProfileDetails/institutionList";
+    this.storageservice.getrequest(institutionListUrl).subscribe(result => {
+      if (result["success"] == true) {
+        this.institutionList = result["institutionList"];
+        this.editEducation(param);
+      }
+    });
+  }
+
   onSearchInstitution(value: string) {
 
     const filterValue = value.toLowerCase();
@@ -655,7 +666,8 @@ export class EducationsPage implements OnInit {
 
 
         const containsTF = this.checkForTF(this.Education.institutionName)
-        if(containsTF == true){
+        let containsString=this.containsAlphabets(this.Education.institutionName);
+        if(containsTF == true || containsString==false){
           this.searchForId(this.Education.institutionName);  
         }else{
           this.searchForText(this.Education.institutionName); 
@@ -746,6 +758,14 @@ export class EducationsPage implements OnInit {
     } else {
       console.log(this.desiredItem.text); 
     }
+  }
+
+  containsAlphabets(inputString: string): boolean {
+    // Define a regular expression pattern that matches any alphabet (A-Z, a-z)
+    const alphabetPattern = /[a-zA-Z]/;
+  
+    // Use the test method to check if the string contains any alphabet
+    return alphabetPattern.test(inputString);
   }
 
 

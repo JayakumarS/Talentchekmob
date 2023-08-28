@@ -92,12 +92,13 @@ export class ClubPage implements OnInit {
      currentUserId: [""]
    });
 
-    this.getOrganisationList()
+    this.getOrganisationList();
 
     this.route.queryParams.subscribe(params => {
       if (params) { 
         if (params.id != null || params.id != undefined ) {  
-            this.editextracurricular(params.id); 
+          this.getOrganisationListEdit(params.id);
+             
           console.log(params);
         }
         else{
@@ -219,6 +220,19 @@ getOrganisationList(){
     }
  });
 }
+
+getOrganisationListEdit(param:any){
+  var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
+  this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+   if (result["success"] == true) {
+    this.organisationList = result["organisationList"]; 
+    this.testOrganisationList = result["organisationList"];
+    this.editextracurricular(param);
+    }
+ });
+}
+
+
 
 // async initializeItems(): Promise<any> { 
 //   var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
@@ -525,7 +539,8 @@ getOrganisationList(){
         //this.initializeItems();
         
         const containsTF = this.checkForTF(this.extracurricularBean.clubName)
-        if(containsTF == true){
+        let containsString=this.containsAlphabets(this.extracurricularBean.clubName); 
+        if(containsTF == true || containsString==false){
           this.searchForId(this.extracurricularBean.clubName);  
         }else{
           this.searchForText(this.extracurricularBean.clubName); 
@@ -596,10 +611,10 @@ getOrganisationList(){
 
   searchForId(id: string) {
     var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
-  this.storageservice.getrequest(organisationListUrl).subscribe(result => {
-   if (result["success"] == true) {
-    this.organisationList = result["organisationList"]; 
-    this.testOrganisationList = result["organisationList"];
+  // this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+  //  if (result["success"] == true) {
+  //   this.organisationList = result["organisationList"]; 
+  //   this.testOrganisationList = result["organisationList"];
 
     this.desiredItem = null;
     console.log(this.organisationList)
@@ -615,8 +630,8 @@ getOrganisationList(){
       console.log(this.desiredItem.text); 
     }
     this.selectedOrganisation = this.desiredItem.text;
-    }
- });
+//     }
+//  });
     // this.desiredItem = null;
     // console.log(this.organisationList)
     // for (const item of this.testOrganisationList) {
@@ -635,10 +650,10 @@ getOrganisationList(){
 
   searchForText(text: string) {
     var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
-  this.storageservice.getrequest(organisationListUrl).subscribe(result => {
-   if (result["success"] == true) {
-    this.organisationList = result["organisationList"]; 
-    this.testOrganisationList = result["organisationList"];
+  // this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+  //  if (result["success"] == true) {
+  //   this.organisationList = result["organisationList"]; 
+  //   this.testOrganisationList = result["organisationList"];
     this.desiredItem = null;
     for (const item of this.testOrganisationList) {
       if (item.text === text) {
@@ -652,8 +667,8 @@ getOrganisationList(){
       console.log(this.desiredItem.text); 
     }
     this.selectedOrganisation = this.desiredItem.text;
-    }
- });
+//     }
+//  });
  console.log( this.selectedOrganisation)
     // this.desiredItem = null;
     // for (const item of this.testOrganisationList) {
@@ -667,6 +682,14 @@ getOrganisationList(){
     // } else {
     //   console.log(this.desiredItem.text); 
     // }
+  }
+
+  containsAlphabets(inputString: string): boolean {
+    // Define a regular expression pattern that matches any alphabet (A-Z, a-z)
+    const alphabetPattern = /[a-zA-Z]/;
+  
+    // Use the test method to check if the string contains any alphabet
+    return alphabetPattern.test(inputString);
   }
 
 //Updateclub
