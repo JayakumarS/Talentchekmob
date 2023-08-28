@@ -381,6 +381,7 @@ export class CertificationPage implements OnInit {
   }
 
 
+
   opencamera() {
     const options: CameraOptions = {
       quality: 70,
@@ -390,30 +391,33 @@ export class CertificationPage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
-      var imageupload = "api/auth/app/IndividualProfileDetails/updateCertification";
-
-      var frmData1: FormData = new FormData();
-      frmData1.append("file", this.base64img1);
-
-      this.storageservice.postrequest(imageupload, frmData1).subscribe(async result => {  
-        console.log("Image upload response: " + result)
-        if (result["success"] == true) {
-        
-          this.certificationForm.patchValue({
-             'uploadCertification':result["uploadPhotoPath"],
-           })
-       
-        }
-   });
-
-      this.certificationForm.patchValue({
-       // 'uploadCertification':data.filePath,
-      })
+  
       console.log(this.base64img1);
+
+      var postData = {
+        'file': this.base64img1,
+        'filetype': "image/jpeg"
+      }
+
+      var ImagePathServiceUrl = "api/auth/app/IndividualProfileDetails/updateCertification";
+      this.storageservice.postrequest(ImagePathServiceUrl, postData).subscribe(result => {
+        if(result['success'] == true){
+ 
+          this.certificationForm.patchValue({
+            'uploadCertification':result["uploadPhotoPath"],
+          });
+
+          console.log(this.certificationForm.value.uploadCertification);
+
+        }
+
+      });   
+
     }), error => {
       console.log(error);
     })
   }
+
 
 
   // footer
