@@ -117,7 +117,7 @@
                                 <ion-input formControlName="regNo" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
                             </ion-item>
                             <div *ngIf=" profileForm.controls.regNo.hasError('required') && profileForm.controls.regNo.touched">
-                                <small style="color: #f70505;">{{'CorReg.RegistrationNorequired' | translate}}</small>
+                                <small style="color: #f70505;">{{'CorReg.reqRegNumber' | translate}}</small>
                             </div>
 
                             <ion-label class="labels">{{'CorReg.dor' | translate}}<small style="color: #f70505;">*</small>
