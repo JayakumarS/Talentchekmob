@@ -77,6 +77,9 @@
             <div *ngIf="docForm.controls.bankAccountNo.hasError('required') && docForm.controls.bankAccountNo.touched">
               <small style="color: #f70505;">{{'profileorg.Enter bank account number' | translate}}</small>
             </div>
+            <div *ngIf="docForm.controls.bankAccountNo.hasError('pattern')">
+              <small style="color: #f70505;">Incorrect account number</small>
+            </div>
           </div>
 
           <div class="button-content">
@@ -94,7 +97,7 @@
             <ion-label class="labels">{{'profileorg.IFSC Code' | translate}}<small
                 style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-input formControlName="ifscCode" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
+              <ion-input formControlName="ifscCode"></ion-input>
             </ion-item>
             <div *ngIf="docForm.controls.ifscCode.hasError('required') && docForm.controls.ifscCode.touched">
               <small style="color: #f70505;">{{'profileorg.Enter your bank IFSC code' | translate}}</small>
@@ -137,7 +140,7 @@
                 style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
 
-              <ion-select interface="popover" formControlName="businessType" placeholder="Business Type"
+              <ion-select  formControlName="businessType" placeholder="Business Type"
                 style="background:white">
                 <ion-select-option value="llp">{{'profileorg.Limited Liability Partnership' |
                   translate}}</ion-select-option>
@@ -191,7 +194,7 @@
             <ion-label class="labels">{{'profileorg.Currency' | translate}}<small
                 style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
-              <ion-select interface="popover" formControlName="currency"
+              <ion-select formControlName="currency"
                 placeholder="{{'profileorg.Currency' | translate}}" style="background:white">
                 <ion-select-option value="INR">{{'Subscription.inr'}}</ion-select-option>
                 <ion-select-option value="USD">{{'Subscription.usd'}}</ion-select-option>

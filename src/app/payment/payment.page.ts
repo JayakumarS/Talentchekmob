@@ -108,6 +108,8 @@ export class PaymentPage implements OnInit {
 async Update(){
   const errors = this.checkFormValidity(this.docForm);
 
+  const containsNumber = /\d/.test(this.docForm.value.accountHolderName);
+
   if (errors.length > 0) {
     // Display errors in a popup
     const alert = await this.toastController.create({
@@ -117,7 +119,17 @@ async Update(){
     });
 
     await alert.present();
-  } else{
+  } else if(containsNumber){
+    // Display errors in a popup
+    const alert = await this.toastController.create({
+    
+      message: 'Name should not contain numbers!',
+      duration: 3000,
+    });
+
+    await alert.present();
+  } 
+  else{
 
     this.docForm.value.currentUserId=this.currentUserId;
     this.paymentDetails = this.docForm.value;

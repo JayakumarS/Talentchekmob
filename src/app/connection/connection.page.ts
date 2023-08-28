@@ -303,7 +303,7 @@ export class ConnectionPage implements OnInit {
   }
   async presentToast1() {
     const toast = await this.toastController.create({
-      message: 'Saved Successfully',
+      message: 'Request Sent',
       duration: 3000,
       cssClass: 'custom-toast'
     });
@@ -398,7 +398,7 @@ export class ConnectionPage implements OnInit {
   }
   async presentToast2() {
     const toast = await this.toastController.create({
-      message: 'Saved Successfully',
+      message: 'Request Sent',
       duration: 3000,
       cssClass: 'custom-toast'
     });
@@ -501,7 +501,7 @@ export class ConnectionPage implements OnInit {
   }
   async presentToast3() {
     const toast = await this.toastController.create({
-      message: 'Saved Successfully',
+      message: 'Request Sent',
       duration: 3000,
       cssClass: 'custom-toast'
     });
