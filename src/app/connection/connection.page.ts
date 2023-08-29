@@ -110,7 +110,7 @@ export class ConnectionPage implements OnInit {
     }
     
     this.ConnectionsForm.patchValue({
-        'ratingInitiator': this.selectedValue,
+        'ratingInitiator': this.selectedValue.length,
     })
   }
 
@@ -214,8 +214,9 @@ export class ConnectionPage implements OnInit {
 
   save() {
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
+      if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
       this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
-
+      } 
     } else {
       this.ConnectionsForm.value.currentUserId = this.userId;
       this.ConnectionsForm.value.currentUserName = this.username
@@ -245,7 +246,11 @@ export class ConnectionPage implements OnInit {
     }
 
     if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
-      this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+      if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
+        this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+
+      }
+     
 
       this.ConnectionsForm.value.currentUserId = this.userId;
       this.ConnectionsForm.value.currentUserName = this.username
@@ -319,7 +324,10 @@ export class ConnectionPage implements OnInit {
 
   orgsave() {
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
-      this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+      if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
+        this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+      }
+      
 
     } else {
       this.ConnectionsForm.value.currentUserId = this.userId;
@@ -348,7 +356,9 @@ export class ConnectionPage implements OnInit {
         }
       });
     } if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
+      if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
       this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+      }
 
       this.ConnectionsForm.value.currentUserId = this.userId;
       this.ConnectionsForm.value.currentUserName = this.username
@@ -413,7 +423,9 @@ export class ConnectionPage implements OnInit {
   instisave() {
 
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
+      if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
       this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
+      }
 
     } else {
       this.ConnectionsForm.value.currentUserId = this.userId;
@@ -442,7 +454,10 @@ export class ConnectionPage implements OnInit {
         }
       });
     } if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
+   
+      if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
       this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+      }
       this.ConnectionsForm.value.currentUserId = this.userId;
       this.ConnectionsForm.value.currentUserName = this.username
       this.Connection = this.ConnectionsForm.value;
@@ -528,6 +543,15 @@ export class ConnectionPage implements OnInit {
       // const startdate = moment(acquaintedFromObj, 'DD/MM/YYYY').toDate();
       // const eduTodate =  this.connectionBean.eduTodate;
       // const enddate = moment(eduTodate, 'DD/MM/YYYY').toDate();
+
+      if(this.connectionBean.ratingInitiator!=null && this.connectionBean.ratingInitiator!=''
+      && this.connectionBean.ratingInitiator!=undefined){
+        let array=[];
+        for(let i=0;i<this.connectionBean.ratingInitiator;i++){
+            array[i]=i;
+        }
+        this.connectionBean.ratingInitiator=array;
+      }
 
       this.ConnectionsForm.patchValue({
         //'acquaintedFromObj': startdate,

@@ -125,7 +125,7 @@ get_CorporateNetwork(){
 
   })
 
-  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkList";
+  var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkListMob";
 
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
   
