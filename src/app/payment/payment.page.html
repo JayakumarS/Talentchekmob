@@ -196,11 +196,11 @@
             <ion-item fill="outline" class="input-field">
               <ion-select formControlName="currency"
                 placeholder="{{'profileorg.Currency' | translate}}" style="background:white">
-                <ion-select-option value="INR">{{'Subscription.inr'}}</ion-select-option>
-                <ion-select-option value="USD">{{'Subscription.usd'}}</ion-select-option>
-                <ion-select-option value="AED">{{'Subscription.aed'}}</ion-select-option>
-                <ion-select-option value="MYR">{{'Subscription.myr'}}</ion-select-option>
-                <ion-select-option value="SGD">{{'Subscription.sgd'}}</ion-select-option>
+                <ion-select-option value="INR">{{'Subscription.inr'| translate}}</ion-select-option>
+                <ion-select-option value="USD">{{'Subscription.usd'| translate}}</ion-select-option>
+                <ion-select-option value="AED">{{'Subscription.aed'| translate}}</ion-select-option>
+                <ion-select-option value="MYR">{{'Subscription.myr'| translate}}</ion-select-option>
+                <ion-select-option value="SGD">{{'Subscription.sgd'| translate}}</ion-select-option>
               </ion-select>
             </ion-item>
             <div *ngIf="docForm.controls.currency.hasError('required') && docForm.controls.currency.touched">
