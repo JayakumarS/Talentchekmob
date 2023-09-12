@@ -4,8 +4,7 @@ import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../language.service';
-import { driver } from "driver.js";
-import "driver.js/dist/driver.css";
+import Driver from 'driver.js';
 
 
 @Component({
@@ -16,7 +15,7 @@ import "driver.js/dist/driver.css";
 export class HomePage implements OnInit {
   langSelected: string;
   selectedLang: string;
-
+  driver:any = new Driver();
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -64,12 +63,8 @@ export class HomePage implements OnInit {
         this.getAvgratingCount();
         this.getProfileViewCount();
         this.getmatchedJobCount();
-        this.getcategoryreg();
-        this.categoryType = localStorage.getItem("categoryType")  ; 
         this.getnetworkCount();
-        if(this.categoryType != ""){
-          this.getTour();
-         }
+        this.getTour();
       }
     });
 
@@ -80,13 +75,10 @@ export class HomePage implements OnInit {
     this.getProfileViewCount();
     this.getmatchedJobCount();
     this.getnetworkCount();
+    this.getTour();
+    this.categoryType = localStorage.getItem("categoryType")  ; 
     this.getcategoryreg();
    this.creditPoints = localStorage.getItem("creditPoints") ;
-
-   if(this.categoryType != ""){
-    this.getTour();
-   }
-
 //Profile View Count
 
 
@@ -99,17 +91,49 @@ export class HomePage implements OnInit {
 
   startTour(){
 
-    const driverObj = driver({
-      showProgress: true,
-      steps: [
-        { element: '#step1', popover: { title: 'Profile Lookup', description: 'You can search and view profiles here.' } },
-        { element: '#step2', popover: { title: 'Job Search', description: 'Add your preferences here to get matched with right opportunities.' } },
-        { element: '#step3', popover: { title: 'Profile', description: 'Update your professional portfolio over here and get your claims verified.' } },
-        { element: '#step4', popover: { title: 'More', description: 'Discover Alumni profiles, manage subscriptions and other settings over here.' } },
-      ]
+    this.driver = new Driver({
+      stageBackground: "rgba(255, 255, 255, 0.1)", // Background color for the staged behind highlighted element
     });
-    
-    driverObj.drive();
+
+    this.driver.defineSteps([
+      {
+        element: '#step1',
+        popover: {
+         className: 'first-step-popover-class',
+          title: 'Profile Lookup',
+          description: 'You can search and view profiles here.',
+          position: 'top',
+        },
+      },
+      {
+        element: '#step2',
+        popover: {
+          title: 'Job Search',
+          description: 'Add your preferences here to get matched with right opportunities.',
+          position: 'top',
+        },
+      },
+
+      {
+        element: '#step3',
+        popover: {
+          title: 'Profile',
+          description: 'Update your professional portfolio over here and get your claims verified.',
+          position: 'top-center',
+        },
+      },
+      {
+        element: '#step4',
+        popover: {
+          title: 'More',
+          description: 'Discover Alumni profiles, manage subscriptions and other settings over here.',
+          position: 'left-bottom',
+        },
+      }
+      // Add more steps as needed
+    ]);
+  
+    this.driver.start();
 
     this.getTourFlagUpdate();
   }
