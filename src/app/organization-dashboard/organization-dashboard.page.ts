@@ -52,7 +52,6 @@ export class OrganizationDashboardPage implements OnInit {
 
     this.userId = localStorage.getItem("userId")  ; 
     this.getCreditpoints();
-    this.getTour();
     this.creditPoints = localStorage.getItem("creditPoints") ;
  
     var indiProfileViewCountURL = "api/auth/app/dashboard/profileviewcount?currentUserId="+this.userId;
@@ -73,6 +72,8 @@ export class OrganizationDashboardPage implements OnInit {
          console.log(result); 
          this.orgCountList = result['orgCountlist'];
             });
+
+            this.getTour();
   }
 
   getCreditpoints(){

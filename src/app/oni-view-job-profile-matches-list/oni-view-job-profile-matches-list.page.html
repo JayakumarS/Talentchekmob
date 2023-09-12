@@ -88,6 +88,17 @@
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
         justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'JobPostInsti.matchedProf' | translate}} </span>
 
+
+        <ion-row *ngIf="matchedList.length == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="matchedList.length == 0">No Results to Display</div>
+
         <ion-card class="profilesearchcard" *ngFor="let match of matchedList" (click)="profileView(match.userid,match.accounttype,match.jobseekername)">
             <ion-card-content style="padding-bottom: 0px;">
 
@@ -126,6 +137,17 @@
         <br>
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
         justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Received Applications' | translate}} </span>
+
+
+        <ion-row *ngIf="applicationsReceivedList.length == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="applicationsReceivedList.length == 0">No Results to Display</div>
 
         <ion-card class="profilesearchcard" *ngFor="let profile of applicationsReceivedList" (click)="viewRecivedAppProfiles(profile.userid,profile.jspid)">
             <ion-card-content style="padding-bottom: 0px;">
@@ -174,6 +196,19 @@
         <br>
         <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;display: flex;justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Bids
             Received' | translate}} </span>
+
+
+        <ion-row *ngIf="orgBidList.length == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="orgBidList.length == 0">No Results to Display</div>
+
+
 
         <ion-card class="profilesearchcard" *ngFor="let bid of orgBidList" (click)="viewBidsRecvProfiles(bid.bidder,bid.bidid)">
             <ion-card-content style="padding-bottom: 0px;">

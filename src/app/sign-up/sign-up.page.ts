@@ -80,7 +80,7 @@ export class SignUpPage implements OnInit {
         lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
         dob: ['', Validators.required], 
         gender: ['', Validators.required],
-        uploadImg: ['',],
+        uploadImg: ['',Validators.required],
   });
 
 
