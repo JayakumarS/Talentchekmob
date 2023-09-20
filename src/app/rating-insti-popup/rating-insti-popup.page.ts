@@ -2,9 +2,13 @@ import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-rating-insti-popup',
   templateUrl: './rating-insti-popup.page.html',
@@ -24,7 +28,10 @@ export class RatingInstiPopupPage implements OnInit {
   
   constructor(public fb: FormBuilder,private route: ActivatedRoute,   public modalController: ModalController,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,public languageService:LanguageService,
-    public toastController:ToastController,public router:Router,public storageservice:StorageService,private renderer: Renderer2) { }
+    public toastController:ToastController,public router:Router,public storageservice:StorageService,private renderer: Renderer2,
+    private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) { }
 
   ngOnInit() {
     this.selectedLang  = localStorage.getItem('selectedLang');
@@ -80,7 +87,8 @@ export class RatingInstiPopupPage implements OnInit {
            
             this.presentToast()
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+                this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
              profilePage.updateData();
             }, 800); 
           }
@@ -97,7 +105,8 @@ export class RatingInstiPopupPage implements OnInit {
            
             this.presentToast()
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+                this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
              profilePage.updateData();
             }, 800); 
           }
@@ -116,14 +125,16 @@ export class RatingInstiPopupPage implements OnInit {
          
           this.presentToast()
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+            const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+              this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
            profilePage.updateData();
           }, 800); 
     }else{
 
       this.router.navigate(['/profile-view']);
       setTimeout(() => {
-        const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+        const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+          this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
        profilePage.updateData();
       }, 800); 
     }
@@ -145,7 +156,8 @@ move(){
 
   this.router.navigate(['/profile-view']); 
   setTimeout(() => {
-    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+      this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
    profilePage.updateData();
   }, 800);
 }

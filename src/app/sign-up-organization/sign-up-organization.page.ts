@@ -61,7 +61,7 @@ export class SignUpOrganizationPage implements OnInit {
   
 
   passwordType: string = 'password';
-  passwordIcon: string = 'eye';
+  passwordIcon: string = 'eye-off';
   showStateResults: boolean = false;
   searchStateResults: string[] = [];
   searchCityResults: string[] = [];
@@ -71,6 +71,8 @@ export class SignUpOrganizationPage implements OnInit {
   statesearchCtrl = new FormControl('');
   showCityResults: boolean = false;
   selectedLang: string;
+  maxWidth: number;
+  maxHeight: number;
   constructor(public router: Router, private camera: Camera, public formbuilder: FormBuilder, public storageservice: StorageService, private transfer: FileTransfer,
     private translate: TranslateService, public modalController: ModalController, public languageService: LanguageService) {
 
@@ -108,7 +110,7 @@ this.regInfoForm = this.formbuilder.group({
   mobileNo: ['', Validators.required],
   referralCode: [''],
   profileVisibility: ['', ''],
-  emailId: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
+  emailId: ['', Validators.compose([Validators.required,Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
   cBoxIAgree: [''],
   cBoxIAgreeConsent: ['']
 
@@ -125,7 +127,11 @@ this.regInfoForm = this.formbuilder.group({
   }
 
   next() {
-    this.stepper.next();
+    if(this.addressForm.valid){
+      this.stepper.next();
+  } else {
+    this.storageservice.warningToast("Please fill required fields");
+  }
   }
 
   prev(){
@@ -134,7 +140,11 @@ this.regInfoForm = this.formbuilder.group({
   }
 
   profileInfonext() {
-    this.stepper.next();
+    if(this.profileForm.valid){
+      this.stepper.next();
+  } else {
+    this.storageservice.warningToast("Please fill required fields");
+  }
   }
 
 
@@ -220,6 +230,14 @@ this.regInfoForm = this.formbuilder.group({
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
 
       console.log(this.base64img1);
+      const img = new Image();
+      img.src = this.base64img1;
+      img.onload = () => {
+        this.maxWidth = img.width;
+        this.maxHeight = img.height;
+
+
+     if (img.width <= 500 && img.height <= 500) {
       var postData = {
         'file': this.base64img1,
         'filetype': "image/jpeg"
@@ -236,6 +254,11 @@ this.regInfoForm = this.formbuilder.group({
         }
 
       });  
+    } else {
+      this.base64img1="";
+      this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
+    }
+  }
     }), error => {
       console.log(error);
     })
@@ -247,7 +270,10 @@ this.regInfoForm = this.formbuilder.group({
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true, // Corrects orientation based on device orientation
+      targetWidth: 500, // Set the desired width
+      targetHeight: 500, // Set the desired height
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
@@ -540,10 +566,10 @@ this.regInfoForm = this.formbuilder.group({
   passwordToggle() {
     if (this.passwordType === 'password') {
       this.passwordType = 'text';
-      this.passwordIcon = 'eye-off';
+      this.passwordIcon = 'eye';
     } else {
       this.passwordType = 'password';
-      this.passwordIcon = 'eye';
+      this.passwordIcon = 'eye-off';
     }
   }
 }

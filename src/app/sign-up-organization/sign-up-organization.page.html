@@ -156,7 +156,7 @@
                             </ion-row>
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!profileForm.valid" (click)="profileInfonext()">{{'profilein.Next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"  (click)="profileInfonext()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -186,7 +186,7 @@
                                 <ionic-selectable formControlName="country" [items]="countryResponse" itemValueField="id" itemTextField="text" [canSearch]="true" (onChange)="portChange($event)">
                                 </ionic-selectable>
                             </ion-item>
-                            <div *ngIf=" addressForm.controls.country.hasError('required') && addressForm.controls.country.touched">
+                            <div *ngIf=" addressForm.controls.country.hasError('required') && addressForm.controls.country.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'CorReg.CountryRequired' | translate}}</small>
                             </div>
                             <ion-label class="labels">{{'CorReg.stateProvince' | translate}} <small style="color: #f70505;">*</small>
@@ -196,7 +196,7 @@
                                 </ionic-selectable>
                             </ion-item>
 
-                            <div *ngIf=" addressForm.controls.state.hasError('required') && addressForm.controls.state.touched">
+                            <div *ngIf=" addressForm.controls.state.hasError('required') && addressForm.controls.state.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'CorReg.State/ProvinceRrequired' | translate}}</small>
                             </div>
                             <ion-label class="labels">{{'CorReg.areaName' | translate}} <small style="color: #f70505;">*</small></ion-label>
@@ -204,14 +204,14 @@
                                 <ionic-selectable formControlName="city" [items]="cityOptions" itemValueField="id" itemTextField="text" [canSearch]="true" (onChange)="cityChange($event)">
                                 </ionic-selectable>
                             </ion-item>
-                            <div *ngIf=" addressForm.controls.city.hasError('required') && addressForm.controls.city.touched">
+                            <div *ngIf=" addressForm.controls.city.hasError('required') && addressForm.controls.city.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'CorReg.CityRequired' | translate}} </small>
                             </div>
                             <ion-label class="labels">{{'CorReg.pinZipCode' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="pincode"></ion-input>
                             </ion-item>
-                            <div *ngIf=" addressForm.controls.pincode.hasError('required') && addressForm.controls.pincode.touched">
+                            <div *ngIf=" addressForm.controls.pincode.hasError('required') && addressForm.controls.pincode.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'CorReg.reqPinZipCode' | translate}}</small>
                             </div>
 
@@ -220,7 +220,7 @@
                             <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="prev()">{{'profilein.Back' | translate}}
                             </ion-button>
 
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!addressForm.valid" (click)="next()">{{'profilein.Next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"  (click)="next()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -246,7 +246,7 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="number" formControlName="mobileNo" (keypress)="limitInputLength($event)"></ion-input>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.mobileNo.hasError('required') && regInfoForm.controls.mobileNo.touched">
+                            <div *ngIf=" regInfoForm.controls.mobileNo.hasError('required') && regInfoForm.controls.mobileNo.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' |
                                     translate}} </small>
                             </div>
@@ -256,9 +256,13 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="emailId" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.emailId.hasError('required') && regInfoForm.controls.emailId.touched">
+                            <div *ngIf=" regInfoForm.controls.emailId.hasError('required') && regInfoForm.controls.emailId.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'CorReg.OrganizationEmailRequired' | translate}}
                                 </small>
+                            </div>
+
+                            <div *ngIf="regInfoForm.controls.emailId.hasError('pattern')" style="text-align: left;">
+                                <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
                             </div>
 
                             <ion-label class="labels">{{'InsReg.password' | translate}} <small style="color: #f70505;">*</small></ion-label>
@@ -266,7 +270,7 @@
                                 <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
                                 <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched">
+                            <div *ngIf=" regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'reqPassword' | translate}}</small>
                             </div>
 

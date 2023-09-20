@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import moment from 'moment';
 import { formatDate } from '@angular/common';
@@ -11,6 +11,10 @@ import { ConsentFormPage } from '../consent-form/consent-form.page';
 import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
 import { unescape } from 'querystring';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 
 
@@ -26,6 +30,8 @@ export class ProfileePage implements OnInit {
   editstate: any;
   editCity: any;
   selectedLang: string;
+  maxWidth: number;
+  maxHeight: number;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -78,7 +84,10 @@ export class ProfileePage implements OnInit {
   splCharRegex: string = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
   constructor(public router: Router, public storageservice: StorageService, private fb: FormBuilder, public modalController: ModalController,
     private camera: Camera, private toastController: ToastController, private elementRef: ElementRef
-    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService,private renderer: Renderer2) { }
+    , public alertController: AlertController, private route: ActivatedRoute, private ngZone: NgZone, public languageService: LanguageService,private renderer: Renderer2,
+    private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) { }
 
   ngOnInit() {
 
@@ -304,7 +313,8 @@ export class ProfileePage implements OnInit {
         console.log("Image upload response: " + result)
         if (result["success"] == true) {
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
+            const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService,
+              this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
             profilePage.updateData();
           }, 800);
           this.storageservice.dismissLoading();
@@ -363,7 +373,8 @@ export class ProfileePage implements OnInit {
       console.log("Image upload response: " + result)
       if (result["success"] == true) {
         setTimeout(() => {
-          const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
+          const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService,
+            this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
           profilePage.updateData();
         }, 800);
         this.storageservice.dismissLoading();
@@ -530,6 +541,18 @@ export class ProfileePage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+
+      const img = new Image();
+      img.src = this.base64img1;
+
+   
+      img.onload = () => {
+         this.maxWidth = img.width;
+         this.maxHeight = img.height;
+
+
+      if (img.width <= 500 && img.height <= 500) {
+
       this.profileForm.patchValue({
         'uploadImg': this.base64img1,
       })
@@ -554,7 +577,16 @@ export class ProfileePage implements OnInit {
 
         }
 
-      });   
+      });  
+      
+      
+    } else {
+      this.base64img1="";
+      this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
+    }
+    
+  }
+
     }), error => {
       console.log(error);
     })
@@ -565,7 +597,9 @@ export class ProfileePage implements OnInit {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation:true
+      correctOrientation:true,
+      targetWidth: 500, // Set the desired width
+      targetHeight: 500, // Set the desired height
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;

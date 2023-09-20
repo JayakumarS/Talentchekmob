@@ -38,13 +38,13 @@ export class StorageService {
 
 //Local server
 
-   mobileserverurl:string ="http://localhost:8080/"; 
-   baseURL:string ="http://localhost:8080/";
+  //  mobileserverurl:string ="http://localhost:8085/"; 
+  //  baseURL:string ="http://localhost:8085/";
 
 
 //portal server
-// mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
-// baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
+mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
+baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
 
   mobileserverserive: any;
 
@@ -355,6 +355,11 @@ export class StorageService {
         })
       );
     //return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+  }
+
+  downloadImage(imageUrl: string): Observable<Blob> {
+    // Send an HTTP GET request to the image URL
+    return this.http.get(imageUrl, { responseType: 'blob' });
   }
 
 }

@@ -85,7 +85,8 @@ export class SubscriptionIndividualPage implements OnInit {
       this.currencySymbolVal = "$";
     }
     else if (this.currencyVal == 'AED') {
-      this.amountVal = 10;
+      // this.amountVal = 10;
+      this.amountVal = 20;
       this.currencySymbolVal = "د.إ";
     }
     else if (this.currencyVal == 'MYR') {
@@ -241,7 +242,8 @@ export class SubscriptionIndividualPage implements OnInit {
           this.currencySymbolVal = "$";
         }
         else if (this.currencyVal == 'AED') {
-          this.amountVal = 10;
+          // this.amountVal = 10;
+          this.amountVal = 20;
           this.currencySymbolVal = "د.إ";
         }
         else if (this.currencyVal == 'MYR') {

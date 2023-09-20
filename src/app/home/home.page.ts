@@ -4,7 +4,7 @@ import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../language.service';
-import { driver } from "driver.js";
+import  {driver}  from "driver.js";
 import "driver.js/dist/driver.css";
 
 
@@ -31,6 +31,7 @@ export class HomePage implements OnInit {
   matchedJobsCount:any;
   avgrating:any;
   categoryType: string;
+  categoryShow:boolean=true;
 
   constructor(public router:Router,public storageservice: StorageService,
     private languageService: LanguageService,private translate: TranslateService,) {
@@ -59,12 +60,17 @@ export class HomePage implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd && event.url === '/home') {
+        this.categoryType = localStorage.getItem("categoryType")  ;
         this.setSelectedTab('apps');
         this.getCreditpoints();
         this.getAvgratingCount();
         this.getProfileViewCount();
+        if(this.categoryType=="" || this.categoryType==undefined){
+          this.getcategoryreg();
+          this.categoryShow=false;
+        }
         this.getmatchedJobCount();
-        this.getcategoryreg();
+        //this.getcategoryreg();
         this.categoryType = localStorage.getItem("categoryType")  ; 
         this.getnetworkCount();
         if(this.categoryType != ""){
@@ -81,6 +87,11 @@ export class HomePage implements OnInit {
     this.getmatchedJobCount();
     this.getnetworkCount();
     this.getcategoryreg();
+    // this.getTour();
+    // this.categoryType = localStorage.getItem("categoryType")  ; 
+    if(this.categoryShow){
+      this.getcategoryreg();
+    }
    this.creditPoints = localStorage.getItem("creditPoints") ;
 
    if(this.categoryType != ""){
@@ -110,7 +121,6 @@ export class HomePage implements OnInit {
     });
     
     driverObj.drive();
-
     this.getTourFlagUpdate();
   }
 

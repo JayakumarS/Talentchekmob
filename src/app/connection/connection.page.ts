@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { StorageService } from '../storage.service';
 import { ProfileViewPage as ProfilePage } from '../profile-view/profile-view.page';
@@ -9,6 +9,10 @@ import { ViewportScroller, formatDate } from '@angular/common';
 import { OrgProfileViewPage } from '../org-profile-view/org-profile-view.page';
 import { InstiProfileViewPage } from '../insti-profile-view/insti-profile-view.page';
 import { LanguageService } from '../language.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-connection',
@@ -48,7 +52,10 @@ export class ConnectionPage implements OnInit {
   nonMandatory: boolean = false;
   constructor(public router: Router, public fb: FormBuilder, public storageservice: StorageService, public languageService: LanguageService,
     private toastController: ToastController, public modalController: ModalController, private elementRef: ElementRef
-    , public alertController: AlertController, private ngZone: NgZone, public route: ActivatedRoute,private renderer: Renderer2) {
+    , public alertController: AlertController, private ngZone: NgZone, public route: ActivatedRoute,private renderer: Renderer2,
+    private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) {
 
 
 
@@ -312,7 +319,8 @@ export class ConnectionPage implements OnInit {
       duration: 3000,
       cssClass: 'custom-toast'
     });
-    const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService);
+    const profilePage = new ProfilePage(this.renderer,this.router, this.ngZone, this.route, this.storageservice, this.elementRef, this.modalController, this.alertController, this.languageService,
+      this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
     profilePage.updateData();
     this.router.navigate(['/profile-view']);
 

@@ -28,6 +28,8 @@ export class SignUpPage implements OnInit {
   showCityResults: boolean = false;
   selectedCity: string;
   selectedLang: string;
+  maxWidth: number;
+  maxHeight: number;
 
   getMaxDate() {
     let maxDate = new Date();
@@ -68,7 +70,7 @@ export class SignUpPage implements OnInit {
   cBoxIAgreeVal: boolean = true;
   cBoxIAgreeConsentVal: boolean = true;
   passwordType: string = 'password';
-  passwordIcon: string = 'eye';
+  passwordIcon: string = 'eye-off';
 
   constructor(public formbuilder: FormBuilder, public router: Router, private camera: Camera,
     public storageservice: StorageService, private transfer: FileTransfer, public modalController: ModalController,
@@ -80,7 +82,7 @@ export class SignUpPage implements OnInit {
         lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
         dob: ['', Validators.required], 
         gender: ['', Validators.required],
-        uploadImg: ['',Validators.required],
+        uploadImg: [''],
   });
 
 
@@ -111,15 +113,29 @@ export class SignUpPage implements OnInit {
   }
 
   next() {
-    this.stepper.next();
-  }
+    if(this.addressForm.valid){
+      this.stepper.next();
+  } else {
+    this.storageservice.warningToast("Please fill required fields");
+  } 
+ }
 
   prev(){
     this.stepper.previous();
   }
 
   profileInfonext() {
-    this.stepper.next();
+    if(this.profileForm.valid){
+      if(this.profileForm.value.uploadImg !=undefined && this.profileForm.value.uploadImg!=''
+      &&this.profileForm.value.uploadImg!=null){
+        this.stepper.next();
+      } else {
+        this.storageservice.warningToast("Please upload image");
+      }
+      
+    } else {
+      this.storageservice.warningToast("Please fill required fields");
+    }
   }
 
   limitInputLength($event, maxLength = 25) {
@@ -139,6 +155,20 @@ export class SignUpPage implements OnInit {
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
+
+
+      const img = new Image();
+      img.src = this.base64img1;
+
+   
+      img.onload = () => {
+         this.maxWidth = img.width;
+         this.maxHeight = img.height;
+
+
+      if (img.width <= 500 && img.height <= 500) {
+        // this.storageservice.warningToast("En "+this.maxWidth+":"+this.maxHeight);
+
       this.profileForm.patchValue({
         'uploadImg': this.base64img1,
       })
@@ -164,6 +194,12 @@ export class SignUpPage implements OnInit {
         }
 
       });   
+    } else {
+      this.base64img1="";
+      this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
+    }
+    
+  }
     }), error => {
       console.log(error);
     })
@@ -171,11 +207,17 @@ export class SignUpPage implements OnInit {
   }
 
   opencamera() {
+
+    
+
     const options: CameraOptions = {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true, // Corrects orientation based on device orientation
+      targetWidth: 500, // Set the desired width
+      targetHeight: 500, // Set the desired height
     }
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
@@ -558,10 +600,10 @@ export class SignUpPage implements OnInit {
   passwordToggle() {
     if (this.passwordType === 'password') {
       this.passwordType = 'text';
-      this.passwordIcon = 'eye-off';
+      this.passwordIcon = 'eye';
     } else {
       this.passwordType = 'password';
-      this.passwordIcon = 'eye';
+      this.passwordIcon = 'eye-off';
     }
   }
 

@@ -119,9 +119,12 @@ standardcountAmt1 :any;
           this.currencySymbolVal = "₹";
         }
         else if (this.currencyVal == 'USD') {
-          this.amtProfessionalVal = 100;
-          this.amtEnterpriseVal = 200;
-          this.amtUltimateVal = 1000;
+          // this.amtProfessionalVal = 100;
+          // this.amtEnterpriseVal = 200;
+          // this.amtUltimateVal = 1000;
+          this.amtProfessionalVal = 200;
+          this.amtEnterpriseVal = 800;
+          this.amtUltimateVal = 2000;
           this.currencySymbolVal = "$";
         }
         else if (this.currencyVal == 'AED') {
@@ -144,17 +147,23 @@ standardcountAmt1 :any;
         }
         else {
           this.currencyVal = "USD";
-          this.amtProfessionalVal = 100;
-          this.amtEnterpriseVal = 200;
-          this.amtUltimateVal = 1000;
+          // this.amtProfessionalVal = 100;
+          // this.amtEnterpriseVal = 200;
+          // this.amtUltimateVal = 1000;
+          this.amtProfessionalVal = 200;
+          this.amtEnterpriseVal = 800;
+          this.amtUltimateVal = 2000;
           this.currencySymbolVal = "$";
         }
       }
       else {
         this.currencyVal = "USD";
-        this.amtProfessionalVal = 100;
-        this.amtEnterpriseVal = 200;
-        this.amtUltimateVal = 1000;
+        // this.amtProfessionalVal = 100;
+        // this.amtEnterpriseVal = 200;
+        // this.amtUltimateVal = 1000;
+        this.amtProfessionalVal = 200;
+        this.amtEnterpriseVal = 800;
+        this.amtUltimateVal = 2000;
         this.currencySymbolVal = "$";
       }
 
@@ -174,9 +183,12 @@ standardcountAmt1 :any;
       this.currencySymbolVal = "₹";
     }
     else if (this.currencyVal == 'USD') {
-      this.amtProfessionalVal = 100;
-      this.amtEnterpriseVal = 200;
-      this.amtUltimateVal = 1000;
+      // this.amtProfessionalVal = 100;
+      // this.amtEnterpriseVal = 200;
+      // this.amtUltimateVal = 1000;
+      this.amtProfessionalVal = 200;
+      this.amtEnterpriseVal = 800;
+      this.amtUltimateVal = 2000;
       this.currencySymbolVal = "$";
     }
     else if (this.currencyVal == 'AED') {
@@ -304,7 +316,7 @@ if(discount.packagetype =='Professional'){
     discount.ProfessionalexAmount=  4999;
    }else if (this.currencyVal =='USD'){
      this.disCountProfessionalAmount = 100*100;
-      discount.ProfessionalexAmount=  100;
+      discount.ProfessionalexAmount=  200;
    }else if (this.currencyVal == 'AED'){
      this.disCountProfessionalAmount = 40000;
      discount.ProfessionalexAmount=  400;
@@ -322,7 +334,7 @@ if(discount.packagetype =='Professional'){
     discount.EnterpriceexAmount=9999;
    }else if (this.currencyVal =='USD'){
      this.disCountEnterpriceAmount = 20000;
-     discount.EnterpriceexAmount= 200;
+     discount.EnterpriceexAmount= 800;
    }else if (this.currencyVal == 'AED'){
      this.disCountEnterpriceAmount = 80000;
      discount.EnterpriceexAmount=  800;
@@ -340,7 +352,7 @@ if(discount.packagetype =='Professional'){
     discount.UltimateexAmount= 74999;
    }else if (this.currencyVal =='USD'){
      this.disCountUltimateAmount =  100000;
-     discount.UltimateexAmount= 1000;
+     discount.UltimateexAmount= 2000;
    }else if (this.currencyVal == 'AED'){
      this.disCountUltimateAmount = 380000;
      discount.UltimateexAmount= 3800;

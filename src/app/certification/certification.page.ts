@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -10,6 +10,10 @@ import moment from 'moment';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-certification',
@@ -46,7 +50,10 @@ export class CertificationPage implements OnInit {
   constructor(public router:Router,public modalController: ModalController,public languageService:LanguageService,
     public fb: FormBuilder, private route: ActivatedRoute,private elementRef: ElementRef
     ,public alertController: AlertController, private ngZone: NgZone,private camera: Camera,
-    public storageservice: StorageService,private toastController: ToastController,private renderer: Renderer2) { }
+    public storageservice: StorageService,private toastController: ToastController,private renderer: Renderer2,
+    private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) { }
 
   ngOnInit() {
 
@@ -230,7 +237,8 @@ export class CertificationPage implements OnInit {
             console.log("Image upload response: " + result)
             if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+                this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
             profilePage.updateData();
             }, 800);
               this.presentToast()
@@ -276,7 +284,8 @@ export class CertificationPage implements OnInit {
       if (result["success"] == true) {
       setTimeout(() => {
         
-         const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+         const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+          this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
         profilePage.updateData();
       }, 800);
        this.updateToast()

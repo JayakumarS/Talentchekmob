@@ -1,10 +1,15 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild, NgZone, Renderer2 } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { AlertController } from '@ionic/angular';
 import { NavigationEnd } from '@angular/router';
 import { LanguageService } from '../language.service';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 
 @Component({
   selector: 'app-profile-view',
@@ -52,7 +57,10 @@ export class ProfileViewPage implements OnInit {
   isPopupOpen: boolean = false;
   currentIndex: any;
   constructor(private renderer: Renderer2,public router: Router, private ngZone: NgZone, public route: ActivatedRoute, public storageservice: StorageService, private elementRef: ElementRef,
-    public modalController: ModalController, public alertController: AlertController, public languageService: LanguageService) {
+    public modalController: ModalController, public alertController: AlertController, public languageService: LanguageService,
+    private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) {
 
     interface MyCustomEventInit extends CustomEventInit {
       target?: HTMLElement;
@@ -304,6 +312,190 @@ export class ProfileViewPage implements OnInit {
       this.storageservice.dismissLoading()
     });
     this.storageservice.dismissLoading()
+  }
+
+
+  fileDownload1(filePath: string, fileName: string, fileType: string) {
+    filePath='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
+    var externalDir = "";
+    if (this.platform.is('android')) {
+    //   this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, , this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]);
+    //   externalDir = this.file.externalRootDirectory;
+    // }
+
+
+    this.androidPermissions.requestPermissions([
+      this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+      this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
+    ]).then(() => {
+      //externalDir = '/storage/emulated/0/Download/';
+      
+      externalDir=this.file.externalRootDirectory+ 'Download/TalentChekLogo.png';
+      this.storageservice.warningToast('Extt: '+externalDir);
+      const url = filePath;
+      var fileNameFull = 'fileName' + "." + 'png';
+    // var externalDir = this.file.externalRootDirectory;
+      var imgPath = externalDir;
+     this.storageservice.warningToast('Path New: '+externalDir);
+      const fileTransfer: FileTransferObject = this.transfer.create();
+
+   // this.showLoadingIndicator();
+   //this.storageservice.warningToast('Entered');
+    fileTransfer.download(url, imgPath, true, {}).then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+      this.storageservice.warningToast('Entered download '+ entry.toURL());
+     // this.hideLoadingIndicator()
+
+      let fileMIMEType = this.getMIMEtype(fileType);
+      this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
+        .then(() => 
+        //console.log('File is opened')
+        this.storageservice.warningToast('Entered In')
+        )
+        .catch(e => console.log('Error opening file', e));
+      
+    }, (error) => {
+      //this.hideLoadingIndicator()
+      console.log('Error download file :', error)
+    });
+     // downloadImage(externalDir);
+    }).catch(error => {
+      // Handle permission request error
+      this.storageservice.warningToast('Please provide all the required values!');
+    });
+
+  }
+
+    if (this.platform.is('ios')) {
+      externalDir = this.file.documentsDirectory;
+    }
+    console.log("Inside  the download created");
+    // const url = filePath;
+    // var fileNameFull = fileName + "." + fileType;
+    // var imgPath = externalDir + fileNameFull;
+
+    // const fileTransfer: FileTransferObject = this.transfer.create();
+    // fileTransfer.download(url, imgPath, true, {}).then((entry) => {
+    // console.log('download complete: ' + entry.toURL());
+
+    //   let fileMIMEType = this.getMIMEtype(fileType);
+    //   this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
+    //     .then(() => console.log('File is opened'))
+    //     .catch(e => console.log('Error opening file', e));
+      
+    // }, (error) => {
+    //   console.log('Error download file :', error)
+    // });
+  }
+
+
+
+  async fileDownload2(filePath: string, fileName: string, fileType: string) {
+    try {
+      const url ='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
+      const fileNameFull = fileName + "." + fileType;
+      var fileDir="";
+      this.androidPermissions.requestPermissions([
+        this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+        this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
+      ]).then(async () => {
+         fileDir = this.file.externalRootDirectory+ 'Download/';
+
+       //  this.storageservice.warningToast(fileDir);
+         var blob;
+
+          try{
+            const response = await fetch(url);
+            blob = await response.formData();
+          } catch(error){
+            this.storageservice.warningToast('Noo '+error);
+          }
+      
+      this.storageservice.warningToast("blob in");
+
+      await this.file.writeFile(fileDir, fileNameFull, blob, {
+        replace: true,
+      });
+
+      this.storageservice.warningToast("written");
+      }).catch(error => {
+        // Handle permission request error
+        this.storageservice.warningToast('Error in downloading file!');
+      });
+      
+
+      
+
+      // this.fileOpener
+      //   .open(fileDir + fileNameFull, fileType)
+      //   .then(() => {
+      //     console.log('File opened successfully');
+      //   })
+      //   .catch((error) => {
+      //     console.log('Error opening file', error);
+      //   });
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  }
+
+
+  fileDownload(filePath: string, fileName: string, fileType: string) {
+    var externalDir = "";
+    if (this.platform.is('android')) {
+      this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, , this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]);
+      externalDir = this.file.externalRootDirectory;
+    }
+    if (this.platform.is('ios')) {
+      externalDir = this.file.documentsDirectory;
+    }
+
+    console.log("Inside  the download created");
+
+    //const url = this.baseURL + filePath;
+    const url ='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
+    var fileNameFull = fileName + "." + fileType;
+    // var externalDir = this.file.externalRootDirectory;
+    var imgPath = externalDir + fileNameFull;
+
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    //this.showLoadingIndicator();
+    fileTransfer.download(url, imgPath, true, {}).then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+
+      //this.hideLoadingIndicator()
+
+      let fileMIMEType = this.getMIMEtype(fileType);
+      this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
+        .then(() => console.log('File is opened'))
+        .catch(e => console.log('Error opening file', e));
+      
+    }, (error) => {
+      //this.hideLoadingIndicator()
+      console.log('Error download file :', error)
+    });
+  }
+
+
+  getMIMEtype(extn) {
+    let ext = extn.toLowerCase();
+    let MIMETypes = {
+      'txt': 'text/plain',
+      'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'doc': 'application/msword',
+      'pdf': 'application/pdf',
+      'jpg': 'image/jpeg',
+      'jpeg': 'image/jpeg',
+      'bmp': 'image/bmp',
+      'png': 'image/png',
+      'xls': 'application/vnd.ms-excel',
+      'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'rtf': 'application/rtf',
+      'ppt': 'application/vnd.ms-powerpoint',
+      'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+    }
+    return MIMETypes[ext];
   }
 
   //this is for refresh without load the screen

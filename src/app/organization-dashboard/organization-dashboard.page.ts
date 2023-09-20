@@ -14,7 +14,7 @@ import "driver.js/dist/driver.css";
 })
 export class OrganizationDashboardPage implements OnInit {
   selectedLang: string;
- // driver:any = new Driver();
+  //driver:any = new Driver();
   doRefresh(event) {
     this.ngOnInit();
     setTimeout(() => {
@@ -99,7 +99,7 @@ export class OrganizationDashboardPage implements OnInit {
     this.storageservice.getrequest(getCurrencyURL).subscribe(result => {
     console.log(result);
     if(result[0].fistTimeloginValue == true){
-    this.startTour();
+      this.startTour();
     }
      });
 

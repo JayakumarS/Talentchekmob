@@ -19,6 +19,7 @@
         "@angular/platform-browser": "~10.0.0",
         "@angular/platform-browser-dynamic": "~10.0.0",
         "@angular/router": "~10.0.0",
+        "@capacitor/filesystem": "^4.1.2",
         "@ionic-native/android-permissions": "^5.36.0",
         "@ionic-native/app-version": "^5.36.0",
         "@ionic-native/barcode-scanner": "^5.36.0",
@@ -26,6 +27,7 @@
         "@ionic-native/core": "^5.36.0",
         "@ionic-native/deeplinks": "^5.36.0",
         "@ionic-native/document-viewer": "^5.31.1",
+        "@ionic-native/fcm": "^5.36.0",
         "@ionic-native/file": "^5.31.1",
         "@ionic-native/file-chooser": "^5.36.0",
         "@ionic-native/file-opener": "^5.31.1",
@@ -39,6 +41,7 @@
         "@ionic-native/status-bar": "^5.0.0",
         "@ionic-native/unique-device-id": "^5.36.0",
         "@ionic/angular": "^5.9.4",
+        "@ionic/cordova-builders": "^10.0.0",
         "@ionic/storage": "^2.3.1",
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
@@ -50,8 +53,11 @@
         "cordova-plugin-nativestorage": "^2.3.2",
         "cordova-plugin-uniquedeviceid": "^1.3.2",
         "cordova-res": "^0.15.4",
-        "driver.js": "^0.9.8",
+        "driver": "^1.0.0",
+        "driver.js": "^1.0.4",
         "google-translate": "^3.0.0",
+        "ionic-selectable": "^4.8.0",
+        "js": "^0.1.0",
         "moment": "^2.29.4",
         "ng2-google-charts": "^6.2.0",
         "properties-parser": "^0.3.1",
@@ -73,16 +79,18 @@
         "@types/node": "^12.20.50",
         "codelyzer": "^6.0.0",
         "com.razorpay.cordova": "github:razorpay/razorpay-cordova",
-        "cordova-android": "^10.1.2",
-        "cordova-plugin-android-permissions": "^1.1.3",
+        "cordova-android": "^12.0.1",
+        "cordova-plugin-android-permissions": "^1.1.2",
         "cordova-plugin-androidx": "^3.0.0",
         "cordova-plugin-androidx-adapter": "^1.1.3",
-        "cordova-plugin-app-version": "^0.1.14",
+        "cordova-plugin-app-version": "^0.1.12",
         "cordova-plugin-appversion": "^1.0.0",
-        "cordova-plugin-camera": "^4.1.0",
+        "cordova-plugin-camera": "^7.0.0",
         "cordova-plugin-device": "^2.1.0",
         "cordova-plugin-document-viewer": "^1.0.0",
-        "cordova-plugin-file-opener2": "^3.0.5",
+        "cordova-plugin-file": "^7.0.0",
+        "cordova-plugin-file-opener2": "^4.0.0",
+        "cordova-plugin-file-transfer": "^2.0.0",
         "cordova-plugin-filechooser": "^1.2.0",
         "cordova-plugin-ionic-keyboard": "^2.2.0",
         "cordova-plugin-ionic-webview": "^4.2.1",
@@ -118,10 +126,7 @@
             },
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-document-viewer": {},
-            "cordova-plugin-file": {},
-            "cordova-plugin-file-opener2": {
-                "ANDROID_SUPPORT_V4_VERSION": "27.+"
-            },
+            "cordova-plugin-file-opener2": {},
             "cordova-plugin-androidx": {},
             "cordova-plugin-androidx-adapter": {},
             "cordova-plugin-x-socialsharing": {},
@@ -130,15 +135,21 @@
             "cordova-plugin-uniquedeviceid": {},
             "cordova-plugin-local-notification": {},
             "cordova-plugin-camera": {
-                "ANDROID_SUPPORT_V4_VERSION": "27.+"
+                "ANDROIDX_CORE_VERSION": "1.6.+"
+            },
+            "cordova-plugin-file": {
+                "ANDROIDX_WEBKIT_VERSION": "1.4.0"
             },
             "cordova-plugin-filechooser": {},
             "cordova-plugin-android-permissions": {},
             "cordova-plugin-app-version": {},
             "cordova-plugin-appversion": {},
             "com.razorpay.cordova": {},
-            "cordova-plugin-sim": {}
+            "cordova-plugin-sim": {},
+            "cordova-plugin-file-transfer": {}
         },
-        "platforms": []
+        "platforms": [
+            "android"
+        ]
     }
 }

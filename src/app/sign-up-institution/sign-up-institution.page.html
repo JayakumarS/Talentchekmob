@@ -143,12 +143,12 @@
                                     </div>
                                 </ion-col>
                             </ion-row>
-                            <div *ngIf=" profileForm.controls.regDate.hasError('required') && profileForm.controls.regDate.touched">
+                            <!-- <div *ngIf=" profileForm.controls.uploadImg.hasError('required') && profileForm.controls.uploadImg.touched">
                                 <small style="color: #f70505;">{{'uploadImagereq' | translate}}</small>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="display-justify">
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!profileForm.valid" (click)="profileInfonext()">{{'profilein.Next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"  (click)="profileInfonext()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -215,7 +215,7 @@
                         <div class="display-justify">
                             <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="prev()">{{'profilein.Back' | translate}}
                             </ion-button>
-                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" [disabled]="!addressForm.valid" (click)="next()">{{'profilein.Next' | translate}}
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"  (click)="next()">{{'profilein.Next' | translate}}
                             </ion-button>
                         </div>
 
@@ -241,7 +241,7 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="mobileNo"></ion-input>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.mobileNo.hasError('required') && regInfoForm.controls.mobileNo.touched">
+                            <div *ngIf=" regInfoForm.controls.mobileNo.hasError('required') && regInfoForm.controls.mobileNo.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' |
                                     translate}}</small>
                             </div>
@@ -251,8 +251,11 @@
                             <ion-item fill="outline" class="input-field">
                                 <ion-input formControlName="emailId" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.emailId.hasError('required') && regInfoForm.controls.emailId.touched">
+                            <div *ngIf=" regInfoForm.controls.emailId.hasError('required') && regInfoForm.controls.emailId.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'instEmailReq' | translate}}</small>
+                            </div>
+                            <div *ngIf="regInfoForm.controls.emailId.hasError('pattern')" style="text-align: left;">
+                                <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
                             </div>
                             <ion-label class="labels">{{'password' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
@@ -260,7 +263,7 @@
                                 <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
                                 <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched">
+                            <div *ngIf=" regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'InsReg.PasswordRequired' | translate}}</small>
                             </div>
                             <ion-label class="labels">{{'referralCode' | translate}}</ion-label>

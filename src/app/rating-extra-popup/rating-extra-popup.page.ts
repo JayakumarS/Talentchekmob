@@ -1,10 +1,14 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { StorageService } from '../storage.service';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-rating-extra-popup',
   templateUrl: './rating-extra-popup.page.html',
@@ -24,7 +28,10 @@ export class RatingExtraPopupPage implements OnInit {
 
   constructor(public router:Router, public storageservice:StorageService,public toastController:ToastController,
     public fb: FormBuilder,private route: ActivatedRoute,  public modalController: ModalController,private elementRef: ElementRef,
-    public alertController: AlertController, private ngZone: NgZone,public languageService:LanguageService,private renderer: Renderer2) { }
+    public alertController: AlertController, private ngZone: NgZone,public languageService:LanguageService,private renderer: Renderer2,
+    private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) { }
 
   ngOnInit() {
 
@@ -70,7 +77,8 @@ export class RatingExtraPopupPage implements OnInit {
         this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
           if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+                this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
              profilePage.updateData();
             }, 800);
             this.presentToast() 
@@ -85,7 +93,8 @@ export class RatingExtraPopupPage implements OnInit {
             this.storageservice.postrequest(updateRatingUrl,this.Extracurricular).subscribe(async result => {  
               if (result["success"] == true) {
                 setTimeout(() => {
-                  const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+                  const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+                    this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
                  profilePage.updateData();
                 }, 800);
                 this.presentToast() 
@@ -109,7 +118,8 @@ export class RatingExtraPopupPage implements OnInit {
         if (result["success"] == true) {
           this.presentToast() 
           setTimeout(() => {
-            const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+            const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+              this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
            profilePage.updateData();
           }, 800);
        
@@ -117,7 +127,8 @@ export class RatingExtraPopupPage implements OnInit {
 
       this.router.navigate(['/profile-view']); 
       setTimeout(() => {
-        const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+        const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+          this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
        profilePage.updateData();
       }, 800);
     }
@@ -133,7 +144,8 @@ export class RatingExtraPopupPage implements OnInit {
     setTimeout(() => {
     
     this.router.navigate(['/profile-view']);
-    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+      this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform)
     profilePage.updateData();
    }, 800);
   await toast.present();
@@ -142,7 +154,8 @@ move(){
 
   this.router.navigate(['/profile-view']); 
   setTimeout(() => {
-    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+    const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+      this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
    profilePage.updateData();
   }, 800);
 }

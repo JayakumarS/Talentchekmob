@@ -1,12 +1,17 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup ,FormControl, Validators, ValidationErrors } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { StorageService } from '../storage.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import moment from 'moment';
 import { ProfileViewPage as ProfilePage} from '../profile-view/profile-view.page';
 import { LanguageService } from '../language.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 
 @Component({
   selector: 'app-skill-popup',
@@ -31,7 +36,9 @@ export class SkillPopupPage implements OnInit {
   constructor(public modalController: ModalController,public alertController: AlertController,
     private fb: FormBuilder,private toastController: ToastController,
     public storageservice:StorageService,private elementRef: ElementRef,
-    public router :Router,private route: ActivatedRoute, private ngZone: NgZone,public languageService:LanguageService,private renderer: Renderer2) { } 
+    public router :Router,private route: ActivatedRoute, private ngZone: NgZone,public languageService:LanguageService,private renderer: Renderer2,private transfer: FileTransfer, private file: File, private fileOpener: FileOpener,
+    private androidPermissions: AndroidPermissions,
+    public platform: Platform) { } 
 
   ngOnInit() {
     this.selectedLang  = localStorage.getItem('selectedLang');
@@ -128,7 +135,8 @@ export class SkillPopupPage implements OnInit {
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+              this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
              profilePage.updateData();
             }, 800);
             this.presentToast()
@@ -153,7 +161,8 @@ export class SkillPopupPage implements OnInit {
           console.log("Image upload response: " + result)
           if (result["success"] == true) {
             setTimeout(() => {
-              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService);
+              const profilePage = new ProfilePage(this.renderer,this.router,this.ngZone,this.route, this.storageservice, this.elementRef, this.modalController, this.alertController,this.languageService,
+                this.transfer,this.file,this.fileOpener,this.androidPermissions,this.platform);
              profilePage.updateData();
             }, 800);
           this.updateToast()
