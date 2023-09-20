@@ -63,9 +63,9 @@ export class HomePage implements OnInit {
         this.getCreditpoints();
         this.getAvgratingCount();
         this.getProfileViewCount();
-        this.getcategoryreg();
-        this.categoryType = localStorage.getItem("categoryType")  ;
         this.getmatchedJobCount();
+        this.getcategoryreg();
+        this.categoryType = localStorage.getItem("categoryType")  ; 
         this.getnetworkCount();
         if(this.categoryType != ""){
           this.getTour();
@@ -80,10 +80,13 @@ export class HomePage implements OnInit {
     this.getProfileViewCount();
     this.getmatchedJobCount();
     this.getnetworkCount();
-    this.getTour();
-    this.categoryType = localStorage.getItem("categoryType")  ; 
     this.getcategoryreg();
    this.creditPoints = localStorage.getItem("creditPoints") ;
+
+   if(this.categoryType != ""){
+    this.getTour();
+   }
+
 //Profile View Count
 
 
@@ -107,6 +110,7 @@ export class HomePage implements OnInit {
     });
     
     driverObj.drive();
+
     this.getTourFlagUpdate();
   }
 
