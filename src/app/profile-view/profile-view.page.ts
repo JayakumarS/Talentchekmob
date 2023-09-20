@@ -316,8 +316,10 @@ export class ProfileViewPage implements OnInit {
 
 
   fileDownload1(filePath: string, fileName: string, fileType: string) {
-    filePath='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
+    //filePath='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
     var externalDir = "";
+    if(filePath!=null && filePath!=undefined && filePath!=''){
+
     if (this.platform.is('android')) {
     //   this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, , this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]);
     //   externalDir = this.file.externalRootDirectory;
@@ -331,37 +333,38 @@ export class ProfileViewPage implements OnInit {
       //externalDir = '/storage/emulated/0/Download/';
       
       externalDir=this.file.externalRootDirectory+ 'Download/TalentChekLogo.png';
-      this.storageservice.warningToast('Extt: '+externalDir);
-      const url = filePath;
+      //this.storageservice.warningToast('Extt: '+externalDir);
+      //const url = filePath;
+      const url = this.storageservice.baseURL + filePath;
       var fileNameFull = 'fileName' + "." + 'png';
     // var externalDir = this.file.externalRootDirectory;
       var imgPath = externalDir;
-     this.storageservice.warningToast('Path New: '+externalDir);
+    // this.storageservice.warningToast('Path New: '+externalDir);
       const fileTransfer: FileTransferObject = this.transfer.create();
 
    // this.showLoadingIndicator();
    //this.storageservice.warningToast('Entered');
     fileTransfer.download(url, imgPath, true, {}).then((entry) => {
       console.log('download complete: ' + entry.toURL());
-      this.storageservice.warningToast('Entered download '+ entry.toURL());
+      this.storageservice.warningToast('QR Downloaded Successfully');
      // this.hideLoadingIndicator()
-
       let fileMIMEType = this.getMIMEtype(fileType);
       this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
         .then(() => 
-        //console.log('File is opened')
-        this.storageservice.warningToast('Entered In')
+        console.log('File is opened')
+        //this.storageservice.warningToast('Entered In')
         )
         .catch(e => console.log('Error opening file', e));
       
     }, (error) => {
       //this.hideLoadingIndicator()
       console.log('Error download file :', error)
+      this.storageservice.warningToast('Error in download');
     });
      // downloadImage(externalDir);
     }).catch(error => {
       // Handle permission request error
-      this.storageservice.warningToast('Please provide all the required values!');
+      this.storageservice.warningToast('Error in download');
     });
 
   }
@@ -370,6 +373,10 @@ export class ProfileViewPage implements OnInit {
       externalDir = this.file.documentsDirectory;
     }
     console.log("Inside  the download created");
+
+  } else {
+    this.storageservice.warningToast('Error in download');
+  }
     // const url = filePath;
     // var fileNameFull = fileName + "." + fileType;
     // var imgPath = externalDir + fileNameFull;
