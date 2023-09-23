@@ -115,14 +115,21 @@
         </div>
 
 
-        <ion-col>
+        <ion-col *ngIf="totalViewCount==0 || totalViewCount=='0'">
             <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1>
             <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P>
             <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
             <img class="imageCss" src="../../assets/img/Illustration.png" />
         </ion-col>
+<div >
+        <ion-col *ngIf="totalViewCount!=0 && totalViewCount!='0'">
+            <p style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 22px;">Total talentcard view count &nbsp; <b style="font-size: 35px;">{{totalViewCount}}</b></p>
+            <!-- <h1 style="font-family:'Times New Roman', Times, serif;font-size: 40px;text-align: left;padding-left: 6%;"><b>{{totalViewCount}}</b></h1> -->
+            <!-- <h2 style="font-family: 'Mr-eaves';text-align: left;padding-left: 3%;">Datewise count</h2> -->
+        </ion-col>
 
-
+        <div id="container" style="display: block; border-radius: 20px;"></div>
+</div>
 
     </form>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../language.service';
 import  {driver}  from "driver.js";
 import "driver.js/dist/driver.css";
+import * as HighCharts from "highcharts";
 
 
 @Component({
@@ -13,9 +14,11 @@ import "driver.js/dist/driver.css";
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit,AfterViewInit {
   langSelected: string;
   selectedLang: string;
+  totalViewCount: any;
+  chartInitialized: boolean;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -32,9 +35,13 @@ export class HomePage implements OnInit {
   avgrating:any;
   categoryType: string;
   categoryShow:boolean=true;
+  barChartList: any;
+
+
+  testData:any="'EMBDSCD','PKGDEK9','KHIDPVD','LKRDCMC','INMUN','YTNTYCT','HKGTMCT','NSACJCF','PUSTHPN'";
 
   constructor(public router:Router,public storageservice: StorageService,
-    private languageService: LanguageService,private translate: TranslateService,) {
+    private languageService: LanguageService,private translate: TranslateService,private el: ElementRef) {
     
 
    }
@@ -43,6 +50,7 @@ export class HomePage implements OnInit {
 
    // this.langSelected=localStorage.getItem("selLanguage") ;
    // this.translate.setDefaultLang(this.langSelected);
+   this.getTuesByPort();
 
 
    this.selectedLang  = localStorage.getItem('selectedLang');
@@ -68,6 +76,7 @@ export class HomePage implements OnInit {
         if(this.categoryType=="" || this.categoryType==undefined){
           this.getcategoryreg();
           this.categoryShow=false;
+          this.getTour();
         }
         this.getmatchedJobCount();
         //this.getcategoryreg();
@@ -76,6 +85,7 @@ export class HomePage implements OnInit {
         if(this.categoryType != ""){
           this.getTour();
          }
+        //this.getTour()
       }
     });
 
@@ -97,16 +107,182 @@ export class HomePage implements OnInit {
    if(this.categoryType != ""){
     this.getTour();
    }
+  //this.getTour()
 
-//Profile View Count
-
-
+  //Profile View Count
+  this.getTuesByPort();
   }
+
+  ngAfterViewInit(): void {
+    if (this.totalViewCount > 0) {
+      HighCharts.chart(this.el.nativeElement.querySelector('#container'), {
+        // Highcharts configuration options
+        // ...
+        chart: {
+          type: "column"
+        },
+        title: {
+          text: "No. of views / day"
+        },
+        xAxis: {
+          type: "category"
+        },
+        yAxis: {
+          title: {
+            text: "No. of Views"
+          }
+        },
+        plotOptions: {
+          series: {
+            borderWidth: 0 /* ,
+            dataLabels: {
+              enabled: true,
+              format: '{point.y:.1f}%'
+            } */
+          }
+        },
+  
+        series: [
+          {
+            // name: this.barChartList.date,
+            name: 'Date',
+            colorByPoint: true,
+            type: undefined,
+          //   data: [ {
+          //     name: '20/09/2023',
+          //     y: 63.06,
+          //     drilldown: '20/09/2023'
+          // },
+          // {
+          //     name: '21/09/2023',
+          //     y: 19.84,
+          //     drilldown: '21/09/2023'
+          // }]
+          data:this.barChartList
+          }
+        ]
+        
+      });
+      this.chartInitialized = true;
+    }
+  }
+
+
+
   selectedTab: string = 'apps';
 
   setSelectedTab(tabName: string) {
     this.selectedTab = tabName;
   }
+
+
+  getTuesByPort() {
+    this.totalViewCount=0;
+    var postData = {
+      "currentUserId": this.userId
+    };
+  
+    var url = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
+    this.storageservice.postrequest(url, postData).subscribe(result => {
+      this.barChartList = result["vcardAnalyticsDetails"];
+      console.log(`barChartList: ${JSON.stringify(this.barChartList)}`);
+      
+      for (var i = 0; i < this.barChartList.length; i++) {
+        this.barChartList[i].name = this.barChartList[i].viewedDate;
+        this.barChartList[i].y = this.barChartList[i].viewcount;
+        this.barChartList[i].color = this.getRandomColor();
+        //this.barChartList[1].name = "hfh";
+        this.totalViewCount=this.totalViewCount+this.barChartList[i].viewcount;
+      }
+      this.barChart();
+    },
+      err => {
+        this.storageservice.warningToast("Network Issue...");
+        console.log("Error", err);
+      }
+    );
+
+    // var organizationCountUrl = "api/auth/app/dashboard/orgCountlist?currentUserId="+this.userId;
+    //     this.storageservice.getrequest(organizationCountUrl).subscribe(result => {
+    //      console.log(result); 
+    //      this.barChartList = result['orgCountlist'];
+       
+    // this.barChartList[0].name='11/08/2023';
+    // this.barChartList[0].x=20;
+    // this.barChartList[0].y=30;
+    // this.barChartList[0].z=40;
+    // this.barChartList[0].color = this.getRandomColor();
+  
+    //         });
+
+ 
+      this.barChart();
+
+  }
+
+  barChart() {
+    //this.totalViewCount=0;
+    if(this.totalViewCount>0){
+
+    
+    var myChart = HighCharts.chart("container", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "No. of views / day"
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: "No. of Views"
+        }
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0 /* ,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          } */
+        }
+      },
+
+      series: [
+        {
+          // name: this.barChartList.date,
+          name: 'Date',
+          colorByPoint: true,
+          type: undefined,
+        //   data: [ {
+        //     name: '20/09/2023',
+        //     y: 63.06,
+        //     drilldown: '20/09/2023'
+        // },
+        // {
+        //     name: '21/09/2023',
+        //     y: 19.84,
+        //     drilldown: '21/09/2023'
+        // }]
+        data:this.barChartList
+        }
+      ]
+    });
+  }
+  }
+
+  getRandomColor() {
+    var color = "#";
+    for (var i = 0; i < 3; i++) {
+      var part = Math.round(Math.random() * 255).toString(16);
+      color += (part.length > 1) ? part : "0" + part;
+    }
+    return color;
+  }
+
+
 
   startTour(){
 

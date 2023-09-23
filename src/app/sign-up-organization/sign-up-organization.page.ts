@@ -230,14 +230,14 @@ this.regInfoForm = this.formbuilder.group({
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
 
       console.log(this.base64img1);
-      const img = new Image();
-      img.src = this.base64img1;
-      img.onload = () => {
-        this.maxWidth = img.width;
-        this.maxHeight = img.height;
+    //   const img = new Image();
+    //   img.src = this.base64img1;
+    //   img.onload = () => {
+    //     this.maxWidth = img.width;
+    //     this.maxHeight = img.height;
 
 
-     if (img.width <= 500 && img.height <= 500) {
+    //  if (img.width <= 500 && img.height <= 500) {
       var postData = {
         'file': this.base64img1,
         'filetype': "image/jpeg"
@@ -254,11 +254,11 @@ this.regInfoForm = this.formbuilder.group({
         }
 
       });  
-    } else {
-      this.base64img1="";
-      this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
-    }
-  }
+  //   } else {
+  //     this.base64img1="";
+  //     this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
+  //   }
+  // }
     }), error => {
       console.log(error);
     })
