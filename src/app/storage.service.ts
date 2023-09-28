@@ -45,7 +45,7 @@ export class StorageService {
 //portal server
 mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
 baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
-mobileserverurl2: string = "https://erp.cordelialine.com/cordelia/";
+// mobileserverurl2: string = "https://erp.cordelialine.com/cordelia/";
   mobileserverserive: any;
 
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {

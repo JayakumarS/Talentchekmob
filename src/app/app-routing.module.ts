@@ -405,7 +405,8 @@ const routes: Routes = [
   {
     path: 'profile-vcard/:param1',
     loadChildren: () => import('./profile-vcard/profile-vcard.module').then(m => m.ProfileVcardPageModule)
-  },  {
+  },
+  {
     path: 'search-popup',
     loadChildren: () => import('./search-popup/search-popup.module').then( m => m.SearchPopupPageModule)
   },

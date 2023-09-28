@@ -215,6 +215,7 @@ loading = false;
       this.splashScreen.hide();
       this.watchLoading();
       this.setupDeepLinks();
+    
 
 
       // subscribe to a topic
@@ -350,7 +351,7 @@ setupDeepLinks() {
     // match.$route - the route we matched, which is the matched entry from the arguments to route()
     // match.$args - the args passed in the link
     // match.$link - the full link data  
-   // this.router.navigate(['/profile-vcard/:param1']);
+       this.router.navigate(['/profile-vcard/:param1']);
     console.log('Successfully matched route', match.$args);
     console.log('Successfully matched route', match.$link);
     console.log('Successfully matched route', match.$route);
