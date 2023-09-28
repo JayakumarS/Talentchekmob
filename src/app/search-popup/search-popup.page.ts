@@ -11,7 +11,7 @@ export class SearchPopupPage implements OnInit {
 
    //#region Declaration
 //  searchList = ['Today','This week','This month','This year','All'];
- searchList = ['Today','This week','This month','This year'];
+ searchList = ['This week','This month','This year'];
  selected = '';
  //#endregion
 
