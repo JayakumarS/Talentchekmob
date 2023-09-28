@@ -408,6 +408,10 @@ const routes: Routes = [
   },  {
     path: 'search-popup',
     loadChildren: () => import('./search-popup/search-popup.module').then( m => m.SearchPopupPageModule)
+  },
+  {
+    path: 'vcard-new',
+    loadChildren: () => import('./vcard-new/vcard-new.module').then( m => m.VcardNewPageModule)
   }
 
 
