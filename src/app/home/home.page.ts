@@ -7,6 +7,8 @@ import { LanguageService } from '../language.service';
 import  {driver}  from "driver.js";
 import "driver.js/dist/driver.css";
 import * as HighCharts from "highcharts";
+import { PopoverController } from '@ionic/angular';
+import { SearchPopupPage } from '../search-popup/search-popup.page';
 
 
 @Component({
@@ -18,7 +20,10 @@ export class HomePage implements OnInit,AfterViewInit {
   langSelected: string;
   selectedLang: string;
   totalViewCount: any;
+  totalContactCount: any;
   chartInitialized: boolean;
+  countAvailable: boolean = false;
+  filterEnabled: boolean = false;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -36,23 +41,47 @@ export class HomePage implements OnInit,AfterViewInit {
   categoryType: string;
   categoryShow:boolean=true;
   barChartList: any;
-
-
-  testData:any="'EMBDSCD','PKGDEK9','KHIDPVD','LKRDCMC','INMUN','YTNTYCT','HKGTMCT','NSACJCF','PUSTHPN'";
+  barChartList2: any;
+  fromDateValue:any;
+  toDateValue:any;
+ 
 
   constructor(public router:Router,public storageservice: StorageService,
-    private languageService: LanguageService,private translate: TranslateService,private el: ElementRef) {
+    private languageService: LanguageService,private translate: TranslateService,private el: ElementRef,private popoverController: PopoverController) {
     
 
    }
 
   ngOnInit() {
-
+    this.userId = localStorage.getItem("userId")  ;
    // this.langSelected=localStorage.getItem("selLanguage") ;
    // this.translate.setDefaultLang(this.langSelected);
-   this.getTuesByPort();
+   this.languageService.setFilterValues("This week");
+   this.selectDate("This week");
 
+   var postData = {
+    "currentUserId": this.userId,
+    "fromDate":this.fromDateValue,
+    "todate":this.toDateValue
+  };
 
+   var url = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
+    this.storageservice.postrequest(url, postData).subscribe(result => {
+      this.barChartList = result["vcardAnalyticsDetails"];
+      this.barChartList2 = result["vcardAnalyticsDetails"];
+      if(this.barChartList.length>0){
+        this.countAvailable=true;
+        this.getTuesByPort();
+      } else {
+        this.countAvailable=false;
+      }
+    },
+      err => {
+        this.storageservice.warningToast("Network Issue...");
+        console.log("Error", err);
+      }
+    );
+   
    this.selectedLang  = localStorage.getItem('selectedLang');
    if(this.selectedLang=="null")
    {
@@ -89,7 +118,7 @@ export class HomePage implements OnInit,AfterViewInit {
       }
     });
 
-    this.userId = localStorage.getItem("userId")  ; 
+    
     this.categoryType = localStorage.getItem("categoryType")  ; 
     this.getCreditpoints();
     this.getAvgratingCount();
@@ -110,11 +139,11 @@ export class HomePage implements OnInit,AfterViewInit {
   //this.getTour()
 
   //Profile View Count
-  this.getTuesByPort();
+ // this.getTuesByPort();
   }
 
   ngAfterViewInit(): void {
-    if (this.totalViewCount > 0) {
+    if (this.countAvailable) {
       HighCharts.chart(this.el.nativeElement.querySelector('#container'), {
         // Highcharts configuration options
         // ...
@@ -163,6 +192,57 @@ export class HomePage implements OnInit,AfterViewInit {
         ]
         
       });
+
+
+      HighCharts.chart(this.el.nativeElement.querySelector('#container2'), {
+        // Highcharts configuration options
+        // ...
+        chart: {
+          type: "column"
+        },
+        title: {
+          text: "No. of views / day"
+        },
+        xAxis: {
+          type: "category"
+        },
+        yAxis: {
+          title: {
+            text: "No. of Views"
+          }
+        },
+        plotOptions: {
+          series: {
+            borderWidth: 0 /* ,
+            dataLabels: {
+              enabled: true,
+              format: '{point.y:.1f}%'
+            } */
+          }
+        },
+  
+        series: [
+          {
+            // name: this.barChartList.date,
+            name: 'Date',
+            colorByPoint: true,
+            type: undefined,
+          //   data: [ {
+          //     name: '20/09/2023',
+          //     y: 63.06,
+          //     drilldown: '20/09/2023'
+          // },
+          // {
+          //     name: '21/09/2023',
+          //     y: 19.84,
+          //     drilldown: '21/09/2023'
+          // }]
+          data:this.barChartList2
+          }
+        ]
+        
+      });
+
       this.chartInitialized = true;
     }
   }
@@ -175,11 +255,50 @@ export class HomePage implements OnInit,AfterViewInit {
     this.selectedTab = tabName;
   }
 
+  selectDate(range:any){
+  const currentDate = new Date();
+  let fromDate: Date;
+  let toDate: Date;
+
+  const formatDate = (date: Date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${year}/${month}/${day}`;
+  };
+
+  if (range === 'Today') {
+    fromDate = new Date(currentDate);
+    toDate = new Date(currentDate);
+  } else if (range === 'This week') {
+    const firstDayOfWeek = new Date(currentDate);
+    firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Set to the first day of the week
+    fromDate = firstDayOfWeek;
+    toDate = new Date(currentDate);
+  } else if (range === 'This month') {
+    fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    toDate = new Date(currentDate);
+  } else if (range === 'This year') {
+    fromDate = new Date(currentDate.getFullYear(), 0, 1);
+    toDate = new Date(currentDate);
+  } else if (range === 'All') {
+    // Set fromDate to the earliest date possible
+    fromDate = new Date(0);
+    toDate = new Date(currentDate);
+  }
+  this.fromDateValue=formatDate(fromDate);
+  this.toDateValue=formatDate(toDate);
+  this.getTuesByPort();
+  }
+
 
   getTuesByPort() {
     this.totalViewCount=0;
+    this.totalContactCount=0;
     var postData = {
-      "currentUserId": this.userId
+      "currentUserId": this.userId,
+      "fromDate":this.fromDateValue,
+      "todate":this.toDateValue
     };
   
     var url = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
@@ -191,9 +310,49 @@ export class HomePage implements OnInit,AfterViewInit {
         this.barChartList[i].name = this.barChartList[i].viewedDate;
         this.barChartList[i].y = this.barChartList[i].viewcount;
         this.barChartList[i].color = this.getRandomColor();
-        //this.barChartList[1].name = "hfh";
+
         this.totalViewCount=this.totalViewCount+this.barChartList[i].viewcount;
+        // if(this.barChartList2[i].saveContactCount!=null && this.barChartList2[i].saveContactCount!=undefined &&
+        //   this.barChartList2[i].saveContactCount!=''){
+        //     this.totalContactCount=this.totalContactCount+Number(this.barChartList2[i].saveContactCount);
+        // } else {
+        //   this.totalContactCount=this.totalContactCount;
+        // }
       }
+
+
+// For chart2
+
+this.storageservice.postrequest(url, postData).subscribe(output => {
+  this.barChartList2 = output["vcardAnalyticsDetails"];
+  for (var i = 0; i < this.barChartList2.length; i++) {
+    this.barChartList2[i].name = this.barChartList2[i].viewedDate;
+    if(this.barChartList2[i].saveContactCount!=null && this.barChartList2[i].saveContactCount!=undefined &&
+      this.barChartList2[i].saveContactCount!=''){
+        this.barChartList2[i].y = parseInt(this.barChartList2[i].saveContactCount);
+    } else {
+      this.barChartList2[i].y = 0;
+    }
+   // this.barChartList2[i].y = this.barChartList2[i].viewcount;
+    this.barChartList2[i].color = this.getRandomColor();
+
+    if(this.barChartList2[i].saveContactCount!=null && this.barChartList2[i].saveContactCount!=undefined &&
+      this.barChartList2[i].saveContactCount!=''){
+        this.totalContactCount=this.totalContactCount+Number(this.barChartList2[i].saveContactCount);
+    } else {
+      this.totalContactCount=this.totalContactCount;
+    }
+  }
+ // this.barChart();
+},
+  err => {
+    this.storageservice.warningToast("Network Issue...");
+    console.log("Error", err);
+  }
+);
+//
+
+
       this.barChart();
     },
       err => {
@@ -220,6 +379,10 @@ export class HomePage implements OnInit,AfterViewInit {
 
   }
 
+  navi(){
+    this.router.navigate(['/profile-vcard/qE2PH1v9jR%2B9ePtNewMsfA%3D%3D']);
+  }
+
   barChart() {
     //this.totalViewCount=0;
     if(this.totalViewCount>0){
@@ -230,14 +393,14 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "No. of views / day"
+        text: "Views / day"
       },
       xAxis: {
         type: "category"
       },
       yAxis: {
         title: {
-          text: "No. of Views"
+          text: "Views"
         }
       },
       plotOptions: {
@@ -270,7 +433,67 @@ export class HomePage implements OnInit,AfterViewInit {
         }
       ]
     });
+
+    var myChart2 = HighCharts.chart("container2", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Saves / day"
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: "Saves"
+        }
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0 /* ,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          } */
+        }
+      },
+
+      series: [
+        {
+          // name: this.barChartList.date,
+          name: 'Date',
+          colorByPoint: true,
+          type: undefined,
+        //   data: [ {
+        //     name: '20/09/2023',
+        //     y: 63.06,
+        //     drilldown: '20/09/2023'
+        // },
+        // {
+        //     name: '21/09/2023',
+        //     y: 19.84,
+        //     drilldown: '21/09/2023'
+        // }]
+        data:this.barChartList2
+        }
+      ]
+    });
   }
+  }
+
+  async openPopOver($event) {
+    const popover = await this.popoverController.create({
+      component: SearchPopupPage,
+      event: $event
+    });
+    // Listen for the dismissal of the popover
+  popover.onDidDismiss().then((data) => {
+    // data will contain information about the dismissal, if needed
+    // Now you can call selectDate after the popup is closed
+    this.selectDate(this.languageService.selectedFilter);
+  });
+    await popover.present();
   }
 
   getRandomColor() {

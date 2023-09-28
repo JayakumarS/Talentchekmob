@@ -14,6 +14,7 @@ export class LanguagePopoverPage implements OnInit {
  selected = '';
   langSelected: string;
   selectedLang: any;
+  selectedFilter:any;
  //#endregion
 
  //#region Constructor
@@ -26,6 +27,8 @@ export class LanguagePopoverPage implements OnInit {
 
   this.selectedLang  = localStorage.getItem('selectedLang');
   this.languageService.setLanguage(this.selectedLang);
+  this.selectedFilter=localStorage.getItem('filterValue');
+  this.languageService.setFilterValues(this.selectedFilter);
   
    this.languages = this.languageService.getLanguages();
    this.selected = this.languageService.selected;

@@ -39,7 +39,6 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 //import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { SearchPopupPipe } from './search-popup.pipe';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
   
@@ -51,7 +50,7 @@ export function createTranslateLoader(http: HttpClient) {
  
  // providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
  // bootstrap: [AppComponent],
-  declarations: [AppComponent, TranslatePipe, SearchPopupPipe],
+  declarations: [AppComponent, TranslatePipe],
   entryComponents: [],
   imports: [
   

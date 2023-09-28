@@ -24,7 +24,7 @@ export class SignInComponent implements OnInit {
   error = "";
 
   passwordType: string = 'password';
-  passwordIcon: string = 'eye'; 
+  passwordIcon: string = 'eye-off'; 
   selectedLang: string;
  
   constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,
@@ -58,10 +58,10 @@ export class SignInComponent implements OnInit {
   passwordToggle() {
     if (this.passwordType === 'password') {
       this.passwordType = 'text';
-      this.passwordIcon = 'eye-off';
+      this.passwordIcon = 'eye';
     } else {
       this.passwordType = 'password';
-      this.passwordIcon = 'eye';
+      this.passwordIcon = 'eye-off';
     }
   }
 

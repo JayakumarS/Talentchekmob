@@ -116,13 +116,13 @@
                         </div>
                     </div>
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'UniqueNationalID' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'UniqueNationalID' | translate}}</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-input formControlName="nationalid"></ion-input>
                         </ion-item>
-                        <div *ngIf="profileForm.controls.nationalid.hasError('required') && profileForm.controls.nationalid.touched">
+                        <!-- <div *ngIf="profileForm.controls.nationalid.hasError('required') && profileForm.controls.nationalid.touched">
                             <small style="color: #f70505;">{{'UniqueIdReq' | translate}}</small>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">{{'AddSkill.category' | translate}}<small style="color: #f70505;">*</small></ion-label>
