@@ -305,7 +305,8 @@ export class HomePage implements OnInit,AfterViewInit {
     this.storageservice.postrequest(url, postData).subscribe(result => {
       this.barChartList = result["vcardAnalyticsDetails"];
       console.log(`barChartList: ${JSON.stringify(this.barChartList)}`);
-      
+      this.totalViewCount=0;
+
       for (var i = 0; i < this.barChartList.length; i++) {
         this.barChartList[i].name = this.barChartList[i].viewedDate;
         this.barChartList[i].y = this.barChartList[i].viewcount;
