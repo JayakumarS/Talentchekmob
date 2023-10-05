@@ -413,6 +413,10 @@ const routes: Routes = [
   {
     path: 'vcard-new',
     loadChildren: () => import('./vcard-new/vcard-new.module').then( m => m.VcardNewPageModule)
+  },
+  {
+    path: 'shared-contact',
+    loadChildren: () => import('./shared-contact/shared-contact.module').then( m => m.SharedContactPageModule)
   }
 
 
