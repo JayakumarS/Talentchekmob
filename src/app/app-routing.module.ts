@@ -417,7 +417,11 @@ const routes: Routes = [
   {
     path: 'shared-contact',
     loadChildren: () => import('./shared-contact/shared-contact.module').then( m => m.SharedContactPageModule)
+  },  {
+    path: 'select-all',
+    loadChildren: () => import('./select-all/select-all.module').then( m => m.SelectAllPageModule)
   }
+
 
 
 
