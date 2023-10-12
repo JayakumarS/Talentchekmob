@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { StorageService } from './storage.service';
@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './language.service';
 import { timer } from 'rxjs/internal/observable/timer';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { HomePage } from './home/home.page';
 //import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 @Component({
@@ -45,6 +46,7 @@ loading = false;
     private translate: TranslateService,
     private deeplinks: Deeplinks,
     private languageService: LanguageService,
+    private nav: NavController
     //private push: Push
   ) {
     this.initializeApp();
@@ -345,31 +347,18 @@ loading = false;
 }
 
 setupDeepLinks() {
-  this.deeplinks.route({
-    '/:param1': 'profile-vcard',
-  }).subscribe(match => {
-    // match.$route - the route we matched, which is the matched entry from the arguments to route()
-    // match.$args - the args passed in the link
-    // match.$link - the full link data  
-       this.router.navigate(['/profile-vcard/:param1']);
-    console.log('Successfully matched route', match.$args);
-    console.log('Successfully matched route', match.$link);
-    console.log('Successfully matched route', match.$route);
-
-    const internalPath = `/${match.$route}/${match.$args['param1']}`;
 
 
-     // Run the navigation in the Angular zone
-     this.zone.run(() => {
-      this.router.navigateByUrl(internalPath);
+    // This is the code who responds to the app deeplinks
+    // Deeplinks if from Ionic Native
+    this.deeplinks.routeWithNavController(this.nav, {
+      '/home': HomePage
+    }).subscribe((match) => {
+      console.log('Successfully routed', match);
+    }, (nomatch) => {
+      console.log('Unmatched Route', nomatch);
     });
-    
-    // You can then navigate to the desired page based on the matched route and arguments
-  }, nomatch => {
-    // nomatch.$link - the full link data
-    console.error('Got a deeplink that didn\'t match', nomatch.$link);
-  });
-}
+  }
 
 
 watchLoading(){

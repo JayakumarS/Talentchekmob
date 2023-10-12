@@ -21,9 +21,12 @@ export class HomePage implements OnInit,AfterViewInit {
   selectedLang: string;
   totalViewCount: any;
   totalContactCount: any;
+  sharedContactCount: any;
   chartInitialized: boolean;
   countAvailable: boolean = false;
   filterEnabled: boolean = false;
+  initialCount: any =0;
+  isFilterChose: boolean = false;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -42,8 +45,11 @@ export class HomePage implements OnInit,AfterViewInit {
   categoryShow:boolean=true;
   barChartList: any;
   barChartList2: any;
+  barChartList3: any;
   fromDateValue:any;
   toDateValue:any;
+  fromDateValue2:any;
+  toDateValue2:any;
  
 
   constructor(public router:Router,public storageservice: StorageService,
@@ -56,10 +62,46 @@ export class HomePage implements OnInit,AfterViewInit {
     this.userId = localStorage.getItem("userId")  ;
    // this.langSelected=localStorage.getItem("selLanguage") ;
    // this.translate.setDefaultLang(this.langSelected);
-   this.languageService.setFilterValues("This week");
-   this.selectDate("This week");
 
-   var postData = {
+
+   const formatDate = (date: Date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${year}/${month}/${day}`;
+  };
+   const currentDate = new Date();
+   var fromDate = new Date(currentDate.getFullYear(), 0, 1);
+   var toDate = new Date(currentDate);
+   this.fromDateValue2=formatDate(fromDate);
+   this.toDateValue2=formatDate(toDate);
+
+ 
+
+  var postData2 = {
+    "currentUserId": this.userId,
+    "fromDate":this.fromDateValue2,
+    "todate":this.toDateValue2
+  };
+
+
+  var url2 = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
+  this.storageservice.postrequest(url2, postData2).subscribe(result => {
+    var datas = result["vcardAnalyticsDetails"];
+     this.initialCount=datas.length;
+ 
+  },
+    err => {
+      this.storageservice.warningToast("Network Issue...");
+      console.log("Error", err);
+    }
+  );
+
+
+  this.languageService.setFilterValues("This week");
+  this.selectDate("This week");
+
+  var postData = {
     "currentUserId": this.userId,
     "fromDate":this.fromDateValue,
     "todate":this.toDateValue
@@ -69,6 +111,7 @@ export class HomePage implements OnInit,AfterViewInit {
     this.storageservice.postrequest(url, postData).subscribe(result => {
       this.barChartList = result["vcardAnalyticsDetails"];
       this.barChartList2 = result["vcardAnalyticsDetails"];
+      this.barChartList3 = result["vcardAnalyticsDetails"];
       if(this.barChartList.length>0){
         this.countAvailable=true;
         this.getTuesByPort();
@@ -243,8 +286,72 @@ export class HomePage implements OnInit,AfterViewInit {
         
       });
 
+      HighCharts.chart(this.el.nativeElement.querySelector('#container3'), {
+        // Highcharts configuration options
+        // ...
+        chart: {
+          type: "column"
+        },
+        title: {
+          text: "No. of shares / day"
+        },
+        xAxis: {
+          type: "category"
+        },
+        yAxis: {
+          title: {
+            text: "No. of shares"
+          }
+        },
+        plotOptions: {
+          series: {
+            borderWidth: 0 /* ,
+            dataLabels: {
+              enabled: true,
+              format: '{point.y:.1f}%'
+            } */
+          }
+        },
+  
+        series: [
+          {
+            // name: this.barChartList.date,
+            name: 'Date',
+            colorByPoint: true,
+            type: undefined,
+          //   data: [ {
+          //     name: '20/09/2023',
+          //     y: 63.06,
+          //     drilldown: '20/09/2023'
+          // },
+          // {
+          //     name: '21/09/2023',
+          //     y: 19.84,
+          //     drilldown: '21/09/2023'
+          // }]
+          data:this.barChartList3
+          }
+        ]
+        
+      });
+
       this.chartInitialized = true;
     }
+  }
+
+  listPage(){
+    if(this.sharedContactCount!=null && this.sharedContactCount!=undefined &&
+      this.sharedContactCount!=''){
+        this.sharedContactCount=Number(this.sharedContactCount);
+    } else {
+      this.sharedContactCount=0;
+    }
+    // if(this.sharedContactCount>0){
+    //   this.router.navigate(['/shared-contact']);
+    // }
+
+    this.router.navigate(['/shared-contact']);
+
   }
 
 
@@ -295,6 +402,7 @@ export class HomePage implements OnInit,AfterViewInit {
   getTuesByPort() {
     this.totalViewCount=0;
     this.totalContactCount=0;
+    this.sharedContactCount=0;
     var postData = {
       "currentUserId": this.userId,
       "fromDate":this.fromDateValue,
@@ -354,6 +462,38 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
 //
 
 
+// For chart3
+
+this.storageservice.postrequest(url, postData).subscribe(output => {
+  this.barChartList3 = output["vcardAnalyticsDetails"];
+  for (var i = 0; i < this.barChartList3.length; i++) {
+    this.barChartList3[i].name = this.barChartList3[i].viewedDate;
+    if(this.barChartList3[i].sharedContactCount!=null && this.barChartList3[i].sharedContactCount!=undefined &&
+      this.barChartList3[i].sharedContactCount!=''){
+        this.barChartList3[i].y = parseInt(this.barChartList3[i].sharedContactCount);
+    } else {
+      this.barChartList3[i].y = 0;
+    }
+   // this.barChartList2[i].y = this.barChartList2[i].viewcount;
+    this.barChartList3[i].color = this.getRandomColor();
+
+    if(this.barChartList3[i].sharedContactCount!=null && this.barChartList3[i].sharedContactCount!=undefined &&
+      this.barChartList3[i].sharedContactCount!=''){
+        this.sharedContactCount=this.sharedContactCount+Number(this.barChartList3[i].sharedContactCount);
+    } else {
+      this.sharedContactCount=this.sharedContactCount;
+    }
+  }
+ // this.barChart();
+},
+  err => {
+    this.storageservice.warningToast("Network Issue...");
+    console.log("Error", err);
+  }
+);
+//
+
+
       this.barChart();
     },
       err => {
@@ -386,7 +526,8 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
 
   barChart() {
     //this.totalViewCount=0;
-    if(this.totalViewCount>0){
+    // if(this.totalViewCount>0){
+      if(this.initialCount>0){
 
     
     var myChart = HighCharts.chart("container", {
@@ -480,10 +621,196 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
         }
       ]
     });
+
+    var myChart3 = HighCharts.chart("container3", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Shares / day"
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: "Shares"
+        }
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0 /* ,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          } */
+        }
+      },
+
+      series: [
+        {
+          // name: this.barChartList.date,
+          name: 'Date',
+          colorByPoint: true,
+          type: undefined,
+        //   data: [ {
+        //     name: '20/09/2023',
+        //     y: 63.06,
+        //     drilldown: '20/09/2023'
+        // },
+        // {
+        //     name: '21/09/2023',
+        //     y: 19.84,
+        //     drilldown: '21/09/2023'
+        // }]
+        data:this.barChartList3
+        }
+      ]
+    });
+
+  } else if(this.isFilterChose) {
+    var myChart = HighCharts.chart("container", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Views / day"
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: "Views"
+        }
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0 /* ,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          } */
+        }
+      },
+
+      series: [
+        {
+          // name: this.barChartList.date,
+          name: 'Date',
+          colorByPoint: true,
+          type: undefined,
+        //   data: [ {
+        //     name: '20/09/2023',
+        //     y: 63.06,
+        //     drilldown: '20/09/2023'
+        // },
+        // {
+        //     name: '21/09/2023',
+        //     y: 19.84,
+        //     drilldown: '21/09/2023'
+        // }]
+        data:[]
+        }
+      ]
+    });
+
+    var myChart2 = HighCharts.chart("container2", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Saves / day"
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: "Saves"
+        }
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0 /* ,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          } */
+        }
+      },
+
+      series: [
+        {
+          // name: this.barChartList.date,
+          name: 'Date',
+          colorByPoint: true,
+          type: undefined,
+        //   data: [ {
+        //     name: '20/09/2023',
+        //     y: 63.06,
+        //     drilldown: '20/09/2023'
+        // },
+        // {
+        //     name: '21/09/2023',
+        //     y: 19.84,
+        //     drilldown: '21/09/2023'
+        // }]
+        data:[]
+        }
+      ]
+    });
+
+    var myChart3 = HighCharts.chart("container3", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Shares / day"
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        title: {
+          text: "Shares"
+        }
+      },
+      plotOptions: {
+        series: {
+          borderWidth: 0 /* ,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          } */
+        }
+      },
+
+      series: [
+        {
+          // name: this.barChartList.date,
+          name: 'Date',
+          colorByPoint: true,
+          type: undefined,
+        //   data: [ {
+        //     name: '20/09/2023',
+        //     y: 63.06,
+        //     drilldown: '20/09/2023'
+        // },
+        // {
+        //     name: '21/09/2023',
+        //     y: 19.84,
+        //     drilldown: '21/09/2023'
+        // }]
+        data:[]
+        }
+      ]
+    });
   }
   }
 
   async openPopOver($event) {
+    this.isFilterChose=true;
     const popover = await this.popoverController.create({
       component: SearchPopupPage,
       event: $event

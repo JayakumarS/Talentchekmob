@@ -12,6 +12,7 @@ export class LanguageService {
   selected = '';
   selectedLang = '';
   selectedFilter='';
+  selectedAll='';
   languages = [];
   //#endregion
 
@@ -72,6 +73,11 @@ export class LanguageService {
   setFilterValues(search){
     localStorage.setItem('filterValue', search);
     this.selectedFilter=search;
+  }
+
+  setSelectedValue(search){
+    localStorage.setItem('selectAll', search);
+    this.selectedAll=search;
   }
 
   //#endregion

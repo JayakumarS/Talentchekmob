@@ -1,9 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>select-all</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-list>
+  <ion-item button *ngFor="let search of searchList" (click)="select(search)" detail="false">
+      <!-- <img [src]="lng.img" height="30px" slot="start" alt="flag"> -->
+      <ion-label class="blackTheme">
+          {{ search }}
+      </ion-label>
+      <ion-icon slot="end" name="checkmark" *ngIf="search === selected"></ion-icon>
+  </ion-item>
+</ion-list>

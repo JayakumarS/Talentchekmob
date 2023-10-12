@@ -1,9 +1,95 @@
+<!-- <ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
+            <ion-col size="0.5">
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" (click)="goto_orgHome()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </ion-col>
+            <ion-col size="8">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 5%;">{{title}} List</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header> -->
 <ion-header>
-  <ion-toolbar>
-    <ion-title>shared-contact</ion-title>
+  <ion-toolbar class="new-background-color">
+      <ion-buttons slot="start">
+          <ion-button (click)="goto_Home()">
+              <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title style="text-align: center;font-family: Mr-eaves; color: black;">Shared Contact List</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="openPopOver($event)">
+            <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+          </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <form [formGroup]="studentNetwork">
 
+      <div class="display-justify" *ngFor="let cElement of sharedContactList">
+          <ion-card class="adv-card">
+              <!-- <ion-row>&nbsp;</ion-row> -->
+              <ion-row style=" margin: 13px 0px -16px 10px;">
+                  <ion-col size="2" style=" margin-top: 2%;" >
+                      <ion-avatar size="small" style="margin-left: -10%;">
+                          <!-- <img style="width: 50%;height: 50%;" alt="" src="{{imagePath}}{{cElement.profileimage}}" /> -->
+                          <div class="contact-box">
+                            <ion-icon name="person" class="contact-icon"></ion-icon>
+                          </div>
+                        </ion-avatar>
+                  </ion-col>
+                  <ion-col size="10">
+                      <ion-row >
+                          <div class="b"><b>{{cElement.firstname}}</b></div>
+                      </ion-row>
+                      <ion-row style="display: flex;flex-wrap: nowrap;">
+                          <div class="c">{{cElement.mobileno}}    </div>
+                          <div><ion-checkbox  style="border: 2px solid;" formControlName="selection" [(ngModel)]="cElement.checked"></ion-checkbox></div>
+                        
+
+
+                       
+                        </ion-row>
+                        <ion-row>
+                          <div class="c">{{cElement.position}}</div>
+
+                      </ion-row>
+                      <!-- <ion-row>
+
+                          <span class="c-pill c-pill--green" style="color:#198754" *ngIf="!cElement.currentEmployee">Ex-Employee</span>
+                          <span class="c-pill c-pill--purple" style="color:#6f42c1" *ngIf="cElement.currentEmployee">Currently working</span>
+
+                      </ion-row> -->
+
+                      <ion-row>
+                          <br>
+                      </ion-row>
+
+
+                  </ion-col>
+
+
+              </ion-row>
+
+
+
+          </ion-card>
+      </div>
+
+  </form>
+  <!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
 </ion-content>
+
+<div class="footer-nav">
+ <div style="font-size: x-large;color: white;" (click)="import()"> Import Contacts</div>
+</div>
