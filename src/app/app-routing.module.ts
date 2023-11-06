@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ProfileViewPopupPage } from './profile-view-popup/profile-view-popup.page';
 
 const routes: Routes = [
   {
@@ -417,10 +418,15 @@ const routes: Routes = [
   {
     path: 'shared-contact',
     loadChildren: () => import('./shared-contact/shared-contact.module').then( m => m.SharedContactPageModule)
-  },  {
+  },
+  {
     path: 'select-all',
     loadChildren: () => import('./select-all/select-all.module').then( m => m.SelectAllPageModule)
-  }
+  },
+  {
+    path: 'page1/:param1',
+    component: ProfileViewPopupPage
+  },
 
 
 
