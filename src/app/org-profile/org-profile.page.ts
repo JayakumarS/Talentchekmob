@@ -475,16 +475,16 @@ export class OrgProfilePage implements OnInit {
     this.camera.getPicture(options).then((ImageData => {
       this.base64img1 = "data:image/jpeg;base64," + ImageData;
 
-      const img = new Image();
-      img.src = this.base64img1;
+      // const img = new Image();
+      // img.src = this.base64img1;
 
    
-      img.onload = () => {
-         this.maxWidth = img.width;
-         this.maxHeight = img.height;
+      // img.onload = () => {
+      //    this.maxWidth = img.width;
+      //    this.maxHeight = img.height;
 
 
-      if (img.width <= 500 && img.height <= 500) {
+      // if (img.width <= 500 && img.height <= 500) {
 
       this.docForm.patchValue({
         'orgLogo': this.base64img1,
@@ -512,12 +512,12 @@ export class OrgProfilePage implements OnInit {
 
       });   
 
-    } else {
-      this.base64img1="";
-      this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
-    }
+  //   } else {
+  //     this.base64img1="";
+  //     this.storageservice.warningToast("The maximum size of the image must not exceed :max500px");
+  //   }
     
-  }
+  // }
 
     }), error => {
       console.log(error);
