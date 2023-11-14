@@ -151,33 +151,21 @@ async Update(){
       }
 }
 
-let usr ={
-  bankdetails,
-  "userid":this.currentUserId,
-
-}
-
 let createAccountIdurl = "api/auth/app/subscription/payments/createActIdRazorpay";
 
-this.storageservice.post(createAccountIdurl,usr).subscribe(result => {
+this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(result => {
   console.log(result)
-  if(result['isSuccess'] == true){
- 
-    this.presentToast();
+    console.log(` data: ${JSON.stringify(this.paymentDetails)}`);
+    var updatepayment = "api/auth/app/PaymentInfo/updateBankDetails";
   
-  }else{
-    var msg = result["id"];
-     if (msg == null) {
-       "id"
-     }
-     this.storageservice.dismissLoading();
- this.storageservice.generalAlertToast(msg);
- //this.hideLoadingIndicator(); //Hide loading indicator
-
-
-
-  }
-   
+     this.storageservice.postrequest(updatepayment, this.paymentDetails).subscribe(result => {  
+        //console.log("Image upload response: " + result)
+       if (result["success"] == true) {
+        const Instprofileview = new InstiProfileViewPage(this.router, this.storageservice,this.languageService,this.route);
+        Instprofileview.reload(); 
+        this.presentToast1()
+        }
+      })
      });
 }
   
