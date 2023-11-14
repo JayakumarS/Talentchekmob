@@ -127,7 +127,6 @@ this.recntCount = result['recentHighlightsStudentNetworkList'].length;
 
 }
  console.log(result); 
-
 });
 
 
@@ -138,7 +137,11 @@ get_CorporateNetwork(){
   this.studentNetwork.value['talentId'] =this.currentUserId;
   var corporateNetworkURL = "api/auth/app/Network/getCorporateNetworkListMob";
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
-
+    if(res['success'] == true) {
+      this.storageservice.dismissLoading();
+      this.constantHighlights =res['constantHighlightsStudentNetworkList'];
+      this.recentHighlights = res['recentHighlightsStudentNetworkList'];   
+      }
     console.log(res);
     this.corporateCount = res['corporateCount'];
     this.storageservice.dismissLoading();
