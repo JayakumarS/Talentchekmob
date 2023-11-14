@@ -288,7 +288,7 @@ export class InstiProfilePage implements OnInit {
 
       await alert.present();
     } else {
-      this.docForm.value.dob = formatDate(this.docForm.value.dob, 'yyyy', 'en-IN');
+     // this.docForm.value.dob = formatDate(this.docForm.value.dob, 'yyyy', 'en-IN');
       this.docForm.value.currentUserId = this.currentUserId;
       this.Instidetails = this.docForm.value;
       console.log(` data: ${JSON.stringify(this.Instidetails)}`);
