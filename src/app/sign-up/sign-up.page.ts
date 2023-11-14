@@ -327,6 +327,10 @@ export class SignUpPage implements OnInit {
         var dateOfBirth = this.transformDate(dob);
         console.log("dateOfBirth: " + dateOfBirth);
 
+        let parts: string[] = dateOfBirth.split('-');
+        console.log(parts);
+        dateOfBirth = parts[2] + '/' + parts[1] + '/' + parts[0];
+
         if (firstName != lastName) { //Validation.
 
           var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.

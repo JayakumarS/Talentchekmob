@@ -98,14 +98,15 @@
                                 <small style="color: #f70505;">{{'CorReg.panTaxIdReq' | translate}}</small>
                             </div>
 
-                            <ion-label class="labels">{{'InsReg.dor' | translate}}<small style="color: #f70505;">*</small>
-                            </ion-label>
-                            <ion-item fill="outline" class="input-field">
-                                <ion-datetime displayFormat="DD.MM.YYYY" formControlName="regDate" presentation="date">
-                                </ion-datetime>
+                            <ion-label class="labels">{{ 'InsReg.dor' | translate }}<small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field" [class.invalid]="profileForm.get('regDate').invalid && profileForm.get('regDate').touched">
+                              <ion-input formControlName="regDate"></ion-input>
                             </ion-item>
-                            <div *ngIf=" profileForm.controls.regDate.hasError('required') && profileForm.controls.regDate.touched">
-                                <small style="color: #f70505;">{{'InsReg.dorReq' | translate}}</small>
+                            <div *ngIf="profileForm.get('regDate').hasError('required') && profileForm.get('regDate').touched">
+                              <small style="color: #f70505;">{{ 'InsReg.dorReq' | translate }}</small>
+                            </div>
+                            <div *ngIf="profileForm.get('regDate').hasError('pattern') && profileForm.get('regDate').touched">
+                              <small style="color: #f70505;">Please enter up to 4 numeric characters.</small>
                             </div>
 
                             <ion-label class="labels">{{'InsReg.institution' | translate}}<small style="color: #f70505;">*</small></ion-label>

@@ -400,6 +400,11 @@ this.regInfoForm = this.formbuilder.group({
         console.log("regDate: " + regDate);
         var regDate1 = this.transformDate(regDate);
         console.log("regDate: " + regDate1);
+
+        let parts: string[] = regDate1.split('-');
+        console.log(parts);
+        regDate1 = parts[2] + '/' + parts[1] + '/' + parts[0];
+        
         //var countryID=country.slice(0,2);
 
         //let myString = regDate1;

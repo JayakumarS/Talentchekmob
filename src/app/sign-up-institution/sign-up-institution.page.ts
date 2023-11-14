@@ -76,7 +76,7 @@ export class SignUpInstitutionPage implements OnInit {
       instituteName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.required])],
       regNo: ['', Validators.required],
       taxId: ['', Validators.required],
-      regDate: ['', Validators.required],
+      regDate: ['', [Validators.required, Validators.pattern('^[0-9]{1,4}$')]],
       instType: ['', Validators.required],
       uploadImg: [''],
 });
@@ -374,12 +374,12 @@ this.regInfoForm = this.formbuilder.group({
         var state = this.addressForm.value.state['id'];
         var referralCode = this.regInfoForm.controls['referralCode'].value;
         var profileVisibility = this.talentinstform.controls['profileVisibility'].value;
-        console.log("regDate: " + regDate);
-        var regDate1 = this.transformDate(regDate);
-        console.log("regDate: " + regDate1);
-        let myString = regDate1;
-        this.Four = myString.substring(0, myString.length - 6);
-        console.log(this.Four)
+        // console.log("regDate: " + regDate);
+        // var regDate1 = this.transformDate(regDate);
+        // console.log("regDate: " + regDate1);
+        // let myString = regDate1;
+        // this.Four = myString.substring(0, myString.length - 6);
+        // console.log(this.Four)
         //var countryID=country.slice(0,2);
         // if (firstName != lastName) { //Validation.
 
@@ -394,7 +394,7 @@ this.regInfoForm = this.formbuilder.group({
           'instituteName': instituteName,
           'regNo': regNo,
           'taxId': taxId,
-          'regDate': this.Four,
+          'regDate':regDate,
           'instType': instType,
           'address': address,
           'emailId': emailId,
