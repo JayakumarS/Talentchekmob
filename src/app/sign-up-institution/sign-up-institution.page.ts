@@ -76,7 +76,7 @@ export class SignUpInstitutionPage implements OnInit {
       instituteName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.required])],
       regNo: ['', Validators.required],
       taxId: ['', Validators.required],
-      regDate: ['', [Validators.required, Validators.pattern('^[0-9]{1,4}$')]],
+      regDate: ['', Validators.required],
       instType: ['', Validators.required],
       uploadImg: [''],
 });
@@ -102,6 +102,16 @@ this.regInfoForm = this.formbuilder.group({
   cBoxIAgreeConsent: ['']
 
 });
+
+function validateNumberLength(maxLength: number) {
+  return (control: { value: string }): { [key: string]: any } | null => {
+    const value = control.value.toString();
+    if (value.length > maxLength) {
+      return { maxLengthExceeded: true };
+    }
+    return null;
+  };
+}
 
 
 
@@ -479,6 +489,17 @@ this.regInfoForm = this.formbuilder.group({
     if ($event.target.value.length >= maxLength) {
       $event.preventDefault();
       return;
+    }
+  }
+
+  onInputChange(event: any) {
+    const inputValue = event;
+    const numericRegex = /^[0-9]*$/;
+
+    if (!numericRegex.test(inputValue)) {
+      this.profileForm.patchValue({
+        regDate:''
+      })
     }
   }
 
