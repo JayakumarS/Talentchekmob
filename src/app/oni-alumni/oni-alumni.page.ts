@@ -89,7 +89,6 @@ export class OniAlumniPage implements OnInit {
      {
        this.get_CorporateNetwork();
        this.get_studentNetwork();
-       this.get_studentCount()
      }
      //org
      else{
@@ -127,6 +126,7 @@ this.recntCount = result['recentHighlightsStudentNetworkList'].length;
 
 }
  console.log(result); 
+ this.studCount = result['studentCount'];
 });
 
 
