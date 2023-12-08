@@ -98,8 +98,8 @@ export class HomePage implements OnInit,AfterViewInit {
   );
 
 
-  this.languageService.setFilterValues("This week");
-  this.selectDate("This week");
+  this.languageService.setFilterValues("This year");
+  this.selectDate("This year");
 
   var postData = {
     "currentUserId": this.userId,
