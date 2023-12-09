@@ -27,6 +27,7 @@ export class HomePage implements OnInit,AfterViewInit {
   filterEnabled: boolean = false;
   initialCount: any =0;
   isFilterChose: boolean = false;
+  isChecked: boolean=true;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -395,6 +396,7 @@ export class HomePage implements OnInit,AfterViewInit {
   }
   this.fromDateValue=formatDate(fromDate);
   this.toDateValue=formatDate(toDate);
+  this.isChecked = true;
   this.getTuesByPort();
   }
 
@@ -466,7 +468,9 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
 
 this.storageservice.postrequest(url, postData).subscribe(output => {
   this.barChartList3 = output["vcardAnalyticsDetails"];
+  if(this.isChecked){
   for (var i = 0; i < this.barChartList3.length; i++) {
+    this.isChecked = false;
     this.barChartList3[i].name = this.barChartList3[i].viewedDate;
     if(this.barChartList3[i].sharedContactCount!=null && this.barChartList3[i].sharedContactCount!=undefined &&
       this.barChartList3[i].sharedContactCount!=''){
@@ -485,6 +489,7 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
     }
   }
  // this.barChart();
+}
 },
   err => {
     this.storageservice.warningToast("Network Issue...");

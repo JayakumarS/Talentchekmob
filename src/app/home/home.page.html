@@ -173,7 +173,8 @@
                             </ion-select>
                         </div> -->
             <!-- </ion-item> -->
-            <p style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">Total Talent Card Views: &nbsp; <b style="font-size: 35px;">{{totalViewCount}}</b></p>
+            <p style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">Total Talent Card Views: &nbsp; <b style="font-size: 35px;">
+                {{totalViewCount}}</b></p>
             <!-- <h1 style="font-family:'Times New Roman', Times, serif;font-size: 40px;text-align: left;padding-left: 6%;"><b>{{totalViewCount}}</b></h1> -->
             <!-- <h2 style="font-family: 'Mr-eaves';text-align: left;padding-left: 3%;">Datewise count</h2> -->
             {{languageService.selectedFilter}} <ion-icon name="funnel" (click)="openPopOver($event)"></ion-icon>
@@ -181,11 +182,13 @@
         </ion-col>
 
         <div id="container"  class="chart-container"></div>
-        <p *ngIf="initialCount!=0 && initialCount!='0'" style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">Total Contact Saves: &nbsp; <b style="font-size: 35px;">{{totalContactCount}}</b></p>
+        <p *ngIf="initialCount!=0 && initialCount!='0'" style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">
+            Total Contact Saves: &nbsp; <b style="font-size: 35px;">{{totalContactCount}}</b></p>
 
         <div id="container2" class="chart-container"></div>
 
-        <p *ngIf="initialCount!=0 && initialCount!='0'" style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">Total Shared Contacts: &nbsp; <b style="font-size: 35px;" (click)="listPage()">{{sharedContactCount}}</b></p>
+        <p *ngIf="initialCount!=0 && initialCount!='0'" style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">
+            Total Shared Contacts: &nbsp; <b style="font-size: 35px;" (click)="listPage()">{{sharedContactCount}}</b></p>
         <div id="container3" class="chart-container"></div>
 </div>
 
