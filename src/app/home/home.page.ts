@@ -28,6 +28,11 @@ export class HomePage implements OnInit,AfterViewInit {
   initialCount: any =0;
   isFilterChose: boolean = false;
   isChecked: boolean=true;
+  shareChecked: boolean =  true;
+  totalViewCountFlag: boolean =  false;
+  totalContactCountFlag: boolean =  false;
+  sharedContactCountFlag: boolean =  false;
+
 
   doRefresh(event) {
     this.ngOnInit();
@@ -397,6 +402,7 @@ export class HomePage implements OnInit,AfterViewInit {
   this.fromDateValue=formatDate(fromDate);
   this.toDateValue=formatDate(toDate);
   this.isChecked = true;
+  this.shareChecked = true;
   this.getTuesByPort();
   }
 
@@ -405,6 +411,9 @@ export class HomePage implements OnInit,AfterViewInit {
     this.totalViewCount=0;
     this.totalContactCount=0;
     this.sharedContactCount=0;
+    this.totalViewCountFlag=false;
+    this.totalContactCountFlag=false;
+    this.sharedContactCountFlag=false;
     var postData = {
       "currentUserId": this.userId,
       "fromDate":this.fromDateValue,
@@ -414,8 +423,9 @@ export class HomePage implements OnInit,AfterViewInit {
     var url = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
     this.storageservice.postrequest(url, postData).subscribe(result => {
       this.barChartList = result["vcardAnalyticsDetails"];
+      this.barChartList2 = result["vcardAnalyticsDetails"];
+      this.barChartList3 = result["vcardAnalyticsDetails"];
       console.log(`barChartList: ${JSON.stringify(this.barChartList)}`);
-      this.totalViewCount=0;
 
       for (var i = 0; i < this.barChartList.length; i++) {
         this.barChartList[i].name = this.barChartList[i].viewedDate;
@@ -430,13 +440,20 @@ export class HomePage implements OnInit,AfterViewInit {
         //   this.totalContactCount=this.totalContactCount;
         // }
       }
+      setTimeout(() => {
+        if(this.totalViewCount == 0){
+          this.totalViewCountFlag=true;
+        } else {
+          this.totalViewCountFlag=false;
+        }
+      }, 500);
 
 
 // For chart2
 
-this.storageservice.postrequest(url, postData).subscribe(output => {
-  this.barChartList2 = output["vcardAnalyticsDetails"];
+  if(this.isChecked){
   for (var i = 0; i < this.barChartList2.length; i++) {
+    this.isChecked = false;
     this.barChartList2[i].name = this.barChartList2[i].viewedDate;
     if(this.barChartList2[i].saveContactCount!=null && this.barChartList2[i].saveContactCount!=undefined &&
       this.barChartList2[i].saveContactCount!=''){
@@ -450,27 +467,30 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
     if(this.barChartList2[i].saveContactCount!=null && this.barChartList2[i].saveContactCount!=undefined &&
       this.barChartList2[i].saveContactCount!=''){
         this.totalContactCount=this.totalContactCount+Number(this.barChartList2[i].saveContactCount);
+        console.log(this.totalContactCount);
     } else {
       this.totalContactCount=this.totalContactCount;
     }
   }
+  setTimeout(() => {
+    if(this.totalContactCount == 0){
+      this.totalContactCountFlag=true;
+    } else {
+      this.totalContactCountFlag=false;
+    }
+  }, 500);
+}
  // this.barChart();
-},
-  err => {
-    this.storageservice.warningToast("Network Issue...");
-    console.log("Error", err);
-  }
-);
+
+
 //
 
 
 // For chart3
 
-this.storageservice.postrequest(url, postData).subscribe(output => {
-  this.barChartList3 = output["vcardAnalyticsDetails"];
-  if(this.isChecked){
+  if(this.shareChecked){
   for (var i = 0; i < this.barChartList3.length; i++) {
-    this.isChecked = false;
+    this.shareChecked = false;
     this.barChartList3[i].name = this.barChartList3[i].viewedDate;
     if(this.barChartList3[i].sharedContactCount!=null && this.barChartList3[i].sharedContactCount!=undefined &&
       this.barChartList3[i].sharedContactCount!=''){
@@ -488,14 +508,16 @@ this.storageservice.postrequest(url, postData).subscribe(output => {
       this.sharedContactCount=this.sharedContactCount;
     }
   }
+   setTimeout(() => {
+    if(this.sharedContactCount == 0){
+      this.sharedContactCountFlag=true;
+    } else {
+      this.sharedContactCountFlag=false;
+    }
+  }, 500);
  // this.barChart();
 }
-},
-  err => {
-    this.storageservice.warningToast("Network Issue...");
-    console.log("Error", err);
-  }
-);
+
 //
 
 
