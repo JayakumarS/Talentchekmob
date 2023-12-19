@@ -80,7 +80,7 @@ export class SignUpPage implements OnInit {
       this.profileForm = this.formbuilder.group({
         firstName: ['', Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
         lastName: ['', Validators.compose([Validators.pattern(this.splCharRegex), Validators.required])],
-        dob: ['', Validators.required], 
+        dob: [''], 
         gender: ['', Validators.required],
         uploadImg: [''],
   });

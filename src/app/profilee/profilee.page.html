@@ -89,13 +89,13 @@
                     </div>
 
                     <div class="button-content" *ngIf="isProfile">
-                        <ion-label class="labels">{{'dob' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-label class="labels">{{'dob' | translate}}</ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-datetime displayFormat="DD.MM.YYYY" placeholder="{{'dob' | translate}}" formControlName="dob" presentation="date" [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
-                        <div *ngIf="profileForm.controls.dob.hasError('required') && profileForm.controls.dob.touched">
+                        <!-- <div *ngIf="profileForm.controls.dob.hasError('required') && profileForm.controls.dob.touched">
                             <small style="color: #f70505;">{{'reqDob' | translate}}</small>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">{{'email' | translate}}</ion-label>

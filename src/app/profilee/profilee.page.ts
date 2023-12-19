@@ -124,7 +124,7 @@ export class ProfileePage implements OnInit {
       firstname: ["", Validators.compose([Validators.maxLength(20), Validators.minLength(3), Validators.pattern(this.splCharRegex), Validators.required])],
       lastname: ["", Validators.compose([Validators.maxLength(20), Validators.minLength(1), Validators.pattern(this.splCharRegex), Validators.required])],
       gender: ["", [Validators.required]],
-      dob: ["", [Validators.required]],
+      dob: [""],
 
       mobile: ["", [Validators.required]],
       email: ["", [Validators.email, Validators.minLength(5)],],
