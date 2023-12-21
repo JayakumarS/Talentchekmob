@@ -43,6 +43,7 @@ export class SignUpPage implements OnInit {
   step: any
   private stepper: Stepper;
   IsSearchListShow: boolean = false;
+  allowToSave:boolean;
   countryResponseBackup: any;
   cityOptions: any;
   cityList: []
@@ -324,20 +325,37 @@ export class SignUpPage implements OnInit {
         var stateName = this.addressForm.value.stateName['id'];
         var pinCode = this.addressForm.controls['pinCode'].value;
         console.log("dob: " + dob);
-        var dateOfBirth = this.transformDate(dob);
-        console.log("dateOfBirth: " + dateOfBirth);
-
-        let parts: string[] = dateOfBirth.split('-');
-        console.log(parts);
-        dateOfBirth = parts[2] + '/' + parts[1] + '/' + parts[0];
-
-        if (firstName != lastName) { //Validation.
-
-          var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
-          console.log("currentDate: " + currentDate);
-          console.log("dateOfBirthAlt: " + dateOfBirth);
-          var frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
-          if (frm <= currentDate) {
+        if(dob!=null){
+          var dateOfBirth = this.transformDate(dob);
+          console.log("dateOfBirth: " + dateOfBirth);
+  
+          let parts: string[] = dateOfBirth.split('-');
+          console.log(parts);
+          dateOfBirth = parts[2] + '/' + parts[1] + '/' + parts[0];
+          }
+          if (firstName != lastName) { //Validation.
+  
+            var currentDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)); //Currentdate - one year.
+            console.log("currentDate: " + currentDate);
+            console.log("dateOfBirthAlt: " + dateOfBirth);
+            var frm;
+            if(dob!=null && dob!=''){
+              frm = new Date(new Date(dob).setHours(new Date(dob).getHours() + 0));
+            } else {
+              frm=null;
+            }
+  
+            if(frm!=null && frm!=undefined){
+              if(frm<=currentDate){
+                this.allowToSave=true;
+              } else {
+                this.allowToSave=false;
+              }
+            } else {
+              this.allowToSave=true;
+            }
+           
+            if (this.allowToSave ) {
             if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
 
               // if (cBoxIAgree == true) {
