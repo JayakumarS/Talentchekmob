@@ -133,7 +133,6 @@ export class SignUpPage implements OnInit {
       } else {
         this.storageservice.warningToast("Please upload image");
       }
-      
     } else {
       this.storageservice.warningToast("Please fill required fields");
     }
@@ -325,13 +324,15 @@ export class SignUpPage implements OnInit {
         var stateName = this.addressForm.value.stateName['id'];
         var pinCode = this.addressForm.controls['pinCode'].value;
         console.log("dob: " + dob);
-        if(dob!=null){
+        if(dob!=null && dob!=''){
           var dateOfBirth = this.transformDate(dob);
           console.log("dateOfBirth: " + dateOfBirth);
   
           let parts: string[] = dateOfBirth.split('-');
           console.log(parts);
           dateOfBirth = parts[2] + '/' + parts[1] + '/' + parts[0];
+          }else{
+            dateOfBirth="";
           }
           if (firstName != lastName) { //Validation.
   
@@ -356,7 +357,7 @@ export class SignUpPage implements OnInit {
             }
            
             if (this.allowToSave ) {
-            if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
+          if (this.base64img1 != null && this.base64img1 != '' && this.base64img1 != "assets/img/avatar1.png") {
 
               // if (cBoxIAgree == true) {
 
@@ -442,7 +443,7 @@ export class SignUpPage implements OnInit {
               //   //this.storageservice.warningToast('Please accept the "Terms and Conditions.');
               //   this.storageservice.warningToastCustom(this.translate.instant('PopupWin.opps'), this.translate.instant('PopupWin.plsAccTmNCon'));
               // }
-            }  //img if condition ends
+           }  //img if condition ends
             else {
               this.storageservice.warningToast('Please upload image.');
               this.storageservice.dismissLoading();

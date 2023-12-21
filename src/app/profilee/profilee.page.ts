@@ -403,12 +403,15 @@ export class ProfileePage implements OnInit {
         this.getcitylist(result["profileList"][0].permState, result["profileList"][0].permCountry)
 
         this.profileList = result["profileList"];
-
+        var startdate;
+        if(this.profileList[0].dob!=null && this.profileList[0].dob!=''){
         const dob = this.profileList[0].dob;
-        const startdate = moment(dob, 'DD/MM/YYYY').toDate();
-
+         startdate = moment(dob, 'DD/MM/YYYY').toDate().toISOString;
+        }else{
+          startdate="";
+        }
         this.profileForm.patchValue({
-          'dob': startdate.toISOString(),
+          'dob':startdate ,
           'firstname': this.profileList[0].firstname,
           'lastname': this.profileList[0].lastname,
           'gender': this.profileList[0].gender,
