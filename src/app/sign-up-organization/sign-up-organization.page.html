@@ -265,14 +265,19 @@
                                 <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">{{'InsReg.password' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{ 'InsReg.password' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
-                                <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
+                                <ion-input type="{{ passwordType }}" clearOnEdit="false" formControlName="pwd" (ionInput)="showPasswordError()"></ion-input>
+                                <ion-icon name="{{ passwordIcon }}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
-                            <div *ngIf=" regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched" style="text-align: left;">
-                                <small style="color: #f70505;">{{'reqPassword' | translate}}</small>
+                            <div *ngIf="showMinLengthError" style="text-align: left;">
+                                <small style="color: #f70505;">Minimum 5 characters required</small>
                             </div>
+                            <div *ngIf="regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched && !showMinLengthError" style="text-align: left;">
+                                <small style="color: #f70505;">{{ 'reqPassword' | translate }}</small>
+                            </div>
+                            
+                            
 
                             <ion-label class="labels">{{'referralCode' | translate}}</ion-label>
                             <ion-item fill="outline" class="input-field">

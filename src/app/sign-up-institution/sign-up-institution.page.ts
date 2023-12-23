@@ -61,6 +61,7 @@ export class SignUpInstitutionPage implements OnInit {
   selectedCity: string;
   showCityResults: boolean = false;
   selectedLang: string;
+  showMinLengthError = false;
   maxWidth: number;
   maxHeight: number;
   constructor(public router: Router, private camera: Camera, public formbuilder: FormBuilder, public storageservice: StorageService, private transfer: FileTransfer,
@@ -93,7 +94,7 @@ this.addressForm = this.formbuilder.group({
 
 
 this.regInfoForm = this.formbuilder.group({
-  pwd: ['', Validators.required],
+  pwd: ['',[Validators.minLength(5)]],
   mobileNo: ['', Validators.required],
   referralCode: [''], 
   emailId: ['', Validators.compose([Validators.required,Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
@@ -311,6 +312,14 @@ function validateNumberLength(maxLength: number) {
 
 
     });
+  }
+
+  showPasswordError() {
+    if (this.regInfoForm.get('pwd')?.value.length < 5) {
+      this.showMinLengthError = true;
+    } else {
+      this.showMinLengthError = false;
+    }
   }
 
   //CountryList

@@ -258,9 +258,12 @@
                             <ion-label class="labels">{{'password' | translate}} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <!-- <ion-input formControlName="pwd"></ion-input> -->
-                                <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd"></ion-input>
+                                <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="pwd" (ionInput)="showPasswordError()"></ion-input>
                                 <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
+                            <div *ngIf="showMinLengthError" style="text-align: left;">
+                                <small style="color: #f70505;">Minimum 5 characters required</small>
+                            </div>
                             <div *ngIf=" regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched" style="text-align: left;">
                                 <small style="color: #f70505;">{{'InsReg.PasswordRequired' | translate}}</small>
                             </div>

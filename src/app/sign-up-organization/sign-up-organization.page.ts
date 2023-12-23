@@ -73,6 +73,8 @@ export class SignUpOrganizationPage implements OnInit {
   selectedLang: string;
   maxWidth: number;
   maxHeight: number;
+  showMinLengthError = false;
+
   constructor(public router: Router, private camera: Camera, public formbuilder: FormBuilder, public storageservice: StorageService, private transfer: FileTransfer,
     private translate: TranslateService, public modalController: ModalController, public languageService: LanguageService) {
 
@@ -106,7 +108,7 @@ this.addressForm = this.formbuilder.group({
 
 
 this.regInfoForm = this.formbuilder.group({
-  pwd: ['', Validators.required],
+  pwd: ['',[Validators.minLength(5)]],
   mobileNo: ['', Validators.required],
   referralCode: [''],
   profileVisibility: ['', ''],
@@ -533,6 +535,13 @@ this.regInfoForm = this.formbuilder.group({
     });
 
     return await modal.present();
+  }
+  showPasswordError() {
+    if (this.regInfoForm.get('pwd')?.value.length < 5) {
+      this.showMinLengthError = true;
+    } else {
+      this.showMinLengthError = false;
+    }
   }
 
   openConsentForm() {

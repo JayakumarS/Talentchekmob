@@ -26,6 +26,7 @@ import { IonicSelectableComponent } from 'ionic-selectable';
 export class SignUpPage implements OnInit {
   selectedState: any;
   showCityResults: boolean = false;
+  showMinLengthError = false;
   selectedCity: string;
   selectedLang: string;
   maxWidth: number;
@@ -99,7 +100,7 @@ export class SignUpPage implements OnInit {
 
 
   this.regInfoForm = this.formbuilder.group({
-    password: ['', Validators.required],
+    password: ['',[Validators.minLength(5)]],
     phoneNo: ['', Validators.compose([Validators.required])],
     referalCode: [''],
     email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
@@ -291,7 +292,13 @@ export class SignUpPage implements OnInit {
 
   }
 
- 
+  showPasswordError() {
+    if (this.regInfoForm.get('pwd')?.value.length < 5) {
+      this.showMinLengthError = true;
+    } else {
+      this.showMinLengthError = false;
+    }
+  }
 
 
   onSubmit() {

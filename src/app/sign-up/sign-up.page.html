@@ -292,15 +292,18 @@
                                 <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
                             </div>
 
-                            <ion-label class="labels">{{'password' | translate }} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-label class="labels">{{ 'password' | translate }} <small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
-                                <!-- <ion-input formControlName="password"></ion-input> -->
-                                <ion-input type="{{passwordType}}" clearOnEdit="false" formControlName="password"></ion-input>
-                                <ion-icon name="{{passwordIcon}}" slot="end" (click)="passwordToggle()"></ion-icon>
+                                <ion-input type="{{ passwordType }}" clearOnEdit="false" formControlName="password" (ionInput)="showPasswordError()"></ion-input>
+                                <ion-icon name="{{ passwordIcon }}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
-                            <div style="text-align: left;" *ngIf=" regInfoForm.controls.password.hasError('required') && regInfoForm.controls.password.touched">
-                                <small style="color: #f70505;">{{'reqPassword' | translate }}</small>
+                             <div *ngIf="showMinLengthError" style="text-align: left;">
+                                <small style="color: #f70505;">Minimum 5 characters required</small>
                             </div>
+                            <div style="text-align: left;" *ngIf="regInfoForm.controls.password.hasError('required') && regInfoForm.controls.password.touched">
+                                <small style="color: #f70505;">{{ 'reqPassword' | translate }}</small>
+                            </div>
+                            
                             <!-- <ion-label class="labels">Account <small style="color: #f70505;">*</small></ion-label>
                             <ion-row class="talentrow">
                                 <ion-radio-group formControlName="profileVisibility" style="width:100%">
