@@ -405,13 +405,18 @@ export class ProfileePage implements OnInit {
         this.profileList = result["profileList"];
         var startdate;
         if(this.profileList[0].dob!=null && this.profileList[0].dob!=''){
-        const dob = this.profileList[0].dob;
-         startdate = moment(dob, 'DD/MM/YYYY').toDate().toISOString;
+          let dob = this.profileList[0].dob;
+          startdate = moment(dob, 'DD/MM/YYYY').toDate();
+          this.profileForm.patchValue({
+            'dob':startdate.toISOString()
+          })
         }else{
           startdate="";
+          this.profileForm.patchValue({
+            'dob':startdate
+          })
         }
         this.profileForm.patchValue({
-          'dob':startdate ,
           'firstname': this.profileList[0].firstname,
           'lastname': this.profileList[0].lastname,
           'gender': this.profileList[0].gender,
