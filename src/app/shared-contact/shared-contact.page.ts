@@ -108,10 +108,19 @@ import(){
   this.checkedArray=[];
   this.sharedContactList.forEach(element => {
     if(element.checked){
+      element.currentUserId=this.currentUserId;
       this.checkedArray.push(element);
     }
    });
    this.checkedArray;
+
+   var updateContact = "api/auth/app/VisitingCard/updateShareContactDetails";
+
+  this.storageservice.postrequest(updateContact,this.checkedArray).subscribe(async result => {  
+    if (result["success"] == true) {
+      this.storageservice.dismissLoading();
+      }
+  });
 
    const selectedData = this.checkedArray
 
@@ -166,5 +175,36 @@ addContactFromCSV(csvData: string) {
   });
     this.storageservice.successToast('Contact added successfully')
 }
+
+import1(){
+  //     this.count=0;
+  // const parsedData = Papa.parse(csvData, { header: true });
+  // const contactsToAdd = parsedData.data;
+
+ // contactsToAdd.forEach((contactData) => {
+    const contact = this.contacts.create();
+
+    contact.name = new ContactName("Name", "hghf");
+    contact.phoneNumbers = [new ContactField('mobile', "9651515")];
+    // contact.id='123';
+    // contact.birthday=new Date();
+    // contact.addresses=[new ContactField('area', 'chennai')];
+    // contact.addresses = [new ContactAddress(true, 'chennai', '', '', '', 'India')];
+    // contact.displayName='New Test';
+     contact.emails=[new ContactField('email', 'abc@mail.com')];
+    // contact.organizations=[new ContactField('Org', 'Paragon')];
+    // contact.note='New one';
+    // contact.nickname='Saro';
+    // Set other details as needed
+
+    contact.save().then(
+      
+      () => this.count++,
+      
+      (error) => console.error('Error adding contact:', error)
+    );
+  //});
+    this.storageservice.successToast('Contact added successfully')
+    }
 
 }

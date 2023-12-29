@@ -114,22 +114,22 @@ export class HomePage implements OnInit,AfterViewInit {
   };
 
    var url = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
-    this.storageservice.postrequest(url, postData).subscribe(result => {
-      this.barChartList = result["vcardAnalyticsDetails"];
-      this.barChartList2 = result["vcardAnalyticsDetails"];
-      this.barChartList3 = result["vcardAnalyticsDetails"];
-      if(this.barChartList.length>0){
-        this.countAvailable=true;
-        this.getTuesByPort();
-      } else {
-        this.countAvailable=false;
-      }
-    },
-      err => {
-        this.storageservice.warningToast("Network Issue...");
-        console.log("Error", err);
-      }
-    );
+    // this.storageservice.postrequest(url, postData).subscribe(result => {
+    //   this.barChartList = result["vcardAnalyticsDetails"];
+    //   this.barChartList2 = result["vcardAnalyticsDetails"];
+    //   this.barChartList3 = result["vcardAnalyticsDetails"];
+    //   if(this.barChartList.length>0){
+    //     this.countAvailable=true;
+    //     this.getTuesByPort();
+    //   } else {
+    //     this.countAvailable=false;
+    //   }
+    // },
+    //   err => {
+    //     this.storageservice.warningToast("Network Issue...");
+    //     console.log("Error", err);
+    //   }
+    // );
    
    this.selectedLang  = localStorage.getItem('selectedLang');
    if(this.selectedLang=="null")
@@ -422,11 +422,19 @@ export class HomePage implements OnInit,AfterViewInit {
   
     var url = "api/auth/app/VisitingCard/getAnalyticsDetailsWeb";
     this.storageservice.postrequest(url, postData).subscribe(result => {
-      this.barChartList = result["vcardAnalyticsDetails"];
-      this.barChartList2 = result["vcardAnalyticsDetails"];
-      this.barChartList3 = result["vcardAnalyticsDetails"];
+      // this.barChartList = result["vcardAnalyticsDetails"];
+      // this.barChartList2 = result["vcardAnalyticsDetails"];
+      // this.barChartList3 = result["vcardAnalyticsDetails"];
+      this.barChartList = JSON.parse(JSON.stringify(result["vcardAnalyticsDetails"]));
+      this.barChartList2 = JSON.parse(JSON.stringify(result["vcardAnalyticsDetails"]));
+      this.barChartList3 = JSON.parse(JSON.stringify(result["vcardAnalyticsDetails"]));
       console.log(`barChartList: ${JSON.stringify(this.barChartList)}`);
-
+      if(this.barChartList.length>0){
+        this.countAvailable=true;
+        // this.getTuesByPort();
+      } else {
+        this.countAvailable=false;
+      }
       for (var i = 0; i < this.barChartList.length; i++) {
         this.barChartList[i].name = this.barChartList[i].viewedDate;
         this.barChartList[i].y = this.barChartList[i].viewcount;
