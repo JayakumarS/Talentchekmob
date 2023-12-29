@@ -593,7 +593,7 @@ export class HomePage implements OnInit,AfterViewInit {
       series: [
         {
           // name: this.barChartList.date,
-          name: 'Date',
+          name: 'Count',
           colorByPoint: true,
           type: undefined,
         //   data: [ {
@@ -639,7 +639,7 @@ export class HomePage implements OnInit,AfterViewInit {
       series: [
         {
           // name: this.barChartList.date,
-          name: 'Date',
+          name: 'Count',
           colorByPoint: true,
           type: undefined,
         //   data: [ {
@@ -685,7 +685,7 @@ export class HomePage implements OnInit,AfterViewInit {
       series: [
         {
           // name: this.barChartList.date,
-          name: 'Date',
+          name: 'Count',
           colorByPoint: true,
           type: undefined,
         //   data: [ {
@@ -732,7 +732,7 @@ export class HomePage implements OnInit,AfterViewInit {
       series: [
         {
           // name: this.barChartList.date,
-          name: 'Date',
+          name: 'Count',
           colorByPoint: true,
           type: undefined,
         //   data: [ {
@@ -778,7 +778,7 @@ export class HomePage implements OnInit,AfterViewInit {
       series: [
         {
           // name: this.barChartList.date,
-          name: 'Date',
+          name: 'Count',
           colorByPoint: true,
           type: undefined,
         //   data: [ {
@@ -824,7 +824,7 @@ export class HomePage implements OnInit,AfterViewInit {
       series: [
         {
           // name: this.barChartList.date,
-          name: 'Date',
+          name: 'Count',
           colorByPoint: true,
           type: undefined,
         //   data: [ {
