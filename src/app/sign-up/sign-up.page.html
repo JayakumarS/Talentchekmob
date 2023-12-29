@@ -298,7 +298,7 @@
                                 <ion-icon name="{{ passwordIcon }}" slot="end" (click)="passwordToggle()"></ion-icon>
                             </ion-item>
                              <div *ngIf="showMinLengthError" style="text-align: left;">
-                                <small style="color: #f70505;">Minimum 5 characters required</small>
+                                <small style="color: #f70505;">Please enter a password with a maximum of 5 characters.</small>
                             </div>
                             <div style="text-align: left;" *ngIf="regInfoForm.controls.password.hasError('required') && regInfoForm.controls.password.touched">
                                 <small style="color: #f70505;">{{ 'reqPassword' | translate }}</small>

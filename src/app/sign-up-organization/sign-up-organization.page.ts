@@ -537,7 +537,7 @@ this.regInfoForm = this.formbuilder.group({
     return await modal.present();
   }
   showPasswordError() {
-    if (this.regInfoForm.get('pwd')?.value.length < 5) {
+    if (this.regInfoForm.get('pwd')?.value.length < 4) {
       this.showMinLengthError = true;
     } else {
       this.showMinLengthError = false;

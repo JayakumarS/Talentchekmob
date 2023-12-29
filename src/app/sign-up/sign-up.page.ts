@@ -293,7 +293,7 @@ export class SignUpPage implements OnInit {
   }
 
   showPasswordError() {
-    if (this.regInfoForm.get('pwd')?.value.length < 5) {
+    if (this.regInfoForm.get('password')?.value.length < 4) {
       this.showMinLengthError = true;
     } else {
       this.showMinLengthError = false;
