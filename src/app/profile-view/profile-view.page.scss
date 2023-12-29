@@ -301,6 +301,7 @@ ion-content {
 .popup-content {
     display: flex;
     flex-direction: column;
+    background-color: #f1f1f1;
 }
 
 .popup-content1 {
@@ -457,4 +458,5 @@ ion-content {
   .edit-button {
     border: none; 
     background-color: transparent;
+    color: black;
 }

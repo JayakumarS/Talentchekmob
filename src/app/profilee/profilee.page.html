@@ -233,7 +233,7 @@
                     <div class="button-content" *ngIf="isProfile">
                         <ion-label class="labels">{{'AddPersonalInfo.bloodgroup' | translate}}<small style="color: #f70505;">*</small></ion-label>
                         <ion-item fill="outline" class="input-field">
-                            <ion-select placeholder="{{'selectBG' | translate }}" formControlName="bloodgroup">
+                            <ion-select placeholder="{{'selectBG' | translate }}" formControlName="bloodgroup" required>
 
                                 <ion-select-option value="A+">A+</ion-select-option>
                                 <ion-select-option value="A-">A-</ion-select-option>
