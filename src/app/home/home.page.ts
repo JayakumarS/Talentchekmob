@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -355,9 +355,12 @@ export class HomePage implements OnInit,AfterViewInit {
     // if(this.sharedContactCount>0){
     //   this.router.navigate(['/shared-contact']);
     // }
-
-    this.router.navigate(['/shared-contact']);
-
+    var postData = {
+      "currentUserId": this.userId,
+      "fromDate":this.fromDateValue,
+      "todate":this.toDateValue
+    };
+    this.router.navigate(['/shared-contact'],{ state: { data: postData }});
   }
 
 

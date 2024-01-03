@@ -23,6 +23,7 @@ export class SharedContactPage implements OnInit {
 
   checkedArray: any =[];
   count: number;
+  test: { [k: string]: any; };
 
   doRefresh(event) {
     this.ngOnInit();
@@ -42,7 +43,7 @@ export class SharedContactPage implements OnInit {
   mySlicedArray = [];
   imagePath:string;
 
-  constructor(private route: ActivatedRoute, private storageservice: StorageService,private fb: FormBuilder, public modalController: ModalController,
+  constructor(private route: ActivatedRoute,private storageservice: StorageService,private fb: FormBuilder, public modalController: ModalController,
     public router:Router,private loadingCtrl: LoadingController,public alertController: AlertController,private languageService: LanguageService,
     private el: ElementRef,private popoverController: PopoverController,private contacts: Contacts) {
 
@@ -73,9 +74,17 @@ export class SharedContactPage implements OnInit {
   ngOnInit() {
 
 
-  let onDemandUrl =  "api/auth/app/VisitingCard/ShareContactDetailsList?talentId="+this.currentUserId;
+    this.test = this.router.getCurrentNavigation()?.extras.state;
 
-  this.storageservice.getrequest(onDemandUrl).subscribe(async result => {
+    var postData = {
+      "currentUserId": this.test.data.currentUserId,
+      "fromDate":this.test.data.fromDate,
+      "todate":this.test.data.todate
+    };
+
+  let onDemandUrl =  "api/auth/app/VisitingCard/ShareContactDetailsList";
+
+  this.storageservice.postrequest(onDemandUrl,postData).subscribe(async result => {
        console.log(result);
        this.sharedContactList=result;
  });
