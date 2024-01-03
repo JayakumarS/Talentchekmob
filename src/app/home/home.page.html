@@ -116,15 +116,15 @@
 
 
         <ion-col *ngIf="initialCount==0 || initialCount=='0'">
-            <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1>
-            <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P>
+            <!-- <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1> -->
+            <!-- <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P> -->
             <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
-            <img class="imageCss" src="../../assets/img/Illustration.png" />
+            <!-- <img class="imageCss" src="../../assets/img/Illustration.png" /> -->
         </ion-col>
         <div>
 <!-- ////////////////////////////// View Count ///////////////////////////////////////// -->
 
-            <ion-col *ngIf="initialCount!=0 && initialCount!='0'" style="display: flex;align-items: center; justify-content: space-between;">
+            <ion-col style="display: flex;align-items: center; justify-content: space-between;">
             <p style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">Total Talent Card Views: &nbsp; <b style="font-size: 35px;">
                 {{totalViewCount}}</b></p>
             {{languageService.selectedFilter}} 
