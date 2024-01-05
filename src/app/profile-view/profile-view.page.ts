@@ -395,7 +395,63 @@ export class ProfileViewPage implements OnInit {
     // });
   }
 
+/////////////////////////// Offline Qr Download ////////////////////////////////////////
 
+fileDownloadOffline(filePath: string, fileName: string, fileType: string) {
+  //filePath='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
+  var externalDir = "";
+  if(filePath!=null && filePath!=undefined && filePath!=''){
+
+  if (this.platform.is('android')) {
+
+  this.androidPermissions.requestPermissions([
+    this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+    this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
+  ]).then(() => {
+    
+    externalDir=this.file.externalRootDirectory+ 'Download/TalentChekLogo.png';
+
+    const url = this.storageservice.baseURL + filePath;
+    var fileNameFull = 'fileName' + "." + 'png';
+    var imgPath = externalDir;
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+ 
+  fileTransfer.download(url, imgPath, true, {}).then((entry) => {
+    console.log('download complete: ' + entry.toURL());
+    this.storageservice.warningToast('QR Downloaded Successfully');
+   // this.hideLoadingIndicator()
+    let fileMIMEType = this.getMIMEtype(fileType);
+    this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
+      .then(() => 
+      console.log('File is opened')
+      //this.storageservice.warningToast('Entered In')
+      )
+      .catch(e => console.log('Error opening file', e));
+    
+  }, (error) => {
+    //this.hideLoadingIndicator()
+    console.log('Error download file :', error)
+    this.storageservice.warningToast('Error in download');
+  });
+   // downloadImage(externalDir);
+  }).catch(error => {
+    // Handle permission request error
+    this.storageservice.warningToast('Error in download');
+  });
+
+}
+
+  if (this.platform.is('ios')) {
+    externalDir = this.file.documentsDirectory;
+  }
+  console.log("Inside  the download created");
+
+} else {
+  this.storageservice.warningToast('Error in download');
+}
+ 
+}
 
   async fileDownload2(filePath: string, fileName: string, fileType: string) {
     try {
