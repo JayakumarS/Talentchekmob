@@ -7,7 +7,7 @@ import { LanguageService } from '../language.service';
 import { ProfileViewPopupPage } from '../profile-view-popup/profile-view-popup.page';
 import { SelectAllPage } from '../select-all/select-all.page';
 import * as Papa from 'papaparse';
-import { Contacts, Contact, ContactField,ContactName } from '@ionic-native/contacts/ngx';
+import { Contacts, Contact, ContactField,ContactName, ContactOrganization } from '@ionic-native/contacts/ngx';
 
 
 @Component({
@@ -163,8 +163,8 @@ addContactFromCSV(csvData: string) {
   contactsToAdd.forEach((contactData) => {
     const contact = this.contacts.create();
 
-    contact.name = new ContactName("Name", contactData.firstname);
-    contact.phoneNumbers = [new ContactField('mobile', contactData.mobileno)];
+    //contact.name = new ContactName("Name", contactData.firstname);
+    //contact.phoneNumbers = [new ContactField('mobile', contactData.mobileno)];
     // contact.id='123';
     // contact.birthday=new Date();
     // contact.addresses=[new ContactField('area', 'chennai')];
@@ -174,6 +174,12 @@ addContactFromCSV(csvData: string) {
     // contact.note='New one';
     // contact.nickname='Saro';
     // Set other details as needed
+
+    contact.name = new ContactName("Name", "",contactData.firstname,"");
+    contact.phoneNumbers = [new ContactField('mobile', contactData.mobileno)];
+    contact.emails=[new ContactField('email', contactData.emailid)];
+    contact.urls=[new ContactField('url',contactData.websiteLink)]
+    contact.organizations=[new ContactOrganization('Org', contactData.company,'',contactData.position)];
 
     contact.save().then(
       
@@ -193,18 +199,21 @@ import1(){
  // contactsToAdd.forEach((contactData) => {
     const contact = this.contacts.create();
 
-    contact.name = new ContactName("Name", "hghf");
-    contact.phoneNumbers = [new ContactField('mobile', "9651515")];
+    contact.name = new ContactName("Name", "SYSY","SS","YY");
+
+    contact.phoneNumbers = [new ContactField('mobile', "96584725")];
     // contact.id='123';
     // contact.birthday=new Date();
     // contact.addresses=[new ContactField('area', 'chennai')];
     // contact.addresses = [new ContactAddress(true, 'chennai', '', '', '', 'India')];
     // contact.displayName='New Test';
-     contact.emails=[new ContactField('email', 'abc@mail.com')];
+     contact.emails=[new ContactField('email', 'abcd@mail.com')];
     // contact.organizations=[new ContactField('Org', 'Paragon')];
     // contact.note='New one';
     // contact.nickname='Saro';
     // Set other details as needed
+    contact.urls=[new ContactField('url','www.abc.in')]
+    contact.organizations=[new ContactOrganization('Org', 'Paragon','dep','titl')];
 
     contact.save().then(
       
