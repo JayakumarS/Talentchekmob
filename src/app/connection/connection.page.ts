@@ -21,6 +21,7 @@ import { File } from '@ionic-native/file/ngx';
 })
 export class ConnectionPage implements OnInit {
   selectedLang: string;
+  isSaved: boolean;
 
   doRefresh(event) {
     this.ngOnInit();
@@ -220,6 +221,7 @@ export class ConnectionPage implements OnInit {
   }
 
   save() {
+    this.isSaved=false;
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
       if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
       this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
@@ -231,8 +233,47 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved) {
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
+        this.isSaved=true;
+        if (result["isSuccess"] == true) {
+          // setTimeout(() => {
+          //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
+          //  profilePage.updateData();
+          // }, 800);
+          this.presentToast1()
+        }
+        else 
+        // if (result["isSuccess"] == false) 
+        {
+          var message = result["message"];
 
+          "message"
+
+          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
+          this.storageservice.warningToast(message);
+          //this.hideLoadingIndicator(); //Hide loading indicator
+        }
+      });
+    }
+    }
+
+    if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
+      if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
+        this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
+
+      }
+     
+
+      this.ConnectionsForm.value.currentUserId = this.userId;
+      this.ConnectionsForm.value.currentUserName = this.username
+      this.Connection = this.ConnectionsForm.value;
+      console.log(` data: ${JSON.stringify(this.Connection)}`);
+      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
+
+      if(!this.isSaved){
+      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           // setTimeout(() => {
           //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
@@ -252,39 +293,6 @@ export class ConnectionPage implements OnInit {
       });
     }
 
-    if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
-      if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
-        this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
-
-      }
-     
-
-      this.ConnectionsForm.value.currentUserId = this.userId;
-      this.ConnectionsForm.value.currentUserName = this.username
-      this.Connection = this.ConnectionsForm.value;
-      console.log(` data: ${JSON.stringify(this.Connection)}`);
-      var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
-
-      this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
-        if (result["isSuccess"] == true) {
-          // setTimeout(() => {
-          //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
-          //  profilePage.updateData();
-          // }, 800);
-          this.presentToast1()
-        }
-        else if (result["isSuccess"] == false) {
-          var message = result["message"];
-
-          "message"
-
-          // this.showNotification('snackbar-danger',result['msg'],'top','Right');
-          this.storageservice.warningToast(message);
-          //this.hideLoadingIndicator(); //Hide loading indicator
-        }
-      });
-
     } else {
       this.ConnectionsForm.value.currentUserId = this.userId;
       this.ConnectionsForm.value.currentUserName = this.username
@@ -292,8 +300,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           // setTimeout(() => {
           //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
@@ -311,6 +320,7 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    }
     }
   }
   async presentToast1() {
@@ -331,6 +341,7 @@ export class ConnectionPage implements OnInit {
   /// org save 
 
   orgsave() {
+    this.isSaved=false;
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
       if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
         this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
@@ -344,8 +355,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           // setTimeout(() => {
           //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
@@ -353,7 +365,9 @@ export class ConnectionPage implements OnInit {
           // }, 800);
           this.presentToast2()
         }
-        else if (result["isSuccess"] == false) {
+        else 
+        //if (result["isSuccess"] == false) 
+        {
           var message = result["message"];
 
           "message"
@@ -363,6 +377,8 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    }
+
     } if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
       if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
       this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
@@ -374,8 +390,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           this.presentToast2()
         }
@@ -389,6 +406,7 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    }
 
     } else {
       this.ConnectionsForm.value.currentUserId = this.userId;
@@ -397,8 +415,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           this.presentToast2()
         }
@@ -412,6 +431,8 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    }
+
     }
   }
   async presentToast2() {
@@ -429,7 +450,7 @@ export class ConnectionPage implements OnInit {
   /// insti save////
 
   instisave() {
-
+    this.isSaved=false;
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
       if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
       this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
@@ -442,8 +463,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           // setTimeout(() => {
           //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
@@ -451,7 +473,9 @@ export class ConnectionPage implements OnInit {
           // }, 800);
           this.presentToast3()
         }
-        else if (result["isSuccess"] == false) {
+        else
+        // if (result["isSuccess"] == false)
+          {
           var message = result["message"];
 
           "message"
@@ -461,7 +485,10 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
-    } if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
+    }
+    } 
+    
+    if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
    
       if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
       this.ConnectionsForm.value.acquaintedTo = formatDate(this.ConnectionsForm.value.acquaintedTo, 'MM/yyyy', 'en-IN');
@@ -472,8 +499,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           // setTimeout(() => {
           //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
@@ -491,6 +519,7 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    }
 
     } else {
 
@@ -501,8 +530,9 @@ export class ConnectionPage implements OnInit {
       console.log(` data: ${JSON.stringify(this.Connection)}`);
       var saveConnections = "api/auth/app/IndividualProfileDetails/saveConnections";
 
+      if(!this.isSaved){
       this.storageservice.postrequest(saveConnections, this.Connection).subscribe(result => {
-
+        this.isSaved=true;
         if (result["isSuccess"] == true) {
           // setTimeout(() => {
           //   const profilePage = new ProfilePage(this.router, this.storageservice, this.elementRef, this.modalController, this.alertController);
@@ -520,6 +550,7 @@ export class ConnectionPage implements OnInit {
           //this.hideLoadingIndicator(); //Hide loading indicator
         }
       });
+    }
     }
   }
   async presentToast3() {
@@ -612,3 +643,4 @@ export class ConnectionPage implements OnInit {
     }
   }
 }
+ 
