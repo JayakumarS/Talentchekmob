@@ -32,6 +32,9 @@ export class HomePage implements OnInit,AfterViewInit {
   totalViewCountFlag: boolean =  false;
   totalContactCountFlag: boolean =  false;
   sharedContactCountFlag: boolean =  false;
+  graphText: string;
+  shareText: string;
+  saveText: string;
 
 
   doRefresh(event) {
@@ -386,18 +389,47 @@ export class HomePage implements OnInit,AfterViewInit {
   if (range === 'Today') {
     fromDate = new Date(currentDate);
     toDate = new Date(currentDate);
-  } else if (range === 'This week') {
-    const firstDayOfWeek = new Date(currentDate);
-    firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Set to the first day of the week
-    fromDate = firstDayOfWeek;
+  } else 
+  
+  // if (range === 'This week') {
+  //   const firstDayOfWeek = new Date(currentDate);
+  //   firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Set to the first day of the week
+  //   fromDate = firstDayOfWeek;
+  //   toDate = new Date(currentDate);
+  // } else if (range === 'This month') {
+  //   fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+  //   toDate = new Date(currentDate);
+  // } else if (range === 'This year') {
+  //   fromDate = new Date(currentDate.getFullYear(), 0, 1);
+  //   toDate = new Date(currentDate);
+  // } 
+
+
+  if (range === 'This week') {
+    this.graphText="Views / Week";
+    this.saveText="Saves / Week";
+    this.shareText="Shares / Week";
     toDate = new Date(currentDate);
-  } else if (range === 'This month') {
-    fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    fromDate = new Date(toDate);
+    fromDate.setDate(toDate.getDate() - 7); // Set fromDate to 7 days ago
+} else if (range === 'This month') {
+    this.graphText="Views / Month";
+    this.saveText="Saves / Month";
+    this.shareText="Shares / Month";
     toDate = new Date(currentDate);
-  } else if (range === 'This year') {
-    fromDate = new Date(currentDate.getFullYear(), 0, 1);
+    fromDate = new Date(toDate);
+    fromDate.setDate(toDate.getDate() - 30); // Set fromDate to 30 days ago
+} else if (range === 'This year') {
+    this.graphText="Views / Year";
+    this.saveText="Saves / Year";
+    this.shareText="Shares / Year";
     toDate = new Date(currentDate);
-  } else if (range === 'All') {
+    fromDate = new Date(toDate);
+    fromDate.setDate(toDate.getDate() - 365); // Set fromDate to 365 days ago
+}
+  
+  
+  else if (range === 'All') {
     // Set fromDate to the earliest date possible
     fromDate = new Date(0);
     toDate = new Date(currentDate);
@@ -573,7 +605,7 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "Views / day"
+        text: this.graphText
       },
       xAxis: {
         type: "category"
@@ -619,7 +651,7 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "Saves / day"
+        text: this.saveText
       },
       xAxis: {
         type: "category"
@@ -665,7 +697,7 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "Shares / day"
+        text: this.shareText
       },
       xAxis: {
         type: "category"
@@ -712,7 +744,7 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "Views / day"
+        text: this.graphText
       },
       xAxis: {
         type: "category"
@@ -758,7 +790,7 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "Saves / day"
+        text: this.saveText
       },
       xAxis: {
         type: "category"
@@ -804,7 +836,7 @@ export class HomePage implements OnInit,AfterViewInit {
         type: "column"
       },
       title: {
-        text: "Shares / day"
+        text: this.shareText
       },
       xAxis: {
         type: "category"
