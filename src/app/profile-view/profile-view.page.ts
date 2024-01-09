@@ -333,34 +333,45 @@ export class ProfileViewPage implements OnInit {
       //externalDir = '/storage/emulated/0/Download/';
       
       externalDir=this.file.externalRootDirectory+ 'Download/TalentChekLogo.png';
+      //this.storageservice.warningToast('Extt: '+externalDir);
+      //const url = filePath;
       const url = this.storageservice.baseURL + filePath;
       var fileNameFull = 'fileName' + "." + 'png';
+    // var externalDir = this.file.externalRootDirectory;
       var imgPath = externalDir;
+    // this.storageservice.warningToast('Path New: '+externalDir);
       const fileTransfer: FileTransferObject = this.transfer.create();
 
+   // this.showLoadingIndicator();
+   //this.storageservice.warningToast('Entered');
     fileTransfer.download(url, imgPath, true, {}).then((entry) => {
       console.log('download complete: ' + entry.toURL());
       this.storageservice.warningToast('QR Downloaded Successfully');
+     // this.hideLoadingIndicator()
       let fileMIMEType = this.getMIMEtype(fileType);
       this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
         .then(() => 
         console.log('File is opened')
+        //this.storageservice.warningToast('Entered In')
         )
         .catch(e => console.log('Error opening file', e));
       
     }, (error) => {
+      //this.hideLoadingIndicator()
       console.log('Error download file :', error)
       this.storageservice.warningToast('Error in download');
     });
+     // downloadImage(externalDir);
     }).catch(error => {
+      // Handle permission request error
       this.storageservice.warningToast('Error in download');
     });
 
   }
 
-    // if (this.platform.is('ios')) {
-    //   externalDir = this.file.documentsDirectory;
-    // }
+    if (this.platform.is('ios')) {
+      externalDir = this.file.documentsDirectory;
+    }
     console.log("Inside  the download created");
 
   } else {
@@ -383,49 +394,6 @@ export class ProfileViewPage implements OnInit {
     //   console.log('Error download file :', error)
     // });
   }
-/////////////////////////////////////////// Download Qr ////////////////////
-
-  downloadQr(filePath: string) {
-    // Replace with the actual file URL
-    const url = this.storageservice.baseURL + filePath;
-
-     this.storageservice.downloadFile(url).subscribe((data: Blob) => {
-       console.log('Downloaded file data:', data);
- 
-       // Trigger the file download
-       const url = window.URL.createObjectURL(data);
-       const link = document.createElement('a');
-       link.href = url;
-       link.download = "Qr.png"; // Specify the desired file name
-       document.body.appendChild(link);
-       link.click();
- 
-       // Cleanup
-       document.body.removeChild(link);
-       window.URL.revokeObjectURL(url);
-     });
-   }
-
-   downloadQrOffline(filePath: string) {
-    // Replace with the actual file URL
-    const url = this.storageservice.baseURL + filePath;
-
-     this.storageservice.downloadFile(url).subscribe((data: Blob) => {
-       console.log('Downloaded file data:', data);
- 
-       // Trigger the file download
-       const url = window.URL.createObjectURL(data);
-       const link = document.createElement('a');
-       link.href = url;
-       link.download = "Qr.png"; // Specify the desired file name
-       document.body.appendChild(link);
-       link.click();
- 
-       // Cleanup
-       document.body.removeChild(link);
-       window.URL.revokeObjectURL(url);
-     });
-   }
 
 /////////////////////////// Offline Qr Download ////////////////////////////////////////
 
