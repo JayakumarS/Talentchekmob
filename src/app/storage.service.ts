@@ -45,7 +45,7 @@ export class StorageService {
 //portal server
 mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
 baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
-// mobileserverurl2: string = "https://erp.cordelialine.com/cordelia/";
+mobileserverurl2: string = "https://erp.cordelialine.com/cordelia/";
   mobileserverserive: any;
 
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {
@@ -74,6 +74,7 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
 
     return this.mobileserverurl;
   }
+  
   postrequest(url, data) {
 
     const headers = new HttpHeaders({
@@ -361,5 +362,7 @@ baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
     // Send an HTTP GET request to the image URL
     return this.http.get(imageUrl, { responseType: 'blob' });
   }
-
+  downloadFile(url: string): Observable<Blob> {
+    return this.http.get(url, { responseType: 'blob' });
+  }
 }
