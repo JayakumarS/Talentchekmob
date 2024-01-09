@@ -355,12 +355,12 @@
                                     <button (click)="deleteExperiences(x.expId)" *ngIf="x.status == 'Unverified' || x.status == 'Verification Pending'" class="delete-button">
                                         <ion-icon name="trash-outline"></ion-icon>{{'delete' | translate}}</button>
                                         <!-- QR and Certificate -->
-                                        <button (click)="fileDownload1(x.expQrPath,'SampleFileNew','png')"  *ngIf="x.status == 'Verified Experience' || x.status == 'Unverified' || x.status == 'Verification Pending' || x.status == 'Promoted'"
+                                        <button (click)="downloadQr(x.expQrPath)" *ngIf="x.status == 'Verified Experience' || x.status == 'Unverified' || x.status == 'Verification Pending' || x.status == 'Promoted'"
                                         class="edit-button">
                                         <ion-icon name="create-outline"></ion-icon>
                                         Download QR
                                     </button>
-                                    <button (click)="fileDownloadOffline(x.offlineqrpath,'SampleFileNew','png')" *ngIf="x.status == 'Verified Experience' || x.status == 'Unverified' || x.status == 'Verification Pending' || x.status == 'Promoted'"
+                                    <button (click)="downloadQrOffline(x.offlineqrpath)" *ngIf="x.status == 'Verified Experience' || x.status == 'Unverified' || x.status == 'Verification Pending' || x.status == 'Promoted'"
                                     class="edit-button">
                                     <ion-icon name="create-outline"></ion-icon>
                                     Offline QR
