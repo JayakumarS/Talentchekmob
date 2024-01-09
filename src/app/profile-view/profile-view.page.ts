@@ -316,173 +316,95 @@ export class ProfileViewPage implements OnInit {
 
 
   fileDownload1(filePath: string, fileName: string, fileType: string) {
-    //filePath='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
-    var externalDir = "";
-    if(filePath!=null && filePath!=undefined && filePath!=''){
 
     if (this.platform.is('android')) {
-    //   this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, , this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]);
-    //   externalDir = this.file.externalRootDirectory;
-    // }
-
-
-    this.androidPermissions.requestPermissions([
-      this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-      this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
-    ]).then(() => {
-      //externalDir = '/storage/emulated/0/Download/';
-      
-      externalDir=this.file.externalRootDirectory+ 'Download/TalentChekLogo.png';
-      const url = this.storageservice.baseURL + filePath;
-      var fileNameFull = 'fileName' + "." + 'png';
-      var imgPath = externalDir;
-      const fileTransfer: FileTransferObject = this.transfer.create();
-
-    fileTransfer.download(url, imgPath, true, {}).then((entry) => {
-      console.log('download complete: ' + entry.toURL());
-      this.storageservice.warningToast('QR Downloaded Successfully');
-      let fileMIMEType = this.getMIMEtype(fileType);
-      this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
-        .then(() => 
-        console.log('File is opened')
-        )
-        .catch(e => console.log('Error opening file', e));
-      
-    }, (error) => {
-      console.log('Error download file :', error)
+    const documentsDir = this.file.documentsDirectory;
+  
+  
+    const fileNameFull = 'fileName' + "." + 'png';
+  
+    const url = this.storageservice.baseURL + filePath;
+    const imgPath = documentsDir + 'Download/TalentChekLogo.png' + fileNameFull; // Adjust the path as needed
+  
+    const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    fileTransfer.download(url, imgPath, true, {}).then(
+        (entry) => {
+          console.log('Download complete: ' + entry.toURL());
+          this.storageservice.warningToast('QR Downloaded Successfully');
+  
+          // Determine MIME type based on the file extension
+          let fileMIMEType = this.getMIMEtype(fileType);
+  
+          this.fileOpener.showOpenWithDialog(entry.toURL(), fileMIMEType).then(
+            () => {
+              console.log('File is opened');
+            },
+            (e) => {
+              console.log('Error opening file', e);
+            }
+          );
+        },
+        (error) => {
+          console.log('Error downloading file:', error);
+          this.storageservice.warningToast('Error in download');
+        }
+      );
+  
+      console.log('Inside the download created');
+    } else {
       this.storageservice.warningToast('Error in download');
-    });
-    }).catch(error => {
-      this.storageservice.warningToast('Error in download');
-    });
+    }
+  
+  
+      }
 
-  }
+////////////////////////////////// Offline Qr ///////////////////////////////////
 
-    // if (this.platform.is('ios')) {
-    //   externalDir = this.file.documentsDirectory;
-    // }
-    console.log("Inside  the download created");
+fileDownloadOffline(filePath: string, fileName: string, fileType: string) {
 
+  if (this.platform.is('android')) {
+  const documentsDir = this.file.documentsDirectory;
+
+
+  const fileNameFull = 'fileName' + "." + 'png';
+
+  const url = this.storageservice.baseURL + filePath;
+  const imgPath = documentsDir + 'Download/TalentChekLogo.png' + fileNameFull; // Adjust the path as needed
+
+  const fileTransfer: FileTransferObject = this.transfer.create();
+
+  fileTransfer.download(url, imgPath, true, {}).then(
+      (entry) => {
+        console.log('Download complete: ' + entry.toURL());
+        this.storageservice.warningToast('QR Downloaded Successfully');
+
+        // Determine MIME type based on the file extension
+        let fileMIMEType = this.getMIMEtype(fileType);
+
+        this.fileOpener.showOpenWithDialog(entry.toURL(), fileMIMEType).then(
+          () => {
+            console.log('File is opened');
+          },
+          (e) => {
+            console.log('Error opening file', e);
+          }
+        );
+      },
+      (error) => {
+        console.log('Error downloading file:', error);
+        this.storageservice.warningToast('Error in download');
+      }
+    );
+
+    console.log('Inside the download created');
   } else {
     this.storageservice.warningToast('Error in download');
   }
-    // const url = filePath;
-    // var fileNameFull = fileName + "." + fileType;
-    // var imgPath = externalDir + fileNameFull;
-
-    // const fileTransfer: FileTransferObject = this.transfer.create();
-    // fileTransfer.download(url, imgPath, true, {}).then((entry) => {
-    // console.log('download complete: ' + entry.toURL());
-
-    //   let fileMIMEType = this.getMIMEtype(fileType);
-    //   this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
-    //     .then(() => console.log('File is opened'))
-    //     .catch(e => console.log('Error opening file', e));
-      
-    // }, (error) => {
-    //   console.log('Error download file :', error)
-    // });
-  }
-/////////////////////////////////////////// Download Qr ////////////////////
-
-  downloadQr(filePath: string) {
-    // Replace with the actual file URL
-    const url = this.storageservice.baseURL + filePath;
-
-     this.storageservice.downloadFile(url).subscribe((data: Blob) => {
-       console.log('Downloaded file data:', data);
- 
-       // Trigger the file download
-       const url = window.URL.createObjectURL(data);
-       const link = document.createElement('a');
-       link.href = url;
-       link.download = "Qr.png"; // Specify the desired file name
-       document.body.appendChild(link);
-       link.click();
- 
-       // Cleanup
-       document.body.removeChild(link);
-       window.URL.revokeObjectURL(url);
-     });
-   }
-
-   downloadQrOffline(filePath: string) {
-    // Replace with the actual file URL
-    const url = this.storageservice.baseURL + filePath;
-
-     this.storageservice.downloadFile(url).subscribe((data: Blob) => {
-       console.log('Downloaded file data:', data);
- 
-       // Trigger the file download
-       const url = window.URL.createObjectURL(data);
-       const link = document.createElement('a');
-       link.href = url;
-       link.download = "Qr.png"; // Specify the desired file name
-       document.body.appendChild(link);
-       link.click();
- 
-       // Cleanup
-       document.body.removeChild(link);
-       window.URL.revokeObjectURL(url);
-     });
-   }
 
 
-fileDownloadOffline(filePath: string, fileName: string, fileType: string) {
-  //filePath='http://talentchek.com/wp-content/uploads/2021/02/TalentChekLogo_v1.png';
-  var externalDir = "";
-  if(filePath!=null && filePath!=undefined && filePath!=''){
+    }
 
-  if (this.platform.is('android')) {
-
-  this.androidPermissions.requestPermissions([
-    this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-    this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
-  ]).then(() => {
-    
-    externalDir=this.file.externalRootDirectory+ 'Download/TalentChekLogo.png';
-
-    const url = this.storageservice.baseURL + filePath;
-    var fileNameFull = 'fileName' + "." + 'png';
-    var imgPath = externalDir;
-    const fileTransfer: FileTransferObject = this.transfer.create();
-
- 
-  fileTransfer.download(url, imgPath, true, {}).then((entry) => {
-    console.log('download complete: ' + entry.toURL());
-    this.storageservice.warningToast('QR Downloaded Successfully');
-   // this.hideLoadingIndicator()
-    let fileMIMEType = this.getMIMEtype(fileType);
-    this.fileOpener.showOpenWithDialog(imgPath, fileMIMEType)
-      .then(() => 
-      console.log('File is opened')
-      //this.storageservice.warningToast('Entered In')
-      )
-      .catch(e => console.log('Error opening file', e));
-    
-  }, (error) => {
-    //this.hideLoadingIndicator()
-    console.log('Error download file :', error)
-    this.storageservice.warningToast('Error in download');
-  });
-   // downloadImage(externalDir);
-  }).catch(error => {
-    // Handle permission request error
-    this.storageservice.warningToast('Error in download');
-  });
-
-}
-
-  if (this.platform.is('ios')) {
-    externalDir = this.file.documentsDirectory;
-  }
-  console.log("Inside  the download created");
-
-} else {
-  this.storageservice.warningToast('Error in download');
-}
- 
-}
 
   async fileDownload2(filePath: string, fileName: string, fileType: string) {
     try {
