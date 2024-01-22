@@ -139,8 +139,8 @@ get_CorporateNetwork(){
   this.storageservice.get(corporateNetworkURL,this.studentNetwork.value).subscribe(res => {
     if(res['success'] == true) {
       this.storageservice.dismissLoading();
-      this.constantHighlights =res['constantHighlightsStudentNetworkList'];
-      this.recentHighlights = res['recentHighlightsStudentNetworkList'];   
+      this.constantHighlights =res['constantHighlightsCorporateNetworkList'];
+      this.recentHighlights = res['recentHighlightsCorporateNetworkList'];   
       }
     console.log(res);
     this.corporateCount = res['corporateCount'];

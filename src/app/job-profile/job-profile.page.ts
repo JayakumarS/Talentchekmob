@@ -38,6 +38,10 @@ export class JobProfilePage implements OnInit {
   skillsList: any;
   jobtype: any;
   language: any;
+  Skills: string[] = [];
+  skilflag: boolean;
+  validFlag:boolean=false;
+  selectedList:any=[]
 
   getMaxDate() {
     let maxDate = new Date();
@@ -137,6 +141,7 @@ export class JobProfilePage implements OnInit {
     this.workLocationList();
     this.getlanguageList();
     this.getSkillList();
+    this.selectedSkill();
 
 
     this.route.queryParams.subscribe(params => {
@@ -609,9 +614,60 @@ export class JobProfilePage implements OnInit {
     this.storageservice.getrequest(getskillListUrl).subscribe(result => {
       if (result["success"] == true) {
         this.skillList = result["skillList"];
+          if(this.skillList.length > 0){
+          for(let i =0;i<this.Skills.length;i++){
+            this.selectSkill(this.Skills[i]);
+            //this.onSearchSkill(this.Skills[i]);
+          }
+
+        }
       }
     });
   }
+  
+selectedSkill() {
+  var selectedskillListUrl = "api/auth/app/CommonUtility/selectedskillListUrl?talentId=" + this.userId;
+
+  this.storageservice.getrequest(selectedskillListUrl).subscribe((result: { skillist: { id1: string; text: string }[] }) => {
+
+    this.selectedList = result.skillist;
+
+    if (result.skillist.length > 0) {
+      this.validFlag = true;
+    } else {
+      this.validFlag = false;
+    }
+
+    for (var i = 0; i < result.skillist.length; i++) {
+      this.skilflag = true;
+
+      if (this.Skills != null) {
+        for (var j = 0; j < this.Skills.length; j++) {
+          if (this.Skills[j] == result.skillist[i].text) {
+            this.skilflag = false;
+          }
+        }
+
+        if (this.skilflag) {
+          this.Skills.push(result.skillist[i].text);
+//          this.skillInput.nativeElement.value = "";
+//          this.skillscrl.setValue(null);
+        }
+      } else {
+        this.Skills.push(result.skillist[i].text);
+ //       this.skillInput.nativeElement.value = "";
+//        this.skillscrl.setValue(null);
+      }
+
+      this.jobProfileForm.patchValue({
+        'jobSkills': this.Skills,
+      })
+
+      this.onSearchSkill(this.Skills[0]);
+    }
+  });
+}
+
   // skill auto complete 
   onSearchSkill(value: string) {
     if (value.length > 2) {
