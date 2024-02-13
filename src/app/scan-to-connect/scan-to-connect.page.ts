@@ -48,6 +48,7 @@ export class ScanToConnectPage implements OnInit {
 
     this.profileImageURL = "assets/img/avatar1.png";
     this.userId = localStorage.getItem("userId")  ; 
+    this.userName = localStorage.getItem("userName")  ; 
     this.imagePath = this.storageservice.mobileserverurl;
     this.favouriteVal = 'No';
     this.rateOrgVal = 0;
