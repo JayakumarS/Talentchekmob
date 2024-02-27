@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { NavigationEnd } from '@angular/router';
@@ -61,17 +61,27 @@ export class HomePage implements OnInit,AfterViewInit {
   toDateValue2:any;
  
 
-  constructor(public router:Router,public storageservice: StorageService,
+  constructor(public router:Router,public storageservice: StorageService,private cdr: ChangeDetectorRef,private route: ActivatedRoute,
     private languageService: LanguageService,private translate: TranslateService,private el: ElementRef,private popoverController: PopoverController) {
     
 
    }
 
   ngOnInit() {
+
+    // if (this.storageservice.shouldReloadPage()) {
+    //   this.storageservice.markPageAsReloaded();
+    //   window.location.reload();
+    // }
+
+    this.route.params.subscribe(params => {
+      this.userId = localStorage.getItem("userId");
+      // Add any other initialization logic here
+   
+
     this.userId = localStorage.getItem("userId")  ;
    // this.langSelected=localStorage.getItem("selLanguage") ;
    // this.translate.setDefaultLang(this.langSelected);
-
 
    const formatDate = (date: Date) => {
     const day = date.getDate().toString().padStart(2, '0');
@@ -192,9 +202,25 @@ export class HomePage implements OnInit,AfterViewInit {
 
   //Profile View Count
  // this.getTuesByPort();
+
+//  if (!localStorage.getItem('foo')) { 
+//   localStorage.setItem('foo', 'no reload') 
+//   location.reload() 
+// } else {
+//   localStorage.removeItem('foo') 
+// }
+
+});
+
   }
 
   ngAfterViewInit(): void {
+
+    this.route.params.subscribe(params => {
+      this.userId = localStorage.getItem("userId");
+      // Add any other initialization logic here
+    });
+
     if (this.countAvailable) {
       HighCharts.chart(this.el.nativeElement.querySelector('#container'), {
         // Highcharts configuration options

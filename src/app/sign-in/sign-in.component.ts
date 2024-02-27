@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthLoginInfo } from '../auth/login-Info';
 import { StorageService } from '../storage.service';
 //import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
@@ -27,8 +27,8 @@ export class SignInComponent implements OnInit {
   passwordIcon: string = 'eye-off'; 
   selectedLang: string;
  
-  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,
-    public storageservice: StorageService,private nativeStorage: NativeStorage,private popoverController: PopoverController) { 
+  constructor(public formbuilder: FormBuilder,public router: Router,private languageService: LanguageService,private cdr: ChangeDetectorRef,
+    public storageservice: StorageService,private nativeStorage: NativeStorage,private popoverController: PopoverController,private zone: NgZone) { 
 
       if (!this.languageService.selectedLang) {
         this.languageService.setInitialAppLanguage();
@@ -138,6 +138,15 @@ export class SignInComponent implements OnInit {
   
                 if (data.roles[0].roleId.includes('1')) {
                   this.router.navigate(['/home']);
+                  //this.router.navigate(['', 'home']);
+                  // this.router.navigate(['', 'home']).then(() => {
+                  //   this.cdr.detectChanges();
+                  // });
+                 // window.location.href = '/home';
+                //  this.zone.run(() => {
+                //   this.router.navigate(['/home']);
+                // });
+                
                 } else if (data.roles[0].roleId.includes('2')) {
                   this.router.navigate(['/organization-dashboard']);
                 } else if (data.roles[0].roleId.includes( '3')) {

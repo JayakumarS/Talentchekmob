@@ -47,6 +47,7 @@ mobileserverurl:string ="https://portal.talentchek.com:5447/talentchek/";
 baseURL:string ="https://portal.talentchek.com:5447/talentchek/";
 mobileserverurl2: string = "https://erp.cordelialine.com/cordelia/";
   mobileserverserive: any;
+  private shouldReload = true;
 
   constructor(private http: HttpClient, public toastController: ToastController, public alertController: AlertController) {
 
@@ -365,4 +366,14 @@ mobileserverurl2: string = "https://erp.cordelialine.com/cordelia/";
   downloadFile(url: string): Observable<Blob> {
     return this.http.get(url, { responseType: 'blob' });
   }
+
+
+  shouldReloadPage(): boolean {
+    return this.shouldReload;
+  }
+
+  markPageAsReloaded(): void {
+    this.shouldReload = false;
+  }
+
 }

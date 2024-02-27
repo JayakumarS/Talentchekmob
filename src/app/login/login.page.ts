@@ -8,6 +8,7 @@ import { LoadingController, PopoverController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { IonSlides } from '@ionic/angular';
 
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
 
@@ -29,6 +30,7 @@ export class LoginPage {
     initialSlide: 0,
     speed: 400
   };
+  mobVersion: any;
 
   //#region Declaration
 
@@ -36,7 +38,7 @@ export class LoginPage {
 
   //#region Constructor
   constructor(public formbuilder: FormBuilder, public router: Router, 
-     private platform: Platform,private storageservice: StorageService) {
+     private platform: Platform,private storageservice: StorageService,private appVersion: AppVersion) {
 
     
     
@@ -75,7 +77,13 @@ export class LoginPage {
       let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
       console.log(latestMobileAppVersion);
 
-      if (latestMobileAppVersion != "5.0.4") {
+       // Get the current installed app version
+  this.appVersion.getVersionNumber().then((currentAppVersion) => {
+    this.storageservice.successToast('Ver: '+ currentAppVersion)  
+    this.mobVersion=currentAppVersion;
+  });
+
+      if (latestMobileAppVersion != this.mobVersion) {
         this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion, 
         'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
         'Update now', 'Not now');

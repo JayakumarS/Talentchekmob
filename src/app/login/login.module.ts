@@ -10,6 +10,9 @@ import { LoginPage } from './login.page';
 
 import {TranslateModule} from '@ngx-translate/core';
 
+import { AppVersion } from '@ionic-native/app-version/ngx';
+
+
 
 @NgModule({
   imports: [
@@ -20,6 +23,9 @@ import {TranslateModule} from '@ngx-translate/core';
     LoginPageRoutingModule,
     TranslateModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  providers: [
+    AppVersion
+  ],
 })
 export class LoginPageModule {}

@@ -66,6 +66,7 @@ export class InstiProfilePage implements OnInit {
 
   ngOnInit() {
 
+    this.route.params.subscribe(params => {
     this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
 
@@ -96,6 +97,32 @@ export class InstiProfilePage implements OnInit {
 
 
 
+    // this.route.queryParams.subscribe(params => {
+    //   if (params) {
+    //     if (params != null) {
+    //       console.log(params);
+
+    //       if (params.id == 1) {
+
+    //         this.isProfile = true;
+    //         this.editinstiprofile();
+    //       } else if (params.id == 2) {
+    //         this.isAbout = true;
+    //         this.editinstiprofile();
+    //       }
+    //       if (params.id == 3) {
+    //         this.isLogo = true;
+    //         this.editinstiprofile();
+    //       }
+    //     }
+    //   }
+    // });
+
+  });
+
+  }
+
+  paramFunction(){
     this.route.queryParams.subscribe(params => {
       if (params) {
         if (params != null) {
@@ -116,7 +143,6 @@ export class InstiProfilePage implements OnInit {
         }
       }
     });
-
   }
 
 
@@ -127,14 +153,15 @@ export class InstiProfilePage implements OnInit {
   }
 
   //InstitypeList 
-  InsttypeList() {
+  async InsttypeList() {
     var instTypeListUrl = "api/auth/app/CommonUtility/instTypeList";
-    this.storageservice.getrequest(instTypeListUrl).subscribe(result => {
+    const InsList = await this.storageservice.getrequest(instTypeListUrl).subscribe(result => {
 
       if (result["success"] == true) {
         this.InstitypeList = result["instTypeList"];
         console.log(`instTypeList: ${JSON.stringify(this.InstitypeList)}`);
       }
+      this.paramFunction();
     });
   }
 
@@ -142,10 +169,10 @@ export class InstiProfilePage implements OnInit {
   ///
   //country list
 
-  getCountryList() {
+  async getCountryList() {
 
     var countryURL = "api/auth/app/CommonUtility/countryList";
-    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+    const InsList = await this.storageservice.getrequest(countryURL).subscribe(result => {
       this.countryResponse = result["countryList"];
       console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
@@ -196,11 +223,11 @@ export class InstiProfilePage implements OnInit {
     return industryURL;
   }
   ///citylist
-  getcitylist(stateId, countryId) {
+  async getcitylist(stateId, countryId) {
 
     console.log(stateId)
     var industryURL = "api/auth/app/CommonUtility/cityList?countryId=" + countryId + "&stateId=" + stateId;
-    this.storageservice.getrequest(industryURL).subscribe(result => {
+    const city = await this.storageservice.getrequest(industryURL).subscribe(result => {
       this.cityList = result['cityList'];
       this.cityOptions = result['cityList'];
       this.docForm.patchValue({

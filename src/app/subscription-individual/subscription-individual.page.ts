@@ -373,7 +373,7 @@ export class SubscriptionIndividualPage implements OnInit {
       };
 
     };
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/home']);
     var cancelCallback = function (error) {
       //alert(error.description + ' (Error ' + error.code + ')');
       console.log(error.description + ' (Error ' + error.code + ')');

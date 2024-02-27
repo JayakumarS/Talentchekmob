@@ -178,7 +178,7 @@ export class CertificationPage implements OnInit {
       
       if(result["skillandCertificationsBean"].issuedDate != null &&  result["skillandCertificationsBean"].issuedDate != ""){
         const issuedate = result["skillandCertificationsBean"].issuedDate;
-        const startdate = moment(issuedate, 'DD/MM/YYYY').toDate();
+        const startdate = moment(issuedate, 'YYYY-MM-DD').toDate();
         this.certificationForm.patchValue({
           'issuedDateObj': startdate.toISOString(),
         })
@@ -186,7 +186,7 @@ export class CertificationPage implements OnInit {
 
       if(result["skillandCertificationsBean"].expiryDate != null &&  result["skillandCertificationsBean"].expiryDate != ""){
         const expdate = result['skillandCertificationsBean'].expiryDate;
-        const enddate = moment(expdate, 'DD/MM/YYYY').toDate();
+        const enddate = moment(expdate, 'YYYY-MM-DD').toDate();
         this.certificationForm.patchValue({
           'expiryDateObj': enddate.toISOString(),
         })

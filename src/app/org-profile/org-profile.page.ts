@@ -66,12 +66,65 @@ export class OrgProfilePage implements OnInit {
      }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
     this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
 
     this.currentUserId = localStorage.getItem("userId");
     this.getCountryList();
 
+    // this.route.queryParams.subscribe(params => {
+    //   if (params) {
+
+    //     if (params != null) {
+    //       console.log(params);
+
+    //       if (params.id == 1) {
+
+    //         this.isProfile = true;
+    //         this.editprofile();
+    //       } else if (params.id == 2) {
+    //         this.isAbout = true;
+    //         this.editprofile();
+
+    //       }
+    //       if (params.id == 3) {
+    //         this.isLogo = true;
+    //        // this.editprofile();
+    //        this.editprofileImg();
+
+    //       }
+    //     }
+    //   }
+    // });
+    this.docForm = this.fb.group({
+      orgName: ["", [Validators.required]],
+      domain: [""],
+      orgEmail: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      orgMobile: ["", [Validators.required]],
+      cinReg: ["", [Validators.required]],
+      dob: ["", [Validators.required]],
+      size: ["", [Validators.required]],
+      orgType: [""],
+      taxId: [""],
+      permAddress: [""],
+      permCity: [""],
+      permState: [""],
+      permCountry: [""],
+      permPinCode: [""],
+      orgLogo: ["",],
+      details: ["", [Validators.required]],
+      currentUserId: [""]
+    })
+    this.OrgtypeList();
+    this.domainList();
+
+    });
+
+
+  }
+
+  paramFunction(){
     this.route.queryParams.subscribe(params => {
       if (params) {
 
@@ -96,31 +149,6 @@ export class OrgProfilePage implements OnInit {
         }
       }
     });
-    this.docForm = this.fb.group({
-      orgName: ["", [Validators.required]],
-      domain: [""],
-      orgEmail: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      orgMobile: ["", [Validators.required]],
-      cinReg: ["", [Validators.required]],
-      dob: ["", [Validators.required]],
-      size: ["", [Validators.required]],
-      orgType: [""],
-      taxId: [""],
-      permAddress: [""],
-      permCity: [""],
-      permState: [""],
-      permCountry: [""],
-      permPinCode: [""],
-      orgLogo: ["",],
-      details: ["", [Validators.required]],
-      currentUserId: [""]
-    })
-    this.OrgtypeList();
-    this.domainList();
-
-
-
-
   }
 
   profileView() {
@@ -133,12 +161,12 @@ export class OrgProfilePage implements OnInit {
   ///
   //country list
 
-  getCountryList() {
+  async getCountryList() {
 
 
 
     var countryURL = "api/auth/app/CommonUtility/countryList";
-    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+    const InsList = await this.storageservice.getrequest(countryURL).subscribe(result => {
       this.countryResponse = result["countryList"];
       console.log(`countryResponse: ${JSON.stringify(this.countryResponse)}`);
     });
@@ -225,6 +253,7 @@ export class OrgProfilePage implements OnInit {
         this.industryList = result["industryList"];
         console.log(`industryList: ${JSON.stringify(this.industryList)}`);
       }
+      this.paramFunction();
     });
   }
 
@@ -248,7 +277,7 @@ export class OrgProfilePage implements OnInit {
 
 
       if (result["success"] == true) {
-        this.getCountryList();
+       // this.getCountryList();
 
         this.searchForId(result["profileList"][0].permCountry);
         // this.selectedCountry = this.desiredItem.text;

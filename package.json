@@ -22,7 +22,6 @@
         "@capacitor/filesystem": "^4.1.2",
         "@ionic-native/android-permissions": "^5.36.0",
         "@ionic-native/app-version": "^5.36.0",
-        "@ionic-native/barcode-scanner": "^5.36.0",
         "@ionic-native/camera": "^5.36.0",
         "@ionic-native/contacts": "^5.36.0",
         "@ionic-native/core": "^5.36.0",
@@ -84,7 +83,7 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "^12.20.50",
         "codelyzer": "^6.0.0",
-        "com.razorpay.cordova": "github:razorpay/razorpay-cordova",
+        "com.razorpay.cordova": "^1.4.5",
         "cordova-android": "^12.0.1",
         "cordova-plugin-android-permissions": "^1.1.2",
         "cordova-plugin-androidx": "^3.0.0",
@@ -161,7 +160,10 @@
                 "DEEPLINK_SCHEME": "https",
                 "DEEPLINK_HOST": "chek"
             },
-            "cordova-plugin-contacts": {}
+            "cordova-plugin-contacts": {},
+            "phonegap-plugin-barcodescanner": {
+                "ANDROID_SUPPORT_V4_VERSION": "27.+"
+            }
         },
         "platforms": [
             "android"

@@ -91,6 +91,7 @@ export class ProfileePage implements OnInit {
 
   ngOnInit() {
 
+    this.route.params.subscribe(params => {
     this.selectedLang = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
 
@@ -146,7 +147,8 @@ export class ProfileePage implements OnInit {
       currentUserId: [""],
     });
 
-
+  });
+  
   }
 
   hobbeList() {

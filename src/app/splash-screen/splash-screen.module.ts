@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SplashScreenPageRoutingModule } from './splash-screen-routing.module';
 
 import { SplashScreenPage } from './splash-screen.page';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { SplashScreenPage } from './splash-screen.page';
     IonicModule,
     SplashScreenPageRoutingModule
   ],
-  declarations: [SplashScreenPage]
+  declarations: [SplashScreenPage],
+  providers: [
+    AppVersion
+  ],
 })
 export class SplashScreenPageModule {}

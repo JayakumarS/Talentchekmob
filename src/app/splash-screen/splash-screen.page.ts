@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
+import { AppVersion } from '@ionic-native/app-version/ngx';
+
 @Component({
   selector: 'app-splash-screen',
   templateUrl: './splash-screen.page.html',
@@ -10,8 +12,9 @@ import { StorageService } from '../storage.service';
 export class SplashScreenPage implements OnInit {
 
   roleId: any;
+  mobVersion: any;
 
-  constructor(private router: Router, public storageservice: StorageService) {
+  constructor(private router: Router, public storageservice: StorageService,private appVersion: AppVersion,) {
 
 
 
@@ -63,11 +66,22 @@ export class SplashScreenPage implements OnInit {
       let latestMobileAppVersion = resultVersion['latestMobileAppVersion'];
       console.log(latestMobileAppVersion);
 
-      if (latestMobileAppVersion != "5.0.4") {
-        this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
-          'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
-          'Update now', 'Not now');
-      }
+      // Get the current installed app version
+  this.appVersion.getVersionNumber().then((currentAppVersion) => {
+   // this.storageservice.successToast('Vers: '+ currentAppVersion)  
+   // this.mobVersion=currentAppVersion;
+   if (latestMobileAppVersion != currentAppVersion) {
+    this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
+      'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
+      'Update now', 'Not now');
+  }
+  });
+
+      // if (latestMobileAppVersion != this.mobVersion) {
+      //   this.storageservice.GeneralAlertCustom('Discover new version ' + latestMobileAppVersion,
+      //     'Latest version ' + latestMobileAppVersion + ' is available in play store now, Would you like to update?',
+      //     'Update now', 'Not now');
+      // }
     },
       error => {
         console.log(`Error data: ${JSON.stringify(error)}`);

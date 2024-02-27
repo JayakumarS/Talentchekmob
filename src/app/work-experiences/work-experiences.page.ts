@@ -86,6 +86,7 @@ export class WorkExperiencesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
     this.selectedLang  = localStorage.getItem('selectedLang');
     this.languageService.setLanguage(this.selectedLang);
     this.userId = localStorage.getItem("userId");
@@ -110,6 +111,17 @@ export class WorkExperiencesPage implements OnInit {
     this.initializeItems();
     // this.BindDefaultCurrencyAsPerCurrentUser();
     this.isunregIns = false;
+  });
+  }
+
+
+  //nav bar
+  selectedTab: string = 'profile';
+  setSelectedTab(tabName: string) {
+    this.selectedTab = tabName;
+  }
+
+  paramFunction(){
     this.route.queryParams.subscribe(params => {
       if (params) {
         if (params != null || params != undefined) {
@@ -121,13 +133,6 @@ export class WorkExperiencesPage implements OnInit {
     });
   }
 
-
-  //nav bar
-  selectedTab: string = 'profile';
-  setSelectedTab(tabName: string) {
-    this.selectedTab = tabName;
-  }
-
   //edit function
   fetchEditDeatils(expId) {
     this.storageservice.showLoading();
@@ -137,7 +142,7 @@ export class WorkExperiencesPage implements OnInit {
         this.storageservice.dismissLoading();
         this.edit = true;
         this.disabled = true;
-        this.initializeItems();
+      //  this.initializeItems();
         const containsTF = this.checkForTF(result["experienceBean"].organisationName)
         if (containsTF == true) {
           this.searchForId(result["experienceBean"].organisationName);
@@ -297,9 +302,10 @@ export class WorkExperiencesPage implements OnInit {
 
   async initializeItems(): Promise<any> {
     var organisationListUrl = "api/auth/app/IndividualProfileDetails/organisationList";
-    const InsList = this.storageservice.getrequest(organisationListUrl).subscribe(result => {
+    const InsList = await this.storageservice.getrequest(organisationListUrl).subscribe(result => {
       this.organisationList = result["organisationList"];
       this.organisationList = result["organisationList"];
+      this.paramFunction();
     });
 
     return InsList;
