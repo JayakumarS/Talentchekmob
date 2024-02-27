@@ -10,6 +10,7 @@ import { LanguageService } from './language.service';
 import { timer } from 'rxjs/internal/observable/timer';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { HomePage } from './home/home.page';
+import { VcardNewPage } from './vcard-new/vcard-new.page';
 //import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 @Component({
@@ -352,9 +353,15 @@ setupDeepLinks() {
     // This is the code who responds to the app deeplinks
     // Deeplinks if from Ionic Native
     this.deeplinks.routeWithNavController(this.nav, {
-      '/home': HomePage
+      '/home': HomePage,
+      'vcard/:param1/:param2':VcardNewPage
     }).subscribe((match) => {
       console.log('Successfully routed', match);
+      if(match['$link']['host'] == 'vcard'){
+
+        this.router.navigate([match['$link']['host']+match['$link']['path']]);
+      }
+
     }, (nomatch) => {
       console.log('Unmatched Route', nomatch);
     });

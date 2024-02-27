@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { ProfileViewPopupPage } from './profile-view-popup/profile-view-popup.page';
+import { VcardNewPage } from './vcard-new/vcard-new.page';
 
 const routes: Routes = [
   {
@@ -424,8 +424,8 @@ const routes: Routes = [
     loadChildren: () => import('./select-all/select-all.module').then( m => m.SelectAllPageModule)
   },
   {
-    path: 'page1/:param1',
-    component: ProfileViewPopupPage
+    path: 'vcard/:param1/:param2',
+    component: VcardNewPage
   },
 
 
