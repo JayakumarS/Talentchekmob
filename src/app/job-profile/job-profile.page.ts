@@ -401,7 +401,7 @@ export class JobProfilePage implements OnInit {
   }
   
   async validateSalaryTo(salaryTo) {
-    let salFrom = parseInt(this.jobProfileForm.value.jobSalaryFrom);
+    let salFrom = parseInt(this.jobsForm.value.jobSalaryFrom);
     let salto = parseInt(salaryTo);
     if (salFrom > salto) {
       const alert = await this.toastController.create({
@@ -409,7 +409,7 @@ export class JobProfilePage implements OnInit {
         message: 'Salary To should be greater than Salary From.',
         duration: 3000,
       });
-      this.jobProfileForm.patchValue({
+      this.jobsForm.patchValue({
         'jobSalaryTo': ""
       })
       await alert.present();
@@ -419,7 +419,7 @@ export class JobProfilePage implements OnInit {
         message: 'Salary From should be lesser than Salary To.',
         duration: 3000,
       });
-      this.jobProfileForm.patchValue({
+      this.jobsForm.patchValue({
         'jobSalaryFrom': ""
       })
       await alert.present();
