@@ -26,6 +26,8 @@ export class PaymentPage implements OnInit {
   roleId: any;
   RoleID: any;
   edit: boolean = false;
+  showContent: boolean = false;
+
   constructor(private fb: FormBuilder,public storageservice:StorageService,public alertController: AlertController,private toastController: ToastController, public router:Router,public languageService:LanguageService,private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -53,6 +55,13 @@ export class PaymentPage implements OnInit {
 
     this.roleId = localStorage.getItem("roleId");
     this.RoleID =  this.roleId.split(",", 3);
+    if(this.docForm.value.amount==""){
+      // alert(1)
+      this.docForm.patchValue({
+        'amount':0,
+        'currency':"INR",
+   })
+    }
 
   }
   
@@ -171,8 +180,18 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
   
 }
 
+toggleContent() {
+  this.showContent = !this.showContent;
+}
 
-
+default(){
+  if(this.docForm.value.amount==null){
+  this.docForm.patchValue({
+   'amount':0,
+   'currency':"INR",
+})
+  }
+}
 update2(){
 
   this.docForm.value.currentUserId=this.currentUserId;
@@ -212,19 +231,11 @@ await toast.present();
 
 ///paymentDetails  Update
 async instiUpdate(){
-  const errors = this.checkFormValidity(this.docForm);
+  //const errors = this.checkFormValidity(this.docForm);
 
-  if (errors.length > 0) {
-    // Display errors in a popup
-    const alert = await this.toastController.create({
-    
-      message: 'Please provide all the required values!',
-      duration: 3000,
-    });
+  if ((this.docForm.value.amount >= 100  || this.docForm.value.amount == 0) && (this.docForm.value.currency === "INR" || this.docForm.value.currency === "USD"  || this.docForm.value.currency === "AED"  || this.docForm.value.currency === "MYR"  || this.docForm.value.currency === "SGD")) {
 
-    await alert.present();
-  } else{
-   
+
     this.docForm.value.currentUserId=this.currentUserId;
     this.paymentDetails = this.docForm.value;
     let bankdetails = {
@@ -258,6 +269,17 @@ this.storageservice.postrequest(createAccountIdurl, bankdetails).subscribe(resul
         }
       })
      });
+    
+  } else{
+   
+   // Display errors in a popup
+   const alert = await this.toastController.create({
+    
+    message: 'Please enter amount above 100 INR',
+    duration: 3000,
+  });
+
+  await alert.present();
 }
   
 }

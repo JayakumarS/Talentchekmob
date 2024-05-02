@@ -61,12 +61,13 @@ export class DeleteMyAccountPage implements OnInit {
 
               var deleteServiceUrl = "api/auth/app/mobile/DeleteUserAccountMob";
 
-              this.storageservice.postrequest(deleteServiceUrl, postData).subscribe(result => {
+              this.storageservice.postrequest(deleteServiceUrl, postData).subscribe((result:any) => {
                 var response = result;
                 console.log(response);
 
                 if (result["success"] == true) {
-                  this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('PopupWin.delSucfly'));
+                 // this.storageservice.successToastCustom(this.translate.instant('PopupWin.congrats'), this.translate.instant('PopupWin.delSucfly'));
+                  this.storageservice.successToast(result.message);
 
                   localStorage.removeItem('token');
                   localStorage.removeItem('user_name');

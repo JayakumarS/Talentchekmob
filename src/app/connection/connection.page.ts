@@ -1,5 +1,5 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, Platform, ToastController } from '@ionic/angular';
 import moment from 'moment';
@@ -51,6 +51,8 @@ export class ConnectionPage implements OnInit {
   roleId: any;
   RoleID: any;
   nonMandatory: boolean = false;
+  dateValidation: boolean;
+
   constructor(public router: Router, public fb: FormBuilder, public storageservice: StorageService, public languageService: LanguageService,
     private toastController: ToastController, public modalController: ModalController, private elementRef: ElementRef
     , public alertController: AlertController, private ngZone: NgZone, public route: ActivatedRoute,private renderer: Renderer2,
@@ -219,9 +221,31 @@ export class ConnectionPage implements OnInit {
       this.ConnectionsForm.get("acquaintedTo").enable();
     }
   }
-
-  save() {
+  checkFormValidity(form: FormGroup): string[] {
+    const errors: string[] = []; 
+    // Check each form control for errors
+    Object.keys(form.controls).forEach(key => {
+      const controlErrors: ValidationErrors = form.controls[key].errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          errors.push(`${key} ${keyError}`);
+        });
+      }
+    }); 
+    return errors;
+  }
+  async save() {
     this.isSaved=false;
+    const errors = this.checkFormValidity(this.ConnectionsForm);  
+    if (errors.length > 0) {
+      // Display errors in a popup
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Please provide all the required values!',
+        duration: 3000,
+      }); 
+      await alert.present();
+     }else{
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
       if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
       this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
@@ -257,6 +281,7 @@ export class ConnectionPage implements OnInit {
       });
     }
     }
+  
 
     if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
       if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
@@ -322,6 +347,7 @@ export class ConnectionPage implements OnInit {
       });
     }
     }
+  }
   }
   async presentToast1() {
     const toast = await this.toastController.create({
@@ -449,8 +475,18 @@ export class ConnectionPage implements OnInit {
   }
   /// insti save////
 
-  instisave() {
+  async instisave() {
     this.isSaved=false;
+    const errors = this.checkFormValidity(this.ConnectionsForm);  
+    if (errors.length > 0) {
+      // Display errors in a popup
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'Please provide all the required values!',
+        duration: 3000,
+      }); 
+      await alert.present();
+     }else{
     if (this.ConnectionsForm.value.acquaintedFrom != undefined && this.ConnectionsForm.value.acquaintedFrom != "") {
       if(this.ConnectionsForm.value.acquaintedFrom.includes('T')){
       this.ConnectionsForm.value.acquaintedFrom = formatDate(this.ConnectionsForm.value.acquaintedFrom, 'MM/yyyy', 'en-IN');
@@ -487,7 +523,7 @@ export class ConnectionPage implements OnInit {
       });
     }
     } 
-    
+  
     if (this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != "") {
    
       if(this.ConnectionsForm.value.acquaintedTo.includes('T')){
@@ -552,6 +588,7 @@ export class ConnectionPage implements OnInit {
       });
     }
     }
+  }
   }
   async presentToast3() {
     const toast = await this.toastController.create({
@@ -630,7 +667,51 @@ export class ConnectionPage implements OnInit {
   // goto_more(){
   //   this.router.navigate(['/settings']);
   // }
+  async validateStartDate(event){
 
+    if(this.ConnectionsForm.value.acquaintedTo != undefined && this.ConnectionsForm.value.acquaintedTo != ""){
+      var endDate = new Date(new Date(this.ConnectionsForm.value.acquaintedTo).setFullYear(new Date(this.ConnectionsForm.value.acquaintedTo).getFullYear())); //Currentdate - one year.
+      console.log("endDate: " + endDate);
+      console.log("startDate: " + event);
+      var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+      this.dateValidation =true;
+      if (endDate <= frm) {
+        const alert = await this.toastController.create({
+          header: '',
+          message: 'AcquaintedTo date should be greater than Acquainted From date.',
+          duration: 3000,
+        });
+         await alert.present();
+         this.ConnectionsForm.patchValue({
+          acquaintedTo: ''
+        });
+      }
+    }
+
+  }
+
+  async validateEndDate(event){
+    var startdate = new Date(new Date(this.ConnectionsForm.value.acquaintedFrom).setFullYear(new Date(this.ConnectionsForm.value.acquaintedFrom).getFullYear())); //Currentdate - one year.
+    console.log("startdate: " + startdate);
+    console.log("enddate: " + event);
+    var frm = new Date(new Date(event).setHours(new Date(event).getHours() + 0));
+    this.dateValidation =true;
+    if (frm <= startdate) {
+      this.dateValidation =false;
+      const alert = await this.toastController.create({
+        header: '',
+        message: 'AcquaintedTo date should be greater than Acquainted From date.',
+        duration: 3000,
+      });
+      this.ConnectionsForm.patchValue({
+        'courseEnd':""
+      })
+       await alert.present();
+       this.ConnectionsForm.patchValue({
+        acquaintedTo: ''
+      });
+    }
+  }
   keyPressAlphaNumeric(event) {
 
     var inp = String.fromCharCode(event.keyCode);

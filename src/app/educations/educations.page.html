@@ -150,7 +150,7 @@
                             [formControl]="searchCtrl"></ion-input>
                     </ion-item>
                     <div
-                        *ngIf=" EducationForm.controls.courseEnd.hasError('required') && EducationForm.controls.courseEnd.touched">
+                        *ngIf=" EducationForm.controls.degree.hasError('required') && EducationForm.controls.degree.touched">
                         <small style="color: #f70505;">{{'Select your academic degree or program' | translate}}</small>
                     </div>
                     <ion-list *ngIf="IsDegreeListShow">

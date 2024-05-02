@@ -296,6 +296,9 @@ export class ProfileViewPage implements OnInit {
 
       //skills
       this.skillList = result['profileViewList'][0].skillList;
+      for (var i = 0; i < this.skillList.length; i++) {
+        this.skillList[i].expertise = this.skillList[i].expertise / 100;
+      }
 
 
 
@@ -804,6 +807,8 @@ fileDownloadOffline(filePath: string, fileName: string, fileType: string) {
               this.storageservice.postrequest(deleteExperienceServiceUrl, postData.skillId).subscribe(async result => {
                 if (result == true) {
                   this.storageservice.successToast('Deleted successfully');
+                  this.listFunction();
+
                 }
                 else if (result == false) {
                   var msg = result["message"];

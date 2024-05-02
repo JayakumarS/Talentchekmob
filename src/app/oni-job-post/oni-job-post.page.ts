@@ -410,16 +410,16 @@ export class OniJobPostPage implements OnInit {
 
   // salary from validation
   async validateSalaryFrom(salaryFrom) {
-    if (this.jobProfileForm.value.jobSalaryTo != "") {
+    if (this.jobProfileForm1.value.jobSalaryTo != "") {
       let salFrom = parseInt(salaryFrom);
-      let salto = parseInt(this.jobProfileForm.value.jobSalaryTo);
+      let salto = parseInt(this.jobProfileForm1.value.jobSalaryTo);
       if (salFrom > salto) {
         const alert = await this.toastController.create({
           header: '',
           message: 'Salary From should be lesser than Salary To.',
           duration: 3000,
         });
-        this.jobProfileForm.patchValue({
+        this.jobProfileForm1.patchValue({
           'jobSalaryFrom': ""
         })
         await alert.present();
@@ -430,7 +430,7 @@ export class OniJobPostPage implements OnInit {
 
   // salary to validation
   async validateSalaryTo(salaryTo) {
-    let salFrom = parseInt(this.jobProfileForm.value.jobSalaryFrom);
+    let salFrom = parseInt(this.jobProfileForm1.value.jobSalaryFrom);
     let salto = parseInt(salaryTo);
     if (salFrom > salto) {
       const alert = await this.toastController.create({
@@ -438,7 +438,7 @@ export class OniJobPostPage implements OnInit {
         message: 'Salary To should be greater than Salary From.',
         duration: 3000,
       });
-      this.jobProfileForm.patchValue({
+      this.jobProfileForm1.patchValue({
         'jobSalaryTo': ""
       })
       await alert.present();
@@ -448,16 +448,42 @@ export class OniJobPostPage implements OnInit {
         message: 'Salary From should be lesser than Salary To.',
         duration: 3000,
       });
-      this.jobProfileForm.patchValue({
+      this.jobProfileForm1.patchValue({
         'jobSalaryFrom': ""
       })
       await alert.present();
     }
   }
   //next step skills validate
+  // nextStep1(currentStep: string, nextStep: string, jobProfile) {
+  //   jobProfile.jobSkills.value = this.selectedSkills;
+  //   if (jobProfile.jobSkills.value != null && jobProfile.jobSkills.value.length != 0) {
+  //     const current = document.getElementById(currentStep);
+  //     const next = document.getElementById(nextStep);
+  //     // current.style.display = 'none';
+  //     // next.style.display = 'block';
+  //     this.step1Flag=false;
+  //     this.step2Flag=false;
+  //     this.step3Flag=true;
+  //     this.step4Flag=false;
+
+  //   }
+  //   else {
+  //     var msg = ["Please select Skills"]
+  //     this.storageservice.warningToast(msg);
+  //   }
+  // }
   nextStep1(currentStep: string, nextStep: string, jobProfile) {
+    jobProfile.roles.value=jobProfile.roles.value;
     jobProfile.jobSkills.value = this.selectedSkills;
-    if (jobProfile.jobSkills.value != null && jobProfile.jobSkills.value.length != 0) {
+    if (jobProfile.jobSalaryFrom.value != "" && jobProfile.jobSalaryFrom.value != null &&jobProfile.jobSalaryFrom.value != undefined
+    && jobProfile.jobSalaryTo.value != "" && jobProfile.jobSalaryTo.value != null &&jobProfile.jobSalaryTo.value != undefined){
+    if (jobProfile.roles.value == '' || jobProfile.roles == 'null') {
+      var msg = ["Please Fill the Job Description"]
+      this.storageservice.warningToast(msg);
+    }
+      else if (jobProfile.jobSkills.value != null && jobProfile.jobSkills.value.length != 0) {
+
       const current = document.getElementById(currentStep);
       const next = document.getElementById(nextStep);
       // current.style.display = 'none';
@@ -467,11 +493,16 @@ export class OniJobPostPage implements OnInit {
       this.step3Flag=true;
       this.step4Flag=false;
 
-    }
+    } 
+  
     else {
       var msg = ["Please select Skills"]
       this.storageservice.warningToast(msg);
     }
+  }  else {
+    this.errorToast();
+  }
+   
   }
   //next step city  validate
   nextStep2(currentStep: string, nextStep: string, jobProfile2) {

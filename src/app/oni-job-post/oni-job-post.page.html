@@ -270,9 +270,11 @@
                     <div class="ion-stepper-buttons" style="justify-content: space-between;">
                         <button class="ion-stepper-prev" style="background-color: #e71c1cab !important;"
                             (click)="prevStep('step2', 'step1')">{{'KmPortal.back' | translate}}</button>
-                        <button class="ion-stepper-next" (click)="nextStep1('step2','step3',jobProfileForm1.controls)"
+                        <!-- <button class="ion-stepper-next" (click)="nextStep1('step2','step3',jobProfileForm1.controls)"
                             [disabled]="!jobProfileForm1.valid">{{'profilein.Next' |
-                            translate}}</button>
+                            translate}}</button> -->
+                            <button class="ion-stepper-next" (click)="nextStep1('step2','step3',jobProfileForm1.controls)">{{'profilein.Next' |
+                                translate}}</button>
                     </div>
                 </div>
             </form>

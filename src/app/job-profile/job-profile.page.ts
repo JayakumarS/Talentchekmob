@@ -290,6 +290,24 @@ export class JobProfilePage implements OnInit {
   //    } 
   // }
 
+  // validateInformation(value) {
+  //   this.jobProfileForm = this.fb.group(
+  //     Object.assign({}, this.jobProfileForm.controls, this.jobsForm.controls)
+  //   );
+
+  //   if (this.jobProfileForm.value.jobSalaryFrom != "" && this.jobProfileForm.value.jobSalaryFrom != null
+  //     && this.jobProfileForm.value.jobSalaryTo != "" && this.jobProfileForm.value.jobSalaryTo != null
+  //     && this.selectedCities.length != 0 && this.jobProfileForm.value.reqLanguages != 0) {
+  //     if (value == 'save') {
+  //       this.savejobseek();
+  //     } else {
+  //       this.updatejobseek();
+  //     }
+  //   } else {
+  //     this.errorToast();
+  //   }
+  // }
+
   validateInformation(value) {
     this.jobProfileForm = this.fb.group(
       Object.assign({}, this.jobProfileForm.controls, this.jobsForm.controls)
@@ -349,16 +367,16 @@ export class JobProfilePage implements OnInit {
   }
 
   async validateSalaryFrom(salaryFrom) {
-    if (this.jobProfileForm.value.jobSalaryTo != "") {
+    if (this.jobsForm.value.jobSalaryTo != "") {
       let salFrom = parseInt(salaryFrom);
-      let salto = parseInt(this.jobProfileForm.value.jobSalaryTo);
+      let salto = parseInt(this.jobsForm.value.jobSalaryTo);
       if (salFrom > salto) {
         const alert = await this.toastController.create({
           header: '',
           message: 'Salary From should be lesser than Salary To.',
           duration: 3000,
         });
-        this.jobProfileForm.patchValue({
+        this.jobsForm.patchValue({
           'jobSalaryFrom': ""
         })
         await alert.present();
@@ -367,6 +385,21 @@ export class JobProfilePage implements OnInit {
 
   }
 
+
+  validateSalaryRange(value) {
+    const jobSalaryFrom = Number(this.jobsForm.value.jobSalaryFrom);
+    const jobSalaryTo = Number(this.jobsForm.value.jobSalaryTo);
+  
+    if (jobSalaryFrom < jobSalaryTo) {
+      this.jobsForm.get('jobSalaryTo').setErrors(null);
+   }
+  
+   else {
+      this.jobsForm.get('jobSalaryTo').setErrors({ 'rangeError': true });
+  
+  }
+  }
+  
   async validateSalaryTo(salaryTo) {
     let salFrom = parseInt(this.jobProfileForm.value.jobSalaryFrom);
     let salto = parseInt(salaryTo);

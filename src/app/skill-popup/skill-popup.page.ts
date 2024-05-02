@@ -141,6 +141,8 @@ export class SkillPopupPage implements OnInit {
             }, 800);
             this.presentToast()
              }else{  
+              this.presentToast2(result);
+
              }
           }); 
        }else{
@@ -183,6 +185,16 @@ export class SkillPopupPage implements OnInit {
   this.router.navigate(['/profile-view']);
   await toast.present();
   }
+
+  async presentToast2(result) {
+    const toast = await this.toastController.create({
+      message: result["msg"],
+      duration: 3000,
+      cssClass: 'custom-toast'
+    });
+  
+  await toast.present();
+  } 
 
   //update toast popup
   async updateToast() {

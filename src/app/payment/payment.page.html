@@ -181,7 +181,7 @@
               <ion-button class="custom-button" (click)="instiUpdate()">{{'profilein.Update' | translate}}</ion-button>
             </div>
           </div>
-          <div class="button-content">
+          <!-- <div class="button-content">
             <ion-label class="labels">{{'Amount' | translate}}<small style="color: #f70505;">*</small></ion-label>
             <ion-item fill="outline" class="input-field">
               <ion-input formControlName="amount"></ion-input>
@@ -206,20 +206,65 @@
             <div *ngIf="docForm.controls.currency.hasError('required') && docForm.controls.currency.touched">
               <small style="color: #f70505;">{{'Currency is required' | translate}}</small>
             </div>
+          </div> -->
+          <div class="row" (click)="default()">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top: 12px;">
+                <ion-item-group >
+                  <ion-item-divider>
+                    <ion-label (click)="toggleContent()">
+                      Service Fee for Verification
+                     <span style="padding-left: 109px;"> (optional)</span>
+                    </ion-label>
+                  </ion-item-divider>
+          
+                  <div *ngIf="showContent">
+                  <ion-label class="labels">{{ 'Amount' | translate }}</ion-label>
+                  <ion-item fill="outline" class="input-field">
+                    <ion-input formControlName="amount"></ion-input>
+                  </ion-item>
+                  <div *ngIf="docForm.controls.amount.hasError('required') && docForm.controls.amount.touched">
+                    <small style="color: #f70505;">{{ 'Amount is required' | translate }}</small>
+                  </div>
+          
+                  <ion-label class="labels">{{ 'profileorg.Currency' | translate }}</ion-label>
+                  <ion-item fill="outline" class="input-field">
+                    <ion-select formControlName="currency" placeholder="{{ 'profileorg.Currency' | translate }}" style="background:white">
+                      <ion-select-option value="INR">{{ 'Subscription.inr' | translate }}</ion-select-option>
+                      <ion-select-option value="USD">{{ 'Subscription.usd' | translate }}</ion-select-option>
+                      <ion-select-option value="AED">{{ 'Subscription.aed' | translate }}</ion-select-option>
+                      <ion-select-option value="MYR">{{ 'Subscription.myr' | translate }}</ion-select-option>
+                      <ion-select-option value="SGD">{{ 'Subscription.sgd' | translate }}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <div *ngIf="docForm.controls.currency.hasError('required') && docForm.controls.currency.touched">
+                    <small style="color: #f70505;">{{ 'Currency is required' | translate }}</small>
+                  </div>
+                
+                  <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
+                    <div class="display-justify" *ngIf="RoleID.includes('2')">
+                        <ion-button class="custom-button" (click)="update2()">{{'profilein.Update' | translate}}</ion-button>
+                    </div>
+                    <div class="display-justify" *ngIf="RoleID.includes('3')">
+                        <ion-button class="custom-button" (click)="instiUpdate()">{{'profilein.Update' | translate}}</ion-button>
+                    </div>
+                </div>
+                </div>
+                </ion-item-group>
+            </div>
           </div>
           <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify">
               <ion-button class="custom-button" (click)="Update()">{{'profilein.Save' | translate}}</ion-button>
             </div>
           </div>
-          <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
+          <!-- <div *ngIf="edit" class="button-content" style="width: 50%;margin: auto;">
             <div class="display-justify" *ngIf="RoleID.includes('2')">
               <ion-button class="custom-button" (click)="update2()">{{'profilein.Update' | translate}}</ion-button>
             </div>
             <div class="display-justify" *ngIf="RoleID.includes('3')">
               <ion-button class="custom-button" (click)="instiUpdate()">{{'profilein.Update' | translate}}</ion-button>
             </div>
-          </div>
+          </div> -->
         </ion-col>
       </ion-row>
     </ion-card-content>

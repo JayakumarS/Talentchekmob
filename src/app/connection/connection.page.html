@@ -136,14 +136,14 @@
                         <ion-label class="labels">{{'profilein.Acquainted From' | translate}} </ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-datetime formControlName="acquaintedFrom" displayFormat="MM/YYYY" presentation="date"
-                                [max]="getMaxDate()"></ion-datetime>
+                            (ionChange)="validateStartDate($event.target.value);" [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
                     </div>
                     <div class="button-content">
                         <ion-label class="labels">{{'profilein.Acquainted Till' | translate}} </ion-label>
                         <ion-item fill="outline" class="input-field">
                             <ion-datetime formControlName="acquaintedTo" displayFormat="MM/YYYY" presentation="date"
-                                [max]="getMaxDate()"></ion-datetime>
+                            (ionChange)="validateEndDate($event.target.value);"   [max]="getMaxDate()"></ion-datetime>
                         </ion-item>
 
                         <div style="    display: flex;">
