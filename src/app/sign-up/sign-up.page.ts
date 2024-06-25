@@ -106,7 +106,9 @@ export class SignUpPage implements OnInit {
     email: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')])],
     agreeVal:[true, Validators.requiredTrue],
     cBoxIAgree: [''],
-    cBoxIAgreeConsent: ['']
+    cBoxIAgreeConsent: [''],
+    logIn:["TalentChek"],
+
 
   });
   
@@ -330,6 +332,8 @@ export class SignUpPage implements OnInit {
         var country =  this.addressForm.value.country['id'] ;
         var stateName = this.addressForm.value.stateName['id'];
         var pinCode = this.addressForm.controls['pinCode'].value;
+        var logIn = this.regInfoForm.controls['logIn'].value;
+
         console.log("dob: " + dob);
         if(dob!=null && dob!=''){
           var dateOfBirth = this.transformDate(dob);
@@ -396,7 +400,8 @@ export class SignUpPage implements OnInit {
                 'registrationmode': 'Mobile',
                 'creditPoints': 5,
                 'latitude': 0,
-                'longitude': 0
+                'longitude': 0,
+                'logIn':logIn
 
               }
               localStorage.setItem('emailId', postData.emailId);
