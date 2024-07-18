@@ -212,7 +212,7 @@
 
                 <div class="button-content">
                     <ion-label class="labels">{{'Description' | translate}}</ion-label>
-                    <ckeditor formControlName="eduDescription"></ckeditor>
+                    <ckeditor [config]='config' formControlName="eduDescription"></ckeditor>
                 </div>
                 <ion-row class="talentrow" *ngIf="!nonMandatory">
                     <ion-col>

@@ -108,7 +108,7 @@
                     <ion-label class="labels">{{'AddJobPost.jobDes' | translate}}<small
                             style="color: #f70505;">*</small></ion-label>
                     <div class="button-content">
-                        <ckeditor formControlName="roles"></ckeditor>
+                        <ckeditor [config]='config' formControlName="roles"></ckeditor>
                     </div>
 
 

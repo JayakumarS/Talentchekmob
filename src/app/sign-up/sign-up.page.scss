@@ -250,3 +250,54 @@ ion-checkbox::part(container) {
     border: 2px solid #6815ec;
 }
 
+
+.input-field {
+    display: flex;
+    align-items: center;
+    gap: 2px; /* Smaller space between elements */
+    background: darkgray;
+  }
+  
+  .input-field ion-select {
+    flex: 0 0 80px; /* Smaller width for the select element */
+    margin-right: 2px; /* Smaller margin */
+  }
+  
+  .input-field ion-input {
+    flex: 1;
+  }
+  
+  .input-field {
+    display: flex;
+    align-items: baseline; /* Align items based on their text baseline */
+  }
+ 
+  .input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .select-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px; /* Adjust width as needed */
+  }
+  
+  .custom-placeholder {
+    width: 100%;
+  }
+  
+  .down-arrow {
+    position: absolute;
+    right: 59px;
+    pointer-events: none;
+    font-size: 0.8em; /* Adjust the size as needed */
+  }
+  
+  /* Custom CSS to make the placeholder bold */
+  .custom-placeholder::part(placeholder) {
+    font-weight: bold;
+  }
+ 

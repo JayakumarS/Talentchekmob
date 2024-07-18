@@ -147,7 +147,7 @@
                 </div>
                 <div class="button-content">
                     <ion-label class="labels">{{'AddJobPost.roleRes' | translate}}</ion-label>
-                    <ckeditor formControlName="expDescription"></ckeditor>
+                    <ckeditor [config]='config' formControlName="expDescription"></ckeditor>
                 </div>
 
                 <div *ngIf="!edit" class="button-content" style="width: 50%;margin: auto;">

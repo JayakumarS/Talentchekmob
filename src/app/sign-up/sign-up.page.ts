@@ -40,6 +40,7 @@ export class SignUpPage implements OnInit {
   profileForm: FormGroup;
   addressForm: FormGroup;
   regInfoForm: FormGroup;
+  codeResponse: Array<{ id: string, text: string }> = [];
 
   step: any
   private stepper: Stepper;
@@ -108,6 +109,7 @@ export class SignUpPage implements OnInit {
     cBoxIAgree: [''],
     cBoxIAgreeConsent: [''],
     logIn:["TalentChek"],
+    countryCode:[""]
 
 
   });
@@ -491,6 +493,7 @@ export class SignUpPage implements OnInit {
     this.languageService.setLanguage(this.selectedLang);
 
     this.getCountryList();
+    this.getCodeList();
 
     this.step = 1;
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
@@ -529,6 +532,28 @@ export class SignUpPage implements OnInit {
     });
   }
 
+  getCodeList() {
+
+    var countryURL = "api/auth/app/CommonUtility/countryCodeList";
+    const InsList = this.storageservice.getrequest(countryURL).subscribe(result => {
+      this.codeResponse = result["countryCodeList"];
+      console.log(`codeResponse: ${JSON.stringify(this.codeResponse)}`);
+    });
+  }
+
+  // getCodeList() {
+  //   const countryURL = "api/auth/app/CommonUtility/countryCodeList";
+  //   this.storageservice.getrequest(countryURL).subscribe(result => {
+  //   //  if (result && result.countryCodeList) {
+  //       this.codeResponse = result["countryCodeList"].map(code => ({
+  //         id: code.countryCode,
+  //         text: code.countryName + ' (' + code.countryCode + ')'
+  //       }));
+  //    // }
+  //   }, error => {
+  //     console.error('Error fetching country codes:', error);
+  //   });
+  // }
 
 
   //state list
@@ -653,4 +678,6 @@ export class SignUpPage implements OnInit {
       return false;
     }
   }
+
+ 
 }

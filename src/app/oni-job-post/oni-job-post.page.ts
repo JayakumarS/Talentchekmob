@@ -953,5 +953,13 @@ export class OniJobPostPage implements OnInit {
     this.router.navigate(['/settings']);
   }
 
-
+  config = {
+    //startupFocus : true,
+    tabSpaces: 10,
+    extraPlugins: 'smiley,justify,indentblock,colordialog,font,exportpdf,pagebreak',
+    font_names: 'कृति देवी/Kruti;Andale Mono;Arial; Arial Black; Arial Narrow; Comic Sans MS; Courier New; Georgia; Helvetica; Impact; Tahoma; Terminal; Times New Roman; Verdana;',
+    removeButtons: 'Paste,PasteText,PasteFromWord',
+    removePlugins: 'elementspath',
+    versionCheck: false
+  }
 }

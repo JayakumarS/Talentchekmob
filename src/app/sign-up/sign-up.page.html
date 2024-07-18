@@ -270,16 +270,43 @@
                 <div id="test-l-3" class="content text-center">
 
                     <form [formGroup]="regInfoForm">
-                        <div class="button-content">
+                        <div class="button-content" >
 
 
-                            <ion-label class="labels">{{'contactNo' | translate }}<small style="color: #f70505;">*</small></ion-label>
+                            <!-- <ion-label class="labels">{{'contactNo' | translate }}<small style="color: #f70505;">*</small></ion-label>
                             <ion-item fill="outline" class="input-field">
                                 <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="phoneNo"></ion-input>
-                            </ion-item>
+                            </ion-item> -->
+                            <!-- <ion-label class="labels">{{'contactNo' | translate }}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field" >
+                        <ion-select class="custom-placeholder" placeholder="Dialing Code" formControlName="countryCode">
+                      <ion-select-option *ngFor="let code of codeResponse" [value]="code.id">{{ code.text }}</ion-select-option>
+                                </ion-select>
+                  <ion-input type="number" (keypress)="limitInputLength($event)" formControlName="phoneNo" placeholder="Phone Number"></ion-input>
+                        </ion-item>
                             <div style="text-align: left;" *ngIf=" regInfoForm.controls.phoneNo.hasError('required') && regInfoForm.controls.phoneNo.touched">
                                 <small style="color: #f70505;">{{'contactValid' | translate }}</small>
-                            </div>
+                            </div> -->
+
+
+                            <ion-label class="labels">
+                                {{ 'contactNo' | translate }}
+                                <small style="color: #f70505;">*</small>
+                              </ion-label>
+                              <ion-item fill="outline" class="input-field">
+                                <div class="input-container">
+                                  <div class="select-container">
+                                    <ion-select class="custom-placeholder" placeholder="Dialing Code" formControlName="countryCode">
+                                      <ion-select-option *ngFor="let code of codeResponse" [value]="code.id">{{ code.id }}</ion-select-option>
+                                    </ion-select>
+                                    <span class="down-arrow">&#9660;</span> <!-- Unicode character for down arrow -->
+                                  </div>
+                                  <ion-input type="number" style="margin-left: -50px;" (keypress)="limitInputLength($event)" formControlName="phoneNo" placeholder="Phone Number"></ion-input>
+                                </div>
+                              </ion-item>
+                              <div style="text-align: left;" *ngIf="regInfoForm.controls.phoneNo.hasError('required') && regInfoForm.controls.phoneNo.touched">
+                                <small style="color: #f70505;">{{ 'contactValid' | translate }}</small>
+                              </div>
 
                             <ion-label class="labels">{{'email' | translate }} </ion-label>
                             <ion-item fill="outline" class="input-field">
