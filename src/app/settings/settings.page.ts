@@ -163,5 +163,10 @@ export class SettingsPage implements OnInit {
 goto_DeleteAccount(){
   this.router.navigate(['/delete-my-account'])
 }
+
+goto_visibility1(id: number) {
+  localStorage.setItem('itemKey', id.toString());
+  this.router.navigate(['/visibility']);
+}
  
 }

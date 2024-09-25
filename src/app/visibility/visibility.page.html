@@ -5,15 +5,31 @@
             <div style="text-align: right;margin: 0px 0px 0px 5px;">
                 <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_settings()"></ion-icon>
             </div>
-            <div style="text-align: center;display: contents;">
+            <div style="text-align: center;display: contents;" *ngIf="!delete">
                 <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'Visibility settings' | translate}}</ion-title>
+            </div>
+            <div style="text-align: center;display: contents;" *ngIf="delete">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">Deleting setting</ion-title>
             </div>
         </div>
     </ion-toolbar>
 
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="delete">
+    <div class="display-justify" (click)="goto_DeleteAccount()">
+<div class="custom-button">
+    <div style="display: flex; align-items: center; font-family: Mr-eaves ;white-space: nowrap;">
+        <ion-avatar slot="start">
+            <img src="../../assets/icon/about.png" />
+        </ion-avatar><span style="font-family: Mr-eaves;">{{'DeleteAccount' | translate}}</span>
+    </div>
+</div>
+</div>
+</ion-content>
+
+
+<ion-content *ngIf="!delete">
 
     <div class="display-justify" (click)="profile_vis()">
         <div class="custom-button">

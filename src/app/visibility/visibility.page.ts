@@ -10,11 +10,17 @@ import { LanguageService } from '../language.service';
 export class VisibilityPage implements OnInit {
   uls:any =[];
   selectedLang: string;
+  delete: any;
   constructor(public router:Router,public languageService:LanguageService) { }
 
   ngOnInit() {
 
     this.selectedLang  = localStorage.getItem('selectedLang');
+    const storedId = localStorage.getItem('itemKey');
+    if (storedId !== null) {
+      this.delete = parseInt(storedId, 10);
+      console.log(this.delete); 
+    }
     this.languageService.setLanguage(this.selectedLang);
 
     this.uls = document.querySelectorAll("ul");
@@ -76,9 +82,13 @@ export class VisibilityPage implements OnInit {
   }
 
   goto_settings(){
+    localStorage.removeItem('itemKey');
     this.router.navigate(['/settings']) 
+
   }
 
-
+  goto_DeleteAccount(){
+    this.router.navigate(['/delete-my-account'])
+  }
  
 }
