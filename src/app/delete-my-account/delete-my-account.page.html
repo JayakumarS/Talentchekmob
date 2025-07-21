@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="goto_settings()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+
+        <ion-row>
+            <ion-col size="10">
+                <ion-title style="text-align: center;">
+                    <div class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'DeleteMyAccount.deleteMyAcc' | translate}}</div>
+                </ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card class="scan-card">
+
+        <ion-card-content style="padding-left: 10%;padding-top:10px">
+            <h1 style="color: black;text-align: center; font-family: Mr-eaves;">{{'DeleteMyAccount.deleteAccWill' | translate}}</h1>
+            <br>
+
+            <p>
+                <ion-icon style="color: red;" name="alert-circle-outline"></ion-icon> {{'DeleteMyAccount.deleteYourAccInfo' | translate}}
+            </p>
+            <p>
+                <ion-icon style="color: red;" name="alert-circle-outline"></ion-icon> {{'DeleteMyAccount.deleteYourEdu' | translate}}
+            </p>
+            <p>
+                <ion-icon style="color: red;" name="alert-circle-outline"></ion-icon> {{'DeleteMyAccount.deleteYuorDoc' | translate}}
+            </p>
+
+        </ion-card-content>
+        <ion-card-header style="text-align: center;">
+
+            <ion-button shape="round" class="deleteBtn" (click)="deleteMyAccount()">
+                {{'DeleteMyAccount.deleteMyAcc' | translate}}
+            </ion-button>
+        </ion-card-header>
+    </ion-card>
+
+</ion-content>

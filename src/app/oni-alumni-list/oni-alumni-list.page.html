@@ -1,0 +1,112 @@
+<!-- <ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
+            <ion-col size="0.5">
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" (click)="goto_orgHome()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </ion-col>
+            <ion-col size="8">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 5%;">{{title}} List</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header> -->
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="goto_orgHome()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title style="text-align: center;font-family: Mr-eaves; color: black;">{{title}} List</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <form>
+
+        <div class="display-justify" *ngFor="let cElement of mySlicedArray" (click)="profileView(cElement.userTalentId,cElement.profileVisibility,cElement.userName)">
+            <ion-card class="adv-card">
+                <ion-row>&nbsp;</ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="small">
+                            <img style="width: 50%;height: 50%;" alt="" src="{{imagePath}}{{cElement.profileimage}}" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="10">
+                        <ion-row>
+                            <div class="b">{{cElement.userName}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <div class="c">{{cElement.fos || cElement.department }}</div>
+                            <div class="c">{{cElement.designation}}</div>
+                        </ion-row>
+                        <ion-row>
+
+                            <span class="c-pill c-pill--green" style="color:#198754" *ngIf="!cElement.currentEmployee">Ex-Employee</span>
+                            <span class="c-pill c-pill--purple" style="color:#6f42c1" *ngIf="cElement.currentEmployee">Currently working</span>
+
+                        </ion-row>
+
+                        <ion-row>
+                            <br>
+                        </ion-row>
+
+
+                    </ion-col>
+
+
+                </ion-row>
+
+
+
+            </ion-card>
+        </div>
+
+
+
+        <div class="display-justify" *ngFor="let aElement of applicantsList" (click)="profileView(aElement.userid)">
+            <ion-card class="adv-card">
+                <ion-row>&nbsp;</ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="small">
+                            <img style="width: 50%;height: 50%;" alt="" src="{{imagePath}}{{aElement.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-row>
+                            <div class="b">{{aElement.jobseekername}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <div class="c">{{aElement.jobtitle}}</div>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size="4">
+                        <div>
+                            <span class="c-pill c-pill--danger">{{aElement.status}}</span>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-card>
+        </div>
+
+
+
+    </form>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

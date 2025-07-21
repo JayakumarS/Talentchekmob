@@ -1,0 +1,90 @@
+<!-- <ion-header>
+    <ion-toolbar class="new-background-color">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_profileView()" style="margin-top:21%"></ion-icon>
+            </div>
+            <div *ngIf="!edit"  style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'addSkills' | translate}}</ion-title>
+            </div>
+            <div  *ngIf="edit" style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'editSkills' | translate}}</ion-title>
+            </div>
+        </div> 
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="goto_profileView()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title *ngIf="!edit" style="text-align: center;font-family: Mr-eaves; color: black;">{{'addSkills' |
+            translate}}</ion-title>
+        <ion-title *ngIf="edit" style="text-align: center;font-family: Mr-eaves; color: black;">{{'editSkills' |
+            translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="skillForm">
+        <ion-card-content>
+            <ion-row class="talentrow">
+                <ion-col>
+                    <div class="button-content">
+
+                        <ion-label class="labels">{{'AddJobProfile.skill' | translate}}<small
+                                style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <div>{{ selectedSkills }}
+                                <ion-icon *ngIf="selectedSkills != undefined && selectedSkills != ''"
+                                    name="close-circle" (click)="removeSkill(selectedSkills)"></ion-icon>
+                            </div>
+                            <ion-input warp="soft" (ionInput)="onSearchSkill($event.target.value)"
+                                [formControl]="searchCtrl"></ion-input>
+                        </ion-item>
+
+                        <ion-list *ngIf="showSkillResults">
+                            <ion-item *ngFor="let result of searchSkillResults"
+                                (click)="selectSkill(result.text,result.id)">
+                                {{ result.text }}
+                            </ion-item>
+                        </ion-list>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row class="talentrow">
+                <ion-col>
+                    <ion-range min="0" style="display: flex;width: 112%;align-items: flex-end; margin-left: -8%;"
+                        max="100" formControlName="expertise" [(ngModel)]="sliderValue"
+                        (ionChange)="onSliderChange($event.target.value)">
+                        <ion-label slot="start">{{'beginner' | translate}}</ion-label>
+                        <ion-label slot="end">{{'expert' | translate}}</ion-label>
+                    </ion-range>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <div *ngIf="!edit" class="button-content" style="margin: auto;">
+                    <div class="display-justify">
+                        <ion-button class="custom-button" (click)="saveSkill()">{{'AddJobProfile.submit' |
+                            translate}}</ion-button>
+                    </div>
+                </div>
+
+                <div *ngIf="edit" class="button-content" style="margin: auto;">
+                    <div class="display-justify">
+                        <ion-button class="custom-button" (click)="updateSkill()">{{'AddJobProfile.update' |
+                            translate}}</ion-button>
+                    </div>
+                </div>
+            </ion-row>
+
+        </ion-card-content>
+    </form>
+</ion-content>

@@ -1,0 +1,646 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
+            <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; text-align: center; font-size: 24px;">{{'DashboardIndividual.myProfile' | translate}}</ion-title>
+        </ion-row>
+        <br>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-row>
+
+            <ion-col size="3" style="margin-left: 25px;">
+                <ion-avatar size="small" *ngIf="prof">
+                    <img style=" height: 70%;width: 70%;" (click)="profile2(2)" src={{img}} />
+                </ion-avatar>
+                <ion-avatar size="small" *ngIf="!prof">
+                    <img style=" height: 70%;width: 70%;" (click)="profile2(2)" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+            </ion-col>
+            <ion-col style="margin-left: -20px;margin-top: 3px;">
+                <ion-title class="ion-text-wrap" style="align-items: center;
+                display: contents;">{{username}} <br> {{talentId}}</ion-title>
+
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<!-- Email -->
+
+<ion-content style="padding-bottom: 60px;">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <form>
+        <ion-card class="talentcard1">
+            <ion-card-content>
+                <ion-row style="display: flex; flex-wrap: nowrap;">
+                    <ion-col size="10">
+                        <ion-title style="color:black; margin-left: -9%;">{{'Menu.profile' | translate}}</ion-title>
+                    </ion-col>
+                    <ion-col size="2" style="    text-align: end;">
+                        <img src="../../assets/icon/edit_icon.png" (click)="profile1(1)" id="prfoileimg1">
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="talentrow">
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
+                        <ion-label>{{'PersonalInformation.name' | translate}} : <b>{{username}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label>{{'Menu.category' | translate}} : {{category}}</ion-label>
+                    </ion-col>
+                    <ion-col size="15" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label>{{'JobSearch.location' | translate}} : {{location}}</ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label>{{'ContactInfo.mobNo' | translate}} :{{mobile}}</ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label>{{'ProfileCorIns.emailId' | translate}} : {{email}}</ion-label>
+                    </ion-col>
+
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label> {{'PersonalInformation.languagesknown' | translate}}: {{language}}</ion-label>
+                    </ion-col>
+
+
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label>{{'PersonalInformation.hobbies' | translate}}: {{hobbies}}</ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label>{{'about' | translate}}: {{about}}</ion-label>
+                    </ion-col>
+                </ion-row>
+
+            </ion-card-content>
+        </ion-card>
+
+        <!------- Skills card------ -->
+        <ion-card class="talentcard1" *ngIf="skillscard">
+            <ion-card-content>
+                <ion-row>
+                    <ion-col size="10">
+                        <ion-title style="color:black; margin-left: -9%;">{{'skill.skill' | translate}}
+
+                        </ion-title>
+                    </ion-col>
+                    <ion-col style="    text-align: end;">
+
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Skill()"></ion-icon>
+
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="talentrow" *ngFor="let x of skillList">
+
+                    <ion-col>
+                        <ion-label>{{x.skillName}}</ion-label>
+                        <ion-progress-bar value="{{x.expertise}}"></ion-progress-bar>
+                    </ion-col>
+                    <ion-col size="2" style="margin-top: 7%;display: flex;">
+                        <img src="../../assets/icon/edit_icon.png" id="prfoileimg1" (click)="Skill(x.skillId)">
+                        <ion-icon name="trash-outline" style="padding-left: 24%;" (click)="deleteSkills(x.skillId)"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- Add card empty -->
+        <ion-card *ngIf="!skillscard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+                        <img src="../../assets/img/addskillicon.png" id="prfoileimg1" (click)="Skill()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%;
+                   width: 112%;    text-align: center;">{{'skill.addSkill' | translate}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+        <!-------  Certifications card------ -->
+        <ion-card class="talentcard1" *ngIf="certificationcard">
+            <ion-card-content>
+
+                <ion-row style=" display: flex; align-content: center;
+                flex-wrap: nowrap;    padding-bottom: 10px;">
+                    <ion-col size="10">
+                        <ion-title style="color:black; margin-left: -9%;">{{'Certification.certificate' | translate}}
+
+                        </ion-title>
+                    </ion-col>
+
+                    <ion-col style=" text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="certification()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+
+                <ion-card class="talentcard2" *ngFor="let x of certifications">
+                    <ion-card-content>
+                        <div class="container">
+                            <div class="three-dots-button">
+                                <span></span> <span></span><span></span>
+                            </div>
+                            <div class="popup">
+                                <div class="popup-triangle"></div>
+                                <div class="popup-content">
+                                    <button style="color: black;" (click)="certification(x.certId)" class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' |
+                                        translate}}</button>
+                                    <button (click)="deleteCertificateCard(x.certId)" class="delete-button">
+                                        <ion-icon name="trash-outline"></ion-icon>{{'delete' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <ion-row>
+                            <ion-col size="11">
+                                <ion-label style="font-size: 16px; font-weight: bolder;">{{x.certificationName}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.issuedBy}}</ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-card-content>
+        </ion-card>
+
+        <!-- Add card empty -->
+        <ion-card *ngIf="!certificationcard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+                        <img src="../../assets/img/addcertificationicon.png" id="prfoileimg1" (click)="certification()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row style="    text-align: center;">
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%;
+                    text-align: center;width: 115%;">{{'Certification.addCert' | translate}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+        <!------- Academics card------ -->
+        <ion-card class="talentcard1" *ngIf="educationcard">
+            <ion-card-content>
+                <ion-row style=" display: flex; align-content: center;
+                flex-wrap: nowrap;    padding-bottom: 10px;">
+                    <ion-col size="11">
+                        <ion-title style="color:black;margin-left: -9%; ">{{'profilein.Academics' | translate}}
+
+                        </ion-title>
+                    </ion-col>
+
+                    <ion-col style=" text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="educations()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+
+                <ion-card class="talentcard2" *ngFor="let x of education;let i=index;">
+                    <ion-card-content>
+
+                        <div class="container">
+                            <div class="three-dots-button">
+                                <span></span> <span></span><span></span>
+                            </div>
+                            <div class="popup">
+                                <div class="popup-triangle"></div>
+                                <div class="popup-content">
+                                    <button style="color: black;" (click)="educations(x.eduId)" *ngIf="x.status == 'Verified Qualification' || x.status == 'Verification Pending'|| x.status == 'Unverified'|| x.status == 'Information Mismatch'" class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>&nbsp;{{'Certification.edit' |
+                                        translate}}</button>
+
+
+                                    <button style="color: black;" (click)="eduIdverifierCall(x.eduId,x.institutionId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                        <img src="../../assets/img/verifier.png"
+                                            style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' |
+                                        translate}}</button>
+                                    <button (click)="deleteeducation(x.eduId)" *ngIf="x.status == 'Unverified' || x.status == 'Verification Pending'" class="delete-button">
+                                        <ion-icon name="trash-outline"></ion-icon>&nbsp;{{'delete' |
+                                        translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ion-row>
+                            <ion-col size="12" style="    display: flex;">
+
+                                <ion-col size="2">
+                                    <ion-avatar size="medium">
+                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;" src="{{imagePath}}{{x.instLogo}}" />
+                                    </ion-avatar>
+                                </ion-col>
+                                <ion-col size="10">
+                                    <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.institutionName}}</ion-label>
+                                </ion-col>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.institutionLocation}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.courseStart}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px;color: #8b8b8b; font-weight: 700;">{{x.fieldofStudy}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Verified Qualification'">
+                                <ion-label (click)="togglePopup(i)"> <span class="badge col-green">
+                                        {{x.status}}</span></ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Verification Pending'">
+                                <ion-label > <span class="badge col-orange">
+                                        {{x.status}}</span></ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Fake Qualification' || x.status=='Discontinued' ||x.status=='Debarred' || x.status=='Information Mismatch' ||x.status=='Unverified'">
+                                <ion-label (click)="togglePopup(i)"> <span class="badge col-red">
+                                        {{x.status}}</span></ion-label>
+                            </ion-col>
+
+                            <div class="container" *ngIf="(x.eduDescription!=null && x.eduDescription !='') && i==currentIndex && (x.status=='Verified Qualification' || x.status=='Fake Qualification' || x.status=='Discontinued' || x.status=='Debarred' || x.status=='Information Mismatch')">  
+                                <div class="popupNew" [ngClass]="{ 'show-popup': isPopupOpen }">
+                                    <!-- <div class="popup-triangle"></div> -->
+                                    <div class="popup-content1">
+                                           Verified by : {{x.verifierName}}<br>
+                                            Verified on : {{x.verifiedOn}}<br>
+                                            Verifier given rating: {{x.verifierRating == 5 ? '★★★★★' : x.verifierRating == 4 ? '★★★★' : x.verifierRating == 3 ? '★★★' : x.verifierRating == 2 ? '★★' : x.verifierRating == 1 ? '★' : x.verifierRating == 'NA' ? 'NA':''}}<br>
+                                            Verifier given remarks : {{x.verifierRemarks}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container" *ngIf="(x.eduDescription==null || x.eduDescription =='') && i==currentIndex && (x.status=='Verified Qualification' || x.status=='Fake Qualification' || x.status=='Discontinued' || x.status=='Debarred' || x.status=='Information Mismatch')">  
+                                <div class="popupNew2" [ngClass]="{ 'show-popup': isPopupOpen }">
+                                    <!-- <div class="popup-triangle"></div> -->
+                                    <div class="popup-content1">
+                                            Verified by : {{x.verifierName}}<br>
+                                            Verified on : {{x.verifiedOn}}<br>
+                                            Verifier given rating: {{x.verifierRating == 5 ? '★★★★★' : x.verifierRating == 4 ? '★★★★' : x.verifierRating == 3 ? '★★★' : x.verifierRating == 2 ? '★★' : x.verifierRating == 1 ? '★' : x.verifierRating == 'NA' ? 'NA':''}}<br>
+                                            Verifier given remarks : {{x.verifierRemarks}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ion-col size="12" *ngIf="x.eduDescription!=null && x.eduDescription!=''">
+                                <ion-label [innerHTML]="x.eduDescription"></ion-label>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-card-content>
+        </ion-card>
+        <!-- Add card empty -->
+        <ion-card *ngIf="!educationcard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+                        <img src="../../assets/img/addeduicon.png" id="prfoileimg1" (click)="educations()" style="  width: 50%;  height: 137%; margin-left: 100%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row style="    text-align: center;">
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%;
+                    width: 104%;">{{'addEducation' | translate}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+
+        <!------- Experience card------ -->
+
+
+        <ion-card class="talentcard1" *ngIf="experiencecard">
+            <ion-card-content>
+                <ion-row style=" display: flex; align-content: center;
+                flex-wrap: nowrap;   padding-bottom: 10px;">
+                    <ion-col size="11">
+                        <ion-title style="color:black; margin-left: -9%;">{{'skill.experience' | translate}}
+
+                        </ion-title>
+                    </ion-col>
+                    <ion-col style="    text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="experiences()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+
+
+                <ion-card class="talentcard2" *ngFor="let x of experience;let i=index;">
+                    <ion-card-content>
+
+                        <div class="container">
+                            <div class="three-dots-button" *ngIf="x.status != 'Fake Experience'">
+                                <span></span> <span></span><span></span>
+                            </div>
+                            <div class="popup">
+                                <div class="popup-triangle"></div>
+                                <div class="popup-content">
+                                    <button style="color: black;" (click)="experiences(x.expId)" *ngIf="x.status == 'Unverified' || x.status == 'In Notice Period' || x.status == 'Information Mismatch' || x.status == 'Verification Pending' || ( x.currentlyWork == true &&  x.status == 'Verified Experience')"
+                                        class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' |
+                                        translate}} </button>
+                                    <button style="color: black;" (click)="expIdverifierCall(x.expId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                        <img src="../../assets\img\verifier.png"
+                                            style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' |
+                                        translate}}</button>
+                                    <button (click)="deleteExperiences(x.expId)" *ngIf="x.status == 'Unverified' || x.status == 'Verification Pending'" class="delete-button">
+                                        <ion-icon name="trash-outline"></ion-icon>{{'delete' | translate}}</button>
+                                        <!-- QR and Certificate -->
+                                        <button (click)="fileDownload1(x.expQrPath,'SampleFileNew','png')" *ngIf="x.status == 'Verified Experience' || x.status == 'Promoted'"
+                                        class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>
+                                        Download QR
+                                    </button>
+                                    <button (click)="fileDownloadOffline(x.offlineqrpath,'SampleFileNew','png')" *ngIf="x.status == 'Verified Experience' ||  x.status == 'Promoted'"
+                                    class="edit-button">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                    Offline QR
+                                </button>
+                                    
+                                    <!-- <button style="color: black;" (click)="fileDownload1(x.expQrPath,'SampleFileNew','png')" *ngIf="x.status == 'Verified Experience'"
+                                        class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>Download Certificate</button> -->
+                                        <!--  -->
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <ion-row>
+                            <ion-col size="12" style="    display: flex;">
+
+                                <ion-col size="2">
+                                    <ion-avatar size="medium">
+                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;" src="{{imagePath}}{{x.orgLogo}}" />
+                                    </ion-avatar>
+                                </ion-col>
+                                <ion-col size="11">
+                                    <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.organisationName }}
+                                    </ion-label>
+                                </ion-col>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style=" font-size: 17px; color: #8b8b8b;">{{x.designation}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.expStart}} - {{x.expEnd}}
+                                </ion-label>
+                            </ion-col>
+
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.orgLocation}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
+                                <ion-label class="badge col-red" (click)="togglePopup(i)">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Verification Pending'">
+                                <ion-label class="badge col-orange">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
+                                <ion-label class="badge col-green" (click)="togglePopup(i)">{{x.status}}
+                                </ion-label>
+                                
+
+                      
+                                
+                            </ion-col>
+                            
+
+                            <div class="container" *ngIf="(x.expDescription!=null && x.expDescription !='') && i==currentIndex && (x.status=='Verified Experience' || x.status=='In Notice Period' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Fake Experience' || x.status=='Absconded from Work')">  
+                                <div class="popupNew" [ngClass]="{ 'show-popup': isPopupOpen }">
+                                    <!-- <div class="popup-triangle"></div> -->
+                                    <div class="popup-content1">
+                                            Verified by : {{x.verifierName}}<br>
+                                            Verified on : {{x.verifiedOn}}<br>
+                                            Verifier given rating: {{x.verifierRating == 5 ? '★★★★★' : x.verifierRating == 4 ? '★★★★' : x.verifierRating == 3 ? '★★★' : x.verifierRating == 2 ? '★★' : x.verifierRating == 1 ? '★' : x.verifierRating == 'NA' ? 'NA':''}}<br>
+                                            Verifier given remarks : {{x.verifierRemarks}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container" *ngIf="(x.expDescription==null || x.expDescription =='') && i==currentIndex && (x.status=='Verified Experience' || x.status=='In Notice Period' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Fake Experience' || x.status=='Absconded from Work')">  
+                                <div class="popupNew2" [ngClass]="{ 'show-popup': isPopupOpen }">
+                                    <!-- <div class="popup-triangle"></div> -->
+                                    <div class="popup-content1">
+                                            Verified by : {{x.verifierName}}<br>
+                                            Verified on : {{x.verifiedOn}}<br>
+                                            Verifier given rating: {{x.verifierRating == 5 ? '★★★★★' : x.verifierRating == 4 ? '★★★★' : x.verifierRating == 3 ? '★★★' : x.verifierRating == 2 ? '★★' : x.verifierRating == 1 ? '★' : x.verifierRating == 'NA' ? 'NA':''}}<br>
+                                            Verifier given remarks : {{x.verifierRemarks}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ion-col size="12" *ngIf="x.expDescription!=null && x.expDescription!=''">
+                                <ion-label [innerHTML]="x.expDescription"></ion-label>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-card-content>
+        </ion-card>
+
+        <!-- Add card empty -->
+        <ion-card *ngIf="!experiencecard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+                        <img src="../../assets\img\briefcase (1).png" id="prfoileimg1" (click)="experiences()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row style="    text-align: center;">
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%;
+                width: 104%;">{{'profilein.Add Work Experience' | translate}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+        <!------- Connections card------ -->
+        <ion-card class="talentcard1" *ngIf="connectioncard">
+            <ion-card-content>
+                <ion-row style="display: flex; align-content: center;
+                flex-wrap: nowrap;">
+                    <ion-col size="11">
+                        <ion-title style="color:black; margin-left: -9%;font-size:16px;"> {{'verifiedNetwork' | translate}}
+
+
+                        </ion-title>
+                    </ion-col>
+                    <ion-col style="    text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Connections()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+
+                <ion-card class="talentcard2" (click)="go_to_list(x.relationship)" *ngFor="let x of connectionList">
+                    <ion-card-content style="margin-top: 21px;">
+
+
+                        <ion-row class="talentrow">
+                            <ion-col size="12">
+                                <ion-label style=" color: #8b8b8b;font-size: 16px;"><b>{{x.connectionCount}}</b></ion-label>
+                                <ion-label style=" color: #8b8b8b;font-size: 16px;"><b>&nbsp;{{x.relationship}}</b></ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+
+
+            </ion-card-content>
+        </ion-card>
+        <!-- Add card empty -->
+        <ion-card *ngIf="!connectioncard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+
+                        <img src="../../assets/img/addconnectionicon.png" id="prfoileimg1" (click)="Connections()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;"> {{'profilein.Add Connection' | translate}}
+                        </ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+
+        <!-- Extracurricular card------ -->
+        <ion-card class="talentcard1" *ngIf="clubscard">
+            <ion-card-content>
+                <ion-row style="  display: flex; align-content: center;
+                flex-wrap: nowrap;  padding-bottom: 10px;">
+                    <ion-col size="11">
+                        <ion-title style="color:black; margin-left: -9%;">{{'profilein.Extracurricular' | translate}}
+
+                        </ion-title>
+                    </ion-col>
+                    <ion-col style="    text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Extracurricular()"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-card class="talentcard2" *ngFor="let x of club">
+                    <ion-card-content>
+
+                        <div class="container">
+                            <div class="three-dots-button">
+                                <span></span> <span></span><span></span>
+                            </div>
+                            <div class="popup">
+                                <div class="popup-triangle"></div>
+                                <div class="popup-content">
+                                    <button style="color: black;" (click)="Extracurricular(x.clubId)" class="edit-button">
+                                        <ion-icon name="create-outline"></ion-icon>{{'Certification.edit' |
+                                        translate}}</button>
+                                    <button style="color: black;" (click)="clubIdverifierCall(x.clubId,x.orgId)" *ngIf="x.status == 'Unverified'" class="edit-button">
+                                        <img src="../../assets/img/verifier.png"
+                                            style="width: 12px;">&nbsp;&nbsp;{{'SeekingService.verification' |
+                                        translate}}</button>
+                                    <button (click)="deleteExtracurricular(x.clubId)" class="delete-button">
+                                        <ion-icon name="trash-outline"></ion-icon>{{'delete' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ion-row>
+                            <ion-col size="12" style="display: flex;">
+                                <ion-col size="2">
+                                    <ion-avatar size="medium">
+                                        <img alt="" style="    margin-left: -22%; height: 80%;width: 80%;" src="{{imagePath}}{{x.orgLogo}}" />
+                                    </ion-avatar>
+                                </ion-col>
+
+                                <ion-col size="10">
+                                    <ion-label style="font-size: 18px;     margin-top: 2%;font-weight: bolder;">{{x.clubName}}</ion-label>
+                                </ion-col>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 17px; color: #8b8b8b;">{{x.titleHeld}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.participatedFrom}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="    font-size: 13px; color: #8b8b8b;">{{x.clubBranch }}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Fake Experience' || x.status=='Absconded from Work' || x.status=='Fired' || x.status=='Information Mismatch' || x.status=='Unverified'">
+                                <ion-label class="badge col-red">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Verification Pending'">
+                                <ion-label class="badge col-orange">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.status=='Verified Experience' || x.status=='In Notice Period'">
+                                <ion-label class="badge col-green">{{x.status}}</ion-label>
+                            </ion-col>
+                            <ion-col size="12" *ngIf="x.rolePlayed!=null && x.rolePlayed!=''">
+                                <ion-label class="badge col-green" [innerHTML]="x.rolePlayed"></ion-label>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-card-content>
+        </ion-card>
+
+
+        <!-- Add card empty -->
+        <ion-card *ngIf="!clubscard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+                        <img src="../../assets/img/addclubicon.png" id="prfoileimg1" (click)="Extracurricular()" style="   width: 57%;height: 77%; margin-left: 100%;  margin-top: 14%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%;    text-align: center;
+                    width: 104%;">{{'profilein.Add Extracurricular' | translate}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+
+    </form>
+
+
+</ion-content>
+
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+        <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+        <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+        <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+    </button>
+</div>

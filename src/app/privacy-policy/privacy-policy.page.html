@@ -1,0 +1,76 @@
+<ion-header style="background-color: white;">
+    <ion-toolbar style="padding: 20px 10px 15px;">
+        <ion-row style="display: flex;justify-content: space-between;">
+            <div>
+                <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+        align-items: center;align-items: center;">
+                {{'Consent.header' | translate}}
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
+            </div>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form>
+        <div class="modal-content" style="text-align: center;padding: 10px;">
+
+            <h2>{{'Consent.paraHeader' | translate}}</h2>
+
+            <p class="ng-binding">
+                {{'Consent.para1' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para2' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para3' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para4' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para5' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para6' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para7' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para8' | translate}}
+            </p>
+            <br>
+            <p>{{'Consent.para9' | translate}}
+            </p>
+
+
+        </div>
+    </form>
+
+</ion-content>
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+<ion-icon size="large" name="search-circle"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+<ion-icon size="large" name="earth-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+<img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">    
+
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+<ion-icon size="large" name="person-circle-sharp"></ion-icon>
+</button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+<ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+</button>
+</div>

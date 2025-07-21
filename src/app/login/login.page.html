@@ -1,0 +1,154 @@
+<ion-header>
+
+</ion-header>
+
+<style>
+    #back {
+        background-size: 100%;
+        background-repeat: no-repeat!important;
+        background-size: cover!important;
+        width: 110vw!important;
+        height: 104vh!important;
+        background-attachment: fixed!important;
+        background-position: center center!important;
+    }
+    
+    #otherslides {
+        background-size: 100%;
+        background-repeat: no-repeat!important;
+        background-size: cover!important;
+        width: 110vw!important;
+        height: 104vh!important;
+        background-attachment: fixed!important;
+        background-position: center center!important;
+    }
+</style>
+
+<ion-content padding color="primary">
+    <ion-slides #slider pager="false" [options]="slideOpts" (ionSlideDidChange)='ionSlideDidChange()'>
+        <ion-slide>
+            <div style="display: flex; justify-content: center; flex-direction: column;" id="back" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'">
+                <div style="display: flex; align-items: center;flex-direction: column;">
+                    <div class="not-now">
+                        <div class="title">TALENTCHEK</div>
+                        <div class="sub-title">Choose the Right One, Wise One</div>
+                    </div>
+                </div>
+                <ion-row>
+                    <ion-col>
+                        <div class="slideimag1"><img src="./assets/img/welcome_Illustration.png" /></div>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div id="otherslides" style="display: flex; flex-direction: column; align-items: center;
+            justify-content: space-evenly;" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'">
+
+                <ion-row>
+                    <ion-col>
+                        <div class="slideimag2"><img src="./assets/img/Illustration-conn.png" /></div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-card class="talentcard1">
+                        <ion-card-content style="min-height: 290px;">
+                            <div class="slide2">Endorse your way to the Top</div>
+                            <div class="slide2Paragraph">Stay ahead of the competition by having your profile fully verified by your school,university, and employers.</div>
+                            <div style="margin-top: 50px;">
+                                <span class="dot active"></span>&nbsp;
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot"></span>
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div id="otherslides" style="display: flex; flex-direction: column; align-items: center;
+            justify-content: space-evenly;" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'">
+                <ion-row>
+                    <ion-col>
+                        <div class="slideimag3"><img src="./assets/img/Illustration-slide2.png" alt="Lights" /></div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-card class="talentcard1">
+                        <ion-card-content style="min-height: 290px;">
+                            <div class="slide2">Find your dream job today!</div>
+                            <div class="slide2Paragraph">Get matched to job vacancies that exactly match your skills and preferences.</div>
+                            <div style="margin-top: 50px;">
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot active"></span>&nbsp;
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot"></span>
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <div id="otherslides" style="display: flex; flex-direction: column; align-items: center;
+            justify-content: space-evenly;" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'">
+                <ion-row>
+                    <ion-col>
+                        <div class="slideimag2"><img src="./assets/img/Illustration-slide3.png" alt="Lights" /></div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-card class="talentcard1">
+                        <ion-card-content style="min-height: 290px;">
+                            <div class="slide2">Connect the Dots to your Success</div>
+                            <div class="slide2Paragraph">Be recognized by your students, clients for your expertise and give credits to your investors, sponsors, and mentors for their timely help.</div>
+                            <div style="margin-top: 50px;">
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot active"></span>&nbsp;
+                                <span class="dot"></span>
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <div id="otherslides" style="display: flex; flex-direction: column; align-items: center;
+            justify-content: space-evenly;" class="row" [style.background]="'url(../../assets/img/login-slides_bg.png)'">
+                <ion-row>
+                    <ion-col>
+                        <div class="slideimag5"><img src="./assets/img/Illustration-slide4.png" alt="Lights" /></div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-card class="talentcard1">
+                        <ion-card-content style="min-height: 290px;">
+                            <div class="slide2">Upskill & Grow</div>
+                            <div class="slide2Paragraph">Head to knowledge bank to enjoy free access to a library of study materials, notes and tutorials.</div>
+
+                            <br>
+
+                            <ion-button class="custom-button" (click)="signUp()">Get Started</ion-button>
+
+
+                            <div style="margin-top: 20px;">
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot"></span>&nbsp;
+                                <span class="dot active"></span>
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-row>
+            </div>
+        </ion-slide>
+
+
+
+
+    </ion-slides>
+</ion-content>

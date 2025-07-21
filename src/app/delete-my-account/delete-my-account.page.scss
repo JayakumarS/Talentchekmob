@@ -1,0 +1,38 @@
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png');
+    background-size: cover;
+    --background: #EDF1FC;
+}
+
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+.deleteBtn {
+    --background: rgb(255, 0, 0);
+    margin-top: 5px;
+    color: rgb(255, 255, 255);
+    font-size: small;
+    font-weight: bold;
+}
+
+.blackTheme {
+    color: black;
+}
+
+.whiteTheme {
+    color: white;
+}
+
+.scan-card {
+    background: #ffffffb3;
+    width: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    border-radius: 6%;
+    box-shadow: 0px 8px 24px #00000026;
+}

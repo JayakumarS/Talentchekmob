@@ -1,0 +1,31 @@
+<ion-app>
+
+
+    <!-- <div class="spinner" *ngIf="showSplash">
+        
+    </div> -->
+
+
+
+    <ion-menu contentId="main-content" type="overlay">
+
+
+        <ion-content>
+        </ion-content>
+
+
+    </ion-menu>
+    <ion-router-outlet id=""></ion-router-outlet>
+
+
+    <div class="custom-loading" *ngIf="loading">
+        <div class="spinner">
+            <div class="loader-container">
+                <span><img src="../../assets/img/faviconcircle.png"></span>
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+
+
+</ion-app>

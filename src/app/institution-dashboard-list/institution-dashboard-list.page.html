@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+
+        <ion-row style="display: flex;justify-content: space-between;">
+            <div>
+                <ion-icon size="large" (click)="goto_insHome()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </div>
+            <div class="ion-text-wrap" style="font-family: Mr-eaves; color: black;font-weight: 600;display: flex;
+            align-items: center;text-align: center;font-size: 17px;">
+                {{title}} List
+            </div>
+            <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;">
+            </div>
+        </ion-row>
+        <!-- <ion-row>
+
+            <ion-col size="0.5">
+
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" (click)="goto_insHome()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+            </ion-col>
+
+            <ion-col size="8">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 5%;">{{title}} List</ion-title>
+            </ion-col>
+        </ion-row> -->
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <form>
+        <div class="display-justify" *ngFor="let cElement of mySlicedArray1" (click)="profileView(cElement.talentid)">
+            <ion-card class="adv-card">
+                <ion-row>&nbsp;</ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="small">
+                            <img style="width: 50%;height: 50%;" alt="" src="{{imagePath}}{{cElement.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="10">
+                        <ion-row>
+                            <div class="b">{{cElement.username}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <div class="c">{{cElement.degortitle}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                        </ion-row>
+                    </ion-col>
+                    <!-- <ion-col size="4">
+                     <ion-col size="4">
+                            <div>
+                                <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                            </div>
+                        </ion-col> -->
+
+                </ion-row>
+
+            </ion-card>
+        </div>
+
+        <div class="display-justify" *ngFor="let cElement of mySlicedArray" (click)="profileView(cElement.talentid)">
+            <ion-card class="adv-card">
+                <ion-row>&nbsp;</ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="small">
+                            <img style="width: 50%;height: 50%;" alt="" src="{{imagePath}}{{cElement.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+                    <ion-col size="10">
+                        <ion-row>
+                            <div class="b">{{cElement.jobseekername}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <div class="c">{{cElement.jobtitle}}</div>
+                        </ion-row>
+                        <ion-row>
+                            <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                        </ion-row>
+                        <br>
+                    </ion-col>
+                    <!-- <ion-col size="4">
+                            <div>
+                                <span class="c-pill c-pill--danger">{{cElement.status}}</span>
+                            </div>
+                        </ion-col> -->
+
+                </ion-row>
+
+            </ion-card>
+        </div>
+
+        <ion-row *ngIf="oniListCount == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="oniListCount == 0">No Results to Display</div>
+
+
+
+    </form>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

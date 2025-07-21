@@ -1,0 +1,281 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
+            <ion-col size="12">
+            </ion-col>
+        </ion-row>
+        <ion-row style="display: flex; text-align: center; justify-content: center;">
+            <ion-col size="11">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; ">{{'Menu.profile' | translate}}
+                </ion-title>
+            </ion-col>
+        </ion-row>
+        <div style=" display: flex;  justify-content: space-between;
+         align-items: center;">
+            <div size="8">
+                <div class="ion-text-wrap" style="padding: 0px 0px 0px 10px;text-align: center;
+              font-family: Mr-eaves; color: black; font-size: 20px;">
+                    {{orgname}}</div>
+            </div>
+
+            <div size="4" style="transform: translate(9px, 9px);">
+                <ion-avatar size="small" *ngIf="prof">
+                    <img style=" height: 60%;width: 60%;" (click)="profileimg(3)" src={{imagePath}}{{logo}} />
+                </ion-avatar>
+
+                <ion-avatar size="small" *ngIf="!prof">
+                    <img style=" height: 60%;width: 60%;" (click)="profileimg(3)" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+            </div>
+        </div>
+
+
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content style="padding-bottom: 60px;">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <form>
+        <ion-card class="talentcard1">
+            <ion-card-content>
+                <ion-row>
+                    <ion-col size="10">
+                        <ion-title style="color:black; margin-left: -10%;">{{'Menu.profile' | translate}}</ion-title>
+                    </ion-col>
+                    <ion-col size="2">
+                        <img src="../../assets/icon/edit_icon.png" (click)="profileorg1(1)" id="prfoileimg1">
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="talentrow">
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
+                        <ion-label style="color: #A3A4A5">TalentID :</ion-label>
+                        <ion-label><b>{{talentId}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
+                        <ion-label style="color: #A3A4A5">{{'PersonalInformation.name' | translate}} :</ion-label>
+                        <ion-label><b>{{orgname}}</b></ion-label>
+                    </ion-col>
+
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label style="color: #A3A4A5">{{'phoneNo' | translate}} :</ion-label>
+                        <ion-label><b>{{mobile}}</b></ion-label>
+
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label style="color: #A3A4A5">{{'email' | translate}} :</ion-label>
+                        <ion-label><b>{{email}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-label style="color: #A3A4A5">{{'JobSearch.location' | translate}} :</ion-label>
+                        <ion-label><b>{{orglocation}}</b></ion-label>
+                    </ion-col>
+                </ion-row>
+
+            </ion-card-content>
+        </ion-card>
+
+
+        <ion-card class="talentcard1">
+            <ion-card-content>
+                <ion-row style="    display: flex; flex-wrap: nowrap;">
+                    <ion-col>
+                        <ion-title style="color:black;     margin-left: -10%;
+                        width: 138%;">{{'aboutOrg' | translate}}</ion-title>
+                    </ion-col>
+                    <ion-col size="2" style="text-align: center;">
+                        <img src="../../assets/icon/edit_icon.png" (click)="profileorg2(2)" id="prfoileimg1">
+                    </ion-col>
+                </ion-row>
+
+
+
+                <ion-row class="talentrow">
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
+                        <ion-label style="color: #A3A4A5">{{'about' | translate}} :</ion-label>
+                        <ion-label><b>{{aboutdesc}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5">
+                        <ion-label style="color: #A3A4A5">{{'KmPortal.domain' | translate}} :</ion-label>
+                        <ion-label> <b>{{industrydomain}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="15" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label style="color: #A3A4A5">{{'entity' | translate}} :</ion-label>
+                        <ion-label><b>{{entitytype}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label style="color: #A3A4A5">{{'profileorg.Organization Size' | translate}} :</ion-label>
+                        <ion-label><b>{{companysize}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12" style="border-bottom: 1px solid #A3A4A5;">
+                        <ion-label style="color: #A3A4A5">{{'founded' | translate}} :</ion-label>
+                        <ion-label><b>{{foundedin}}</b></ion-label>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-label style="color: #A3A4A5">{{'regNo' | translate}} :</ion-label>
+                        <ion-label><b>{{registrationno}}</b></ion-label>
+                    </ion-col>
+
+                </ion-row>
+
+
+            </ion-card-content>
+        </ion-card>
+
+
+        <ion-card class="talentcard1">
+            <ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <ion-title style="color:black;    width: 105%; margin-left: -10%;">{{'profileorg.Payment Info' | translate}}
+
+                        </ion-title>
+                    </ion-col>
+                    <!-- <ion-col style="    text-align: end;">
+                        <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;"
+                        name="add-circle" (click)="payment()"></ion-icon>
+                        </ion-col> -->
+
+                </ion-row>
+                <ion-card class="talentcard2">
+                    <ion-card-content>
+
+                        <ion-row style="text-align: end;">
+                            <ion-col>
+                                <img src="../../assets/icon/edit_icon.png" (click)="payment(userId)">
+                            </ion-col>
+
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col size="12">
+                                <ion-label style="color: #A3A4A5">{{'BankDetails.accHoldName' | translate}} :
+                                </ion-label>
+                                <ion-label><b>{{accountHolderName}}</b></ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="color: #A3A4A5">{{'BankDetails.bankAccNo' | translate}} :</ion-label>
+                                <ion-label><b>{{accountNumber}}</b></ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="color: #A3A4A5">{{'BankDetails.ifscCode' | translate}} :</ion-label>
+                                <ion-label><b>{{ifscCode}}</b></ion-label>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-label style="color: #A3A4A5">{{'serviceFee' | translate}} :</ion-label>
+                                <ion-label><b>{{feeAmount}} {{feeCurrency}}</b></ion-label>
+                            </ion-col>
+
+                            <!-- <ion-col size="12">
+                            <ion-label>{{accountHolderName}}</ion-label>
+                        </ion-col> -->
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-card-content>
+        </ion-card>
+
+        <div #section>
+            <!-- <ion-card class="talentcard1"  id="section" *ngIf="connectioncard" > -->
+            <ion-card class="talentcard1" id="section" *ngIf="connectioncard">
+                <ion-card-content>
+                    <ion-row style="display: flex; align-content: center;
+                flex-wrap: nowrap;">
+                        <ion-col size="11">
+                            <ion-title style="color:black; margin-left: -10%;font-size:16px;"> {{'verifiedNetwork' | translate}}
+
+
+                            </ion-title>
+                        </ion-col>
+                        <ion-col style="    text-align: end;">
+                            <ion-icon style="margin-top: 1px;color:#ACCCFF;font-size: 32px;" name="add-circle" (click)="Connections()"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <ion-card class="talentcard2" (click)="go_to_list(i.relationship)" *ngFor="let i of connectionList">
+                        <ion-card-content>
+
+                            <!-- <ion-row style="text-align: end;">
+                        <ion-col size="12">
+                            <button ion-button (click)="showDropdown(x.certId)" style="    background: #edf1fc;">
+                              <ion-icon name="ellipsis-vertical"></ion-icon>
+                            </button>
+                            <div *ngIf="x.certId == showDropdownFlag" (click)="closeDropdown(x.certId)">
+                              <ion-list style="  height: 106px;width: 50%; margin-left: 46%;">
+                                <ion-item (click)="certification(x.certId)">
+                                    <ion-icon name="create-outline" style="padding-right: 15px;"></ion-icon>Edit
+                                </ion-item>
+                                <ion-item (click)="deleteCertificateCard(x.certId)" style="color:red">
+                                    <ion-icon name="trash-outline" style="padding-right: 15px;"></ion-icon>Delete
+                                </ion-item>
+                              </ion-list>
+                            </div>
+                          </ion-col>
+                    </ion-row> -->
+
+                            <ion-row>
+
+                                {{'verifiedNetwork' | translate}}
+                                <ion-col size="12">
+                                    <ion-label> <b>{{i.connectionCount}} </b></ion-label>
+                                    <ion-label> <b>{{i.relationship}} </b></ion-label>
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-card-content>
+                    </ion-card>
+
+
+
+
+
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <!-- Add card empty -->
+        <ion-card *ngIf="!connectioncard" class="talentcard1" style="padding-bottom: 35px ;">
+            <ion-card-content>
+                <ion-row>
+
+                    <ion-col size="5">
+
+                        <img src="../../assets/img/addconnectionicon.png" id="prfoileimg1" (click)="Connections()" style="    width: 50%; height: 73%; margin-left: 100%;  margin-top: 14%;">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-title style="color:black;margin-top: 5%; text-align: center;width: 104%;">{{'profilein.Add Connection' | translate}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+
+    </form>
+</ion-content>
+
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();">
+        <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();">
+        <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();">
+        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();">
+        <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+    </button>
+</div>

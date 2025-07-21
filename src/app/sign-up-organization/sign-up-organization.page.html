@@ -1,0 +1,321 @@
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- BS Stepper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
+
+
+<!-- <ion-header>
+    <ion-toolbar class="new-background-color headers">
+        <ion-row>
+
+
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_welcome()">
+                </ion-icon>
+            </ion-col>
+
+            <ion-col size="10">
+                <ion-title class="ion-text-wrap"
+                    style="font-family: Mr-eaves; color: black;text-align: center;">{{'Login.sign-up' |
+                    translate}}</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="goto_welcome()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title style="text-align: center;font-family: Mr-eaves; color: black;">{{'Login.sign-up' | translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <div class="container">
+        <div id="stepper3" class="bs-stepper">
+            <div class="bs-stepper-header">
+                <div class="step" data-target="#test-l-1">
+                    <button class="step-trigger">
+                        <span class="bs-stepper-circle">1</span>
+                        <span class="bs-stepper-label">{{'ProfileInfo' | translate }}</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-2">
+                    <button class="step-trigger" [disabled]="!profileForm.valid">
+                        <span class="bs-stepper-circle">2</span>
+                        <span class="bs-stepper-label">{{'AddressInfo' | translate }}</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-3">
+                    <button class="step-trigger" [disabled]="!addressForm.valid">
+                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-label">{{'RegistrationInfo' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+            <br>
+            <div class="bs-stepper-content">
+
+                <div id="test-l-1" class="content">
+                    <form [formGroup]="profileForm">
+                        <div class="button-content">
+                            <ion-label class="labels">{{'CorReg.orgName' | translate }} <small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="organizationName"></ion-input>
+                            </ion-item>
+                            <div *ngIf=" profileForm.controls.organizationName.hasError('required') && profileForm.controls.organizationName.touched">
+                                <small style="color: #f70505;">{{'CorReg.reqOrgName' | translate }}</small>
+                            </div>
+                            <div *ngIf="profileForm.controls.organizationName.hasError('pattern')">
+                                <small style="color: #f70505;">{{'CorReg.splCharNumAreNotAllowed' | translate }}</small>
+                            </div>
+                            <div *ngIf="profileForm.controls.organizationName.hasError('minlength')">
+                                <small style="color: #f70505;">{{'CorReg.firstNameMinLength' | translate }}</small>
+                            </div>
+
+                            <ion-label class="labels">{{'CorReg.OrganizationType' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+
+                                <ion-select placeholder="{{'CorReg.OrganizationType' | translate}}" formControlName="orgType">
+                                    <ion-select-option *ngFor="let Type of orgTypeList" [value]="Type.id">
+                                        {{Type.text}}</ion-select-option>
+
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf=" profileForm.controls.orgType.hasError('required') && profileForm.controls.orgType.touched">
+                                <small style="color: #f70505;">{{'CorReg.Organizationrequired' | translate}}</small>
+                            </div>
+                            <ion-label class="labels">{{'CorReg.domain' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-select placeholder="{{'CorReg.domain' | translate}}" formControlName="domainId">
+                                    <ion-select-option *ngFor="let domain of domainList" [value]="domain.id">
+                                        {{domain.text}}</ion-select-option>
+
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf=" profileForm.controls.domainId.hasError('required') && profileForm.controls.domainId.touched">
+                                <small style="color: #f70505;">{{'CorReg.reqDomain' | translate}}</small>
+                            </div>
+
+                            <ion-label class="labels">{{'CorReg.OrganisationRegiNo' | translate}}<small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="regNo" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
+                            </ion-item>
+                            <div *ngIf=" profileForm.controls.regNo.hasError('required') && profileForm.controls.regNo.touched">
+                                <small style="color: #f70505;">{{'CorReg.reqRegNumber' | translate}}</small>
+                            </div>
+
+                            <ion-label class="labels">{{'CorReg.dor' | translate}}<small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-datetime displayFormat="DD.MM.YYYY" formControlName="regDate" presentation="date">
+                                </ion-datetime>
+                            </ion-item>
+                            <div *ngIf=" profileForm.controls.regDate.hasError('required') && profileForm.controls.regDate.touched">
+                                <small style="color: #f70505;">{{'CorReg.reqDor' | translate}}</small>
+                            </div>
+
+
+
+                            <ion-label class="labels">{{'CorReg.uploadLogo' | translate}}</ion-label>
+                            <ion-row>
+                                <ion-col size="6">
+                                    <ion-thumbnail *ngIf="base64img1">
+                                        <img class="horizontal" [src]="base64img1" name="image" />
+                                    </ion-thumbnail>
+                                    <ion-thumbnail *ngIf="!base64img1">
+                                        <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                    </ion-thumbnail>
+                                </ion-col>
+
+                                <ion-col size="6">
+                                    <div class="ion-float-rigth">
+                                        <ion-button fill="clear" (click)="opengallery()">
+                                            <ion-icon name="image-outline"></ion-icon>
+                                        </ion-button>
+                                        <ion-button fill="clear" (click)="opencamera()">
+                                            <ion-icon name="camera-outline"></ion-icon>
+                                        </ion-button>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                        <div class="display-justify">
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"  (click)="profileInfonext()">{{'profilein.Next' | translate}}
+                            </ion-button>
+                        </div>
+
+                        <div class="line-with-text">
+                            <hr class="hr1">
+
+                            <hr class="hr2">
+                        </div>
+
+                        <div class="sign-in">
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()" style="color: #007bff;">
+                                        {{'sign_in' | translate}}</a></b></span>
+                        </div>
+                    </form>
+                </div>
+                <div id="test-l-2" class="content">
+                    <form [formGroup]="addressForm">
+                        <div class="button-content">
+                            <ion-label class="labels">{{'profileorg.Address' | translate}}</ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-textarea placeholder="{{'Enter' | translate}}" formControlName="address"></ion-textarea>
+                            </ion-item>
+
+
+                            <ion-label class="labels">{{'country'| translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ionic-selectable formControlName="country" [items]="countryResponse" itemValueField="id" itemTextField="text" [canSearch]="true" (onChange)="portChange($event)">
+                                </ionic-selectable>
+                            </ion-item>
+                            <div *ngIf=" addressForm.controls.country.hasError('required') && addressForm.controls.country.touched" style="text-align: left;">
+                                <small style="color: #f70505;">{{'CorReg.CountryRequired' | translate}}</small>
+                            </div>
+                            <ion-label class="labels">{{'CorReg.stateProvince' | translate}} <small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ionic-selectable formControlName="state" [items]="stateResponse" itemValueField="id" itemTextField="text" [canSearch]="true" (onChange)="stateChange($event)">
+                                </ionic-selectable>
+                            </ion-item>
+
+                            <div *ngIf=" addressForm.controls.state.hasError('required') && addressForm.controls.state.touched" style="text-align: left;">
+                                <small style="color: #f70505;">{{'CorReg.State/ProvinceRrequired' | translate}}</small>
+                            </div>
+                            <ion-label class="labels">{{'CorReg.areaName' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ionic-selectable formControlName="city" [items]="cityOptions" itemValueField="id" itemTextField="text" [canSearch]="true" (onChange)="cityChange($event)">
+                                </ionic-selectable>
+                            </ion-item>
+                            <div *ngIf=" addressForm.controls.city.hasError('required') && addressForm.controls.city.touched" style="text-align: left;">
+                                <small style="color: #f70505;">{{'CorReg.CityRequired' | translate}} </small>
+                            </div>
+                            <ion-label class="labels">{{'CorReg.pinZipCode' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="pincode"></ion-input>
+                            </ion-item>
+                            <div *ngIf=" addressForm.controls.pincode.hasError('required') && addressForm.controls.pincode.touched" style="text-align: left;">
+                                <small style="color: #f70505;">{{'CorReg.reqPinZipCode' | translate}}</small>
+                            </div>
+
+                        </div>
+                        <div class="display-justify">
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="prev()">{{'profilein.Back' | translate}}
+                            </ion-button>
+
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;"  (click)="next()">{{'profilein.Next' | translate}}
+                            </ion-button>
+                        </div>
+
+                        <div class="line-with-text">
+                            <hr class="hr1">
+                            <hr class="hr2">
+                        </div>
+
+                        <div class="sign-in">
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?'| translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"
+                                        style="color: #007bff;">{{'sign_in'|
+                                        translate}}</a></b></span>
+                        </div>
+                    </form>
+                </div>
+                <div id="test-l-3" class="content text-center">
+                    <form [formGroup]="regInfoForm">
+                        <div class="button-content">
+
+
+                            <ion-label class="labels">{{'AddFamilyInfo.contactNo' | translate}} <small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input type="number" formControlName="mobileNo" (keypress)="limitInputLength($event)"></ion-input>
+                            </ion-item>
+                            <div *ngIf=" regInfoForm.controls.mobileNo.hasError('required') && regInfoForm.controls.mobileNo.touched" style="text-align: left;">
+                                <small style="color: #f70505;">{{'AddFamilyInfo.Contact number is required' |
+                                    translate}} </small>
+                            </div>
+
+                            <ion-label class="labels">{{'CorReg.orgEmail' | translate}} <small style="color: #f70505;">*</small>
+                            </ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="emailId" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
+                            </ion-item>
+                            <div *ngIf=" regInfoForm.controls.emailId.hasError('required') && regInfoForm.controls.emailId.touched" style="text-align: left;">
+                                <small style="color: #f70505;">{{'CorReg.OrganizationEmailRequired' | translate}}
+                                </small>
+                            </div>
+
+                            <div *ngIf="regInfoForm.controls.emailId.hasError('pattern')" style="text-align: left;">
+                                <small style="color: #f70505;">{{'invalidEmail' | translate }}</small>
+                            </div>
+
+                            <ion-label class="labels">{{ 'InsReg.password' | translate }} <small style="color: #f70505;">*</small></ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input type="{{ passwordType }}" clearOnEdit="false" formControlName="pwd" (ionInput)="showPasswordError()"></ion-input>
+                                <ion-icon name="{{ passwordIcon }}" slot="end" (click)="passwordToggle()"></ion-icon>
+                            </ion-item>
+                            <div *ngIf="showMinLengthError" style="text-align: left;">
+                                <small style="color: #f70505;">Please enter a password with a maximum of 5 characters.</small>
+                            </div>
+                            <div *ngIf="regInfoForm.controls.pwd.hasError('required') && regInfoForm.controls.pwd.touched && !showMinLengthError" style="text-align: left;">
+                                <small style="color: #f70505;">{{ 'reqPassword' | translate }}</small>
+                            </div>
+                            
+                            
+
+                            <ion-label class="labels">{{'referralCode' | translate}}</ion-label>
+                            <ion-item fill="outline" class="input-field">
+                                <ion-input formControlName="referralCode"></ion-input>
+                            </ion-item>
+
+                            <ion-item lines="none">
+                                <ion-checkbox formControlName="cBoxIAgree" [(ngModel)]="cBoxIAgreeVal"></ion-checkbox>
+                                <ion-label>&emsp;{{'iAccept' | translate}} <a (click)="openTCForm()" style="color: rgb(119, 191, 194);"> {{'tAndC' | translate}}</a><span style="color:red">*</span></ion-label>
+                            </ion-item><br>
+
+                            <ion-item lines="none">
+                                <ion-checkbox formControlName="cBoxIAgreeConsent" [(ngModel)]="cBoxIAgreeConsentVal"></ion-checkbox>
+                                <ion-label>&emsp;{{'iAccept' | translate}} <a (click)="openConsentForm()" style="color: rgb(119, 191, 194);">{{'consentForm' | translate}}</a><span style="color:red">*</span></ion-label>
+                            </ion-item>
+
+                        </div>
+                        <div class="display-justify">
+                            <ion-button class="custom-button" style="font-family:  Mr-eaves;" (click)="prev()">{{'profilein.Back' | translate}}
+                            </ion-button>
+                            <ion-button class="custom-button" [disabled]="!regInfoForm.valid || cBoxIAgreeVal==false || cBoxIAgreeConsentVal ==false " style="font-family:  Mr-eaves;" (click)="onSubmit()">
+                                {{'register' | translate}}</ion-button>
+                        </div>
+
+
+                        <div class="line-with-text">
+                            <hr class="hr1">
+                            <hr class="hr2">
+                        </div>
+
+                        <div class="sign-in">
+                            <div style="font-size: 16px;">{{'Already a Talentchek member?' | translate}} </div><span style="font-size: 18px;"><b> <a (click)="goto_signin()"
+                                        style="color: #007bff;">{{'sign_in' | translate}}</a></b></span>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ion-content>

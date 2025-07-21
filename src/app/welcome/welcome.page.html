@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-title login-page-text>Welcome</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <!-- <ion-card-header>
+      <ion-card-title>Congratulations!</ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+    </ion-card-header> -->
+
+    <ion-card-content>
+      <ion-row>
+        <img src="./assets/img/Congratulations.png"/>
+      </ion-row>
+      <ion-row></ion-row>
+      <ion-row>
+        <ion-label style="font-weight: bold;">Your talent id is: </ion-label>
+        <ion-label style="font-weight: bold;color:Green">{{ data.empId }}</ion-label>
+      </ion-row>
+      <ion-row></ion-row>
+      <ion-row>
+        <ion-label style="font-weight: bold;">Your newly earned Talent Credits: </ion-label>
+        <ion-label style="font-weight: bold;color:Green">{{ data.points }}</ion-label>
+      </ion-row>
+      <ion-row></ion-row>
+      <ion-row>
+        <ion-button login-page-text class="loginbtnV2" (click)="goto_login()" shape="round"
+              style="width:270px;color: black;font-size: medium;font-weight: bold;">Click Here to Continue...</ion-button>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

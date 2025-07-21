@@ -1,0 +1,242 @@
+<ion-header>
+    <ion-toolbar>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_matches_list()" style="margin-top:21%"></ion-icon>
+            </div>
+            <div style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;">{{'View Matches' | translate}}
+                </ion-title>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div *ngIf="heagerListFlag">
+
+        <div class="display-justify">
+            <ion-card class="adv-card" (click)="matchedProfileList()">
+                <ion-card-content>
+                    <ion-row>
+
+                        <ion-col size="3">
+                            <img alt="" src="../../assets/img/match.png" />
+                        </ion-col>
+                        <ion-col size="6">
+                            <p class="title-match">{{'JobPostInsti.matchedProf' | translate}}</p>
+                        </ion-col>
+                        <ion-col size="3">
+                            <p class="title-count">{{matchedCount}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <div class="display-justify">
+            <ion-card class="adv-card" (click)="recivedApplicationList()">
+                <ion-card-content>
+                    <ion-row>
+
+                        <ion-col size="3">
+                            <img alt="" src="../../assets/img/applications.png" />
+                        </ion-col>
+                        <ion-col size="5">
+                            <p class="title-match">{{'Received Applications' | translate}}</p>
+                        </ion-col>
+                        <ion-col size="4">
+                            <p class="title-count">{{applicationsReceivedCount}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+
+
+        <div class="display-justify">
+            <ion-card class="adv-card" (click)="bidsreceivedList()">
+                <ion-card-content>
+                    <ion-row>
+
+                        <ion-col size="3">
+                            <img alt="" src="../../assets/img/auctioneer.png" />
+                        </ion-col>
+                        <ion-col size="6">
+                            <p class="title-match">{{'Bids Received' | translate}}</p>
+                        </ion-col>
+                        <ion-col size="3">
+                            <p class="title-count">{{orgBidCount}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </div>
+
+    <!-- Matched Profiles List-->
+
+    <div *ngIf="!heagerListFlag && matchjobsFlag">
+
+        <br>
+        <br>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
+        justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'JobPostInsti.matchedProf' | translate}} </span>
+
+
+        <ion-row *ngIf="matchedList.length == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="matchedList.length == 0">No Results to Display</div>
+
+        <ion-card class="profilesearchcard" *ngFor="let match of matchedList" (click)="profileView(match.userid,match.accounttype,match.jobseekername)">
+            <ion-card-content style="padding-bottom: 0px;">
+
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="medium">
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{imagePath}}{{match.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+
+                    <ion-col size="10">
+                        <ion-title style="font-family:  Mr-eaves; font-size: 18px;">{{match.jobseekername}} </ion-title>
+                    </ion-col>
+
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="2">
+                    </ion-col>
+                    <ion-col size="10" style="    margin-top: -13%;">
+                        <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
+                            {{match.jobseekerexperienceno}} {{match.jobseekerexperienceformat}} {{'JobAppliRec.relExp' | translate}}
+                        </ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+
+    <!-- Application Recived list -->
+
+    <div *ngIf="!heagerListFlag && recivedAppFlag">
+        <br>
+        <br>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600; display: flex;
+        justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Received Applications' | translate}} </span>
+
+
+        <ion-row *ngIf="applicationsReceivedList.length == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="applicationsReceivedList.length == 0">No Results to Display</div>
+
+        <ion-card class="profilesearchcard" *ngFor="let profile of applicationsReceivedList" (click)="viewRecivedAppProfiles(profile.userid,profile.jspid)">
+            <ion-card-content style="padding-bottom: 0px;">
+
+                <ion-row>
+                    <ion-col size="3">
+                        <ion-avatar size="medium">
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{imagePath}}{{profile.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+
+                    <!-- <ion-col size="10">
+                        <ion-title style="font-family: Mr-eaves; font-size: 18px;">{{profile.jobseekername}}</ion-title>
+                    </ion-col> -->
+
+                    <ion-col size="9">
+                        <ion-title style="text-align: start;padding:0px;align-items: baseline;">
+                            <div class="ion-text-wrap" style="font-family:  Mr-eaves; font-size: 18px; text-align: start;">
+                                {{profile.jobseekername}}</div>
+                        </ion-title>
+                        <div style="padding-top: 20px;">
+                            <p class="ion-text-wrap" style="word-wrap: normal; width: 140%;padding-top: 10px;">
+                                {{profile.receivedformat}}</p>
+
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <!-- <ion-row>
+                    <ion-col size="2">
+                    </ion-col>
+                    <ion-col size="10" style="    margin-top: -13%;">
+                        <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
+                            {{profile.receivedformat}}</ion-title>
+                    </ion-col>
+                </ion-row> -->
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <!-- Bids Recived List-->
+
+
+    <div *ngIf="!heagerListFlag && bidsRecvFlag">
+        <br>
+        <br>
+        <span style=" font-family: 'Poppins';font-size: 26px;font-weight: 600;display: flex;justify-content: space-around;">&nbsp;&nbsp;&nbsp;{{'Bids
+            Received' | translate}} </span>
+
+
+        <ion-row *ngIf="orgBidList.length == 0">
+            <ion-col size="12">
+                <ion-avatar size="medium" style="width: 90%; margin-left: 5%; margin-top: 8%; height: 90%;">
+                    <img alt="" src="../../assets/img/search.png" />
+                </ion-avatar>
+            </ion-col>
+
+        </ion-row>
+        <div style="display: flex;justify-content: center;" *ngIf="orgBidList.length == 0">No Results to Display</div>
+
+
+
+        <ion-card class="profilesearchcard" *ngFor="let bid of orgBidList" (click)="viewBidsRecvProfiles(bid.bidder,bid.bidid)">
+            <ion-card-content style="padding-bottom: 0px;">
+
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-avatar size="medium">
+                            <img alt="" style=" height: 80%;width: 80%;" src="{{imagePath}}{{bid.profileimg}}" />
+                        </ion-avatar>
+                    </ion-col>
+
+                    <ion-col size="10">
+                        <ion-title style="font-family:  Mr-eaves; font-size: 18px;">{{bid.biddername}}</ion-title>
+                    </ion-col>
+
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="2">
+                    </ion-col>
+                    <ion-col size="10" style="    margin-top: -13%;">
+                        <ion-title style="    line-height: 14px;font-family: inherit;    font-size: 13px;">
+                            {{'Expecting' | translate}}{{bid.salaryBudgetFrom}}-{{bid.salaryBudgetTo}} {{bid.salaryBudgetCurrency}} {{bid.salaryBudgetFrequency}}</ion-title>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+</ion-content>

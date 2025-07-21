@@ -1,0 +1,139 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-back-button class="whiteTheme" defaultHref="dashboard-individual" (click)="goto_Dashboard()"></ion-back-button>
+        </ion-buttons>
+        <ion-row>
+
+            <ion-col size="10">
+                <ion-title class="ion-text-wrap">G-track </ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card class="talentcard1" *ngIf="isShow==true">
+        <ion-card-content>
+            <!-- Email -->
+            <ion-row class="talentrow">
+                <ion-col class="ion-no-padding">
+
+                    <ion-label class="kTheme">Search By</ion-label>
+                    <ion-select placeholder="Select One" [(ngModel)]="searchby" (ionChange)="getValue(mod)" style="color: #27246f!important;">
+                        <ion-select-option *ngFor="let mod of modelList" value="{{mod}}">{{mod}}</ion-select-option>
+                    </ion-select>
+
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="talentrow">
+                <ion-col class="ion-no-padding">
+                    <ion-col lines="none">
+                        <ion-label class="kTheme">{{searchby}}</ion-label>
+                        <ion-input class="klab" style="color: #000000!important;" type="text" [(ngModel)]="searchdata"></ion-input>
+                    </ion-col>
+                </ion-col>
+            </ion-row>
+
+
+            <!-- Search button -->
+            <ion-row>
+                <ion-col style="text-align: center;" class="ion-no-padding">
+                    <ion-button shape="round" class="ioncardButtonNormal" (click)="searchClick()">
+                        <ion-icon slot="start" name="search"></ion-icon>search
+                    </ion-button>
+                    <ion-button shape="round" class="ioncardButtonNormal" (click)="resetClick()">
+                        <ion-icon slot="start" name="refresh-outline"></ion-icon>Reset
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="details-card" *ngIf="isSubmitted==true">
+        <ion-card-content>
+            <div class="container">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-9 push-3 style="color: #000; font-weight: bold;">
+                            {{searchby}} :
+                        </ion-col>
+                        <ion-col col-3 pull-9 style="color: #27246f; font-weight: bold;">
+                            {{tracking.jobid}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-9 push-3 style="color: #000; font-weight: bold;">
+                            Pickup Date :
+                        </ion-col>
+                        <ion-col col-3 pull-9 style="color: #27246f; font-weight: bold;">
+                            {{tracking.jb_dt}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-9 push-3 style="color: #000; font-weight: bold;">
+                            FROM :
+                        </ion-col>
+                        <ion-col col-3 pull-9 style="color: #27246f; font-weight: bold;">
+                            {{tracking.pol}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-9 push-3 style="color: #000; font-weight: bold;">
+                            TO :
+                        </ion-col>
+                        <ion-col col-3 pull-9 style="color: #27246f; font-weight: bold;">
+                            {{tracking.pod}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-9 push-3 style="color: #000; font-weight: bold;">
+                            Reference No :
+                        </ion-col>
+                        <ion-col col-3 pull-9 style="color: #27246f; font-weight: bold;">
+                            {{tracking.booking_no}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </div>
+            <div class="container">
+                <div class="lines">
+
+
+                    <ion-grid>
+
+                        <div *ngFor="let item of resultArray;let i=index ; let l=last ; ">
+
+                            <ion-row>
+                                <ion-col col-9 push-3>
+                                    <div *ngIf="i==0" class="greendot">
+                                        <ion-label>{{item.jobtriggername}}</ion-label>
+                                    </div>
+                                    <div *ngIf="i!=0 && i!=l" class="dot">
+                                        <ion-label>{{item.jobtriggername}}</ion-label>
+                                    </div>
+                                    <div *ngIf="l" class="reddot">
+                                        <ion-label>{{item.jobtriggername}}</ion-label>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div *ngIf="l" class="blueline"></div>
+                                </ion-col>
+                                <ion-col col-3 pull-9>
+                                    <div class="card">
+                                        <h4>{{item.jbtime}} {{item.time}}</h4>
+                                        <p>{{item.jobtriggername1}}</p>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+
+                    </ion-grid>
+                </div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

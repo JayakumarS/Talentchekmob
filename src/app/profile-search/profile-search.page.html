@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-back-button class="blackTheme" defaultHref="dashboard-individual"
+                (click)="goto_Dashboard()"></ion-back-button>
+        </ion-buttons>
+        <ion-row>
+            <ion-col size="10">
+                <ion-title class="ion-text-wrap">{{'ProfileSearch.profileSearch' | translate}} </ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card class="talentcard1">
+        <ion-card-content>
+            <!-- Email -->
+            <ion-row class="talentrow">
+                <ion-col class="ion-no-padding">
+
+                    <ion-label class="kTheme">Search By</ion-label>
+                    <ion-select placeholder="Select One" [(ngModel)]="searchby" (ionChange)="getValue(mod)">
+                        <ion-select-option *ngFor="let mod of modelList" value="{{mod}}">{{mod}}</ion-select-option>
+                    </ion-select>
+
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="talentrow">
+                <ion-col class="ion-no-padding">
+                    <ion-col lines="none">
+                        <ion-label class="kTheme">Job No</ion-label>
+                        <ion-input class="klab" type="text" [(ngModel)]="searchdata"></ion-input>
+                    </ion-col>
+                </ion-col>
+            </ion-row>
+
+
+            <!-- Search button -->
+            <ion-row>
+                <ion-col style="text-align: center;" class="ion-no-padding">
+                    <ion-button shape="round" class="ioncardButtonNormal" (click)="searchClick()">
+                        <ion-icon slot="start" name="search"></ion-icon>{{'ProfileSearch.search' | translate}}
+                    </ion-button>
+                    <ion-button shape="round" class="ioncardButtonNormal" (click)="resetClick()">
+                        <ion-icon slot="start" name="refresh-outline"></ion-icon>{{'ProfileSearch.reset' | translate}}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="talentcard2">
+        <ion-card-content>
+
+            <ion-list style="background: transparent !important;">
+                <ion-label *ngIf="searchListCount == 0" color="dark">
+                    <h2 class="blackTheme">{{'ProfileSearch.plsSrhAdSePfe' | translate}}</h2>
+                </ion-label>
+                <ion-item style="--ion-item-background: transparent;" *ngFor='let element of searchListResponse'
+                    (click)="openDetailsWithService(element.userId,element.empId,element.userAcctType)">
+                    <ion-avatar slot="start">
+                        <img *ngIf="element.uploadPhoto != null" [src]="baseURL + element.uploadPhoto">
+                        <img *ngIf="element.uploadPhoto == null" src="../../assets/img/avatar1.png">
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{element.firstName}} {{element.lastName}}</h2>
+                        <p *ngIf="element.skillCategory != null">{{element.skillCategory}} - {{element.subCategory}}</p>
+                        <p>{{element.userId}}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

@@ -1,0 +1,69 @@
+<ion-header style="background-color: white;">
+  <ion-toolbar style="padding: 20px 10px 15px;">
+      <ion-row style="display: flex;justify-content: space-between;">
+        <div>
+          <ion-icon size="large" (click)="goto_settings()" name="arrow-back-circle-outline" style="margin-top:21%"></ion-icon>
+        </div>  
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;display: flex;
+        align-items: center;align-items: center;">
+          Push messages
+        </div> 
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
+        </div>
+      </ion-row> 
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div>
+  <ion-item class="toggle-item">
+    <ion-label><b>Recommend vacancies</b><br>Just recommend job for you</ion-label>
+    <ion-toggle class="toggle" slot="end" ></ion-toggle>
+  </ion-item>
+
+  
+  <ion-item class="toggle-item">
+    <ion-label><b>Hot vacancies</b><br>Everyday hot job vacancies for you</ion-label>
+    <ion-toggle class="toggle" slot="end"></ion-toggle>
+  </ion-item>
+
+  
+  <ion-item class="toggle-item">
+    <ion-label><b>Your subscriptions</b><br>Job alerts for which you are subscribed</ion-label>
+    <ion-toggle class="toggle" slot="end"></ion-toggle>
+  </ion-item>
+
+  
+  <ion-item class="toggle-item">
+    <ion-label><b>Jobby center</b><br>Receive daily update notifications in Jobby center</ion-label>
+    <ion-toggle class="toggle" slot="end"></ion-toggle>
+  </ion-item>
+
+  
+  <ion-item class="toggle-item">
+    <ion-label><b>Views of your resume</b><br>Get notified when your resumes are viewed</ion-label>
+    <ion-toggle class="toggle" slot="end"></ion-toggle>
+  </ion-item>
+</div>
+
+
+
+
+
+  <div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');">
+      <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth')">
+      <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps')">
+      <ion-icon size="large" name="apps"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile')">
+      <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu')">
+      <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+    </button>
+  </div>
+</ion-content>

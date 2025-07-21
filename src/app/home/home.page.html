@@ -1,0 +1,259 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title style="text-align: center;
+        font-family: 'Mr-eaves';
+        font-size: 28px;">{{'KmPortal.home' | translate}}</ion-title>
+    </ion-toolbar>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <form>
+        <div class="display-justify">
+            <ion-row class="container">
+                <ion-col size="6">
+                    <ion-card class="recharge-card" (click)="goto_subscribe()">
+                        <ion-card-content>
+                            <p style="text-align: center;font-size: 16px; color: #fff;">{{'Available' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; color: #fff; font-weight: 700;">
+                                {{'Subscription.talCrd'| translate}}</p>
+
+                            <div class="card-content p-0 flex" style="display: flex;justify-content: center;">
+                                <div class="spinningasset coin is-sm">
+                                    <div>
+                                        <em></em>
+                                        <em></em>
+                                    </div>
+                                </div>
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color: #fff;">
+                                    {{creditPoints}}
+                                </div>
+                            </div>
+                            <br>
+                            <p style="text-align: center;font-size: 14px; color: #fff;"><b>{{'Recharge Now' |
+                                    translate}}</b></p>
+
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <div>
+                    <ion-col size="3">
+                        <div class="custom-button">
+                            <div style="display: flex; align-items: center;">
+                                {{'Profile Views' | translate}}<b>: {{profileViewCount}}</b></div>
+                        </div>
+                    </ion-col>
+                    <ion-col size="3">
+                        <div class="custom-button">
+                            <div style="display: flex; align-items: center;">
+                                {{'Your Rating' | translate}}:<b>&nbsp; {{avgrating}}</b><span class="fa fa-star checked"></span></div>
+                        </div>
+                    </ion-col>
+                </div>
+            </ion-row>
+        </div>
+
+
+        <!-- <ion-row class="container">
+            <ion-col size="6">
+                <ion-card class="network-card">
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col size="3">
+                                <ion-icon name="person-add-outline"></ion-icon>
+                            </ion-col>
+
+                            <ion-col size="6">
+
+                            </ion-col>
+
+                            <ion-col size="3">
+
+                            </ion-col>
+
+                        </ion-row>
+
+                        <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{networkCount}}</p>
+                        <p style="text-align: center;font-size: 14px; color: #000;"><b>Your Network</b></p>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+            <ion-col size="6">
+                <ion-card class="network-card">
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col size="3">
+                                <ion-icon name="eye-outline"></ion-icon>
+                            </ion-col>
+
+                            <ion-col size="6">
+
+                            </ion-col>
+
+                            <ion-col size="3">
+
+                            </ion-col>
+
+                        </ion-row>
+
+                        <p style="text-align: center;font-size: 24px;font-weight: 700; color: #000;">{{matchedJobsCount}}</p>
+                        <p style="text-align: center;font-size: 14px; color: #000;"><b>Matched Jobs</b></p>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row> -->
+
+
+        <div class="line-with-text">
+            <hr class="hr1">
+        </div>
+
+
+        <ion-col *ngIf="initialCount==0 || initialCount=='0'">
+            <!-- <h1 style="font-family: 'Mr-eaves';font-size: 29px;text-align: center;">{{'STAY CALM' | translate}}</h1> -->
+            <!-- <P style="text-align: center ;">{{'and get your profile permanently endorsed' | translate}}</P> -->
+            <p style="text-align: center ; color: #61ccff;font-weight: 700;font-size: 17px;"><a (click)="goto_profile()">{{'Go to Profile' | translate}}</a></p>
+            <!-- <img class="imageCss" src="../../assets/img/Illustration.png" /> -->
+        </ion-col>
+        <div>
+<!-- ////////////////////////////// View Count ///////////////////////////////////////// -->
+
+            <ion-col style="display: flex;align-items: center; justify-content: space-between;">
+            <p style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">Total Talent Card Views: &nbsp; <b style="font-size: 35px;">
+                {{totalViewCount}}</b></p>
+            {{languageService.selectedFilter}} 
+              <ion-icon name="funnel" (click)="openPopOver($event)"></ion-icon>
+            </ion-col>
+
+        <!-- <ion-col *ngIf="(totalViewCount==0 || totalViewCount=='0' ) && range ==This year" style="display: flex;align-items: center; justify-content: space-between;">
+            <img class="imageCss" src="../../assets/img/year.png" />
+        </ion-col>
+        <ion-col *ngIf="(totalViewCount==0 || totalViewCount=='0' ) && range =='This month'" style="display: flex;align-items: center; justify-content: space-between;">
+            <img class="imageCss" src="../../assets/img/month.png" />
+        </ion-col>
+        <ion-col *ngIf="(totalViewCount==0 || totalViewCount=='0' ) && range =='This week'" style="display: flex;align-items: center; justify-content: space-between;">
+            <img class="imageCss" src="../../assets/img/week.png" />
+        </ion-col> -->
+
+        <ion-col *ngIf="totalViewCountFlag">
+            <p *ngIf="languageService.selectedFilter === 'This week'">
+               <img class="imageCss" src="../../assets/img/view1.png" />
+               </p>
+               <p *ngIf="languageService.selectedFilter === 'This month'">
+                   <img class="imageCss" src="../../assets/img/view2.png" />
+   
+               </p>
+               <p *ngIf="languageService.selectedFilter === 'This year'">
+                   <img class="imageCss" src="../../assets/img/view3.png" />
+   
+               </p>
+   
+             </ion-col>
+
+             <div *ngIf="!totalViewCountFlag">
+                <div id="container" class="chart-container"></div>
+            </div>
+        
+
+<!-- ////////////////////////////////// Save Count ///////////////////////////////////////////// -->
+        <p *ngIf="initialCount!=0 && initialCount!='0'" style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">
+            Total Contact Saves: &nbsp; <b style="font-size: 35px;">{{totalContactCount}}</b></p>
+<!--        
+        <p *ngIf="(totalContactCount==0 || totalContactCount=='0' )&& range ==This year">
+            <img class="imageCss" src="../../assets/img/year.png" />
+        </p>
+
+        <p *ngIf="(totalContactCount==0 || totalContactCount=='0' )&& range =='This month'">
+            <img class="imageCss" src="../../assets/img/month.png" />
+        </p>
+
+        <p *ngIf="(totalContactCount==0 || totalContactCount=='0' )&& range =='This week'">
+            <img class="imageCss" src="../../assets/img/week.png" />
+        </p> -->
+        <!-- <div *ngIf="totalContactCount!=0 ||totalContactCount!='0'">
+        <div id="container2" class="chart-container"></div>
+        </div> -->
+
+        <ion-col *ngIf="totalContactCountFlag">
+            <p *ngIf="languageService.selectedFilter === 'This week'">
+               <img class="imageCss" src="../../assets/img/save1.png" />
+               </p>
+               <p *ngIf="languageService.selectedFilter === 'This month'">
+                   <img class="imageCss" src="../../assets/img/save2.png" />
+
+               </p>
+               <p *ngIf="languageService.selectedFilter === 'This year'">
+                   <img class="imageCss" src="../../assets/img/save3.png" />
+
+               </p></ion-col>
+        <div *ngIf="!totalContactCountFlag">
+            <div id="container2" class="chart-container"></div>
+        </div>
+        <!-- /////////////////////////////////////////////// Share Count ///////////////////////////////////// -->
+
+        <p *ngIf="initialCount!=0 && initialCount!='0'" style="font-family:Arial, Helvetica, sans-serif;text-align: left;padding-left: 3%; font-size: 17px;">
+            Total Shared Contacts: &nbsp; <b style="font-size: 35px;" (click)="listPage()">{{sharedContactCount}}</b></p>
+          
+        <!-- <p *ngIf="(sharedContactCount==0 || sharedContactCount=='0') && range ==This year">
+            <img class="imageCss" src="../../assets/img/year.png" />
+        </p>
+
+        <p *ngIf="(sharedContactCount==0 || sharedContactCount=='0' )&& range =='This month'">
+            <img class="imageCss" src="../../assets/img/month.png" />
+        </p>
+
+        <p *ngIf="(sharedContactCount==0 || sharedContactCount=='0') && range =='This week'">
+            <img class="imageCss" src="../../assets/img/week.png" />
+        </p> -->
+
+        
+        <ion-col *ngIf="sharedContactCountFlag">
+            <p *ngIf="languageService.selectedFilter === 'This week'">
+               <img class="imageCss" src="../../assets/img/share1.png" />
+               </p>
+               <p *ngIf="languageService.selectedFilter === 'This month'">
+                   <img class="imageCss" src="../../assets/img/share2.png" />
+
+               </p>
+
+               <p *ngIf="languageService.selectedFilter === 'This year'">
+                   <img class="imageCss" src="../../assets/img/share3.png" />
+
+               </p></ion-col>
+         <div *ngIf="!sharedContactCountFlag">
+            <div id="container3" class="chart-container"></div>
+        </div>
+</div>
+
+    </form>
+
+
+
+
+</ion-content>
+
+<div class="footer-nav">
+    <button [ngClass]="{'selected': selectedTab === 'search'}" (click)="setSelectedTab('search');goto_profileSearch();" id="step1">
+        <ion-icon size="large" name="search-circle"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'earth'}" (click)="setSelectedTab('earth');goto_jobs();" id="step2">
+        <ion-icon size="large" name="earth-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'apps'}" (click)="setSelectedTab('apps');goto_home();">
+        <img style="max-width: 67%;" src="../../assets/img/faviconcircle.png" (click)="setSelectedTab('apps')">
+
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'profile'}" (click)="setSelectedTab('profile');goto_profile();" id="step3">
+        <ion-icon size="large" name="person-circle-sharp"></ion-icon>
+    </button>
+    <button [ngClass]="{'selected': selectedTab === 'menu'}" (click)="setSelectedTab('menu');goto_more();" id="step4">
+        <ion-icon size="large" name="ellipsis-vertical-circle-sharp"></ion-icon>
+
+    </button>
+</div>

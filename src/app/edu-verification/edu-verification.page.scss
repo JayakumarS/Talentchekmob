@@ -1,0 +1,149 @@
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png')  ;
+    background-size: cover;
+}
+
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+@font-face {
+    font-family: alina-sans;
+    src: url(../../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+}
+
+.not-now {
+    display: flex;
+    justify-content: center;
+    padding-top: 15%;
+    color: #5E6061;
+    font-size: 14px;
+    font-family: alina-sans;
+}
+
+.imageCss {
+    display: flex;
+    justify-content: center;
+    padding-top: 45px;
+}
+
+.display-justify {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 35px;
+}
+
+.line-with-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line-with-text .hr1 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+.line-with-text .hr2 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.or-text {
+    font-size: 18px;
+    color: #000000;
+}
+
+.social-icon {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
+}
+
+.sign-in {
+    display: flex;
+    justify-content: center;
+    padding-top: 33px;
+}
+
+:host(.icon-large) {
+    font-size: 50px !important;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    border-top: 2px solid black;
+    margin: 10px 0;
+}
+
+.custom-button {
+    width: 360px;
+    --border-radius: 50px;
+    height: 56px;
+    font-size: 18px;
+}
+
+.hello-dear {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 40px;
+}
+
+.button-native {
+    background: brown!important;
+}
+
+:root.buttonColor {
+    --ion-color-secondary: #006600;
+    --ion-color-secondary-rgb: 0, 102, 0;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #005a00;
+    --ion-color-secondary-tint: #1a751a;
+}
+
+.buttonionix {
+    --background: #93e9be;
+    --background-hover: #9ce0be;
+    --background-activated: #88f4be;
+    --background-focused: #88f4be;
+    --color: #C1D8FF;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
+.container{
+    background: #D5E5FF;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: 20px;
+
+}
+
+.but1{
+
+    background: #3880ff;
+    padding: 20px;
+    width: 88%;
+    border-radius: 30px;
+    color: white;
+    font-size: 22px;
+}
+.but2{
+    background: #ffffff;
+    padding: 20px;
+    width: 88%;
+    border-radius: 30px;
+    color: black;
+    font-size: 22px;
+    border: 1px solid;
+
+}

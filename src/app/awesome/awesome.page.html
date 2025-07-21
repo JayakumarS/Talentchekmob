@@ -1,0 +1,25 @@
+<ion-content>
+    <!-- <div class="not-now">
+     logo goes here
+  </div> -->
+
+    <div style="width: 100%;" class="line-with-text">
+        <br>
+        <img style="max-width: 57%;padding-top: 40px;" src="../../assets/img/tc_logo_with_text.png">
+        <br>
+
+    </div>
+
+    <ion-row>
+        <ion-col>
+            <div class="imageCss"><img src="../../assets/img/welcome.png" /></div>
+        </ion-col>
+    </ion-row>
+    <div class="hello-dear">
+        <div style="font-size: 24px;font-family: Mr-eaves;">{{'Registration Successful!' | translate}}</div>
+        <div *ngIf="!emailContentFlag" style="padding: 13px;font-size: 16px;color: #5E6061; font-family: alina-sans;text-align: center;">{{'Confirm mail' | translate}}</div>
+    </div>
+    <div class="display-justify">
+        <ion-button class="custom-button" (click)="goto_signup()">{{'Subscription.getsta' | translate}}</ion-button>
+    </div>
+</ion-content>

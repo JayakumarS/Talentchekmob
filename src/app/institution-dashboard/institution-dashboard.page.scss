@@ -1,0 +1,398 @@
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 97%;
+    height: 8vh;
+    /* set the height to 8% of the viewport height */
+    background: #112e5b;
+    display: flex;
+    padding: 19px;
+    margin: 0px 10px 10px 10px;
+    justify-content: space-around;
+    border-radius: 30px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.footer-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.footer-nav button ion-icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.footer-nav button.selected {
+    color: #FF9E3F;
+    border-radius: 50%;
+}
+
+
+/* Set the padding at the bottom of the ion-content to the height of the footer */
+
+ion-content {
+    --ion-safe-area-bottom: 8vh;
+    /* set the safe area bottom to 8% of the viewport height */
+}
+
+.display-justify {
+    padding: 20px 10px;
+}
+
+.display-justify-butterfly {
+    padding: 20px 20px;
+}
+
+.custom-button {
+    width: 165px;
+    border-radius: 30px;
+    height: 70px;
+    font-size: 18px;
+    background-color: antiquewhite;
+    display: flex;
+    padding: 0px 5px;
+    align-items: center;
+    justify-content: center;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.custom-buttryfly-left1 {
+    width: 140px;
+    height: 135px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 20px 20px 70px 20px;
+    opacity: 1;
+    margin-left: 4px;
+    padding: 8px;
+    margin-right: 4px;
+}
+
+.custom-buttryfly-left2 {
+    width: 140px;
+    height: 135px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 20px 70px 20px 20px;
+    opacity: 1;
+    margin-left: 4px;
+    padding: 8px;
+    margin-right: 4px;
+}
+
+.custom-buttryfly-right1 {
+    width: 140px;
+    height: 135px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 20px 20px 20px 70px;
+    opacity: 1;
+    margin-left: 4px;
+    padding: 8px;
+    margin-right: 4px;
+}
+
+.custom-buttryfly-right2 {
+    width: 140px;
+    height: 135px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 70px 20px 20px 20px;
+    opacity: 1;
+    margin-left: 4px;
+    padding: 8px;
+    margin-right: 4px;
+}
+
+.custom-buttryfly {
+    width: 165px;
+    height: 160px;
+    display: flex;
+    padding: 0px 0px;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.butterfly-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-left: 0px;
+    justify-content: space-around;
+}
+
+.company-card {
+    padding: 10px;
+    color: white;
+    align-items: center;
+    background: var(--unnamed-color-191d1e) 0% 0% no-repeat padding-box;
+    background: #112E5B 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+}
+
+.line-with-text .hr1 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ion-content {
+    --background: #EDF1FC;
+}
+
+.network-card {
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+}
+
+.recharge-card {
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #112e5b 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+    border-radius: 24px;
+    opacity: 1;
+}
+
+.imageCss {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.checked {
+    color: orange;
+}
+
+
+/*----------------------------*/
+
+
+/* SPINNING OBJECTS */
+
+
+/*----------------------------*/
+
+@keyframes spin {
+    0% {
+        transform: rotateY(-180deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.spinningasset {
+    text-align: left;
+    transition: all 0.4s ease-out;
+    cursor: pointer;
+    animation: brightness 2.5s infinite linear;
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 8px;
+        width: 11px;
+        margin: auto;
+        background-size: 100px 400%;
+        background-position: center;
+    }
+    >div {
+        position: relative;
+        z-index: 2;
+        perspective: 10000px;
+        transform-style: preserve-3d;
+        transform-origin: center;
+        animation: spin 2.5s infinite linear;
+        top: 24px;
+        >* {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: inherit;
+            background-size: cover;
+        }
+        >div:first-child {
+            transform: translateZ(-6px);
+        }
+        >div:last-child {
+            transform: translateZ(6px);
+            background-image: url(https://res.cloudinary.com/gloot/image/upload/v1632752594/Marketing/202109_gloot2/Coins_side_front.svg);
+        }
+        em {
+            filter: blur(0.5px);
+            &:first-of-type {
+                transform: translateZ(0px) rotateY(-6deg);
+            }
+            &:last-of-type {
+                transform: translateZ(0px) rotateY(6deg);
+            }
+        }
+    }
+    &.is-sm {
+        width: 24px;
+        height: 0px;
+        transform: scale(0.24);
+        transform-origin: left top;
+        filter: none;
+        margin-left: 15%;
+    }
+    &.coin {
+        >div {
+            width: 100px;
+            height: 100px;
+            >div:first-child {
+                background-image: url(https://res.cloudinary.com/gloot/image/upload/v1632752594/Marketing/202109_gloot2/Coins_side_back.svg);
+            }
+            >div:last-child,
+            &::after,
+            i,
+            em {
+                background-image: url(https://res.cloudinary.com/gloot/image/upload/v1632752594/Marketing/202109_gloot2/Coins_side_front.svg);
+            }
+        }
+    }
+}
+
+.ag-format-container {
+    width: 1142px;
+    margin: 0 auto;
+}
+
+.ag-courses_box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    //   padding: 100px 0;
+}
+
+.ag-courses_item {
+    -ms-flex-preferred-size: calc(33.33333% - 30px);
+    flex-basis: calc(33.33333% - 30px);
+    margin: 0 15px 30px;
+    overflow: hidden;
+    border-radius: 28px;
+    box-shadow: 0px 8px 24px #00000026
+}
+
+.ag-courses-item_link {
+    display: block;
+    padding: 30px 20px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    ;
+    overflow: hidden;
+    position: relative;
+}
+
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.ag-courses-item_link:hover .ag-courses-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+}
+
+.ag-courses-item_title {
+    min-height: 87px;
+    margin: 0 0 25px;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: Mr-eaves;
+    color: #000;
+    z-index: 2;
+    position: relative;
+}
+
+.ag-courses-item_date-box {
+    font-size: 18px;
+    color: #000;
+    z-index: 2;
+    font-family: alina-sans;
+    position: relative;
+}
+
+@media only screen and (max-width: 979px) {
+    .ag-courses_item {
+        -ms-flex-preferred-size: calc(50% - 30px);
+        flex-basis: calc(50% - 30px);
+    }
+    .ag-courses-item_title {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .ag-format-container {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .ag-courses_item {
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+    }
+    .ag-courses-item_title {
+        min-height: 40px;
+        font-size: 23px;
+    }
+    .ag-courses-item_link {
+        padding: 15px 30px;
+    }
+    .ag-courses-item_date-box {
+        font-size: 16px;
+        margin-top: -7%;
+    }
+}

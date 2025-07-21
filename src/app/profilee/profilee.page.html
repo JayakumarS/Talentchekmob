@@ -1,0 +1,345 @@
+<!-- <ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-row>
+            <ion-col size="0.5">
+            </ion-col>
+            <ion-col size="2">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="profileView()" style="margin-top:21%"></ion-icon>
+            </ion-col>
+            <ion-col>
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black; margin-top: 7%;">{{'editGeneralInfo' | translate}}</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header> -->
+<ion-header>
+    <ion-toolbar class="new-background-color">
+        <ion-buttons slot="start">
+            <ion-button (click)="profileView()">
+                <ion-icon size="large" style="    color: black;" name="arrow-back-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title style="text-align: center;font-family: Mr-eaves; color: black;">{{'editGeneralInfo' | translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <form [formGroup]="profileForm">
+
+        <ion-card-content>
+            <!-- <ion-row>
+          <ion-col >
+              <ion-title style="color:black;">Profile</ion-title>
+          </ion-col>
+          
+      </ion-row> -->
+
+            <ion-row class="talentrow">
+                <ion-col>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'firstName' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="firstname"></ion-input>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.firstname.hasError('required') && profileForm.controls.firstname.touched">
+                            <small style="color: #f70505;">{{'reqFirstName' | translate}}</small>
+                        </div>
+                        <div *ngIf="profileForm.controls.firstname.hasError('pattern')">
+                            <small style="color: #f70505;">{{'splCharNotAllowed' | translate}}</small>
+                        </div>
+                        <div *ngIf="profileForm.controls.firstname.hasError('minlength')">
+                            <small style="color: #f70505;">{{'firstNameMinLength' | translate}}</small>
+                        </div>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'lastName' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="lastname"></ion-input>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.lastname.hasError('required') && profileForm.controls.lastname.touched">
+                            <small style="color: #f70505;">{{'reqLastName' | translate}}</small>
+                        </div>
+                        <div *ngIf="profileForm.controls.lastname.hasError('pattern')">
+                            <small style="color: #f70505;">{{'splCharNotAllowed' | translate}}</small>
+                        </div>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'gender' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+
+                            <ion-select interface="popover" formControlName="gender" placeholder="{{'gender' | translate}}" style="background:white">
+                                <ion-select-option value="M">{{'male' | translate}}</ion-select-option>
+                                <ion-select-option value="F">{{'female' | translate}}</ion-select-option>
+                                <ion-select-option value="O">{{'others' | translate}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.gender.hasError('required') && profileForm.controls.gender.touched">
+                            <small style="color: #f70505;">{{'reqGender' | translate}}</small>
+                        </div>
+
+                    </div>
+
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'dob' | translate}}</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-datetime displayFormat="DD.MM.YYYY" placeholder="{{'dob' | translate}}" formControlName="dob" presentation="date" [max]="getMaxDate()"></ion-datetime>
+                        </ion-item>
+                        <!-- <div *ngIf="profileForm.controls.dob.hasError('required') && profileForm.controls.dob.touched">
+                            <small style="color: #f70505;">{{'reqDob' | translate}}</small>
+                        </div> -->
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'email' | translate}}</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="email" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
+                        </ion-item>
+                        <!-- <div *ngIf="profileForm.controls.email.hasError('required') && profileForm.controls.email.touched">
+                            <small style="color: #f70505;">{{'invalidEmail' | translate}}</small>
+                        </div> -->
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'phoneNo' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="mobile"></ion-input>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.mobile.hasError('required') && profileForm.controls.mobile.touched">
+                            <small style="color: #f70505;">{{'reqMobNo' | translate}}</small>
+                        </div>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'UniqueNationalID' | translate}}</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="nationalid"></ion-input>
+                        </ion-item>
+                        <!-- <div *ngIf="profileForm.controls.nationalid.hasError('required') && profileForm.controls.nationalid.touched">
+                            <small style="color: #f70505;">{{'UniqueIdReq' | translate}}</small>
+                        </div> -->
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'AddSkill.category' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+
+                            <ion-select placeholder="{{'selectCategory' | translate}}" multiple="true" formControlName="category" style="background-color: white;">
+                                <ion-select-option *ngFor="let tittle of categoryList" [value]="tittle.id">
+                                    {{tittle.text}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.category.hasError('required') && profileForm.controls.category.touched">
+                            <small style="color: #f70505;">{{'AddSkill.plsSelCategory' | translate}}</small>
+                        </div>
+
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'ViewJobProfile.langKnown' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-select placeholder="{{'selectLangKnown' | translate}}" multiple="true" formControlName="languagesknown" style="background-color: white;">
+
+                                <ion-select-option *ngFor="let topping of languageList" [value]="topping.id">{{topping.text}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.languagesknown.hasError('required') && profileForm.controls.languagesknown.touched">
+                            <small style="color: #f70505;">{{'reqLangKnown' | translate}}</small>
+                        </div>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'PersonalInformation.hobbies' | translate}}</ion-label>
+
+                        <ion-item fill="outline" class="input-field">
+                            <ion-select placeholder="{{'selectHobbies' | translate}}" multiple="true" formControlName="hobbies" style="background-color: white;">
+                                <ion-select-option *ngFor="let hobby of hobbyList " [value]="hobby.id">
+                                    {{hobby.text}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'profileorg.Address' | translate}} <small style="color: #f70505;">*</small></ion-label>
+
+                        <ion-item fill="outline" class="input-field">
+                            <ion-textarea formControlName="permAddress"></ion-textarea>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.permAddress.hasError('required') && profileForm.controls.permAddress.touched">
+                            <small style="color: #f70505;">{{'ContactInfo.reqAddress' | translate}}</small>
+                        </div>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'country' | translate}} <small style="color: #f70505;">*</small></ion-label>
+
+                        <ion-item fill="outline" class="input-field">
+                            <div class="selected-skills-container">
+                                <div class="selected-skill">{{ selectedCountry }}
+                                </div>
+                            </div>
+                            <ion-icon *ngIf="selectedCountry != undefined && selectedCountry != ''" name="close-circle" (click)="removeCountry()"></ion-icon>
+                            <ion-input (ionInput)="onCountrySearch($event.target.value)" [formControl]="countrysearchCtrl"></ion-input>
+                        </ion-item>
+
+                        <ion-list *ngIf="showcountyResults">
+                            <ion-item *ngFor="let result of searchResults" (click)="selectcountry(result.text,result.id)">
+                                {{ result.text }}
+                            </ion-item>
+                        </ion-list>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'stateProvince' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+
+                            <ion-select (ionChange)="goTostateSelectedItem($event.target.value)" formControlName="permState">
+                                <ion-select-option *ngFor="let sElement of stateResponse" [value]="sElement.id">
+                                    {{sElement.text}}</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+                    </div>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'areaName' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-select formControlName="permCity">
+                                <ion-select-option *ngFor="let ciElement of cityOptions" [value]="ciElement.id">
+                                    {{ciElement.text}}</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+                    </div>
+
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'pinZipCode' | translate}} <small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="permPinCode"></ion-input>
+                        </ion-item>
+                    </div>
+
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'emergencyContact' | translate }}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input type="number" formControlName="emergencyContact" maxlength="15"></ion-input>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.emergencyContact.hasError('required') && profileForm.controls.emergencyContact.touched">
+                            <small style="color: #f70505;">{{'emergencyContactReq' | translate }}</small>
+                        </div>
+                    </div>
+
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'AddPersonalInfo.bloodgroup' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-select placeholder="{{'selectBG' | translate }}" formControlName="bloodgroup" required>
+
+                                <ion-select-option value="A+">A+</ion-select-option>
+                                <ion-select-option value="A-">A-</ion-select-option>
+                                <ion-select-option value="B+">B+</ion-select-option>
+                                <ion-select-option value="B-">B-</ion-select-option>
+                                <ion-select-option value="O+">O+</ion-select-option>
+                                <ion-select-option value="O-">O-</ion-select-option>
+                                <ion-select-option value="AB+">AB+</ion-select-option>
+                                <ion-select-option value="AB-">AB-</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <div *ngIf="profileForm.controls.bloodgroup.hasError('required') && profileForm.controls.bloodgroup.touched">
+                            <small style="color: #f70505;"> {{'PopupWin.bldGrpMan' | translate}}</small>
+                        </div>
+                    </div>
+
+                    <div class="button-content" *ngIf="isLogo">
+                        <ion-label slot="end">{{'AddFamilyInfo.image' | translate}}<small style="color: #f70505;">*</small></ion-label>
+                        <!-- <ion-row size="12">
+                            <ion-col size="6">
+                           
+                                <ion-thumbnail *ngIf="base64img1" >
+                                    <div >
+                                    <img size="2" [src]="base64img1" name="image" /> &nbsp;
+                                    <img size="2" [src]="base64img2" name="image" style="opacity: 0.5;"/> &nbsp;
+                                    <img size="2" [src]="base64img3" name="image" style="opacity: 0.5;" />
+                                    </div>
+                                </ion-thumbnail>
+                                <ion-thumbnail *ngIf="!base64img1">
+                                    <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                </ion-thumbnail>
+                            
+                            </ion-col>
+                        </ion-row> -->
+                        <ion-grid>
+                            <ion-row>
+                              <ion-col size="4"> <!-- Each image will occupy 4 columns (1/3 of the row) -->
+                                <ion-thumbnail *ngIf="base64img1">
+                                  <img class="horizontal" [src]="base64img1" name="image" />
+                                </ion-thumbnail>
+                                <ion-thumbnail *ngIf="!base64img1">
+                                  <img class="horizontal" src="./assets/img/avatar1.png" alt="Lights" style="width:100%" />
+                                </ion-thumbnail>
+                              </ion-col>
+                              <ion-col size="4">
+                                <ion-thumbnail *ngIf="base64img2">
+                                  <img class="horizontal" [src]="base64img2" name="image" style="opacity: 0.5;"/>
+                                </ion-thumbnail>
+                                
+                              </ion-col>
+                              <ion-col size="4">
+                                <ion-thumbnail *ngIf="base64img3">
+                                  <img class="horizontal" [src]="base64img3" name="image" style="opacity: 0.5;"/>
+                                </ion-thumbnail>
+                              </ion-col>
+                            </ion-row>
+                          </ion-grid>
+                      
+                            <ion-row>
+                            <ion-col size="6">
+                                <div class="ion-float-left">
+                                    <ion-button fill="clear" (click)="opengallery()">
+                                        <ion-icon name="image-outline"></ion-icon>
+                                    </ion-button>
+                                    <ion-button fill="clear" (click)="opencamera()">
+                                        <ion-icon name="camera-outline"></ion-icon>
+                                    </ion-button>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </div><br>
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'urlLink' | translate}}</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-input formControlName="linkurl"></ion-input>
+                        </ion-item>
+                    </div>
+
+
+                    <div class="button-content" *ngIf="isProfile">
+                        <ion-label class="labels">{{'aboutYou' | translate}}</ion-label>
+                        <ion-item fill="outline" class="input-field">
+                            <ion-textarea formControlName="details" placeholder="{{'aboutYou' | translate}}"></ion-textarea>
+                        </ion-item>
+                    </div>
+
+                    <div class="button-content" style="width: 50%;
+                                        margin: auto;">
+                        <div class="display-justify" *ngIf="isProfile">
+                            <ion-button class="custom-button" (click)="Update()">{{'AddPersonalInfo.update' | translate}}
+                            </ion-button>
+                        </div>
+                        <div class="display-justify" *ngIf="isLogo">
+                            <ion-button class="custom-button" (click)="imgUpdate()">{{'AddPersonalInfo.update' | translate}}
+                            </ion-button>
+                        </div>
+                    </div>
+
+
+
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+
+    </form>
+
+
+
+</ion-content>

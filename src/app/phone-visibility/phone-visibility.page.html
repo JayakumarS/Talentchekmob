@@ -1,0 +1,63 @@
+<ion-header style="background-color: white;">
+  <ion-toolbar style="padding: 20px 10px 15px;">
+      <ion-row style="display: flex;justify-content: space-between;">
+        <div>
+          <ion-icon size="large" name="arrow-back-circle-outline" style="margin-top:21%" (click)="goto_visibility()"></ion-icon>
+        </div>  
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 20px;display: flex;
+        align-items: center;align-items: center;">          
+        {{'Choose who can view your number' | translate}}
+        </div> 
+        <div style="font-family: Mr-eaves; color: black;font-weight: 600;font-size: 30px;"> 
+        </div>
+      </ion-row> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="phoneVisForm">
+  <ion-list style="padding: 14px;">
+    <ion-radio-group formControlName="phoneVisibility" (ionChange)="updatePhoneVisibility()" [allowEmptySelection]="true" value="turtles">
+      <ion-item class="ion-item">
+        <div style="padding: 5px 0px 4px 8px;">
+          <div><b>{{'private' | translate}}</b></div>
+          <div style="color: gray;font-size: 12px;">
+            {{'Only visible to you' | translate}}
+         </div> 
+        </div>
+         <ion-radio slot="end" value="private"></ion-radio>
+      </ion-item>  
+      
+      <ion-item class="ion-item">
+        <div style="padding: 5px 0px 4px 8px;">
+          <div><b>{{'Network' | translate}}</b></div>
+          <div style="color: gray;font-size: 12px;">
+            {{'Connections verified by you & your university corporate alumni network can view' | translate}}
+         </div> 
+        </div>
+         <ion-radio slot="end" value="network"></ion-radio>
+      </ion-item> 
+      
+      <ion-item class="ion-item">
+        <div style="padding: 5px 0px 4px 8px;">
+          <div><b>{{'Employers' | translate}}</b></div>
+          <div style="color: gray;font-size: 12px;">
+            {{'Visible to organisations & recruiters' | translate}}
+         </div> 
+        </div>
+         <ion-radio slot="end" value="employers"></ion-radio>
+      </ion-item> 
+
+      <ion-item class="ion-item">
+        <div style="padding: 5px 0px 4px 8px;">
+          <div><b>{{'public' | translate}}</b></div>
+          <div style="color: gray;font-size: 12px;">
+            {{'Anyone on talent chek can see your phone number' | translate}}
+         </div> 
+        </div>
+         <ion-radio slot="end" value="public"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</form> 
+</ion-content>

@@ -1,0 +1,128 @@
+<ion-header>
+    <ion-toolbar>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: right;margin: 0px 0px 0px 5px;">
+                <ion-icon size="large" name="arrow-back-circle-outline" (click)="goto_Settings()"></ion-icon>
+            </div>
+            <div style="text-align: center;display: contents;">
+                <ion-title class="ion-text-wrap" style="font-family: Mr-eaves; color: black;"> {{'alumni' | translate}}</ion-title>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" id="my-content">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <form>
+        <div class="display-justify">
+            <ion-row class="container">
+                <ion-col size="6" *ngIf="RoleID.includes('3')">
+                    <ion-card class="recharge-card" (click)="goto_AlumniList('Student')">
+                        <ion-card-content>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">{{'Category.student' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">{{'Network' | translate}}</p>
+
+                            <div class="card-content p-0 flex">
+
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px; color:#000000">
+                                    {{studCount}}
+                                </div>
+                            </div>
+                            <br>
+
+
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+
+                <ion-col size="6">
+                    <ion-card class="recharge-card" (click)="goto_AlumniList('Corporate')">
+                        <ion-card-content>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000 ">{{'Register.cor_quote' | translate}}</p>
+                            <p style="text-align: center;font-size: 18px; font-weight: 700; color:#000000">{{'Network' | translate}}</p>
+
+                            <div class="card-content p-0 flex">
+
+                                <div class="ml-2" style="text-align: center;font-weight: bolder;font-size: 26px;color:#000000;">
+                                    {{corporateCount}}
+                                </div>
+                            </div>
+                            <br>
+
+
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+
+            </ion-row>
+        </div>
+
+
+
+
+        <div class="line-with-text">
+            <hr class="hr1">
+        </div>
+
+
+        <P style="margin-left: 15px; ;font-size: 22px;" *ngIf="constCount != 0"><b>{{'Constant Highlights' | translate}}</b></P>
+
+
+        <ion-slides pager="false" [options]="slideOpts" *ngIf="constCount != 0">
+            <ion-slide *ngFor="let slide of constantHighlights">
+                <ion-card color="primary" class="ion-activatable ripple-parent" style=" background: #FFFFFF 0% 0% no-repeat padding-box;
+                box-shadow: 0px 8px 24px #00000026;
+                border-radius: 24px;" (click)="profileView(slide.userTalentId,slide.profileVisibility,slide.userName)">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <div class="card">
+                        <div class="card-info">
+                            <div class="card-avatar">
+                                <img src="{{imagePath}}{{slide.profileimage}}" />
+                            </div>
+                            <div class="card-title">{{slide.userName}}</div>
+                            <div class="card-subtitle">{{slide.degree}}</div>
+                        </div>
+
+                    </div>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+
+
+
+
+        <P style="margin-left: 15px;font-size: 22px;" *ngIf="recntCount != 0"><b>{{'Recent Highlights' | translate}}</b></P>
+
+
+        <ion-slides pager="false" [options]="slideOpts" *ngIf="recntCount != 0">
+            <ion-slide *ngFor="let slide of recentHighlights">
+                <ion-card color="primary" class="ion-activatable ripple-parent" style=" background: #FFFFFF 0% 0% no-repeat padding-box;
+                    box-shadow: 0px 8px 24px #00000026;
+                    border-radius: 24px;" (click)="profileView(slide.userTalentId,slide.profileVisibility,slide.userName)">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <div class="card">
+                        <div class="card-info">
+                            <div class="card-avatar">
+                                <img src="{{imagePath}}{{slide.profileimage}}" />
+                            </div>
+                            <div class="card-title">{{slide.userName}}</div>
+                            <div class="card-subtitle">{{slide.degree}}</div>
+                        </div>
+
+                    </div>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+
+
+
+
+    </form>
+
+
+
+
+</ion-content>

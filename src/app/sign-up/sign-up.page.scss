@@ -1,0 +1,303 @@
+ion-content {
+    --background: url('../../assets/img/06_Welcome screen.png');
+    background-size: cover;
+}
+
+@font-face {
+    font-family: Mr-eaves;
+    src: url(../../assets/fonts/mreavesxl/MrEavesXLModOT-Heavy.ttf);
+}
+
+.new-background-color {
+    --background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 24px #00000026;
+}
+
+.sign-up {
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 8px 15px #00000033;
+    opacity: 1;
+}
+
+.display-justify {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    padding-top: 15px;
+}
+
+.line-with-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line-with-text .hr1 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+.line-with-text .hr2 {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.or-text {
+    font-size: 18px;
+    color: #000000;
+}
+
+.social-icon {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10px;
+}
+
+.sign-in {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    border-top: 2px solid black;
+    margin: 10px 0;
+}
+
+.custom-button {
+    width: 360px;
+    --border-radius: 50px;
+    height: 56px;
+    font-size: 18px;
+    color: white;
+}
+
+.progress-steps {
+    justify-content: space-around;
+    padding: 15px 15px;
+}
+
+.progress-step {
+    width: 10px;
+    height: 37px;
+    display: flex;
+    border-radius: 50%;
+    background-color: #A3A4A5;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-step.active {
+    background-color: #FA7070;
+}
+
+.progress-dot {
+    width: 4px;
+    height: 10px;
+    margin-top: 15px;
+    border-radius: 50%;
+    background-color: #A3A4A5;
+}
+
+.input-field {
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0px 8px 24px #00000026;
+    border: 1px solid #D1D1D2;
+}
+
+.button-content {
+    display: flex;
+    padding: 0px 16px;
+    flex-direction: column;
+}
+
+.horizontal-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+.horizontal-radio-item {
+    background-color: transparent;
+    border: none;
+}
+
+.horizontal-radio-button {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+.horizontal-radio-label {
+    font-size: 16px;
+    background-color: transparent;
+    color: #333;
+}
+
+.bs-stepper-circle {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    padding: 0.5em 0;
+    margin: 0.25rem;
+    line-height: 1em;
+    color: #fff;
+    background-color: #A3A4A5;
+    border-radius: 1em;
+}
+
+.active .bs-stepper-circle {
+    background-color: #007bff;
+}
+
+.bs-stepper-label {
+    display: inline-block;
+    margin: 0rem !important;
+}
+
+.labels {
+    font: normal normal bold 16px/22px Mr-eaves;
+    text-align: left;
+    letter-spacing: 0.24px;
+    color: #191D1E;
+    opacity: 1;
+}
+
+.genderbg {
+    background-color: #f3f4f700;
+    border-radius: 20px;
+}
+
+.genderpadding {
+    padding: 3px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.emojiicons {
+    height: 20px;
+}
+
+ion-radio {
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 50%;
+    width: 13px !important;
+    height: 13px !important;
+    margin-top: 3px;
+}
+
+.emojitext {
+    font-size: 13px;
+    margin: 0px 5px;
+}
+
+ion-select::part(icon) {
+    display: none;
+}
+
+.head {
+    font-family: Mr-eaves;
+    color: black;
+    margin-left: 17%;
+    margin-top: 5%;
+}
+
+@media (min-device-width: 375px) and (max-device-width: 812px) {
+    #head {
+        margin-left: -7%;
+        font-family: Mr-eaves;
+        color: black;
+    }
+}
+
+.headers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+    padding-left: 0px !important;
+}
+
+ion-checkbox {
+    --size: 32px;
+    --background-checked: #6815ec;
+}
+
+ion-checkbox::part(container) {
+    border-radius: 6px;
+    border: 2px solid #6815ec;
+}
+
+
+.input-field {
+    display: flex;
+    align-items: center;
+    gap: 2px; /* Smaller space between elements */
+    background: darkgray;
+  }
+  
+  .input-field ion-select {
+    flex: 0 0 80px; /* Smaller width for the select element */
+    margin-right: 2px; /* Smaller margin */
+  }
+  
+  .input-field ion-input {
+    flex: 1;
+  }
+  
+  .input-field {
+    display: flex;
+    align-items: baseline; /* Align items based on their text baseline */
+  }
+ 
+  .input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .select-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px; /* Adjust width as needed */
+  }
+  
+  .custom-placeholder {
+    width: 100%;
+  }
+  
+  .down-arrow {
+    position: absolute;
+    right: 59px;
+    pointer-events: none;
+    font-size: 0.8em; /* Adjust the size as needed */
+  }
+  
+  /* Custom CSS to make the placeholder bold */
+  .custom-placeholder::part(placeholder) {
+    font-weight: bold;
+  }
+ 

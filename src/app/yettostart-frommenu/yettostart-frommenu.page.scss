@@ -1,0 +1,44 @@
+.new-background-color {
+    --background: yellow;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 300px auto;
+}
+
+.loader {
+    border: 7px solid #f3f3f3;
+    /* Light grey */
+    border-top: 7px solid #112e5b;
+    /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: loaderspin 2s linear infinite;
+    position: relative;
+}
+
+.loader-container {
+    position: absolute;
+    display: inline-block;
+    margin-left: -84%;
+}
+
+.loader-container span {
+    position: absolute;
+    top: 17%;
+    left: 12%;
+    width: 73%;
+}
+
+@keyframes loaderspin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
