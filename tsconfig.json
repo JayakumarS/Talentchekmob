@@ -15,7 +15,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+     "paths": {
+      "querystring": [
+        "node_modules/querystring-es3"
+      ]
+    }
+    
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
